@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Javascripture</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="loading.js"></script>
+</head>
+<body>
+	<h1>Javascripture</h1>
+	<p id="loading" style="background: url(ajax-loader.gif) no-repeat; padding: 20px 0 0 0;">Loading</p>
+	<h2>Features</h2>
+	<ul>
+		<li>Lookup verses in the KJV</li>
+		<li>Click to find and highlight the strongs number</li>
+		<li>Find strongs roots</li>
+		<li>Search by word or strongs number</li>
+		<li>Next and previous book, chapter and verse buttons</li>
+		<li>Context</li>
+		<li>Always visible heading</li>
+	</ul>
+	<h2>To Do</h2>
+	<ul>
+		<li>Group by families</li>
+		<li>Find strong's branches</li>
+		<li>Most similar verse</li>
+		<li>Tracking in background</li>
+		<li>Show titles</li>
+		<li>Reset button</li>
+		<li>Show first reference when searching?</li>
+		<li>better ui for highlight and search</li>
+		<li>Get tab working on the controls</li>
+		<li>Next in search results</li>
+		<li>don't match case in search</li>
+		<li>word search in safari</li>
+		<li>better word/phrase search</li>
+		<li>reference lookp with string</li>
+		<li>scroll inside reference panel</li>
+		<li>Only highlight strongs numbers</li>
+		<li>keyboard shortcuts</li>
+	</ul>
+	<p>The bible is about 15MB, so it will take a while to load. (We load it all at once so when it's done then things are quicker).</p>
+	<p>Tested on Firefox 3.6 and Safari - Mac only</p>
+</body>
+</html>

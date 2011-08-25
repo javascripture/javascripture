@@ -1,0 +1,10 @@
+<root>
+<node name="test">Test Value</node>
+<node name="test2">Test Value 2</node>
+
+<group name="test3">
+<item name="Item 1" value="1"/>
+<item name="Item 2" value="2"/>
+<item name="Item 3" value="3"/>
+</group>
+</root>

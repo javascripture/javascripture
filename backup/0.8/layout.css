@@ -1,0 +1,305 @@
+* {border:none;margin:0;padding:0;}
+body {background:#fff;color:#000;font-family:Arial, Helvetica, sans-serif; font-size: 0.8em;}
+a{text-decoration: none;}
+.trans-change.added { font-style: italic;}
+#current {background: #ddd;}
+div#tabs {float:left}
+select {font-size:0.8em;}
+select option {padding: 0 0 0 3px;}
+.selects{overflow:hidden;}
+.selects select,ul {float:left;}
+.selects select{height:100%;}
+ul li.current {background:#cceeff;}
+.panel .heading {height:10%;}
+.verse {color: #000;}
+.verse .added, transchange {color:#aaa; font-style: italic;}
+.verse {line-height:1.4em; padding: 0 10px;}
+.verse span {white-space: nowrap;}
+.verse h1 {text-align: center; line-height: 150%;}
+a, span {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
+.verse span:hover {
+	background:#666;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(50,50,50)),
+        color-stop(1, rgb(100,100,100))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(50,50,50) 0%,
+        rgb(100,100,100) 100%
+    );
+	color: #fff;
+    box-shadow: 10px 10px 5px #000;
+    -webkit-box-shadow: 1px 1px 2px #000;
+    -moz-box-shadow: 1px 1px 2px #000;
+}
+.verse span.added:hover {
+	background:none;
+	color: #ccc;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none
+}
+#verse.isolate {
+	color: #999;
+}
+#verse.isolate ol li span {
+	background: none;
+	color: #999;
+
+}
+button, input[type=button], input[type=submit] {
+	border: none;
+	background:#666;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(50,50,50)),
+        color-stop(1, rgb(100,100,100))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(50,50,50) 0%,
+        rgb(100,100,100) 100%
+    );
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	color: #fff;
+    box-shadow: 10px 10px 5px #000;
+    -webkit-box-shadow: 1px 1px 2px #000;
+    -moz-box-shadow: 1px 1px 2px #000;
+    padding: 3px;
+}
+div.verse ol li {list-style-position: inside;}
+.selectWrapper {position:absolute;left:0;top:0;}
+.selectWrapper select {border-bottom:1px solid #000;}
+ul.bookSelect {margin:0 0 0 5px; width:96px}
+ul.chapterSelect {margin:0 0 0 5px; width:34px;}
+ul.verseSelect {margin:0 0 0 5px; width:35px;}
+.yahweh {text-transform:uppercase;}
+.selects, .details {float:left; width: 147px;}
+.panel {border-right:1px solid #666; height:100%;overflow:auto; position:relative;}
+.selects{overflow:hidden;width:auto;}
+.panel .dock {background: url(images/dock.png); height: 50px; position: absolute; width: 100%; top: -50px;}
+.panel .dock .background {background: url(images/dock.png); height: 50px; position: fixed; width: 100%; left:0;}
+
+.panel .heading-wrapper {margin: 0 auto; text-align: center;}
+.panel .heading {font-size: 2em; text-align: center; position: fixed; width; 300px;}
+.panel .heading select {position:relative;z-index:1;}
+form {overflow:auto;padding:10px;}
+form ul li {list-style:none;}
+form label {float:left;}
+form input, form select {border:1px solid #999; margin: 0 10px 10px 0; width: 90px;}
+form input[type=checkbox]{width:20px;}
+input#search {margin:0;}
+.references {clear:both;}
+.references li {list-style-position: inside;}
+.references #currentRef {background:#ccc;}
+#strongsTracking {float:right; width: 77px; }
+#strongsTracking ul {float:right;padding: 0 10px 0 0; text-align:right;}
+#strongsTracking li {list-style:none; padding: 7px 0; position:relative;}
+#strongsTracking span, #strongsTracking a {padding:3px; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;text-decoration:none;}
+#strongsTracking .close {background:#999;color:#fff;-moz-border-radius:5px;display:none;line-height:13px;padding:0;position:absolute;right:-5px;text-align:center;top:0px;width:15px;height:15px;}
+#strongsTracking li:hover .close {display:block;}
+
+.collapsable h2 { background:#666 url(arrow.png) no-repeat top right;
+    background:  url(arrow.png) no-repeat top right, -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(50,50,50)),
+		color-stop(.49, rgb(90,90,90)),
+		color-stop(.50, rgb(100,100,100)),
+        color-stop(1, rgb(150,150,150))
+    );
+    background: url(arrow.png) no-repeat top right, -moz-linear-gradient(
+        center bottom,
+        rgb(50,50,50) 0%,
+		rgb(90,90,90) 49%,
+		rgb(100,100,100) 50%,
+        rgb(150,150,150) 100%
+    );
+	border-bottom: 1px solid #666;
+	color:#fff; cursor:pointer; font-size: 1.3em; font-weight:normal; padding:3px 5px;
+}
+.collapsable.closed h2 { 
+	background:#666 url(arrow.png) no-repeat bottom right;
+	background: url(arrow.png) no-repeat bottom right, -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(140,140,140)),
+        color-stop(1, rgb(190,190,190))
+    );
+    background: url(arrow.png) no-repeat bottom right, -moz-linear-gradient(
+        center bottom,
+        rgb(140,140,140) 0%,
+        rgb(190,190,190) 100%
+    );
+}
+.collapsable h2 a.remove {
+	background: url(images/remove.png);
+	color: #fff;
+	display: block;
+	float: right;
+	height: 14px;
+	margin: 2px 0 0 0;
+	padding: 0;
+	width: 14px;
+}
+.collapsable h2 a.remove:hover {
+	background-position: 0 -14px;
+}
+.collapsable.closed form { display:none;}
+
+.navigation {
+	position: absolute;
+	top: 0;
+	width: 300px;
+}
+.navigation-right {
+	right: 0;
+}
+.navigation-left {
+	left: 0;
+}
+.navigation ul {
+	position: fixed;
+	width: 300px;
+}
+.navigation ul li, #nextRef, #prevRef {
+	background:#666;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color:#fff;
+	cursor:pointer;
+	list-style: none;
+	margin: 5px;
+	opacity:.8;
+	padding: 5px;
+	text-decoration: none;
+}
+#nextRef {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#prevRef {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.navigation ul li:hover { opacity:1;}
+.navigation ul li.previous{float:left; /*left:0; position:fixed; bottom:0; */}
+.navigation ul li.next{float:right; /*right:0; position:fixed; bottom:0; */}
+#wordControlPanel {
+	display: none;
+	position:absolute;
+	width: 200px;
+	z-index:999;
+}
+.control-panel .template {display:none;}
+.control-panel .duplicated {display:block; margin: 0 0 1em 0;}
+.control-panel{
+	background: #eee;
+    box-shadow: 10px 10px 5px #000;
+    -webkit-box-shadow: 1px 1px 2px #000;
+    -moz-box-shadow: 1px 1px 2px #000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow:#000;
+	color: #000;
+	/*margin: 0 0 30px 0;*/
+	padding: 7px;
+}
+.top.left .control-panel {
+	border-top-left-radius: 0;
+	-moz-border-radius-topleft: 0;
+	-webkit-border-top-left-radius: 0;
+}
+.top.right .control-panel {
+	border-top-right-radius: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+}
+.bottom.left .control-panel {
+	border-bottom-left-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+}
+.bottom.right .control-panel {
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+}
+.control-panel .definitions {color: #999; font-style: italic;}
+.control-panel .definitions-link {text-decoration:underline;}
+.control-panel a {
+	cursor: pointer;
+}
+
+.sticky{
+	position:absolute;
+	top: -50px;
+	left: -50px;
+	width: 100px;
+	height: 100px;
+}
+
+.hide {
+	display: none;
+}
+note {
+	border: 1px solid #acf;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #acf;
+	display: none;
+	width: 25px;
+	height: 11px;
+	line-height:12px;
+	overflow: hidden;
+	margin: 0 3px;
+}
+.show-notes note {
+ display: inline-block;
+}
+note:before {
+	content: 'note';
+}
+note:hover {
+	border: 1px solid #acf;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	color: #000;
+	display: inline-block;
+	width: 250px;
+	height: 110px;
+	line-height:12px;
+	overflow: hidden;
+	margin: 0 3px;
+}
+#colorSelector {
+	display: inline-block;
+}
+
+divinename {text-transform: uppercase;}
+.verse {text-align: justify;}
+#verse ol {margin: 0 0 0 20px;}
+#verse li {clear: both;list-style-position: outside;}
+.hebrew { direction: rtl; display: none; font-size: 120%;  }
+.showHebrew .english { float: left; width: 48%; }
+.showHebrew .hebrew { display: block; float: right; width: 48%;}
+.hebrew span { margin: 0 2px; }
+.hebrew seg {display:none;}
+
+.verse .wrapper { display:inline-block; vertical-align:top; width:100%; }

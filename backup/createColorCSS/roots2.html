@@ -1,0 +1,67 @@
+<script src="jquery.js"></script>
+<script src="json2.js"></script>
+<script src="strongsObjectRoots.js"></script>
+<script>
+var newStrongsObject = new Object();
+var details = new Object();
+var families = new Array();
+var getRoots = function(root, rootArray) {
+	//if(root is in rootArray)
+	$.each(root, function(key, value) {
+		$.each(rootArray, function(key2, value2) {
+			if(value == value2) {
+			//console.log(value);
+				//rootArray.push(value);
+			}
+		});
+	});
+	$.each(root, function(key, value) {
+		rootArray.push(value);
+	});
+	if(rootArray.length > 1 && strongsObject[rootArray[0]]) {
+		console.log(strongsObject[rootArray[0]]);
+		console.log(rootArray);
+		$.each(strongsObject[rootArray[0]], function(key, value) {
+			rootArray.push(value);
+		});
+		console.log(rootArray);
+		rootArray.splice(0,1);
+		console.log(rootArray);
+		//getRoots(strongsObject[rootArray[0]],rootArray);
+	} else {
+		return rootArray[0];
+	}
+}
+var getRoot = function(root) {
+	if(strongsObject[root]) {
+		if(strongsObject[root][0]) {
+			return getRoot(strongsObject[root][0]);
+		} else {
+			return getRoot(strongsObject[root]);
+		}
+	} else {
+		return root;
+	}
+}
+$.each(strongsObject, function(index, root) {
+	var details = new Object();
+	if(root!="") {
+		var rootArray = Array();
+		details['family'] = getRoot(root[0]);
+		details['roots'] = root;
+	} else {
+		details['family'] = index;
+	}
+	newStrongsObject[index] = details;
+});
+document.write(JSON.stringify(newStrongsObject));
+/*anotherObject = new Object();
+$.each(newStrongsObject, function(index, root) {
+	var family = newStrongsObject[index]['family'];
+	if(typeof(anotherObject[family]) == "undefined") {
+		anotherObject[family] = new Array();
+	}
+	anotherObject[family].push(index);
+});
+document.write(JSON.stringify(anotherObject));*/
+</script>

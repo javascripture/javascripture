@@ -1,0 +1,59 @@
+               Dictionaries of Hebrew and Greek Words
+                             taken from
+                  Strong's Exhaustive Concordance
+                                 by
+                    James Strong, S.T.D., LL.D. 
+                                1890
+
+                   Public Domain -- Copy Freely
+
+For a hundred years Strong's Dictionaries have been popular with Bible students.
+By assigning numbers to each unique word in the Old and New Testaments and
+listing each word with its number, Strong produced a standard, still used today,
+for referencing definitions. Bible students, with little or no knowledge of
+Greek and Hebrew, are able to use Strong's numbers to learn about the Greek and
+Hebrew of the Bible.
+
+ASCII e-text version:
+=====================
+
+The files for this e-text were produced by Michael Grier, mgrier@pdnt.com,
+in 1996, and download from  http://members.tripod.com/~SoftIdeas, in
+February 1998. The files have been setup for importing into the Online
+Bible for DOS. But to make these files into generic text files, all that
+is needed is to replace the terms "2GREEK" and "2HEBREW" with "Greek" and
+"Hebrew" or the names of the appropriate files. 
+
+The e-text has been changed from the printed version in three ways.
+
+1) A five digit Strong's word number with leading zeros has been placed before
+   each entry. 
+2) Where Strong provides the number of another word for etymology,
+   a line with "see 2GREEK for" or "see 2HEBREW for" and the number, has been
+   added after Strong's entry for the word. (This is for use after
+   importing into the DOS version of Online Bible, but also provides a good
+   way to programmatically add links.)
+3) The abbreviations used by Strong in the
+   Greek dictionary, (not Hebrew) have been replaced by the abbreviated words.
+
+Michael Grier did a check of the e-text against a printed Strong's dictionary.
+The work seems clean but more proofreading is needed to certify it clean from
+errors.
+
+Further info:
+=============
+
+If you are looking for Strong's that will self install into the Online
+Bible see:
+           Michael Grier
+           mgrier@pdnt.com
+           http://members.tripod.com/~SoftIdeas
+
+If any errors are located, please ensure you have the latest files,
+and if so, we would appreciate being informed of the error.
+
+           Bible Foundation
+           bf@bf.org
+           http://www.bf.org/
+           or the e-text Library
+           http://www.bf.org/bfetexts.htm

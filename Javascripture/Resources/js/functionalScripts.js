@@ -32,6 +32,13 @@
 			var chapter = $('select#chapterSelect').val();
 			var verse = $('select#verseSelect').val();
 		}
+		/*$.mobile.changePage(
+			{
+				url: 'mobile.html',
+				type: "get",
+				data: $("form#referenceLookup").serialize()
+			}
+		);*/
 		setHashState(book,chapter,verse);
 		var endDate = new Date();
 		timer(startDate, endDate);
@@ -39,37 +46,38 @@
 	function subdueColor(color, subdueColorBy){
 		return parseInt(color/subdueColorBy);
 	} 
-	function highlightStrongsNumber(strongsNumber, type) {
-		var strongsNumberAsId = strongsNumber.replace(/ /gi,"");
-		var strongsInt = parseInt(strongsNumber.substring(2,strongsNumber.length)/4);
-		if(!$('#'+strongsNumberAsId).length > 0) {
-			if(strongsInt > 0) {
-				var subdueColorBy = $('#subdueColorBy').val();
-				var color = colors[strongsInt];
-				var colorArray = color.split('(')[1].split(')')[0].split(',')
-				var red = subdueColor(colorArray[0], subdueColorBy);
-				var green = subdueColor(colorArray[1], subdueColorBy);
-				var blue = subdueColor(colorArray[2], subdueColorBy);
-				var newColor = createColorCode(red,green,blue);
-				var strongsStyle = '#'+strongsNumber+' #verse span.'+strongsNumber+', #'+strongsNumber+' .'+strongsNumber+', .'+strongsNumber+' {color:#fff;background:'+newColor+';}';
-		    }
-			var strongsTracking = '';
-			strongsTracking += '<div class="collapsable" id="'+strongsNumberAsId+'"><style></style><h2 class="'+strongsNumber+'">'+strongsNumber+' <a class="remove" href="#"></a></h2></div>';
-			$('#referenceTracking').append(strongsTracking);
-			if(strongsInt > 0) {
-        	    $('#'+strongsNumber+' style').html(strongsStyle);
-            	$('#changeColor #colorFormStrongsNumber').val(strongsNumber);
-	            color = $('#'+strongsNumber+' .'+strongsNumber).css("background-color");
-				$('#changeColor #colorFormColor').val(color);
-				$('#colorSelector div').css('background',newColor);
-				$('#colorSelector').ColorPickerSetColor(RGBtoHEX(newColor));
-		        $('#wordControlPanel').hide();
-    	        $('#referenceTracking h2').hoverIntent(hoverIntentConfig);
-    	    }
-        }
-		if(strongsInt > 0) {
-			wordTree(strongsNumber);
+	function highlightStrongsNumber(strongsNumber) {
+		var strongsFamily = '';
+		var type = '';
+		if(typeof(strongsObjectWithFamilies[strongsNumber]) != "undefined") {
+			type = "strongs";
+			rootNumber = strongsObjectWithFamilies[strongsNumber]['family'];
+		} else {
+			type = "word";
+			rootNumber = strongsNumber.replace(/ /gi,"");
 		}
+		if(!$('#'+rootNumber+'Family').length > 0) {
+			var strongsTracking = '';
+			if(type==="strongs") {
+				strongsTracking += '<div class="collapsable" id="'+rootNumber+'Family" class="family-wrapper"><h2 class="'+rootNumber+'"><span class="text">'+rootNumber+'</span> <a class="remove" href="#"></a></h2><form>';
+			} else { //word
+				strongsTracking += '<div class="collapsable" id="'+rootNumber+'"><h2 class="'+rootNumber+'"><span class="text">'+rootNumber+'</span> <a class="remove" href="#"></a></h2>';
+			}
+			if(typeof(strongsFamilies[rootNumber]) != "undefined") {
+				$.each(strongsFamilies[rootNumber], function(index, number) {
+					strongsTracking += '<div class="collapsable" id="'+number+'"><h2 class="'+rootNumber+'"><span class="text">'+number+'</span></h2></div>';
+				});
+			}
+			if(type==="strongs") {
+				strongsTracking += '</form></div>';
+			} else { //word
+				strongsTracking += '</div>';
+			}
+			$('#referenceTracking .results').append(strongsTracking);
+			$('body').data('class', $('body').data('class')+' '+strongsNumber);
+			//$('body').data('class', $('body').data('class')+' '+rootNumber);
+			$('body').addClass(rootNumber);
+        }
 	}
 	function searchByStrongsNumber(strongsNumberString) {
 		var startDate = new Date();
@@ -78,7 +86,7 @@
 		var searchType = $('#searchSelect').val();
 		var wordString = "";
 		var strongsNumberAsId = strongsNumberString.replace(/ /gi,"");
-		highlightStrongsNumber(strongsNumberString);
+		highlightStrongsNumber(strongsNumberAsId);
 		strongsNumberArray = strongsNumberString.split(' ');
 /*
 		//to differentiate between strongs numbers and not strongs numbers
@@ -97,18 +105,19 @@
 		if(wordString!=""){
 			highlightStrongsNumber(wordString,'word');
 		}*/
-		references += '<form><ol class="references">';
+		references += '<ol class="references">';
 		var wordCount = 0;
 
 		var searchObject = bibleObject;
 		if($("select[name=searchLanguage]").val() === "hebrew") {
 			searchObject = hebrewObject;
-			$.each(strongsNumberArray, function(index, strongsNumber) {
+/*			$.each(strongsNumberArray, function(index, strongsNumber) {
 				if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
 					strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
 				}
-			});
+			});*/
 		}
+
 		var referenceArray = new Array();
 		$.each(searchObject, function(bookName, bookContent) {
 			if($('#searchRange').val() === "book") {
@@ -133,13 +142,18 @@
 			}
 		});
 		references += createReferenceList(referenceArray);
-		references += '</ol></form>';
+		references += '</ol>';
 
 		//collapse all the others
-		$('#referenceTracking .collapsable').addClass('closed');
+		$('#referenceTracking .results .collapsable').addClass('closed');
+		if(typeof(strongsObjectWithFamilies[strongsNumberAsId]) != "undefined") {
+			$('#referenceTracking #'+strongsObjectWithFamilies[strongsNumberAsId]['family']+'Family').removeClass('closed');
+		}
 		$('#referenceTracking #'+strongsNumberAsId).removeClass('closed');
 		if(!$('#referenceTracking #'+strongsNumberAsId+' form').length > 0 ) {
-			$('#referenceTracking #'+strongsNumberAsId).append(references);
+			var details = wordDetails(strongsNumberAsId);
+			var contents = '<form>'+details+references+'</form>';
+			$('#referenceTracking #'+strongsNumberAsId).append(contents);
 		}
 		goToFirstReference();
 		var endDate = new Date();
@@ -192,8 +206,8 @@ var findArrayElementsInString = function(array, string, searchType) {
 	}
 }
 
-
 function loadReference(book,chapter,verse){
+	book = book.replace(/%20/gi, ' ')
 	chapterInArray = chapter - 1;
 	verseInArray = verse - 1
 	context = false;
@@ -201,7 +215,29 @@ function loadReference(book,chapter,verse){
 	$('head title').text(reference);
 	var chapterText = "<h1>"+reference+"</h1>";
 	chapterText += '<ol id="start">';
-	$.each(bibleObject[book][chapterInArray], function(verseNumber, verseText) {
+	if(books[book].test === 'old') {
+		originalText = hebrewObject;
+		originalClass = 'hebrew';
+	}
+	if(books[book].test === 'new') {
+		originalText = greekObject;
+		originalClass = 'greek';
+	}
+	if(originalText && originalText[book] && originalText[book][chapterInArray].length > bibleObject[book][chapterInArray].length) { //there are more hebrew verses than english
+		primaryObject = originalText;
+		secondaryObject = bibleObject;
+		primaryClass = 'original ' + originalClass;
+		secondaryClass = "english";
+	} else {
+		primaryObject = bibleObject;
+		secondaryObject = originalText;
+		primaryClass = "english";
+		secondaryClass = 'original ' + 	originalClass;
+	}
+	console.log(originalText[book][chapterInArray].length);
+	console.log(bibleObject[book][chapterInArray].length);
+	//todo - implement templating system
+	$.each(primaryObject[book][chapterInArray], function(verseNumber, verseText) {
 		chapterText += '<li>';
 		chapterText += '<div class="wrapper"';
 		if(verseNumber === verseInArray) {
@@ -212,14 +248,17 @@ function loadReference(book,chapter,verse){
 			context = true;
 		}
 		chapterText += '>';
-		chapterText += '<div class="english">';
+		//load primary object
+		chapterText += '<div class="'+primaryClass+'">';
 		chapterText += verseText;
 		chapterText += "</div>";
-		//Load hebrew
-		if(hebrewObject[book] && hebrewObject[book][chapterInArray][verseNumber]) {
-			chapterText += "<div class='hebrew'>";
-			//chapterText += hebrewObject[book][chapterInArray][verseNumber];
-			chapterText += hebrewObject[book][chapterInArray][verseNumber].toString();
+		//Load secondary object
+		if(secondaryObject[book] && secondaryObject[book][chapterInArray][verseNumber]) {
+			chapterText += '<div class="'+secondaryClass+'">';
+			$.each(secondaryObject[book][chapterInArray][verseNumber], function(index, word) {
+				//console.log(verseNumber + '    ' + index);
+				chapterText += '<span class="'+word['lemma']+'" title="'+word['lemma']+' '+word['morph']+'">'+word['word']+'</span> ';
+			});
 			chapterText += "</div>";
 		}
 		chapterText += '</div>';
@@ -227,35 +266,83 @@ function loadReference(book,chapter,verse){
 	});
 
 	chapterText += '</ol>';
-	chapterText = chapterText.replace(/<w/gi,'<span').replace(/<\/w>/gi,'</span> ').replace(/<q who="Jesus" marker="">/gi,'').replace(/<\/q>/gi,'');
+	chapterText = chapterText.replace(/<w/gi,'<span')
+	                         .replace(/<\/w>/gi,'</span> ')
+//	                         .replace(/<q who="Jesus" marker="">/gi,'')
+//	                         .replace(/<\/q>/gi,'')
+//	                         .replace(/lemma=\"/gi, 'title="') 
+	                         .replace(/lemma=\"H([0-9]+)\"/gi, 'class="H$1" lemma="H$1"')
+	                         .replace(/lemma=\"G([0-9]+)\"/gi, 'class="G$1" lemma="G$1"')
+	;
+	$('body').attr('class',$('body').data('class'));
 	$('#verse').html(chapterText);
-	$.each($('#verse .hebrew span'),function() {
-		if($(this).attr('lemma')){
-			var newLemma = 'H0' + $(this).attr('lemma');
-			$(this).attr('lemma',newLemma);
-		}
+	/*$.each($('#verse .hebrew span'),function() {
+	//	if($(this).attr('lemma')){
+			var newLemma = 'H0' + $(this).attr('class');
+			$(this).attr('class',newLemma);
+	//	}
 	});
-	$.each($('#verse span'),function() {
+	/*$.each($('#verse span'),function() {
 		if($(this).attr('lemma')){
 			$(this).addClass($(this).attr('lemma').replace(/strong:/gi,''));
 		}
-	});
-	$('#verse ol > li span, #strongsTracking ul > li span').hoverIntent(hoverIntentConfig);
+	});*/
+	$('#wordControlPanel').hide();
+	//$('#verse ol > li span, #strongsTracking ul > li span').hoverIntent(hoverIntentConfig);
 	scrollVerseTo($('#context'));
 	maintainState(book,chapter,verse,context);
-
+	
+	/*todo - move this to the data
+	setTimeout(function() {
+		$.each($('#verse ol > li span'),function(){
+			var thisSpan = $(this);
+			if(thisSpan.attr('lemma')) {
+				thisSpan.attr('title',$(this).attr('lemma'));
+				//loop array of lemma
+				$.each(thisSpan.attr('lemma').split(' '), function(key, value) {
+					if(strongsObjectWithFamilies[value]) {
+						thisSpan.attr('class',strongsObjectWithFamilies[value]['family']);
+					}
+				});
+			}
+		});
+	}, 1);*/
 }
 var hoverIntentConfig = {
     sensitivity: 1, // number = sensitivity threshold (must be 1 or higher)
     interval: 250, // number = milliseconds for onMouseOver polling interval
-    over: function(){initializeWordPanel($(this));}, // function = onMouseOver callback (REQUIRED)
+    over: function(){showWordDetails($(this).attr('lemma'));},//initializeWordPanel($(this));}, // function = onMouseOver callback (REQUIRED)
     timeout: 250, // number = milliseconds delay before onMouseOut
-    out: function(){hideWordPanel();} // function = onMouseOut callback (REQUIRED)
+    out: function(){}//hideWordPanel();} // function = onMouseOut callback (REQUIRED)
+}
+
+function wordDetails(strongsNumber) {
+			var details = '';
+			if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' && strongsDictionary[strongsNumber] ) {
+				var strongsObject = strongsDictionary[strongsNumber];
+				var lemma = stripPointing(strongsObject["lemma"]);
+				var strongsDef = strongsObject["strongs_def"];
+				var kjvDef = strongsObject["kjv_def"];
+				var pron = strongsObject["pron"];
+				var xlit = strongsObject["xlit"];
+				var derivation = strongsObject["derivation"];
+				var family = strongsObjectWithFamilies[strongsNumber]["family"];
+				details += '<ul class="details">';
+				details += '<li>lemma: '+lemma+'</li>';
+				details += '<li>strongsDef: '+strongsDef+'</li>';
+				details += '<li>kjvDef: '+kjvDef+'</li>';
+				details += '<li>pron: '+pron+'</li>';
+				details += '<li>xlit: '+xlit+'</li>';
+				details += '<li>derivation: '+derivation+'</li>';
+				details += '<li>family: '+family+'</li>';
+				details += '</ul>';
+				return details
+			}
 }
 
 /*Word panel*/
 function initializeWordPanel(spanObject) {
-	var strongsNumberArray = spanObject.attr('class').split(' ');
+	var strongsNumberArray = spanObject.attr('lemma').split(' ');
 	var strongsNumberPrefix = '';
 	var strongsNumberDisplay = '';
 	var lemma = '';
@@ -264,32 +351,31 @@ function initializeWordPanel(spanObject) {
 	var englishWord = '';
 	$('.control-panel .duplicated').remove();
 	$.each(strongsNumberArray, function(i,strongsNumber) {
-		if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' ) {
-			strongsNumberDisplay = strongsNumber;
-			/*convert*/
-			strongsNumberPrefix = strongsNumber.substring(0,1);
-			if(strongsNumberPrefix==="H") {
-				osidStrongsNumber = strongsNumberPrefix + strongsNumber.substring(2,strongsNumber.length);
-			} else {
-				osidStrongsNumber = strongsNumberPrefix + strongsNumber.substring(1,strongsNumber.length);
-			}
-			lemma = stripPointing(strongsDictionary[osidStrongsNumber]["lemma"]);
-			strongsDef = strongsDictionary[osidStrongsNumber]["strongs_def"];
-			kjvDef = strongsDictionary[osidStrongsNumber]["kjv_def"];
-			englishWord = spanObject.text();
+		if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' && strongsDictionary[strongsNumber] ) {
+			lemma = stripPointing(strongsDictionary[strongsNumber]["lemma"]);
+			strongsDef = strongsDictionary[strongsNumber]["strongs_def"];
+			kjvDef = strongsDictionary[strongsNumber]["kjv_def"];
+			pron = strongsDictionary[strongsNumber]["pron"];
+			xlit = strongsDictionary[strongsNumber]["xlit"];
+			derivation = strongsDictionary[strongsNumber]["derivation"];
+			family = strongsObjectWithFamilies[strongsNumber]["family"];
+			englishWord = spanObject.html();
 			var infoObject = $('.control-panel .template').clone().removeClass('template').addClass('duplicated');
 			infoObject.appendTo('#wordControlPanel .control-panel')
-			infoObject.find('.wordControlPanelStrongsNumber').addClass(strongsNumberDisplay).text(strongsNumberDisplay);
+			infoObject.find('.wordControlPanelStrongsNumber').addClass(strongsNumber).text(strongsNumber);
 			infoObject.find('.wordControlPanelLemma').text(lemma);
-			infoObject.find('.wordControlPanelEnglish').text(englishWord);
+			infoObject.find('.wordControlPanelEnglish').html(englishWord).addClass(strongsNumber);
 			infoObject.find('.wordControlPanelStrongsDef').text(strongsDef);
 			infoObject.find('.wordControlPanelKJVDef').text(kjvDef);
+			infoObject.find('.wordControlPanelXLit').text(xlit);
+			infoObject.find('.wordControlPanelPron').text(pron);
+			infoObject.find('.wordControlPanelDerivation').text(derivation);
+			infoObject.find('.wordControlPanelFamily').text(family);
 		}
 	});
 	showWordPanel(spanObject);
 }
 function showWordPanel(spanObject) {
-
 	/*position*/
 	$('#wordControlPanel').show();
 	var positionClass = "";
@@ -300,7 +386,7 @@ function showWordPanel(spanObject) {
 	} else {
 		positionClass += "top";
 	}
-	var leftPosition = spanObject.offset().left + spanObject.width(); /// 2; //0 - ($('#wordControlPanel').width() / 2 - $(this).width() / 2);
+	var leftPosition = spanObject.offset().left - 5;// + spanObject.width(); /// 2; //0 - ($('#wordControlPanel').width() / 2 - $(this).width() / 2);
 	positionClass += " ";
 	if(leftPosition + $('#wordControlPanel').width() > $('body').width()){
 		var leftPosition = spanObject.offset().left - $('#wordControlPanel').width();// / 2 - $(this).width() / 2);
@@ -308,11 +394,10 @@ function showWordPanel(spanObject) {
 	} else {
 		positionClass += "left";
 	}
-
 	$('#wordControlPanel').css({
 		'top': topPosition,
 		'left': leftPosition
-	}).attr('class','').addClass('not-active').addClass(positionClass);
+	}).attr('class','').addClass('not-active').addClass(positionClass).addClass(spanObject.attr('class'));
 	$('#wordControlPanel .definitions').addClass('hide');
 }
 function hideWordPanel() {
@@ -320,7 +405,6 @@ function hideWordPanel() {
 }
 /*Word Tree*/
 function wordTree(strongsNumber){
-	$('#wordTree').html('Loading');
 	var roots = '';
 	if(typeof(strongsObject[strongsNumber]) != "undefined"){
         $.each(strongsObject[strongsNumber], function(index,rootNumber){
@@ -335,7 +419,8 @@ function wordTree(strongsNumber){
 			}
 		});
 	});
-	wordTreeString = '';
+	var wordTreeString = '';
+	wordTreeString += '<div class="wordTree">';
 	if(roots == ''){
 		wordTreeString += '<p>no roots</p>';
 	} else {
@@ -346,7 +431,8 @@ function wordTree(strongsNumber){
 	} else {
 		wordTreeString += 'branches:<br />' + branches + '</p>';
 	}
-	$('#wordTree').html(wordTreeString);
+	wordTreeString = '</div>';
+	return wordTreeString;
 }
 
 /*State Maintainance*/
@@ -395,9 +481,9 @@ function markReference(referenceLink){
     window.location.hash = href;
 }
 function scrollVerseTo(verse) {
-	$('#verse').closest('.panel').scrollTop(0);
+	$('.panel.central').scrollTop(0);
 	if(verse.length > 0) {
-		$('#verse').closest('.panel').scrollTop(verse.offset().top);
+		$('.panel.central').scrollTop(verse.offset().top);
 	}
 }
 /*Helper Methods*/
@@ -407,97 +493,6 @@ function timer(startDate, endDate){
 	if(typeof(console) !== 'undefined'){
 		console.log(endTime - startTime);
 	}
-}
-function createColorCode(red,green,blue){
-	return 'rgb('+red+','+green+','+blue+')';
-}
-/* Create Color Array*/
-var colors = new Array();
-var i = 0;
-//red to green			
-var red = 255;
-var green = 0;
-var blue = 0;
-while(red > 0){
-	red = red - 1;
-	green = green + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//green to blue
-var red = 0;
-var green = 255;
-var blue = 0;
-
-while(green > 0){
-	green = green - 1;
-	blue = blue + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//red to blue
-var red = 255;
-var green = 0;
-var blue = 0;
-while(red > 0){
-	red = red - 1;
-	blue = blue + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//Red to Yellow
-var red = 255;
-var green = 0;
-var blue = 0;
-while(green < 255){
-	green = green + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//Yellow to Green
-var red = 255;
-var green = 255;
-var blue = 0;
-while(red > 1){
-	red = red - 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//Greens to Turqoise
-var red = 0;
-var green = 255;
-var blue = 0;
-while(blue < 255){
-	blue = blue + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//Turqoise to Blue
-var red = 0;
-var green = 255;
-var blue = 255;
-while(green > 0){
-	green = green - 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//red to Purple
-var red = 255;
-var green = 0;
-var blue = 0;
-while(blue < 255){
-	blue = blue + 1;
-	colors[i] = createColorCode(red,green,blue);
-	i++
-}
-//Purple to blue
-var red = 255;
-var green = 0;
-var blue = 255;
-while(blue > 0){
-	blue = blue - 1;
-	colors[i] = 'rgb('+red+','+green+','+blue+')';
-	i++
 }
 
 function stripPointing(word) {
@@ -655,33 +650,10 @@ Array.prototype.unique =
     }
     return a;
   };
-  
-  
-  //actual converter function called by main function
- 
-function toHex(N) {
-	if (N==null) return "00";
-	N=parseInt(N); if (N==0 || isNaN(N)) return "00";
-	N=Math.max(0,N); N=Math.min(N,255); N=Math.round(N);
-	return "0123456789ABCDEF".charAt((N-N%16)/16) + "0123456789ABCDEF".charAt(N%16);
-}
- 
-//function called to return hex string value
-function RGBtoHEX(str)
-{
-	//check that string starts with 'rgb'
-	if (str.substring(0, 3) == 'rgb') {
-		var arr = str.split(",");
-		var r = arr[0].replace('rgb(','').trim(), g = arr[1].trim(), b = arr[2].replace(')','').trim();
-		var hex = [
-			toHex(r),
-			toHex(g),
-			toHex(b)
-		];
-		return "#" + hex.join('');				
-	}
-	else{
-		//string not rgb so return original string unchanged		
-    return str;
+
+if(typeof(console) == 'undefined'){
+	console = new Object;
+	console.log = function(stuff) {
+		$('.console').html(stuff);
 	}
 }
