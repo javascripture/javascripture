@@ -1,0 +1,115 @@
+html {
+	display: none;
+	&.ui-mobile {
+		display: block;
+	}
+}
+.hebrew {
+	font-family: 'Times New Roman', Times serif;
+	font-size: 1.3em;
+	line-height: 1em;
+	text-align: right;
+}
+@word-padding: 2px;
+.translation a, .original a {
+	color: inherit;
+	border-radius: 3px;
+	margin: (0 - @word-padding);
+	padding: @word-padding;
+	text-decoration: none;
+}
+.ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d {
+	overflow: visible;
+}
+.hebrew a {padding: 0 5px;}
+.ui-icon-book {background-image: url(images/icon-book-white.png); }
+/*#reference .ui-grid-a, #reference .ui-grid-b { overflow: visible; }
+#reference ol li {clear:both;}*/
+
+#reference {
+	h2 {
+		text-align: center;
+	}
+	ol.wrapper {
+		padding: 0;
+		li {
+			margin-left: 50%;
+		}
+		.ui-grid-a {
+			display: inline-block;
+			vertical-align: top;
+			margin-left: -100%;
+			width: 200%;
+		}
+		.original {
+			padding-right: 2em;
+		}
+		.greek {
+			padding-right: 2.2em;
+		}
+	}
+}
+#book {
+	.ui-collapsible-set {
+		margin: 0 -15px;
+		.ui-collapsible-heading {
+			margin: 0;
+			.ui-collapsible-heading-toggle {
+				.ui-btn-inner {
+					//could use this to break up the books into sections background-color: rgba(255,0,0,.1);
+				}
+			}
+		}
+		.ui-collapsible-content {
+			margin-left: 3px;
+			margin-right: 0;
+			padding-left: 0;
+			padding-right: 0;
+			.ui-controlgroup-horizontal {
+				margin: 0;
+				padding: 0;
+			}
+			.ui-btn {
+				width: 9.9%;
+				.ui-btn-inner {
+					padding-left: 0;
+					padding-right: 0;
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+#word {
+	.ui-collapsible-set {
+		margin: 0 -7px;
+		.ui-collapsible-heading {
+			.ui-collapsible-heading-toggle {
+				background: none;
+				border: none;
+				color: #fff;
+				text-shadow: 0 1px 0 #000;
+				text-ahadow: inherit;
+			}
+		}
+		.ui-collapsible-content {
+			position: relative;
+		}
+	}
+	a.deleteWord {
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		height: 24px;
+		width: 24px;
+		.ui-btn-inner {
+			padding: 0 !important;
+		}
+	}
+}
+divinename {
+	text-transform: uppercase;
+}
+a.added {
+	color: #aaa;
+}

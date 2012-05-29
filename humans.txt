@@ -1,0 +1,14 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Builder: Ben Dwyer
+  Site: scruffian.com
+  Twitter: @scruffian
+  Location: the woods
+
+/* SITE */
+  Components: jQuery Mobile
+  Software: Netbeans, Codekit
+  Twitter: @javascripture
