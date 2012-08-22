@@ -1,1804 +1,334 @@
 <!doctype html>
 <html lang="en">
-<head>
-	<title>Javascripture</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet"  href="css/jquery.mobile-1.1.0.css" />
-	<link rel="stylesheet" type="text/css" href="css/multiview.css" />
-	<link rel="stylesheet"  href="css/qunit.css" />
-	<link rel="stylesheet" href="css/strongscolors.css" />
-	<link rel="stylesheet"  href="css/javascripture.css" />
-	<script data-main="js/javascripture" src="js/external/requirejs/require.js"></script>
-</head>
-<body>					
-	<div data-role="page" id="container" data-wrapper="true" data-switchable="true" data-scrollmode="overthrow">	
-		<div data-role="panel" data-id="menu" data-panel="menu" data-hash="history" data-menu-text="Books">
-			<div data-role="page" id="book" data-show="first">
-				<div data-role="header" data-position="fixed" data-theme="a">
-					<h1>Books</h1>
-				</div>
-				<div data-role="content">
-					<div data-role="collapsible-set">
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Genesis</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Genesis&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Genesis&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Genesis&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Genesis&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Genesis&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Genesis&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Genesis&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Genesis&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Genesis&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Genesis&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Genesis&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Genesis&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Genesis&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Genesis&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Genesis&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Genesis&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Genesis&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Genesis&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Genesis&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Genesis&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Genesis&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Genesis&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Genesis&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Genesis&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Genesis&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Genesis&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Genesis&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Genesis&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Genesis&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Genesis&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Genesis&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Genesis&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Genesis&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Genesis&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Genesis&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Genesis&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Genesis&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Genesis&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Genesis&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Genesis&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Genesis&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Genesis&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-								<a href="#reference?book=Genesis&amp;chapter=43" data-role="button" data-panel="main" data-transition="slide">43</a>
-								<a href="#reference?book=Genesis&amp;chapter=44" data-role="button" data-panel="main" data-transition="slide">44</a>
-								<a href="#reference?book=Genesis&amp;chapter=45" data-role="button" data-panel="main" data-transition="slide">45</a>
-								<a href="#reference?book=Genesis&amp;chapter=46" data-role="button" data-panel="main" data-transition="slide">46</a>
-								<a href="#reference?book=Genesis&amp;chapter=47" data-role="button" data-panel="main" data-transition="slide">47</a>
-								<a href="#reference?book=Genesis&amp;chapter=48" data-role="button" data-panel="main" data-transition="slide">48</a>
-								<a href="#reference?book=Genesis&amp;chapter=49" data-role="button" data-panel="main" data-transition="slide">49</a>
-								<a href="#reference?book=Genesis&amp;chapter=50" data-role="button" data-panel="main" data-transition="slide">50</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Exodus</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Exodus&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Exodus&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Exodus&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Exodus&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Exodus&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Exodus&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Exodus&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Exodus&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Exodus&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Exodus&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Exodus&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Exodus&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Exodus&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Exodus&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Exodus&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Exodus&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Exodus&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Exodus&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Exodus&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Exodus&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Exodus&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Exodus&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Exodus&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Exodus&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Exodus&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Exodus&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Exodus&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Exodus&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Exodus&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Exodus&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Exodus&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Exodus&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Exodus&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Exodus&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Exodus&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Exodus&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Exodus&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Exodus&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Exodus&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Exodus&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Leviticus</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Leviticus&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Leviticus&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Leviticus&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Leviticus&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Leviticus&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Leviticus&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Leviticus&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Leviticus&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Leviticus&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Leviticus&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Leviticus&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Leviticus&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Leviticus&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Leviticus&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Leviticus&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Leviticus&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Leviticus&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Leviticus&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Leviticus&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Leviticus&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Leviticus&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Leviticus&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Leviticus&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Leviticus&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Leviticus&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Leviticus&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Leviticus&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Numbers</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Numbers&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Numbers&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Numbers&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Numbers&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Numbers&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Numbers&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Numbers&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Numbers&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Numbers&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Numbers&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Numbers&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Numbers&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Numbers&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Numbers&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Numbers&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Numbers&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Numbers&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Numbers&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Numbers&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Numbers&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Numbers&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Numbers&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Numbers&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Numbers&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Numbers&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Numbers&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Numbers&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Numbers&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Numbers&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Numbers&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Numbers&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Numbers&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Numbers&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Numbers&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Numbers&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Numbers&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Deuteronomy</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Deuteronomy&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Deuteronomy&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Joshua</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Joshua&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Joshua&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Joshua&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Joshua&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Joshua&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Joshua&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Joshua&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Joshua&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Joshua&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Joshua&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Joshua&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Joshua&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Joshua&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Joshua&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Joshua&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Joshua&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Joshua&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Joshua&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Joshua&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Joshua&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Joshua&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Joshua&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Joshua&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Joshua&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Judges</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Judges&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Judges&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Judges&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Judges&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Judges&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Judges&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Judges&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Judges&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Judges&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Judges&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Judges&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Judges&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Judges&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Judges&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Judges&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Judges&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Judges&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Judges&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Judges&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Judges&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Judges&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Ruth</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Ruth&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Ruth&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Ruth&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Ruth&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Samuel</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Samuel&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=1 Samuel&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Samuel</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Samuel&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=2 Samuel&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Kings</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Kings&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Kings&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Kings&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Kings&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Kings&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Kings&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=1 Kings&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=1 Kings&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=1 Kings&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=1 Kings&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=1 Kings&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=1 Kings&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=1 Kings&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=1 Kings&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=1 Kings&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=1 Kings&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=1 Kings&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=1 Kings&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=1 Kings&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=1 Kings&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=1 Kings&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=1 Kings&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=1 Kings&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=1 Kings&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Kings</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Kings&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Kings&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Kings&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=2 Kings&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=2 Kings&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=2 Kings&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=2 Kings&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=2 Kings&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=2 Kings&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=2 Kings&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=2 Kings&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=2 Kings&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=2 Kings&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=2 Kings&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=2 Kings&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=2 Kings&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=2 Kings&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=2 Kings&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=2 Kings&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=2 Kings&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=2 Kings&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=2 Kings&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=2 Kings&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=2 Kings&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=2 Kings&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Chronicles</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Chronicles&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Chronicles</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Chronicles&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=1 Chronicles&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Ezra</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Ezra&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Ezra&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Ezra&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Ezra&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Ezra&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Ezra&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Ezra&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Ezra&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Ezra&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Ezra&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Nehemiah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Nehemiah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Nehemiah&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Esther</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Esther&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Esther&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Esther&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Esther&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Esther&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Esther&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Esther&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Esther&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Esther&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Esther&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Job</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Job&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Job&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Job&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Job&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Job&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Job&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Job&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Job&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Job&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Job&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Job&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Job&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Job&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Job&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Job&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Job&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Job&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Job&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Job&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Job&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Job&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Job&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Job&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Job&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Job&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Job&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Job&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Job&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Job&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Job&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Job&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Job&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Job&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Job&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Job&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Job&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Job&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Job&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Job&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Job&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Job&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Job&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Psalm</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Psalm&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Psalm&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Psalm&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Psalm&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Psalm&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Psalm&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Psalm&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Psalm&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Psalm&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Psalm&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Psalm&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Psalm&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Psalm&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Psalm&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Psalm&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Psalm&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Psalm&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Psalm&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Psalm&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Psalm&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Psalm&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Psalm&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Psalm&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Psalm&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Psalm&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Psalm&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Psalm&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Psalm&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Psalm&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Psalm&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Psalm&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Psalm&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Psalm&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Psalm&ampamp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Psalm&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Psalm&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Psalm&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Psalm&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Psalm&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Psalm&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Psalm&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Psalm&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-								<a href="#reference?book=Psalm&amp;chapter=43" data-role="button" data-panel="main" data-transition="slide">43</a>
-								<a href="#reference?book=Psalm&amp;chapter=44" data-role="button" data-panel="main" data-transition="slide">44</a>
-								<a href="#reference?book=Psalm&amp;chapter=45" data-role="button" data-panel="main" data-transition="slide">45</a>
-								<a href="#reference?book=Psalm&amp;chapter=46" data-role="button" data-panel="main" data-transition="slide">46</a>
-								<a href="#reference?book=Psalm&amp;chapter=47" data-role="button" data-panel="main" data-transition="slide">47</a>
-								<a href="#reference?book=Psalm&amp;chapter=48" data-role="button" data-panel="main" data-transition="slide">48</a>
-								<a href="#reference?book=Psalm&amp;chapter=49" data-role="button" data-panel="main" data-transition="slide">49</a>
-								<a href="#reference?book=Psalm&amp;chapter=50" data-role="button" data-panel="main" data-transition="slide">50</a>
-								<a href="#reference?book=Psalm&amp;chapter=51" data-role="button" data-panel="main" data-transition="slide">51</a>
-								<a href="#reference?book=Psalm&amp;chapter=52" data-role="button" data-panel="main" data-transition="slide">52</a>
-								<a href="#reference?book=Psalm&amp;chapter=53" data-role="button" data-panel="main" data-transition="slide">53</a>
-								<a href="#reference?book=Psalm&amp;chapter=54" data-role="button" data-panel="main" data-transition="slide">54</a>
-								<a href="#reference?book=Psalm&amp;chapter=55" data-role="button" data-panel="main" data-transition="slide">55</a>
-								<a href="#reference?book=Psalm&amp;chapter=56" data-role="button" data-panel="main" data-transition="slide">56</a>
-								<a href="#reference?book=Psalm&amp;chapter=57" data-role="button" data-panel="main" data-transition="slide">57</a>
-								<a href="#reference?book=Psalm&amp;chapter=58" data-role="button" data-panel="main" data-transition="slide">58</a>
-								<a href="#reference?book=Psalm&amp;chapter=59" data-role="button" data-panel="main" data-transition="slide">59</a>
-								<a href="#reference?book=Psalm&amp;chapter=60" data-role="button" data-panel="main" data-transition="slide">60</a>
-								<a href="#reference?book=Psalm&amp;chapter=61" data-role="button" data-panel="main" data-transition="slide">61</a>
-								<a href="#reference?book=Psalm&amp;chapter=62" data-role="button" data-panel="main" data-transition="slide">62</a>
-								<a href="#reference?book=Psalm&amp;chapter=63" data-role="button" data-panel="main" data-transition="slide">63</a>
-								<a href="#reference?book=Psalm&amp;chapter=64" data-role="button" data-panel="main" data-transition="slide">64</a>
-								<a href="#reference?book=Psalm&amp;chapter=65" data-role="button" data-panel="main" data-transition="slide">65</a>
-								<a href="#reference?book=Psalm&amp;chapter=66" data-role="button" data-panel="main" data-transition="slide">66</a>
-								<a href="#reference?book=Psalm&amp;chapter=67" data-role="button" data-panel="main" data-transition="slide">67</a>
-								<a href="#reference?book=Psalm&amp;chapter=68" data-role="button" data-panel="main" data-transition="slide">68</a>
-								<a href="#reference?book=Psalm&amp;chapter=69" data-role="button" data-panel="main" data-transition="slide">69</a>
-								<a href="#reference?book=Psalm&amp;chapter=70" data-role="button" data-panel="main" data-transition="slide">70</a>
-								<a href="#reference?book=Psalm&amp;chapter=71" data-role="button" data-panel="main" data-transition="slide">71</a>
-								<a href="#reference?book=Psalm&amp;chapter=72" data-role="button" data-panel="main" data-transition="slide">72</a>
-								<a href="#reference?book=Psalm&amp;chapter=73" data-role="button" data-panel="main" data-transition="slide">73</a>
-								<a href="#reference?book=Psalm&amp;chapter=74" data-role="button" data-panel="main" data-transition="slide">74</a>
-								<a href="#reference?book=Psalm&amp;chapter=75" data-role="button" data-panel="main" data-transition="slide">75</a>
-								<a href="#reference?book=Psalm&amp;chapter=76" data-role="button" data-panel="main" data-transition="slide">76</a>
-								<a href="#reference?book=Psalm&amp;chapter=77" data-role="button" data-panel="main" data-transition="slide">77</a>
-								<a href="#reference?book=Psalm&amp;chapter=78" data-role="button" data-panel="main" data-transition="slide">78</a>
-								<a href="#reference?book=Psalm&amp;chapter=79" data-role="button" data-panel="main" data-transition="slide">79</a>
-								<a href="#reference?book=Psalm&amp;chapter=80" data-role="button" data-panel="main" data-transition="slide">80</a>
-								<a href="#reference?book=Psalm&amp;chapter=81" data-role="button" data-panel="main" data-transition="slide">81</a>
-								<a href="#reference?book=Psalm&amp;chapter=82" data-role="button" data-panel="main" data-transition="slide">82</a>
-								<a href="#reference?book=Psalm&amp;chapter=83" data-role="button" data-panel="main" data-transition="slide">83</a>
-								<a href="#reference?book=Psalm&amp;chapter=84" data-role="button" data-panel="main" data-transition="slide">84</a>
-								<a href="#reference?book=Psalm&amp;chapter=85" data-role="button" data-panel="main" data-transition="slide">85</a>
-								<a href="#reference?book=Psalm&amp;chapter=86" data-role="button" data-panel="main" data-transition="slide">86</a>
-								<a href="#reference?book=Psalm&amp;chapter=87" data-role="button" data-panel="main" data-transition="slide">87</a>
-								<a href="#reference?book=Psalm&amp;chapter=88" data-role="button" data-panel="main" data-transition="slide">88</a>
-								<a href="#reference?book=Psalm&amp;chapter=89" data-role="button" data-panel="main" data-transition="slide">89</a>
-								<a href="#reference?book=Psalm&amp;chapter=90" data-role="button" data-panel="main" data-transition="slide">90</a>
-								<a href="#reference?book=Psalm&amp;chapter=91" data-role="button" data-panel="main" data-transition="slide">91</a>
-								<a href="#reference?book=Psalm&amp;chapter=92" data-role="button" data-panel="main" data-transition="slide">92</a>
-								<a href="#reference?book=Psalm&amp;chapter=93" data-role="button" data-panel="main" data-transition="slide">93</a>
-								<a href="#reference?book=Psalm&amp;chapter=94" data-role="button" data-panel="main" data-transition="slide">94</a>
-								<a href="#reference?book=Psalm&amp;chapter=95" data-role="button" data-panel="main" data-transition="slide">95</a>
-								<a href="#reference?book=Psalm&amp;chapter=96" data-role="button" data-panel="main" data-transition="slide">96</a>
-								<a href="#reference?book=Psalm&amp;chapter=97" data-role="button" data-panel="main" data-transition="slide">97</a>
-								<a href="#reference?book=Psalm&amp;chapter=98" data-role="button" data-panel="main" data-transition="slide">98</a>
-								<a href="#reference?book=Psalm&amp;chapter=99" data-role="button" data-panel="main" data-transition="slide">99</a>
-								<a href="#reference?book=Psalm&amp;chapter=100" data-role="button" data-panel="main" data-transition="slide">100</a>
-								<a href="#reference?book=Psalm&amp;chapter=101" data-role="button" data-panel="main" data-transition="slide">101</a>
-								<a href="#reference?book=Psalm&amp;chapter=102" data-role="button" data-panel="main" data-transition="slide">102</a>
-								<a href="#reference?book=Psalm&amp;chapter=103" data-role="button" data-panel="main" data-transition="slide">103</a>
-								<a href="#reference?book=Psalm&amp;chapter=104" data-role="button" data-panel="main" data-transition="slide">104</a>
-								<a href="#reference?book=Psalm&amp;chapter=105" data-role="button" data-panel="main" data-transition="slide">105</a>
-								<a href="#reference?book=Psalm&amp;chapter=106" data-role="button" data-panel="main" data-transition="slide">106</a>
-								<a href="#reference?book=Psalm&amp;chapter=107" data-role="button" data-panel="main" data-transition="slide">107</a>
-								<a href="#reference?book=Psalm&amp;chapter=108" data-role="button" data-panel="main" data-transition="slide">108</a>
-								<a href="#reference?book=Psalm&amp;chapter=109" data-role="button" data-panel="main" data-transition="slide">109</a>
-								<a href="#reference?book=Psalm&amp;chapter=110" data-role="button" data-panel="main" data-transition="slide">110</a>
-								<a href="#reference?book=Psalm&amp;chapter=111" data-role="button" data-panel="main" data-transition="slide">111</a>
-								<a href="#reference?book=Psalm&amp;chapter=112" data-role="button" data-panel="main" data-transition="slide">112</a>
-								<a href="#reference?book=Psalm&amp;chapter=113" data-role="button" data-panel="main" data-transition="slide">113</a>
-								<a href="#reference?book=Psalm&amp;chapter=114" data-role="button" data-panel="main" data-transition="slide">114</a>
-								<a href="#reference?book=Psalm&amp;chapter=115" data-role="button" data-panel="main" data-transition="slide">115</a>
-								<a href="#reference?book=Psalm&amp;chapter=116" data-role="button" data-panel="main" data-transition="slide">116</a>
-								<a href="#reference?book=Psalm&amp;chapter=117" data-role="button" data-panel="main" data-transition="slide">117</a>
-								<a href="#reference?book=Psalm&amp;chapter=118" data-role="button" data-panel="main" data-transition="slide">118</a>
-								<a href="#reference?book=Psalm&amp;chapter=119" data-role="button" data-panel="main" data-transition="slide">119</a>
-								<a href="#reference?book=Psalm&amp;chapter=120" data-role="button" data-panel="main" data-transition="slide">120</a>
-								<a href="#reference?book=Psalm&amp;chapter=121" data-role="button" data-panel="main" data-transition="slide">121</a>
-								<a href="#reference?book=Psalm&amp;chapter=122" data-role="button" data-panel="main" data-transition="slide">122</a>
-								<a href="#reference?book=Psalm&amp;chapter=123" data-role="button" data-panel="main" data-transition="slide">123</a>
-								<a href="#reference?book=Psalm&amp;chapter=124" data-role="button" data-panel="main" data-transition="slide">124</a>
-								<a href="#reference?book=Psalm&amp;chapter=125" data-role="button" data-panel="main" data-transition="slide">125</a>
-								<a href="#reference?book=Psalm&amp;chapter=126" data-role="button" data-panel="main" data-transition="slide">126</a>
-								<a href="#reference?book=Psalm&amp;chapter=127" data-role="button" data-panel="main" data-transition="slide">127</a>
-								<a href="#reference?book=Psalm&amp;chapter=128" data-role="button" data-panel="main" data-transition="slide">128</a>
-								<a href="#reference?book=Psalm&amp;chapter=129" data-role="button" data-panel="main" data-transition="slide">129</a>
-								<a href="#reference?book=Psalm&amp;chapter=130" data-role="button" data-panel="main" data-transition="slide">130</a>
-								<a href="#reference?book=Psalm&amp;chapter=131" data-role="button" data-panel="main" data-transition="slide">131</a>
-								<a href="#reference?book=Psalm&amp;chapter=132" data-role="button" data-panel="main" data-transition="slide">132</a>
-								<a href="#reference?book=Psalm&amp;chapter=133" data-role="button" data-panel="main" data-transition="slide">133</a>
-								<a href="#reference?book=Psalm&amp;chapter=134" data-role="button" data-panel="main" data-transition="slide">134</a>
-								<a href="#reference?book=Psalm&amp;chapter=135" data-role="button" data-panel="main" data-transition="slide">135</a>
-								<a href="#reference?book=Psalm&amp;chapter=136" data-role="button" data-panel="main" data-transition="slide">136</a>
-								<a href="#reference?book=Psalm&amp;chapter=137" data-role="button" data-panel="main" data-transition="slide">137</a>
-								<a href="#reference?book=Psalm&amp;chapter=138" data-role="button" data-panel="main" data-transition="slide">138</a>
-								<a href="#reference?book=Psalm&amp;chapter=139" data-role="button" data-panel="main" data-transition="slide">139</a>
-								<a href="#reference?book=Psalm&amp;chapter=140" data-role="button" data-panel="main" data-transition="slide">140</a>
-								<a href="#reference?book=Psalm&amp;chapter=141" data-role="button" data-panel="main" data-transition="slide">141</a>
-								<a href="#reference?book=Psalm&amp;chapter=142" data-role="button" data-panel="main" data-transition="slide">142</a>
-								<a href="#reference?book=Psalm&amp;chapter=143" data-role="button" data-panel="main" data-transition="slide">143</a>
-								<a href="#reference?book=Psalm&amp;chapter=144" data-role="button" data-panel="main" data-transition="slide">144</a>
-								<a href="#reference?book=Psalm&amp;chapter=145" data-role="button" data-panel="main" data-transition="slide">145</a>
-								<a href="#reference?book=Psalm&amp;chapter=146" data-role="button" data-panel="main" data-transition="slide">146</a>
-								<a href="#reference?book=Psalm&amp;chapter=147" data-role="button" data-panel="main" data-transition="slide">147</a>
-								<a href="#reference?book=Psalm&amp;chapter=148" data-role="button" data-panel="main" data-transition="slide">148</a>
-								<a href="#reference?book=Psalm&amp;chapter=149" data-role="button" data-panel="main" data-transition="slide">149</a>
-								<a href="#reference?book=Psalm&amp;chapter=150" data-role="button" data-panel="main" data-transition="slide">150</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Proverbs</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Proverbs&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Proverbs&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Proverbs&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Proverbs&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Proverbs&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Proverbs&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Proverbs&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Proverbs&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Proverbs&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Proverbs&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Proverbs&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Proverbs&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Proverbs&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Proverbs&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Proverbs&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Proverbs&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Proverbs&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Proverbs&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Proverbs&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Proverbs&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Proverbs&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Proverbs&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Proverbs&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Proverbs&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Proverbs&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Proverbs&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Proverbs&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Proverbs&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Proverbs&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Proverbs&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Proverbs&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Ecclesiastes</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Ecclesiastes&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Ecclesiastes&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Song of songs</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Song of songs&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Song of songs&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Song of songs&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Song of songs&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Song of songs&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Song of songs&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Song of songs&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Song of songs&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Isaiah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Isaiah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Isaiah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Isaiah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Isaiah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Isaiah&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Isaiah&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Isaiah&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Isaiah&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Isaiah&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Isaiah&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Isaiah&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Isaiah&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Isaiah&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Isaiah&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Isaiah&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Isaiah&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Isaiah&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Isaiah&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Isaiah&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Isaiah&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Isaiah&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Isaiah&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Isaiah&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Isaiah&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Isaiah&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Isaiah&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Isaiah&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Isaiah&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Isaiah&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Isaiah&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Isaiah&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Isaiah&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Isaiah&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Isaiah&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Isaiah&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Isaiah&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Isaiah&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Isaiah&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Isaiah&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Isaiah&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Isaiah&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Isaiah&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-								<a href="#reference?book=Isaiah&amp;chapter=43" data-role="button" data-panel="main" data-transition="slide">43</a>
-								<a href="#reference?book=Isaiah&amp;chapter=44" data-role="button" data-panel="main" data-transition="slide">44</a>
-								<a href="#reference?book=Isaiah&amp;chapter=45" data-role="button" data-panel="main" data-transition="slide">45</a>
-								<a href="#reference?book=Isaiah&amp;chapter=46" data-role="button" data-panel="main" data-transition="slide">46</a>
-								<a href="#reference?book=Isaiah&amp;chapter=47" data-role="button" data-panel="main" data-transition="slide">47</a>
-								<a href="#reference?book=Isaiah&amp;chapter=48" data-role="button" data-panel="main" data-transition="slide">48</a>
-								<a href="#reference?book=Isaiah&amp;chapter=49" data-role="button" data-panel="main" data-transition="slide">49</a>
-								<a href="#reference?book=Isaiah&amp;chapter=50" data-role="button" data-panel="main" data-transition="slide">50</a>
-								<a href="#reference?book=Isaiah&amp;chapter=51" data-role="button" data-panel="main" data-transition="slide">51</a>
-								<a href="#reference?book=Isaiah&amp;chapter=52" data-role="button" data-panel="main" data-transition="slide">52</a>
-								<a href="#reference?book=Isaiah&amp;chapter=53" data-role="button" data-panel="main" data-transition="slide">53</a>
-								<a href="#reference?book=Isaiah&amp;chapter=54" data-role="button" data-panel="main" data-transition="slide">54</a>
-								<a href="#reference?book=Isaiah&amp;chapter=55" data-role="button" data-panel="main" data-transition="slide">55</a>
-								<a href="#reference?book=Isaiah&amp;chapter=56" data-role="button" data-panel="main" data-transition="slide">56</a>
-								<a href="#reference?book=Isaiah&amp;chapter=57" data-role="button" data-panel="main" data-transition="slide">57</a>
-								<a href="#reference?book=Isaiah&amp;chapter=58" data-role="button" data-panel="main" data-transition="slide">58</a>
-								<a href="#reference?book=Isaiah&amp;chapter=59" data-role="button" data-panel="main" data-transition="slide">59</a>
-								<a href="#reference?book=Isaiah&amp;chapter=60" data-role="button" data-panel="main" data-transition="slide">60</a>
-								<a href="#reference?book=Isaiah&amp;chapter=61" data-role="button" data-panel="main" data-transition="slide">61</a>
-								<a href="#reference?book=Isaiah&amp;chapter=62" data-role="button" data-panel="main" data-transition="slide">62</a>
-								<a href="#reference?book=Isaiah&amp;chapter=63" data-role="button" data-panel="main" data-transition="slide">63</a>
-								<a href="#reference?book=Isaiah&amp;chapter=64" data-role="button" data-panel="main" data-transition="slide">64</a>
-								<a href="#reference?book=Isaiah&amp;chapter=65" data-role="button" data-panel="main" data-transition="slide">65</a>
-								<a href="#reference?book=Isaiah&amp;chapter=66" data-role="button" data-panel="main" data-transition="slide">66</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Jeremiah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Jeremiah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=43" data-role="button" data-panel="main" data-transition="slide">43</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=44" data-role="button" data-panel="main" data-transition="slide">44</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=45" data-role="button" data-panel="main" data-transition="slide">45</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=46" data-role="button" data-panel="main" data-transition="slide">46</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=47" data-role="button" data-panel="main" data-transition="slide">47</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=48" data-role="button" data-panel="main" data-transition="slide">48</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=49" data-role="button" data-panel="main" data-transition="slide">49</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=50" data-role="button" data-panel="main" data-transition="slide">50</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=51" data-role="button" data-panel="main" data-transition="slide">51</a>
-								<a href="#reference?book=Jeremiah&amp;chapter=52" data-role="button" data-panel="main" data-transition="slide">52</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Lamentations</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Lamentations&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Lamentations&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Lamentations&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Lamentations&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Lamentations&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Ezekiel</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Ezekiel&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=29" data-role="button" data-panel="main" data-transition="slide">29</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=30" data-role="button" data-panel="main" data-transition="slide">30</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=31" data-role="button" data-panel="main" data-transition="slide">31</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=32" data-role="button" data-panel="main" data-transition="slide">32</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=33" data-role="button" data-panel="main" data-transition="slide">33</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=34" data-role="button" data-panel="main" data-transition="slide">34</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=35" data-role="button" data-panel="main" data-transition="slide">35</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=36" data-role="button" data-panel="main" data-transition="slide">36</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=37" data-role="button" data-panel="main" data-transition="slide">37</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=38" data-role="button" data-panel="main" data-transition="slide">38</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=39" data-role="button" data-panel="main" data-transition="slide">39</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=40" data-role="button" data-panel="main" data-transition="slide">40</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=41" data-role="button" data-panel="main" data-transition="slide">41</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=42" data-role="button" data-panel="main" data-transition="slide">42</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=43" data-role="button" data-panel="main" data-transition="slide">43</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=44" data-role="button" data-panel="main" data-transition="slide">44</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=45" data-role="button" data-panel="main" data-transition="slide">45</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=46" data-role="button" data-panel="main" data-transition="slide">46</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=47" data-role="button" data-panel="main" data-transition="slide">47</a>
-								<a href="#reference?book=Ezekiel&amp;chapter=48" data-role="button" data-panel="main" data-transition="slide">48</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Daniel</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Daniel&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Daniel&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Daniel&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Daniel&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Daniel&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Daniel&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Daniel&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Daniel&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Daniel&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Daniel&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Daniel&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Daniel&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Hosea</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Hosea&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Hosea&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Hosea&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Hosea&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Hosea&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Hosea&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Hosea&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Hosea&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Hosea&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Hosea&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Hosea&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Hosea&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Hosea&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Hosea&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Joel</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Joel&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Joel&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Joel&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Amos</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Amos&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Amos&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Amos&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Amos&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Amos&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Amos&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Amos&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Amos&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Amos&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Obadiah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Obadiah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Jonah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Jonah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Jonah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Jonah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Jonah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Micah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Micah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Micah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Micah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Micah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Micah&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Micah&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Micah&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Nahum</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Nahum&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Nahum&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Nahum&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Habbakuk</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Habbakuk&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Habbakuk&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Habbakuk&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Zephaniah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Zephaniah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Zephaniah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Zephaniah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Haggai</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Haggai&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Haggai&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Zechariah</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Zechariah&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Zechariah&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Zechariah&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Zechariah&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Zechariah&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Zechariah&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Zechariah&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Zechariah&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Zechariah&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Zechariah&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Zechariah&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Zechariah&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Zechariah&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Zechariah&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Malachi</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Malachi&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Malachi&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Malachi&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Malachi&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Matthew</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Matthew&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Matthew&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Matthew&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Matthew&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Matthew&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Matthew&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Matthew&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Matthew&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Matthew&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Matthew&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Matthew&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Matthew&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Matthew&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Matthew&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Matthew&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Matthew&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Matthew&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Matthew&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Matthew&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Matthew&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Matthew&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Matthew&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Matthew&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Matthew&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Matthew&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Matthew&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Matthew&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Matthew&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Mark</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Mark&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Mark&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Mark&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Mark&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Mark&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Mark&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Mark&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Mark&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Mark&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Mark&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Mark&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Mark&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Mark&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Mark&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Mark&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Mark&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Luke</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Luke&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Luke&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Luke&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Luke&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Luke&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Luke&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Luke&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Luke&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Luke&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Luke&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Luke&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Luke&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Luke&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Luke&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Luke&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Luke&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Luke&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Luke&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Luke&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Luke&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Luke&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Luke&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Luke&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Luke&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>John</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=John&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=John&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=John&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=John&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=John&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=John&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=John&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=John&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=John&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=John&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=John&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=John&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=John&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=John&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=John&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=John&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=John&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=John&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=John&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=John&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=John&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Acts</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Acts&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Acts&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Acts&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Acts&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Acts&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Acts&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Acts&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Acts&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Acts&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Acts&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Acts&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Acts&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Acts&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Acts&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Acts&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Acts&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Acts&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Acts&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Acts&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Acts&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Acts&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Acts&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
-								<a href="#reference?book=Acts&amp;chapter=23" data-role="button" data-panel="main" data-transition="slide">23</a>
-								<a href="#reference?book=Acts&amp;chapter=24" data-role="button" data-panel="main" data-transition="slide">24</a>
-								<a href="#reference?book=Acts&amp;chapter=25" data-role="button" data-panel="main" data-transition="slide">25</a>
-								<a href="#reference?book=Acts&amp;chapter=26" data-role="button" data-panel="main" data-transition="slide">26</a>
-								<a href="#reference?book=Acts&amp;chapter=27" data-role="button" data-panel="main" data-transition="slide">27</a>
-								<a href="#reference?book=Acts&amp;chapter=28" data-role="button" data-panel="main" data-transition="slide">28</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Romans</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Romans&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Romans&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Romans&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Romans&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Romans&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Romans&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Romans&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Romans&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Romans&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Romans&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Romans&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Romans&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Romans&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Romans&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Romans&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Romans&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Corinthians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Corinthians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=1 Corinthians&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Corinthians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Corinthians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=2 Corinthians&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Galatians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Galatians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Galatians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Galatians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Galatians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Galatians&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Galatians&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Ephesians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Ephesians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Ephesians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Ephesians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Ephesians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Ephesians&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Ephesians&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Philipians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Philipians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Philipians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Philipians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Philipians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Colossians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Colossians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Colossians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Colossians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Colossians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Thessalonians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Thessalonians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Thessalonians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Thessalonians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Thessalonians&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Thessalonians&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Thessalonians</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Thessalonians&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Thessalonians&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Thessalonians&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Timothy</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Timothy&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Timothy&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Timothy&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Timothy&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Timothy&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=1 Timothy&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Timothy</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Timothy&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Timothy&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Timothy&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=2 Timothy&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Titus</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Titus&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Titus&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Titus&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Philemon</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Philemon&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Hebrews</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Hebrews&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Hebrews&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Hebrews&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Hebrews&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Hebrews&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Hebrews&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Hebrews&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Hebrews&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Hebrews&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Hebrews&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Hebrews&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Hebrews&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Hebrews&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>James</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=James&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=James&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=James&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=James&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=James&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 Peter</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 Peter&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 Peter&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 Peter&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 Peter&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 Peter&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 Peter</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 Peter&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=2 Peter&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=2 Peter&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>1 John</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=1 John&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=1 John&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=1 John&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=1 John&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=1 John&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>2 John</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=2 John&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>3 John</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=3 John&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Jude</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Jude&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-							</div>
-						</div>
-						<div data-role="collapsible" data-collapsed="true">
-							<h3>Revelation</h3>
-							<div data-role="controlgroup" data-type="horizontal">
-								<a href="#reference?book=Revelation&amp;chapter=1" data-role="button" data-panel="main" data-transition="slide">1</a>
-								<a href="#reference?book=Revelation&amp;chapter=2" data-role="button" data-panel="main" data-transition="slide">2</a>
-								<a href="#reference?book=Revelation&amp;chapter=3" data-role="button" data-panel="main" data-transition="slide">3</a>
-								<a href="#reference?book=Revelation&amp;chapter=4" data-role="button" data-panel="main" data-transition="slide">4</a>
-								<a href="#reference?book=Revelation&amp;chapter=5" data-role="button" data-panel="main" data-transition="slide">5</a>
-								<a href="#reference?book=Revelation&amp;chapter=6" data-role="button" data-panel="main" data-transition="slide">6</a>
-								<a href="#reference?book=Revelation&amp;chapter=7" data-role="button" data-panel="main" data-transition="slide">7</a>
-								<a href="#reference?book=Revelation&amp;chapter=8" data-role="button" data-panel="main" data-transition="slide">8</a>
-								<a href="#reference?book=Revelation&amp;chapter=9" data-role="button" data-panel="main" data-transition="slide">9</a>
-								<a href="#reference?book=Revelation&amp;chapter=10" data-role="button" data-panel="main" data-transition="slide">10</a>
-								<a href="#reference?book=Revelation&amp;chapter=11" data-role="button" data-panel="main" data-transition="slide">11</a>
-								<a href="#reference?book=Revelation&amp;chapter=12" data-role="button" data-panel="main" data-transition="slide">12</a>
-								<a href="#reference?book=Revelation&amp;chapter=13" data-role="button" data-panel="main" data-transition="slide">13</a>
-								<a href="#reference?book=Revelation&amp;chapter=14" data-role="button" data-panel="main" data-transition="slide">14</a>
-								<a href="#reference?book=Revelation&amp;chapter=15" data-role="button" data-panel="main" data-transition="slide">15</a>
-								<a href="#reference?book=Revelation&amp;chapter=16" data-role="button" data-panel="main" data-transition="slide">16</a>
-								<a href="#reference?book=Revelation&amp;chapter=17" data-role="button" data-panel="main" data-transition="slide">17</a>
-								<a href="#reference?book=Revelation&amp;chapter=18" data-role="button" data-panel="main" data-transition="slide">18</a>
-								<a href="#reference?book=Revelation&amp;chapter=19" data-role="button" data-panel="main" data-transition="slide">19</a>
-								<a href="#reference?book=Revelation&amp;chapter=20" data-role="button" data-panel="main" data-transition="slide">20</a>
-								<a href="#reference?book=Revelation&amp;chapter=21" data-role="button" data-panel="main" data-transition="slide">21</a>
-								<a href="#reference?book=Revelation&amp;chapter=22" data-role="button" data-panel="main" data-transition="slide">22</a>
+	<head>
+		<title>Javascripture</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet"  href="css/jquery.mobile-1.2.0-alpha.1.min.css" />
+		<link rel="stylesheet"  href="css/qunit.css" />
+		<link rel="stylesheet" href="css/strongscolors.css" />
+		<link rel="stylesheet"  href="css/javascripture.css" />
+		<script data-main="js/javascripture" src="js/external/requirejs/require.js"></script>
+	</head>
+	<body>
+		<div data-role="page" id="reference">
+			<div data-role="header" data-position="fixed">
+				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+				<h1>Javascripture</h1>
+			</div><!-- /header -->
+			<div data-role="content">
+				<div class="books panel">
+					<div class="panel-inner">
+						<div data-role="collapsible-set" data-inset="false">
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="50" data-name="Genesis">
+								<h3>Genesis</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="40" data-name="Exodus">
+								<h3>Exodus</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="27" data-name="Leviticus">
+								<h3>Leviticus</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="Numbers">
+								<h3>Numbers</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="34" data-name="Deuteronomy">
+								<h3>Deuteronomy</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Joshua">
+								<h3>Joshua</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="Judges">
+								<h3>Judges</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Ruth">
+								<h3>Ruth</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="1 Samuel">
+								<h3>1 Samuel</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="2 Samuel">
+								<h3>2 Samuel</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="1 Kings">
+								<h3>1 Kings</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="25" data-name="2 Kings">
+								<h3>2 Kings</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="29" data-name="1 Chronicles">
+								<h3>1 Chronicles</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="2 Chronicles">
+								<h3>2 Chronicles</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Ezra">
+								<h3>Ezra</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Nehemiah">
+								<h3>Nehemiah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Esther">
+								<h3>Esther</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="42" data-name="Job">
+								<h3>Job</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="150" data-name="Psalm">
+								<h3>Psalm</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="Proverbs">
+								<h3>Proverbs</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Ecclesiastes">
+								<h3>Ecclesiastes</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="8" data-name="Song of songs">
+								<h3>Song of songs</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="66" data-name="Isaiah">
+								<h3>Isaiah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="52" data-name="Jeremiah">
+								<h3>Jeremiah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="Lamentations">
+								<h3>Lamentations</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="48" data-name="Ezekiel">
+								<h3>Ezekiel</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Daniel">
+								<h3>Daniel</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Hosea">
+								<h3>Hosea</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Joel">
+								<h3>Joel</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="9" data-name="Amos">
+								<h3>Amos</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Obadiah">
+								<h3>Obadiah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Jonah">
+								<h3>Jonah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="7" data-name="Micah">
+								<h3>Micah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Nahum">
+								<h3>Nahum</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Habbakuk">
+								<h3>Habbakuk</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Zephaniah">
+								<h3>Zephaniah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="2" data-name="Haggai">
+								<h3>Haggai</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Zechariah">
+								<h3>Zechariah</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Malachi">
+								<h3>Malachi</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Matthew">
+								<h3>Matthew</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Mark">
+								<h3>Mark</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Luke">
+								<h3>Luke</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="John">
+								<h3>John</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Acts">
+								<h3>Acts</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Romans">
+								<h3>Romans</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="1 Corinthians">
+								<h3>1 Corinthians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="2 Corinthians">
+								<h3>2 Corinthians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Galatians">
+								<h3>Galatians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Ephesians">
+								<h3>Ephesians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Philipians">
+								<h3>Philipians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Colossians">
+								<h3>Colossians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Thessalonians">
+								<h3>1 Thessalonians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Thessalonians">
+								<h3>2 Thessalonians</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="1 Timothy">
+								<h3>1 Timothy</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="2 Timothy">
+								<h3>2 Timothy</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Titus">
+								<h3>Titus</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Philemon">
+								<h3>Philemon</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Hebrews">
+								<h3>Hebrews</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="James">
+								<h3>James</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Peter">
+								<h3>1 Peter</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Peter">
+								<h3>2 Peter</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 John">
+								<h3>1 John</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="2 John">
+								<h3>2 John</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
+								<h3>3 John</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
+								<h3>Jude</h3>
+							</div>
+							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
+								<h3>Revelation</h3>
 							</div>
 						</div>
 					</div>
-				</div>	
-			</div>
-			<div data-role="page" id="chapter">
-				<div data-role="header" data-theme="a" data-position="fixed" >
-					<h1>Choose chapter</h1>
 				</div>
-				<div data-role="content">
-
+				<div id="word" class="panel">
+					<div class="panel-inner">
+						<div data-role="collapsible-set" data-inset="false">
+						</div>						
+					</div>
+				</div>
+				<div id="reference-panel" class="reference">
+					<div class="panel-inner">
+						<div data-role="popup" id="gotoForm" data-position-to="window">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<form method="get" action="#reference" class="gotoReference">
+								<fieldset>
+									<div data-role="fieldcontain" class="ui-hide-label">
+										<label for="gotoReference">Go to...</label>
+										<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
+									</div>
+								</fieldset>
+							</form>
+						</div>
+						<div data-role="popup" id="searchForm" data-position-to="window">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<form action="#search" method="get" class="search">
+								<fieldset>
+									<div data-role="fieldcontain" class="ui-hide-label">
+										<label for="term">Search</label>
+										<input type="text" name="term" id="term" value="" placeholder="Search" />
+									</div>
+								</fieldset>
+							</form>
+						</div>
+						<div data-role="popup" id="settings" data-position-to="window">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<form action="#search" method="get" class="search">
+								<fieldset>
+									<label><input type="checkbox" name="original" checked />Show original language?</label>
+								</fieldset>
+							</form>
+						</div>
+						<div data-role="popup" id="about" data-position-to="window">
+							<h2>The Scriptures in JavaScript</h2>
+							<div data-role="collapsible-set">
+								<div data-role="collapsible">
+									<h3>About</h3>
+									<p>Javascripture aspires to be a simple but powerful tool for rightly dividing the word of truth.</p>
+									<p>This code is in early stages of development, so there will be plenty of bugs. If you have any requests for features or bugs please <a href="http://scruffian.wordpress.com/contact/">let me know</a>.</p>
+									<p>The project is entirely open source, so if you want to help out by adding features, or fixing things, please <a href="http://github.com/scruffian/Javascripture">fork me on github</a>.</p>
+									<p>The ultimate aim is to make the application available across all computing platforms and smart phones, which is why it's built using web technologies (that, and I don't know anything else).</p>
+								</div>
+								<div data-role="collapsible">
+									<h3>Download</h3>
+									<p>The application is currently available for Windows, Mac OS X and Linux</p>
+									<p><a href="http://api.appcelerator.net/p/pages/app_page?token=P4paL5t6">Get the latest version.</a></p>
+								</div>
+								<div data-role="collapsible">
+									<h3>Features</h3>
+									<ul>
+										<li>Lookup verses in the KJV</li>
+										<li>Find and highlight the strongs number</li>
+										<li>Search by single or muliple strongs number</li>
+										<li>Search the hebrew text</li>
+										<li>Search by word or strongs number</li>
+										<li>Find strongs roots</li>
+										<li>Reverse roots (branches)</li>
+										<li>Find rare words</li>
+									</ul>
+								</div>
+								<div data-role="collapsible">
+									<h3>To Do</h3>
+									<ul>
+										<li>Group by families</li>
+										<li>Most similar verse</li>
+										<li>Tracking in background</li>
+										<li>Reset button</li>
+										<li>Show first reference when searching?</li>
+										<li>better word/phrase search</li>
+										<li>reference lookup with string</li>
+										<li>scroll inside reference panel</li>
+										<li>Only highlight strongs numbers</li>
+										<li>keyboard shortcuts</li>
+										<li>Make data smaller</li>
+										<li>Loading on random verse</li>
+										<li>Original language</li>
+										<li>Map color chart</li>
+										<li>graphical word tree</li>
+										<li>search - input 5 strongs number and find any combination</li>
+										<li>Find unusual translations</li>
+									</ul>			
+								</div>
+								<div data-role="collapsible">
+									<h3>Documentation</h3>
+									<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-
-		<div data-role="panel" data-id="results" data-panel="mid" data-hash="history" data-mid-text="Words">
-			<div data-role="page" id="word" data-show="first">
-				<div data-role="header" data-position="fixed" data-theme="a">
-					<h1>Words</h1>
-				</div>
-				<div data-role="content">
-					<div data-role="collapsible-set">
-					</div>
-				</div>
-				<div data-role="footer" data-position="fixed">
-					<div data-role="navbar">
-						<ul>
-							<li>
-								<a data-icon="arrow-l">Previous</a>
-							</li>
-							<li>
-								<a data-icon="arrow-r">Next</a>
-							</li>
-						</ul>
-					</div>
-				</div><!-- /footer -->
-			</div>		
-		</div>
-	
-		<div data-role="panel" data-id="main" data-panel="main" data-hash="history">
-			<div data-role="page" id="reference" data-show="first">
-				<div data-role="header" data-position="fixed">
-					<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
-					<h1>Javascripture</h1>
-					<div class="headWrapRight ui-btn-right">										
-						<div data-role="controlgroup" data-type="horizontal" class="iconposSwitcher-div">
-							<a href="#" data-transition="pop" data-role="button" data-panel="pop_two" data-icon="info" data-iconpos="left" class="iconposSwitcher-a toggle_popover">pop1</a>							
-							<a href="#" data-transition="pop" data-role="button" data-panel="pop_one" data-icon="gear" data-iconpos="left" class="iconposSwitcher-a toggle_popover">pop2</a>														
-							<a href="#settings" data-role="button" data-icon="gear" data-rel="dialog" data-transition="slidedown">Settings</a>
-						</div>				
-					</div>	
-				</div><!-- /header -->
-				<div data-role="content">
-					<h2>The Scriptures in JavaScript</h2>
-					<div data-role="collapsible-set">
-
-						<div data-role="collapsible">
-							<h3>About</h3>
-							<p>Javascripture aspires to be a simple but powerful tool for rightly dividing the word of truth.</p>
-							<p>This code is in early stages of development, so there will be plenty of bugs. If you have any requests for features or bugs please <a href="http://scruffian.wordpress.com/contact/">let me know</a>.</p>
-							<p>The project is entirely open source, so if you want to help out by adding features, or fixing things, please <a href="http://github.com/scruffian/Javascripture">fork me on github</a>.</p>
-							<p>The ultimate aim is to make the application available across all computing platforms and smart phones, which is why it's built using web technologies (that, and I don't know anything else).</p>
-						</div>
-
-						<div data-role="collapsible">
-							<h3>Download</h3>
-							<p>The application is currently available for Windows, Mac OS X and Linux</p>
-							<p><a href="http://api.appcelerator.net/p/pages/app_page?token=P4paL5t6">Get the latest version.</a></p>
-						</div>
-
-						<div data-role="collapsible">
-							<h3>Online</h3>
-							<p><a href="Javascripture/Resources/index.html">An online version of the bible is available here</a></p>
-							<p>The bible is about 15MB, so it will take a while to load. (We load it all at once so when it's done then things are quicker).</p>
-							<p>This version will only work on standards complient browsers like Firefox, Safari, Chrome and Opera.</p>
-						</div>
-
-						<div data-role="collapsible">
-							<h3>Features</h3>
-							<ul>
-								<li>Lookup verses in the KJV</li>
-								<li>Find and highlight the strongs number</li>
-								<li>Search by single or muliple strongs number</li>
-								<li>Search the hebrew text</li>
-								<li>Search by word or strongs number</li>
-								<li>Find strongs roots</li>
-								<li>Reverse roots (branches)</li>
-								<li>Find rare words</li>
-							</ul>
-						</div>
-
-						<div data-role="collapsible">
-							<h3>To Do</h3>
-							<ul>
-								<li>Group by families</li>
-								<li>Most similar verse</li>
-								<li>Tracking in background</li>
-								<li>Reset button</li>
-								<li>Show first reference when searching?</li>
-								<li>better word/phrase search</li>
-								<li>reference lookup with string</li>
-								<li>scroll inside reference panel</li>
-								<li>Only highlight strongs numbers</li>
-								<li>keyboard shortcuts</li>
-								<li>Make data smaller</li>
-								<li>Loading on random verse</li>
-								<li>Original language</li>
-								<li>Map color chart</li>
-								<li>graphical word tree</li>
-								<li>search - input 5 strongs number and find any combination</li>
-								<li>Find unusual translations</li>
-							</ul>			
-						</div>
-
-						<div data-role="collapsible">
-							<h3>Documentation</h3>
-							<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
-						</div>
-
-					</div>
-					<div class="twitter ui-corner-all">
-						<p>Keep up to date with the latest version by <a href="http://twitter.com/#!/javascripture">following us on Twitter</a></p>
-					</div>
-
-				</div>	
-				<div data-role="footer" data-position="fixed">
-					<div data-role="navbar">
-						<ul>
-							<li>
-								<a data-icon="arrow-l" class="next-chapter">Previous chapter</a>
-							</li>
-							<li>
-								<a href="#searchForm" data-icon="search" data-rel="dialog" data-transition="slidedown" id="keyCode83">Search</a>
-							</li>
-							<li>
-								<a href="#about" data-role="button" data-icon="info" data-rel="dialog" data-transition="slidedown">About</a>
-							</li>
-							<li>
-								<a href="#gotoForm" data-rel="dialog" data-transition="slidedown" data-icon="book" id="keyCode71">Go to</a>
-							</li>
-							<li>
-								<a data-icon="arrow-r" class="previous-chapter">Next chapter</a>
-							</li>
-						</ul>
-					</div>
-				</div><!-- /footer -->
-			</div>
-		</div>
-	
-		<div data-role="panel" data-id="pop_one" data-panel="popover" data-fixed="top" data-hash="history" data-triangle="top" class="popover2">
-			<div data-role="page" id="pop_one_first" data-show="first">	
-				<div data-role="header" data-position="fixed" data-theme="a">
-					<h1>POP 1 First</h1>
-				</div>
-				<div data-role="content">
-					<p>POP 1 Lorem Ipsum</p>
-					<ul data-role="listview">
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
-						<li>POP</li>
-						<li>1</li>
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" id="keyCode83">Search</a></li>
+						<li><a href="#about" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">About</a></li>
+						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" id="keyCode71">Go to</a></li>
+						<li><a href="#settings" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Settings</a></li>
 					</ul>
-				</div>					
-			</div>
-			<div data-role="page" id="pop_one_second">
-				<div data-role="header" data-theme="a" data-position="fixed">
-					<h1>POP 1 Second</h1>								
 				</div>
-				<div data-role="content" class="brown">				
-					<div>Lorem Ipsum</div>
-				</div>
-			</div>
-		</div>
-
-		<div data-role="panel" data-id="pop_two" data-panel="popover" data-fixed="top" data-hash="history" data-triangle="top" class="popover1">
-			<div data-role="page" id="pop_two_first" data-show="first">
-				<div data-role="header" data-position="fixed" data-theme="a">
-					<h1>POP 2 First</h1>
-				</div>
-				<div data-role="content">
-					<p>POP 2 Lorem Ipsum</p>
-					<ul data-role="listview">
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-						<li>POP</li>
-						<li>2</li>
-					</ul>
-				</div>					
-			</div>
-			<div data-role="page" id="pop_two_second">
-				<div data-role="header" data-theme="a" data-position="fixed">
-					<h1>POP 2 Second</h1>								
-				</div>
-				<div data-role="content" class="brown">				
-					<div>Lorem Ipsum</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div data-role="page" id="gotoForm">
-		<div data-role="header" data-position="fixed">
-			<h1>Go to..</h1>
-		</div><!-- /header -->
-		<div data-role="content">
-			<form method="get" action="#reference" class="gotoReference">
-				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="gotoReference">Go to...</label>
-					<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<div data-role="page" id="searchForm">
-		<div data-role="header" data-position="fixed">
-			<h1>Search</h1>
-		</div><!-- /header -->
-		<div data-role="content">
-			<form action="#search" method="get" class="search">
-				<div data-role="fieldcontain" class="ui-hide-label">
-					<label for="term">Search</label>
-					<input type="text" name="term" id="term" value="" placeholder="Search" />
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<div data-role="page" id="settings">
-		<div data-role="header" data-position="fixed">
-			<h1>Settings</h1>
-		</div><!-- /header -->
-		<div data-role="content">
-			Settings
-		</div>
-	</div>
-
-</body>
+			</div><!-- /footer -->
+		</div><!-- /page -->
+	</body>
 </html>
+

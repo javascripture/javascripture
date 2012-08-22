@@ -2,10 +2,12 @@
 var start = new Date();
 require.config({
 	paths: {
-		'jquery': 'external/jquery-1.7.1',
-		'jquery-mobile': 'external/jquery.mobile-1.1.0',
+		'jquery': 'external/jquery-1.7.2',
+		'jquery-mobile': 'external/jquery.mobile-1.2.0-alpha.1.min',
 		'multiview': 'external/multiview',
 		'pageparams': 'external/jquery.mobile.page.params',
+		'jquery-router': 'external/jquery.mobile.router',
+		'order': 'external/order-1.0.0',
 		'ba-debug': 'external/ba-debug',
 		'bible': '../data/bible',
 		'english': '../data/kjvdwyer4',
@@ -14,7 +16,7 @@ require.config({
 		'strongsDictionary': '../data/strongsDictionary',
 		'strongObjectRoots': '../data/strongsObjectRoots'
 	},
-	priority: ['jquery', 'jquery-mobile'],
+	priority: ['jquery'],
 	waitSeconds: 20000
 });
 require({
@@ -22,30 +24,32 @@ require({
 	urlArgs: "bust=" +  (new Date()).getTime()
 }, [
 	'jquery',
-	'jquery-mobile',
-	'pageparams',
-	'multiview',
-	'ba-debug'
+	'ba-debug',
+	'jquery-router',
+	'order!jquery-mobile',
+	//'pageparams',
+	//'multiview',
+	'order!src/bookControl'
 ], function () { //first get the useful libraries
 	"use strict";
 	debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
 	setTimeout(function () { //to give the framework a chance to load
-		$.mobile.showPageLoadingMsg('a', 'Loading data'); //TODO - messages could be more specific
+		$.mobile.showPageLoadingMsg('a', 'Loading bible'); //messages could be more specific
 		require(['english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots'], function () {
 			$.mobile.hidePageLoadingMsg();
 			require([
-				'src/chapter',
-				'src/focusFirstInput',
-				'src/keyboardShortcuts',
-				'src/loadNextChapter',
-				'src/reference',
 				'src/router',
-				'src/search',
-				'src/trackWord',
-				'src/word'
+				'order!src/chapter',
+				'order!src/focusFirstInput',
+				'order!src/keyboardShortcuts',
+				'order!src/loadNextChapter',
+				'order!src/reference',
+				'order!src/referenceLink',
+				'order!src/search',
+				'order!src/trackWord',
+				'order!src/word'
 			], function () { //now build the menu and show the first reference
 				debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
-				$.mobile.changePage('');
 			});
 		});
 	});

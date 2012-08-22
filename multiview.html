@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Javascripture</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet"  href="css/jquery.mobile-1.1.0.css" />
+	<link rel="stylesheet" type="text/css" href="css/multiview.css" />
+	<link rel="stylesheet"  href="css/qunit.css" />
+	<link rel="stylesheet" href="css/strongscolors.css" />
+	<link rel="stylesheet"  href="css/javascripture.css" />
+	<script data-main="js/javascripture" src="js/external/requirejs/require.js"></script>
+</head>
+<body>	
+	<div data-role="page" id="container" data-wrapper="true" data-switchable="true" data-scrollMode="overthrow">
+		<div data-role="panel" data-id="menu" data-panel="menu" data-hash="history" data-menu-text="Books">
+			<div data-role="page" id="book" data-show="first">
+				<div data-role="header" data-position="fixed" data-theme="a">
+					<h1>Books</h1>
+				</div>
+				<div data-role="content">
+					<div data-role="collapsible-set">
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="50" data-name="Genesis">
+							<h3>Genesis</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="40" data-name="Exodus">
+							<h3>Exodus</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="27" data-name="Leviticus">
+							<h3>Leviticus</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="Numbers">
+							<h3>Numbers</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="34" data-name="Deuteronomy">
+							<h3>Deuteronomy</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Joshua">
+							<h3>Joshua</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="Judges">
+							<h3>Judges</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Ruth">
+							<h3>Ruth</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="1 Samuel">
+							<h3>1 Samuel</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="2 Samuel">
+							<h3>2 Samuel</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="1 Kings">
+							<h3>1 Kings</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="25" data-name="2 Kings">
+							<h3>2 Kings</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="29" data-name="1 Chronicles">
+							<h3>1 Chronicles</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="2 Chronicles">
+							<h3>2 Chronicles</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Ezra">
+							<h3>Ezra</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Nehemiah">
+							<h3>Nehemiah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Esther">
+							<h3>Esther</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="42" data-name="Job">
+							<h3>Job</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="150" data-name="Psalm">
+							<h3>Psalm</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="Proverbs">
+							<h3>Proverbs</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Ecclesiastes">
+							<h3>Ecclesiastes</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="8" data-name="Song of songs">
+							<h3>Song of songs</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="66" data-name="Isaiah">
+							<h3>Isaiah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="52" data-name="Jeremiah">
+							<h3>Jeremiah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="Lamentations">
+							<h3>Lamentations</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="48" data-name="Ezekiel">
+							<h3>Ezekiel</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Hosea">
+							<h3>Hosea</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Hosea">
+							<h3>Hosea</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Joel">
+							<h3>Joel</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="9" data-name="Amos">
+							<h3>Amos</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Obadiah">
+							<h3>Obadiah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Jonah">
+							<h3>Jonah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="7" data-name="Micah">
+							<h3>Micah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Nahum">
+							<h3>Nahum</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Habbakuk">
+							<h3>Habbakuk</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Zephaniah">
+							<h3>Zephaniah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="2" data-name="Haggai">
+							<h3>Haggai</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Zechariah">
+							<h3>Zechariah</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Malachi">
+							<h3>Malachi</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Matthew">
+							<h3>Matthew</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Mark">
+							<h3>Mark</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Luke">
+							<h3>Luke</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="John">
+							<h3>John</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Acts">
+							<h3>Acts</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Romans">
+							<h3>Romans</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="1 Corinthians">
+							<h3>1 Corinthians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="2 Corinthians">
+							<h3>2 Corinthians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Galatians">
+							<h3>Galatians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Ephesians">
+							<h3>Ephesians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Philipians">
+							<h3>Philipians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Colossians">
+							<h3>Colossians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Thessalonians">
+							<h3>1 Thessalonians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Thessalonians">
+							<h3>2 Thessalonians</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="1 Timothy">
+							<h3>1 Timothy</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="2 Timothy">
+							<h3>2 Timothy</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Titus">
+							<h3>Titus</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Philemon">
+							<h3>Philemon</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Hebrews">
+							<h3>Hebrews</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="James">
+							<h3>James</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Peter">
+							<h3>1 Peter</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Peter">
+							<h3>2 Peter</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 John">
+							<h3>1 John</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="2 John">
+							<h3>2 John</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
+							<h3>3 John</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
+							<h3>Jude</h3>
+						</div>
+						<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
+							<h3>Revelation</h3>
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<div data-role="page" id="menu_second">
+				<div data-role="header" data-theme="a" data-position="fixed" >
+					<h1>Second Page Menu</h1>
+				</div>
+				<div data-role="content" class="blue">
+					<div>Lorem Ipsum</div>
+					<a href="#menu_third" data-panel="menu" data-role="button">Third page</a>
+				</div>
+			</div>	
+			<div data-role="page" id="menu_third">
+				<div data-role="header" data-theme="a" data-position="fixed" >
+					<h1>Third Page Menu</h1>
+				</div>
+				<div data-role="content" class="blue">
+					<div>Lorem Ipsum</div>
+				</div>
+			</div>	
+		</div>
+		<div data-role="panel" data-id="results" data-panel="mid" data-hash="history" data-mid-text="Words">
+			<div data-role="page" id="word" data-show="first">
+				<div data-role="header" data-position="fixed" data-theme="a">
+					<a href="#" data-icon="arrow-l" class="prevReferenceLink" id="keyCode80">Previous</a>
+					<h1>Words</h1>
+					<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" class="nextReferenceLink" id="keyCode78">Next</a>
+				</div>
+				<div data-role="content">
+					<div data-role="collapsible-set">
+					</div>
+				</div>
+			</div>
+
+			<div data-role="page" id="mid_second">
+				<div data-role="header" data-theme="a" data-position="fixed" >
+					<h1>Second Page Mid</h1>
+				</div>
+				<div data-role="content" >
+					<div>Lorem Ipsum</div>
+				</div>
+			</div>				
+		</div>
+		<div data-role="panel" data-id="main" data-panel="main" data-hash="history">
+			<div data-role="page" id="reference" data-show="first">
+				<div data-role="header" data-position="fixed">
+					<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+					<h1>Javascripture</h1>
+					<div class="headWrapRight ui-btn-right">										
+						<div data-role="controlgroup" data-type="horizontal" class="iconposSwitcher-div">
+							<a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" id="keyCode83">Search</a>
+							<a href="#about" data-role="button" data-icon="info" data-rel="dialog" data-transition="slidedown">About</a>
+							<a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" id="keyCode71">Go to</a>
+							<a href="#" data-transition="pop" data-role="button" data-panel="pop_two" data-icon="info" data-iconpos="left" class="iconposSwitcher-a toggle_popover">pop1</a>							
+							<a href="#" data-transition="pop" data-role="button" data-panel="pop_one" data-icon="gear" data-iconpos="left" class="iconposSwitcher-a toggle_popover">pop2</a>														
+							<a href="#settings" data-role="button" data-icon="gear" data-rel="dialog" data-transition="slidedown">Settings</a>
+						</div>				
+					</div>	
+				</div><!-- /header -->
+				<div data-role="content">
+	<div data-role="popup" id="gotoForm">
+		<h1>Go to..</h1>
+		<form method="get" action="#reference" class="gotoReference">
+			<div data-role="fieldcontain" class="ui-hide-label">
+				<label for="gotoReference">Go to...</label>
+				<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
+			</div>
+		</form>
+	</div>
+
+	<div data-role="popup" id="searchForm">
+		<h1>Search</h1>
+		<form action="#search" method="get" class="search">
+			<div data-role="fieldcontain" class="ui-hide-label">
+				<label for="term">Search</label>
+				<input type="text" name="term" id="term" value="" placeholder="Search" />
+			</div>
+		</form>
+	</div>
+					<h2>The Scriptures in JavaScript</h2>
+					<div data-role="collapsible-set">
+
+						<div data-role="collapsible">
+							<h3>About</h3>
+							<p>Javascripture aspires to be a simple but powerful tool for rightly dividing the word of truth.</p>
+							<p>This code is in early stages of development, so there will be plenty of bugs. If you have any requests for features or bugs please <a href="http://scruffian.wordpress.com/contact/">let me know</a>.</p>
+							<p>The project is entirely open source, so if you want to help out by adding features, or fixing things, please <a href="http://github.com/scruffian/Javascripture">fork me on github</a>.</p>
+							<p>The ultimate aim is to make the application available across all computing platforms and smart phones, which is why it's built using web technologies (that, and I don't know anything else).</p>
+						</div>
+
+						<div data-role="collapsible">
+							<h3>Download</h3>
+							<p>The application is currently available for Windows, Mac OS X and Linux</p>
+							<p><a href="http://api.appcelerator.net/p/pages/app_page?token=P4paL5t6">Get the latest version.</a></p>
+						</div>
+
+						<div data-role="collapsible">
+							<h3>Online</h3>
+							<p><a href="Javascripture/Resources/index.html">An online version of the bible is available here</a></p>
+							<p>The bible is about 15MB, so it will take a while to load. (We load it all at once so when it's done then things are quicker).</p>
+							<p>This version will only work on standards complient browsers like Firefox, Safari, Chrome and Opera.</p>
+						</div>
+
+						<div data-role="collapsible">
+							<h3>Features</h3>
+							<ul>
+								<li>Lookup verses in the KJV</li>
+								<li>Find and highlight the strongs number</li>
+								<li>Search by single or muliple strongs number</li>
+								<li>Search the hebrew text</li>
+								<li>Search by word or strongs number</li>
+								<li>Find strongs roots</li>
+								<li>Reverse roots (branches)</li>
+								<li>Find rare words</li>
+							</ul>
+						</div>
+
+						<div data-role="collapsible">
+							<h3>To Do</h3>
+							<ul>
+								<li>Group by families</li>
+								<li>Most similar verse</li>
+								<li>Tracking in background</li>
+								<li>Reset button</li>
+								<li>Show first reference when searching?</li>
+								<li>better word/phrase search</li>
+								<li>reference lookup with string</li>
+								<li>scroll inside reference panel</li>
+								<li>Only highlight strongs numbers</li>
+								<li>keyboard shortcuts</li>
+								<li>Make data smaller</li>
+								<li>Loading on random verse</li>
+								<li>Original language</li>
+								<li>Map color chart</li>
+								<li>graphical word tree</li>
+								<li>search - input 5 strongs number and find any combination</li>
+								<li>Find unusual translations</li>
+							</ul>			
+						</div>
+
+						<div data-role="collapsible">
+							<h3>Documentation</h3>
+							<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
+						</div>
+
+					</div>
+					<div class="twitter ui-corner-all">
+						<p>Keep up to date with the latest version by <a href="http://twitter.com/#!/javascripture">following us on Twitter</a></p>
+					</div>
+
+				</div>	
+				<div data-role="footer" data-position="fixed">
+					<div id="word-details">
+					</div>
+				</div><!-- /footer -->
+			</div>
+		</div>
+	
+		<div data-role="panel" data-id="pop_one" data-panel="popover" data-fixed="top" data-hash="history" data-triangle="top" class="popover2">
+			<div data-role="page" id="pop_one_first" data-show="first">	
+				<div data-role="header" data-position="fixed" data-theme="a">
+					<h1>POP 1 First</h1>
+				</div>
+				<div data-role="content">
+					<p>POP 1 Lorem Ipsum</p>
+					<ul data-role="listview">
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+						<li>POP</li>
+						<li>1</li>
+					</ul>
+				</div>					
+			</div>
+			<div data-role="page" id="pop_one_second">
+				<div data-role="header" data-theme="a" data-position="fixed">
+					<h1>POP 1 Second</h1>								
+				</div>
+				<div data-role="content" class="brown">				
+					<div>Lorem Ipsum</div>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="panel" data-id="pop_two" data-panel="popover" data-fixed="top" data-hash="history" data-triangle="top" class="popover1">
+			<div data-role="page" id="pop_two_first" data-show="first">
+				<div data-role="header" data-position="fixed" data-theme="a">
+					<h1>POP 2 First</h1>
+				</div>
+				<div data-role="content">
+					<p>POP 2 Lorem Ipsum</p>
+					<ul data-role="listview">
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+						<li>POP</li>
+						<li>2</li>
+					</ul>
+				</div>					
+			</div>
+			<div data-role="page" id="pop_two_second">
+				<div data-role="header" data-theme="a" data-position="fixed">
+					<h1>POP 2 Second</h1>								
+				</div>
+				<div data-role="content" class="brown">				
+					<div>Lorem Ipsum</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="settings">
+		<div data-role="header" data-position="fixed">
+			<h1>Settings</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+			Settings
+		</div>
+	</div>
+
+
+</body>
+</html>
+

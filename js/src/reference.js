@@ -15,7 +15,7 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 				book = this.options.book,
 				chapter = parseInt(this.options.chapter, 10),
 				verse = parseInt(this.options.verse, 10),
-				$content = this.element.find('[data-role=content]'),
+				$content = this.element,
 				verseSelector,
 				contentHeight,
 				contentTop,
@@ -26,17 +26,17 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 				nextBook,
 				nextBookFirstChapter,
 				i;
-			if (typeof (english[book]) === 'undefined') {
+			if (english[book] === undefined) {
 				$.each(books, function (bookNameArrayIndex, bookNameArray) {
 					$.each(bookNameArray, function (bookNameIndex, bookName) {
-						if (bookName === book) {
+						if (bookName.toLowerCase() === book.toLowerCase()) {
 							book = bookNameArray[0]; //we always use the first name in the array
 							//should break the loops here
 						}
 					});
 				});
 			}
-			if (typeof (english[book]) === 'undefined') {
+			if (english[book] === undefined) {
 				$content.html('Cannot find: ' + book + ' ' + chapter + ' ' + verse);
 			}
 			if (isNaN(chapter)) {
@@ -45,47 +45,58 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 			if (isNaN(verse)) {
 				verse = 1;
 			}
-			verseSelector = '#' + book + '_' + chapter + '_' + verse;
+			verseSelector = '#' + book.replace(/ /g, '_') + '_' + chapter + '_' + verse;
 			if (!$(verseSelector).length) {
 				$content.html('Loading ' + book + ' ' + chapter + ' ' + verse);
-				if (typeof (english[book][chapter - 2]) !== 'undefined') {
-					markup += self.createMarkup(book, chapter - 1, verse); //get the chapter before				
-				} else {
-					//get the previous book
-					for (i in books) {
-						if (books[i][0] === book) {
-							previousBook = books[i - 1][0];
-							previousBookLastChapter = bible.Data.verses[i - 1].length;
-							markup += self.createMarkup(previousBook, previousBookLastChapter, verse);
-							break;
-						}
+				$.mobile.showPageLoadingMsg('a', 'Loading data');
+				setTimeout(function () { //give the loading message a chance to show
+					markup += '<div class="reference-wrapper">';
+					/*try loading everything - makes scrolling jumpy
+					$.each(english[book], function (chapter) { 
+						markup += self.createMarkup(book, chapter + 1, verse);
+					});*/
+					//load the chapter before and after
+					if (english[book][chapter - 2] !== undefined) {
+						markup += self.createMarkup(book, chapter - 1, verse); //get the chapter before				
+					} else {
+						//get the previous book
+						$.each(books, function (index, loopBookArray) {
+							if (loopBookArray[0] === book) {
+								if (books[index - 1] !== undefined) {
+									previousBook = books[index - 1][0];
+									previousBookLastChapter = bible.Data.verses[index - 1].length;
+									markup += self.createMarkup(previousBook, previousBookLastChapter, verse);
+									//break;
+								}
+							}
+						});
 					}
-				}
-				markup += self.createMarkup(book, chapter, verse);
-				if (typeof (english[book][chapter]) !== 'undefined') {
-					markup += self.createMarkup(book, chapter + 1, verse); //get the chapter after
-				} else {
-					//get the next book
-					for (i in books) {
-						if (books[i][0] === book) {
-							next = parseInt(i, 10) + 1;
-							nextBook = books[next][0];
-							nextBookFirstChapter = 1;
-							markup += self.createMarkup(nextBook, nextBookFirstChapter, verse);
-							break;
-						}
+					markup += self.createMarkup(book, chapter, verse);
+					if (english[book][chapter] !== undefined) {
+						markup += self.createMarkup(book, chapter + 1, verse); //get the chapter after
+					} else {
+						//get the next book
+						$.each(books, function (index, loopBookArray) {
+							if (loopBookArray[0] === book) {
+								if (books[index + 1] !== undefined) {
+									nextBook = books[index + 1][0];
+									nextBookFirstChapter = 1;
+									markup += self.createMarkup(nextBook, nextBookFirstChapter, verse);
+									//break;
+								}
+							}
+						});
 					}
-
-				}
-				$content.html(markup);
+					markup += '</div>';
+					$content.html(markup);
+					$.mobile.hidePageLoadingMsg();
+				});
 			}
-			contentHeight = $content.height();
-			$content.scrollTop(0); //set it back to the top before we calculate the offset
-			contentTop = $(verseSelector).offset().top;
-			debug.debug(verseSelector);
-			debug.debug(contentTop);
-			$content.scrollTop(contentTop - (contentHeight / 3));
-			$(document).trigger('attachWaypoints');
+			setTimeout(function () { //give the loading message a chance to hide
+				contentTop = $(verseSelector).offset().top;
+				contentHeight = $(window).height();
+				$content.scrollTop(contentTop - contentHeight / 3);
+			});
 		},
 		createMarkup: function (book, chapter, verse) {
 			var self = this,
@@ -95,7 +106,7 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 				translatedText = english[book][jsonChapter],
 				className = '',
 				originalObject;
-			if (typeof (hebrew[book]) !== "undefined") {
+			if (hebrew[book] !== undefined) {
 				originalObject = hebrew;
 				className = 'hebrew';
 			} else {
@@ -105,15 +116,20 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 			markup += '<h2 class="loadNextChapter">' + book + ' ' + chapter + '</h2>';
 			markup += '<ol class="wrapper">';
 			$.each(translatedText, function (verseNumber, verseText) {
-				markup += '<li id ="' + book + '_' + chapter + '_' + (verseNumber + 1) + '"><div class="ui-grid-a">';
+				markup += '<li id ="' + book.replace(/ /g, '_') + '_' + chapter + '_' + (verseNumber + 1) + '"';
+				if (verseNumber === jsonVerse && chapter === parseInt(self.options.chapter, 10)) {
+					markup += ' class="current-verse"';
+				}
+				markup += '>';
+				markup += '<div class="ui-grid-a">';
 				markup += '<div class="ui-block-a"><div class="' + self.options.originalSelector + ' ' + className + '">';
-				if (typeof (originalObject[book][jsonChapter][verseNumber]) !== 'undefined') {
+				if (originalObject[book][jsonChapter][verseNumber] !== undefined) {
 					$.each(originalObject[book][jsonChapter][verseNumber], function (index, word) {
-						markup += '<a href="#word?word=' + word.lemma + '" data-panel="results" class="' + word.lemma + '" title="' + word.lemma + '">' + word.word + '</a> ';
+						markup += '<span class="word ' + word.lemma + '" title="' + word.lemma + ' ' + word.morph + '" data-lemma="' + word.lemma + '" data-type="' + className + '" data-morph="' + word.morph + '">' + word.word + '</span> ';
 					});
 				}
 				markup += '</div></div>';
-				markup += '<div class="ui-block-b"><div class="' + self.options.translationSelector + '">' + verseText.replace(/<w/gi, '<a').replace(/<\/w>/gi, '</a>').replace(/lemma="([A-Z,0-9, ]+)"/gi, 'href="#word?word=$1" data-panel="results" class="$1"').replace(/morph="([A-Z,0-9, ]+)"/gi, 'title="$1"') + '</div></div>';
+				markup += '<div class="ui-block-b"><div class="' + self.options.translationSelector + '">' + verseText.replace(/<w/gi, '<span').replace(/<\/w>/gi, '</span>').replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-type="' + className + '" class="word $1"').replace(/morph="([A-Z,0-9, ]+)"/gi, 'title="$1" data-morph="$1"') + '</div></div>';
 				markup += '</div></li>';
 			});
 			markup += '</ol>';
@@ -126,7 +142,6 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 			book = reference[0],
 			chapter = reference[1],
 			verse = reference[2];
-		$('.ui-dialog').dialog('close');
 		setTimeout(function () { //this gives the page time to load so that it scrolls to the right place
 			$.mobile.changePage('#reference?book=' + book + '&chapter=' + chapter + '&verse=' + verse);
 		});

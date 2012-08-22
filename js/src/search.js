@@ -64,7 +64,7 @@ define(['jquery', 'english', 'jquery-mobile', 'ba-debug'], function ($, english)
 		createMarkup: function (referenceArray) {
 			var markup = '<ol data-role="listview">';
 			$.each(referenceArray, function (key, reference) {
-				markup += ('<li><a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a></li>');
+				markup += ('<li><a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" data-transition="none">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a></li>');
 			});
 			markup += '</ol>';
 			return markup;
@@ -73,8 +73,7 @@ define(['jquery', 'english', 'jquery-mobile', 'ba-debug'], function ($, english)
 	$('form.search').submit(function (event) {
 		event.preventDefault();
 		var term = $('#term').val();
-		$('.ui-dialog').dialog('close');
-		$.mobile.changePage('#search?term=' + term);
+		$.mobile.changePage('#word?word=' + term + '&type=english');
 		return false;
 	});
 });
