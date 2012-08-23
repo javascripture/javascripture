@@ -1,0 +1,187 @@
+﻿
+*[lang=he] /* hebrew */
+	{ font-family: Ezra SIL, SBL Hebrew; }
+*[lang=el] /* greek */
+	{ font-family: GentiumAlt, Cardo, Arial Unicode MS; }
+*[lang=en] /* English */
+	{ font-family: Georgia; }
+
+
+/* bible formatting */
+h1.bookname
+	{ margin: 40px 0 5px 0; font-size: 26px; 
+	  direction: ltr; text-align: center; font-family: Helvetica, Arial;}
+.chapter
+	{ margin: 5px 0; }
+h2.c-num 
+	{ display: block; float: left; font-weight: bold; 
+	  font-family: Georgia; color: #666;
+	  font-size: 38px; margin: 0 5px 5px 2px; /* font-size: 150%;  border: 1px solid #333; padding: 8px 12px; margin: 2px 5px 5px 2px; */   }
+h3
+	{ color: #333; margin: 8px 0 4px 0; font-family: Helvetica, Arial;}
+.chapter[lang=el] h1, .chapter[lang=el] h2, .chapter[lang=el] h3 
+	{ font-family: GentiumAlt; }
+.chapter[lang=he] h1, .chapter[lang=he] h2, .chapter[lang=he] h3 
+	{ font-family: Ezra SIL; }	
+*[dir=rtl] .c-num
+	{ float: right; margin: 2px 2px 5px 5px;}
+.v-num 
+	{ color: #333; font-weight: bold; font-size: 12px; vertical-align: top; }	
+/* :first-of-type is not well supported 
+.chapter p:first-of-type span.verse:first-child span.v-num:first-child
+	{ display: none;} */
+.v-1
+	{ display: none; }
+
+.text-content
+	{ line-height: 140%;}
+.text-content *[lang=el], #content *[lang=el]
+	{ line-height: 140%; font-size: 130%;}
+.text-content *[lang=he], #content *[lang=he]
+	{ line-height: 180%; font-size: 150%;}
+.text-content *[lang=ar], #content *[lang=ar]
+	{ font-size: 140%; }
+
+
+/* words with strongs */
+.w, mark 
+	{ cursor: pointer; }
+.word-over, .word-selected
+	{ background: #424443; color: #ffffff; }
+.verse-over
+	{ background: rgba(235, 255, 241, 0.5); /* #EBFFF1; */ } /* too light: F4FAF6 */
+.rare-word
+	{ background: #ffcccc; }	
+	
+/* lexicon */
+.tooltip-header .lex-title
+	{ display: inline; }
+
+.lex-frequency
+	{ color: #50AD2D; font-size: 110%; cursor: pointer; }
+.lex-frequency:hover
+	{ color:#fff; background: #50AD2D; }	
+.lex-usage ol
+	{ list-style-type: decimal; padding: 0 0 0 10px; margin: 0 0 0 10px; }
+.lex-usage li
+	{ padding: 0 0 0 4px; }
+.lex-usage ol ol
+	{ list-style-type: lower-alpha; }	
+.lex-usage ol ol ol
+	{ list-style-type: lower-roman; }	
+.morphology
+	{ font-style: italic; }	
+	
+	
+	
+/* versions and special formatting */
+.woc 
+	{ color: #990000; }
+
+/* notes */
+span.note, span.cf
+	{ color: #6666cc; vertical-align: top; font-size: 60%; cursor: pointer; }
+span.note:hover, span.cf:hover
+	{ color: #fff; background: #999; }
+span.note dfn, span.cf dfn
+	{ display:none;}
+.word-over .note, .word-selected .note
+	{ color: #ffffff; }
+
+/* KJV */
+.kjv span.verse
+	{ display: block;}
+
+/* NASB specific formatting */	
+article.nasb .ot-quote
+	{ font-variant: small-caps; }			
+article.nasb .nog
+	{ font-variant: small-caps; }				
+article.nasb ins
+	{ font-style: italic; }
+article.nasb h3
+	{ font-style:italic; text-align:center; font-weight: normal;}
+article.nasb.psalm h2.c-num
+	{ display: block;font-size: 120%; text-align: center; margin: 10px 0 0 0; padding: 0; float:none; }
+article.nasb.psalm span.v-1
+	{ display: inline;}
+article.nasb p
+	{ margin: 0; }
+article.nasb .verse
+	{ display: block; text-indent: 6px;}	
+article.nasb .v-num
+	{ font-size: 100%; vertical-align: inherit; font-weight: normal;}
+article.nasb p > span.verse:first-child span.v-num
+	{ font-weight: bold;}
+article.nasb .verse .poetry /* separate from the verse number */
+	{ display: block; margin: 0 0 0 20px; }
+article.nasb .verse.poetry /* includes the verse number with it */
+	{ margin: 0 0 0 20px; }	
+
+article.nasb.ot .verse.poetry 
+	{ margin: 0 0 0 50px; }	
+article.nasb.ot .poetry
+	{ text-indent: -25px; }
+	
+/* NET formatting */
+.net h1.bookname
+	{ /* font-family: Papyrus; font-size: 150%; */ }
+.net .v-num
+	{ vertical-align:inherit; font-size: inherit; }
+.net .c-num
+	{ display: none; }
+.net .v-1
+	{ display: inherit; }
+.net h3 
+	{ font-weight: normal; font-style: italic; }
+
+.net-notes 
+	{ font-size: 90%; }
+.net-notes .n-num
+	{ color: #6666cc; font-size: 90%;}
+.net-notes .v-num
+	{ font-weight: normal; font-style: italic; vertical-align:inherit; font-size: inherit; display:block; }	
+.net-notes .verse p
+	{ text-indent: 15px; }	
+	
+/* scofield */
+.scofield .verse
+	{ display: block; margin: 0 0 10px 0;}
+.scofield .verse span.title
+	{ display: block; font-weight:bold;}	
+.scofield .v-num
+	{ font-weight: normal; font-style: italic; vertical-align:inherit; font-size: inherit; display:block; }	
+	
+/* open english bible */
+.oeb {
+	background: transparent url('oeb-draft2	.png') 60px 50px repeat-y;
+	position: relative;
+}
+.oeb .c-num {
+	display: block;
+	margin: 20px 0 10px 0;
+	float: none;
+	font-size: 16px;
+	
+}
+.oeb .c-num:before {
+	content: "Chapter ";
+}
+
+.oeb .v-1 {
+	display: inline;
+}
+.oeb p {
+	padding-right: 35px; 
+	
+}
+.oeb .verse {
+	
+}
+.oeb p .v-num {
+	position: absolute;
+	right: 0;
+}
+.oeb h3 {
+	text-align: center;
+}
