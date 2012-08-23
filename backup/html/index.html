@@ -1,0 +1,133 @@
+<html>
+	<head>
+		<title>Javascripture</title>
+		<link rel="stylesheet" href="jquery-ui-1.8.2.boticca.css" />
+		<style>
+			* {
+				border: none;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background: url(background.jpg);
+				color: #333;
+				font-family: Georgia;
+				margin: 1em;
+			}
+			h1 {
+				font-size: 200%;
+				line-height: 1em;
+				text-align: center;
+				text-shadow: 1px 1px 1px #fff;
+			}
+			h2 {
+				font-size: 100%;
+				font-weight: normal;
+				text-align: center;
+			}
+			hr {
+				margin: 1em;
+			}
+			.tabs {
+				line-height: 2em;
+			}
+			ul {
+				margin:  0 0 0 1em;
+			}
+			.twitter {
+				background: #fff;
+				font-size: 0.8em;
+				margin: 1em;
+				padding: 1em;
+				right: 0;
+				position: absolute;
+				top: 0;
+				width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Javascripture</h1>
+		<h2>The Scriptures in JavaScript</h2>
+		<hr />	
+		<!-- tabs -->
+		<div class="tabs">
+			<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#download">Download</a></li>
+				<li><a href="#online">Online</a></li>
+				<li><a href="#documentation">Documentation</a></li>
+				<li><a href="#features">Features</a></li>
+				<li><a href="#todo">To Do</a></li>
+			</ul>
+			<div id="about">
+				<h3>About</h3>
+				<p>Javascripture aspires to be a simple but powerful tool for rightly dividing the word of truth.</p>
+				<p>This code is in early stages of development, so there will be plenty of bugs. If you have any requests for features or bugs please <a href="http://scruffian.wordpress.com/contact/">let me know</a>.</p>
+				<p>The project is entirely open source, so if you want to help out by adding features, or fixing things, please <a href="http://github.com/scruffian/Javascripture">fork me on github</a>.</p>
+				<p>The ultimate aim is to make the application available across all computing platforms and smart phones, which is why it's built using web technologies (that, and I don't know anything else).</p>
+			</div>
+			<div id="download">
+				<h3>Download</h3>
+				<p>The application is currently available for Windows, Mac OS X and Linux</p>
+				<p><a href="http://api.appcelerator.net/p/pages/app_page?token=P4paL5t6">Get the latest version.</a></p>
+			</div>
+			<div id="online">
+				<h3>Online</h3>
+				<p><a href="Javascripture/Resources/index.html">An online version of the bible is available here</a></p>
+				<p>The bible is about 15MB, so it will take a while to load. (We load it all at once so when it's done then things are quicker).</p>
+				<p>This version will only work on standards complient browsers like Firefox, Safari, Chrome and Opera.</p>
+			</div>
+			<div id="documentation">
+				<h3>Documentation</h3>
+				<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
+			</div>
+			<div id="features">
+				<h3>Features</h3>
+				<ul>
+					<li>Lookup verses in the KJV</li>
+					<li>Find and highlight the strongs number</li>
+					<li>Search by single or muliple strongs number</li>
+					<li>Search the hebrew text</li>
+					<li>Search by word or strongs number</li>
+					<li>Find strongs roots</li>
+					<li>Reverse roots (branches)</li>
+					<li>Find rare words</li>
+				</ul>
+			</div>
+			<div id="todo">
+				<h3>To Do</h3>
+				<ul>
+					<li>Group by families</li>
+					<li>Most similar verse</li>
+					<li>Tracking in background</li>
+					<li>Reset button</li>
+					<li>Show first reference when searching?</li>
+					<li>better word/phrase search</li>
+					<li>reference lookup with string</li>
+					<li>scroll inside reference panel</li>
+					<li>Only highlight strongs numbers</li>
+					<li>keyboard shortcuts</li>
+					<li>Make data smaller</li>
+					<li>Loading on random verse</li>
+					<li>Original language</li>
+					<li>Map color chart</li>
+					<li>graphical word tree</li>
+					<li>search - input 5 strongs number and find any combination</li>
+					<li>Find unusual translations</li>
+				</ul>
+			</div>
+		</div>
+		<div class="twitter ui-corner-all">
+			<p>Keep up to date with the latest version by <a href="http://twitter.com/#!/javascripture">following us on Twitter</a></p>
+		</div>
+		<script src="jquery.min.js"></script>
+		<script src="jquery-ui.min.js"></script>
+		<script>
+			$('.tabs').tabs();
+			$('.ui-tabs-nav a').click(function() {
+				$(this).blur();
+			});
+		</script>
+	</body>
+</html>
