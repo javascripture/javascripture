@@ -73,7 +73,11 @@ define(['jquery', 'english', 'jquery-mobile', 'ba-debug'], function ($, english)
 	$('form.search').submit(function (event) {
 		event.preventDefault();
 		var term = $('#term').val();
-		$.mobile.changePage('#word?word=' + term + '&type=english');
+		debug.debug(term);
+		$('#word').word({
+			lemma: term,
+			type: 'english'
+		});
 		return false;
 	});
 });

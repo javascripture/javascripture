@@ -39,11 +39,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 					markup += strongsDictionary[word].lemma;
 				}
 				markup += '</h3>';
-				/*markup += '<strong>Derivation:</strong> ' + strongsDictionary[word].derivation + '<br />';
-				markup += '<strong>KJV usage:</strong> ' + strongsDictionary[word].kjv_def + '<br />';
-				markup += '<strong>Pronounciation:</strong> ' + strongsDictionary[word].pron + '<br />';
-				markup += '<strong>Strongs definition:</strong>' + strongsDictionary[word].strongs_def + '<br />';
-				markup += '<strong>Transliteration:</strong> ' + strongsDictionary[word].xlit + '<br />';*/
+				markup += '<a data-lemma="' + word + '" class="wordDetails">Details</a>';
 				markup += self.createMarkup(referenceArray);
 				markup += '</div>';
 				self.element.find('[data-role=collapsible-set]').append(markup).collapsibleset('refresh');
@@ -126,8 +122,20 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		$('#' + word).remove();
 		$('html').removeClass(word);
 	});*/
-	$(document).on('vclick', 'span.word', function () {
-		var $this = $(this);
+	var words = '.word';
+	$(document).on('vmouseover', words, function (event) {
+		var word = $(this).attr('class');
+		$('body').addClass(word);
+	});
+	$(document).on('vmouseout', words, function () {
+		var word = $(this).attr('class');
+		$('body').removeClass(word);
+	});
+	$(document).on('vclick', words, function (event) {
+		var word = $(this).attr('class'),
+			$this = $(this);
+		$('html').addClass(word);
 		$('#word').word($this.data());
 	});
+
 });

@@ -143,7 +143,9 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 			chapter = reference[1],
 			verse = reference[2];
 		setTimeout(function () { //this gives the page time to load so that it scrolls to the right place
-			$.mobile.changePage('#reference?book=' + book + '&chapter=' + chapter + '&verse=' + verse);
+			$.mobile.changePage('#reference?book=' + book + '&chapter=' + chapter + '&verse=' + verse, {
+				transition: 'none'
+			});
 		});
 		return false;
 	});

@@ -46,8 +46,8 @@ require({
 				'order!src/reference',
 				'order!src/referenceLink',
 				'order!src/search',
-				'order!src/trackWord',
-				'order!src/word'
+				'order!src/word',
+				'order!src/wordDetails'
 			], function () { //now build the menu and show the first reference
 				debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
 			});

@@ -14,6 +14,7 @@ define(['jquery', 'jquery-router', 'ba-debug', 'order!jquery-mobile'], function 
 		},
 		defaultHandlerEvents: "s"
 	});
+	//got to go in here somewhere$("."+$.mobile.activeBtnClass).removeClass($.mobile.activeBtnClass);
 /*	var router = new $.mobile.Router([{
 		"#reference(?:[?](.*))?": {
 			handler: function (type, match, ui, page, event) {
