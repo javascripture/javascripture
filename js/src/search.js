@@ -3,7 +3,11 @@ define(['jquery', 'english', 'jquery-mobile', 'ba-debug'], function ($, english)
 	"use strict";
 	$.widget('javascripture.search', {
 		options: {
-			term: 'God'
+			term: 'God',
+			searchFor: 'all',
+			language: 'english',
+			type: 'lemma',
+			strict: false
 		},
 		_init: function () {
 			var self = this,
@@ -73,10 +77,13 @@ define(['jquery', 'english', 'jquery-mobile', 'ba-debug'], function ($, english)
 	$('form.search').submit(function (event) {
 		event.preventDefault();
 		var term = $('#term').val();
-		debug.debug(term);
-		$('#word').word({
-			lemma: term,
-			type: 'english'
+		debug.debug($(this).serialize().parse());
+		$('search-button').text('searching...');
+		setTimeout(function () {
+			/*$('#word').word({
+				lemma: term,
+				type: 'english'
+			});*/
 		});
 		return false;
 	});

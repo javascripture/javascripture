@@ -104,14 +104,14 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 				jsonChapter = chapter - 1, //because javascript arrays count from 0
 				jsonVerse = verse - 1, //because javascript arrays count from 0
 				translatedText = english[book][jsonChapter],
-				className = '',
+				language = '',
 				originalObject;
 			if (hebrew[book] !== undefined) {
 				originalObject = hebrew;
-				className = 'hebrew';
+				language = 'hebrew';
 			} else {
 				originalObject = greek;
-				className = 'greek';
+				language = 'greek';
 			}
 			markup += '<h2 class="loadNextChapter">' + book + ' ' + chapter + '</h2>';
 			markup += '<ol class="wrapper">';
@@ -122,14 +122,26 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 				}
 				markup += '>';
 				markup += '<div class="ui-grid-a">';
-				markup += '<div class="ui-block-a"><div class="' + self.options.originalSelector + ' ' + className + '">';
+				markup += '<div class="ui-block-a"><div class="' + self.options.originalSelector + ' ' + language + '">';
 				if (originalObject[book][jsonChapter][verseNumber] !== undefined) {
 					$.each(originalObject[book][jsonChapter][verseNumber], function (index, word) {
-						markup += '<span class="word ' + word.lemma + '" title="' + word.lemma + ' ' + word.morph + '" data-lemma="' + word.lemma + '" data-type="' + className + '" data-morph="' + word.morph + '">' + word.word + '</span> ';
+						markup += '<span class="word ' + word.lemma;
+						if (word.morph !== undefined) {
+							markup += ' ' + word.morph;
+						}
+						markup += '" title="' + word.lemma;
+						if (word.morph !== undefined) {
+							markup += ' ' + word.morph;
+						}
+						markup += '" data-lemma="' + word.lemma + '" ';
+						markup += '" data-type="lemma" ';
+						markup += 'data-language="' + language + '" ';
+						markup += 'data-morph="' + word.morph + '">';
+						markup += word.word + '</span> ';
 					});
 				}
 				markup += '</div></div>';
-				markup += '<div class="ui-block-b"><div class="' + self.options.translationSelector + '">' + verseText.replace(/<w/gi, '<span').replace(/<\/w>/gi, '</span>').replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-type="' + className + '" class="word $1"').replace(/morph="([A-Z,0-9, ]+)"/gi, 'title="$1" data-morph="$1"') + '</div></div>';
+				markup += '<div class="ui-block-b"><div class="' + self.options.translationSelector + '">' + verseText.replace(/<w/gi, '<span').replace(/<\/w>/gi, '</span>').replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-language="' + language + '" class="word $1" title="$1"').replace(/morph="([A-Z,0-9, ]+)"/gi, 'data-morph="$1"') + '</div></div>';
 				markup += '</div></li>';
 			});
 			markup += '</ol>';
@@ -148,5 +160,8 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 's
 			});
 		});
 		return false;
+	});
+	$(document).on('click', 'a', function () {
+		$('.ui-btn-active').removeClass('ui-btn-active');
 	});
 });

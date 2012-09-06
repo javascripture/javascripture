@@ -46,8 +46,16 @@ divinename {
 #word {
 	right: 0;
 	width: @word-panel-width;
-	.ui-collapsible-set {
-		//margin: 0 -7px;
+	.collapsible-wrapper {
+		position: relative
+	}
+	.word-list {
+		margin: 0;
+		.ui-listview {
+			margin: 0;
+		}
+	}
+	.ui-collapsible {
 		.ui-collapsible-heading {
 			.ui-collapsible-heading-toggle {
 				background: none;
@@ -56,16 +64,8 @@ divinename {
 				text-shadow: 0 1px 0 #000;
 				text-ahadow: inherit;
 			}
-			.ui-count {
-				background: grey;
-				border-radius: 6px;
-				padding: 4px;
-				position: absolute;
-				right: 45px;
-				top: 5px;
-			}
 		}
-		.ui-collapsible-content {
+		.ui-collapsible-content ol {
 			max-height: 290px;
 			margin: 0;
 			overflow: auto;
@@ -75,14 +75,23 @@ divinename {
 			}
 		}
 	}
-	a.deleteWord {
+	.controlgroup {
 		position: absolute;
-		top: 5px;
-		right: 10px;
-		height: 24px;
-		width: 24px;
-		.ui-btn-inner {
-			padding: 0 !important;
+		right: 5px;
+		top: 0;
+		.ui-li-count {
+			right: 60px;
+		}
+		a.ui-btn {
+			float: right;
+			height: 24px;
+			margin-left: 4px;
+			position: relative;
+			width: 24px;
+			z-index: 9999;
+			.ui-btn-inner {
+				padding: 0 !important;
+			}
 		}
 	}
 }
@@ -100,6 +109,9 @@ divinename {
 				padding-left: 0;
 				padding-right: 0;
 				width: 100%;
+			}
+			&.three-digit {
+				width: 100% / 5;
 			}
 		}
 	}
@@ -185,8 +197,11 @@ html {
 			margin: 0;
 		}
 		.word-details-inner {
-			padding: 0 1em;
+			padding: 1em 0;
 			width: 300px;
+			h3 {
+				padding: .5em 1em;
+			}
 		}
 	}
 }

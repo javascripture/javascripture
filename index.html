@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<link rel="stylesheet"  href="css/jquery.mobile-1.2.0-alpha.1.min.css" />
 		<link rel="stylesheet"  href="css/qunit.css" />
+		<link rel="stylesheet" href="css/morphology.css" />
 		<link rel="stylesheet" href="css/strongscolors.css" />
 		<link rel="stylesheet"  href="css/javascripture.css" />
 		<script data-main="js/javascripture" src="js/external/requirejs/require.js"></script>
@@ -212,7 +213,7 @@
 							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
 								<h3>3 John</h3>
 							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
+							<div  class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
 								<h3>Jude</h3>
 							</div>
 							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
@@ -223,8 +224,6 @@
 				</div>
 				<div id="word" class="panel">
 					<div class="panel-inner">
-						<div data-role="collapsible-set" data-inset="false">
-						</div>						
 					</div>
 				</div>
 				<div id="reference-panel" class="reference">
@@ -250,6 +249,53 @@
 									</div>
 								</fieldset>
 							</form>
+							<a href="#advancedSearch" data-icon="search" data-rel="popup" data-transition="slidedown">Advanced search</a>
+						</div>
+						<div data-role="popup" id="advancedSearch" data-position-to="window">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<form method="get" class="search">
+								<div data-role="fieldcontain">
+									<label for="term">Term</label>
+									<input type="search" name="term" id="term" value=""  />
+								</div>
+
+								<div data-role="fieldcontain">
+									<label for="searchFor">Search for:</label>
+									<select name="searchFor" id="searchFor" data-role="slider">
+										<option value="all">All words</option>
+										<option value="any">Any word</option>
+									</select>
+								</div>
+
+								<div data-role="fieldcontain">
+									<fieldset data-role="controlgroup" data-type="horizontal">
+										<legend>Language:</legend>
+											<input type="radio" name="language" id="english" value="english" checked="checked" />
+											<label for="english">English</label>
+											<input type="radio" name="language" id="hebrew" value="hebrew" />
+											<label for="hebrew">Hebrew</label>
+											<input type="radio" name="language" id="greek" value="greek" />
+											<label for="greek">Greek</label>
+									</fieldset>
+								</div>
+
+								<div data-role="fieldcontain">
+									<label for="type">Search type:</label>
+									<select name="type" id="type" data-role="slider">
+										<option value="lemma">Word</option>
+										<option value="morph">Morphology</option>
+									</select>
+								</div>
+
+								<div data-role="fieldcontain">
+								<fieldset data-role="controlgroup">
+									<legend>Strict search:</legend>
+									<input type="checkbox" name="strict" id="strict" class="custom" />
+									<label for="strict">Strict</label>
+								</fieldset>
+								</div>
+								<button type="submit" class="search-button">Search</button>							
+							</form>
 						</div>
 						<div data-role="popup" id="settings" data-position-to="window">
 							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -259,7 +305,9 @@
 								</fieldset>
 							</form>
 						</div>
-						<div data-role="popup" id="wordDetails" data-position-to="window">
+						<div data-role="popup" id="wordDetails" data-position-to="window" data-transition="none">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<div class="content"></div>
 						</div>
 						<div data-role="popup" id="about" data-position-to="window">
 							<h2>The Scriptures in JavaScript</h2>
@@ -323,9 +371,9 @@
 			<div data-role="footer" data-position="fixed">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" id="keyCode83">Search</a></li>
+						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" id="keyCode223">Search</a></li>
 						<li><a href="#about" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">About</a></li>
-						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" id="keyCode71">Go to</a></li>
+						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" id="keyCode169">Go to</a></li>
 						<li><a href="#settings" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Settings</a></li>
 					</ul>
 				</div>
@@ -333,4 +381,3 @@
 		</div><!-- /page -->
 	</body>
 </html>
-

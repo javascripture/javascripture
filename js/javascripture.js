@@ -14,7 +14,8 @@ require.config({
 		'hebrew': '../data/hebrew5',
 		'greek': '../data/greek4',
 		'strongsDictionary': '../data/strongsDictionary',
-		'strongObjectRoots': '../data/strongsObjectRoots'
+		'strongObjectRoots': '../data/strongsObjectRoots',
+		'morphology': '../data/morphology'
 	},
 	priority: ['jquery'],
 	waitSeconds: 20000
@@ -45,11 +46,12 @@ require({
 				'order!src/loadNextChapter',
 				'order!src/reference',
 				'order!src/referenceLink',
-				'order!src/search',
+				//'order!src/search',
 				'order!src/word',
 				'order!src/wordDetails'
-			], function () { //now build the menu and show the first reference
+			], function (router) { //now build the menu and show the first reference
 				debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
+				$('#reference-panel').reference(router.getParams(window.location.hash));
 			});
 		});
 	});
