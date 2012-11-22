@@ -3,15 +3,53 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
             <url>js/src/bookControl.js</url>
-            <line>31</line>
+            <line>43</line>
         </file>
         <file>
             <url>index.html</url>
-            <line>382</line>
+            <line>547</line>
+        </file>
+        <file>
+            <url>js/src/word.js</url>
+            <line>117</line>
         </file>
         <file>
             <url>new.html</url>
             <line>1702</line>
+        </file>
+    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0">
+        <file>
+            <url>js/src/bookControl.js</url>
+            <bookmark id="0">
+                <name/>
+                <line>43</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>index.html</url>
+            <bookmark id="0">
+                <name/>
+                <line>545</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>js/src/word.js</url>
+            <bookmark id="0">
+                <name/>
+                <line>120</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>new.html</url>
+            <bookmark id="0">
+                <name/>
+                <line>1702</line>
+                <key/>
+            </bookmark>
         </file>
     </editor-bookmarks>
 </project-private>

@@ -38,7 +38,7 @@ bible.Data.books = [
 ['Nahum','Nah','Na'],
 ['Habakkuk','Hab'],
 ['Zephaniah','Zep','Zeph'],
-['Haggia','Hag'],
+['Haggai','Hag'],
 ['Zechariah','Zech','Zec'],
 ['Malachi','Mal'],
 ['Matthew','Matt','Mat','Mt'],

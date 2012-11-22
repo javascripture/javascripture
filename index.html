@@ -4,7 +4,7 @@
 		<title>Javascripture</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet"  href="css/jquery.mobile-1.2.0-alpha.1.min.css" />
+		<link rel="stylesheet"  href="css/jquery.mobile-1.2.0.min.css" />
 		<link rel="stylesheet"  href="css/qunit.css" />
 		<link rel="stylesheet" href="css/morphology.css" />
 		<link rel="stylesheet" href="css/strongscolors.css" />
@@ -13,219 +13,28 @@
 	</head>
 	<body>
 		<div data-role="page" id="reference">
-			<div data-role="header" data-position="fixed">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
 				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
-				<h1>Javascripture</h1>
+				<h1>&nbsp;</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+					<a href="#about" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">About</a>
+					<a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a>
+					<a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a>
+					<a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a>
+					<a href="#grammar" data-role="button" data-icon="info">Grammar</a>
+					<a href="#options" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Options</a>
+				</div>
+				<div data-role="navbar" class="mobile-button">
+					<ul>
+						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a></li>
+						<li><a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a></li>
+						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a></li>
+						<li><a href="#bookList" data-role="button" data-icon="book" data-rel="popup" data-transition="slidedown" class="desktop-button">Books</a></li>
+						<li><a href="#results" data-role="button" data-icon="grid" data-rel="popup" data-transition="slidedown" class="desktop-button">Results</a></li>
+					</ul>
+				</div><!-- /navbar -->
 			</div><!-- /header -->
 			<div data-role="content">
-				<div class="books panel">
-					<div class="panel-inner">
-						<div data-role="collapsible-set" data-inset="false">
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="50" data-name="Genesis">
-								<h3>Genesis</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="40" data-name="Exodus">
-								<h3>Exodus</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="27" data-name="Leviticus">
-								<h3>Leviticus</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="Numbers">
-								<h3>Numbers</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="34" data-name="Deuteronomy">
-								<h3>Deuteronomy</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Joshua">
-								<h3>Joshua</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="Judges">
-								<h3>Judges</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Ruth">
-								<h3>Ruth</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="1 Samuel">
-								<h3>1 Samuel</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="2 Samuel">
-								<h3>2 Samuel</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="1 Kings">
-								<h3>1 Kings</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="25" data-name="2 Kings">
-								<h3>2 Kings</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="29" data-name="1 Chronicles">
-								<h3>1 Chronicles</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="2 Chronicles">
-								<h3>2 Chronicles</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Ezra">
-								<h3>Ezra</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Nehemiah">
-								<h3>Nehemiah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Esther">
-								<h3>Esther</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="42" data-name="Job">
-								<h3>Job</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="150" data-name="Psalm">
-								<h3>Psalm</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="Proverbs">
-								<h3>Proverbs</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Ecclesiastes">
-								<h3>Ecclesiastes</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="8" data-name="Song of songs">
-								<h3>Song of songs</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="66" data-name="Isaiah">
-								<h3>Isaiah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="52" data-name="Jeremiah">
-								<h3>Jeremiah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="Lamentations">
-								<h3>Lamentations</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="48" data-name="Ezekiel">
-								<h3>Ezekiel</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Daniel">
-								<h3>Daniel</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Hosea">
-								<h3>Hosea</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Joel">
-								<h3>Joel</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="9" data-name="Amos">
-								<h3>Amos</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Obadiah">
-								<h3>Obadiah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Jonah">
-								<h3>Jonah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="7" data-name="Micah">
-								<h3>Micah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Nahum">
-								<h3>Nahum</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Habbakuk">
-								<h3>Habbakuk</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Zephaniah">
-								<h3>Zephaniah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="2" data-name="Haggai">
-								<h3>Haggai</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Zechariah">
-								<h3>Zechariah</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Malachi">
-								<h3>Malachi</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Matthew">
-								<h3>Matthew</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Mark">
-								<h3>Mark</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Luke">
-								<h3>Luke</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="John">
-								<h3>John</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Acts">
-								<h3>Acts</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Romans">
-								<h3>Romans</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="1 Corinthians">
-								<h3>1 Corinthians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="2 Corinthians">
-								<h3>2 Corinthians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Galatians">
-								<h3>Galatians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Ephesians">
-								<h3>Ephesians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Philipians">
-								<h3>Philipians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Colossians">
-								<h3>Colossians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Thessalonians">
-								<h3>1 Thessalonians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Thessalonians">
-								<h3>2 Thessalonians</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="1 Timothy">
-								<h3>1 Timothy</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="2 Timothy">
-								<h3>2 Timothy</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Titus">
-								<h3>Titus</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Philemon">
-								<h3>Philemon</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Hebrews">
-								<h3>Hebrews</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="James">
-								<h3>James</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Peter">
-								<h3>1 Peter</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Peter">
-								<h3>2 Peter</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 John">
-								<h3>1 John</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="2 John">
-								<h3>2 John</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
-								<h3>3 John</h3>
-							</div>
-							<div  class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
-								<h3>Jude</h3>
-							</div>
-							<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
-								<h3>Revelation</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="word" class="panel">
-					<div class="panel-inner">
-					</div>
-				</div>
 				<div id="reference-panel" class="reference">
 					<div class="panel-inner">
 						<div data-role="popup" id="gotoForm" data-position-to="window">
@@ -244,19 +53,31 @@
 							<form action="#search" method="get" class="search">
 								<fieldset>
 									<div data-role="fieldcontain" class="ui-hide-label">
-										<label for="term">Search</label>
-										<input type="text" name="term" id="term" value="" placeholder="Search" />
+										<label for="word">Search</label>
+										<input type="text" name="word" id="word" value="" placeholder="Search" />
+										<input type="hidden" name="lemma" value="" />
+										<input type="hidden" name="morph" value="" />
+										<input type="hidden" name="searchFor" value="all" />
+										<input type="hidden" name="language" value="english" />
 									</div>
 								</fieldset>
 							</form>
-							<a href="#advancedSearch" data-icon="search" data-rel="popup" data-transition="slidedown">Advanced search</a>
 						</div>
 						<div data-role="popup" id="advancedSearch" data-position-to="window">
 							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 							<form method="get" class="search">
-								<div data-role="fieldcontain">
-									<label for="term">Term</label>
-									<input type="search" name="term" id="term" value=""  />
+								<legend>Advanced search</legend>
+								<div data-role="fieldcontain" class="ui-hide-label">
+									<label for="word">Word</label>
+									<input type="text" name="word" id="word" value="" placeholder="Word" />
+								</div>
+								<div data-role="fieldcontain" class="ui-hide-label">
+									<label for="lemma">Strongs number</label>
+									<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
+								</div>
+								<div data-role="fieldcontain" class="ui-hide-label">
+									<label for="morph">Morphology</label>
+									<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
 								</div>
 
 								<div data-role="fieldcontain">
@@ -270,12 +91,24 @@
 								<div data-role="fieldcontain">
 									<fieldset data-role="controlgroup" data-type="horizontal">
 										<legend>Language:</legend>
-											<input type="radio" name="language" id="english" value="english" checked="checked" />
-											<label for="english">English</label>
-											<input type="radio" name="language" id="hebrew" value="hebrew" />
-											<label for="hebrew">Hebrew</label>
-											<input type="radio" name="language" id="greek" value="greek" />
-											<label for="greek">Greek</label>
+										<input type="radio" name="language" id="english" value="english" checked="checked" />
+										<label for="english">English</label>
+										<input type="radio" name="language" id="hebrew" value="hebrew" />
+										<label for="hebrew">Hebrew</label>
+										<input type="radio" name="language" id="greek" value="greek" />
+										<label for="greek">Greek</label>
+									</fieldset>
+								</div>
+
+								<div data-role="fieldcontain">
+									<fieldset data-role="controlgroup" data-type="horizontal">
+										<legend>Range:</legend>
+										<input type="radio" name="range" id="range_word" value="word" checked="checked" />
+										<label for="range_word">Word</label>
+										<input type="radio" name="range" id="range_verse" value="verse" />
+										<label for="range_verse">Verse</label>
+										<input type="radio" name="range" id="range_chapter" value="greek" />
+										<label for="range_chapter">Chapter</label>
 									</fieldset>
 								</div>
 
@@ -288,16 +121,16 @@
 								</div>
 
 								<div data-role="fieldcontain">
-								<fieldset data-role="controlgroup">
+								<fieldset data-role="controlgroup" class="ui-hide-label">
 									<legend>Strict search:</legend>
-									<input type="checkbox" name="strict" id="strict" class="custom" />
-									<label for="strict">Strict</label>
+									<input type="checkbox" name="strictSearch" id="strictSearch" class="custom" />
+									<label for="strictSearch">Strict search?</label>
 								</fieldset>
 								</div>
 								<button type="submit" class="search-button">Search</button>							
 							</form>
 						</div>
-						<div data-role="popup" id="settings" data-position-to="window">
+						<div data-role="popup" id="options" data-position-to="window">
 							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 							<form action="#search" method="get" class="search">
 								<fieldset>
@@ -308,6 +141,210 @@
 						<div data-role="popup" id="wordDetails" data-position-to="window" data-transition="none">
 							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 							<div class="content"></div>
+						</div>
+						<div data-role="popup" id="results" data-position-to="window" data-transition="none" class="mobile-popup"></div>
+						<div data-role="popup" id="bookList" data-position-to="window" data-transition="none" class="mobile-popup">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
+							<div data-role="collapsible-set" data-inset="false">
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="50" data-name="Genesis">
+									<h3>Genesis</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="40" data-name="Exodus">
+									<h3>Exodus</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="27" data-name="Leviticus">
+									<h3>Leviticus</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="Numbers">
+									<h3>Numbers</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="34" data-name="Deuteronomy">
+									<h3>Deuteronomy</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Joshua">
+									<h3>Joshua</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="Judges">
+									<h3>Judges</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Ruth">
+									<h3>Ruth</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="1 Samuel">
+									<h3>1 Samuel</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="2 Samuel">
+									<h3>2 Samuel</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="1 Kings">
+									<h3>1 Kings</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="25" data-name="2 Kings">
+									<h3>2 Kings</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="29" data-name="1 Chronicles">
+									<h3>1 Chronicles</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="2 Chronicles">
+									<h3>2 Chronicles</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Ezra">
+									<h3>Ezra</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Nehemiah">
+									<h3>Nehemiah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Esther">
+									<h3>Esther</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="42" data-name="Job">
+									<h3>Job</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="150" data-name="Psalm">
+									<h3>Psalm</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="Proverbs">
+									<h3>Proverbs</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Ecclesiastes">
+									<h3>Ecclesiastes</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="8" data-name="Song of songs">
+									<h3>Song of songs</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="66" data-name="Isaiah">
+									<h3>Isaiah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="52" data-name="Jeremiah">
+									<h3>Jeremiah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="Lamentations">
+									<h3>Lamentations</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="48" data-name="Ezekiel">
+									<h3>Ezekiel</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Daniel">
+									<h3>Daniel</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Hosea">
+									<h3>Hosea</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Joel">
+									<h3>Joel</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="9" data-name="Amos">
+									<h3>Amos</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Obadiah">
+									<h3>Obadiah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Jonah">
+									<h3>Jonah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="7" data-name="Micah">
+									<h3>Micah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Nahum">
+									<h3>Nahum</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Habakkuk">
+									<h3>Habakkuk</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Zephaniah">
+									<h3>Zephaniah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="2" data-name="Haggai">
+									<h3>Haggai</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Zechariah">
+									<h3>Zechariah</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Malachi">
+									<h3>Malachi</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Matthew">
+									<h3>Matthew</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Mark">
+									<h3>Mark</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Luke">
+									<h3>Luke</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="John">
+									<h3>John</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Acts">
+									<h3>Acts</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Romans">
+									<h3>Romans</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="1 Corinthians">
+									<h3>1 Corinthians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="2 Corinthians">
+									<h3>2 Corinthians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Galatians">
+									<h3>Galatians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Ephesians">
+									<h3>Ephesians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Philippians">
+									<h3>Philippians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Colossians">
+									<h3>Colossians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Thessalonians">
+									<h3>1 Thessalonians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Thessalonians">
+									<h3>2 Thessalonians</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="1 Timothy">
+									<h3>1 Timothy</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="2 Timothy">
+									<h3>2 Timothy</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Titus">
+									<h3>Titus</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Philemon">
+									<h3>Philemon</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Hebrews">
+									<h3>Hebrews</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="James">
+									<h3>James</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Peter">
+									<h3>1 Peter</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Peter">
+									<h3>2 Peter</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 John">
+									<h3>1 John</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="2 John">
+									<h3>2 John</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
+									<h3>3 John</h3>
+								</div>
+								<div  class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
+									<h3>Jude</h3>
+								</div>
+								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
+									<h3>Revelation</h3>
+								</div>
+							</div>
 						</div>
 						<div data-role="popup" id="about" data-position-to="window">
 							<h2>The Scriptures in JavaScript</h2>
@@ -368,16 +405,142 @@
 					</div>
 				</div>
 			</div>
-			<div data-role="footer" data-position="fixed">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" id="keyCode223">Search</a></li>
-						<li><a href="#about" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">About</a></li>
-						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" id="keyCode169">Go to</a></li>
-						<li><a href="#settings" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Settings</a></li>
-					</ul>
-				</div>
-			</div><!-- /footer -->
 		</div><!-- /page -->
+		<div data-role="page" id="grammar">
+			<div data-role="header">
+				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
+				<h1>Grammar</h1>
+			</div>
+			<div data-role="content">
+				<h2>Hebrew pronouns</h2>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>I</th>
+							<th>my</th>
+							<th>me</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1<sup>st</sup> singular</td>
+							<td>אנכי,אני</td>
+							<td>י</td>
+							<td>ני</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>we</th>
+							<th>our</th>
+							<th>us</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1<sup>st</sup> plural</td>
+							<td>אנחני</td>
+							<td>נו</td>
+							<td>נו</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>thou</th>
+							<th>thy</th>
+							<th>thee</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>2<sup>nd</sup> singular</td>
+							<td>אתח,את (m),<br/> אתי,את (f)</td>
+							<td>ך</td>
+							<td>ך</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>ye</th>
+							<th>your</th>
+							<th>you</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>2<sup>nd</sup> plural</td>
+							<td>אתם (m)<br />אתו (m)</td>
+							<td>כם (m)<br />
+							כו	(f)
+							</td>
+							<td>כם (m)<br />
+							כו	(f)
+							</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>he</th>
+							<th>his</th>
+							<th>him</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>3<sup>rd</sup> singular</td>
+							<td>הוא</td>
+							<td>ו</td>
+							<td>הו,ו</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>she</th>
+							<th>her</th>
+							<th>her</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>3<sup>rd</sup> singular</td>
+							<td>היא</td>
+							<td>ה</td>
+							<td>ה</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th></th>
+							<th>they</th>
+							<th>their</th>
+							<th>them</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>3<sup>rd</sup> singular</td>
+							<td>
+								הם,המה	(m)<br/>
+								הנ,הןה	(f)
+							</td>
+							<td>
+								(m)<br/>
+								(f)
+							</td>
+							<td>
+								(m)<br/>
+								(f)
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</body>
 </html>
