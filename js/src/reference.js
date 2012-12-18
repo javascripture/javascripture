@@ -86,6 +86,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				language = 'greek';
 			}
 			chapterWrapperId = self.referenceToId(book, chapter);
+			debug.debug(chapterWrapperId);
 			markup += '<div id="' + chapterWrapperId + '" class="' + self.options.chapterWrapperClass + '" data-book="' + book + '" data-chapter="' + chapter + '">';
 			markup += '<div class="sticky-panel-wrapper"><h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#' + chapterWrapperId + '">' + book + ' ' + chapter + '</h2></div>';
 			markup += '<ol class="wrapper">';
@@ -178,49 +179,47 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			}
 			return referenceString;
 		},
-		scrollToChapter: function (chapter, offset) { //needs refactoring
-			debug.debug(this.element.data(chapter));
-			var chapterObject = this.element.data(chapter);
-			//if (scrollPosition === 'top') {
-			this.scrollToReference(chapterObject.book, chapterObject.chapter, 1, offset);
-			//}
-			/*var $chapter = $('#' + this.referenceToId(chapterObject.book, chapterObject.chapter)),
-				currentChapterTop = $chapter.offset().top,
-				$contentScroller = this.element.closest('.ui-content'),
-				$contentScroller = $('body'),
-				currentChapterHeight = $chapter.height(),
-				contentHeight = $(window).height();
-			if (scrollPosition === 'bottom') {
-				$contentScroller.scrollTop(0); //so that the offset is calculated correctly
-				currentChapterTop = $chapter.offset().top; //reset this as the value above is not right now
-				$contentScroller.scrollTop(currentChapterTop + currentChapterHeight - contentHeight);
-			}*/
+		scrollToChapter: function (chapter, position) { //needs refactoring
+			var chapterObject = this.element.data(chapter),
+				verse = 1,
+				offset = -108,
+				verseHeight;
+			if (position === 'end') {
+				//get the last verse
+				$.each(bible.Data.books, function (index, loopBookArray) {
+					if (loopBookArray[0] === chapterObject.book) { //this is very labour intensive
+						verse = bible.Data.verses[index][chapterObject.chapter - 1];
+					}
+				});
+				verseHeight = $('#' + this.referenceToId(chapterObject.book, chapterObject.chapter, verse)).height();
+				offset = offset - $(window).height() - verseHeight;
+			}
+			this.scrollToReference(chapterObject.book, chapterObject.chapter, verse, offset);
 		},
 		scrollToReference: function (book, chapter, verse, offset) {
 			var verseSelector = '#' + this.referenceToId(book, chapter, verse);
-			console.log(verseSelector);
-			console.log(offset);
+			debug.debug(verseSelector);
 			$('body').scrollTo($(verseSelector), { offset: offset });
 			//$.mobile.silentScroll(contentTop - contentHeight / 3)*/
 		},
 		loadChapterBefore: function () {
 			if (this.loadChapter('prev')) {
 				this.removeChapter('next');
-				this.scrollToChapter('current',  -108);
+				this.scrollToChapter('current');
 			}
 		},
 		loadChapterAfter: function () {
 			if (this.loadChapter('next')) {
-				this.removeChapter('prev');
-				var chapterObject = this.element.data('current'),
+				//this.removeChapter('prev');
+				/* surely there's no need to change the scroll position var chapterObject = this.element.data('current'),
 					$chapter = $('#' + this.referenceToId(chapterObject.book, chapterObject.chapter)),
 					currentChapterTop = $chapter.offset().top,
 					$contentScroller = $('body'),
 					currentChapterHeight = $chapter.height(),
 					contentHeight = $(window).height(),
 					offset = -currentChapterHeight;
-				//debug.debug(offset);
-				this.scrollToChapter('current', offset);
+				debug.debug(offset);
+				this.scrollToChapter('current', 'end');*/
 			}
 		},
 		loadChapter: function (position) {
@@ -263,6 +262,12 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			//update the prev/next chapter data so that we don't get out of sync
 			this.setChapterData(chapterObject, position);
 			chapter.remove();
+		},
+		getReferenceId: function () {
+			var book = this.options.book,
+				chapter = this.options.chapter,
+				verse = this.options.verse;
+			return this.referenceToId(book, chapter, verse);
 		},
 		referenceToId: function (book, chapter, verse) {
 			var referenceToId = book.replace(/ /g, '_') + '_' + chapter;

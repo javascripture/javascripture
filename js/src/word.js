@@ -13,13 +13,13 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			terms: {},
 			termArray: [],
 			testObject: [],
-			referenceObject: {}
+			referenceObject: {},
+			referenceThatTriggeredSearch: ''
 		},
 		_create: function () {
 			$('#results').append('<div class="panel-inner"></div>');
 		},
 		_init: function () {
-			debug.debug(this.options);
 			var self = this,
 				$this = this.element,
 				word = this.options.word,
@@ -54,36 +54,10 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			//set up array
 			self.options.terms = {};
 			self.options.termArray = [];
-			if (word !== '') {
-				wordArray = word.split(' ');
-				$.each(wordArray, function (key, value) {
-					self.options.terms[value] = {
-						type: 'word',
-						references: []
-					};
-				});
-				self.options.termArray = self.options.termArray.concat(wordArray);// this doesn't remove duplicates
-			}
-			if (lemma !== '') {
-				lemmaArray = lemma.split(' ');
-				$.each(lemmaArray, function (key, value) {
-					self.options.terms[value] = {
-						type: 'lemma',
-						references: []
-					};
-				});
-				self.options.termArray = self.options.termArray.concat(lemmaArray);// this doesn't remove duplicates
-			}
-			if (morph !== '') {
-				morphArray = morph.split(' ');
-				$.each(morphArray, function (key, value) {
-					self.options.terms[value] = {
-						type: 'morph',
-						references: []
-					};
-				});
-				self.options.termArray = self.options.termArray.concat(morphArray);// this doesn't remove duplicates
-			}
+			//add terms to array
+			this.addTermsToTermArray('word');
+			this.addTermsToTermArray('lemma');
+			this.addTermsToTermArray('morph');
 			//loop over the terms first, and build up a reference array for each term
 			//then we can compare those arrays to see the overlap.
 			//could cache the results
@@ -114,9 +88,26 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			self.combineTerms();
 			self.addTermsToPage();
 		},
+		addTermsToTermArray: function (type) {
+			var self = this,
+				termArray,
+				terms = this.options[type];
+			if (terms !== '') {
+				termArray = terms.split(' ');
+				$.each(termArray, function (key, value) {
+					self.options.terms[value] = {
+						type: type,
+						references: []
+					};
+				});
+				self.options.termArray = self.options.termArray.concat(termArray);// this doesn't remove duplicates
+			}
+		},
 		addTermsToPage: function () {
 			var self = this,
-				markup = '';
+				markup = '',
+				parentElement = self.element.find('.panel-inner'),
+				referenceThatTriggeredSearchLink;
 			$.each(self.options.terms, function (term, termDetails) {
 				markup = '';
 				if ($('#' + term).length === 0) {
@@ -135,20 +126,34 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 					markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
 					markup += '</div>';
 					markup += '</div>';
-					self.element.find('.panel-inner').append(markup);
+					parentElement.append(markup);
+					parentElement.find('[data-role=collapsible]').trigger('collapse');
 					$('#' + term).find('[data-role=collapsible]').collapsible();
 					$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
 					$('#' + term).find('[data-role=button]').button();
+					referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
+					referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
 					$('html').addClass(term);
 				}
 			});
 		},
+		getReferenceLinkObject: function (reference) {
+			return $('#' + this.getReferenceLinkId(reference));
+		},
+		getReferenceLinkId: function (reference) {
+			return reference + '_link';
+		},
+		getReferenceLinkIdFromArray: function (referenceArray) {
+			var referenceId = referenceArray[0] + '_' + referenceArray[1] + '_' + referenceArray[2];
+			return this.getReferenceLinkId(referenceId);
+		},
 		createMarkup: function (referenceArray) {
-			var markup = '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
+			var self = this,
+				markup = '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
 			$.each(referenceArray, function (key, reference) {
 				markup += '<li>';
-				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
-				/* take out the info for split lists markup += '<a data-language="' + reference[4] + '"';
+				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none" id="' + self.getReferenceLinkIdFromArray(reference) + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
+				/* hide split view markup += '<a data-language="' + reference[4] + '"';
 				if (reference[5] !== undefined) {
 					if (reference[5].lemma !== undefined) {
 						markup += ' data-lemma="' + reference[5].lemma + '"';
@@ -157,7 +162,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 						markup += ' data-lemma="' + reference[5].morph + '"';
 					}
 				}
-				markup += ' class="wordDetails">Info</a>';*/
+				markup += ' class="wordDetails" data-icon="info">Info</a>';*/
 				markup += '</li>';
 			});
 			markup += '</ol>';
@@ -312,9 +317,15 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		} else {
 			data.word = '';
 			data.morph = '';
+			data.referenceThatTriggeredSearch = $(this).closest('li').attr('id');
 			$('#results').word(data);
 		}
 	});
+	$(document).on('taphold', words, function (event) {
+		var data = $(this).data();
+		$('#wordDetails').wordDetails(data);
+	});
+
 	$(document).on('vclick', '#wordDetails .word', function (event) {
 		var data = $(this).data();
 		$('#results').word(data);

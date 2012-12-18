@@ -11,13 +11,15 @@ define(['jquery', 'jquery-router', 'ba-debug', 'order!jquery-mobile'], function 
 				requestedBook = router.getParams(match[1]).book,
 				requestedChapter = router.getParams(match[1]).chapter,
 				requestedVerse = router.getParams(match[1]).verse;
-			$('#reference-panel').reference(router.getParams(match[1]));
+			if (currentBook !== requestedBook || currentChapter !== requestedChapter) {
+				$('#reference-panel').reference(router.getParams(match[1]));
+			}
 		}
 	}, {
 		defaultHandler: function (type, ui, page) {
 			debug.debug("Default handler called due to unknown route (" + type + ", " + ui + ", " + page + ")");
 		},
-		defaultHandlerEvents: "s"
+		defaultHandlerEvents: "bc"
 	});
 	return router;
 });
