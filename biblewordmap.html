@@ -1,0 +1,64 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/strongscolors.css" />
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+	-moz-column-count: 4;
+	-moz-column-gap: 1px;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1px;
+	column-count: 4;
+	column-gap: 1px
+			}
+			h2 {
+				color: #fff;
+				display: none;
+				font-family: Helvetica Neue;
+				font-weight: 100;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			div:hover h2 {
+				display: block;
+			}
+			div {
+				background: #000;
+				display: inline-block;
+				position: relative;
+			}
+			span {
+				display: block;
+				float: left;
+				height: 3px;
+				margin-left: -1px;
+				margin-top: -1px;
+				width: 3px;
+			}
+		</style>
+	</head>
+<body class="G2962">
+</body>
+	<script src="js/external/jquery-1.7.2.js"></script>
+	<script src="js/external/json2.js"></script>
+	<script src="data/greekobject.js"></script>
+	<script>
+		$.each(greek, function (bookKey, bookValue) {
+			var pixels = '';
+			setTimeout(function () {
+				pixels += '<div><h2>' + bookKey + '</h2>';
+				$.each(bookValue, function (chapterKey, chapterValue) {
+					$.each(chapterValue, function (verseKey, verseValue) {
+						$.each(verseValue, function (wordKey, wordObject) {
+							pixels += '<span class="' + wordObject.lemma + '"></span>';
+						});
+					});
+				});
+				pixels += '</div>';
+				$('body').append(pixels);
+			}, 1000);
+		});			
+	</script>
+</html>

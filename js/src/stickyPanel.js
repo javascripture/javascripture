@@ -17,7 +17,7 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 			this.element.addClass('initialized');
 			$.waypoints.settings.scrollThrottle = 30;
 			this.options.topWayPoint.waypoint(function (event, direction) {
-				console.log('top');
+				debug.debug('top');
 				if (direction === 'down') {
 					self.fixElement();
 				} else {
@@ -29,7 +29,7 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 			});
 			if (this.options.bottomWaypoint !== undefined) {
 				$(this.options.bottomWaypoint).waypoint(function (event, direction) {
-					console.log('bottom');
+					debug.debug('bottom');
 					if (direction === 'down') {
 						self.stickToBottom();
 					} else {

@@ -8,6 +8,9 @@ dvnnm { //removed the vowels so that searches on name and divine still work!
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 }
+.ui-content {
+	overflow: hidden;
+}
 /*.ui-content,
 .ui-page {
 	height: 100%;
@@ -203,7 +206,7 @@ html {
 
 //variables
 @mobile-width: 768px;
-@book-panel-width: 250px;
+@book-panel-width: 270px; //less than this makes ... in firefox
 .ui-popup-container {
 	h3 {
 		margin: 0;
@@ -237,11 +240,14 @@ html {
 		.ui-popup {
 			border-radius: 0;
 			height: 100%;
-			overflow: scroll;
+			overflow: auto;
 		}
 		.close {
 			display: none;
 		}
+	}
+	#results-popup {
+		width: @word-panel-width;
 	}
 	.mobile-button {
 		display: none;
@@ -292,7 +298,7 @@ html {
 @media (max-width: @mobile-width) {
 	#bookList {
 		max-height: 320px;
-		overflow: scroll;
+		overflow: auto;
 		width: 320px;
 	}
 }

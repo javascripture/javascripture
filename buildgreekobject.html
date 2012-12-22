@@ -1,0 +1,24 @@
+<html>
+	<body>
+	</body>
+	<script src="js/external/jquery-1.7.2.js"></script>
+	<script src="js/external/json2.js"></script>
+	<script src="data/greektranslation.js"></script>
+	<script src="data/strongsDictionaryobject.js"></script>
+	<script>
+		$.each(greekTranslation, function (lemma, object) {
+			var kjv_def = strongsDictionary[lemma]['kjv_def'];
+			if (kjv_def !== undefined) {
+				if (kjv_def.indexOf(',') > -1){
+					var wordArray = kjv_def.split(',');
+					kjv_def = wordArray[0];
+				}
+			}
+			console.log(kjv_def);
+			$.each(object, function(morph, wordValue) {
+				greekTranslation[lemma][morph] = kjv_def;
+			});
+		});			
+		$('body').html(JSON.stringify(greekTranslation));
+	</script>
+</html>

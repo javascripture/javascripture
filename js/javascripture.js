@@ -15,7 +15,8 @@ require.config({
 		'greek': '../data/greek4',
 		'strongsDictionary': '../data/strongsDictionary',
 		'strongObjectRoots': '../data/strongsObjectRoots',
-		'morphology': '../data/morphology'
+		'morphology': '../data/morphology',
+		'greekTranslation': '../data/greektranslation'
 	},
 	priority: ['jquery'],
 	waitSeconds: 20000

@@ -11,9 +11,9 @@ define(['jquery', 'jquery-router', 'ba-debug', 'order!jquery-mobile'], function 
 				requestedBook = router.getParams(match[1]).book,
 				requestedChapter = router.getParams(match[1]).chapter,
 				requestedVerse = router.getParams(match[1]).verse;
-			if (currentBook !== requestedBook || currentChapter !== requestedChapter) {
-				$('#reference-panel').reference(router.getParams(match[1]));
-			}
+			//if (currentBook !== requestedBook || currentChapter !== requestedChapter) {
+			$('#reference-panel').reference(router.getParams(match[1]));
+			//}
 		}
 	}, {
 		defaultHandler: function (type, ui, page) {

@@ -1,5 +1,5 @@
 /*global define, require, debug*/
-define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, strongObjectRoots) {
+define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots', 'greekTranslation', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, strongObjectRoots, greekTranslation) {
 	"use strict";
 	$.widget('javascripture.reference', {
 		options: {
@@ -86,7 +86,6 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				language = 'greek';
 			}
 			chapterWrapperId = self.referenceToId(book, chapter);
-			debug.debug(chapterWrapperId);
 			markup += '<div id="' + chapterWrapperId + '" class="' + self.options.chapterWrapperClass + '" data-book="' + book + '" data-chapter="' + chapter + '">';
 			markup += '<div class="sticky-panel-wrapper"><h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#' + chapterWrapperId + '">' + book + ' ' + chapter + '</h2></div>';
 			markup += '<ol class="wrapper">';
@@ -97,37 +96,23 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				}
 				markup += '>';
 				markup += '<div class="ui-grid-a">';
-				markup += '<div class="ui-block-a"><div class="' + self.options.originalSelector + ' ' + language + '">';
+				markup += '<div class="ui-block-a">';
+				markup += '<div class="' + self.options.originalSelector + ' ' + language + '">';
 				if (originalObject[book][jsonChapter][verseNumber] !== undefined) {
-					$.each(originalObject[book][jsonChapter][verseNumber], function (index, wordObject) {
-						markup += '<span class="word ' + wordObject.lemma;
-						if (wordObject.morph !== undefined) {
-							markup += ' ' + wordObject.morph;
-						}
-						markup += '" title="' + wordObject.lemma;
-						if (wordObject.morph !== undefined) {
-							markup += ' ' + wordObject.morph;
-						}
-						markup += '" data-word="' + wordObject.word + '" ';
-						markup += '" data-lemma="' + wordObject.lemma + '" ';
-						markup += 'data-language="' + language + '" ';
-						markup += 'data-range="word" ';
-						if (wordObject.morph !== undefined) {
-							markup += 'data-morph="' + wordObject.morph + '"';
-						}
-						markup += '>';
-						markup += wordObject.word + '</span> ';
-					});
+					markup += self.getOriginalVerseMarkup(originalObject[book][jsonChapter][verseNumber], language, 'original');
 				}
-				markup += '</div></div>';
-				markup += '<div class="ui-block-b"><div class="' + self.options.translationSelector + '">' + verseText
-					.replace(/<w/gi, '<span')
-					.replace(/<\/w>/gi, '</span>')
-					.replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-language="' + language + '" class="word $1" title="$1"')
-					.replace(/morph="([A-Z,0-9, ]+)"/gi, 'data-morph="$1"')
-					.replace(/morph="robinson:([A-Z,a-z,0-9, ,\-]+)"/gi, 'data-morph="$1"')
-					.replace(/>([A-Z,0-9, ]+)</gi, ' data-word="$1">$1<') + '</div></div>';
-				markup += '</div></li>';
+				markup += '</div>';
+				markup += '</div>';
+				var literalTranslation = false;
+				markup += '<div class="ui-block-b">';
+				if (literalTranslation && greekTranslation && language === 'greek') {
+					markup += self.getOriginalVerseMarkup(originalObject[book][jsonChapter][verseNumber], language, 'literal');
+				} else {
+					markup += self.getTranslatedVerseMarkup(verseText, language);
+				}
+				markup += '</div>';
+				markup += '</div>';
+				markup += '</li>';
 			});
 			markup += '</ol>';
 			markup += '</div>';
@@ -200,7 +185,6 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			var verseSelector = '#' + this.referenceToId(book, chapter, verse);
 			debug.debug(verseSelector);
 			$('body').scrollTo($(verseSelector), { offset: offset });
-			//$.mobile.silentScroll(contentTop - contentHeight / 3)*/
 		},
 		loadChapterBefore: function () {
 			if (this.loadChapter('prev')) {
@@ -209,18 +193,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			}
 		},
 		loadChapterAfter: function () {
-			if (this.loadChapter('next')) {
-				//this.removeChapter('prev');
-				/* surely there's no need to change the scroll position var chapterObject = this.element.data('current'),
-					$chapter = $('#' + this.referenceToId(chapterObject.book, chapterObject.chapter)),
-					currentChapterTop = $chapter.offset().top,
-					$contentScroller = $('body'),
-					currentChapterHeight = $chapter.height(),
-					contentHeight = $(window).height(),
-					offset = -currentChapterHeight;
-				debug.debug(offset);
-				this.scrollToChapter('current', 'end');*/
-			}
+			this.loadChapter('next');
 		},
 		loadChapter: function (position) {
 			var chapterObject = this.element.data(position),
@@ -275,6 +248,46 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				referenceToId += '_' + (verse);
 			}
 			return referenceToId;
+		},
+		getOriginalVerseMarkup: function (verse, language, translationType) {
+			var markup = '';
+			$.each(verse, function (index, wordObject) {
+				markup += '<span class="word ' + wordObject.lemma;
+				if (wordObject.morph !== undefined) {
+					markup += ' ' + wordObject.morph;
+				}
+				markup += '" title="' + wordObject.lemma;
+				if (wordObject.morph !== undefined) {
+					markup += ' ' + wordObject.morph;
+				}
+				markup += '" data-word="' + wordObject.word + '" ';
+				markup += '" data-lemma="' + wordObject.lemma + '" ';
+				markup += 'data-language="' + language + '" ';
+				markup += 'data-range="word" ';
+				if (wordObject.morph !== undefined) {
+					markup += 'data-morph="' + wordObject.morph + '"';
+				}
+				markup += '>';
+				if (translationType === 'literal') {
+					markup += greekTranslation[wordObject.lemma][wordObject.morph];
+				} else {
+					markup += wordObject.word;
+				}
+				markup += '</span> ';
+			});
+			return markup;
+		},
+		getTranslatedVerseMarkup: function (verseText, language) {
+			var self = this,
+				markup = '';
+			markup += '<div class="' + self.options.translationSelector + '">' + verseText
+				.replace(/<w/gi, '<span')
+				.replace(/<\/w>/gi, '</span>')
+				.replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-language="' + language + '" class="word $1" title="$1"')
+				.replace(/morph="([A-Z,0-9, ]+)"/gi, 'data-morph="$1"')
+				.replace(/morph="robinson:([A-Z,a-z,0-9, ,\-]+)"/gi, 'data-morph="$1"')
+				.replace(/>([A-Z,0-9, ]+)</gi, ' data-word="$1">$1<') + '</div>';
+			return markup;
 		}
 	});
 	$('.gotoReference').submit(function (event) {

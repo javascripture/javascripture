@@ -95,13 +95,25 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			if (terms !== '') {
 				termArray = terms.split(' ');
 				$.each(termArray, function (key, value) {
-					self.options.terms[value] = {
-						type: type,
-						references: []
-					};
+					self.options.terms[value] = self.createTermDetails(type, value, []);
 				});
 				self.options.termArray = self.options.termArray.concat(termArray);// this doesn't remove duplicates
 			}
+		},
+		combineTerms: function () {
+			var self = this,
+				combinedString = self.options.termArray.join('_', self.options.terms),
+				combinedHeadingText = self.options.termArray.join(' & ', self.options.terms) + ' (' + self.options.range + ')';
+			if (self.options.terms[combinedString] === undefined) {
+				self.options.terms[combinedString] = self.createTermDetails('combined', combinedHeadingText, self.combineReferences());
+			}
+		},
+		createTermDetails: function (type, headingText, references) {
+			return {
+				type: type,
+				headingText: headingText,
+				references: references
+			};
 		},
 		addTermsToPage: function () {
 			var self = this,
@@ -117,7 +129,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 					if (termDetails.type === 'lemma') {
 						markup += ' class="transparent ' + term + '"';
 					}
-					markup += '>' + term + ' ';
+					markup += '>' + termDetails.headingText + ' ';
 					markup += '</h3>';
 					markup += self.createMarkup(termDetails.references);
 					markup += '</div>';
@@ -238,19 +250,6 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			}
 			return wordValueIsInWordObject;
 		},
-		combineTerms: function () {
-			var self = this,
-				combinedString = self.options.termArray.join('_', self.options.terms),
-				combinedTermDetails = {};
-			if (self.options.terms[combinedString] === undefined) {
-				combinedTermDetails = {
-					'type': 'combined'
-				};
-				combinedTermDetails.references = [];
-				combinedTermDetails.references = self.combineReferences();
-				self.options.terms[combinedString] = combinedTermDetails;
-			}
-		},
 		combineReferences: function () {
 			var self = this,
 				allReferences = {},
@@ -258,7 +257,14 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 				combinedReferences = [];
 			$.each(this.options.terms, function (term, termDetails) {
 				$.each(termDetails.references, function (key, reference) {
-					referenceString = reference[0] + '_' + reference[1] + '_' + reference[2]; //this will match across a verse not across a word
+					referenceString = reference[0]; //range === book
+					if(self.options.range === 'chapter' || self.options.range === 'verse' || self.options.range === 'word') {
+						referenceString += '_' + reference[1]; //range === chapter
+						if (self.options.range === 'verse' || self.options.range === 'word') {
+							 referenceString += '_' + reference[2]; //range === verse
+						}
+						//to do range === word
+					}
 					if (allReferences[referenceString] !== undefined && allReferences[referenceString].terms !== undefined) {
 						if (allReferences[referenceString].terms.toString().indexOf(term) === -1) { //term isn't already in array
 							allReferences[referenceString].terms.push(term);
