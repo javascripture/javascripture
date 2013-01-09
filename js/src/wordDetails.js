@@ -77,12 +77,17 @@ define(['jquery', 'strongsDictionary', 'morphology', 'ba-debug'], function ($, s
 							}
 						} else {
 							if (morphArray[1] !== undefined) {
-								Case = morphArray[1][0];
-								markup += morphologyDictionary.greek.Case[Case] + ' ';
-								number = morphArray[1][1];
-								markup += morphologyDictionary.greek.number[number] + ' ';
-								gender = morphArray[1][2];
-								markup += morphologyDictionary.greek.gender[gender] + ' ';
+								if (morphologyDictionary.greek.Case[Case] !== undefined) { //there are some nouns that have a 3 letter case code
+									markup += morphologyDictionary.greek.Case[Case];
+								} else {
+									console.log(Case);
+									Case = morphArray[1][0];
+									markup += morphologyDictionary.greek.Case[Case] + ' ';
+									number = morphArray[1][1];
+									markup += morphologyDictionary.greek.number[number] + ' ';
+									gender = morphArray[1][2];
+									markup += morphologyDictionary.greek.gender[gender] + ' ';
+								}
 							}
 						}
 					}

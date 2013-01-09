@@ -58,10 +58,15 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			this.addTermsToTermArray('word');
 			this.addTermsToTermArray('lemma');
 			this.addTermsToTermArray('morph');
+			this.removeCommonWordsFromTermArray();
 			//loop over the terms first, and build up a reference array for each term
 			//then we can compare those arrays to see the overlap.
 			//could cache the results
 			$.each(self.options.terms, function (term, termDetails) {
+				if(termDetails.type = 'lemma') {
+					debug.debug(termDetails); //type is inaccurate
+					debug.debug('get the word tree');
+				}
 				$.each(searchObject, function (bookName, bookContent) {
 					$.each(bookContent, function (chapterNumber, chapterContent) {
 						$.each(chapterContent, function (verseNumber, verseContent) {
@@ -87,6 +92,9 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			});
 			self.combineTerms();
 			self.addTermsToPage();
+		},
+		removeCommonWordsFromTermArray: function () {
+			this.options.termArray = this.options.termArray; //TODO
 		},
 		addTermsToTermArray: function (type) {
 			var self = this,
@@ -141,7 +149,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 					parentElement.append(markup);
 					parentElement.find('[data-role=collapsible]').trigger('collapse');
 					$('#' + term).find('[data-role=collapsible]').collapsible();
-					$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
+					//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
 					$('#' + term).find('[data-role=button]').button();
 					referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
 					referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);

@@ -54,7 +54,7 @@ require({
 					chapterNumber,
 					numberOfVerses,
 					verseNumber;
-				if (!reference || reference === undefined || reference[0] === undefined || reference[0].book === null) {
+				if (!reference || reference === undefined || reference.book === null) {
 					reference = {};
 					bookNumber = Math.floor(Math.random() * bible.Data.books.length);
 					chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length);
@@ -64,7 +64,6 @@ require({
 					reference.chapter = chapterNumber + 1;
 					reference.verse = verseNumber + 1;
 				}
-				debug.debug(reference);
 				$('#reference-panel').reference(reference);
 			});
 		});

@@ -8,7 +8,8 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			chapterWrapperClass: 'chapter-wrapper',
 			verse: 1,
 			originalSelector: 'original',
-			translationSelector: 'translation'
+			translationSelector: 'translation',
+			literalTranslation: false
 		},
 		_init: function () {
 			var self = this,
@@ -28,8 +29,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				previousBookLastChapter,
 				next,
 				nextBook,
-				nextBookFirstChapter,
-				i;
+				nextBookFirstChapter;
 			if (english[book] === undefined) {
 				$.each(books, function (bookNameArrayIndex, bookNameArray) {
 					$.each(bookNameArray, function (bookNameIndex, bookName) {
@@ -103,9 +103,8 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				}
 				markup += '</div>';
 				markup += '</div>';
-				var literalTranslation = false;
 				markup += '<div class="ui-block-b">';
-				if (literalTranslation && greekTranslation && language === 'greek') {
+				if (self.options.literalTranslation && greekTranslation && language === 'greek') {
 					markup += self.getOriginalVerseMarkup(originalObject[book][jsonChapter][verseNumber], language, 'literal');
 				} else {
 					markup += self.getTranslatedVerseMarkup(verseText, language);
@@ -303,15 +302,19 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 		});
 		return false;
 	});
-	/*$(document).on('click', '.referenceLink', function (event) {
-		event.preventDefault();
-		event.stopPropagation();
-		console.log(router);
-	});*/
-	$(document).on('click', 'a', function () {
+	$(document).on('click', '.referenceLink', function (event) {
 		$('.ui-btn-active').removeClass('ui-btn-active');
+		$(this).addClass('ui-btn-active');
 	});
-	$(window).bind('scrollstop', function (event) {
+	$(document).on('click', '#literalTranslation', function () {
+		setTimeout(function () { //leave some time for the DOM to update
+			$('#reference-panel').reference('option', 'literalTranslation', $('[name="literalTranslation"]').is(':checked'));			
+		});
+	});
+	//$(document).on('click', 'a', function () {
+		//$('.ui-btn-active').removeClass('ui-btn-active');
+	//});
+	$(window).bind('scrollstop', function () {
 		var scrollTop = $(this).scrollTop(),
 			contentHeight = $('#reference-panel').height() - $(this).height();
 		if (scrollTop === 0) {
