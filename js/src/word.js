@@ -12,7 +12,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			strict: false,
 			terms: {},
 			termArray: [],
-			testObject: [],
+			familyArray: [],
 			referenceObject: {},
 			referenceThatTriggeredSearch: ''
 		},
@@ -311,6 +311,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				} else {
 					root = term;
 				}
+				self.options.familyArray.push(root);
 				family = strongsFamilies[root];
 				lemmaArray = lemmaArray.concat(family);
 			});
