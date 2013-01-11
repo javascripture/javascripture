@@ -20,6 +20,14 @@
     </editor-bookmarks>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0">
         <file>
+            <url>js/src/word.js</url>
+            <bookmark id="0">
+                <name/>
+                <line>125</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
             <url>js/src/bookControl.js</url>
             <bookmark id="0">
                 <name/>
@@ -32,14 +40,6 @@
             <bookmark id="0">
                 <name/>
                 <line>560</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>js/src/word.js</url>
-            <bookmark id="0">
-                <name/>
-                <line>127</line>
                 <key/>
             </bookmark>
         </file>

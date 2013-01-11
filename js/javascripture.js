@@ -14,7 +14,8 @@ require.config({
 		'hebrew': '../data/hebrew5',
 		'greek': '../data/greek4',
 		'strongsDictionary': '../data/strongsDictionary',
-		'strongObjectRoots': '../data/strongsObjectRoots',
+		'strongsObjectWithFamilies': '../data/strongsObjectWithFamilies', //can probably replace the line above
+		'strongsFamilies': '../data/strongsFamilies', //can probably replace the line above
 		'morphology': '../data/morphology',
 		'greekTranslation': '../data/greektranslation'
 	},
@@ -35,9 +36,27 @@ require({
 	"use strict";
 	debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
 	setTimeout(function () { //to give the framework a chance to load
-		$.mobile.showPageLoadingMsg('a', 'Loading bible'); //messages could be more specific
-		require(['bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots'], function (bible) {
-			$.mobile.hidePageLoadingMsg();
+		$.mobile.showPageLoadingMsg('a', 'Loading data');
+		//This is just to give more specific loading messages
+		require(['bible'], function (){
+			$.mobile.showPageLoadingMsg('a', 'Loading English');
+			require(['english'], function (){
+				$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
+				require(['hebrew'], function (){
+					$.mobile.showPageLoadingMsg('a', 'Loading Greek');
+					require(['greek'], function (){
+						$.mobile.showPageLoadingMsg('a', 'Loading Strongs Numbers');
+						require(['strongsDictionary'], function (){
+							require(['strongsObjectWithFamilies'], function (){
+								$.mobile.showPageLoadingMsg('a', 'Data loaded');
+							});
+						});
+					});
+				});
+			});
+		});
+		require(['bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongsObjectWithFamilies'], function (bible) {
+			$.mobile.showPageLoadingMsg('a', 'Loading modules');
 			require([
 				'src/router',
 				'order!src/chapter',

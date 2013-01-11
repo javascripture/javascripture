@@ -1,5 +1,5 @@
 /*global define, require, debug*/
-define(['jquery', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots', 'jquery-mobile', 'ba-debug'], function ($, english, hebrew, greek, strongsDictionary, strongObjectRoots) {
+define(['jquery', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongsObjectWithFamilies', 'jquery-mobile', 'ba-debug'], function ($, english, hebrew, greek, strongsDictionary, strongsObjectWithFamilies) {
 	"use strict";
 	$.widget('javascripture.chapter', {
 		options: {

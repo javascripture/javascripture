@@ -1,5 +1,5 @@
 define(function () {
-﻿var bible = {};
+var bible = {};
 bible.Data = {};
 bible.Data.books = [
 ['Genesis','Gen','Ge'],

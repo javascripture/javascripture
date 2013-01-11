@@ -1,5 +1,5 @@
-/*global define, require, debug*/
-define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongObjectRoots', 'greekTranslation', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, strongObjectRoots, greekTranslation) {
+/*global define, debug*/
+define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongsObjectWithFamilies', 'greekTranslation', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, strongsObjectWithFamilies, greekTranslation) {
 	"use strict";
 	$.widget('javascripture.reference', {
 		options: {
@@ -18,18 +18,18 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				chapter = parseInt(this.options.chapter, 10),
 				verse = parseInt(this.options.verse, 10),
 				$content = this.element,
-				$contentScroller = this.element.closest('body'),
+				//$contentScroller = this.element.closest('body'),
 				verseSelector,
-				contentHeight,
-				contentTop,
-				books = bible.Data.books,
-				nextChapter = self.getOffsetChapter(book, chapter, 1),
+				//contentHeight,
+				//contentTop,
+				books = bible.Data.books;
+				/*nextChapter = self.getOffsetChapter(book, chapter, 1),
 				prevChapter = self.getOffsetChapter(book, chapter, -1),
 				previousBook,
 				previousBookLastChapter,
 				next,
 				nextBook,
-				nextBookFirstChapter;
+				nextBookFirstChapter;*/
 			if (english[book] === undefined) {
 				$.each(books, function (bookNameArrayIndex, bookNameArray) {
 					$.each(bookNameArray, function (bookNameIndex, bookName) {
@@ -302,13 +302,13 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 		});
 		return false;
 	});
-	$(document).on('click', '.referenceLink', function (event) {
+	$(document).on('click', '.referenceLink', function () {
 		$('.ui-btn-active').removeClass('ui-btn-active');
 		$(this).addClass('ui-btn-active');
 	});
 	$(document).on('click', '#literalTranslation', function () {
 		setTimeout(function () { //leave some time for the DOM to update
-			$('#reference-panel').reference('option', 'literalTranslation', $('[name="literalTranslation"]').is(':checked'));			
+			$('#reference-panel').reference('option', 'literalTranslation', $('[name="literalTranslation"]').is(':checked'));
 		});
 	});
 	//$(document).on('click', 'a', function () {

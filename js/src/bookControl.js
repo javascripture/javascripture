@@ -1,7 +1,8 @@
-/*global define, require, debug*/
+/*global define, debug*/
 define(['jquery', 'jquery-mobile', 'ba-debug'], function ($) {
 	"use strict";
-	$('.bookControl h3').click(function (event) {
+	var moduleName = 'bookControl';
+	$('.' + moduleName + ' h3').click(function (event) {
 		event.preventDefault();
 		var $this = $(this).closest('.bookControl'),
 			chapters = parseInt($this.data('chapters'), 10),
@@ -28,4 +29,8 @@ define(['jquery', 'jquery-mobile', 'ba-debug'], function ($) {
 			}
 		}
 	});
+	$(document).on('mouseup', '.bookControl a', function () {
+		$('.bookControl .ui-btn-active').removeClass('ui-btn-active');
+	});
+	debug.debug(moduleName + ' loaded');
 });

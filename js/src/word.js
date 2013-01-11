@@ -1,5 +1,5 @@
-/*global define, require, debug*/
-define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongObjectRoots, english, hebrew, greek) {
+/*global define, debug*/
+define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, english, hebrew, greek) {
 	"use strict";
 	$.widget('javascripture.word', {
 		options: {
@@ -21,80 +21,86 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		},
 		_init: function () {
 			var self = this,
-				$this = this.element,
 				word = this.options.word,
 				lemma = this.options.lemma,
 				morph = this.options.morph,
-				language = this.options.language,
-				range = this.options.range,
-				markup = '',
-				wordArray = [],
-				lemmaArray = [],
-				morphArray = [],
-				wordCount = 0,
-				searchObject,
 				term,
-				termId = word + '_' + lemma + '_' + morph, //term is used to identify the combination of things that are being searched for
-				termReadable = word + ' ' + lemma + ' ' + morph, //term is used to identify the combination of things that are being searched for
-				matchArray = [];
+				termId = word + '_' + lemma + '_' + morph; //term is used to identify the combination of things that are being searched for
 			termId = termId.replace(/ /gi, '_');
 			if (lemma !== '') {
 				term = lemma;
 			} else if (morph !== '') {
 				term += ' ' + morph;
 			}
-			if (language === "hebrew") {
-				searchObject = hebrew;
+			if (this.options.language === "hebrew") {
 				word = self.standarizeWordEndings(word);
-			} else if (language === "greek") {
-				searchObject = greek;
-			} else {
-				searchObject = english;
 			}
+
+			//replace the lemma terms with their roots
+			self.addWholeFamilyToLemmaTerms();
+
 			//set up array
 			self.options.terms = {};
 			self.options.termArray = [];
+			
 			//add terms to array
 			this.addTermsToTermArray('word');
 			this.addTermsToTermArray('lemma');
 			this.addTermsToTermArray('morph');
-			this.removeCommonWordsFromTermArray();
+			this.removeDuplicatesFromTermArray();
 			//loop over the terms first, and build up a reference array for each term
 			//then we can compare those arrays to see the overlap.
 			//could cache the results
 			$.each(self.options.terms, function (term, termDetails) {
-				if(termDetails.type = 'lemma') {
-					debug.debug(termDetails); //type is inaccurate
-					debug.debug('get the word tree');
-				}
-				$.each(searchObject, function (bookName, bookContent) {
-					$.each(bookContent, function (chapterNumber, chapterContent) {
-						$.each(chapterContent, function (verseNumber, verseContent) {
-							if (language === 'english') {
-								//range can't apply in here
-								//old way if (self.findArrayElementsInString(term, verseContent, wordCount)) {
-								if (self.findTermInString(term, verseContent)) {
-									self.options.terms[term].references.push([bookName, chapterNumber + 1, verseNumber + 1, wordCount, language, verseContent]);
-								}
-							} else {
-								//loop through each word in the verse doing a match on our terms
-								$.each(verseContent, function (wordNumber, wordObject) {
-									//if the term is a match
-									if (self.isWordValueInWordObject(term, termDetails, wordObject)) {
-										//then add the key to our references
-										self.options.terms[term].references.push([bookName, chapterNumber + 1, verseNumber + 1, wordCount, language, wordObject, wordNumber]);
-									}
-								});
-							}
-						});
-					});
-				});
+				self.searchForTerm(term, termDetails);
 			});
 			self.combineTerms();
 			self.addTermsToPage();
 		},
-		removeCommonWordsFromTermArray: function () {
-			this.options.termArray = this.options.termArray; //TODO
+		searchForTerm: function (term, termDetails) {
+			var self = this,
+				wordCount = 0,
+				searchObject;
+			if (this.options.language === "hebrew") {
+				searchObject = hebrew;
+			} else if (this.options.language === "greek") {
+				searchObject = greek;
+			} else {
+				searchObject = english;
+			}
+			$.each(searchObject, function (bookName, bookContent) {
+				$.each(bookContent, function (chapterNumber, chapterContent) {
+					$.each(chapterContent, function (verseNumber, verseContent) {
+						if (self.options.language === 'english') {
+							//range can't apply in here
+							//old way if (self.findArrayElementsInString(term, verseContent, wordCount)) {
+							if (self.findTermInString(term, verseContent)) {
+								self.options.terms[term].references.push([bookName, chapterNumber + 1, verseNumber + 1, wordCount, self.options.language, verseContent]);
+							}
+						} else {
+							//loop through each word in the verse doing a match on our terms
+							$.each(verseContent, function (wordNumber, wordObject) {
+								//if the term is a match
+								if (self.isWordValueInWordObject(term, termDetails, wordObject)) {
+									//then add the key to our references
+									self.options.terms[term].references.push([bookName, chapterNumber + 1, verseNumber + 1, wordCount, self.options.language, wordObject, wordNumber]);
+								}
+							});
+						}
+					});
+				});
+			});
+		},
+		removeDuplicatesFromTermArray: function () {
+			var termObject = {},
+				newTermArray = [];
+			$.each(this.options.termArray, function (index, value) {
+				termObject[value] = 0;
+			});
+			$.each(termObject, function(term) {
+				newTermArray.push(term);
+			});
+			this.options.termArray = newTermArray;
 		},
 		addTermsToTermArray: function (type) {
 			var self = this,
@@ -125,35 +131,21 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		},
 		addTermsToPage: function () {
 			var self = this,
-				markup = '',
 				parentElement = self.element.find('.panel-inner'),
 				referenceThatTriggeredSearchLink;
 			$.each(self.options.terms, function (term, termDetails) {
-				markup = '';
 				if ($('#' + term).length === 0) {
-					markup += '<div class="collapsible-wrapper" id="' + term + '">';
-					markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false">';
-					markup += '<h3';
-					if (termDetails.type === 'lemma') {
-						markup += ' class="transparent ' + term + '"';
-					}
-					markup += '>' + termDetails.headingText + ' ';
-					markup += '</h3>';
-					markup += self.createMarkup(termDetails.references);
-					markup += '</div>';
-					markup += '<div class="controlgroup ui-li-has-count">';
-					markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
-					markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
-					markup += '</div>';
-					markup += '</div>';
-					parentElement.append(markup);
-					parentElement.find('[data-role=collapsible]').trigger('collapse');
-					$('#' + term).find('[data-role=collapsible]').collapsible();
-					//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
-					$('#' + term).find('[data-role=button]').button();
-					referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
-					referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
-					$('html').addClass(term);
+					//add collapsible to page
+					setTimeout(function () {
+						parentElement.append(self.createCollapsible(term, termDetails));
+						parentElement.find('[data-role=collapsible]').trigger('collapse');
+						$('#' + term).find('[data-role=collapsible]').collapsible();
+						//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
+						$('#' + term).find('[data-role=button]').button();
+						referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
+						referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
+						$('html').addClass(term);
+					}, 10);
 				}
 			});
 		},
@@ -167,10 +159,20 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			var referenceId = referenceArray[0] + '_' + referenceArray[1] + '_' + referenceArray[2];
 			return this.getReferenceLinkId(referenceId);
 		},
-		createMarkup: function (referenceArray) {
+		createCollapsible: function (term, termDetails) {
 			var self = this,
-				markup = '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
-			$.each(referenceArray, function (key, reference) {
+				markup = '';
+			markup += '<div class="collapsible-wrapper" id="' + term + '">';
+			markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false">';
+			markup += '<h3';
+			if (termDetails.type === 'lemma') {
+				markup += ' class="transparent ' + term + '"';
+			}
+			markup += '>' + termDetails.headingText + ' ';
+			markup += '</h3>';
+
+			markup += '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
+			$.each(termDetails.references, function (key, reference) {
 				markup += '<li>';
 				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none" id="' + self.getReferenceLinkIdFromArray(reference) + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
 				/* hide split view markup += '<a data-language="' + reference[4] + '"';
@@ -186,6 +188,12 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 				markup += '</li>';
 			});
 			markup += '</ol>';
+			markup += '</div>';
+			markup += '<div class="controlgroup ui-li-has-count">';
+			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
+			markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
+			markup += '</div>';
+			markup += '</div>';
 			return markup;
 		},
 		findTermInString: function (term, string) {
@@ -269,7 +277,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 					if(self.options.range === 'chapter' || self.options.range === 'verse' || self.options.range === 'word') {
 						referenceString += '_' + reference[1]; //range === chapter
 						if (self.options.range === 'verse' || self.options.range === 'word') {
-							 referenceString += '_' + reference[2]; //range === verse
+							referenceString += '_' + reference[2]; //range === verse
 						}
 						//to do range === word
 					}
@@ -291,6 +299,22 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 				}
 			});
 			return combinedReferences;
+		},
+		addWholeFamilyToLemmaTerms: function () {
+			var self = this,
+				root,
+				family,
+				lemmaArray = self.options.lemma.split(' ');
+			$.each(self.options.lemma.split(' '), function (index, term) {
+				if (strongsObjectWithFamilies[term] !== undefined && strongsObjectWithFamilies[term].family !== undefined) {
+					root = strongsObjectWithFamilies[term].family;
+				} else {
+					root = term;
+				}
+				family = strongsFamilies[root];
+				lemmaArray = lemmaArray.concat(family);
+			});
+			self.options.lemma = lemmaArray.join(' ');
 		}
 	});
 	$.fn.serializeObject = function () {
@@ -316,7 +340,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		$('html').removeClass(word);
 	});
 	var words = '#reference-panel .word';
-	$(document).on('vmouseover', words, function (event) {
+	$(document).on('vmouseover', words, function () {
 		var word = $(this).data('lemma');
 		$('body').addClass(word);
 	});
@@ -324,7 +348,7 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		var word = $(this).attr('class');
 		$('body').removeClass(word);
 	});
-	$(document).on('vclick', words, function (event) {
+	$(document).on('vclick', words, function () {
 		var data = $(this).data();
 		if (event.altKey) {
 			$('#wordDetails').wordDetails(data);
@@ -335,12 +359,12 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 			$('#results').word(data);
 		}
 	});
-	$(document).on('taphold', words, function (event) {
+	$(document).on('taphold', words, function () {
 		var data = $(this).data();
 		$('#wordDetails').wordDetails(data);
 	});
 
-	$(document).on('vclick', '#wordDetails .word', function (event) {
+	$(document).on('vclick', '#wordDetails .word', function () {
 		var data = $(this).data();
 		$('#results').word(data);
 	});
@@ -350,4 +374,5 @@ define(['jquery', 'strongsDictionary', 'strongObjectRoots', 'english', 'hebrew',
 		$('#results').word($(this).serializeObject());
 		return false;
 	});
+	debug.debug('word module loaded');
 });

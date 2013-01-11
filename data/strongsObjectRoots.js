@@ -1,4 +1,5 @@
-var strongsObject = {
+define(function () {
+	var strongsObjectRoot = {
 "H1":"",
 "H2":["H1"],
 "H3":["H24"],
@@ -14296,4 +14297,6 @@ var strongsObject = {
 "G5622":["G5624"],
 "G5623":["G5622"],
 "G5624":["G3786"]
-}
+};
+return strongsObjectRoot
+});
