@@ -170,9 +170,20 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			}
 			markup += '>' + termDetails.headingText + ' ';
 			markup += '</h3>';
-
+			markup += self.createListView(termDetails.references);
+			markup += '</div>';
+			markup += '<div class="controlgroup ui-li-has-count">';
+			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
+			markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
+			markup += '</div>';
+			markup += '</div>';
+			return markup;
+		},
+		createListView: function (references) {
+			var self = this,
+				markup = '';
 			markup += '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
-			$.each(termDetails.references, function (key, reference) {
+			$.each(references, function (key, reference) {
 				markup += '<li>';
 				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none" id="' + self.getReferenceLinkIdFromArray(reference) + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
 				/* hide split view markup += '<a data-language="' + reference[4] + '"';
@@ -188,12 +199,6 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				markup += '</li>';
 			});
 			markup += '</ol>';
-			markup += '</div>';
-			markup += '<div class="controlgroup ui-li-has-count">';
-			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
-			markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
-			markup += '</div>';
-			markup += '</div>';
 			return markup;
 		},
 		findTermInString: function (term, string) {
