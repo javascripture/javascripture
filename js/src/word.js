@@ -139,33 +139,48 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				parentElement = self.element.find('.panel-inner'),
 				referenceThatTriggeredSearchLink;
 			$.each(self.options.familyArray, function (index, value) {
+				var content = '',
+					collapsibleElement = self.createCollapsible(value, self.options.terms[value], content, value + '_family', value + ' family');//self.createCollapsible(value + '_family', value + ' family');
+				self.addCollapsibleToPage(parentElement, collapsibleElement);
 				//lots of duplication from below
-				parentElement.append(self.createCollapsible(value, self.options.terms[value]));
-				parentElement.find('[data-role=collapsible]').trigger('collapse');
-				$('#' + value).find('[data-role=collapsible]').collapsible();
-				//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
-				$('#' + value).find('[data-role=button]').button();
+//				parentElement.append(self.createCollapsible(value, self.options.terms[value]));
+//				parentElement.find('[data-role=collapsible]').trigger('collapse');
+//				$('#' + value).find('[data-role=collapsible]').collapsible();
+//				//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
+//				$('#' + value).find('[data-role=button]').button();
 				$('html').addClass(value);
 			});
 			$.each(self.options.terms, function (term, termDetails) {
 				if ($('#' + term).length === 0) {
 					if (termDetails.type === 'lemma') {
 						//add it to the family collapsible
-						parentElement = $('#' + strongsObjectWithFamilies[term].family).find('.ui-collapsible-content');
+						parentElement = $('#' + strongsObjectWithFamilies[term].family + '_family').find('.ui-collapsible-content');
 					}
 					//add collapsible to page
 					setTimeout(function () {
-						parentElement.append(self.createCollapsible(term, termDetails));
-						parentElement.find('[data-role=collapsible]').trigger('collapse');
-						$('#' + term).find('[data-role=collapsible]').collapsible();
-						//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
-						$('#' + term).find('[data-role=button]').button();
+						var content = self.createListView(termDetails.references),
+							collapsibleElement = self.createCollapsible(term, self.options.terms[term], content, term, termDetails.headingText, termDetails.references.length);//self.createCollapsible(value + '_family', value + ' family');
+						self.addCollapsibleToPage(parentElement, collapsibleElement);
+
+//						parentElement.append(self.createCollapsible(term, termDetails));
+//						parentElement.find('[data-role=collapsible]').trigger('collapse');
+//						$('#' + term).find('[data-role=collapsible]').collapsible();
+//						//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
+//						$('#' + term).find('[data-role=button]').button();
 						referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
 						referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
 						$('html').addClass(term);
 					}, 10);
 				}
 			});
+		},
+		addCollapsibleToPage: function (parentElement, collapsibleElement) {
+			parentElement.find('[data-role=collapsible]').trigger('collapse');
+			var $collapsibleElement = $(collapsibleElement).appendTo(parentElement);
+			$collapsibleElement.find('[data-role=collapsible]').collapsible();
+			//$collapsibeElement.find(':jqmData(role=listview)').listview();/* makes things very slow*/
+			$collapsibleElement.find('[data-role=button]').button();
+
 		},
 		getReferenceLinkObject: function (reference) {
 			return $('#' + this.getReferenceLinkId(reference));
@@ -177,22 +192,24 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			var referenceId = referenceArray[0] + '_' + referenceArray[1] + '_' + referenceArray[2];
 			return this.getReferenceLinkId(referenceId);
 		},
-		createCollapsible: function (term, termDetails) {
+		createCollapsible: function (term, termDetails, content, id, headingText, number) {
 			var self = this,
 				markup = '';
-			markup += '<div class="collapsible-wrapper" id="' + term + '">';
+			markup += '<div class="collapsible-wrapper" id="' + id + '">';
 			markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false">';
 			markup += '<h3';
 			if (termDetails.type === 'lemma') {
 				markup += ' class="transparent ' + term + '"';
 			}
-			markup += '>' + termDetails.headingText + ' ';
+			markup += '>' + headingText + ' ';
 			markup += '</h3>';
-			markup += self.createListView(termDetails.references);
+			markup += content;
 			markup += '</div>';
 			markup += '<div class="controlgroup ui-li-has-count">';
-			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
-			markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + termDetails.references.length + '</span>';
+			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + id + '" class="deleteWord">Delete</a>';
+			if (number !== undefined) {
+				markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + number + '</span>';
+			}
 			markup += '</div>';
 			markup += '</div>';
 			return markup;

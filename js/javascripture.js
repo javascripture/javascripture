@@ -28,7 +28,7 @@ require({
 }, [
 	'jquery',
 	'ba-debug',
-	'jquery-router',
+	'order!jquery-router',
 	'order!jquery-mobile',
 	'order!src/bookControl',
 	'order!external/jquery.scrollTo'
