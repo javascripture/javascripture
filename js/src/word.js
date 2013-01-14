@@ -36,12 +36,13 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				word = self.standarizeWordEndings(word);
 			}
 
-			//replace the lemma terms with their roots
-			self.addWholeFamilyToLemmaTerms();
-
 			//set up array
 			self.options.terms = {};
 			self.options.termArray = [];
+			self.options.familyArray = [];
+			
+			//add the root and family for the lemma terms
+			self.addWholeFamilyToLemmaTerms();
 			
 			//add terms to array
 			this.addTermsToTermArray('word');
@@ -55,6 +56,10 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				self.searchForTerm(term, termDetails);
 			});
 			self.combineTerms();
+			
+			debug.debug(self.options.terms);
+			debug.debug(self.options.termArray);
+			
 			self.addTermsToPage();
 		},
 		searchForTerm: function (term, termDetails) {
@@ -133,8 +138,21 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			var self = this,
 				parentElement = self.element.find('.panel-inner'),
 				referenceThatTriggeredSearchLink;
+			$.each(self.options.familyArray, function (index, value) {
+				//lots of duplication from below
+				parentElement.append(self.createCollapsible(value, self.options.terms[value]));
+				parentElement.find('[data-role=collapsible]').trigger('collapse');
+				$('#' + value).find('[data-role=collapsible]').collapsible();
+				//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
+				$('#' + value).find('[data-role=button]').button();
+				$('html').addClass(value);
+			});
 			$.each(self.options.terms, function (term, termDetails) {
 				if ($('#' + term).length === 0) {
+					if (termDetails.type === 'lemma') {
+						//add it to the family collapsible
+						parentElement = $('#' + strongsObjectWithFamilies[term].family).find('.ui-collapsible-content');
+					}
 					//add collapsible to page
 					setTimeout(function () {
 						parentElement.append(self.createCollapsible(term, termDetails));
@@ -318,6 +336,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				}
 				self.options.familyArray.push(root);
 				family = strongsFamilies[root];
+				family.push(root);
 				lemmaArray = lemmaArray.concat(family);
 			});
 			self.options.lemma = lemmaArray.join(' ');
