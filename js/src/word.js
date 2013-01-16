@@ -40,7 +40,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			self.options.terms = {};
 			self.options.termArray = [];
 			self.options.familyArray = [];
-			
+
 			//add the root and family for the lemma terms
 			self.addWholeFamilyToLemmaTerms();
 			
@@ -56,9 +56,6 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				self.searchForTerm(term, termDetails);
 			});
 			self.combineTerms();
-			
-			debug.debug(self.options.terms);
-			debug.debug(self.options.termArray);
 			
 			self.addTermsToPage();
 		},
@@ -142,17 +139,11 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				var content = '',
 					collapsibleElement = self.createCollapsible(value, self.options.terms[value], content, value + '_family', value + ' family');//self.createCollapsible(value + '_family', value + ' family');
 				self.addCollapsibleToPage(parentElement, collapsibleElement);
-				//lots of duplication from below
-//				parentElement.append(self.createCollapsible(value, self.options.terms[value]));
-//				parentElement.find('[data-role=collapsible]').trigger('collapse');
-//				$('#' + value).find('[data-role=collapsible]').collapsible();
-//				//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
-//				$('#' + value).find('[data-role=button]').button();
 				$('html').addClass(value);
 			});
 			$.each(self.options.terms, function (term, termDetails) {
 				if ($('#' + term).length === 0) {
-					if (termDetails.type === 'lemma') {
+					if (termDetails.type === 'lemma' && strongsObjectWithFamilies[term] && strongsObjectWithFamilies[term].family) {
 						//add it to the family collapsible
 						parentElement = $('#' + strongsObjectWithFamilies[term].family + '_family').find('.ui-collapsible-content');
 					}
@@ -161,12 +152,6 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 						var content = self.createListView(termDetails.references),
 							collapsibleElement = self.createCollapsible(term, self.options.terms[term], content, term, termDetails.headingText, termDetails.references.length);//self.createCollapsible(value + '_family', value + ' family');
 						self.addCollapsibleToPage(parentElement, collapsibleElement);
-
-//						parentElement.append(self.createCollapsible(term, termDetails));
-//						parentElement.find('[data-role=collapsible]').trigger('collapse');
-//						$('#' + term).find('[data-role=collapsible]').collapsible();
-//						//$('#' + term).find(':jqmData(role=listview)').listview();/* makes things very slow*/
-//						$('#' + term).find('[data-role=button]').button();
 						referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
 						referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
 						$('html').addClass(term);
@@ -345,17 +330,19 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				root,
 				family,
 				lemmaArray = self.options.lemma.split(' ');
-			$.each(self.options.lemma.split(' '), function (index, term) {
-				if (strongsObjectWithFamilies[term] !== undefined && strongsObjectWithFamilies[term].family !== undefined) {
-					root = strongsObjectWithFamilies[term].family;
-				} else {
-					root = term;
-				}
-				self.options.familyArray.push(root);
-				family = strongsFamilies[root];
-				family.push(root);
-				lemmaArray = lemmaArray.concat(family);
-			});
+			if (self.options.lemma.length > 0 ) {
+				$.each(self.options.lemma.split(' '), function (index, term) {
+					if (strongsObjectWithFamilies[term] !== undefined && strongsObjectWithFamilies[term].family !== undefined) {
+						root = strongsObjectWithFamilies[term].family;
+					} else {
+						root = term;
+					}
+					self.options.familyArray.push(root);
+					family = strongsFamilies[root];
+					family.push(root);
+					lemmaArray = lemmaArray.concat(family);
+				});
+			}
 			self.options.lemma = lemmaArray.join(' ');
 		}
 	});
@@ -377,8 +364,14 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 	$(document).on('click', '.deleteWord', function (event) {
 		event.preventDefault();
 		event.stopPropagation();
-		var word = $(this).data('word');
-		$(this).closest('.collapsible-wrapper').remove();
+		var $this = $(this),
+			word = $this.data('word'),
+			$parent = $this.closest('.collapsible-wrapper')
+		$parent.find('.collapsible-wrapper').each(function (index, element) {
+			var id = $(element).attr('id');
+			$('html').removeClass(id);
+		})
+		$parent.remove();
 		$('html').removeClass(word);
 	});
 	var words = '#reference-panel .word';
