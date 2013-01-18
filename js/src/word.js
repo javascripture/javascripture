@@ -1,5 +1,5 @@
 /*global define, debug*/
-define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, english, hebrew, greek) {
+define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'wordFamilies', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, wordFamilies, english, hebrew, greek) {
 	"use strict";
 	$.widget('javascripture.word', {
 		options: {
@@ -142,7 +142,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				$('html').addClass(value);
 			});
 			$.each(self.options.terms, function (term, termDetails) {
-				if ($('#' + term).length === 0) {
+				if ($('#' + term).length === 0) { //don't re-add it to the page
 					if (termDetails.type === 'lemma' && strongsObjectWithFamilies[term] && strongsObjectWithFamilies[term].family) {
 						//add it to the family collapsible
 						parentElement = $('#' + strongsObjectWithFamilies[term].family + '_family').find('.ui-collapsible-content');
@@ -184,7 +184,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false">';
 			markup += '<h3';
 			if (termDetails.type === 'lemma') {
-				markup += ' class="transparent ' + term + '"';
+				markup += ' class="transparent ' + wordFamilies.getFamily(term) + '"';
 			}
 			markup += '>' + headingText + ' ';
 			markup += '</h3>';
@@ -376,11 +376,11 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 	});
 	var words = '#reference-panel .word';
 	$(document).on('vmouseover', words, function () {
-		var word = $(this).data('lemma');
+		var word = $(this).data('family');
 		$('body').addClass(word);
 	});
 	$(document).on('vmouseout', words, function () {
-		var word = $(this).attr('class');
+		var word = $(this).data('family');
 		$('body').removeClass(word);
 	});
 	$(document).on('vclick', words, function () {
