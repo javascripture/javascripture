@@ -1,5 +1,5 @@
 /*global define, debug*/
-define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'wordFamilies', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, wordFamilies, english, hebrew, greek) {
+define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'wordFamilies', 'translateLiterally', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, wordFamilies, translateLiterally, english, hebrew, greek) {
 	"use strict";
 	$.widget('javascripture.word', {
 		options: {
@@ -137,7 +137,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				referenceThatTriggeredSearchLink;
 			$.each(self.options.familyArray, function (index, value) {
 				var content = '',
-					collapsibleElement = self.createCollapsible(value, self.options.terms[value], content, value + '_family', value + ' family');//self.createCollapsible(value + '_family', value + ' family');
+					collapsibleElement = self.createCollapsible(value, self.options.terms[value], content, value + '_family', value + ' ' + translateLiterally.getWord(value) + ' family');//self.createCollapsible(value + '_family', value + ' family');
 				self.addCollapsibleToPage(parentElement, collapsibleElement);
 				$('html').addClass(value);
 			});
@@ -150,7 +150,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 					//add collapsible to page
 					setTimeout(function () {
 						var content = self.createListView(termDetails.references),
-							collapsibleElement = self.createCollapsible(term, self.options.terms[term], content, term, termDetails.headingText, termDetails.references.length);//self.createCollapsible(value + '_family', value + ' family');
+							collapsibleElement = self.createCollapsible(term, self.options.terms[term], content, term, termDetails.headingText + ' ' + translateLiterally.getWord(term), termDetails.references.length);//self.createCollapsible(value + '_family', value + ' family');
 						self.addCollapsibleToPage(parentElement, collapsibleElement);
 						referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
 						referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
@@ -181,7 +181,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			var self = this,
 				markup = '';
 			markup += '<div class="collapsible-wrapper" id="' + id + '">';
-			markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false">';
+			markup += '<div data-role="collapsible" class="word-list" data-collapsed="false" data-inset="false" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">';
 			markup += '<h3';
 			if (termDetails.type === 'lemma') {
 				markup += ' class="transparent ' + wordFamilies.getFamily(term) + '"';

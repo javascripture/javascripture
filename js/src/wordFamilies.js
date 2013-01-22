@@ -3,13 +3,18 @@ define(['jquery', 'strongsObjectWithFamilies', 'strongsFamilies'], function ($, 
 	"use strict";
 	var wordFamilies = {
 		getFamily: function (lemma) {
-			var family = lemma;
-			if (strongsObjectWithFamilies[lemma] !== undefined) {
-				family = strongsObjectWithFamilies[lemma].family;
-			} else {
-				debug.debug('why isnt there a family for ' + lemma);
+			var familyArray = [];
+			if (lemma === "added") {
+				return '';
 			}
-			return family;
+			$.each(lemma.split(' '), function (index, term) {
+				if (strongsObjectWithFamilies[term] !== undefined) {
+					familyArray.push(strongsObjectWithFamilies[term].family);
+				} else {
+					debug.debug('why isnt there a family for ' + term);
+				}				
+			});
+			return familyArray.join(' ');
 		}/*,
 		getWordFamily: function (term) {
 			debug.debug(term);

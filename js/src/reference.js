@@ -1,5 +1,5 @@
 /*global define, debug*/
-define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'greekTranslation', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, wordFamilies, greekTranslation) {
+define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'translateLiterally', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, wordFamilies, translateLiterally) {
 	"use strict";
 	$.widget('javascripture.reference', {
 		options: {
@@ -104,7 +104,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				markup += '</div>';
 				markup += '</div>';
 				markup += '<div class="ui-block-b">';
-				if (self.options.literalTranslation && greekTranslation && language === 'greek') {
+				if (self.options.literalTranslation && literalTranslation) {
 					markup += self.getOriginalVerseMarkup(originalObject[book][jsonChapter][verseNumber], language, 'literal');
 				} else {
 					markup += self.getTranslatedVerseMarkup(verseText, language);
@@ -270,7 +270,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				}
 				markup += '>';
 				if (translationType === 'literal') {
-					markup += greekTranslation[wordObject.lemma][wordObject.morph];
+					markup += translateLiterally.getWord(wordObject);
 				} else {
 					markup += wordObject.word;
 				}

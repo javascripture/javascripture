@@ -17,7 +17,8 @@ require.config({
 		'strongsObjectWithFamilies': '../data/strongsObjectWithFamilies', //can probably replace the line above
 		'strongsFamilies': '../data/strongsFamilies', //can probably replace the line above
 		'morphology': '../data/morphology',
-		'greekTranslation': '../data/greektranslation',
+		'literalTranslation': '../data/literalTranslation',
+		'translateLiterally': 'src/translateLiterally',
 		'wordFamilies': 'src/wordFamilies'
 	},
 	priority: ['jquery'],
