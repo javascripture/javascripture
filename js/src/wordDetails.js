@@ -1,5 +1,5 @@
 /*global define, require, debug*/
-define(['jquery', 'strongsDictionary', 'morphology', 'ba-debug'], function ($, strongsDictionary, morphologyDictionary) {
+define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug'], function ($, strongsDictionary, morphologyDictionary, wordFamilies) {
 	"use strict";
 	$.widget('javascripture.wordDetails', {
 		_init: function () {
@@ -22,7 +22,7 @@ define(['jquery', 'strongsDictionary', 'morphology', 'ba-debug'], function ($, s
 				case2;
 			$.each(lemmaArray, function (key, lemma) {
 				markup += '<div class="word-details-inner">';
-				markup += '<div class="' + lemma + '"><h3 class="' + lemma + '">' + lemma + ' ' + word + '</h3></div><br />';
+				markup += '<div class="' + wordFamilies.getFamily(lemma) + '"><h3 class="' + wordFamilies.getFamily(lemma) + '">' + lemma + ' ' + word + '</h3></div><br />';
 				markup += '<strong>Lemma:</strong> ' + strongsDictionary[lemma].lemma + '<br />';
 				markup += '<strong>Derivation:</strong> ' + strongsDictionary[lemma].derivation + '<br />';
 				markup += '<strong>KJV usage:</strong> ' + strongsDictionary[lemma].kjv_def + '<br />';

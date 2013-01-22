@@ -14,7 +14,8 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			termArray: [],
 			familyArray: [],
 			referenceObject: {},
-			referenceThatTriggeredSearch: ''
+			referenceThatTriggeredSearch: '',
+			combineTerms: false
 		},
 		_create: function () {
 			$('#results').append('<div class="panel-inner"></div>');
@@ -55,8 +56,9 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			$.each(self.options.terms, function (term, termDetails) {
 				self.searchForTerm(term, termDetails);
 			});
-			self.combineTerms();
-			
+			if (self.options.combineTerms) {
+				self.combineTerms();				
+			}
 			self.addTermsToPage();
 		},
 		searchForTerm: function (term, termDetails) {

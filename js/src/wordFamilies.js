@@ -4,7 +4,7 @@ define(['jquery', 'strongsObjectWithFamilies', 'strongsFamilies'], function ($, 
 	var wordFamilies = {
 		getFamily: function (lemma) {
 			var familyArray = [];
-			if (lemma === "added") {
+			if (lemma === "added" || lemma === undefined) {
 				return '';
 			}
 			$.each(lemma.split(' '), function (index, term) {
@@ -15,25 +15,7 @@ define(['jquery', 'strongsObjectWithFamilies', 'strongsFamilies'], function ($, 
 				}				
 			});
 			return familyArray.join(' ');
-		}/*,
-		getWordFamily: function (term) {
-			debug.debug(term);
-			if (term !== undefined) {
-				var lemmaArray = term.split(' '),
-					familyArray = [];
-				$.each(lemmaArray, function (index, lemma) {
-					if (strongsObjectWithFamilies[lemma] !== undefined) {
-						familyArray.push(strongsObjectWithFamilies[lemma].family);
-					} else {
-						debug.debug('why isnt there a family for ' + lemma);
-					}
-				});
-				debug.debug(familyArray.join(' '));
-				return familyArray.join(' ');
-			} else {
-				return '';
-			}
-		}*/
+		}
 	};
 	return wordFamilies;
 });
