@@ -104,10 +104,11 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 				markup += '</div>';
 				markup += '</div>';
 				markup += '<div class="ui-block-b">';
-				if (self.options.literalTranslation && literalTranslation) {
+				if (self.options.literalTranslation && translateLiterally) {
 					markup += self.getOriginalVerseMarkup(originalObject[book][jsonChapter][verseNumber], language, 'literal');
 				} else {
-					markup += self.getTranslatedVerseMarkup(verseText, language);
+					//markup += self.getTranslatedVerseMarkup(verseText, language);
+					markup += self.getOriginalVerseMarkup(verseText, language, 'original');
 				}
 				markup += '</div>';
 				markup += '</div>';
@@ -249,10 +250,12 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			return referenceToId;
 		},
 		getOriginalVerseMarkup: function (verse, language, translationType) {
-			var self = this,
-				markup = '';
+			var markup = '';
 			$.each(verse, function (index, wordObject) {
-				markup += '<span class="word ' + wordFamilies.getFamily(wordObject.lemma);
+				markup += '<span class="word ';
+				if (wordObject.lemma !== undefined) {
+					markup += wordObject.lemma + ' ' + wordFamilies.getFamily(wordObject.lemma);
+				}
 				if (wordObject.morph !== undefined) {
 					markup += ' ' + wordObject.morph;
 				}
@@ -261,7 +264,7 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 					markup += ' ' + wordObject.morph;
 				}
 				markup += '" data-word="' + wordObject.word + '" ';
-				markup += '" data-lemma="' + wordObject.lemma + '" ';
+				markup += 'data-lemma="' + wordObject.lemma + '" ';
 				markup += 'data-language="' + language + '" ';
 				markup += 'data-range="word" ';
 				markup += 'data-family="' + wordFamilies.getFamily(wordObject.lemma) + '" ';
@@ -282,25 +285,31 @@ define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsD
 			var self = this,
 				markup = '',
 				$markup,
-				family;
+				family,
+				verseText = verseText[0];
 			markup += '<div class="' + self.options.translationSelector + '">';
 			markup += verseText
 				.replace(/<w/gi, '<span')
 				.replace(/<\/w>/gi, '</span>')
 				.replace(/lemma="([A-Z,0-9, ]+)"/gi, 'data-lemma="$1" data-language="' + language + '" class="word" title="$1"')
-				.replace(/morph="([A-Z,0-9, ]+)"/gi, 'data-morph="$1"')
-				.replace(/morph="robinson:([A-Z,a-z,0-9, ,\-]+)"/gi, 'data-morph="$1"')
-				.replace(/>([A-Z,0-9, ]+)</gi, ' data-word="$1">$1<');
+				.replace(/>([A-Z,a-z,0-9, ,\-]+)</gi, ' data-word="$1">$1<')
+				.replace(/morph="([A-Z,a-z,0-9, ,\-]+)"/gi, 'data-morph="$1"')
+				.replace(/morph="robinson:([A-Z,a-z,0-9, ,\-]+)"/gi, 'data-morph="$1"');
 			markup += '</div>';
 			$markup = $(markup);
 			$markup.find('span.word').each(function () {
 				var $this = $(this),
 					lemma = $this.data('lemma');
-				if (lemma !== undefined || lemma !== 'added') {
+				if (lemma === 'added') {
+					$this.addClass(lemma);
+				} else if (lemma !== undefined) {
 					family = wordFamilies.getFamily($this.data('lemma'));
 					$this.addClass(family).attr('data-family', family);
 				} else {
 					debug.debug('no lemma for: ' + $this.html());
+				}
+				if ($this.data('morph') !== undefined) {
+					$this.attr('title', $this.attr('title') + ' ' + $this.data('morph'));
 				}
 			});
 			return $markup.prop('outerHTML');

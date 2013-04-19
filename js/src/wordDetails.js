@@ -98,7 +98,7 @@ define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug']
 				markup += '<a class="word" data-role="button" data-language="' + language + '" data-word="" data-lemma="' + lemma + '" data-morph="">' + lemma + '</a>';
 				if (morph !== undefined) {
 					markup += '<a class="word" data-role="button" data-language="' + language + '" data-word="" data-lemma="" data-morph="' + morph + '">' + morph + '</a>';
-					markup += '<a class="word" data-role="button" data-language="' + language + '" data-word="" data-lemma="' + lemma + '" data-morph="' + morph + '">' + lemma + ' and ' + morph + '</a>';
+					markup += '<a class="word" data-role="button" data-language="' + language + '" data-word="" data-lemma="' + lemma + '" data-morph="' + morph + '" data-combine-terms="on">' + lemma + ' and ' + morph + '</a>';
 				}
 				markup += '</div>';
 				markup += '</div>';

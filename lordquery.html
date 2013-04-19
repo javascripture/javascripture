@@ -1,0 +1,29 @@
+<html>
+	<body>
+	</body>
+	<script src="js/external/jquery-1.7.2.js"></script>
+	<script src="js/external/json2.js"></script>
+	<script src="data/greekobject.js"></script>
+	<script>
+		var references = []
+			previousWord = ''
+			referenceString = '';
+		$.each(greek, function (bookName, book) {
+			$.each(book, function (chapterNumber, chapter) {
+				$.each(chapter, function (verseNumber, verse) {
+					$.each(verse, function (wordNumber, word) {
+						//still need to remove second person ones, which is harder
+						if (word.lemma === "G2962" && previousWord !== "G3588" && previousWord !== 'G1722') {
+							references.push('<a target="_blank" href="index.html#reference?book=' + bookName + '&chapter=' + (chapterNumber + 1) + '&verse=' + (verseNumber + 1) + '">' + bookName + ' ' + (chapterNumber + 1) + ':' + (verseNumber + 1) + '</a>');
+						}
+						previousWord = word.lemma;
+					});
+				});
+			})
+		});
+		$.each(references, function(index, reference) {
+			referenceString += reference + '<br />';
+		});
+		$('body').html(referenceString);
+	</script>
+</html>

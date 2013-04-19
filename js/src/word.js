@@ -1,5 +1,5 @@
 /*global define, debug*/
-define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'wordFamilies', 'translateLiterally', 'english', 'hebrew', 'greek', 'jquery-mobile', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, wordFamilies, translateLiterally, english, hebrew, greek) {
+define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFamilies', 'wordFamilies', 'translateLiterally', 'english', 'hebrew', 'greek', 'jquery-mobile', '../external/jquery.sloweach', 'ba-debug'], function ($, strongsDictionary, strongsObjectWithFamilies, strongsFamilies, wordFamilies, translateLiterally, english, hebrew, greek) {
 	"use strict";
 	$.widget('javascripture.word', {
 		options: {
@@ -15,10 +15,19 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			familyArray: [],
 			referenceObject: {},
 			referenceThatTriggeredSearch: '',
-			combineTerms: false
+			termThatTriggeredSearch: '',
+			combineTerms: false,
+			searchObject: english
 		},
 		_create: function () {
 			$('#results').append('<div class="panel-inner"></div>');
+			if (this.options.language === "hebrew") {
+				this.options.searchObject = hebrew;
+			} else if (this.options.language === "greek") {
+				this.options.searchObject = greek;
+			} else {
+				this.options.searchObject = english;
+			}
 		},
 		_init: function () {
 			var self = this,
@@ -56,23 +65,15 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			$.each(self.options.terms, function (term, termDetails) {
 				self.searchForTerm(term, termDetails);
 			});
-			if (self.options.combineTerms) {
-				self.combineTerms();				
+			if (self.options.combineTerms === "on") {
+				self.combineTerms();
 			}
 			self.addTermsToPage();
 		},
-		searchForTerm: function (term, termDetails) {
+		searchForTerm: function (term, termDetails) { //should depreciate this
 			var self = this,
-				wordCount = 0,
-				searchObject;
-			if (this.options.language === "hebrew") {
-				searchObject = hebrew;
-			} else if (this.options.language === "greek") {
-				searchObject = greek;
-			} else {
-				searchObject = english;
-			}
-			$.each(searchObject, function (bookName, bookContent) {
+				wordCount = 0;
+			$.each(self.options.searchObject, function (bookName, bookContent) {
 				$.each(bookContent, function (chapterNumber, chapterContent) {
 					$.each(chapterContent, function (verseNumber, verseContent) {
 						if (self.options.language === 'english') {
@@ -94,6 +95,32 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 					});
 				});
 			});
+		},
+		searchForSpecificWord: function() { //use this instead of above
+			var self = this,
+				references = [];
+			$.each(self.options.searchObject, function (bookName, bookContent) {
+				$.each(bookContent, function (chapterNumber, chapterContent) {
+					$.each(chapterContent, function (verseNumber, verseContent) {
+						if (self.options.language === 'english') {
+							//range can't apply in here
+							//old way if (self.findArrayElementsInString(term, verseContent, wordCount)) {
+							//TODOif (self.findTermInString(term, verseContent)) {
+							//TODO	self.options.terms[term].references.push([bookName, chapterNumber + 1, verseNumber + 1, wordCount, self.options.language, verseContent]);
+							//TODO}
+						} else {
+							//loop through each word in the verse doing a match on our terms
+							$.each(verseContent, function (wordNumber, wordObject) {
+								//if the term is a match
+								if (self.doWordsMatch(self.options, wordObject)) {
+									references.push([bookName, chapterNumber + 1, verseNumber + 1]);
+								}
+							});
+						}
+					});
+				});
+			});
+			return references;
 		},
 		removeDuplicatesFromTermArray: function () {
 			var termObject = {},
@@ -143,6 +170,9 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 				self.addCollapsibleToPage(parentElement, collapsibleElement);
 				$('html').addClass(value);
 			});
+			/*this.element.slowEach(self.options.terms, 10, function (term, termDetails) {
+				console.log(term);
+			});*/
 			$.each(self.options.terms, function (term, termDetails) {
 				if ($('#' + term).length === 0) { //don't re-add it to the page
 					if (termDetails.type === 'lemma' && strongsObjectWithFamilies[term] && strongsObjectWithFamilies[term].family) {
@@ -150,16 +180,19 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 						parentElement = $('#' + strongsObjectWithFamilies[term].family + '_family').find('.ui-collapsible-content');
 					}
 					//add collapsible to page
-					setTimeout(function () {
-						var content = self.createListView(termDetails.references),
+					//setTimeout(function () {
+						var content = self.createListView(termDetails.references, term),
 							collapsibleElement = self.createCollapsible(term, self.options.terms[term], content, term, termDetails.headingText + ' ' + translateLiterally.getWord(term), termDetails.references.length);//self.createCollapsible(value + '_family', value + ' family');
 						self.addCollapsibleToPage(parentElement, collapsibleElement);
-						referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch);
-						referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);
 						$('html').addClass(term);
-					}, 10);
+					//}, 10);
 				}
 			});
+			setTimeout(function () {//use deferred and promise
+				referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch, self.options.termThatTriggeredSearch);
+				referenceThatTriggeredSearchLink.closest('[data-role=collapsible]').trigger('expand');
+				referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);				
+			}, 1000);
 		},
 		addCollapsibleToPage: function (parentElement, collapsibleElement) {
 			parentElement.find('[data-role=collapsible]').trigger('collapse');
@@ -169,15 +202,16 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			$collapsibleElement.find('[data-role=button]').button();
 
 		},
-		getReferenceLinkObject: function (reference) {
-			return $('#' + this.getReferenceLinkId(reference));
+		getReferenceLinkObject: function (reference, term) {
+			var id = this.getReferenceLinkId(reference, term);
+			return $('#' + id);
 		},
-		getReferenceLinkId: function (reference) {
-			return reference + '_link';
+		getReferenceLinkId: function (reference, term) {
+			return reference + '_link_' + term;
 		},
-		getReferenceLinkIdFromArray: function (referenceArray) {
+		getReferenceLinkIdFromArray: function (referenceArray, term) {
 			var referenceId = referenceArray[0] + '_' + referenceArray[1] + '_' + referenceArray[2];
-			return this.getReferenceLinkId(referenceId);
+			return this.getReferenceLinkId(referenceId, term);
 		},
 		createCollapsible: function (term, termDetails, content, id, headingText, number) {
 			var self = this,
@@ -201,13 +235,13 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			markup += '</div>';
 			return markup;
 		},
-		createListView: function (references) {
+		createListView: function (references, term) {
 			var self = this,
 				markup = '';
 			markup += '<ol data-role="listview" data-mini="true">'; //take out split list data-split-icon="info" data-split-theme="d">';
 			$.each(references, function (key, reference) {
 				markup += '<li>';
-				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none" id="' + self.getReferenceLinkIdFromArray(reference) + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
+				markup += '<a href="#reference?book=' + reference[0] + '&chapter=' + reference[1] + '&verse=' + reference[2] + '" class="referenceLink" data-transition="none" id="' + self.getReferenceLinkIdFromArray(reference, term) + '">' + reference[0] + ' ' + reference[1] + ':' + reference[2] + '</a>';
 				/* hide split view markup += '<a data-language="' + reference[4] + '"';
 				if (reference[5] !== undefined) {
 					if (reference[5].lemma !== undefined) {
@@ -273,7 +307,7 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 		standarizeWordEndings: function (word) {
 			return word.replace(/ם/gi, 'מ');
 		},
-		isWordValueInWordObject: function (term, termDetails, wordObject) {
+		isWordValueInWordObject: function (term, termDetails, wordObject) { //depreciate this in favour of the below
 			var wordValueIsInWordObject = false;
 			if (wordObject !== undefined) {
 				if (term === '' || wordObject[termDetails.type] !== undefined) {
@@ -293,38 +327,54 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			}
 			return wordValueIsInWordObject;
 		},
+		doWordsMatch: function (wordToSearchFor, wordObject) { //use this to replace the functon above
+			if (this.doesTypeMatch(wordToSearchFor, wordObject, 'word') && this.doesTypeMatch(wordToSearchFor, wordObject, 'morph') && this.doesTypeMatch(wordToSearchFor, wordObject, 'lemma')) {
+				return true;
+			}
+			return false;
+		},
+		doesTypeMatch: function(wordToSearchFor, wordObject, type) {
+			if (wordToSearchFor[type] === '' || wordToSearchFor[type] === wordObject[type]) {
+				return true;
+			}
+			return false;			
+		},
 		combineReferences: function () {
 			var self = this,
 				allReferences = {},
 				referenceString = '',
 				combinedReferences = [];
-			$.each(this.options.terms, function (term, termDetails) {
-				$.each(termDetails.references, function (key, reference) {
-					referenceString = reference[0]; //range === book
-					if(self.options.range === 'chapter' || self.options.range === 'verse' || self.options.range === 'word') {
-						referenceString += '_' + reference[1]; //range === chapter
-						if (self.options.range === 'verse' || self.options.range === 'word') {
-							referenceString += '_' + reference[2]; //range === verse
+			if (self.options.range === 'word') {
+				combinedReferences = self.searchForSpecificWord();
+			} else {
+				$.each(this.options.terms, function (term, termDetails) {
+					$.each(termDetails.references, function (key, reference) {
+						referenceString = reference[0]; //range === book
+						if(self.options.range === 'chapter' || self.options.range === 'verse' || self.options.range === 'word') {
+							referenceString += '_' + reference[1]; //range === chapter
+							if (self.options.range === 'verse' || self.options.range === 'word') {
+								referenceString += '_' + reference[2]; //range === verse
+							}
+							//to do range === word
 						}
-						//to do range === word
-					}
-					if (allReferences[referenceString] !== undefined && allReferences[referenceString].terms !== undefined) {
-						if (allReferences[referenceString].terms.toString().indexOf(term) === -1) { //term isn't already in array
+						if (allReferences[referenceString] !== undefined && allReferences[referenceString].terms !== undefined) {
+							if (allReferences[referenceString].terms.toString().indexOf(term) === -1) { //term isn't already in array
+								allReferences[referenceString].terms.push(term);
+							}
+						} else {
+							allReferences[referenceString] = {};
+							allReferences[referenceString].terms = [];
 							allReferences[referenceString].terms.push(term);
+							allReferences[referenceString].referenceObject = reference;
 						}
-					} else {
-						allReferences[referenceString] = {};
-						allReferences[referenceString].terms = [];
-						allReferences[referenceString].terms.push(term);
-						allReferences[referenceString].referenceObject = reference;
-					}
+					});
 				});
-			});
-			$.each(allReferences, function (key, object) {
-				if (object.terms.length >= self.options.termArray.length) {
-					combinedReferences.push(object.referenceObject);
-				}
-			});
+				$.each(allReferences, function (key, object) {
+					if (object.terms.length >= self.options.termArray.length) {
+						combinedReferences.push(object.referenceObject);
+					}
+				});				
+			}
 			return combinedReferences;
 		},
 		addWholeFamilyToLemmaTerms: function () {
@@ -345,7 +395,9 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 					lemmaArray = lemmaArray.concat(family);
 				});
 			}
-			self.options.lemma = lemmaArray.join(' ');
+			if (self.options.combineTerms !== "on") { //don't add all the family if we are combining terms
+				self.options.lemma = lemmaArray.join(' ');
+			}
 		}
 	});
 	$.fn.serializeObject = function () {
@@ -393,11 +445,13 @@ define(['jquery', 'strongsDictionary', 'strongsObjectWithFamilies', 'strongsFami
 			data.word = '';
 			data.morph = '';
 			data.referenceThatTriggeredSearch = $(this).closest('li').attr('id');
+			data.termThatTriggeredSearch = $(this).data('lemma');
 			$('#results').word(data);
 		}
 	});
 	$(document).on('taphold', words, function () {
 		var data = $(this).data();
+		console.log(data);
 		$('#wordDetails').wordDetails(data);
 	});
 

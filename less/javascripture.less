@@ -1,8 +1,10 @@
 dvnnm { //removed the vowels so that searches on name and divine still work!
 	text-transform: uppercase;
 }
-.added {
+.added, .dwyer-added {
 	color: #bbb;
+	font-weight: 300;
+	text-shadow: none;
 }
 .ui-page {
 	padding-top: 0 !important;
@@ -148,13 +150,14 @@ html {
 @word-padding: 2px;
 .translation, .original {
 	padding: 0 1em;
-	.word {
-		border-radius: 3px;
-		margin: (0 - @word-padding);
-		padding: @word-padding;
-		text-decoration: none;
-	}
 }
+.word {
+	border-radius: 3px;
+	margin: (0 - @word-padding);
+	padding: @word-padding;
+	text-decoration: none;
+}
+
 .ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d {
 	overflow: visible;
 }
@@ -213,7 +216,7 @@ html {
 		.word-details-inner {
 			float: left;
 			padding: 1em 0;
-			width: 500px;
+			width: 600px;
 			h3 {
 				padding: .5em 1em;
 			}
@@ -230,7 +233,7 @@ html {
 }
 
 //variables
-@mobile-width: 768px;
+@mobile-width: 1000px;
 @book-panel-width: 270px; //less than this makes ... in firefox
 .ui-popup-container {
 	h3 {
@@ -259,9 +262,10 @@ html {
 	#bookList-popup, #results-popup {
 		bottom: 0;
 		padding: 0;
-		top: 40px;
+		top: 42px;
 		position: fixed;
 		width: @book-panel-width;
+		//z-index: 9;
 		.ui-popup {
 			border-radius: 0;
 			height: 100%;
@@ -283,7 +287,6 @@ html {
 }
 
 #bookList-popup, #results-popup {
-	z-index: 10;
 	.ui-popup {
 		padding: 0;
 	}
@@ -322,9 +325,12 @@ html {
 }
 @media (max-width: @mobile-width) {
 	#bookList {
-		max-height: 320px;
-		overflow: auto;
+		overflow: visible;
 		width: 320px;
+		.ui-collapsible-set {
+			max-height: 320px;
+			overflow-y: auto;
+		}
 	}
 }
 /*reference*/
@@ -380,3 +386,4 @@ html {
     //position: relative;
     //-webkit-transform: translate3d(0,0,0);
 }
+

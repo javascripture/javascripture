@@ -21,7 +21,7 @@
 					<a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a>
 					<a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a>
 					<a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a>
-					<a href="#grammar" data-role="button" data-icon="info">Grammar</a>
+					<a href="#extras" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">Extras</a>
 					<a href="#options" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Options</a>
 					<a href="#help" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">Help</a>
 				</div>
@@ -60,6 +60,8 @@
 										<input type="hidden" name="morph" value="" />
 										<input type="hidden" name="searchFor" value="all" />
 										<input type="hidden" name="language" value="english" />
+										<input type="hidden" name="clusivity" value="exclusive" />
+										<input type="hidden" name="range" value="verse" />
 									</div>
 								</fieldset>
 							</form>
@@ -359,6 +361,7 @@
 							</div>
 						</div>
 						<div data-role="popup" id="about" data-position-to="window">
+							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 							<h2>The Scriptures in JavaScript</h2>
 							<div data-role="collapsible-set">
 								<div data-role="collapsible">
@@ -413,6 +416,20 @@
 									<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
 								</div>
 							</div>
+							<div data-role="popup" id="extras" data-position-to="window">
+								<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+								<div data-role="content">
+									<ul data-role="listview" data-inset="true">
+										<li data-role="list-divider">Hebrew grammar</li>
+										<li><a href="pdf/Hebrew tables.pdf" rel="external" target="_blank">Hebrew grammar</a></li>
+										<li><a href="pdf/Gesenius.pdf" rel="external" target="_blank">Gesenius Hebrew grammar</a></li>
+										<li><a href="pdf/to be verb table.pdf" rel="external" target="_blank">To be verb table</a></li>
+										<li data-role="list-divider">Hymns</li>
+										<li><a href="pdf/Hymn Book.pdf" rel="external" target="_blank">The Christadelphian hymn book</a></li>
+										<li><a href="pdf/PTL.pdf" rel="external" target="_blank">Praise The Lord hymn book</a></li>
+									</ul>
+								</div>
+							</div><!-- /page -->
 						</div>
 					</div>
 				</div>
@@ -428,142 +445,6 @@
 				Tap and hold to see more details on a word
 			</div>
 		</div><!-- /page -->
-
-		<div data-role="page" id="grammar">
-			<div data-role="header">
-				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
-				<h1>Grammar</h1>
-			</div>
-			<div data-role="content">
-				<h2>Hebrew pronouns</h2>
-				<table>
-					<thead>
-						<tr>
-							<th></th>
-							<th>I</th>
-							<th>my</th>
-							<th>me</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1<sup>st</sup> singular</td>
-							<td>אנכי,אני</td>
-							<td>י</td>
-							<td>ני</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>we</th>
-							<th>our</th>
-							<th>us</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1<sup>st</sup> plural</td>
-							<td>אנחני</td>
-							<td>נו</td>
-							<td>נו</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>thou</th>
-							<th>thy</th>
-							<th>thee</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>2<sup>nd</sup> singular</td>
-							<td>אתח,את (m),<br/> אתי,את (f)</td>
-							<td>ך</td>
-							<td>ך</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>ye</th>
-							<th>your</th>
-							<th>you</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>2<sup>nd</sup> plural</td>
-							<td>אתם (m)<br />אתו (m)</td>
-							<td>כם (m)<br />
-							כו	(f)
-							</td>
-							<td>כם (m)<br />
-							כו	(f)
-							</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>he</th>
-							<th>his</th>
-							<th>him</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>3<sup>rd</sup> singular</td>
-							<td>הוא</td>
-							<td>ו</td>
-							<td>הו,ו</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>she</th>
-							<th>her</th>
-							<th>her</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>3<sup>rd</sup> singular</td>
-							<td>היא</td>
-							<td>ה</td>
-							<td>ה</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th></th>
-							<th>they</th>
-							<th>their</th>
-							<th>them</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>3<sup>rd</sup> singular</td>
-							<td>
-								הם,המה	(m)<br/>
-								הנ,הןה	(f)
-							</td>
-							<td>
-								(m)<br/>
-								(f)
-							</td>
-							<td>
-								(m)<br/>
-								(f)
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+	
 	</body>
 </html>

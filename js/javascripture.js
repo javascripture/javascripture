@@ -10,16 +10,18 @@ require.config({
 		'order': 'external/order-1.0.0',
 		'ba-debug': 'external/ba-debug',
 		'bible': '../data/bible',
-		'english': '../data/kjvdwyer4',
+		'english': '../data/kjvdwyer6',
 		'hebrew': '../data/hebrew5',
 		'greek': '../data/greek4',
+		'search': 'src/search',
 		'strongsDictionary': '../data/strongsDictionary',
 		'strongsObjectWithFamilies': '../data/strongsObjectWithFamilies', //can probably replace the line above
 		'strongsFamilies': '../data/strongsFamilies', //can probably replace the line above
 		'morphology': '../data/morphology',
 		'literalTranslation': '../data/literalTranslation',
 		'translateLiterally': 'src/translateLiterally',
-		'wordFamilies': 'src/wordFamilies'
+		'wordFamilies': 'src/wordFamilies',
+		'wordInterface': 'src/wordInterface'
 	},
 	priority: ['jquery'],
 	waitSeconds: 20000
@@ -66,8 +68,9 @@ require({
 				'order!src/keyboardShortcuts',
 				'order!src/reference',
 				'order!src/stickyPanel',
-				'order!src/word',
-				'order!src/wordDetails'
+//				'order!src/word',
+				'order!src/wordDetails',
+				'order!src/wordInterface'
 			], function (router) { //now build the menu and show the first reference
 				debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
 				var reference = router.getParams(window.location.hash),
