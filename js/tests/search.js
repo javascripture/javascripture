@@ -128,9 +128,6 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 	module("search hebrew");
 	parameters.language = 'hebrew';
 	parameters.word = '';
-	
-	
-	
 	test('search for a strongs number in a verse in hebrew', function testLemmaInVerse () {
 		expect(3);
 		parameters.lemma = 'H1234';
@@ -142,6 +139,37 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 		parameters.lemma = 'H3588';
 		javascriptureTestHelper.referenceCount(parameters, 4479, 'there are EXPECTED verses that contain "TERM" in LANGUAGE');
 
+	});
+
+	module("search greek");
+	test('search for a strongs number in greek', function () {
+		expect(2);
+		equal(search.getReferences({
+			language: 'greek',
+			lemma: 'G363'
+		}).length, 76, 'there are 76 occurance of "G363" in Greek');
+		equal(search.getReferences({
+			language: 'greek',
+			lemma: 'G1877'
+		}).length, 3, 'there are 3 occurances of "G1877" in Greek');
+	});
+	test('search for a morphology in greek', function () {
+		expect(2);
+		equal(search.getReferences({
+			language: 'greek',
+			morph: 'V-PAO-3S'
+		}).length, 16, 'there are 16 occurance of "V-PAO-3S" in Greek');
+		equal(search.getReferences({
+			language: 'greek',
+			morph: 'V-2ADO-3S'
+		}).length, 17, 'there are 17 occurances of "V-2ADO-3S" in Greek');
+	});
+	test('search for a mood in greek', function () {
+		expect(1);
+		equal(search.getReferences({
+			language: 'greek',
+			morph: 'V-(.*)O-'
+		}).length, 68, 'there are 68 occurances of the optative mood in Greek');
 	});
 
 

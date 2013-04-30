@@ -1,5 +1,5 @@
 /*global define, require, debug*/
-define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug'], function ($, strongsDictionary, morphologyDictionary, wordFamilies) {
+define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug'], function ($, strongsDictionary, morphology, wordFamilies) {
 	"use strict";
 	$.widget('javascripture.wordDetails', {
 		_init: function () {
@@ -32,65 +32,7 @@ define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug']
 				markup += '<strong>Transliteration:</strong> ' + strongsDictionary[lemma].xlit + '<br />';
 				if (morph !== undefined) {
 					markup += '<strong>Morphology:</strong> ' + morph + '<br />';
-					if (language === 'hebrew') {
-						language = 'english'; //because the morph data for hebrew is actually in the english text
-						markup += morphologyDictionary.hebrew[morph] + ' ';
-					}
-					if (language === 'greek') {
-						morphArray = morph.split('-');
-						partOfSpeech = morphArray[0];
-						markup += morphologyDictionary.greek.partOfSpeech[partOfSpeech] + ' ';
-						Case = morphArray[1];
-						if (partOfSpeech === 'V') { //for verbs
-							if (Case !== undefined) {
-								if (morphologyDictionary.greek.Case[Case] !== undefined) {
-									markup += morphologyDictionary.greek.Case[Case] + ' ';
-								} else {
-									if (parseInt(Case[0], 10) > 0) { // second future, second aorist and second perfect
-										tense = Case[0] + Case[1];
-										voice = Case[2];
-										mood = Case[3];
-									} else {
-										tense = Case[0];
-										voice = Case[1];
-										mood = Case[2];
-									}
-									markup += morphologyDictionary.greek.Case.tense[tense] + ' ';
-									markup += morphologyDictionary.greek.Case.voice[voice] + ' ';
-									markup += morphologyDictionary.greek.Case.mood[mood] + ' ';
-								}
-							}
-							if (morphArray[2] !== undefined) {
-								if (mood === "P" || mood === "R") {
-									case2 = morphArray[2][0];
-									markup += morphologyDictionary.greek.Case[case2] + ' ';
-									number = morphArray[2][1];
-									markup += morphologyDictionary.greek.number[number] + ' ';
-									gender = morphArray[2][2];
-									markup += morphologyDictionary.greek.gender[gender] + ' ';
-								} else {
-									person = morphArray[2][0];
-									markup += morphologyDictionary.greek.person[person] + ' ';
-									number = morphArray[2][1];
-									markup += morphologyDictionary.greek.number[number] + ' ';
-								}
-							}
-						} else {
-							if (morphArray[1] !== undefined) {
-								if (morphologyDictionary.greek.Case[Case] !== undefined) { //there are some nouns that have a 3 letter case code
-									markup += morphologyDictionary.greek.Case[Case];
-								} else {
-									console.log(Case);
-									Case = morphArray[1][0];
-									markup += morphologyDictionary.greek.Case[Case] + ' ';
-									number = morphArray[1][1];
-									markup += morphologyDictionary.greek.number[number] + ' ';
-									gender = morphArray[1][2];
-									markup += morphologyDictionary.greek.gender[gender] + ' ';
-								}
-							}
-						}
-					}
+					markup += morphology.get(morph, 'withLinks');
 				}
 				markup += '<br /><label>Search on</label>';
 				markup += '<div data-role="controlgroup" data-type="horizontal">';

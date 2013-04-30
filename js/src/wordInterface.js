@@ -5,7 +5,9 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 		_init: function () {
 			if ( this.resultsAreAlreadyOnPage() )
 				return;
+			console.log(this.options);
 			var references = search.getReferences(this.options);
+			console.log(references);
 			this.addReferencesToPage(references);
 		},
 		addReferencesToPage: function (references) {
@@ -21,22 +23,27 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 				this.options.lemma,
 				content,
 				this.getIdFromOptions(),
-				this.options.word + ' ' + this.options.lemma + ' ' + this.options.morph + ' ' + translateLiterally.getWord(this.options.lemma),
+				this.getTitleFromOptions(),
 				references.length,
 				className
 			);
 			
 			$('#results').find('[data-role=collapsible]').trigger('collapse')
-			$('#results').append(collapsibleElement).find('[data-role=collapsible]').collapsible()
+			$('#results').append(collapsibleElement).find('[data-role=collapsible]').collapsible({
+				create: function( event, ui ) {
+					var referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch, self.options.termThatTriggeredSearch);
+					referenceThatTriggeredSearchLink.closest('[data-role=collapsible]').trigger('expand');
+					//add the class to highlight - should be absctracted
+					console.log(referenceThatTriggeredSearchLink);
+					referenceThatTriggeredSearchLink.addClass('ui-btn-active').closest('ol').scrollTo(referenceThatTriggeredSearchLink);		
+				}
+			});
 			$('#results').find('[data-role=button]').button();
 			$('html').addClass(this.options.lemma);
 
-			setTimeout(function () {//use deferred and promise
-				var referenceThatTriggeredSearchLink = self.getReferenceLinkObject(self.options.referenceThatTriggeredSearch, self.options.termThatTriggeredSearch);
-				referenceThatTriggeredSearchLink.closest('[data-role=collapsible]').trigger('expand');
-				referenceThatTriggeredSearchLink.click().closest('ol').scrollTo(referenceThatTriggeredSearchLink);				
+/*			setTimeout(function () {//use deferred and promise
 			}, 1000);
-
+*/
 		},
 		createCollapsible: function (term, content, id, headingText, number, className) {
 			var self = this,
@@ -47,7 +54,7 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 			markup += content;
 			markup += '</div>';
 			markup += '<div class="controlgroup ui-li-has-count">';
-			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + id + '" class="deleteWord">Delete</a>';
+			markup += '<a data-role="button" data-icon="delete" data-iconpos="notext" data-word="' + term + '" class="deleteWord">Delete</a>';
 			if (number !== undefined) {
 				markup += '<span class="ui-li-count ui-btn-up-c ui-btn-corner-all">' + number + '</span>';
 			}
@@ -96,7 +103,25 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 			return false;
 		},
 		getIdFromOptions: function () {
-			return this.options.word + '_' + this.options.lemma + '_' + this.options.morph.replace(/ /g, '_');
+			var id = '';
+			id += this.options.word + '_';
+			id += this.options.lemma + '_';
+			id += this.options.morph.replace(/ /g, '_').replace(/\*/g, '_').replace(/\./g, '_').replace(/\(/g, '_').replace(/\)/g, '_');
+			console.log(this.options.morph);
+			return id;
+		},
+		getTitleFromOptions: function () {
+			var title = '';
+			if (this.options.word != undefined) {
+				title += this.options.word + ' ';
+			}
+			if (this.options.lemma != undefined) {
+				title += this.options.lemma + ' ' + translateLiterally.getWord(this.options.lemma) + ' ';
+			}
+			if (this.options.morph != undefined) {
+				title += this.options.morph + ' ';
+			}
+			return title;
 		}
 	});
 	$(document).on('click', '.deleteWord', function (event) {
@@ -104,13 +129,10 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 		event.stopPropagation();
 		var $this = $(this),
 			word = $this.data('word'),
-			$parent = $this.closest('.collapsible-wrapper')
-		$parent.find('.collapsible-wrapper').each(function (index, element) {
-			var id = $(element).attr('id');
-			$('html').removeClass(id);
-		})
-		$parent.remove();
+			$parent = $this.closest('.collapsible-wrapper');
+		console.log(word);
 		$('html').removeClass(word);
+		$parent.remove();
 	});
 	var words = '#reference-panel .word';
 	$(document).on('vmouseover', words, function () {
@@ -139,6 +161,7 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 	});
 	$(document).on('taphold', words, function () {
 		var data = $(this).data();
+		data.history = 'false';
 		console.log(data);
 		$('#wordDetails').wordDetails(data);
 	});
@@ -167,5 +190,10 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 		$('.search-button').text('Searching...');
 		$('#results').wordInterface($(this).serializeObject());
 		return false;
+	});
+	$(document).on('click', '.morphSearch', function (event) {
+		event.preventDefault();
+		var data = $(this).data();
+		$('#results').wordInterface(data);
 	});
 });

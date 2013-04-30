@@ -8,7 +8,8 @@ require.config({
 		'hebrew': '../data/hebrew5',
 		'greek': '../data/greek4',
 		'strongsDictionary': '../data/strongsDictionary',
-		'strongObjectRoots': '../data/strongsObjectRoots'
+		'strongObjectRoots': '../data/strongsObjectRoots',
+		'morphologyDictionary': '../data/morphology'
 	},
 	priority: ['jquery']
 });
@@ -16,7 +17,8 @@ require({
 	baseUrl: 'js',
 	urlArgs: "bust=" +  (new Date()).getTime()
 }, [
-	'tests/search'
+	'tests/search',
+	'tests/morphology'
 ], function () { //first get the useful libraries
 	"use strict";
 });

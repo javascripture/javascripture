@@ -8,11 +8,13 @@ define(['jquery', 'strongsObjectWithFamilies', 'strongsFamilies'], function ($, 
 				return '';
 			}
 			$.each(lemma.split(' '), function (index, term) {
-				if (strongsObjectWithFamilies[term] !== undefined) {
-					familyArray.push(strongsObjectWithFamilies[term].family);
-				} else {
-					debug.debug('why isnt there a family for ' + term);
-				}				
+				if ( term !== 'added' && term !== 'dwyer-added' ) {
+					if (strongsObjectWithFamilies[term] !== undefined ) {
+						familyArray.push(strongsObjectWithFamilies[term].family);
+					} else {
+						debug.debug('why isnt there a family for ' + term);
+					}				
+				}
 			});
 			return familyArray.join(' ');
 		}

@@ -2,11 +2,11 @@
 var start = new Date();
 require.config({
 	paths: {
-		'jquery': 'external/jquery-1.7.2',
-		'jquery-mobile': 'external/jquery.mobile-1.2.0.min',
+		'jquery': 'external/jquery-2.0.0.min',
+		'jquery-mobile': 'external/jquery.mobile-1.3.1.min',
 		'multiview': 'external/multiview',
 		'pageparams': 'external/jquery.mobile.page.params',
-		'jquery-router': 'external/jquery.mobile.router',
+		'jquery-router': 'external/jquery.mobile.router.min',
 		'order': 'external/order-1.0.0',
 		'ba-debug': 'external/ba-debug',
 		'bible': '../data/bible',
@@ -17,7 +17,8 @@ require.config({
 		'strongsDictionary': '../data/strongsDictionary',
 		'strongsObjectWithFamilies': '../data/strongsObjectWithFamilies', //can probably replace the line above
 		'strongsFamilies': '../data/strongsFamilies', //can probably replace the line above
-		'morphology': '../data/morphology',
+		'morphologyDictionary': '../data/morphology',
+		'morphology': 'src/morphology',
 		'literalTranslation': '../data/literalTranslation',
 		'translateLiterally': 'src/translateLiterally',
 		'wordFamilies': 'src/wordFamilies',

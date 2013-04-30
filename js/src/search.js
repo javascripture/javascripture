@@ -48,7 +48,7 @@ define(['english', 'hebrew', 'greek', 'ba-debug'], function (english, hebrew, gr
         	if (data.indexOf( ' ' + term) === 0 ) { //start of a string
 	        	return true;
         	}*/
-            if ( data.indexOf( term ) > -1 ) {
+            if ( data.search( term ) > -1 ) {
             	return true;
             }
             return false;
