@@ -19,7 +19,7 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 		ok(search, 'the search object exists');
 	});
 	test('search for one term in a verse', function testWordInVerse () {
-		expect(2);
+		expect(4);
 		equal(search.getReferences({
 			language: 'english',
 			word: 'void',
@@ -31,6 +31,19 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 			word: 'cheese',
 			range: 'verse'
 		}).length, 3, 'there are 3 verses that contain "cheese" in English');
+		
+		equal(search.getReferences({
+			language: 'english',
+			word: 'immanuel',
+			range: 'verse'
+		}).length, 2, 'there are 2 verses that contain "immanuel" in English.  Search is case insensitive.');
+
+		equal(search.getReferences({
+			language: 'english',
+			word: 'Immanuel',
+			range: 'verse'
+		}).length, 2, 'there are 2 verses that contain "Immanuel" in English.');
+
 	});
 	
 	test('search for form or void in the same verse', function () {

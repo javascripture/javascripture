@@ -23,6 +23,8 @@ define(['english', 'hebrew', 'greek', 'ba-debug'], function (english, hebrew, gr
             return search.results.references;
 		},
         doesDataMatchTerm: function(data, term) {
+        	var data = data.toLowerCase(),
+        	    term = term.toLowerCase();
         	if ( data === term ) { //exact match
         		return true;
         	}
