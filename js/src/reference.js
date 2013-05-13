@@ -1,5 +1,5 @@
 /*global define, debug*/
-define(['jquery', 'src/router', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'translateLiterally', 'jquery-mobile', 'ba-debug'], function ($, router, bible, english, hebrew, greek, strongsDictionary, wordFamilies, translateLiterally) {
+define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'translateLiterally', 'jquery-mobile', 'ba-debug'], function ($, bible, english, hebrew, greek, strongsDictionary, wordFamilies, translateLiterally) {
 	"use strict";
 	$.widget('javascripture.reference', {
 		options: {
