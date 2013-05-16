@@ -24,7 +24,7 @@ define([ "jquery","backbone", "../models/ReferenceModel", "../collections/Refere
             // When there is no hash bang on the url, the home method is called
             "": "home",
 
-            // When #category? is on the url, the reference method is called
+            // When #reference? is on the url, the reference method is called
             "reference?:type": "reference"
 
         },

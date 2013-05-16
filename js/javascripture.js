@@ -111,6 +111,10 @@ require({
 							reference.verse = verseNumber + 1;
 						}
 						$('#reference-panel').reference(reference);*/
+						$('[data-rel=popup]').on('click', function ( event ) {
+							event.preventDefault();
+							$($(this).attr('href')).popup('open')
+						});
 					});
 				});
 			});
