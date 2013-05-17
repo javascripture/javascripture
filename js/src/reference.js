@@ -273,6 +273,7 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'w
 				}
 				markup += '>';
 				if (translationType === 'literal') {
+					console.log(translateLiterally.getWord(wordObject));
 					markup += translateLiterally.getWord(wordObject);
 				} else {
 					markup += wordObject.word;

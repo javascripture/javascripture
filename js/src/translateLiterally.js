@@ -6,7 +6,8 @@ define(['jquery', 'literalTranslation'], function ($, literalTranslation) {
 			var literalWord;
 			if (typeof(word) === 'object') {
 				if (word.morph) {
-					literalWord = literalTranslation[word.lemma][word.morph];
+					var morph = word.morph.replace(/-/gi, ''); 
+					literalWord = literalTranslation[word.lemma][morph];
 				} else {
 					literalWord = literalTranslation[word.lemma];
 				}
