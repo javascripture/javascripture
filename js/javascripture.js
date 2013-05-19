@@ -8,7 +8,6 @@ require.config({
 		'backbone': 'external/backbone',
 		'underscore': 'external/lodash',
 		'pageparams': 'external/jquery.mobile.page.params',
-//		'jquery-router': 'external/jquery.mobile.router.min',
 		'order': 'external/order-1.0.0',
 		'ba-debug': 'external/ba-debug',
 		'bible': '../data/bible',
@@ -35,7 +34,6 @@ require.config({
 		}
 	}, // end Shim Configuration
 
-	//priority: ['jquery'],
 	waitSeconds: 20000
 });
 
@@ -53,10 +51,12 @@ require({
 
 			// Disabling this will prevent jQuery Mobile from handling hash changes
 			$.mobile.hashListeningEnabled = false;
+			alert('mobile-init');
 		}
 	)
 
 	require( [ "jquery-mobile" ], function() {
+		$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
 		require( [ 'ba-debug', 'src/bookControl', 'external/jquery.scrollTo' ], function() {
 			debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
 			setTimeout(function () { //to give the framework a chance to load
@@ -73,6 +73,9 @@ require({
 								require(['strongsDictionary'], function (){
 									require(['strongsObjectWithFamilies'], function (){
 										$.mobile.showPageLoadingMsg('a', 'Data loaded');
+										setTimeout( function () {
+											$.mobile.hidePageLoadingMsg();											
+										}, 100);
 									});
 								});
 							});
@@ -93,24 +96,11 @@ require({
 						'src/wordInterface'
 					], function () { //now build the menu and show the first reference
 						debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
+
 						// Instantiates a new Backbone.js Mobile Router
 						this.router = new Mobile();
-						//var reference = router.getParams(window.location.hash),
-						/*var bookNumber,
-							chapterNumber,
-							numberOfVerses,
-							verseNumber;
-						if (!reference || reference === undefined || reference.book === null) {
-							reference = {};
-							bookNumber = Math.floor(Math.random() * bible.Data.books.length);
-							chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length);
-							numberOfVerses = bible.Data.verses[bookNumber][chapterNumber];
-							verseNumber = Math.floor(Math.random() * numberOfVerses);
-							reference.book = bible.Data.books[bookNumber][0];
-							reference.chapter = chapterNumber + 1;
-							reference.verse = verseNumber + 1;
-						}
-						$('#reference-panel').reference(reference);*/
+
+						//fix popups
 						$('[data-rel=popup]').on('click', function ( event ) {
 							event.preventDefault();
 							$($(this).attr('href')).popup('open')
@@ -121,71 +111,3 @@ require({
 		});
 	});
 } );
-/*require({
-	baseUrl: 'js',
-	urlArgs: "bust=" +  (new Date()).getTime()
-}, [
-	'jquery',
-	'ba-debug',
-	'order!jquery-router',
-	'order!jquery-mobile',
-	'order!src/bookControl',
-	'order!external/jquery.scrollTo'
-], function () { //first get the useful libraries
-	"use strict";
-	debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
-	setTimeout(function () { //to give the framework a chance to load
-		$.mobile.showPageLoadingMsg('a', 'Loading data');
-		//This is just to give more specific loading messages
-		require(['bible'], function (){
-			$.mobile.showPageLoadingMsg('a', 'Loading English');
-			require(['english'], function (){
-				$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
-				require(['hebrew'], function (){
-					$.mobile.showPageLoadingMsg('a', 'Loading Greek');
-					require(['greek'], function (){
-						$.mobile.showPageLoadingMsg('a', 'Loading Strongs Numbers');
-						require(['strongsDictionary'], function (){
-							require(['strongsObjectWithFamilies'], function (){
-								$.mobile.showPageLoadingMsg('a', 'Data loaded');
-							});
-						});
-					});
-				});
-			});
-		});
-		require(['bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongsObjectWithFamilies'], function (bible) {
-			$.mobile.showPageLoadingMsg('a', 'Loading modules');
-			require([
-				'src/router',
-				'order!src/chapter',
-				'order!src/focusFirstInput',
-				'order!src/keyboardShortcuts',
-				'order!src/reference',
-				'order!src/stickyPanel',
-//				'order!src/word',
-				'order!src/wordDetails',
-				'order!src/wordInterface'
-			], function (router) { //now build the menu and show the first reference
-				debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
-				var reference = router.getParams(window.location.hash),
-					bookNumber,
-					chapterNumber,
-					numberOfVerses,
-					verseNumber;
-				if (!reference || reference === undefined || reference.book === null) {
-					reference = {};
-					bookNumber = Math.floor(Math.random() * bible.Data.books.length);
-					chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length);
-					numberOfVerses = bible.Data.verses[bookNumber][chapterNumber];
-					verseNumber = Math.floor(Math.random() * numberOfVerses);
-					reference.book = bible.Data.books[bookNumber][0];
-					reference.chapter = chapterNumber + 1;
-					reference.verse = verseNumber + 1;
-				}
-				$('#reference-panel').reference(reference);
-			});
-		});
-	});
-});
-*/

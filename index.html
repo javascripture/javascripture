@@ -21,7 +21,6 @@
 					<a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a>
 					<a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a>
 					<a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a>
-					<a href="#extras" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">Extras</a>
 					<a href="#options" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Options</a>
 					<a href="#help" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">Help</a>
 				</div>
@@ -38,124 +37,6 @@
 			<div data-role="content">
 				<div id="reference-panel" class="reference">
 					<div class="panel-inner">
-						<div data-role="popup" id="gotoForm" data-position-to="window">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<form method="get" action="#reference" class="gotoReference">
-								<fieldset>
-									<div data-role="fieldcontain" class="ui-hide-label">
-										<label for="gotoReference">Go to...</label>
-										<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
-									</div>
-								</fieldset>
-							</form>
-						</div>
-						<div data-role="popup" id="searchForm" data-position-to="window">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<form action="#search" method="get" class="search">
-								<fieldset>
-									<div data-role="fieldcontain" class="ui-hide-label">
-										<label for="word">Search</label>
-										<input type="text" name="word" id="word" value="" placeholder="Search" />
-										<input type="hidden" name="lemma" value="" />
-										<input type="hidden" name="morph" value="" />
-										<input type="hidden" name="searchFor" value="all" />
-										<input type="hidden" name="language" value="english" />
-										<input type="hidden" name="clusivity" value="exclusive" />
-										<input type="hidden" name="range" value="verse" />
-									</div>
-								</fieldset>
-							</form>
-						</div>
-						<div data-role="popup" id="advancedSearch" data-position-to="window">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<form method="get" class="search">
-								<legend>Advanced search</legend>
-								<div data-role="fieldcontain" class="ui-hide-label">
-									<label for="word">Word</label>
-									<input type="text" name="word" id="word" value="" placeholder="Word" />
-								</div>
-								<div data-role="fieldcontain" class="ui-hide-label">
-									<label for="lemma">Strongs number</label>
-									<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
-								</div>
-								<div data-role="fieldcontain" class="ui-hide-label">
-									<label for="morph">Morphology</label>
-									<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
-								</div>
-								
-								<div data-role="fieldcontain">
-									<fieldset data-role="controlgroup" class="ui-hide-label">
-										<legend>Combine terms?</legend>
-										<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
-										<label for="combineTerms">Combine terms?</label>
-									</fieldset>
-								</div>
-
-								<div data-role="fieldcontain">
-									<label for="searchFor">Search for:</label>
-									<select name="searchFor" id="searchFor" data-role="slider">
-										<option value="all">All words</option>
-										<option value="any">Any word</option>
-									</select>
-								</div>
-
-								<div data-role="fieldcontain">
-									<fieldset data-role="controlgroup" data-type="horizontal">
-										<legend>Language:</legend>
-										<input type="radio" name="language" id="english" value="english" checked="checked" />
-										<label for="english">English</label>
-										<input type="radio" name="language" id="hebrew" value="hebrew" />
-										<label for="hebrew">Hebrew</label>
-										<input type="radio" name="language" id="greek" value="greek" />
-										<label for="greek">Greek</label>
-									</fieldset>
-								</div>
-
-								<div data-role="fieldcontain">
-									<fieldset data-role="controlgroup" data-type="horizontal">
-										<legend>Range:</legend>
-										<input type="radio" name="range" id="range_word" value="word" checked="checked" />
-										<label for="range_word">Word</label>
-										<input type="radio" name="range" id="range_verse" value="verse" />
-										<label for="range_verse">Verse</label>
-										<input type="radio" name="range" id="range_chapter" value="chapter" />
-										<label for="range_chapter">Chapter</label>
-										<input type="radio" name="range" id="range_book" value="book" />
-										<label for="range_chapter">Book</label>
-									</fieldset>
-								</div>
-
-								<div data-role="fieldcontain">
-									<label for="type">Search type:</label>
-									<select name="type" id="type" data-role="slider">
-										<option value="lemma">Word</option>
-										<option value="morph">Morphology</option>
-									</select>
-								</div>
-
-								<div data-role="fieldcontain">
-								<fieldset data-role="controlgroup" class="ui-hide-label">
-									<legend>Strict search:</legend>
-									<input type="checkbox" name="strictSearch" id="strictSearch" class="custom" />
-									<label for="strictSearch">Strict search?</label>
-								</fieldset>
-								</div>
-								<button type="submit" class="search-button">Search</button>							
-							</form>
-						</div>
-						<div data-role="popup" id="options" data-position-to="window">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<form action="#search" method="get" class="search">
-								<fieldset>
-									<label><input type="checkbox" name="original" checked />Show original language?</label>
-									<label id="literalTranslation"><input type="checkbox" name="literalTranslation"/>Use literal consistent translation?</label>
-								</fieldset>
-							</form>
-						</div>
-						<div data-role="popup" id="wordDetails" data-position-to="window" data-transition="none">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<div class="content"></div>
-						</div>
 						<div data-role="popup" id="results" data-position-to="window" data-transition="none" class="mobile-popup"></div>
 						<div data-role="popup" id="bookList" data-position-to="window" data-transition="none" class="mobile-popup">
 							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
@@ -416,24 +297,134 @@
 									<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
 								</div>
 							</div>
-							<div data-role="popup" id="extras" data-position-to="window">
-								<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-								<div data-role="content">
-									<ul data-role="listview" data-inset="true">
-										<li data-role="list-divider">Hebrew grammar</li>
-										<li><a href="pdf/Hebrew tables.pdf" rel="external" target="_blank">Hebrew grammar</a></li>
-										<li><a href="pdf/Gesenius.pdf" rel="external" target="_blank">Gesenius Hebrew grammar</a></li>
-										<li><a href="pdf/to be verb table.pdf" rel="external" target="_blank">To be verb table</a></li>
-										<li data-role="list-divider">Hymns</li>
-										<li><a href="pdf/Hymn Book.pdf" rel="external" target="_blank">The Christadelphian hymn book</a></li>
-										<li><a href="pdf/PTL.pdf" rel="external" target="_blank">Praise The Lord hymn book</a></li>
-									</ul>
-								</div>
-							</div><!-- /page -->
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- Go to form -->
+			<div data-role="popup" id="gotoForm" data-position-to="window">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<form method="get" action="#reference" class="gotoReference">
+					<fieldset>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<label for="gotoReference">Go to...</label>
+							<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
+			<!-- Search form -->
+			<div data-role="popup" id="searchForm" data-position-to="window">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<form action="#search" method="get" class="search">
+					<fieldset>
+						<div data-role="fieldcontain" class="ui-hide-label">
+							<label for="word">Search</label>
+							<input type="text" name="word" id="word" value="" placeholder="Search" />
+							<input type="hidden" name="lemma" value="" />
+							<input type="hidden" name="morph" value="" />
+							<input type="hidden" name="searchFor" value="all" />
+							<input type="hidden" name="language" value="english" />
+							<input type="hidden" name="clusivity" value="exclusive" />
+							<input type="hidden" name="range" value="verse" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			
+			<!-- Advanced search form -->
+			<div data-role="popup" id="advancedSearch" data-position-to="window">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<form method="get" class="search">
+					<legend>Advanced search</legend>
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="word">Word</label>
+						<input type="text" name="word" id="word" value="" placeholder="Word" />
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="lemma">Strongs number</label>
+						<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="morph">Morphology</label>
+						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
+					</div>
+					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" class="ui-hide-label">
+							<legend>Combine terms?</legend>
+							<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
+							<label for="combineTerms">Combine terms?</label>
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="searchFor">Search for:</label>
+						<select name="searchFor" id="searchFor" data-role="slider">
+							<option value="all">All words</option>
+							<option value="any">Any word</option>
+						</select>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Language:</legend>
+							<input type="radio" name="language" id="english" value="english" checked="checked" />
+							<label for="english">English</label>
+							<input type="radio" name="language" id="hebrew" value="hebrew" />
+							<label for="hebrew">Hebrew</label>
+							<input type="radio" name="language" id="greek" value="greek" />
+							<label for="greek">Greek</label>
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Range:</legend>
+							<input type="radio" name="range" id="range_word" value="word" checked="checked" />
+							<label for="range_word">Word</label>
+							<input type="radio" name="range" id="range_verse" value="verse" />
+							<label for="range_verse">Verse</label>
+							<input type="radio" name="range" id="range_chapter" value="chapter" />
+							<label for="range_chapter">Chapter</label>
+							<input type="radio" name="range" id="range_book" value="book" />
+							<label for="range_chapter">Book</label>
+						</fieldset>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="type">Search type:</label>
+						<select name="type" id="type" data-role="slider">
+							<option value="lemma">Word</option>
+							<option value="morph">Morphology</option>
+						</select>
+					</div>
+
+					<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" class="ui-hide-label">
+						<legend>Strict search:</legend>
+						<input type="checkbox" name="strictSearch" id="strictSearch" class="custom" />
+						<label for="strictSearch">Strict search?</label>
+					</fieldset>
+					</div>
+					<button type="submit" class="search-button">Search</button>							
+				</form>
+			</div>
+			<div data-role="popup" id="options" data-position-to="window">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<form action="#search" method="get" class="search">
+					<fieldset>
+						<label><input type="checkbox" name="original" checked />Show original language?</label>
+						<label id="literalTranslation"><input type="checkbox" name="literalTranslation"/>Use literal consistent translation?</label>
+					</fieldset>
+				</form>
+			</div>
+			<div data-role="popup" id="wordDetails" data-position-to="window" data-transition="none">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div class="content"></div>
+			</div>
+
 		</div><!-- /page -->
 	
 		<div data-role="page" id="help">
@@ -445,6 +436,116 @@
 				Tap and hold to see more details on a word
 			</div>
 		</div><!-- /page -->
-	
+
+<div id="categories" data-role="page" data-title="Categories">
+  
+      <div data-role="header">
+            <h1>Categories</h1>
+      </div><!-- /header -->
+  
+      <div data-role="content">
+            <h2>Select a Category Below:</h2>
+            <ul data-role="listview" data-inset="true">
+                  <li><a href="#category?animals" class="animals">Animals</a></li>
+                  <li><a href="#category?colors" class="colors">Colors</a></li>
+                  <li><a href="#category?vehicles" class="vehicles">Vehicles</a></li>
+            </ul>
+      </div><!-- /content -->
+
+</div>
+
+		<div id="animals" data-role="page" data-title="Animals">
+		
+		      <div data-role="header">
+			    <h1>Animals</h1>
+		      </div><!-- /header -->
+		  
+		      <div data-role="content">
+		            <ul data-role="listview" data-inset="true">
+		            </ul>
+		      </div><!-- /content -->
+		</div>
+		
+		<div id="colors" data-role="page" data-title="Colors">
+		
+		      <div data-role="header">
+			    <h1>Colors</h1>
+		      </div><!-- /header -->
+		
+		      <div data-role="content">
+		            <ul data-role="listview" data-inset="true">
+		            </ul>
+		      </div><!-- /content -->
+		
+		</div>
+		
+		<div id="vehicles" data-role="page" data-title="Vehicles">
+		
+		      <div data-role="header">
+			    <h1>Vehicles</h1>
+		      </div><!-- /header -->
+		  
+		      <div data-role="content">
+		            <ul data-role="listview" data-inset="true">
+		            </ul>
+		      </div><!-- /content -->
+		
+		</div>
+		<!-- Underscore Template that is used to display all of the Category Models -->
+		<script id="categoryItems" type="text/template">
+			<div id="<%= collection.toJSON()[0].chapterWrapperId %>" class="chapter-wrapper" data-book="<%= collection.toJSON()[0].book %>" data-chapter="<%= collection.chapter %>">
+				<div class="sticky-panel-wrapper">
+					<h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#<%= collection.toJSON()[0].chapterWrapperId %>"><%= collection.toJSON()[0].book %> <%= collection.toJSON()[0].chapter %></h2>
+				</div>	
+				<ol class="wrapper">
+					<% _.each( collection.toJSON()[0].references, function( reference ) { %>
+						<li id ="<%= reference.referenceId %>" class="<%= reference.className %>">
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<div class="original <%= reference.language %>">
+									
+										<% _.each( reference.original, function( word ) { %>
+										
+											<span
+												class="<%= word.className %>"
+												title="<%= word.title %>"
+												data-word="<%= word.word %>"
+												data-lemma="<%= word.lemma %>"
+												data-language="<%= reference.language %>"
+												data-range="<%= word.range %>"
+												data-family="<%= word.family %>"
+												data-morph="<%= word.morph %>"
+											>
+												<%= word.word %>
+											</span>
+						
+										<% }); %>
+									</div>
+								</div>
+								<div class="ui-block-b">
+								
+									<% _.each( reference.english, function( word ) { %>
+									
+										<span
+											class="<%= word.class %>"
+											title="<%= word.title %>"
+											data-word="<%= word.word %>"
+											data-lemma="<%= word.lemma %>"
+											data-language="<%= reference.language %>"
+											data-range="<%= word.range %>"
+											data-family="<%= word.family %>"
+											data-morph="<%= word.morph %>"
+										>
+											<%= word.word %>
+										</span>
+					
+									<% }); %>
+								</div>
+							</div>
+						</li>
+					<% }); %>
+				</ol>
+			</div>
+		</script>	
 	</body>
 </html>
