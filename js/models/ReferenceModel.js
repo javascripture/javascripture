@@ -37,39 +37,15 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 					referenceId: self.getReferenceId( book, chapter, verseNumber + 1 ),
 					className: '', //un;ess it\s current-verse
 					language: language,
-					english: [],
-					original: []
+					english: self.createReferencesArray( verseObject ),
+					original: self.createReferencesArray( originalObject[book][jsonChapter][verseNumber] )
 				};
-				$.each(verseObject, function (wordNumber, wordObject) {
-					wordObject.className = 'word';
-					if (wordObject.lemma !== undefined) {
-						wordObject.className = wordObject.className + ' ' + wordObject.lemma + ' ' + wordFamilies.getFamily(wordObject.lemma);
-						wordObject.title = wordObject.lemma;
-						wordObject.family = wordFamilies.getFamily(wordObject.lemma);
-					}
-					if (wordObject.morph !== undefined) {
-						wordObject.morph = ' ' + wordObject.morph;
-						wordObject.title = wordObject.title + ' ' + wordObject.morph;
-					}
-					reference.english.push(wordObject);
-				});
-				$.each(originalObject[book][jsonChapter][verseNumber], function (wordNumber, wordObject) {
-					wordObject.className = 'word';
-					if (wordObject.lemma !== undefined) {
-						wordObject.className = wordObject.className + ' ' + wordObject.lemma + ' ' + wordFamilies.getFamily(wordObject.lemma);
-						wordObject.title = wordObject.lemma;
-						wordObject.family = wordFamilies.getFamily(wordObject.lemma);
-					}
-					if (wordObject.morph !== undefined) {
-						wordObject.morph = ' ' + wordObject.morph;
-						wordObject.title = wordObject.title + ' ' + wordObject.morph;
-					}
-					reference.original.push(wordObject);
-				});
 				referenceCollection.references.push(reference);
 			});
+			console.log(referenceCollection);
 			return referenceCollection;
 		},
+
 		getReferenceId: function () {
 			var referenceId = this.get('book').replace(/ /g, '_') + '_' + this.get('chapter');
 			if (this.get('verse') != '') {
@@ -77,6 +53,24 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			}
 			return referenceId;
 		},
+		
+		createReferencesArray: function ( verseObject ) {
+			var references = [];
+			$.each(verseObject, function (wordNumber, wordObject) {
+				wordObject.className = 'word';
+				if (wordObject.lemma !== undefined) {
+					wordObject.className = wordObject.className + ' ' + wordObject.lemma + ' ' + wordFamilies.getFamily(wordObject.lemma);
+					wordObject.title = wordObject.lemma;
+					wordObject.family = wordFamilies.getFamily(wordObject.lemma);
+				}
+				if (wordObject.morph !== undefined) {
+					wordObject.morph = ' ' + wordObject.morph;
+					wordObject.title = wordObject.title + ' ' + wordObject.morph;
+				}
+				references.push(wordObject);
+			});
+			return references;
+		}
     } );
 
     // Returns the Model class

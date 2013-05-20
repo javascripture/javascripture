@@ -10,6 +10,30 @@
 		// The Router constructor
 		initialize: function() {
 
+			var self = this;
+
+			this.referenceView = new ReferenceView( {
+				el: '#reference',
+				collection: new ReferenceCollection( [], {} )
+			} );
+			
+
+			/*$(window).bind('scrollstop', function () {
+				var $window = $(this),
+					scrollTop = $window.scrollTop(),
+					contentHeight = $('#reference-panel').height() - $window.height();
+				if (scrollTop === 0) { //previous
+					var offsetChapter = self.referenceView.collection.getOffsetChapter( -1 );
+					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
+//					self.removeNextChapter();
+//					self.scrollToCurrentChapter();
+				}
+				if (scrollTop > contentHeight) { //next
+					var offsetChapter = self.referenceView.collection.getOffsetChapter( 1 );
+					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
+				}
+			});*/
+
 			Backbone.history.start();
 
 		},
@@ -33,24 +57,25 @@
 		},
 
 		reference: function( hash ) {
-			
-			options = this._getOptionsFromHash( hash )
-			$('#reference-panel').reference( options );
-            
-            /*this.referenceView = new ReferenceView( { el: "#reference", collection: new ReferenceCollection( [] ) } );
+			var hashObject = this._getObjectFromHash( hash );
+
+			$('#reference-panel').reference( hashObject );
+			/*this.referenceView.collection.book = hashObject.book;
+			this.referenceView.collection.chapter = hashObject.chapter;
+			this.referenceView.collection.verse = hashObject.verse;
 
             $.mobile.loading( "show" );
 
             // Fetches the Collection of Category Models for the current Category View
             this.referenceView.collection.fetch().done( function() {
-            
+
                 $.mobile.loading( "hide" );
 
             } );*/
 
 		},
 
-		_getOptionsFromHash: function( hash ) {
+		_getObjectFromHash: function( hash ) {
 			var typeArray = hash.split('&'),
 				options = {};
 			for(var i = 0; i < typeArray.length; i++) {
@@ -70,7 +95,18 @@
 			referenceObject.book = bible.Data.books[bookNumber][0];
 			referenceObject.chapter = chapterNumber + 1;
 			referenceObject.verse = verseNumber + 1;
-			return 'book=' + referenceObject.book + '&chapter=' + referenceObject.chapter  + '&verse=' + referenceObject.verse;
+			return this.objectToQueryString( referenceObject );
+		},
+		
+		objectToQueryString: function( object ) {
+			string = '';
+			$.each(object, function (parameter, value) {
+				if ( string != '' ) {
+					string += '&';
+				}
+				string += parameter + '=' + value;
+			})
+			return string;
 		}
 
     } );

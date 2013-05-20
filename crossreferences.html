@@ -1,0 +1,13 @@
+<script src="data/crossReferences.js"></script>
+<script src="js/external/json2.js"></script>
+<script>
+	var crossObject = {};
+	for( var i = 0; i < crossReferences.length; i++) {
+		if ( crossObject[ crossReferences[i][0] ] === undefined ) {
+			crossObject[ crossReferences[i][0] ] = [];
+		}
+		crossObject[ crossReferences[i][0] ].push( crossReferences[i][1] );
+//		console.log(crossReferences[i]);
+	}
+	document.write(JSON.stringify(crossObject));
+</script>

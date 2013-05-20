@@ -23,7 +23,8 @@ require.config({
 		'literalTranslation': '../data/literalTranslation',
 		'translateLiterally': 'src/translateLiterally',
 		'wordFamilies': 'src/wordFamilies',
-		'wordInterface': 'src/wordInterface'
+		'wordInterface': 'src/wordInterface',
+		'crossReferences': 'src/crossReferences'
 	},
 
 	// Sets the configuration for your third party scripts that are not AMD compatible
@@ -51,7 +52,9 @@ require({
 
 			// Disabling this will prevent jQuery Mobile from handling hash changes
 			$.mobile.hashListeningEnabled = false;
-			alert('mobile-init');
+			
+			console.log('mobile init');
+
 		}
 	)
 
@@ -61,28 +64,24 @@ require({
 			debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
 			setTimeout(function () { //to give the framework a chance to load
 				$.mobile.showPageLoadingMsg('a', 'Loading data');
+				console.log('jqm');
 				//This is just to give more specific loading messages
 				require(['bible'], function (){
 					$.mobile.showPageLoadingMsg('a', 'Loading English');
 					require(['english'], function (){
 						$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
 						require(['hebrew'], function (){
+				console.log('hebrew');
 							$.mobile.showPageLoadingMsg('a', 'Loading Greek');
 							require(['greek'], function (){
 								$.mobile.showPageLoadingMsg('a', 'Loading Strongs Numbers');
 								require(['strongsDictionary'], function (){
 									require(['strongsObjectWithFamilies'], function (){
 										$.mobile.showPageLoadingMsg('a', 'Data loaded');
-										setTimeout( function () {
-											$.mobile.hidePageLoadingMsg();											
-										}, 100);
-									});
-								});
-							});
-						});
-					});
-				});
-				require(['bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'strongsObjectWithFamilies'], function (bible) {
+										
+										
+										
+										
 					$.mobile.showPageLoadingMsg('a', 'Loading modules');
 					require([
 	//					'src/router',
@@ -93,7 +92,8 @@ require({
 						'src/stickyPanel',
 		//				'order!src/word',
 						'src/wordDetails',
-						'src/wordInterface'
+						'src/wordInterface',
+						'src/crossReferences'
 					], function () { //now build the menu and show the first reference
 						debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
 
@@ -104,6 +104,15 @@ require({
 						$('[data-rel=popup]').on('click', function ( event ) {
 							event.preventDefault();
 							$($(this).attr('href')).popup('open')
+						});
+						
+					});
+										
+										
+
+									});
+								});
+							});
 						});
 					});
 				});

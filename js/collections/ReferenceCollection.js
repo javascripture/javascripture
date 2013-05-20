@@ -2,7 +2,7 @@
 // ===================
 
 // Includes file dependencies
-define([ "jquery","backbone","models/ReferenceModel" ], function( $, Backbone, ReferenceModel ) {
+define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebrew', 'greek' ], function( $, Backbone, ReferenceModel, bible, english, hebrew, greek ) {
 
     // Extends Backbone.Router
     var Collection = Backbone.Collection.extend( {
@@ -10,96 +10,41 @@ define([ "jquery","backbone","models/ReferenceModel" ], function( $, Backbone, R
         // The Collection constructor
         initialize: function( models, options ) {
 
-            // Sets the type instance property (ie. animals)
-            this.book = options.book;
-            this.chapter = options.chapter;
-            this.verse = options.verse;
+	        if (options) {
+	        
+	            // Sets the type instance property (ie. animals)
+	            this.book = options.book;
+	            this.chapter = options.chapter;
+	            this.verse = options.verse;
+		        
+	        }
 
-        },
+      },
 
         // Sets the Collection model property to be a Category Model
         model: ReferenceModel,
 
-        // Sample JSON data that in a real app will most likely come from a REST web service
-        jsonArray: [
-
-            { "category": "animals", "type": "Pets" },
-
-            { "category": "animals", "type": "Farm Animals" },
-
-            { "category": "animals", "type": "Wild Animals" },
-
-            { "category": "colors", "type": "Blue" },
-
-            { "category": "colors", "type": "Green" },
-
-            { "category": "colors", "type": "Orange" },
-
-            { "category": "colors", "type": "Purple" },
-
-            { "category": "colors", "type": "Red" },
-
-            { "category": "colors", "type": "Yellow" },
-
-            { "category": "colors", "type": "Violet" },
-
-            { "category": "vehicles", "type": "Cars" },
-
-            { "category": "vehicles", "type": "Planes" },
-
-            { "category": "vehicles", "type": "Construction" }
-
-        ],
-
         // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)
         sync: function( method, model, options ) {
 
-            // Local Variables
-            // ===============
+console.log(method);
+console.log(model);
+console.log(options);
+            // Stores the this context in the self variable
+            self = this,
 
-            // Instantiates an empty array
-            var categories = [],
-
-                // Stores the this context in the self variable
-                self = this,
-
-                // Creates a jQuery Deferred Object
-                deferred = $.Deferred();
+            // Creates a jQuery Deferred Object
+            deferred = $.Deferred();
 
             // Uses a setTimeout to show the loading spinner
             setTimeout( function() {
-
-                // Filters the above sample JSON data to return an array of only the correct category type
-                categories = _.filter( self.jsonArray, function( row ) {
-
-                    return row.category === self.type;
-
-                } );
-                console.log(categories);
-                //var references = [];
-				/*$.each(categories, function() {
-					var category = new CategoryModel({
-						book: 'Genesis',
-						chapter: 1,
-						verse: 1
-					});
-					references.push(category.getReference());
-				});*/
-
 				var references = new ReferenceModel({
 					book: self.book,
 					chapter: self.chapter,
 					verse: self.verse
 				});
-				var collection = references.getReference();
 
-				/*var collection = {
-					chapterWrapperId: 'chapterWrapperId',
-					chapterWrapperClass: 'chapterWrapperClass',
-					book: 'book',
-					chapter: 'chapter',
-					references: references
-		     	};*/
+				var collection = references.getReference();
 
                 // Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
                 options.success( collection );
@@ -114,6 +59,39 @@ define([ "jquery","backbone","models/ReferenceModel" ], function( $, Backbone, R
 
             // Returns the deferred object
             return deferred;
+
+        },
+        
+        getOffsetChapter: function( offsetNumber ) {
+        	
+	        var book = this.book,
+	        	chapter = this.chapter,
+	        	offsetChapter = {},
+				offsetChapterNumber = parseInt(chapter, 10) + offsetNumber,
+				offsetNumberJavascript = offsetChapterNumber - 1,
+				offsetBook;
+			if (english[book] && english[book][offsetNumberJavascript] !== undefined) {
+				offsetChapter.book = book;
+				offsetChapter.chapter = offsetChapterNumber;
+			} else {
+				//get the offset book
+				$.each(bible.Data.books, function (index, loopBookArray) {
+					if (loopBookArray[0] === book) {
+						offsetBook = index + offsetNumber;
+						if (bible.Data.books[offsetBook] !== undefined) {
+							offsetChapter.book = bible.Data.books[offsetBook][0];
+							//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
+							if (offsetNumber > 0) {
+								offsetChapter.chapter = 1;
+							} else {
+								offsetChapter.chapter = bible.Data.verses[offsetBook].length;
+							}
+						}
+					}
+				});
+			}
+			
+			return offsetChapter;
 
         }
 
