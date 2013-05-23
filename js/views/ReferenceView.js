@@ -27,11 +27,17 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
             // Renders the view's template inside of the current listview element
             this.$el.find("#reference-panel").html(this.template);
             
-            var offset = - $('[data-role=header]').height();
-
-//			console.log( $( '#' + collection.currentId ) );
-			console.log(collection.currentId);
-			$('body').scrollTo( $( '#' + collection.currentId ), { offset: offset } );
+			//anchor to current verse
+			var $anchorPoint = $('.current-verse'),
+				verseHeight = $anchorPoint.height(),
+				offset = -$(window).height()/2 + verseHeight;
+			
+			//anchor to a chapter
+			if ( $anchorPoint.length === 0 ) {
+				$anchorPoint = $( '#' + collection.currentId );
+				offset = - $('[data-role=header]').height();
+			}
+			$('body').scrollTo( $anchorPoint, { offset: offset } );
 
             // Maintains chainability
             return this;
