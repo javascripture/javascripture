@@ -11,7 +11,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				referenceObject = this.getOffsetChapter( offset ),
 				book = referenceObject.book,
 				chapter = referenceObject.chapter,
-				verse = this.get( 'verse' ),
+				verse = parseInt( this.get( 'verse' ), 10 ),
 				jsonChapter = chapter - 1, //because javascript arrays count from 0
 				jsonVerse = verse - 1, //because javascript arrays count from 0
 				translatedText = english[ book ][ jsonChapter ],
@@ -36,11 +36,15 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			$.each(translatedText, function (verseNumber, verseObject) {
 				var reference = {
 					referenceId: self.getReferenceId( book, chapter, verseNumber + 1 ),
-					className: '', //un;ess it\s current-verse
 					language: language,
 					english: self.createReferencesArray( verseObject ),
 					original: self.createReferencesArray( originalObject[ book ][ jsonChapter ][ verseNumber ] )
 				};
+				
+				//create a class for the current verse
+				if ( verseNumber + 1 === verse && offset === 0 ) {
+					reference.className = 'current-verse'; //should be in html?
+				}
 				referenceCollection.references.push( reference );
 			});
 			return referenceCollection;
