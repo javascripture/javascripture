@@ -27,7 +27,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			}
 
 			var referenceCollection = {
-				chapterWrapperId: this.getReferenceId( book, chapter ),
+				chapterWrapperId: this.getReferenceId( book, chapter, 0 ),
 				book: book,
 				chapter: chapter,
 				references: []

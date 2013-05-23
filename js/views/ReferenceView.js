@@ -29,6 +29,8 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
             
             var offset = - $('[data-role=header]').height();
 
+//			console.log( $( '#' + collection.currentId ) );
+			console.log(collection.currentId);
 			$('body').scrollTo( $( '#' + collection.currentId ), { offset: offset } );
 
             // Maintains chainability
