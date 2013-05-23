@@ -17,7 +17,7 @@ define(['jquery', 'jquery-mobile', 'ba-debug'], function ($) {
 					if (chapter > 100) {
 						className = ' class="three-digit"';
 					}
-					$markup.append('<a href="#reference?book=' + book + '&amp;chapter=' + chapter + '&amp;verse=' + verse + '" data-role="button" data-transition="none"' + className + '>' + chapter + '</a>');
+					$markup.append('<a href="#reference?book=' + book + '&amp;chapter=' + chapter + '" data-role="button" data-transition="none"' + className + '>' + chapter + '</a>');
 				}
 				$this.find('.ui-collapsible-content').append($markup).trigger('create');
 			}
