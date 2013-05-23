@@ -18,21 +18,19 @@
 			} );
 			
 
-			/*$(window).bind('scrollstop', function () {
+			$(window).bind('scrollstop', function () {
 				var $window = $(this),
 					scrollTop = $window.scrollTop(),
 					contentHeight = $('#reference-panel').height() - $window.height();
 				if (scrollTop === 0) { //previous
-					var offsetChapter = self.referenceView.collection.getOffsetChapter( -1 );
+					var offsetChapter = self.referenceView.collection.previousChapter;
 					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
-//					self.removeNextChapter();
-//					self.scrollToCurrentChapter();
 				}
 				if (scrollTop > contentHeight) { //next
-					var offsetChapter = self.referenceView.collection.getOffsetChapter( 1 );
+					var offsetChapter = self.referenceView.collection.nextChapter;
 					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
 				}
-			});*/
+			});
 
 			Backbone.history.start();
 
@@ -59,8 +57,8 @@
 		reference: function( hash ) {
 			var hashObject = this._getObjectFromHash( hash );
 
-			$('#reference-panel').reference( hashObject );
-			/*this.referenceView.collection.book = hashObject.book;
+//			$('#reference-panel').reference( hashObject );
+			this.referenceView.collection.book = hashObject.book;
 			this.referenceView.collection.chapter = hashObject.chapter;
 			this.referenceView.collection.verse = hashObject.verse;
 
@@ -71,7 +69,7 @@
 
                 $.mobile.loading( "hide" );
 
-            } );*/
+            } );
 
 		},
 

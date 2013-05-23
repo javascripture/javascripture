@@ -493,12 +493,16 @@
 		</div>
 		<!-- Underscore Template that is used to display all of the Category Models -->
 		<script id="categoryItems" type="text/template">
-			<div id="<%= collection.toJSON()[0].chapterWrapperId %>" class="chapter-wrapper" data-book="<%= collection.toJSON()[0].book %>" data-chapter="<%= collection.chapter %>">
+			<% _.each( collection.chapters, function( chapter ) { %>
+
+			<div id="<%= chapter.chapterWrapperId %>" class="chapter-wrapper" data-book="<%= chapter.book %>" data-chapter="<%= chapter.chapter %>">
 				<div class="sticky-panel-wrapper">
-					<h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#<%= collection.toJSON()[0].chapterWrapperId %>"><%= collection.toJSON()[0].book %> <%= collection.toJSON()[0].chapter %></h2>
+					<h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#<%= chapter.chapterWrapperId %>">
+						<%= chapter.book %> <%= chapter.chapter %>
+					</h2>
 				</div>	
 				<ol class="wrapper">
-					<% _.each( collection.toJSON()[0].references, function( reference ) { %>
+					<% _.each( chapter.references, function( reference ) { %>
 						<li id ="<%= reference.referenceId %>" class="<%= reference.className %>">
 							<div class="ui-grid-a">
 								<div class="ui-block-a">
@@ -546,6 +550,9 @@
 					<% }); %>
 				</ol>
 			</div>
+
+			<% }); %>
+
 		</script>	
 	</body>
 </html>

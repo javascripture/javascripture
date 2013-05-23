@@ -6,17 +6,18 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 
 	// The Model constructor
     var Model = Backbone.Model.extend( {
-		getReference: function () {
+		getReference: function (offset) {
 			var self = this,
-				book = this.get( 'book' ),
-				chapter = this.get( 'chapter' ),
+				referenceObject = this.getOffsetChapter( offset ),
+				book = referenceObject.book,
+				chapter = referenceObject.chapter,
 				verse = this.get('verse'),
 				jsonChapter = chapter - 1, //because javascript arrays count from 0
 				jsonVerse = verse - 1, //because javascript arrays count from 0
-				chapterWrapperId = this.getReferenceId( book, chapter ),
 				translatedText = english[book][jsonChapter],
 				originalObject,
 				language;
+
 			if (hebrew[book] !== undefined) {
 				originalObject = hebrew;
 				language = 'hebrew';
@@ -24,14 +25,14 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				originalObject = greek;
 				language = 'greek';
 			}
-			
+
 			var referenceCollection = {
-				chapterWrapperId: chapterWrapperId,
+				chapterWrapperId: this.getReferenceId( book, chapter ),
 				book: book,
 				chapter: chapter,
 				references: []
 			}
-			
+
 			$.each(translatedText, function (verseNumber, verseObject) {
 				var reference = {
 					referenceId: self.getReferenceId( book, chapter, verseNumber + 1 ),
@@ -42,14 +43,22 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				};
 				referenceCollection.references.push(reference);
 			});
-			console.log(referenceCollection);
 			return referenceCollection;
 		},
 
-		getReferenceId: function () {
-			var referenceId = this.get('book').replace(/ /g, '_') + '_' + this.get('chapter');
-			if (this.get('verse') != '') {
-				referenceId += '_' + this.get('verse');
+		getReferenceId: function (book, chapter, verse) {
+			if ( book === undefined ) {
+				book = this.get( 'book' );
+			}
+			if ( chapter === undefined ) {
+				chapter = this.get( 'chapter' );
+			}
+			if ( verse === undefined ) {
+				verse = this.get( 'verse' );
+			}
+			var referenceId = book.replace(/ /g, '_') + '_' + chapter;
+			if ( verse ) {
+				referenceId += '_' + verse;
 			}
 			return referenceId;
 		},
@@ -70,7 +79,38 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				references.push(wordObject);
 			});
 			return references;
+		},
+		
+        getOffsetChapter: function( offsetNumber ) {
+	        var book = this.get( 'book' ),
+	        	chapter = this.get( 'chapter' ),
+	        	offsetChapter = {},
+				offsetChapterNumber = parseInt(chapter, 10) + offsetNumber,
+				offsetNumberJavascript = offsetChapterNumber - 1,
+				offsetBook;
+			if (english[book] && english[book][offsetNumberJavascript] !== undefined) {
+				offsetChapter.book = book;
+				offsetChapter.chapter = offsetChapterNumber;
+			} else {
+				//get the offset book
+				$.each(bible.Data.books, function (index, loopBookArray) {
+					if (loopBookArray[0] === book) {
+						offsetBook = index + offsetNumber;
+						if (bible.Data.books[offsetBook] !== undefined) {
+							offsetChapter.book = bible.Data.books[offsetBook][0];
+							//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
+							if (offsetNumber > 0) {
+								offsetChapter.chapter = 1;
+							} else {
+								offsetChapter.chapter = bible.Data.verses[offsetBook].length;
+							}
+						}
+					}
+				});
+			}
+			return offsetChapter;
 		}
+
     } );
 
     // Returns the Model class

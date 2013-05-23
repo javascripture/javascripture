@@ -341,7 +341,7 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'w
 	//$(document).on('click', 'a', function () {
 		//$('.ui-btn-active').removeClass('ui-btn-active');
 	//});
-	$(window).bind('scrollstop', function () {
+/*	$(window).bind('scrollstop', function () {
 		var scrollTop = $(this).scrollTop(),
 			contentHeight = $('#reference-panel').height() - $(this).height();
 		if (scrollTop === 0) {
@@ -350,5 +350,5 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'w
 		if (scrollTop > contentHeight) {
 			$('#reference-panel').reference('loadChapterAfter');
 		}
-	});
+	});*/
 });

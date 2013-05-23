@@ -27,11 +27,7 @@ define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebre
         // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)
         sync: function( method, model, options ) {
 
-console.log(method);
-console.log(model);
-console.log(options);
-            // Stores the this context in the self variable
-            self = this,
+			var self = this,
 
             // Creates a jQuery Deferred Object
             deferred = $.Deferred();
@@ -44,7 +40,17 @@ console.log(options);
 					verse: self.verse
 				});
 
-				var collection = references.getReference();
+				self.previousChapter = references.getOffsetChapter(-1);
+				self.nextChapter = references.getOffsetChapter(1);
+
+				var collection = {
+					currentId: references.getReferenceId(),
+					chapters: []
+				};
+
+				collection.chapters.push(references.getReference(-1));
+				collection.chapters.push(references.getReference(0));
+				collection.chapters.push(references.getReference(+1));
 
                 // Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
                 options.success( collection );
@@ -59,39 +65,6 @@ console.log(options);
 
             // Returns the deferred object
             return deferred;
-
-        },
-        
-        getOffsetChapter: function( offsetNumber ) {
-        	
-	        var book = this.book,
-	        	chapter = this.chapter,
-	        	offsetChapter = {},
-				offsetChapterNumber = parseInt(chapter, 10) + offsetNumber,
-				offsetNumberJavascript = offsetChapterNumber - 1,
-				offsetBook;
-			if (english[book] && english[book][offsetNumberJavascript] !== undefined) {
-				offsetChapter.book = book;
-				offsetChapter.chapter = offsetChapterNumber;
-			} else {
-				//get the offset book
-				$.each(bible.Data.books, function (index, loopBookArray) {
-					if (loopBookArray[0] === book) {
-						offsetBook = index + offsetNumber;
-						if (bible.Data.books[offsetBook] !== undefined) {
-							offsetChapter.book = bible.Data.books[offsetBook][0];
-							//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
-							if (offsetNumber > 0) {
-								offsetChapter.chapter = 1;
-							} else {
-								offsetChapter.chapter = bible.Data.verses[offsetBook].length;
-							}
-						}
-					}
-				});
-			}
-			
-			return offsetChapter;
 
         }
 
