@@ -6,15 +6,15 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 
 	// The Model constructor
     var Model = Backbone.Model.extend( {
-		getReference: function (offset) {
+		getReference: function ( offset ) {
 			var self = this,
 				referenceObject = this.getOffsetChapter( offset ),
 				book = referenceObject.book,
 				chapter = referenceObject.chapter,
-				verse = this.get('verse'),
+				verse = this.get( 'verse' ),
 				jsonChapter = chapter - 1, //because javascript arrays count from 0
 				jsonVerse = verse - 1, //because javascript arrays count from 0
-				translatedText = english[book][jsonChapter],
+				translatedText = english[ book ][ jsonChapter ],
 				originalObject,
 				language;
 
@@ -39,14 +39,14 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 					className: '', //un;ess it\s current-verse
 					language: language,
 					english: self.createReferencesArray( verseObject ),
-					original: self.createReferencesArray( originalObject[book][jsonChapter][verseNumber] )
+					original: self.createReferencesArray( originalObject[ book ][ jsonChapter ][ verseNumber ] )
 				};
-				referenceCollection.references.push(reference);
+				referenceCollection.references.push( reference );
 			});
 			return referenceCollection;
 		},
 
-		getReferenceId: function (book, chapter, verse) {
+		getReferenceId: function ( book, chapter, verse ) {
 			if ( book === undefined ) {
 				book = this.get( 'book' );
 			}
@@ -65,14 +65,14 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 		
 		createReferencesArray: function ( verseObject ) {
 			var references = [];
-			$.each(verseObject, function (wordNumber, wordObject) {
+			$.each(verseObject, function ( wordNumber, wordObject ) {
 				wordObject.className = 'word';
-				if (wordObject.lemma !== undefined) {
-					wordObject.className = wordObject.className + ' ' + wordObject.lemma + ' ' + wordFamilies.getFamily(wordObject.lemma);
+				if ( wordObject.lemma !== undefined ) {
+					wordObject.className = wordObject.className + ' ' + wordObject.lemma + ' ' + wordFamilies.getFamily( wordObject.lemma );
 					wordObject.title = wordObject.lemma;
-					wordObject.family = wordFamilies.getFamily(wordObject.lemma);
+					wordObject.family = wordFamilies.getFamily( wordObject.lemma );
 				}
-				if (wordObject.morph !== undefined) {
+				if ( wordObject.morph !== undefined ) {
 					wordObject.morph = ' ' + wordObject.morph;
 					wordObject.title = wordObject.title + ' ' + wordObject.morph;
 				}
@@ -93,16 +93,16 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				offsetChapter.chapter = offsetChapterNumber;
 			} else {
 				//get the offset book
-				$.each(bible.Data.books, function (index, loopBookArray) {
-					if (loopBookArray[0] === book) {
+				$.each( bible.Data.books, function ( index, loopBookArray ) {
+					if ( loopBookArray[0] === book ) {
 						offsetBook = index + offsetNumber;
 						if (bible.Data.books[offsetBook] !== undefined) {
 							offsetChapter.book = bible.Data.books[offsetBook][0];
 							//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
-							if (offsetNumber > 0) {
+							if ( offsetNumber > 0 ) {
 								offsetChapter.chapter = 1;
 							} else {
-								offsetChapter.chapter = bible.Data.verses[offsetBook].length;
+								offsetChapter.chapter = bible.Data.verses[ offsetBook ].length;
 							}
 						}
 					}
