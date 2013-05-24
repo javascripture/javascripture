@@ -22,9 +22,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 
 			var collection = this.collection
 			    jsonCollection = collection.toJSON()[0], //bit strange!
-			    anchoringData = this.getAnchoringData( this.collection.direction ),
-			    anchorPointSelector = anchoringData[1],
-			    offset = anchoringData[0];
+			    anchoringData = this.getAnchoringData( this.collection.direction );
 
             // Sets the view's template property
             this.template = _.template( $( "script#categoryItems" ).html(), { "collection": jsonCollection } );
@@ -32,7 +30,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
             // Renders the view's template inside of the current listview element
             this.$el.find("#reference-panel").html(this.template);
 
-			this.anchorReference( anchorPointSelector, offset);
+			this.anchorReference( anchoringData );
 			
 			$('.chapter-wrapper').waypoint(function (event, direction) {
 				$('#stopBackbone').val('true');
@@ -82,8 +80,10 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			return [offset, anchorPointSelector];
 		},
 		
-		anchorReference: function ( anchorPointSelector, offset ) {
-			var $anchorPoint = $( anchorPointSelector );
+		anchorReference: function ( anchoringData ) {
+			var anchorPointSelector = anchoringData[1],
+			    offset = anchoringData[0],
+			    $anchorPoint = $( anchorPointSelector );
 
 			if ( anchorPointSelector === '.current-verse' ) {
 				verseHeight = $anchorPoint.height(),
