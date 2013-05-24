@@ -19,7 +19,7 @@ define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebre
 		        
 	        }
 
-      },
+		},
 
         // Sets the Collection model property to be a Category Model
         model: ReferenceModel,
@@ -52,21 +52,32 @@ define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebre
 				collection.chapters.push(references.getReference(0));
 				collection.chapters.push(references.getReference(+1));
 
-                // Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
-                options.success( collection );
+				// Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
+				options.success( collection );
 
-                // Triggers the custom `added` method (which the Category View listens for)
-                self.trigger( "added" );
+				// Triggers the custom `added` method (which the Category View listens for)
+				self.trigger( "create" );
 
-                // Resolves the deferred object (this triggers the changePage method inside of the Category Router)
-                deferred.resolve();
+				// Resolves the deferred object (this triggers the changePage method inside of the Category Router)
+				deferred.resolve();
 
-            }, 1);
+			}, 1);
 
-            // Returns the deferred object
-            return deferred;
+			// Returns the deferred object
+			return deferred;
 
-        }
+		},
+		
+		objectToQueryString: function( object ) {
+			string = '';
+			$.each(object, function (parameter, value) {
+				if ( string != '' ) {
+					string += '&';
+				}
+				string += parameter + '=' + value;
+			})
+			return string;
+		}
 
     } );
 

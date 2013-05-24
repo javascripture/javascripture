@@ -2,10 +2,18 @@
 // =============
 
 // Includes file dependencies
-	define([ "jquery", "backbone", "../models/ReferenceModel", "../collections/ReferenceCollection", "../views/ReferenceView", 'bible' ], function( $, Backbone, ReferenceModel, ReferenceCollection, ReferenceView, bible ) {
+define([
+	"jquery",
+	"backbone",
+	"../models/ReferenceModel",
+	"../collections/ReferenceCollection",
+	"../views/ReferenceView",
+	'bible',
+	'external/jquery.waypoints'
+], function( $, Backbone, ReferenceModel, ReferenceCollection, ReferenceView, bible ) {
 
 	// Extends Backbone.Router
-	var ReferenceRouter = Backbone.Router.extend( {
+	var MobileRouter = Backbone.Router.extend( {
 
 		// The Router constructor
 		initialize: function() {
@@ -16,20 +24,24 @@
 				el: '#reference',
 				collection: new ReferenceCollection( [], {} )
 			} );
-			
 
 			$(window).bind('scrollstop', function () {
 				var $window = $(this),
 					scrollTop = $window.scrollTop(),
-					contentHeight = $('#reference-panel').height() - $window.height();
-				if (scrollTop === 0) { //previous
+					contentHeight = $(self.referenceView.el).height() - $window.height();
+				//update the panel based on the current hash state
+				var hash = window.location.hash.split('?')[1];
+				self.reference( hash );
+/*				if (scrollTop === 0) { //previous
 					var offsetChapter = self.referenceView.collection.previousChapter;
-					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
+						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+					self.referenceInject( hash );
 				}
 				if (scrollTop > contentHeight) { //next
-					var offsetChapter = self.referenceView.collection.nextChapter;
-					window.location.hash = 'reference?' + self.objectToQueryString( offsetChapter );
-				}
+					var offsetChapter = self.referenceView.collection.nextChapter,
+						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+					self.referenceInject( hash );
+				}*/
 			});
 
 			Backbone.history.start();
@@ -55,22 +67,38 @@
 		},
 
 		reference: function( hash ) {
-			var hashObject = this._getObjectFromHash( hash );
 
 //			$('#reference-panel').reference( hashObject );
-			this.referenceView.collection.book = hashObject.book;
-			this.referenceView.collection.chapter = hashObject.chapter;
-			this.referenceView.collection.verse = hashObject.verse;
+			var hashObject = this._getObjectFromHash( hash );
 
-            $.mobile.loading( "show" );
+			if ( $('#stopBackbone').val() !== 'true' ) {
+				if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
+					if ( this.referenceView.collection.chapter > hashObject.chapter ) {
+						this.referenceView.collection.direction = 'previous';
+					}
+					if ( this.referenceView.collection.chapter < hashObject.chapter ) {
+						this.referenceView.collection.direction = 'next';
+					}
+					this.referenceView.collection.book = hashObject.book;
+					this.referenceView.collection.chapter = hashObject.chapter;
+					this.referenceView.collection.verse = hashObject.verse;
+		            $.mobile.loading( "show" );
+		
+		            // Fetches the Collection of Category Models for the current Category View
+		            this.referenceView.collection.fetch().done( function() {
+		
+						$.mobile.loading( "hide" );
 
-            // Fetches the Collection of Category Models for the current Category View
-            this.referenceView.collection.fetch().done( function() {
+					} );
+				}
+			} else {
+				$('#stopBackbone').val('false');
+			}
 
-                $.mobile.loading( "hide" );
-
-            } );
-
+		},
+		
+		referencesAreTheSame: function ( firstReference, secondReference ) {
+			return ( firstReference.book === secondReference.book ) && ( firstReference.chapter === secondReference.chapter );
 		},
 
 		_getObjectFromHash: function( hash ) {
@@ -93,23 +121,12 @@
 			referenceObject.book = bible.Data.books[bookNumber][0];
 			referenceObject.chapter = chapterNumber + 1;
 			referenceObject.verse = verseNumber + 1;
-			return this.objectToQueryString( referenceObject );
-		},
-		
-		objectToQueryString: function( object ) {
-			string = '';
-			$.each(object, function (parameter, value) {
-				if ( string != '' ) {
-					string += '&';
-				}
-				string += parameter + '=' + value;
-			})
-			return string;
+			return this.referenceView.collection.objectToQueryString( referenceObject );
 		}
 
     } );
 
     // Returns the Router class
-    return ReferenceRouter;
+    return MobileRouter;
 
 } );

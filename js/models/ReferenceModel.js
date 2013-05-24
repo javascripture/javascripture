@@ -12,7 +12,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				book = referenceObject.book,
 				chapter = referenceObject.chapter,
 				verse = parseInt( this.get( 'verse' ), 10 ),
-				jsonChapter = chapter - 1, //because javascript arrays count from 0
+				jsonChapter = parseInt( chapter, 10 ) - 1, //because javascript arrays count from 0
 				jsonVerse = verse - 1, //because javascript arrays count from 0
 				translatedText = english[ book ][ jsonChapter ],
 				originalObject,
@@ -51,6 +51,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 		},
 
 		getReferenceId: function ( book, chapter, verse ) {
+			var referenceId = '';
 			if ( book === undefined ) {
 				book = this.get( 'book' );
 			}
@@ -60,7 +61,9 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			if ( verse === undefined ) {
 				verse = this.get( 'verse' );
 			}
-			var referenceId = book.replace(/ /g, '_') + '_' + chapter;
+			if ( book && chapter ) {
+				referenceId = book.replace(/ /g, '_') + '_' + chapter;
+			}
 			if ( verse ) {
 				referenceId += '_' + verse;
 			}

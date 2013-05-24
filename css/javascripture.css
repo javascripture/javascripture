@@ -164,14 +164,10 @@ html {
 .ui-icon-book {
   background-image: url(images/icon-book-white.png);
 }
-#reference .sticky-panel-wrapper {
-  height: 66px;
-}
-#reference .sticky-panel-wrapper h2 {
-  background: rgba(255, 255, 255, 0.7);
-  text-align: center;
+#reference h2 {
   margin: 0;
-  padding: .8em 0;
+  padding: 1em 0;
+  text-align: center;
 }
 #reference ol.wrapper {
   margin: 0;

@@ -19,9 +19,9 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 			this.options.topWayPoint.waypoint(function (event, direction) {
 				debug.debug('top');
 				if (direction === 'down') {
-					self.fixElement();
+					//self.fixElement();
 				} else {
-					self.resetElement();
+					//self.resetElement();
 				}
 				event.stopPropagation();
 			}, {
@@ -31,9 +31,9 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 				$(this.options.bottomWaypoint).waypoint(function (event, direction) {
 					debug.debug('bottom');
 					if (direction === 'down') {
-						self.stickToBottom();
+						//self.stickToBottom();
 					} else {
-						self.fixElement();
+						//self.fixElement();
 					}
 				}, {
 					offset: this.bottomWayPointOffset()
@@ -88,9 +88,9 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 			}
 			this.resetElement();
 			if (bottomWayPointOffset !== undefined && windowOffsetTop > bottomWayPointOffset) {
-				this.stickToBottom();
+				//this.stickToBottom();
 			} else if (windowOffsetTop > topWayPointOffset) {
-				this.fixElement();
+				//this.fixElement();
 			}
 		},
 		destroy: function () {
@@ -102,6 +102,7 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 	});
 	$(document).bind('createWidgets', function () {
 		$('.stickyPanel').each(function () {
+			console.log('stick');
 			var $this = $(this),
 				options = $this.data();
 			if ($this.hasClass('initialized')) { //there must be a better way to tell if this has already beem initailized
@@ -112,9 +113,9 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 			} else {
 				options.topWayPoint = $this.parent();
 			}
-			//$this.stickyPanel(options);
+			$this.stickyPanel(options);
 		});
-		//$('.stickyPanel').stickyPanel('checkWayPoints');
+		$('.stickyPanel').stickyPanel('checkWayPoints');
 	});
 	$(document).bind('windowResize', function () {
 		$('.stickyPanel').stickyPanel('checkWayPoints');

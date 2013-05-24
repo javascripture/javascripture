@@ -89,7 +89,7 @@ require({
 						'src/focusFirstInput',
 						'src/keyboardShortcuts',
 						'src/reference',
-						'src/stickyPanel',
+//						'src/stickyPanel',
 		//				'order!src/word',
 						'src/wordDetails',
 						'src/wordInterface',
