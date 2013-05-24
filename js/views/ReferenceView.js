@@ -32,20 +32,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
             // Renders the view's template inside of the current listview element
             this.$el.find("#reference-panel").html(this.template);
 
-			var $anchorPoint = $( anchorPointSelector );
-
-			if ( anchorPointSelector === '.current-verse' ) {
-				verseHeight = $anchorPoint.height(),
-				offset = -$(window).height() / 2 + verseHeight;				
-			}
-
-			//anchor to a chapter
-			if ( $anchorPoint.length === 0 ) {
-				$anchorPoint = $( '#' + jsonCollection.currentId );
-				offset = - $('[data-role=header]').height();
-			}
-
-			$('body').scrollTo( $anchorPoint, { offset: offset } );
+			this.anchorReference( anchorPointSelector, offset);
 			
 			$('.chapter-wrapper').waypoint(function (event, direction) {
 				$('#stopBackbone').val('true');
@@ -93,6 +80,23 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			}
 
 			return [offset, anchorPointSelector];
+		},
+		
+		anchorReference: function ( anchorPointSelector, offset ) {
+			var $anchorPoint = $( anchorPointSelector );
+
+			if ( anchorPointSelector === '.current-verse' ) {
+				verseHeight = $anchorPoint.height(),
+				offset = -$(window).height() / 2 + verseHeight;				
+			}
+
+			//anchor to a chapter
+			if ( $anchorPoint.length === 0 ) {
+				$anchorPoint = $( '#' + jsonCollection.currentId );
+				offset = - $('[data-role=header]').height();
+			}
+
+			$('body').scrollTo( $anchorPoint, { offset: offset } );
 		}
 		
     } );
