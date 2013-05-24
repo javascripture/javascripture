@@ -13,8 +13,10 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				chapter = referenceObject.chapter,
 				verse = parseInt( this.get( 'verse' ), 10 ),
 				jsonChapter = parseInt( chapter, 10 ) - 1, //because javascript arrays count from 0
-				jsonVerse = verse - 1, //because javascript arrays count from 0
-				translatedText = english[ book ][ jsonChapter ],
+				jsonVerse = verse - 1; //because javascript arrays count from 0
+//console.log(book);
+//console.log(jsonChapter);
+				var translatedText = english[ book ][ jsonChapter ],
 				originalObject,
 				language;
 

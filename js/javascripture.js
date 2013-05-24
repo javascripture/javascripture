@@ -91,6 +91,7 @@ require({
 						'src/reference',
 //						'src/stickyPanel',
 		//				'order!src/word',
+						'src/wayPoint',
 						'src/wordDetails',
 						'src/wordInterface',
 						'src/crossReferences'

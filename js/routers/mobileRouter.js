@@ -31,7 +31,7 @@ define([
 					contentHeight = $(self.referenceView.el).height() - $window.height();
 				//update the panel based on the current hash state
 				var hash = window.location.hash.split('?')[1];
-				self.reference( hash );
+				self.reference( hash, 'scroll' );
 /*				if (scrollTop === 0) { //previous
 					var offsetChapter = self.referenceView.collection.previousChapter;
 						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
@@ -66,18 +66,23 @@ define([
 
 		},
 
-		reference: function( hash ) {
+		reference: function( hash, type ) {
 
 //			$('#reference-panel').reference( hashObject );
 			var hashObject = this._getObjectFromHash( hash );
 
 			if ( $('#stopBackbone').val() !== 'true' ) {
 				if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
-					if ( this.referenceView.collection.chapter > hashObject.chapter ) {
-						this.referenceView.collection.direction = 'previous';
-					}
-					if ( this.referenceView.collection.chapter < hashObject.chapter ) {
-						this.referenceView.collection.direction = 'next';
+
+					this.referenceView.collection.direction = '';
+					if ( type === 'scroll' ) {
+						console.log(type);
+						if ( this.referenceView.collection.chapter > hashObject.chapter ) {
+							this.referenceView.collection.direction = 'previous';
+						}
+						if ( this.referenceView.collection.chapter < hashObject.chapter ) {
+							this.referenceView.collection.direction = 'next';
+						}						
 					}
 					this.referenceView.collection.book = hashObject.book;
 					this.referenceView.collection.chapter = hashObject.chapter;

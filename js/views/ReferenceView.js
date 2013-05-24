@@ -32,25 +32,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 
 			this.anchorReference( anchoringData );
 			
-			$('.chapter-wrapper').waypoint(function (event, direction) {
-				$('#stopBackbone').val('true');
-				var $this = undefined;
-				if (direction === 'down') {
-					$this = $(this);
-				} else {
-					if ( $(this).prev('.chapter-wrapper').length ) {
-						$this = $(this).prev('.chapter-wrapper');						
-					}
-				}
-				if ( $this !== undefined ) {
-					$( 'h1' ).text( $this.data('book') + ' ' + $this.data('chapter') );
-					var hash = 'reference?book=' + $this.data('book') + '&chapter=' + $this.data('chapter');
-					window.location.hash = hash; //'reference?' + collection.objectToQueryString( collection.nextChapter );
-//					event.stopPropagation();					
-				}
-			}, {
-				offset: $('[data-role=header]').height()
-			});
+			$('.chapter-wrapper').wayPoint();
 
             // Maintains chainability
             return this;
