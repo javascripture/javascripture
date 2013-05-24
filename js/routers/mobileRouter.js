@@ -26,12 +26,14 @@ define([
 			} );
 
 			$(window).bind('scrollstop', function () {
-				var $window = $(this),
-					scrollTop = $window.scrollTop(),
-					contentHeight = $(self.referenceView.el).height() - $window.height();
-				//update the panel based on the current hash state
-				var hash = window.location.hash.split('?')[1];
-				self.reference( hash, 'scroll' );
+				if ( $('#hashdelay').val('true') ) {
+					var $window = $(this),
+						scrollTop = $window.scrollTop(),
+						contentHeight = $(self.referenceView.el).height() - $window.height();
+					//update the panel based on the current hash state
+					var hash = window.location.hash.split('?')[1];
+					self.reference( hash, 'scroll' );
+				}
 /*				if (scrollTop === 0) { //previous
 					var offsetChapter = self.referenceView.collection.previousChapter;
 						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
@@ -67,16 +69,16 @@ define([
 		},
 
 		reference: function( hash, type ) {
-
+console.log('reference:' + hash);
 //			$('#reference-panel').reference( hashObject );
 			var hashObject = this._getObjectFromHash( hash );
 
 			if ( $('#stopBackbone').val() !== 'true' ) {
 				if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
+						console.log(type);
 
 					this.referenceView.collection.direction = '';
 					if ( type === 'scroll' ) {
-						console.log(type);
 						if ( this.referenceView.collection.chapter > hashObject.chapter ) {
 							this.referenceView.collection.direction = 'previous';
 						}

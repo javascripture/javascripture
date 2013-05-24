@@ -75,10 +75,14 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			//anchor to a chapter
 			if ( $anchorPoint.length === 0 ) {
 				$anchorPoint = $( '#' + jsonCollection.currentId );
-				offset = - $('[data-role=header]').height();
+				offset = - $('[data-role=header]').height() - 10;
 			}
 
 			$('body').scrollTo( $anchorPoint, { offset: offset } );
+			
+			setTimeout(function () {
+				$('#hashdelay').val('false'); //yuk
+			}, 3000);
 		}
 		
     } );
