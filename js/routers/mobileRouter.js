@@ -26,13 +26,15 @@ define([
 			} );
 
 			$(window).bind('scrollstop', function () {
-				if ( $('#hashdelay').val('true') ) {
-					var $window = $(this),
-						scrollTop = $window.scrollTop(),
-						contentHeight = $(self.referenceView.el).height() - $window.height();
-					//update the panel based on the current hash state
-					var hash = window.location.hash.split('?')[1];
-					self.reference( hash, 'scroll' );
+				if ( $('#stopBackbone').val() !== 'true' ) {
+					if ( $('#hashdelay').val('true') ) {
+						var $window = $(this),
+							scrollTop = $window.scrollTop(),
+							contentHeight = $(self.referenceView.el).height() - $window.height();
+							//update the panel based on the current hash state
+						var hash = window.location.hash.split('?')[1];
+						self.reference( hash, 'scroll' );
+					}
 				}
 /*				if (scrollTop === 0) { //previous
 					var offsetChapter = self.referenceView.collection.previousChapter;
@@ -109,13 +111,15 @@ console.log('reference:' + hash);
 		},
 
 		_getObjectFromHash: function( hash ) {
-			var typeArray = hash.split('&'),
-				options = {};
-			for(var i = 0; i < typeArray.length; i++) {
-				parameter = typeArray[i].split('=');
-				options[parameter[0]] = parameter[1];
+			if ( hash ) {
+				var typeArray = hash.split('&'),
+					options = {};
+				for(var i = 0; i < typeArray.length; i++) {
+					parameter = typeArray[i].split('=');
+					options[parameter[0]] = parameter[1];
+				}
+				return options;				
 			}
-			return options;
 		},
 
 		// get a random reference

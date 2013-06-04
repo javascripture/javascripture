@@ -59,7 +59,7 @@ require({
 	)
 
 	require( [ "jquery-mobile" ], function() {
-		$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
+		//$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
 		require( [ 'ba-debug', 'src/bookControl', 'external/jquery.scrollTo' ], function() {
 			debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
 			setTimeout(function () { //to give the framework a chance to load

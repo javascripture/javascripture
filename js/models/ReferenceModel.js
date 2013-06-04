@@ -2,7 +2,7 @@
 // ==============
 
 // Includes file dependencies
-define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'translateLiterally', 'jquery-mobile', 'ba-debug'], function ($, Backbone, bible, english, hebrew, greek, strongsDictionary, wordFamilies, translateLiterally) {
+define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'wordFamilies', 'translateLiterally', 'ba-debug'], function ($, Backbone, bible, english, hebrew, greek, strongsDictionary, wordFamilies, translateLiterally) {
 
 	// The Model constructor
     var Model = Backbone.Model.extend( {
