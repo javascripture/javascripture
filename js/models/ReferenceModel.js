@@ -36,12 +36,18 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			}
 
 			$.each(translatedText, function (verseNumber, verseObject) {
+//				console.log(originalObject[ book ][ jsonChapter ][ verseNumber ]);
 				var reference = {
 					referenceId: self.getReferenceId( book, chapter, verseNumber + 1 ),
 					language: language,
-					english: self.createReferencesArray( verseObject ),
-					original: self.createReferencesArray( originalObject[ book ][ jsonChapter ][ verseNumber ] )
+					english: self.createReferencesArray( verseObject )
 				};
+
+				if ( originalObject[ book ][ jsonChapter ][ verseNumber ] ) {
+					reference.original = self.createReferencesArray( originalObject[ book ][ jsonChapter ][ verseNumber ] );	
+				} else {
+					console.log( book + ' ' + jsonChapter + ' ' + verseNumber + ' is missing' );
+				}
 				
 				//create a class for the current verse
 				if ( verseNumber + 1 === verse && offset === 0 ) {

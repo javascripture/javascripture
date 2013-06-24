@@ -1,4 +1,4 @@
-// Category View
+// Reference View
 // =============
 
 // Includes file dependencies
@@ -24,11 +24,11 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			    jsonCollection = collection.toJSON()[0], //bit strange!
 			    anchoringData = this.getAnchoringData( this.collection.direction );
 
-            // Sets the view's template property
-            this.template = _.template( $( "script#categoryItems" ).html(), { "collection": jsonCollection } );
+			// Sets the view's template property
+			this.template = _.template( $( "script#categoryItems" ).html(), { "collection": jsonCollection } );
 
             // Renders the view's template inside of the current listview element
-            this.$el.find("#reference-panel").html(this.template);
+			this.$el.find("#reference-panel").html(this.template);
 
 			this.anchorReference( anchoringData );
 			

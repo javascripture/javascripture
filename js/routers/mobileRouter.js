@@ -26,25 +26,29 @@ define([
 			} );
 
 			$(window).bind('scrollstop', function () {
-				if ( $('#stopBackbone').val() !== 'true' ) {
-					if ( $('#hashdelay').val('true') ) {
-						var $window = $(this),
-							scrollTop = $window.scrollTop(),
-							contentHeight = $(self.referenceView.el).height() - $window.height();
-							//update the panel based on the current hash state
-						var hash = window.location.hash.split('?')[1];
-						self.reference( hash, 'scroll' );
+				setTimeout( function () { //todo - all this does is delay the problem
+					if ( $('#stopBackbone').val() !== 'true' ) {
+						if ( $('#hashdelay').val('true') ) {
+							var $window = $(this),
+								scrollTop = $window.scrollTop(),
+								contentHeight = $(self.referenceView.el).height() - $window.height();
+								//update the panel based on the current hash state
+							var hash = window.location.hash.split('?')[1];
+							self.reference( hash, 'scroll' );
+						}
 					}
-				}
+				}, 1000);
 /*				if (scrollTop === 0) { //previous
-					var offsetChapter = self.referenceView.collection.previousChapter;
-						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
-					self.referenceInject( hash );
+//					var offsetChapter = self.referenceView.collection.previousChapter;
+//						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+//					self.referenceInject( hash );
+					self.reference( hash, 'scroll' );
 				}
 				if (scrollTop > contentHeight) { //next
-					var offsetChapter = self.referenceView.collection.nextChapter,
-						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
-					self.referenceInject( hash );
+//					var offsetChapter = self.referenceView.collection.nextChapter,
+//						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+//					self.referenceInject( hash );
+					self.reference( hash, 'scroll' );
 				}*/
 			});
 
@@ -71,7 +75,6 @@ define([
 		},
 
 		reference: function( hash, type ) {
-console.log('reference:' + hash);
 //			$('#reference-panel').reference( hashObject );
 			var hashObject = this._getObjectFromHash( hash );
 
