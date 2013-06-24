@@ -46,7 +46,7 @@ define([
 //					self.referenceInject( hash );
 					self.reference( hash, 'scroll' );
 				}
-				if (scrollTop > contentHeight) { //next
+				if (scrollTop === contentHeight) { //next
 					var offsetChapter = self.referenceView.collection.nextChapter,
 						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
 					console.log(hash);
