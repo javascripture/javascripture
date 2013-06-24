@@ -316,19 +316,6 @@ define(['jquery', 'bible', 'english', 'hebrew', 'greek', 'strongsDictionary', 'w
 			return $markup.prop('outerHTML');
 		}
 	});
-	$('.gotoReference').submit(function (event) {
-		event.preventDefault();
-		var reference = $('#gotoReference').val().split(/,| |\.|:/),
-			book = reference[0],
-			chapter = reference[1],
-			verse = reference[2];
-		setTimeout(function () { //this gives the page time to load so that it scrolls to the right place
-			$.mobile.changePage('#reference?book=' + book + '&chapter=' + chapter + '&verse=' + verse, {
-				transition: 'none'
-			});
-		});
-		return false;
-	});
 	$(document).on('click', '.referenceLink', function () {
 		$('.ui-btn-active').removeClass('ui-btn-active');
 		$(this).addClass('ui-btn-active');

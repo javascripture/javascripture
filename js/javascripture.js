@@ -1,5 +1,7 @@
 /*global require, $, debug*/
 var start = new Date();
+var scrollDeferred;
+
 require.config({
 	paths: {
 		'jquery': 'external/jquery-2.0.0.min',
@@ -45,6 +47,7 @@ require({
 }, [ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
 
 	$( document ).on( "mobileinit",
+
 		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
 		function() {
 			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.

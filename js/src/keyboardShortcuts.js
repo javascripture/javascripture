@@ -3,7 +3,13 @@ define(['jquery', 'ba-debug'], function ($) {
 	"use strict";
 	$(document).on('keypress', function (event) {
 		debug.debug(event.keyCode);
-		$('#keyCode' + event.keyCode).click();
+
+		var target = $('#keyCode' + event.keyCode);
+		if ( target.length > 0) {
+			event.preventDefault();
+			$('#keyCode' + event.keyCode).click();			
+		}
+
 		if (event.keyCode === 14 || event.keyCode === 16 || event.keyCode === 45 || event.keyCode === 61) {
 			if ($('#results .collapsible-wrapper').length) { //there should be a better way to see if the widget has been initialized
 				var currentLink = $('#results').find('.ui-btn-active'),
@@ -19,9 +25,9 @@ define(['jquery', 'ba-debug'], function ($) {
 			}
 		}
 	});
-	$(document).on('keyup', function (event) { //for escape - for some reason this is not detected by keypress
+/*	$(document).on('keyup', function (event) { //for escape - for some reason this is not detected by keypress
 		if (event.keyCode === 27) {
 			$('a[title=Close]').click();
 		}
-	});
+	});*/
 });

@@ -44,13 +44,23 @@ define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebre
 				self.nextChapter = references.getOffsetChapter(1);
 
 				var collection = {
-					currentId: references.getReferenceId(),
-					chapters: []
-				};
+						currentId: references.getReferenceId(),
+						referenceName: references.getReferenceName(),
+						chapters: []
+					},
+					previousChapter = references.getReference(-1),
+					currentChapter = references.getReference(0),
+					nextChapter = references.getReference(1);
 
-				collection.chapters.push(references.getReference(-1));
-				collection.chapters.push(references.getReference(0));
-				collection.chapters.push(references.getReference(+1));
+				if ( previousChapter ) {
+					collection.chapters.push( previousChapter );					
+				}
+				if ( currentChapter ) {
+					collection.chapters.push( currentChapter );					
+				}
+				if ( nextChapter ) {
+					collection.chapters.push( nextChapter );					
+				}
 
 				// Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
 				options.success( collection );

@@ -30,6 +30,8 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
             // Renders the view's template inside of the current listview element
 			this.$el.find("#reference-panel").html(this.template);
 
+			$( 'h1' ).text( jsonCollection.referenceName );
+
 			this.anchorReference( anchoringData );
 			
 			$('.chapter-wrapper').wayPoint();
@@ -63,6 +65,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 		},
 		
 		anchorReference: function ( anchoringData ) {
+			console.log( anchoringData );
 			var anchorPointSelector = anchoringData[1],
 			    offset = anchoringData[0],
 			    $anchorPoint = $( anchorPointSelector );
@@ -75,8 +78,10 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			//anchor to a chapter
 			if ( $anchorPoint.length === 0 ) {
 				$anchorPoint = $( '#' + jsonCollection.currentId );
-				offset = - $('[data-role=header]').height() - 10;
+				offset = - $('[data-role=header]').height();// - 10;
 			}
+			
+			console.log(offset);
 
 			$('body').scrollTo( $anchorPoint, { offset: offset } );
 			

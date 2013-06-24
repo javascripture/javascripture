@@ -13,12 +13,14 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				chapter = referenceObject.chapter,
 				verse = parseInt( this.get( 'verse' ), 10 ),
 				jsonChapter = parseInt( chapter, 10 ) - 1, //because javascript arrays count from 0
-				jsonVerse = verse - 1; //because javascript arrays count from 0
-//console.log(book);
-//console.log(jsonChapter);
-				var translatedText = english[ book ][ jsonChapter ],
+				jsonVerse = verse - 1, //because javascript arrays count from 0
 				originalObject,
 				language;
+
+			if ( typeof referenceObject.book === 'undefined') {
+				return;
+			}
+			var translatedText = english[ book ][ jsonChapter ];
 
 			if (hebrew[book] !== undefined) {
 				originalObject = hebrew;
@@ -33,7 +35,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 				book: book,
 				chapter: chapter,
 				references: []
-			}
+			};
 
 			$.each(translatedText, function (verseNumber, verseObject) {
 //				console.log(originalObject[ book ][ jsonChapter ][ verseNumber ]);
@@ -78,6 +80,10 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 			return referenceId;
 		},
 		
+		getReferenceName: function () {
+			return this.get( 'book' ) + ' ' + this.get( 'chapter' );
+		},
+
 		createReferencesArray: function ( verseObject ) {
 			var references = [];
 			$.each(verseObject, function ( wordNumber, wordObject ) {

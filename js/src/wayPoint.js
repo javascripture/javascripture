@@ -17,9 +17,10 @@ define(['jquery', 'jquery-mobile', 'ba-debug', 'external/jquery.waypoints'], fun
 					}
 				}
 				if ( $this !== undefined ) {
+					console.log( $this );
 					$( 'h1' ).text( $this.data('book') + ' ' + $this.data('chapter') );
-					var hash = 'reference?book=' + $this.data('book') + '&chapter=' + $this.data('chapter');
-					window.location.hash = hash; //'reference?' + collection.objectToQueryString( collection.nextChapter );
+//					var hash = 'reference?book=' + $this.data('book') + '&chapter=' + $this.data('chapter');
+//					window.location.hash = hash; //'reference?' + collection.objectToQueryString( collection.nextChapter );
 //					event.stopPropagation();					
 				}
 			}, {

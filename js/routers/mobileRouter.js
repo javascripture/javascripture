@@ -25,31 +25,51 @@ define([
 				collection: new ReferenceCollection( [], {} )
 			} );
 
+			scrollDeferred = $.Deferred;
 			$(window).bind('scrollstop', function () {
-				setTimeout( function () { //todo - all this does is delay the problem
-					if ( $('#stopBackbone').val() !== 'true' ) {
-						if ( $('#hashdelay').val('true') ) {
-							var $window = $(this),
-								scrollTop = $window.scrollTop(),
-								contentHeight = $(self.referenceView.el).height() - $window.height();
-								//update the panel based on the current hash state
-							var hash = window.location.hash.split('?')[1];
-							self.reference( hash, 'scroll' );
-						}
+				var $window = $(this),
+					scrollTop = $window.scrollTop(),
+					contentHeight = $(self.referenceView.el).height() - $window.height();
+				/*if ( $('#stopBackbone').val() !== 'true' ) {
+					if ( $('#hashdelay').val('true') ) {
+							//update the panel based on the current hash state
+						var hash = window.location.hash.split('?')[1];
+						self.reference( hash, 'scroll' );
 					}
-				}, 1000);
-/*				if (scrollTop === 0) { //previous
-//					var offsetChapter = self.referenceView.collection.previousChapter;
-//						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+				}*/
+
+				if (scrollTop === 0) { //previous
+					
+					var offsetChapter = self.referenceView.collection.previousChapter;
+						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+					console.log(hash);
 //					self.referenceInject( hash );
 					self.reference( hash, 'scroll' );
 				}
 				if (scrollTop > contentHeight) { //next
-//					var offsetChapter = self.referenceView.collection.nextChapter,
-//						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+					var offsetChapter = self.referenceView.collection.nextChapter,
+						hash = self.referenceView.collection.objectToQueryString( offsetChapter );
+					console.log(hash);
+
 //					self.referenceInject( hash );
 					self.reference( hash, 'scroll' );
-				}*/
+										console.log(hash);
+				}
+			});
+
+			//bind go to form
+			$('.gotoReference').submit(function (event) {
+				event.preventDefault();
+				console.log($('#gotoReference').val());
+				var reference = bible.parseReference( $('#gotoReference').val() );
+
+				setTimeout( function () { //this gives the page time to load so that it scrolls to the right place
+					var hash = 'book=' + bible.Data.books[reference.bookID - 1][0] + '&chapter=' + reference.chapter + '&verse=' + reference.verse;
+					console.log(hash);
+					self.reference( hash );
+				});
+				$( '#gotoForm' ).popup( 'close' );
+				return false;
 			});
 
 			Backbone.history.start();
@@ -78,9 +98,9 @@ define([
 //			$('#reference-panel').reference( hashObject );
 			var hashObject = this._getObjectFromHash( hash );
 
-			if ( $('#stopBackbone').val() !== 'true' ) {
+//			if ( $('#stopBackbone').val() !== 'true' ) {
 				if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
-						console.log(type);
+					//console.log(type);
 
 					this.referenceView.collection.direction = '';
 					if ( type === 'scroll' ) {
@@ -103,9 +123,9 @@ define([
 
 					} );
 				}
-			} else {
-				$('#stopBackbone').val('false');
-			}
+			//} else {
+			//	$('#stopBackbone').val('false');
+			//}
 
 		},
 		
