@@ -25,7 +25,7 @@ define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug']
 				markup += '<div class="' + wordFamilies.getFamily(lemma) + '"><h3 class="' + wordFamilies.getFamily(lemma) + '">' + lemma + ' ' + word + '</h3></div><br />';
 				markup += '<strong>Lemma:</strong> ' + strongsDictionary[lemma].lemma + '<br />';
 				markup += '<strong>Derivation:</strong> ' + strongsDictionary[lemma].derivation + '<br />';
-				markup += '<strong>KJV usage:</strong> ' + strongsDictionary[lemma].kjv_def + '<br />';
+				markup += '<strong>KJV usage:</strong> ' + self.getUses( strongsDictionary[lemma].kjv_def, lemma ) + '<br />';
 				markup += '<strong>Pronounciation:</strong> ' + strongsDictionary[lemma].pron + '<br />';
 				markup += '<strong>Strongs definition:</strong> ' + strongsDictionary[lemma].strongs_def + '<br />';
 				markup += '<strong>Language:</strong> ' + language + '<br />';
@@ -48,6 +48,16 @@ define(['jquery', 'strongsDictionary', 'morphology', 'wordFamilies', 'ba-debug']
 			$this.find('.content').html(markup).find('[data-role=button]').button();
 			$this.find('[data-role=controlgroup]').controlgroup();
 			$this.popup('open');
+		},
+		getUses: function ( uses, lemma ) {
+			var returnString = '';
+			if ( typeof uses !== 'undefined' ) {
+				$.each( uses.split( ', ' ), function ( index, use ) {
+					returnString += '<span href="#" class="word" data-word="' + use + '" data-lemma="' + lemma + '" data-language="english" data-clusivity="exclusive">' + use + '</span>, ';
+				});
+			}
+			return returnString;
+
 		}
 	});
 	$(document).on('vclick', '.wordDetails', function (event) {

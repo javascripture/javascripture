@@ -94,7 +94,7 @@ define(['jquery', 'backbone', 'bible', 'english', 'hebrew', 'greek', 'strongsDic
 					wordObject.family = wordFamilies.getFamily( wordObject.lemma );
 				}
 				if ( wordObject.morph !== undefined ) {
-					wordObject.morph = ' ' + wordObject.morph;
+					wordObject.morph = wordObject.morph;
 					wordObject.title = wordObject.title + ' ' + wordObject.morph;
 				}
 				references.push(wordObject);

@@ -15,7 +15,7 @@ require.config({
 });
 require({
 	baseUrl: 'js',
-	urlArgs: "bust=" +  (new Date()).getTime()
+	urlArgs: "bust=" + (new Date()).getTime()
 }, [
 	'tests/search',
 	'tests/morphology'

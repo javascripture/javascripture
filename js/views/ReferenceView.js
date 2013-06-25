@@ -83,7 +83,7 @@ define([ "jquery", "backbone","models/ReferenceModel" ], function( $, Backbone, 
 			
 			console.log(offset);
 
-			$('body').scrollTo( $anchorPoint, { offset: offset } );
+			$('body').scrollTo( $anchorPoint, { offset: offset + 50 } );
 			
 			setTimeout(function () {
 				$('#hashdelay').val('false'); //yuk

@@ -99,7 +99,7 @@ define([
 			var hashObject = this._getObjectFromHash( hash );
 
 //			if ( $('#stopBackbone').val() !== 'true' ) {
-				if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
+				//if ( ! this.referencesAreTheSame( this.referenceView.collection, hashObject) ) {
 					//console.log(type);
 
 					this.referenceView.collection.direction = '';
@@ -122,7 +122,7 @@ define([
 						$.mobile.loading( "hide" );
 
 					} );
-				}
+				//}
 			//} else {
 			//	$('#stopBackbone').val('false');
 			//}

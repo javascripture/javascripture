@@ -103,12 +103,16 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 			return false;
 		},
 		getIdFromOptions: function () {
+			console.log(this.options);
 			var id = '';
 			id += this.options.word + '_';
-			id += this.options.lemma + '_';
-			id += this.options.morph.replace(/ /g, '_').replace(/\*/g, '_').replace(/\./g, '_').replace(/\(/g, '_').replace(/\)/g, '_');
-			console.log(this.options.morph);
-			return id;
+			if ( this.options.lemma ) {
+				id += this.options.lemma + '_';
+			}
+			if ( this.options.morph ) {
+				id += this.options.morph;
+			}
+			return id.replace(/ /g, '_').replace(/\*/g, '_').replace(/\./g, '_').replace(/\(/g, '_').replace(/\)/g, '_');
 		},
 		getTitleFromOptions: function () {
 			var title = '';
