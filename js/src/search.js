@@ -131,8 +131,10 @@ define(['english', 'hebrew', 'greek', 'ba-debug'], function (english, hebrew, gr
 		},
 		standarizeWordEndings: function (word) {
 			return word.replace(/ם/gi, 'מ');
+		},
+		getTranslations: function ( lemma ) {
+			
 		}
-
 	};
 	return search;
 });
