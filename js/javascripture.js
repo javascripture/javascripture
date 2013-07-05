@@ -42,78 +42,75 @@ require.config({
 });
 
 // Includes File Dependencies
-require({
-	baseUrl: 'js',
-}, [ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
 
-	$( document ).on( "mobileinit",
 
-		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
-		function() {
-			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
-			$.mobile.linkBindingEnabled = false;
-
-			// Disabling this will prevent jQuery Mobile from handling hash changes
-			$.mobile.hashListeningEnabled = false;
-			
-			console.log('mobile init');
-
-		}
-	);
-
-	require( [ "jquery-mobile" ], function() {
-		//$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
-		require( [ 'ba-debug', 'src/bookControl', 'external/jquery.scrollTo' ], function() {
-			debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
-			setTimeout(function () { //to give the framework a chance to load
-				$.mobile.showPageLoadingMsg('a', 'Loading data');
-				console.log('jqm');
-				//This is just to give more specific loading messages
-				require(['bible'], function (){
-					$.mobile.showPageLoadingMsg('a', 'Loading English');
-					require(['english-ot', 'english-nt'], function (){
-						$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
-						require(['hebrew'], function (){
-				console.log('hebrew');
-							$.mobile.showPageLoadingMsg('a', 'Loading Greek');
-							require(['greek'], function (){
-								$.mobile.showPageLoadingMsg('a', 'Loading Strongs Numbers');
-								require(['strongsDictionary'], function (){
-									require(['strongsObjectWithFamilies'], function (){
-										$.mobile.showPageLoadingMsg('a', 'Data loaded');
+require( [ "jquery-mobile" ], function() {
+	require( [ 'ba-debug', 'src/bookControl', 'external/jquery.scrollTo' ], function() {
+		debug.debug('Jquery mobile loading time: ' + (new Date() - start) + ' miliseconds');
+		setTimeout(function () { //to give the framework a chance to load
+			$.mobile.showPageLoadingMsg('a', 'Loading data');
+			console.log('jqm');
+			//This is just to give more specific loading messages
+			require(['bible'], function (){
+				$.mobile.showPageLoadingMsg('a', 'Loading English');
+				require(['english-ot', 'english-nt'], function (){
+					console.log('english');
+					$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
+					require(['hebrew'], function (){
+						console.log('hebrew');
+						$.mobile.showPageLoadingMsg('a', 'Loading Greek');
+						require(['greek'], function (){
+							$.mobile.showPageLoadingMsg('a', 'Loading Strongs Numbers');
+							require(['strongsDictionary'], function (){
+								$.mobile.showPageLoadingMsg('a', 'Loading families');
+								require(['strongsObjectWithFamilies'], function (){
+									$.mobile.showPageLoadingMsg('a', 'Loading modules');
+									require( {
+										baseUrl: 'js',
+									}, [ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
+								
+										$( document ).on( "mobileinit",
+									
+											// Set up the "mobileinit" handler before requiring jQuery Mobile's module
+											function() {
+												// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+												$.mobile.linkBindingEnabled = false;
+									
+												// Disabling this will prevent jQuery Mobile from handling hash changes
+												$.mobile.hashListeningEnabled = false;
+												
+												console.log('mobile init');
+									
+											}
+										);
+									
+										$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
 										
-										
-
-										
-					$.mobile.showPageLoadingMsg('a', 'Loading modules');
-					require([
-						//'src/router',
-//						'src/chapter',
-						'src/focusFirstInput',
-						'src/keyboardShortcuts',
-//						'src/reference',
-						//'src/stickyPanel',
-						//'order!src/word',
-						'src/wayPoint',
-						'src/wordDetails',
-						'src/wordInterface',
-						'src/crossReferences'
-					], function () { //now build the menu and show the first reference
-						debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
-
-						// Instantiates a new Backbone.js Mobile Router
-						this.router = new Mobile();
-
-						//fix popups
-						$('[data-rel=popup]').on('click', function ( event ) {
-							event.preventDefault();
-							$($(this).attr('href')).popup('open')
-						});
-						
-					});
-	
-										
-
+									
+										require([
+											//'src/router',
+					//						'src/chapter',
+											'src/focusFirstInput',
+											'src/keyboardShortcuts',
+					//						'src/reference',
+											//'src/stickyPanel',
+											//'order!src/word',
+											'src/wayPoint',
+											'src/wordDetails',
+											'src/wordInterface',
+											'src/crossReferences'
+										], function () { //now build the menu and show the first reference
+											debug.debug('Total loading time: ' + (new Date() - start) + ' miliseconds');
+					
+											// Instantiates a new Backbone.js Mobile Router
+											this.router = new Mobile();
+					
+											//fix popups
+											$('[data-rel=popup]').on('click', function ( event ) {
+												event.preventDefault();
+												$($(this).attr('href')).popup('open')
+											});
+										});
 									});
 								});
 							});

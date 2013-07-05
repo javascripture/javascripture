@@ -1,7 +1,6 @@
 /*global define*/
-define(['english-ot', 'english-nt', 'hebrew', 'greek', 'ba-debug'], function (englishOt, englishNt, hebrew, greek) {
-	var english = jQuery.extend(englishOt, englishNt);
-	console.log(english);
+define(['jquery', 'english-ot', 'english-nt', 'hebrew', 'greek', 'ba-debug'], function ($, englishOt, englishNt, hebrew, greek) {
+	var english = $.extend(englishOt, englishNt);
 	var search = {
 		parameters: { //deprecated
 			

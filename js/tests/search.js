@@ -1,5 +1,5 @@
 /*global define, debug, module, test, ok*/
-define(['../external/qunit', 'src/search'], function (qunit, search) {
+define(['src/search'], function (search) {
 	"use strict";
 	
 	var javascriptureTestHelper = {
@@ -12,12 +12,12 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 	var parameters = { //default parameters
 		language: 'english',
 		range: 'verse'
-	}	
+	};
 	module("search english");
 	test("search", function () {
 		ok(search, 'the search object exists');
 	});
-/*	test('search for one term in a verse', function testWordInVerse () {
+	test('search for one term in a verse', function testWordInVerse () {
 		expect(4);
 		equal(search.getReferences({
 			language: 'english',
@@ -184,5 +184,4 @@ define(['../external/qunit', 'src/search'], function (qunit, search) {
 		}).length, 68, 'there are 68 occurances of the optative mood in Greek');
 	});
 
-*/
 });

@@ -1,5 +1,5 @@
 /*global define, debug, module, test, ok*/
-define(['../external/qunit', 'src/morphology'], function (qunit, morphology) {
+define(['src/morphology'], function (morphology) {
 	"use strict";
 	
 	/*english tests*/
