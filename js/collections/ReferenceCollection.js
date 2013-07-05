@@ -2,7 +2,9 @@
 // ===================
 
 // Includes file dependencies
-define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english', 'hebrew', 'greek' ], function( $, Backbone, ReferenceModel, bible, english, hebrew, greek ) {
+define([ "jquery","backbone","models/ReferenceModel", 'bible', 'english-ot', 'english-nt', 'hebrew', 'greek' ], function( $, Backbone, ReferenceModel, bible, englishOt, englishNt, hebrew, greek ) {
+
+	var english = jQuery.extend(englishOt, englishNt);
 
     // Extends Backbone.Router
     var Collection = Backbone.Collection.extend( {

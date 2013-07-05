@@ -13,7 +13,8 @@ require.config({
 		'order': 'external/order-1.0.0',
 		'ba-debug': 'external/ba-debug',
 		'bible': '../data/bible',
-		'english': '../data/kjvdwyer6',
+		'english-ot': '../data/kjv-ot',
+		'english-nt': '../data/kjv-nt',
 		'hebrew': '../data/hebrew5',
 		'greek': '../data/greek4',
 		'search': 'src/search',
@@ -40,7 +41,6 @@ require.config({
 	waitSeconds: 20000
 });
 
-
 // Includes File Dependencies
 require({
 	baseUrl: 'js',
@@ -59,7 +59,7 @@ require({
 			console.log('mobile init');
 
 		}
-	)
+	);
 
 	require( [ "jquery-mobile" ], function() {
 		//$( document ).trigger( "mobileinit" ); //shouldn't this happen automattically?
@@ -71,7 +71,7 @@ require({
 				//This is just to give more specific loading messages
 				require(['bible'], function (){
 					$.mobile.showPageLoadingMsg('a', 'Loading English');
-					require(['english'], function (){
+					require(['english-ot', 'english-nt'], function (){
 						$.mobile.showPageLoadingMsg('a', 'Loading Hebrew');
 						require(['hebrew'], function (){
 				console.log('hebrew');
@@ -83,17 +83,17 @@ require({
 										$.mobile.showPageLoadingMsg('a', 'Data loaded');
 										
 										
-										
+
 										
 					$.mobile.showPageLoadingMsg('a', 'Loading modules');
 					require([
-	//					'src/router',
-						'src/chapter',
+						//'src/router',
+//						'src/chapter',
 						'src/focusFirstInput',
 						'src/keyboardShortcuts',
-						'src/reference',
-//						'src/stickyPanel',
-		//				'order!src/word',
+//						'src/reference',
+						//'src/stickyPanel',
+						//'order!src/word',
 						'src/wayPoint',
 						'src/wordDetails',
 						'src/wordInterface',
@@ -111,7 +111,7 @@ require({
 						});
 						
 					});
-										
+	
 										
 
 									});

@@ -72,6 +72,11 @@ define([
 				return false;
 			});
 
+			$(document).on('click', '.referenceLink', function () {
+				$('.ui-btn-active').removeClass('ui-btn-active');
+				$(this).addClass('ui-btn-active');
+			});
+
 			Backbone.history.start();
 
 		},
