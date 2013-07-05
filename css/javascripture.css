@@ -323,3 +323,10 @@ html {
   border: 1px solid #000;
   text-align: left;
 }
+.ui-field-contain label.clusivity-label {
+  line-height: 2.3;
+  width: auto;
+}
+.ui-field-contain label.clusivity-label-suffix {
+  margin-left: 2%;
+}

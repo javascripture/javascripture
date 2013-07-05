@@ -334,10 +334,10 @@
 			</div>
 			
 			<!-- Advanced search form -->
-			<div data-role="popup" id="advancedSearch" data-position-to="window">
+			<div data-role="popup" id="advancedSearch" data-position-to="window" data-theme="a">
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 				<form method="get" class="search">
-					<legend>Advanced search</legend>
+					<h3>Advanced search</h3>
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="word">Word</label>
 						<input type="text" name="word" id="word" value="" placeholder="Word" />
@@ -351,21 +351,13 @@
 						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
 					</div>
 					
-					<div data-role="fieldcontain">
+					<!--<div data-role="fieldcontain">
 						<fieldset data-role="controlgroup" class="ui-hide-label">
 							<legend>Combine terms?</legend>
 							<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
 							<label for="combineTerms">Combine terms?</label>
 						</fieldset>
-					</div>
-
-					<div data-role="fieldcontain">
-						<label for="clusivity">Search for:</label>
-						<select name="clusivity" id="clusivity" data-role="slider">
-							<option value="exclusive">All words</option>
-							<option value="inclusive">Any word</option>
-						</select>
-					</div>
+					</div>-->
 
 					<div data-role="fieldcontain">
 						<fieldset data-role="controlgroup" data-type="horizontal">
@@ -379,35 +371,43 @@
 						</fieldset>
 					</div>
 
+
+					<div data-role="fieldcontain">
+						<label for="clusivity" class="clusivity-label clusivity-label-prefix">Look for</label>
+						<select name="clusivity" id="clusivity" data-role="slider">
+							<option value="exclusive">All</option>
+							<option value="inclusive">Any</option>
+						</select>
+						<label for="clusivity" class="clusivity-label clusivity-label-suffix">words in a</label>
+					</div>
+
 					<div data-role="fieldcontain">
 						<fieldset data-role="controlgroup" data-type="horizontal">
-							<legend>Range:</legend>
 							<input type="radio" name="range" id="range_word" value="word" checked="checked" />
 							<label for="range_word">Word</label>
 							<input type="radio" name="range" id="range_verse" value="verse" />
 							<label for="range_verse">Verse</label>
 							<input type="radio" name="range" id="range_chapter" value="chapter" />
 							<label for="range_chapter">Chapter</label>
-							<input type="radio" name="range" id="range_book" value="book" />
-							<label for="range_chapter">Book</label>
 						</fieldset>
 					</div>
 
-					<div data-role="fieldcontain">
+					<!--<div data-role="fieldcontain">
 						<label for="type">Search type:</label>
 						<select name="type" id="type" data-role="slider">
 							<option value="lemma">Word</option>
 							<option value="morph">Morphology</option>
 						</select>
-					</div>
+					</div>-->
 
-					<div data-role="fieldcontain">
+					<!--<div data-role="fieldcontain">
 					<fieldset data-role="controlgroup" class="ui-hide-label">
 						<legend>Strict search:</legend>
 						<input type="checkbox" name="strictSearch" id="strictSearch" class="custom" />
 						<label for="strictSearch">Strict search?</label>
 					</fieldset>
-					</div>
+					</div>-->
+
 					<button type="submit" class="search-button">Search</button>							
 				</form>
 			</div>

@@ -108,7 +108,7 @@ require( [ "jquery-mobile" ], function() {
 											//fix popups
 											$('[data-rel=popup]').on('click', function ( event ) {
 												event.preventDefault();
-												$($(this).attr('href')).popup('open')
+												$($(this).attr('href')).popup('open');
 											});
 										});
 									});

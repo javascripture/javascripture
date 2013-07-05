@@ -193,6 +193,7 @@ define(['jquery', 'search', 'wordFamilies', 'translateLiterally', 'ba-debug'], f
 		event.preventDefault();
 		$('.search-button').text('Searching...');
 		$('#results').wordInterface($(this).serializeObject());
+		$(this).closest('[data-role=popup]').popup('close')
 		return false;
 	});
 	$(document).on('click', '.morphSearch', function (event) {
