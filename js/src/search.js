@@ -20,6 +20,7 @@ define(['jquery', 'english-ot', 'english-nt', 'hebrew', 'greek', 'ba-debug'], fu
 			matches: {} //used to keep track of which word has been matched when searching - for when you need to match more than one word
 		},
 		getReferences: function (parameters) {
+			console.log(parameters);
 			search.lookForTerm(parameters);
             return search.results.references;
 		},

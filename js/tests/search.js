@@ -114,7 +114,7 @@ define(['src/search'], function (search) {
 			lemma: 'H3588',
 			range: 'verse',
 			word: 'God'
-		}).length, 12, 'there are 12 occurances of "H3588" and "God" in the same verse in English');
+		}).length, 13, 'there are 12 occurances of "H3588" and "God" in the same verse in English');
 
 	});
 
