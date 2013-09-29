@@ -1,355 +1,211 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<head>
 		<title>Javascripture</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet"  href="css/jquery.mobile-1.3.1.min.css" />
-		<link rel="stylesheet"  href="css/qunit.css" />
-		<link rel="stylesheet" href="css/morphology.css" />
-		<link rel="stylesheet" href="css/strongscolors.css" />
-		<link rel="stylesheet"  href="css/javascripture.css" />
-		<script data-main="js/javascripture" src="js/external/requirejs/require.js"></script>
+		<link rel="stylesheet" href="css/layout.css" />
+		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+		<style id="bodyFontFamily"></style>
+		<style id="bodyFontSize"></style>
 	</head>
 	<body>
-		<div data-role="page" id="reference">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false">
-				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
-				<h1>&nbsp;</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-					<a href="#about" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">About</a>
-					<a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a>
-					<a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a>
-					<a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a>
-					<a href="#options" data-role="button" data-icon="gear" data-rel="popup" data-transition="slidedown">Options</a>
-					<a href="#help" data-role="button" data-icon="info" data-rel="popup" data-transition="slidedown">Help</a>
-				</div>
-				<div data-role="navbar" class="mobile-button">
-					<ul>
-						<li><a href="#searchForm" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Search</a></li>
-						<li><a href="#advancedSearch" data-role="button" data-icon="search" data-rel="popup" data-transition="slidedown" class="desktop-button" id="keyCode223">Advanced search</a></li>
-						<li><a href="#gotoForm" data-role="button" data-rel="popup" data-transition="slidedown" data-icon="book" class="desktop-button" id="keyCode169">Go to</a></li>
-						<li><a href="#bookList" data-role="button" data-icon="book" data-rel="popup" data-transition="slidedown" class="desktop-button">Books</a></li>
-						<li><a href="#results" data-role="button" data-icon="grid" data-rel="popup" data-transition="slidedown" class="desktop-button">Results</a></li>
-					</ul>
-				</div><!-- /navbar -->
-			</div><!-- /header -->
-			<div data-role="content">
-				<div id="reference-panel" class="reference">
-					<div class="panel-inner">
-						<div data-role="popup" id="results" data-position-to="window" data-transition="none" class="mobile-popup"></div>
-						<div data-role="popup" id="bookList" data-position-to="window" data-transition="none" class="mobile-popup">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right close">Close</a>
-							<div data-role="collapsible-set" data-inset="false">
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="50" data-name="Genesis">
-									<h3>Genesis</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="40" data-name="Exodus">
-									<h3>Exodus</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="27" data-name="Leviticus">
-									<h3>Leviticus</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="Numbers">
-									<h3>Numbers</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="34" data-name="Deuteronomy">
-									<h3>Deuteronomy</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Joshua">
-									<h3>Joshua</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="Judges">
-									<h3>Judges</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Ruth">
-									<h3>Ruth</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="1 Samuel">
-									<h3>1 Samuel</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="2 Samuel">
-									<h3>2 Samuel</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="1 Kings">
-									<h3>1 Kings</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="25" data-name="2 Kings">
-									<h3>2 Kings</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="29" data-name="1 Chronicles">
-									<h3>1 Chronicles</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="36" data-name="2 Chronicles">
-									<h3>2 Chronicles</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Ezra">
-									<h3>Ezra</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Nehemiah">
-									<h3>Nehemiah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="10" data-name="Esther">
-									<h3>Esther</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="42" data-name="Job">
-									<h3>Job</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="150" data-name="Psalm">
-									<h3>Psalm</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="31" data-name="Proverbs">
-									<h3>Proverbs</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Ecclesiastes">
-									<h3>Ecclesiastes</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="8" data-name="Song of songs">
-									<h3>Song of songs</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="66" data-name="Isaiah">
-									<h3>Isaiah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="52" data-name="Jeremiah">
-									<h3>Jeremiah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="Lamentations">
-									<h3>Lamentations</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="48" data-name="Ezekiel">
-									<h3>Ezekiel</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="12" data-name="Daniel">
-									<h3>Daniel</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Hosea">
-									<h3>Hosea</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Joel">
-									<h3>Joel</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="9" data-name="Amos">
-									<h3>Amos</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Obadiah">
-									<h3>Obadiah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Jonah">
-									<h3>Jonah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="7" data-name="Micah">
-									<h3>Micah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Nahum">
-									<h3>Nahum</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Habakkuk">
-									<h3>Habakkuk</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Zephaniah">
-									<h3>Zephaniah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="2" data-name="Haggai">
-									<h3>Haggai</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="14" data-name="Zechariah">
-									<h3>Zechariah</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Malachi">
-									<h3>Malachi</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Matthew">
-									<h3>Matthew</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Mark">
-									<h3>Mark</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="24" data-name="Luke">
-									<h3>Luke</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="21" data-name="John">
-									<h3>John</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="28" data-name="Acts">
-									<h3>Acts</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="Romans">
-									<h3>Romans</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="16" data-name="1 Corinthians">
-									<h3>1 Corinthians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="2 Corinthians">
-									<h3>2 Corinthians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Galatians">
-									<h3>Galatians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="Ephesians">
-									<h3>Ephesians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Philippians">
-									<h3>Philippians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="Colossians">
-									<h3>Colossians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Thessalonians">
-									<h3>1 Thessalonians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Thessalonians">
-									<h3>2 Thessalonians</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="6" data-name="1 Timothy">
-									<h3>1 Timothy</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="4" data-name="2 Timothy">
-									<h3>2 Timothy</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="Titus">
-									<h3>Titus</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Philemon">
-									<h3>Philemon</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="13" data-name="Hebrews">
-									<h3>Hebrews</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="James">
-									<h3>James</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 Peter">
-									<h3>1 Peter</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="3" data-name="2 Peter">
-									<h3>2 Peter</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="5" data-name="1 John">
-									<h3>1 John</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="2 John">
-									<h3>2 John</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="3 John">
-									<h3>3 John</h3>
-								</div>
-								<div  class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="1" data-name="Jude">
-									<h3>Jude</h3>
-								</div>
-								<div class="bookControl" data-role="collapsible" data-collapsed="true" data-chapters="22" data-name="Revelation">
-									<h3>Revelation</h3>
-								</div>
-							</div>
-						</div>
-						<div data-role="popup" id="about" data-position-to="window">
-							<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-							<h2>The Scriptures in JavaScript</h2>
-							<div data-role="collapsible-set">
-								<div data-role="collapsible">
-									<h3>About</h3>
-									<p>Javascripture aspires to be a simple but powerful tool for rightly dividing the word of truth.</p>
-									<p>This code is in early stages of development, so there will be plenty of bugs. If you have any requests for features or bugs please <a href="http://scruffian.wordpress.com/contact/">let me know</a>.</p>
-									<p>The project is entirely open source, so if you want to help out by adding features, or fixing things, please <a href="http://github.com/scruffian/Javascripture">fork me on github</a>.</p>
-									<p>The ultimate aim is to make the application available across all computing platforms and smart phones, which is why it's built using web technologies (that, and I don't know anything else).</p>
-								</div>
-								<div data-role="collapsible">
-									<h3>Download</h3>
-									<p>The application is currently available for Windows, Mac OS X and Linux</p>
-									<p><a href="http://api.appcelerator.net/p/pages/app_page?token=P4paL5t6">Get the latest version.</a></p>
-								</div>
-								<div data-role="collapsible">
-									<h3>Features</h3>
-									<ul>
-										<li>Lookup verses in the KJV</li>
-										<li>Find and highlight the strongs number</li>
-										<li>Search by single or muliple strongs number</li>
-										<li>Search the hebrew text</li>
-										<li>Search by word or strongs number</li>
-										<li>Find strongs roots</li>
-										<li>Reverse roots (branches)</li>
-										<li>Find rare words</li>
-									</ul>
-								</div>
-								<div data-role="collapsible">
-									<h3>To Do</h3>
-									<ul>
-										<li>Group by families</li>
-										<li>Most similar verse</li>
-										<li>Tracking in background</li>
-										<li>Reset button</li>
-										<li>Show first reference when searching?</li>
-										<li>better word/phrase search</li>
-										<li>reference lookup with string</li>
-										<li>scroll inside reference panel</li>
-										<li>Only highlight strongs numbers</li>
-										<li>keyboard shortcuts</li>
-										<li>Make data smaller</li>
-										<li>Loading on random verse</li>
-										<li>Original language</li>
-										<li>Map color chart</li>
-										<li>graphical word tree</li>
-										<li>search - input 5 strongs number and find any combination</li>
-										<li>Find unusual translations</li>
-									</ul>			
-								</div>
-								<div data-role="collapsible">
-									<h3>Documentation</h3>
-									<p>It's supposed to be simple and intuitive, so that means you don't need instructions right ;)</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+	<div class="dock">
+		<div class="heading-wrapper">
+			<div class="heading"><!--size="66,150,176"-->
+				<select id="bookSelect" class="lookup bookSelect" tabindex="1">
+					<option value="Genesis">Genesis</option>
+					<option value="Exodus">Exodus</option>
+					<option value="Leviticus">Leviticus</option>
+					<option value="Numbers">Numbers</option>
+					<option value="Deuteronomy">Deuteronomy</option>
+					<option value="Joshua">Joshua</option>
+					<option value="Judges">Judges</option>
+					<option value="Ruth">Ruth</option>
+					<option value="1 Samuel">1 Samuel</option>
+					<option value="2 Samuel">2 Samuel</option>
+					<option value="1 Kings">1 Kings</option>
+					<option value="2 Kings">2 Kings</option>
+					<option value="1 Chronicles">1 Chronicles</option>
+					<option value="2 Chronicles">2 Chronicles</option>
+					<option value="Ezra">Ezra</option>
+					<option value="Nehemiah">Nehemiah</option>
+					<option value="Esther">Esther</option>
+					<option value="Job">Job</option>
+					<option value="Psalm">Psalm</option>
+					<option value="Proverbs">Proverbs</option>
+					<option value="Ecclesiastes">Ecclesiastes</option>
+					<option value="Song of songs">Song of Songs</option>
+					<option value="Isaiah">Isaiah</option>
+					<option value="Jeremiah">Jeremiah</option>
+					<option value="Lamentations">Lamentations</option>
+					<option value="Ezekiel">Ezekiel</option>
+					<option value="Daniel">Daniel</option>
+					<option value="Hosea">Hosea</option>
+					<option value="Joel">Joel</option>
+					<option value="Amos">Amos</option>
+					<option value="Obadiah">Obadiah</option>
+					<option value="Jonah">Jonah</option>
+					<option value="Micah">Micah</option>
+					<option value="Nahum">Nahum</option>
+					<option value="Habbakuk">Habbakuk</option>
+					<option value="Zephaniah">Zephaniah</option>
+					<option value="Haggai">Haggai</option>
+					<option value="Zechariah">Zechariah</option>
+					<option value="Malachi">Malachi</option>
+					<option value="Matthew">Matthew</option>
+					<option value="Mark">Mark</option>
+					<option value="Luke">Luke</option>
+					<option value="John">John</option>
+					<option value="Acts">Acts</option>
+					<option value="Romans">Romans</option>
+					<option value="1 Corinthians">1 Corinthians</option>
+					<option value="2 Corinthians">2 Corinthians</option>
+					<option value="Galatians">Galatians</option>
+					<option value="Ephesians">Ephesians</option>
+					<option value="Philipians">Philipians</option>
+					<option value="Colossians">Colossians</option>
+					<option value="1 Thessalonians">1 Thessalonians</option>
+					<option value="2 Thessalonians">2 Thessalonians</option>
+					<option value="1 Timothy">1 Timothy</option>
+					<option value="2 Timothy">2 Timothy</option>
+					<option value="Titus">Titus</option>
+					<option value="Philemon">Philemon</option>
+					<option value="Hebrews">Hebrews</option>
+					<option value="James">James</option>
+					<option value="1 Peter">1 Peter</option>
+					<option value="2 Peter">2 Peter</option>
+					<option value="1 John">1 John</option>
+					<option value="2 John">2 John</option>
+					<option value="3 John">3 John</option>
+					<option value="Jude">Jude</option>
+					<option value="Revelation">Revelation</option>
+				</select>
+				<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 			</div>
-			<!-- Go to form -->
-			<div data-role="popup" id="gotoForm" data-position-to="window">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<form method="get" action="#reference" class="gotoReference">
-					<fieldset>
-						<div data-role="fieldcontain" class="ui-hide-label">
-							<label for="gotoReference">Go to...</label>
-							<input type="text" name="gotoReference" id="gotoReference" value="" placeholder="Go to..." class="focusWhenVisible" />
-						</div>
-					</fieldset>
-				</form>
+		</div>
+		<nav class="left">
+			<a href="javascript:history.back();";>&laquo; Back</a>
+		</nav>
+		<nav class="right">
+			<a href="#search-popup" class="open-popup" id="keyCode83">Search</a>
+			<a href="#settings-popup" class="open-popup" id="keyCode48">Settings</a>
+			<a href="#bookmarks-popup" class="open-popup" id="keyCode66">Bookmarks</a>
+			<a href="#go-to-popup" class="open-popup" id="keyCode71">Go to</a>
+		</nav>
+	</div>
+
+		
+
+	<div class="goToPanel">
+		<div class="lookup bookSelect">
+			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
+			<a href="#book=Exodus&chapter=1" data-chapters="40">Exodus <span class="chapter"></span></a>
+			<a href="#book=Leviticus&chapter=1" data-chapters="27">Leviticus <span class="chapter"></span></a>
+			<a href="#book=Numbers&chapter=1" data-chapters="36">Numbers <span class="chapter"></span></a>
+			<a href="#book=Deuteronomy&chapter=1" data-chapters="34">Deuteronomy <span class="chapter"></span></a>
+			<a href="#book=Joshua&chapter=1" data-chapters="24">Joshua <span class="chapter"></span></a>
+			<a href="#book=Judges&chapter=1" data-chapters="21">Judges <span class="chapter"></span></a>
+			<a href="#book=Ruth&chapter=1" data-chapters="4">Ruth <span class="chapter"></span></a>
+			<a href="#book=1 Samuel&chapter=1" data-chapters="31">1 Samuel <span class="chapter"></span></a>
+			<a href="#book=2 Samuel&chapter=1" data-chapters="24">2 Samuel <span class="chapter"></span></a>
+			<a href="#book=1 Kings&chapter=1" data-chapters="24">1 Kings <span class="chapter"></span></a>
+			<a href="#book=2 Kings&chapter=1" data-chapters="25">2 Kings <span class="chapter"></span></a>
+			<a href="#book=1 Chronicles&chapter=1" data-chapters="29">1 Chronicles <span class="chapter"></span></a>
+			<a href="#book=2 Chronicles&chapter=1" data-chapters="36">2 Chronicles <span class="chapter"></span></a>
+			<a href="#book=Ezra&chapter=1" data-chapters="10">Ezra <span class="chapter"></span></a>
+			<a href="#book=Nehemia&chapter=1" data-chapters="13">Nehemiah <span class="chapter"></span></a>
+			<a href="#book=Esther&chapter=1" data-chapters="10">Esther <span class="chapter"></span></a>
+			<a href="#book=Job&chapter=1" data-chapters="42">Job <span class="chapter"></span></a>
+			<a href="#book=Psalm&chapter=1" data-chapters="150">Psalm <span class="chapter"></span></a>
+			<a href="#book=Proverbs&chapter=1" data-chapters="31">Proverbs <span class="chapter"></span></a>
+			<a href="#book=Ecclesiastes&chapter=1" data-chapters="12">Ecclesiastes <span class="chapter"></span></a>
+			<a href="#book=Song Of Songs&chapter=1" data-chapters="8">Song of Songs <span class="chapter"></span></a>
+			<a href="#book=Isaiah&chapter=1" data-chapters="66">Isaiah <span class="chapter"></span></a>
+			<a href="#book=Jeremiah&chapter=1" data-chapters="52">Jeremiah <span class="chapter"></span></a>
+			<a href="#book=Lamentation&chapter=1" data-chapters="4">Lamentations <span class="chapter"></span></a>
+			<a href="#book=Ezekiel&chapter=1" data-chapters="48">Ezekiel <span class="chapter"></span></a>
+			<a href="#book=Daniel&chapter=1" data-chapters="12">Daniel <span class="chapter"></span></a>
+			<a href="#book=Hosea&chapter=1" data-chapters="14">Hosea <span class="chapter"></span></a>
+			<a href="#book=Joel&chapter=1" data-chapters="3">Joel <span class="chapter"></span></a>
+			<a href="#book=Amos&chapter=1" data-chapters="9">Amos <span class="chapter"></span></a>
+			<a href="#book=Obadiah&chapter=1">Obadiah</a>
+			<a href="#book=Jonah&chapter=1" data-chapters="4">Jonah <span class="chapter"></span></a>
+			<a href="#book=Micah&chapter=1" data-chapters="7">Micah <span class="chapter"></span></a>
+			<a href="#book=Nahum&chapter=1" data-chapters="3">Nahum <span class="chapter"></span></a>
+			<a href="#book=Habbakuk&chapter=1" data-chapters="3">Habbakuk <span class="chapter"></span></a>
+			<a href="#book=Zephaniah&chapter=1" data-chapters="3">Zephaniah <span class="chapter"></span></a>
+			<a href="#book=Haggai&chapter=1" data-chapters="2">Haggai <span class="chapter"></span></a>
+			<a href="#book=Zechariah&chapter=1" data-chapters="14">Zechariah <span class="chapter"></span></a>
+			<a href="#book=Malachi&chapter=1" data-chapters="4">Malachi <span class="chapter"></span></a>
+			<a href="#book=Matthew&chapter=1" data-chapters="28">Matthew <span class="chapter"></span></a>
+			<a href="#book=Mark&chapter=1" data-chapters="16">Mark <span class="chapter"></span></a>
+			<a href="#book=Luke&chapter=1" data-chapters="24">Luke <span class="chapter"></span></a>
+			<a href="#book=John&chapter=1" data-chapters="21">John <span class="chapter"></span></a>
+			<a href="#book=Acts&chapter=1" data-chapters="28">Acts <span class="chapter"></span></a>
+			<a href="#book=Romans&chapter=1" data-chapters="16">Romans <span class="chapter"></span></a>
+			<a href="#book=1 Corinthians&chapter=1" data-chapters="16">1 Corinthians <span class="chapter"></span></a>
+			<a href="#book=2 Corinthians&chapter=1" data-chapters="13">2 Corinthians <span class="chapter"></span></a>
+			<a href="#book=Galatians&chapter=1" data-chapters="6">Galatians <span class="chapter"></span></a>
+			<a href="#book=Ephesians&chapter=1" data-chapters="6">Ephesians <span class="chapter"></span></a>
+			<a href="#book=Philipians&chapter=1" data-chapters="4">Philipians <span class="chapter"></span></a>
+			<a href="#book=Colossians&chapter=1" data-chapters="4">Colossians <span class="chapter"></span></a>
+			<a href="#book=1 Thessalonians&chapter=1" data-chapters="5">1 Thessalonians <span class="chapter"></span></a>
+			<a href="#book=2 Thessalonians&chapter=1" data-chapters="3">2 Thessalonians <span class="chapter"></span></a>
+			<a href="#book=1 Timothy&chapter=1" data-chapters="6">1 Timothy <span class="chapter"></span></a>
+			<a href="#book=2 Timothy&chapter=1" data-chapters="4">2 Timothy <span class="chapter"></span></a>
+			<a href="#book=Titus&chapter=1" data-chapters="3">Titus <span class="chapter"></span></a>
+			<a href="#book=Philemon&chapter=1">Philemon</span></a>
+			<a href="#book=Hebrews&chapter=1" data-chapters="13">Hebrews <span class="chapter"></span></a>
+			<a href="#book=James&chapter=1" data-chapters="5">James <span class="chapter"></span></a>
+			<a href="#book=1 Peter&chapter=1" data-chapters="5">1 Peter <span class="chapter"></span></a>
+			<a href="#book=2 Peter&chapter=1" data-chapters="3">2 Peter <span class="chapter"></span></a>
+			<a href="#book=1 John&chapter=1" data-chapters="5">1 John <span class="chapter"></span></a>
+			<a href="#book=2 John&chapter=1">2 John</a>
+			<a href="#book=3 John&chapter=1">3 John</a>
+			<a href="#book=Jude&chapter=1">Jude</a>
+			<a href="#book=Revelation&chapter=1" data-chapters="22">Revelation <span class="chapter"></span></a>
+		</div>
+	</div>
+
+	<div id="referenceTracking" class="searchPanel" style="float: right; width: 200px;"></div>
+
+	<div class="referencePanel" id="reference">
+		<div class="verse">
+			<div id="wordControlPanel" class="not-active">
+				<style></style>
+				<div class="control-panel">
+					<div class="duplicated">Select a word to show more details about it here</div>
+				</div>
 			</div>
 
-			<!-- Search form -->
-			<div data-role="popup" id="searchForm" data-position-to="window">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<form action="#search" method="get" class="search">
-					<fieldset>
-						<div data-role="fieldcontain" class="ui-hide-label">
-							<label for="word">Search</label>
-							<input type="text" name="word" id="word" value="" placeholder="Search" />
-							<input type="hidden" name="lemma" value="" />
-							<input type="hidden" name="morph" value="" />
-							<input type="hidden" name="searchFor" value="all" />
-							<input type="hidden" name="language" value="english" />
-							<input type="hidden" name="clusivity" value="exclusive" />
-							<input type="hidden" name="range" value="verse" />
-						</div>
-					</fieldset>
-				</form>
-			</div>
-			
-			<!-- Advanced search form -->
-			<div data-role="popup" id="advancedSearch" data-position-to="window" data-theme="a">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<form method="get" class="search">
-					<h3>Advanced search</h3>
-					<div data-role="fieldcontain" class="ui-hide-label">
-						<label for="word">Word</label>
-						<input type="text" name="word" id="word" value="" placeholder="Word" />
-					</div>
-					<div data-role="fieldcontain" class="ui-hide-label">
-						<label for="lemma">Strongs number</label>
-						<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
-					</div>
-					<div data-role="fieldcontain" class="ui-hide-label">
-						<label for="morph">Morphology</label>
-						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
-					</div>
+			<div id="verse"><!--<button class="random-verse">Load random verse</button>--></div>
+		</div>
+	</div>
+</div>
+
+<!-- Search popup -->
+<div id="search-popup" class="popup">
+	<div class="content">
+		<a href="#" class="close-popup">Close</a>
+		<h2>Search</h2>
+		<form class="search">
+			<ul>
+				<li>
+					<label for="word" class="has-placeholder">Word</label>
+					<input type="text" name="word" id="word" value="" placeholder="Word" />
+				</li>
+			</ul>
+			<a href="#advanced" class="shower">Advanced</a>
+			<ul id="advanced">
+				<li>
+					<label for="lemma" class="has-placeholder">Strongs number</label>
+					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
+				</li>
+				<li>
+					<label for="morph" class="has-placeholder">Morphology</label>
+					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
+				</li>
+				<li>
 					
 					<!--<div data-role="fieldcontain">
 						<fieldset data-role="controlgroup" class="ui-hide-label">
@@ -358,200 +214,229 @@
 							<label for="combineTerms">Combine terms?</label>
 						</fieldset>
 					</div>-->
-
-					<div data-role="fieldcontain">
-						<fieldset data-role="controlgroup" data-type="horizontal">
-							<legend>Language:</legend>
-							<input type="radio" name="language" id="english" value="english" checked="checked" />
-							<label for="english">English</label>
-							<input type="radio" name="language" id="hebrew" value="hebrew" />
-							<label for="hebrew">Hebrew</label>
-							<input type="radio" name="language" id="greek" value="greek" />
-							<label for="greek">Greek</label>
-						</fieldset>
-					</div>
-
-
-					<div data-role="fieldcontain">
-						<label for="clusivity" class="clusivity-label clusivity-label-prefix">Look for</label>
-						<select name="clusivity" id="clusivity" data-role="slider">
-							<option value="exclusive">All</option>
-							<option value="inclusive">Any</option>
-						</select>
-						<label for="clusivity" class="clusivity-label clusivity-label-suffix">words in a</label>
-					</div>
-
-					<div data-role="fieldcontain">
-						<fieldset data-role="controlgroup" data-type="horizontal">
-							<input type="radio" name="range" id="range_word" value="word" checked="checked" />
-							<label for="range_word">Word</label>
-							<input type="radio" name="range" id="range_verse" value="verse" />
-							<label for="range_verse">Verse</label>
-							<input type="radio" name="range" id="range_chapter" value="chapter" />
-							<label for="range_chapter">Chapter</label>
-						</fieldset>
-					</div>
-
-					<!--<div data-role="fieldcontain">
-						<label for="type">Search type:</label>
-						<select name="type" id="type" data-role="slider">
-							<option value="lemma">Word</option>
-							<option value="morph">Morphology</option>
-						</select>
-					</div>-->
-
-					<!--<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" class="ui-hide-label">
-						<legend>Strict search:</legend>
-						<input type="checkbox" name="strictSearch" id="strictSearch" class="custom" />
-						<label for="strictSearch">Strict search?</label>
-					</fieldset>
-					</div>-->
-
-					<button type="submit" class="search-button">Search</button>							
-				</form>
-			</div>
-			<div data-role="popup" id="options" data-position-to="window">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<form action="#search" method="get" class="search">
-					<fieldset>
-						<label><input type="checkbox" name="original" checked />Show original language?</label>
-						<label id="literalTranslation"><input type="checkbox" name="literalTranslation"/>Use literal consistent translation?</label>
-					</fieldset>
-				</form>
-			</div>
-			<div data-role="popup" id="wordDetails" data-position-to="window" data-transition="none">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<div class="content"></div>
-			</div>
-
-		</div><!-- /page -->
-	
-		<div data-role="page" id="help">
-			<div data-role="header">
-				<a data-rel="back" data-role="button" data-icon="arrow-l">Back</a>
-				<h1>Help</h1>
-			</div>
-			<div data-role="content">
-				Tap and hold to see more details on a word
-			</div>
-		</div><!-- /page -->
-
-<div id="categories" data-role="page" data-title="Categories">
-  
-      <div data-role="header">
-            <h1>Categories</h1>
-      </div><!-- /header -->
-  
-      <div data-role="content">
-            <h2>Select a Category Below:</h2>
-            <ul data-role="listview" data-inset="true">
-                  <li><a href="#category?animals" class="animals">Animals</a></li>
-                  <li><a href="#category?colors" class="colors">Colors</a></li>
-                  <li><a href="#category?vehicles" class="vehicles">Vehicles</a></li>
-            </ul>
-      </div><!-- /content -->
-
+					<label for="language">Language:</label>
+					<select name="language" id="language">
+						<option>english</option>
+						<option>hebrew</option>
+						<option>greek</option>
+					</select>
+				</li>
+				<li>
+					<label for="clusivity">Look for</label>
+					<select name="clusivity" id="clusivity">
+						<option value="exclusive">All</option>
+						<option value="inclusive">Any</option>
+					</select>
+					<label for="range">terms in a</label>
+					<select name="range" id="range">
+						<option>word</option>
+						<option selected>verse</option>
+						<option>chapter</option>
+					</select>
+				</li>
+<!--				<li>
+					<label>Search term:</label>
+					<input type="text" value="search" name="searchTerm" id="searchTerm" />
+				</li>
+				<li>
+					<label>Search for:</label>
+					<select id="searchSelect" name="searchSelect">
+						<option value="any">Any</option>
+						<option value="all">All</option>
+					</select>
+				</li>
+				<li>
+					<label>Search language:</label>
+					<select id="searchLanguage" name="searchLanguage">
+						<option value="english">English</option>
+						<option value="hebrew">Hebrew</option>
+					</select>
+				</li>
+				<li>
+					<label>Search range:</label>							
+					<select id="searchRange" name="searchRange">
+						<option value="verse">Verse</option>
+						<option value="chapter">Chapter</option>
+						<option value="book">Book</option>
+					</select>
+				</li>
+				<li>
+					<input type="submit" value="search" name="search" id="search" />
+				</li>
+				<li>
+					<br /><button class="highlight-all">Highlight all</button>
+				</li>-->
+			</ul>
+			<input type="submit" value="search" id="searchLoading" />
+		</form>
+	</div>
 </div>
 
-		<div id="animals" data-role="page" data-title="Animals">
-		
-		      <div data-role="header">
-			    <h1>Animals</h1>
-		      </div><!-- /header -->
-		  
-		      <div data-role="content">
-		            <ul data-role="listview" data-inset="true">
-		            </ul>
-		      </div><!-- /content -->
-		</div>
-		
-		<div id="colors" data-role="page" data-title="Colors">
-		
-		      <div data-role="header">
-			    <h1>Colors</h1>
-		      </div><!-- /header -->
-		
-		      <div data-role="content">
-		            <ul data-role="listview" data-inset="true">
-		            </ul>
-		      </div><!-- /content -->
-		
-		</div>
-		
-		<div id="vehicles" data-role="page" data-title="Vehicles">
-		
-		      <div data-role="header">
-			    <h1>Vehicles</h1>
-		      </div><!-- /header -->
-		  
-		      <div data-role="content">
-		            <ul data-role="listview" data-inset="true">
-		            </ul>
-		      </div><!-- /content -->
-		
-		</div>
-		<input type="hidden" id="stopBackbone" />
-		<input type="hidden" id="hashDelay" />
-
-		<!-- Underscore Template that is used to display all of the Category Models -->
-		<script id="categoryItems" type="text/template">
-			<% _.each( collection.chapters, function( chapter ) { %>
-
-			<div id="<%= chapter.chapterWrapperId %>" class="chapter-wrapper" data-book="<%= chapter.book %>" data-chapter="<%= chapter.chapter %>">
-				<div class="sticky-panel-wrapper">
-					<h2 class="stickyPanel" data-top-space="42" data-bottom-waypoint="#<%= chapter.chapterWrapperId %>">
-						<%= chapter.book %> <%= chapter.chapter %>
-					</h2>
-				</div>	
-				<ol class="wrapper">
-					<% _.each( chapter.references, function( reference ) { %>
-						<li id ="<%= reference.referenceId %>" class="<%= reference.className %>">
-							<div class="ui-grid-a">
-								<div class="ui-block-a">
-									<div class="original <%= reference.language %>">
-									
-										<% _.each( reference.original, function( word ) { %>
-										
-											<span
-												class="<%= word.className %>"
-												title="<%= word.title %>"
-												data-word="<%= word.word %>"
-												data-lemma="<%= word.lemma %>"
-												data-language="<%= reference.language %>"
-												data-range="<%= word.range %>"
-												data-family="<%= word.family %>"
-												data-morph="<%= word.morph %>"
-											><%= word.word %></span>
-						
-										<% }); %>
-									</div>
-								</div>
-								<div class="ui-block-b">
-								
-									<% _.each( reference.english, function( word ) { %>
-									
-										<span
-											class="<%= word.className %>"
-											title="<%= word.title %>"
-											data-word="<%= word.word %>"
-											data-lemma="<%= word.lemma %>"
-											data-language="<%= reference.language %>"
-											data-range="<%= word.range %>"
-											data-family="<%= word.family %>"
-											data-morph="<%= word.morph %>"
-										><%= word.word %></span>
-					
-									<% }); %>
-								</div>
-							</div>
+<!-- Settings popup -->
+<div id="settings-popup" class="popup">
+	<div class="content">
+		<a href="#" class="close-popup">Close</a>
+		<h2>Settings</h2>
+		<form>
+			<ul>
+				<li>
+					Fonts: <select name="bodyFontFamily" class="changeStyle">
+						<option value="Arial, Helvetica;">Arial</option>
+						<option value="font-family: 'Bookman Old Style';">Bookman Old Style</option>
+						<option value="font-family: 'Courier New', Courier;">Courier</option>
+						<option value="font-family: Georgia;">Georgia</option>
+						<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande';">Lucida</option>
+						<option value="font-family: 'Times New Roman', Times;">Times</option>
+						<option value="font-family: Verdana, Geneva;">Verdana</option>
+					</select>
+				</li>
+				<li>
+					Font size: <select name="bodyFontSize" class="changeStyle">
+						<option value="font-size: 80%;">80%</option>
+						<option value="font-size: 90%;">90%</option>
+						<option value="font-size: 100%;">100%</option>
+						<option value="font-size: 110%;">110%</option>
+						<option value="font-size: 120%;">120%</option>
+						<option value="font-size: 130%;">130%</option>
+						<option value="font-size: 140%;">140%</option>
+						<option value="font-size: 150%;">150%</option>
+						<option value="font-size: 160%;">160%</option>
+						<option value="font-size: 170%;">170%</option>
+						<option value="font-size: 180%;">180%</option>
+						<option value="font-size: 190%;">190%</option>
+						<option value="font-size: 200%;">200%</option>
+					</select>
+				</li>
+				<li>
+					Colours: <select id="subdueColorBy">
+						<option value="1">Very Bright</option>
+						<option value="1.5" selected="selected">Bright</option>
+						<option value="2">Normal</option>
+						<option value="3">Dark</option>
+						<option value="4">Very Dark</option>
+					</select>
+				</li>
+				<li>
+					<p><input type="checkbox" id="showNotes" />show notes</p>
+				</li>
+				<li>
+					<p><input type="checkbox" id="strictSearch" />strict search</p>
+				</li>
+				<li>
+					Keyboard shortcuts:<br /><br />
+					Chapter &raquo;: <strong>right arrow</strong><br />
+					Verse &raquo;: <strong>down arrow</strong><br />
+					&laquo; Chapter: <strong>left arrow</strong><br />
+					&laquo; Verse: <strong>up arrow</strong><br />
+					Next reference: <strong>n</strong><br />
+					Prev reference: <strong>p</strong><br />
+				</li>
+				<li>
+					Show original: <input type="checkbox" id="showHebrew" checked />
+				</li>
+			</ul>
+		</form>
+	</div>
+</div>
+<div id="bookmarks-popup" class="popup">
+	<div class="content">
+		<a href="#" class="close-popup">Close</a>
+		<h2>Bookmarks</h2>
+		<form>
+			<a href="#" class="bookmark">save current passage</a>
+			<br /><br />
+			<ol id="bookmarks"></ol>
+		</form>
+	</div>
+</div>
+<div id="go-to-popup" class="popup">
+	<div class="content">
+		<a href="#" class="close-popup">Close</a>
+		<form class="goToReference">
+			<input type="text" id="goToReference" placeholder="Go to reference..." />
+		</form>
+	</div>
+</div>
+<!--			<div class="collapsable closed">
+				<h2>Colours</h2>
+				<form id="changeColor">
+					<ul>
+						<li>
+							<label for="colorFormStrongsNumber">Strongs Number</label>
+							<input type="text" id="colorFormStrongsNumber" />
 						</li>
-					<% }); %>
-				</ol>
+						<li>
+							<div id="colorSelector"><div style="background-color: #0000ff; height:50px; width:50px;"></div></div>
+						</li>
+						<li class="hide">
+							<label for="colorFormColor">Colour</label>
+							<input type="text" id="colorFormColor" />
+						</li>
+						<li class="hide">
+							<input type="submit" value="change colour" />
+						</li>
+					</ul>
+				</form>
 			</div>
+			<div class="collapsable closed">
+				<h2>Rare Words</h2>
+				<form>
+					Use this to find rare words in your current chapter.<br /><br />
+					Max uses: <input type="text" id="maximumNumberOfUses" value="5" style="width:30px;" /><br />
+					<button class="findRareWords">Find Rare Words</button>
+					<div id="rareWords"></div>
+				</form>
+			</div>
+			<div class="collapsable closed">
+				<h2>Statistics</h2>
+				<form>
+					<button id="wordUsageCount">Word usage count</button>
+				</form>
+			</div>
+-->
+<div class="wordControlPanelTemplate">
+	<style></style>
+	<div class="word-details">
+		<span class="wordControlPanelStrongsNumber"></span> | <span class="wordControlPanelEnglish"></span> | <span class="wordControlPanelLemma"></span>
+		<div class="word-tree" id="wordTreeRoots"></div>
+		<div class="word-tree" id="wordTreeBranches"></div>
+	</div>
+	<div class="definitions">
+		<strong>KJV Usage:</strong> <span class="wordControlPanelKJVDef"></span><br />
+		<strong>Strongs Definition:</strong> <span class="wordControlPanelStrongsDef"></span><br />
+	</div>
+	<a href="#" class="close">x</a>
+</div>
 
-			<% }); %>
+</body>
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+<!--<script src="js/lib/jquery.indexeddb.min.js"></script>
+<script src="js/database.js"></script>-->
+<script type="text/javascript" src="data/bible.js"></script>
+<script type="text/javascript" src="data/strongs-dictionary.js"></script>
+<script type="text/javascript" src="data/kjvdwyer7.js"></script>
+<script type="text/javascript" src="data/strongsObjectWithFamilies.js"></script>
+<script type="text/javascript" src="data/hebrew6.js"></script>
+<script type="text/javascript" src="data/greek4.js"></script>
+<script src="data/crossReferences.js"></script>
 
-		</script>	
-	</body>
+
+<script type="text/javascript" src="js/jquery.hoverIntent.min.js"></script>
+<script type="text/javascript" src="js/colorpicker.js"></script>
+<script type="text/javascript" src="js/events.js"></script>
+<script type="text/javascript" src="js/functionalScripts.js"></script>
+<script src="js/searchApi.js"></script>
+<script src="js/searchBindings.js"></script>
+<script src="js/wordPanel.js"></script>
+<script src="js/loading.js"></script>
+<script src="js/reference.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/shower.js"></script>
+<script src="js/jquery.waypoints.js"></script>
+<script src="js/wayPoint.js"></script>
+<script src="js/keyboardShortcuts.js"></script>
+<script src="js/crossReferences.js"></script>
+<script src="js/bookSelect.js"></script>
 </html>

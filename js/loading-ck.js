@@ -1,0 +1,1 @@
+(function(){$(document).bind("loading",function(e,t,n){console.log(t);$("#searchLoading").val(t)})})(jQuery);

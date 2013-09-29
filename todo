@@ -1,0 +1,65 @@
+//javascripture bugs
+________________________________________
+//scrolling deferred object
+
+
+number of refs found when searching
+scrolling load ref
+keyboard shortcuts
+load random ref
+
+
+clicking chapter 10 box
+search for H232
+
+H01657 is a root of H0566
+acts 7:20 - word for take up is missing...
+G2470 is a root of G2471
+H02620 not related to H0982
+fix color changer
+search for G18 G2041 - why isn't 2 Tim 3:1 in the list?
+search for "change" broken
+H5214
+luke 8:25 - afrai
+link definitions to usage
+G96 is  a root of G1381
+
+luke 6:41 - KJV/
+mark 9:43
+
+
+beth-lehem
+G2928 is root of G4032
+H05797 is related to H01162 (via micah 5:3)
+H0748 is a root of H0724
+
+//javascripture features
+________________________________________
+highlight family or word
+autocomplete
+list of all heberew forms so can give consistent translation?
+soft hyphen
+show history
+use intersecting bubbles to show what words appear in all X passages and with words
+graphs for chapters and words
+word density
+change strict to exact
+find strange translations
+history - which passges you look up more and less
+back button
+make it more like a game - but what are achievements
+show greek/hebrew word in word tree
+judges 11:14 - H05314 - should be something else - breath not soul
+
+
+How to get the length of a JSON object
+________________________________________
+Hebrw morphology
+
+1.tree empty
+2.call function with stem
+3.if is stem in not already in tree then
+4.add stem to tree as empty object
+5.loop through all relationships to stem
+6.for each one go to step 2
+
