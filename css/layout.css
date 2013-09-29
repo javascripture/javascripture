@@ -9,11 +9,6 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 100%;
 }
-.heading-wrapper {
-  font-size: 160%;
-  line-height: 1.7em;
-  text-align: center;
-}
 a {
   text-decoration: none;
 }
@@ -94,7 +89,7 @@ a.word-tree {
   top: 0;
 }
 .selectWrapper select {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #333;
 }
 ul.bookSelect {
   margin: 0 0 0 5px;
@@ -124,11 +119,24 @@ ul.verseSelect {
   z-index: 9;
 }
 .bookSelect a {
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f0f0f0), color-stop(1, #ffffff));
-  background: -moz-linear-gradient(center bottom, #f0f0f0 0%, #ffffff 100%);
+  /*    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+		color-stop(0, rgb(240,240,240)),
+        color-stop(1, rgb(255,255,255))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+		rgb(240,240,240) 0%,
+        rgb(255,255,255) 100%
+    );*/
+
   border-bottom: 1px #ccc solid;
-  color: #000;
+  color: #666;
   display: block;
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
   line-height: 2em;
   text-indent: 1em;
   white-space: nowrap;
@@ -230,34 +238,9 @@ form ul li {
 #referenceTracking .collapsable h2 {
   background-position: -26px -26px;
 }
-nav {
-  position: absolute;
-  top: 0;
-}
-nav.right {
-  right: 0;
-}
-nav.left {
-  left: 0;
-}
-nav a {
-  background: #666;
-  border-radius: 3px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  list-style: none;
-  margin: 4px 2px;
-  opacity: .8;
-  padding: 5px;
-  text-decoration: none;
-}
-nav ul li:hover {
-  opacity: 1;
-}
 #wordControlPanel {
   background: rgba(255, 255, 255, 0.9);
-  border-top: 1px solid #000;
+  border-top: 1px solid #ccc;
   bottom: 0;
   display: block;
   left: 201px;
@@ -491,6 +474,8 @@ form.search #advanced {
 .dock {
   background: #fff;
   border-bottom: 1px solid #ccc;
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
   height: 50px;
   width: 100%;
   position: fixed;
@@ -500,9 +485,44 @@ form.search #advanced {
   z-index: 9;
 }
 .dock select {
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
   -webkit-appearance: none;
   min-width: 50px;
   text-indent: .5em;
+}
+.dock .heading-wrapper {
+  font-size: 160%;
+  line-height: 1.8em;
+  text-align: center;
+}
+.dock nav {
+  line-height: 50px;
+  position: absolute;
+  top: 0;
+}
+.dock nav.right {
+  right: 4px;
+}
+.dock nav.left {
+  left: 4px;
+}
+.dock nav a {
+  background: #000;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 2.5em;
+  opacity: .4;
+  padding: 0 1em;
+  text-decoration: none;
+  -webkit-transition: opacity .5s;
+  /* Safari */
+
+}
+.dock nav a:hover {
+  opacity: 1;
 }
 .referencePanel {
   margin: 50px 200px 0;
@@ -516,10 +536,20 @@ form.search #advanced {
   width: 200px;
 }
 .goToPanel {
-  border-right: 1px solid #000;
+  border-right: 1px solid #ccc;
   left: 0;
 }
 .searchPanel {
-  border-left: 1px solid #000;
+  border-left: 1px solid #ccc;
   right: 0;
+}
+.reading-mode .dock,
+.reading-mode .goToPanel,
+.reading-mode .searchPanel,
+.reading-mode .popup,
+.reading-mode #wordControlPanel {
+  display: none !important;
+}
+.reading-mode .referencePanel {
+  margin: 0 10%;
 }

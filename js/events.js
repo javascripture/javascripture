@@ -237,6 +237,9 @@
 /*		$(window).resize(function(){
 			resizeWrapperToWindow();
 		});*/
+		$( '#readingMode' ).bind( 'touchstart click', function () {
+			$( 'html' ).toggleClass( 'reading-mode' );
+		} );
 	});
 /*function resizeWrapperToWindow() {
 	$('body > .wrapper').css('height',$(window).height()-$('.dock').height() );

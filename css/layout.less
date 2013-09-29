@@ -1,10 +1,5 @@
 * {border:none;margin:0;padding:0;}
 body {background:#fff;color:#000;font-family: Helvetica, Arial, sans-serif; font-size: 100%; }
-.heading-wrapper {
-	font-size: 160%;
-	line-height: 1.7em;
-	text-align: center;
-}
 a{text-decoration: none;}
 .trans-change.added { font-style: italic;}
 #current { background:rgba(0,0,0,.2);}
@@ -45,7 +40,7 @@ span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-ra
 }
 
 .selectWrapper {position:absolute;left:0;top:0;}
-.selectWrapper select {border-bottom:1px solid #000;}
+.selectWrapper select {border-bottom:1px solid #333;}
 ul.bookSelect {margin:0 0 0 5px; width:96px}
 ul.chapterSelect {margin:0 0 0 5px; width:34px;}
 ul.verseSelect {margin:0 0 0 5px; width:35px;}
@@ -56,7 +51,7 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 }
 
 .bookSelect a {
-    background: -webkit-gradient(
+/*    background: -webkit-gradient(
         linear,
         left bottom,
         left top,
@@ -67,10 +62,12 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
         center bottom,
 		rgb(240,240,240) 0%,
         rgb(255,255,255) 100%
-    );
+    );*/
     border-bottom: 1px #ccc solid;
-	color: #000;
+	color: #666;
 	display: block;
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
 	line-height: 2em;
 	text-indent: 1em;
 	white-space: nowrap;
@@ -145,33 +142,10 @@ form ul li {list-style:none;}
 }
 .collapsable.closed form { display:none;}
 #referenceTracking .collapsable h2 { background-position: -26px -26px; }
-nav {
-	position: absolute;
-	top: 0;
-}
-nav.right {
-	right: 0;
-}
-nav.left {
-	left: 0;
-}
-nav a {
-	background:#666;
-	border-radius: 3px;
-	color:#fff;
-	cursor:pointer;
-	display: inline-block;
-	list-style: none;
-	margin: 4px 2px;
-	opacity:.8;
-	padding: 5px;
-	text-decoration: none;
-}
-nav ul li:hover { opacity:1;}
 
 #wordControlPanel {
 	background: rgba( 255, 255, 255, .9 );
-		border-top: 1px solid #000;
+		border-top: 1px solid #ccc;
 //    box-shadow: 0 0 5px black;
 	bottom: 0;
 	display: block;
@@ -396,6 +370,8 @@ form.search {
 .dock {
 	background: #fff;
 	border-bottom: 1px solid #ccc;
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
 	height: @dock-height;
 	width: 100%;
 
@@ -405,10 +381,42 @@ form.search {
 	top: 0;
 	z-index: 9;
 	select {
+		font-family: 'Helvetica Neue';
+		font-weight: 100;
 		-webkit-appearance: none;
 		min-width: 50px;
 		text-indent: .5em;
 	}
+	.heading-wrapper {
+		font-size: 160%;
+		line-height: 1.8em;
+		text-align: center;
+	}
+	nav {
+		line-height: @dock-height;
+		position: absolute;
+		top: 0;
+	}
+	nav.right {
+		right: 4px;
+	}
+	nav.left {
+		left: 4px;
+	}
+	nav a {
+		background: #000;
+		border-radius: 3px;
+		color:#fff;
+		cursor:pointer;
+		display: inline-block;
+		line-height: 2.5em;
+
+		opacity:.4;
+		padding: 0 1em;
+		text-decoration: none;
+		-webkit-transition: opacity .5s; /* Safari */
+	}
+	nav a:hover { opacity: 1; }
 }
 .referencePanel {
 	margin: @dock-height 200px 0;
@@ -421,10 +429,18 @@ form.search {
 	width: 200px;
 }
 .goToPanel {
-	border-right: 1px solid #000;
+	border-right: 1px solid #ccc;
 	left: 0;
 }
 .searchPanel {
-	border-left: 1px solid #000;
+	border-left: 1px solid #ccc;
 	right: 0;
+}
+.reading-mode {
+	.dock, .goToPanel, .searchPanel, .popup, #wordControlPanel {
+		display: none !important;
+	}
+	.referencePanel {
+		margin: 0 10%;
+	}
 }
