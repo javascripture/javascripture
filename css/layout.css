@@ -11,6 +11,7 @@ body {
 }
 .heading-wrapper {
   font-size: 160%;
+  line-height: 1.7em;
   text-align: center;
 }
 a {
@@ -36,11 +37,6 @@ div#tabs {
 }
 ul li.current {
   background: #cceeff;
-}
-.dock {
-  background: #000;
-  height: 37px;
-  width: 100%;
 }
 body > .wrapper {
   height: 0;
@@ -493,21 +489,30 @@ form.search #advanced {
   background: #ddd;
 }
 .dock {
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  height: 50px;
+  width: 100%;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   z-index: 9;
 }
+.dock select {
+  -webkit-appearance: none;
+  min-width: 50px;
+  text-indent: .5em;
+}
 .referencePanel {
-  margin: 37px 200px 0;
+  margin: 50px 200px 0;
 }
 .goToPanel,
 .searchPanel {
   bottom: 0;
   overflow: scroll;
   position: fixed;
-  top: 37px;
+  top: 50px;
   width: 200px;
 }
 .goToPanel {
