@@ -39,26 +39,6 @@
 	function subdueColor(color, subdueColorBy){
 		return parseInt(color/subdueColorBy);
 	}
-	
-	function getStrongsColor( strongsInt ) {
-/*		var subdueColorBy = $('#subdueColorBy').val();
-		var color = colors[strongsInt];
-		var colorArray = color.split('(')[1].split(')')[0].split(',')
-		var red = subdueColor(colorArray[0], subdueColorBy);
-		var green = subdueColor(colorArray[1], subdueColorBy);
-		var blue = subdueColor(colorArray[2], subdueColorBy);
-		return createColorCode(red,green,blue);*/
-		//Using HSL there are 360 colors with different % saturation and lightness
-		//There are about 2135 different word families
-		var theSizeOfAColorSegment = 360 / 8000,
-			hue = strongsInt * theSizeOfAColorSegment;
-
-		return 'hsl( ' + hue + ', 50%, 50% )';
-	}
-	
-	function getStrongsStyle( strongsNumber, newColor ) {
-		return '.' + strongsNumber + ' {color:#fff;background:' + newColor + ' !important;}';	
-	}
 
 	function searchByStrongsNumber(strongsNumberString) {
 		var startDate = new Date();

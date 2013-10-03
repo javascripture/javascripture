@@ -1,3 +1,4 @@
+/*global colors*/
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -85,7 +86,7 @@
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
 		$('#referenceTracking #'+trackingBoxId).removeClass('closed');
-		if(!$('#referenceTracking #'+trackingBoxId+' form').length > 0 ) {
+		if( $('#referenceTracking #'+trackingBoxId+' form').length <= 0 ) {
 			$('#referenceTracking #'+trackingBoxId).append(references);
 		}
 		goToFirstReference();
@@ -131,21 +132,23 @@
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
 
+				var strongsStyle = '';
+				if(familyInt > 0) {
+					var newColor = colors.getStrongsColor( familyInt );
+					strongsStyle = colors.getStrongsStyle( family, newColor );
+				}
 
 				if(familyInt > 0) {
-					var newColor = getStrongsColor( familyInt );
-					strongsStyle = getStrongsStyle( family, newColor );
-			    }
-
-				if(familyInt > 0) {
-	        	    $('#'+trackingBoxId+' style').html(strongsStyle);
-	            	$('#changeColor #colorFormStrongsNumber').val( data.lemma );
-		            color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");
+					$('#' + trackingBoxId + ' style').html(strongsStyle);
+					$('#changeColor #colorFormStrongsNumber').val( data.lemma );
+					var color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");
 					$('#changeColor #colorFormColor').val(color);
 					//$('#colorSelector div').css('background',newColor);
 					//$('#colorSelector').ColorPickerSetColor(RGBtoHEX(newColor));
-			        //$('#wordControlPanel').hide();
-	    	        $('#referenceTracking h2').hoverIntent(hoverIntentConfig);
+					//$('#wordControlPanel').hide();
+
+					//TODO highlight only these words on hover
+					//$('#referenceTracking h2').hoverIntent(hoverIntentConfig);
 				}
 			}
         }
@@ -173,7 +176,7 @@
 	
 	$( document ).on( 'click', 'a.word-tree', function( event ) {
 		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data() );		
+		createSearchReferencesPanel( $( this ).data() );
 	} );
 
 } )( jQuery );

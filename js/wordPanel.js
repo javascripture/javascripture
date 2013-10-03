@@ -83,8 +83,8 @@
 				var family = reference.getFamily( strongsNumber );
 				var strongsInt = parseInt( family.substring( 1, family.length ), 10 );
 	
-				var newColor = getStrongsColor( strongsInt );
-				var strongsStyle = getStrongsStyle( family, newColor );
+				var newColor = colors.getStrongsColor( strongsInt );
+				var strongsStyle = colors.getStrongsStyle( family, newColor );
 	console.log(spanObject.data( 'family' ));
 				infoObjects[ i ].find('style').html( strongsStyle );
 			}
