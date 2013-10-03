@@ -122,18 +122,22 @@
 		var trackingBoxId = createTrackingBoxString( data, '_' );
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
-			var header = createTrackingBoxString( data, ' ' );
-			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+data.lemma+'"><style></style><h2 class="'+data.lemma+'">' + header + ' <a class="remove" href="#"></a></h2></div>';
+			var header = createTrackingBoxString( data, ' ' ),
+			    family = reference.getFamily( data.lemma),
+			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 );
+			
+
+			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'"><style></style><h2 class="'+family+'">' + header + ' <a class="remove" href="#"></a></h2></div>';
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
-				var strongsInt = parseFloat( data.lemma.substring( 1, data.lemma.length ), 10 );
 
-				if(strongsInt > 0) {
-					var newColor = getStrongsColor( strongsInt );
-					strongsStyle = getStrongsStyle( data.lemma, newColor );
+
+				if(familyInt > 0) {
+					var newColor = getStrongsColor( familyInt );
+					strongsStyle = getStrongsStyle( family, newColor );
 			    }
 
-				if(strongsInt > 0) {
+				if(familyInt > 0) {
 	        	    $('#'+trackingBoxId+' style').html(strongsStyle);
 	            	$('#changeColor #colorFormStrongsNumber').val( data.lemma );
 		            color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");

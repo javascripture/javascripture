@@ -105,7 +105,7 @@ var reference;
 			
 			this.scrollToVerse( $anchorPoint, offset );
 		},
-		getClassName: function ( strongsNumber ) {
+		getFamily: function ( strongsNumber ) {
 			if ( strongsObjectWithFamilies[ strongsNumber ] ) {
 				return strongsObjectWithFamilies[ strongsNumber ].family;
 			} else {
@@ -176,7 +176,7 @@ var reference;
 			family = strongsObjectWithFamilies[ wordArray[ 1 ] ].family;
 		}
 		wordString += '<span'; 
-		wordString += ' class="' + reference.getClassName( lemma ) + '"';
+		wordString += ' class="' + reference.getFamily( lemma ) + '"';
 		wordString += ' title="' + wordArray[1];
 		if ( wordArray[2] ) {
 			wordString += ' ' + wordArray[2];
