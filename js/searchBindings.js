@@ -43,57 +43,67 @@
 		if(wordString!=""){
 			highlightStrongsNumber(wordString,'word');
 		}*/
-		references += '<form><ol class="references">';
-		var wordCount = 0;
-
-		var searchObject = javascripture.data.kjv;
-		if($("select[name=searchLanguage]").val() === "hebrew") {
-			searchObject = javascripture.data.hebrew;
-			$.each(strongsNumberArray, function(index, strongsNumber) {
-				if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-					strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-				}
-			});
-		}
-		/*var referenceArray = new Array();
-		$.each(searchObject, function(bookName, bookContent) {
-			if($('#searchRange').val() === "book") {
-				//search this string and return a reference
-				if(findArrayElementsInString(strongsNumberArray, bookContent, searchType)){
-					referenceArray.push([bookName,1,1,wordCount]);
-				}
-			} else {
-				$.each(bookContent, function(chapterNumber, chapterContent) {
-					if($('#searchRange').val() === "chapter") {
-						if(findArrayElementsInString(strongsNumberArray, chapterContent, searchType)){
-							referenceArray.push([bookName,chapterNumber+1,1,wordCount]);
-						}
-					} else {
-						$.each(chapterContent, function(verseNumber, verseContent) {
-							if(findArrayElementsInString(strongsNumberArray, verseContent, searchType)){
-								referenceArray.push([bookName,chapterNumber+1,verseNumber+1,wordCount]);
-							}
-						});
+		
+		
+		
+		searchApi.getReferences(data);
+		searchApi.deferred.done( function(){
+			var referenceArray =  searchApi.results.references;
+	
+			references += '<form><ol class="references">';
+			var wordCount = 0;
+	
+			var searchObject = javascripture.data.kjv;
+			if($("select[name=searchLanguage]").val() === "hebrew") {
+				searchObject = javascripture.data.hebrew;
+				$.each(strongsNumberArray, function(index, strongsNumber) {
+					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
 					}
 				});
 			}
-		});*/
-		var referenceArray = searchApi.getReferences(data);
-		references += createReferenceList(referenceArray);
-
-		references += '</ol></form>';
-
-		//collapse all the others
-		$('#referenceTracking .collapsable').addClass('closed');
-		$('#referenceTracking #'+trackingBoxId).removeClass('closed');
-		if( $('#referenceTracking #'+trackingBoxId+' form').length <= 0 ) {
-			$('#referenceTracking #'+trackingBoxId).append(references);
-		}
-		goToFirstReference();
-//		$('.popup').popup( 'close' );
-
-		var endDate = new Date();
-		timer(startDate, endDate);
+			/*var referenceArray = new Array();
+			$.each(searchObject, function(bookName, bookContent) {
+				if($('#searchRange').val() === "book") {
+					//search this string and return a reference
+					if(findArrayElementsInString(strongsNumberArray, bookContent, searchType)){
+						referenceArray.push([bookName,1,1,wordCount]);
+					}
+				} else {
+					$.each(bookContent, function(chapterNumber, chapterContent) {
+						if($('#searchRange').val() === "chapter") {
+							if(findArrayElementsInString(strongsNumberArray, chapterContent, searchType)){
+								referenceArray.push([bookName,chapterNumber+1,1,wordCount]);
+							}
+						} else {
+							$.each(chapterContent, function(verseNumber, verseContent) {
+								if(findArrayElementsInString(strongsNumberArray, verseContent, searchType)){
+									referenceArray.push([bookName,chapterNumber+1,verseNumber+1,wordCount]);
+								}
+							});
+						}
+					});
+				}
+			});*/
+				references += createReferenceList(referenceArray);
+				
+			//});
+	
+			references += '</ol></form>';
+	
+			//collapse all the others
+			$('#referenceTracking .collapsable').addClass('closed');
+			$('#referenceTracking #'+trackingBoxId).removeClass('closed');
+			if( $('#referenceTracking #'+trackingBoxId+' form').length <= 0 ) {
+				$('#referenceTracking #'+trackingBoxId).append(references);
+			}
+			goToFirstReference();
+	//		$('.popup').popup( 'close' );
+	
+			var endDate = new Date();
+			timer(startDate, endDate);
+			
+		});
 	}
 
 	var createReferenceList = function(referenceArray) {

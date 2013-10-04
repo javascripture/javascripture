@@ -13,7 +13,7 @@ bible.Data.books = [
 ['2 Samuel','2 Sam','2Sam','2 Sa','2Sa','II Samuel','II Sam','II Sa'],
 ['1 Kings','1 Kin','1Kin','1 Ki','1Ki','I Kings','I Kin','I Ki'],
 ['2 Kings','2 Kin','2Kin','2 Ki','2Ki','II Kings','II Kin','II Ki'],
-['1 Chronicles','1 Chr','1Chr','1 Ch','1Ch','I Chronicles','I Chr','I Ch',],
+['1 Chronicles','1 Chr','1Chr','1 Ch','1Ch','I Chronicles','I Chr','I Ch'],
 ['2 Chronicles','2 Chr','2Chr','2 Ch','2Ch','II Chronicles','II Chr','II Ch'],
 ['Ezra','Ezr'],
 ['Nehemiah','Neh','Ne'],
@@ -37,7 +37,7 @@ bible.Data.books = [
 ['Nahum','Nah','Na'],
 ['Habakkuk','Hab'],
 ['Zephaniah','Zep','Zeph'],
-['Haggia','Hag'],
+['Haggai','Hag'],
 ['Zechariah','Zech','Zec'],
 ['Malachi','Mal'],
 ['Matthew','Matt','Mat','Mt'],
@@ -46,7 +46,7 @@ bible.Data.books = [
 ['John','Joh','Jn'],
 ['Acts','Act','Ac'],
 ['Romans','Rom','Ro'],
-['1 Corinthians','1 Cor','1Cor','1 Co','1Co','I Corinthians','I Cor','I Co',],
+['1 Corinthians','1 Cor','1Cor','1 Co','1Co','I Corinthians','I Cor','I Co'],
 ['2 Corinthians','2 Cor','2Cor','2 Co','2Co','II Corinthians','II Cor','II Co'],
 ['Galatians','Gal','Ga'],
 ['Ephesians','Eph','Ep'],
@@ -54,7 +54,7 @@ bible.Data.books = [
 ['Colossians','Col','Co'],
 ['1 Thessalonians','1 Thess','1Thess','1 Thes','1Thes','1 The','1The','1 Th','1Th','I Thessalonians','I Thess','I The','I Th'],
 ['2 Thessalonians','2 Thess','2Thess','2 Thes','2Thes','2 The','2The','2 Th','2Th','II Thessalonians','II Thess','II The','II Th'],
-['1 Timothy','1 Tim','1Tim','1 Ti','1Ti','I Timothy','I Tim','I Ti',],
+['1 Timothy','1 Tim','1Tim','1 Ti','1Ti','I Timothy','I Tim','I Ti'],
 ['2 Timothy','2 Tim','2Tim','2 Ti','2Ti','II Timothy','II Tim','II Ti'],
 ['Titus','Tit','Ti'],
 ['Philemon','Phile', 'Philm'],
@@ -68,6 +68,9 @@ bible.Data.books = [
 ['Jude'],
 ['Revelation','Rev','Re','Apocalypse']
 ];
+bible.Data.otBooks = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Songs','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi'];
+bible.Data.ntBooks = ['Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+
 bible.Data.verses = [
 [31,25,24,26,32,22,24,22,29,32,32,20,18,24,21,16,27,33,38,18,34,24,20,67,34,35,46,22,35,43,55,32,20,31,29,43,36,30,23,23,57,38,34,34,28,34,31,22,33,26],
 [22,25,22,31,23,30,25,32,35,29,10,51,22,31,27,36,16,27,25,26,36,31,33,18,40,37,21,43,46,38,18,35,23,35,35,38,29,31,43,38],

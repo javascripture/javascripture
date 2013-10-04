@@ -25,6 +25,11 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			greek: javascripture.data.greek,
 			hebrew: javascripture.data.hebrew
 		},
+		books: {
+			english: ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Songs','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'],
+			hebrew: ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Songs','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi'],
+			greek: ['Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation']
+		},
 		types: [
 			'word',
 			'lemma',
@@ -35,9 +40,10 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			matches: {} //used to keep track of which word has been matched when searching - for when you need to match more than one word
 		},
 		getReferences: function (parameters) {
+			var self = this;
 			console.log(parameters);
+			this.deferred = $.Deferred();
 			this.lookForTerm(parameters);
-            return this.results.references;
 		},
         doesDataMatchTerm: function(type, data, term) {
 			data = data.toLowerCase();
@@ -51,7 +57,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			}
 			if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
 				return true;
-			}
+			}	
 			if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
 				return true;
 			}
@@ -91,8 +97,12 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			self.results.references = [];
 			self.resetMatches();
 
-			for( var bookName in dataSource ) {
-				book = dataSource[ bookName ];
+			var booksToSearch = this.books[ parameters.language ];
+			jQuery.fn.slowEach( booksToSearch, 1, function( bookNumber, bookName ) {
+
+				var book = dataSource[ bookName ];
+			//for( var bookName in dataSource ) {
+
 				$( document ).trigger( 'loading', 'searching ' + bookName );
 
 				for (var chapterNumber = 0, bookLength = book.length; chapterNumber < bookLength; chapterNumber++) {
@@ -122,11 +132,11 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 
 								if ( termString !== undefined && termString !== '') {
 									if ( wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined' ) { //sometimes wordObjects are undefined in hebrew
-										var terms = termString.split(' '),
-											termsLength = termsLength + terms.length,
-											matchesLength = 0;
+										var terms = termString.split(' ');
+										termsLength = termsLength + terms.length;
+										matchesLength = 0;
 
-										for ( var termNumber = 0, termsLength = terms.length; termNumber < termsLength; termNumber++ ) {
+										for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
 											var term = terms[ termNumber ];
 											if ( self.doesDataMatchTerm(type, wordObject[typeKey], term) ) {
 												if (parameters.clusivity === 'exclusive' ) {
@@ -157,7 +167,11 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 						}
 					}
 				}
-			}
+
+				if (bookNumber === booksToSearch.length - 1 ) {
+					self.deferred.resolve();
+				}
+			} );
 
 		},
 		standarizeWordEndings: function (word) {
