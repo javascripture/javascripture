@@ -1,3 +1,24 @@
+function slowLoop( array, i ) {
+	if( array[i] ){
+		setTimeout( function () {
+			i++;
+			slowLoop(array, i);
+		}, 1000 );
+    }
+}
+
+jQuery.fn.slowEach = function(array, interval, callback ) {
+  if( ! array.length ) return;
+  var i = 0;
+  next();
+  function next() {
+    if( callback.call( array[i], i, array[i] ) !== false )
+      if( ++i < array.length )
+        setTimeout( next, interval );
+  }
+};
+
+
 	var searchApi = {
 		language: { //helper object to access different languages
 			english: javascripture.data.kjv,
@@ -70,7 +91,6 @@
 			self.results.references = [];
 			self.resetMatches();
 
-			//use JS for loop with caching: for (var i = 0, l = myArray.length; i < l; i++) {}
 			for( var bookName in dataSource ) {
 				book = dataSource[ bookName ];
 				$( document ).trigger( 'loading', 'searching ' + bookName );
