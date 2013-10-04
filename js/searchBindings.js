@@ -26,25 +26,10 @@
 		var trackingBoxId = createTrackingBoxString( data, '_' );
 		createTrackingBox( data );
 		strongsNumberArray = data.lemma.split(' ');
-/*
-		//to differentiate between strongs numbers and not strongs numbers
-		$.each(strongsNumberArray, function(index, strongsNumber) {
-			if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-				highlightStrongsNumber(strongsNumber,'number');
-				wordTree(strongsNumber);
-				//this doesn't work as one word can have 2 strongs numbers... strongsNumberArray[index] = strongsNumber + '"';
-			} else { //not a strongs number
-				wordString = wordString + " " + strongsNumber;
-//			    var strongsTracking += '<div class="collapsable"><h2 class="'+strongsNumber+'">'+strongsNumber+' <a class="remove" href="#"></a></h2></div>';
- //               $('#referenceTracking').append(strongsTracking);
-
-			}
-		});		
-		if(wordString!=""){
-			highlightStrongsNumber(wordString,'word');
-		}*/
 		
-		
+		//collapse all the others
+		$('#referenceTracking .collapsable').addClass('closed');
+		$('#referenceTracking #'+trackingBoxId).removeClass('closed');
 		
 		searchApi.getReferences(data);
 		searchApi.deferred.done( function(){
@@ -91,11 +76,8 @@
 	
 			references += '</ol></form>';
 	
-			//collapse all the others
-			$('#referenceTracking .collapsable').addClass('closed');
-			$('#referenceTracking #'+trackingBoxId).removeClass('closed');
-			if( $('#referenceTracking #'+trackingBoxId+' form').length <= 0 ) {
-				$('#referenceTracking #'+trackingBoxId).append(references);
+			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
 			}
 			goToFirstReference();
 	//		$('.popup').popup( 'close' );
@@ -139,7 +121,7 @@
 			
 
 			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'"><style></style><h2 class="'+family+'">' + header;
-			strongsTracking += '<a aria-hidden="true" class="icon-close remove"></a></h2></div>';
+			strongsTracking += '<a aria-hidden="true" class="icon-close remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
 
