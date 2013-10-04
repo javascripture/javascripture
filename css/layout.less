@@ -276,13 +276,32 @@ dvnnm {text-transform: uppercase;}
 		padding: 1em;
 		position: relative;
 		width: 320px;
+		h2, input, a {
+			font-family: 'Helvetica Neue';
+			font-weight: 100;
+		}
+		input[type=submit],
+		input[type=text] {
+			text-indent: .5em;
+			width: 100%;
+		}
 		.close-popup {
-			border-radius: 3px;
-			color: #000;
+			color: #ccc;
 			padding: 1em;
 			position: absolute;
 			right: 0;
 			top: 0;
+		}
+		.close-popup:hover {
+			color: #000;
+		}
+	}
+	.advanced {
+		display: block;
+		margin-top: 1em;
+		text-align: center;
+		a {
+			color: #999;
 		}
 	}
 }
@@ -330,12 +349,6 @@ form input[type=checkbox]{width:20px;}
 form.search {
 	li {
 		line-height: 3em;
-	}
-	input[type=text] {
-		text-indent: .5em;
-	}
-	input {
-		width: 100%;
 	}
 	#advanced {
 		display: none;

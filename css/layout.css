@@ -393,13 +393,34 @@ dvnnm {
   position: relative;
   width: 320px;
 }
+.popup .content h2,
+.popup .content input,
+.popup .content a {
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
+}
+.popup .content input[type=submit],
+.popup .content input[type=text] {
+  text-indent: .5em;
+  width: 100%;
+}
 .popup .content .close-popup {
-  border-radius: 3px;
-  color: #000;
+  color: #ccc;
   padding: 1em;
   position: absolute;
   right: 0;
   top: 0;
+}
+.popup .content .close-popup:hover {
+  color: #000;
+}
+.popup .advanced {
+  display: block;
+  margin-top: 1em;
+  text-align: center;
+}
+.popup .advanced a {
+  color: #999;
 }
 /*Forms*/
 input,
@@ -433,12 +454,6 @@ form input[type=checkbox] {
 /*Search form*/
 form.search li {
   line-height: 3em;
-}
-form.search input[type=text] {
-  text-indent: .5em;
-}
-form.search input {
-  width: 100%;
 }
 form.search #advanced {
   display: none;

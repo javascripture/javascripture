@@ -184,7 +184,7 @@
 <!-- Search popup -->
 <div id="search-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
+		<a aria-hidden="true" class="icon-close close-popup"></a>
 		<h2>Search</h2>
 		<form class="search">
 			<ul>
@@ -193,7 +193,6 @@
 					<input type="text" name="word" id="word" value="" placeholder="Word" />
 				</li>
 			</ul>
-			<a href="#advanced" class="shower">Advanced</a>
 			<ul id="advanced">
 				<li>
 					<label for="lemma" class="has-placeholder">Strongs number</label>
@@ -265,7 +264,10 @@
 					<br /><button class="highlight-all">Highlight all</button>
 				</li>-->
 			</ul>
-			<input type="submit" value="search" />
+			<input type="submit" value="Search" />
+			<div class="advanced">
+				<a href="#advanced" class="toggler">Advanced</a>
+			</div>
 		</form>
 	</div>
 </div>
@@ -273,7 +275,7 @@
 <!-- Settings popup -->
 <div id="settings-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
+		<a aria-hidden="true" class="icon-close close-popup"></a>
 		<h2>Settings</h2>
 		<form>
 			<ul>
@@ -341,7 +343,7 @@
 </div>
 <div id="bookmarks-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
+		<a aria-hidden="true" class="icon-close close-popup"></a>
 		<h2>Bookmarks</h2>
 		<form>
 			<a href="#" class="bookmark">save current passage</a>
@@ -352,7 +354,7 @@
 </div>
 <div id="go-to-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
+		<a aria-hidden="true" class="icon-close close-popup"></a>
 		<form class="goToReference">
 			<input type="text" id="goToReference" placeholder="Go to reference..." />
 		</form>
@@ -440,7 +442,7 @@
 <script src="js/loading.js"></script>
 <script src="js/reference.js"></script>
 <script src="js/popup.js"></script>
-<script src="js/shower.js"></script>
+<script src="js/toggler.js"></script>
 <script src="js/jquery.waypoints.js"></script>
 <script src="js/wayPoint.js"></script>
 <script src="js/keyboardShortcuts.js"></script>
