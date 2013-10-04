@@ -221,19 +221,6 @@ form ul li {
   background: url(arrow.png) no-repeat bottom right, -webkit-gradient(linear, left bottom, left top, color-stop(0, #8c8c8c), color-stop(1, #bebebe));
   background: url(arrow.png) no-repeat bottom right, -moz-linear-gradient(center bottom, #8c8c8c 0%, #bebebe 100%);
 }
-.collapsable h2 a.remove {
-  background: url(images/remove.png);
-  color: #fff;
-  display: block;
-  float: right;
-  height: 14px;
-  margin: 2px 0 0 0;
-  padding: 0;
-  width: 14px;
-}
-.collapsable h2 a.remove:hover {
-  background-position: 0 -14px;
-}
 .collapsable.closed form {
   display: none;
 }
@@ -250,21 +237,6 @@ form ul li {
   position: fixed;
   z-index: 999;
   color: #000;
-}
-.wordControlPanel {
-  clear: both;
-}
-.wordControlPanel .close {
-  background: #000;
-  color: #fff;
-  font-size: 15px;
-  height: 18px;
-  line-height: 1em;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 14px;
-  text-align: center;
 }
 .wordControlPanelTemplate {
   display: none;
@@ -530,6 +502,20 @@ form.search #advanced {
 .referencePanel {
   margin: 50px 200px 0;
 }
+.referencePanel .wordControlPanel {
+  clear: both;
+}
+.referencePanel .wordControlPanel .close {
+  color: #000;
+  height: 18px;
+  line-height: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  width: 18px;
+  text-align: center;
+}
 .goToPanel,
 .searchPanel {
   bottom: 0;
@@ -546,6 +532,31 @@ form.search #advanced {
   border-left: 1px solid #ccc;
   right: 0;
 }
+.searchPanel h2 {
+  border-bottom: 0;
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
+  position: relative;
+}
+.searchPanel h2 .remove {
+  font-size: 14px;
+  opacity: .8;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 999;
+}
+.searchPanel h2 .remove:hover {
+  opacity: 1;
+}
+.searchPanel ol li {
+  color: #ddd;
+  line-height: 1.5em;
+  margin-left: .5em;
+}
+.searchPanel ol li a {
+  color: #000;
+}
 .reading-mode .dock,
 .reading-mode .goToPanel,
 .reading-mode .searchPanel,
@@ -555,4 +566,43 @@ form.search #advanced {
 }
 .reading-mode .referencePanel {
   margin: 0 9%;
+}
+/*Fonts*/
+@font-face {
+  font-family: 'icomoon';
+  src: url('fonts/icomoon.eot');
+  src: url('fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('fonts/icomoon.woff') format('woff'), url('fonts/icomoon.ttf') format('truetype'), url('fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'icomoon';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-close {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-close:before {
+  content: "\e000";
 }

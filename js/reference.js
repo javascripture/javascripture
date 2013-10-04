@@ -126,15 +126,15 @@ var reference;
 		chapterText += '<ol class="wrapper">';
 	
 		var originalText, language;
-		if( hebrewObject[book] ) {
-			originalText = hebrewObject;
+		if( javascripture.data.hebrew[book] ) {
+			originalText = javascripture.data.hebrew;
 			language = 'hebrew';
 		} else {
-			originalText = greekObject;
+			originalText = javascripture.data.greek;
 			language = 'greek';
 		}
 
-		$.each(bibleObject[book][chapterInArray], function(verseNumber, verseText) {
+		$.each( javascripture.data.kjv[book][chapterInArray], function(verseNumber, verseText ) {
 			chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '">';
 			chapterText += '<div class="wrapper"';
 			if(verseNumber === verseInArray) {
@@ -146,7 +146,7 @@ var reference;
 			}
 			chapterText += '>';
 			chapterText += '<div class="english">';
-				$.each( bibleObject[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+				$.each( javascripture.data.kjv[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 					chapterText += createWordString( wordObject, language );
 				});
 			chapterText += "</div>";
@@ -201,7 +201,7 @@ var reference;
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
-		if (bibleObject[book] && bibleObject[book][offsetNumberJavascript] !== undefined) {
+		if (javascripture.data.kjv[book] && javascripture.data.kjv[book][offsetNumberJavascript] !== undefined) {
 			offsetChapter.book = book;
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {

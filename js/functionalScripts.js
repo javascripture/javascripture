@@ -316,10 +316,10 @@ function goToReference(book,chapter,verse){
 function maintainState(book,chapter,verse){
 	$('.dynamic').each(function(){
 		if($(this).hasClass('chapterSelect')){
-			var size = bibleObject[book].length;
+			var size = javascripture.data.kjv[book].length;
 		} else if($(this).hasClass('verseSelect')){
 			var chapterInArray = chapter - 1;
-			var size = bibleObject[book][chapterInArray].length;
+			var size = javascripture.data.kjv[book][chapterInArray].length;
 		}
 		if($(this).attr('size') > 0){
 			$(this).attr('size',size);

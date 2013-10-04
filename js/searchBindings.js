@@ -46,9 +46,9 @@
 		references += '<form><ol class="references">';
 		var wordCount = 0;
 
-		var searchObject = bibleObject;
+		var searchObject = javascripture.data.kjv;
 		if($("select[name=searchLanguage]").val() === "hebrew") {
-			searchObject = hebrewObject;
+			searchObject = javascripture.data.hebrew;
 			$.each(strongsNumberArray, function(index, strongsNumber) {
 				if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
 					strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
@@ -128,7 +128,8 @@
 			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 );
 			
 
-			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'"><style></style><h2 class="'+family+'">' + header + ' <a class="remove" href="#"></a></h2></div>';
+			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'"><style></style><h2 class="'+family+'">' + header;
+			strongsTracking += '<a aria-hidden="true" class="icon-close remove"></a></h2></div>';
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
 

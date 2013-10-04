@@ -1,8 +1,8 @@
 	var searchApi = {
 		language: { //helper object to access different languages
-				english: bibleObject,
-				greek: greekObject,
-				hebrew: hebrewObject
+			english: javascripture.data.kjv,
+			greek: javascripture.data.greek,
+			hebrew: javascripture.data.hebrew
 		},
 		types: [
 			'word',
@@ -21,37 +21,37 @@
         doesDataMatchTerm: function(type, data, term) {
 			data = data.toLowerCase();
 			term = term.toLowerCase();
-        	if ( data === term ) { //exact match
-        		return true;
-        	}
-        	/*this get very complex 
-        	if (data.indexOf( ' ' + term + ' ') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ';') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ':') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( term + ' ') === 0 ) { //start of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term) === 0 ) { //start of a string
-	        	return true;
-        	}*/
-        	//skip this for lemma
-        	if ( type !== 'lemma' ) {
-	            if ( data.search( term ) > -1 ) {
-    	        	return true;
-        	    }
-            }
+			if ( data === term ) { //exact match
+				return true;
+			}
+			/*this get very complex 
+			if (data.indexOf( ' ' + term + ' ') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ';') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ':') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( term + ' ') === 0 ) { //start of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term) === 0 ) { //start of a string
+				return true;
+			}*/
+			//skip this for lemma
+			if ( type !== 'lemma' ) {
+				if ( data.search( term ) > -1 ) {
+					return true;
+				}
+			}
             return false;
         },
         resetMatches: function () {
@@ -106,7 +106,8 @@
 											termsLength = termsLength + terms.length,
 											matchesLength = 0;
 
-										$.each(terms, function (key, term) {
+										for ( var termNumber = 0, termsLength = terms.length; termNumber < termsLength; termNumber++ ) {
+											var term = terms[ termNumber ];
 											if ( self.doesDataMatchTerm(type, wordObject[typeKey], term) ) {
 												if (parameters.clusivity === 'exclusive' ) {
 													self.results.matches[term] = true;
@@ -114,7 +115,7 @@
 													self.addReference(bookName, chapterNumber, verseNumber);
 												}
 											}
-										});
+										}
 									}
 								}
 							}
