@@ -1,6 +1,6 @@
 $('.bookSelect a').bind( 'touchmove', function(event) {
 	event.preventDefault();
-$( this ).text( event.clientX );
+$( this ).text( 'test:' + event.clientX );
 	var numberOfChapters = parseInt( $(this).data( 'chapters' ), 10 ),
 	    position = event.clientX - $(this).offset().left,
 	    spacing =  $(this).width() / numberOfChapters,
@@ -17,7 +17,7 @@ $( this ).text( event.clientX );
 
 	$( this ).attr( 'href', newHref ).find('.chapter').text( chapter );
 });
-$('.bookSelect a').bind( 'touchend', function(event) {
+/*$('.bookSelect a').bind( 'touchend', function(event) {
 	event.preventDefault();
 	window.location.href = $( this ).attr( 'href' );
-});
+});*/
