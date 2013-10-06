@@ -24,16 +24,16 @@
 					//convert
 					osidStrongsNumber = strongsNumber;
 	
-					lemma = stripPointing(strongsDictionary[osidStrongsNumber].lemma );
+					lemma = stripPointing( strongsDictionary[ osidStrongsNumber ].lemma );
 					strongsDef = strongsDictionary[osidStrongsNumber].strongs_def;
 					kjvDef = strongsDictionary[osidStrongsNumber].kjv_def;
 					englishWord = spanObject.text();
-					infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass('wordControlPanelTemplate').addClass( 'wordControlPanel' );
-					infoObjects[ i ].find('.wordControlPanelStrongsNumber').addClass( className ).text(strongsNumberDisplay);
-					infoObjects[ i ].find('.wordControlPanelLemma').text(lemma);
-					infoObjects[ i ].find('.wordControlPanelEnglish').text(englishWord);
-					infoObjects[ i ].find('.wordControlPanelStrongsDef').text(strongsDef);
-					infoObjects[ i ].find('.wordControlPanelKJVDef').text(kjvDef);
+					infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass( 'wordControlPanelTemplate' ).addClass( 'wordControlPanel' );
+					infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay );
+					infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
+					infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
+					infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
+					infoObjects[ i ].find( '.wordControlPanelKJVDef' ).text( kjvDef );
 				}
 		
 				var roots = '';
