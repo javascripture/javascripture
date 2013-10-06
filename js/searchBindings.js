@@ -23,13 +23,13 @@
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
 		var strongsNumberAsId = data.lemma.replace(/ /gi,"");
-		var trackingBoxId = createTrackingBoxString( data, '_' );
+		var trackingBoxId = createTrackingBoxId( data, '_' );
 		createTrackingBox( data );
 		strongsNumberArray = data.lemma.split(' ');
 		
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
-		$('#referenceTracking #'+trackingBoxId).removeClass('closed');
+		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 		
 		searchApi.getReferences(data);
 		searchApi.deferred.done( function(){
@@ -110,9 +110,19 @@
 		}
 		return string;
 	}
+	
+	function createTrackingBoxId( data ) {
+		var string = '';
+		$.each( data, function ( key, value ) {
+			if ( value !== '' ) {
+				string += value.replace( / /gi, '_' ) + '_';
+			}
+		} );
+		return string;
+	}
 
 	function createTrackingBox( data, type) {
-		var trackingBoxId = createTrackingBoxString( data, '_' );
+		var trackingBoxId = createTrackingBoxId( data );
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
 			var header = createTrackingBoxString( data, ' ' ),

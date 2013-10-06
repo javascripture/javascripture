@@ -570,7 +570,7 @@ form.search #advanced {
 .searchPanel ol li {
   color: #ddd;
   line-height: 1.5em;
-  margin-left: .5em;
+  padding-left: .5em;
 }
 .searchPanel ol li a {
   color: #000;
