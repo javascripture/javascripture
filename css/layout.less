@@ -140,7 +140,7 @@ form ul li {list-style:none;}
 	right: 202px;
 //	overflow: hidden;
 	position: fixed;
-	z-index:999;
+	z-index:8;
 	color: #000;
 }
 
@@ -257,18 +257,21 @@ dvnnm {text-transform: uppercase;}
 
 /*popups*/
 .popup {
+	background: rgba(255, 255, 255, .5);
 	display: none;
 	position: fixed;
+	bottom: 0;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 0;
+	height: 100%;
+	width: 100%;
 	z-index: 9;
 	.content {
 		background: #fff;
 		border-bottom-left-radius: 1em;
 		border-bottom-right-radius: 1em;
-		border: 1px solid black;
+		border: 1px solid #ccc;
 		border-top: none;
 //		box-shadow: 0 0 10px #000;
 		margin: 0 auto;
@@ -276,9 +279,11 @@ dvnnm {text-transform: uppercase;}
 		padding: 1em;
 		position: relative;
 		width: 320px;
-		h2, input, a {
-			font-family: 'Helvetica Neue';
-			font-weight: 100;
+		.content-padding {
+			h2, input, a {
+				font-family: 'Helvetica Neue';
+				font-weight: 100;
+			}
 		}
 		input[type=submit],
 		input[type=text] {

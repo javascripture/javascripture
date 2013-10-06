@@ -105,8 +105,9 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 
 				$( document ).trigger( 'loading', 'searching ' + bookName );
 
-				for (var chapterNumber = 0, bookLength = book.length; chapterNumber < bookLength; chapterNumber++) {
-					chapter = book[ chapterNumber ];
+				jQuery.fn.slowEach(book, 1, function( chapterNumber, chapter ) {
+//				for (var chapterNumber = 0, bookLength = book.length; chapterNumber < bookLength; chapterNumber++) {
+//					chapter = book[ chapterNumber ];
 
 					if (parameters.range === 'chapter' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 						self.resetMatches();
@@ -161,12 +162,9 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 									self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 								}
 							}
-
-
-
 						}
 					}
-				}
+				} );
 
 				if (bookNumber === booksToSearch.length - 1 ) {
 					self.deferred.resolve();
