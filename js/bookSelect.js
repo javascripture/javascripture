@@ -1,7 +1,4 @@
-$('.bookSelect a').bind( 'touchmove', function(event) {
-	event.preventDefault();
-	event.stopPropagation();
-$( this ).text( 'test2:' + event.clientX );
+$('.bookSelect a').bind( 'mousemove touchmove', function(event) {
 	var numberOfChapters = parseInt( $(this).data( 'chapters' ), 10 ),
 	    position = event.clientX - $(this).offset().left,
 	    spacing =  $(this).width() / numberOfChapters,
@@ -18,7 +15,7 @@ $( this ).text( 'test2:' + event.clientX );
 
 	$( this ).attr( 'href', newHref ).find('.chapter').text( chapter );
 });
-/*$('.bookSelect a').bind( 'touchend', function(event) {
+$('.bookSelect a').bind( 'touchend', function(event) {
 	event.preventDefault();
 	window.location.href = $( this ).attr( 'href' );
-});*/
+});
