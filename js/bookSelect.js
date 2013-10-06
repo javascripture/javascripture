@@ -1,3 +1,7 @@
+$('.bookSelect a').bind('touchmove',function(e){
+      e.preventDefault();
+alert('h');
+});
 $('.bookSelect a').bind( 'mousemove touchmove', function(event) {
 	var numberOfChapters = parseInt( $(this).data( 'chapters' ), 10 ),
 	    position = event.clientX - $(this).offset().left,
