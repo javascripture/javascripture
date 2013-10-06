@@ -16,7 +16,7 @@ var reference;
 			    chapter = reference.chapter,
 			    verse = reference.verse;
 
-			if ( undefined === verse ) {
+			if ( 'undefined' == typeof verse ) {
 				reference.verse = 1;				
 			}
 

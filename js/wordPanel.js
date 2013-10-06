@@ -26,14 +26,18 @@
 	
 					lemma = stripPointing( strongsDictionary[ osidStrongsNumber ].lemma );
 					strongsDef = strongsDictionary[osidStrongsNumber].strongs_def;
-					kjvDef = strongsDictionary[osidStrongsNumber].kjv_def;
+					kjvDefArray = strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
+					$.each( kjvDefArray, function( key, word ) {
+						var kjvWord = word.trim();
+						kjvDef += '<a href="#" class="kjv-def" data-language="english" data-clusivity="exclusive" data-range="word" data-lemma="' + strongsNumber + '" data-word="' + kjvWord + '">' + kjvWord + '</a>, ';
+					} );
 					englishWord = spanObject.text();
 					infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass( 'wordControlPanelTemplate' ).addClass( 'wordControlPanel' );
 					infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay );
 					infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 					infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 					infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
-					infoObjects[ i ].find( '.wordControlPanelKJVDef' ).text( kjvDef );
+					infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
 				}
 		
 				var roots = '';

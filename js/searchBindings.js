@@ -184,5 +184,10 @@
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).data() );
 	} );
+	
+	$( document ).on( 'click', 'a.kjv-def', function( event ) {
+		event.preventDefault();
+		createSearchReferencesPanel( $( this ).data() );
+	} );
 
 } )( jQuery );
