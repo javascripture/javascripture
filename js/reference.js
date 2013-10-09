@@ -147,7 +147,9 @@ var reference;
 			chapterText += '>';
 			chapterText += '<div class="english">';
 				$.each( javascripture.data.kjv[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-					chapterText += createWordString( wordObject, language );
+					if ( wordObject ) {
+						chapterText += createWordString( wordObject, language );
+					}
 				});
 			chapterText += "</div>";
 
@@ -172,12 +174,12 @@ var reference;
 		var wordString = '',
 		    family = '',
 		    lemma = wordArray[ 1 ];
-		if ( strongsObjectWithFamilies[ wordArray[ 1 ] ] ) {
-			family = strongsObjectWithFamilies[ wordArray[ 1 ] ].family;
+		if ( lemma && strongsObjectWithFamilies[ lemma ] ) {
+			family = strongsObjectWithFamilies[ lemma ].family;
 		}
 		wordString += '<span'; 
 		wordString += ' class="' + reference.getFamily( lemma ) + '"';
-		wordString += ' title="' + wordArray[1];
+		wordString += ' title="' + lemma;
 		if ( wordArray[2] ) {
 			wordString += ' ' + wordArray[2];
 		}
