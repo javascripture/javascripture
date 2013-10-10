@@ -171,14 +171,18 @@ var reference;
 	}
 	
 	function createWordString( wordArray, language ) {
-		var wordString = '',
-		    family = '',
+		var self = this,
+		    wordString = '',
+		    families = [],
 		    lemma = wordArray[ 1 ];
-		if ( lemma && strongsObjectWithFamilies[ lemma ] ) {
-			family = strongsObjectWithFamilies[ lemma ].family;
+		if ( lemma ) {
+			lemmaArray = lemma.split( ' ' );
+			$.each( lemmaArray, function( key, lemmaValue ) {
+				families.push( reference.getFamily( lemmaValue ) );
+			} );
 		}
 		wordString += '<span'; 
-		wordString += ' class="' + reference.getFamily( lemma ) + '"';
+		wordString += ' class="' + families.join( ' ' ) + '"';
 		wordString += ' title="' + lemma;
 		if ( wordArray[2] ) {
 			wordString += ' ' + wordArray[2];
@@ -188,7 +192,7 @@ var reference;
 		wordString += ' data-lemma="' + wordArray[1] + '"';
 		wordString += ' data-language="' + language + '"';
 		wordString += ' data-range="verse"';
-		wordString += ' data-family="' + family + '"';
+		wordString += ' data-family="' + families.join( ' ' ) + '"';
 		if ( wordArray[2] ) {
 			wordString += ' data-morph="' + wordArray[2] + '"';
 		}
