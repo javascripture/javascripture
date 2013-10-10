@@ -98,6 +98,20 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			self.resetMatches();
 
 			var booksToSearch = this.books[ parameters.language ];
+
+			//work out how many terms there are			
+			var termsLength = 0;
+			for( var typeKey in self.types ) {
+				var type = self.types[typeKey];
+					termString = parameters[type];
+
+				if ( termString !== undefined && termString !== '') {
+					var terms = termString.split(' ');
+					termsLength = termsLength + terms.length;
+				}
+			}
+
+			
 			jQuery.fn.slowEach( booksToSearch, 1, function( bookNumber, bookName ) {
 			//for( var bookName in dataSource ) {
 
@@ -123,9 +137,9 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 							if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 								self.resetMatches();
 							}
-							var termsLength = 0,
-								matchesLength,
-								termString;
+
+							var matchesLength,
+							    termString;
 
 							for( var typeKey in self.types ) {
 								var type = self.types[typeKey];
@@ -134,8 +148,6 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 								if ( termString !== undefined && termString !== '') {
 									if ( wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined' ) { //sometimes wordObjects are undefined in hebrew
 										var terms = termString.split(' ');
-										termsLength = termsLength + terms.length;
-										matchesLength = 0;
 
 										for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
 											var term = terms[ termNumber ];
@@ -150,15 +162,15 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 									}
 								}
 							}
-
 							//terms are combined for exclusive searches here							
 							if (parameters.clusivity === 'exclusive' ) {
 								matchesLength = 0;
-								$.each(self.results.matches, function (term) {
+
+								$.each(self.results.matches, function (key, term) {
 									matchesLength++;
 								});
-
 								if ( matchesLength > 0 && matchesLength >= termsLength) {
+								console.log(matchesLength, termsLength);
 									self.addReference(bookName, chapterNumber, verseNumber);
 									self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 								}
