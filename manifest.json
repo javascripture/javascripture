@@ -1,0 +1,22 @@
+{
+	// Required
+	"manifest_version": 2,
+	"name": "My Extensions",
+	"version": "versionString",
+
+	// Recommended
+	"default_locale": "en",
+	"description": "A plain text description",
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+
+	// Optional
+	"author": 'scruffian',
+	"background": {
+		// Recommended
+		"persistent": false
+	}
+}
