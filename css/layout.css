@@ -224,9 +224,6 @@ form ul li {
 .collapsable.closed form {
   display: none;
 }
-#referenceTracking .collapsable h2 {
-  background-position: -26px -26px;
-}
 #wordControlPanel {
   background: rgba(255, 255, 255, 0.9);
   border-top: 1px solid #ccc;
@@ -551,7 +548,7 @@ form.search #advanced {
   right: 0;
 }
 .searchPanel h2 {
-  border-bottom: 0;
+  border: none;
   font-family: 'Helvetica Neue';
   font-weight: 100;
   position: relative;

@@ -5,8 +5,7 @@
 	"version": "3",
 
 	// Recommended
-	"default_locale": "en",
-	"description": 'A JavaScript bible exploration app',
+	"description": "A JavaScript bible exploration app",
 	"icons": {
 		"16": "icon16.png",
 		"48": "icon48.png",
@@ -24,9 +23,5 @@
 	},
 
 	// Optional
-	"author": 'scruffian',
-	"background": {
-		// Recommended
-		"persistent": false
-	}
+	"author": "scruffian"
 }
