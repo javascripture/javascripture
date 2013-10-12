@@ -406,6 +406,9 @@ dvnnm {
 .popup .content .content-padding ul {
   margin: 0 0 1em 1em;
 }
+.popup .content .content-padding .search ul {
+  margin: 0;
+}
 .popup .content input[type=submit],
 .popup .content input[type=text] {
   text-indent: .5em;

@@ -128,7 +128,7 @@
 			<a href="#book=Jonah&chapter=1" data-chapters="4">Jonah <span class="chapter"></span></a>
 			<a href="#book=Micah&chapter=1" data-chapters="7">Micah <span class="chapter"></span></a>
 			<a href="#book=Nahum&chapter=1" data-chapters="3">Nahum <span class="chapter"></span></a>
-			<a href="#book=Habbakuk&chapter=1" data-chapters="3">Habbakuk <span class="chapter"></span></a>
+			<a href="#book=Habakkuk&chapter=1" data-chapters="3">Habakkuk <span class="chapter"></span></a>
 			<a href="#book=Zephaniah&chapter=1" data-chapters="3">Zephaniah <span class="chapter"></span></a>
 			<a href="#book=Haggai&chapter=1" data-chapters="2">Haggai <span class="chapter"></span></a>
 			<a href="#book=Zechariah&chapter=1" data-chapters="14">Zechariah <span class="chapter"></span></a>
@@ -170,7 +170,7 @@
 			<div id="wordControlPanel" class="not-active">
 				<style></style>
 				<div class="control-panel">
-					<div class="duplicated">Select a word to show more details about it here</div>
+					<div class="duplicated">Select a word to show more details about it here. Double click to search.</div>
 				</div>
 			</div>
 
@@ -360,11 +360,15 @@
 </div>
 <div id="go-to-popup" class="popup">
 	<div class="content">
+		<h2>Go to...</h2>
 		<a aria-hidden="true" class="icon-close close-popup"></a>
 		<div class="content-padding">
 			<form class="goToReference">
 				<input type="text" id="goToReference" placeholder="Go to reference..." />
 			</form>
+			<div class="advanced">
+				<a href="#" class="randomReference">Load random reference</a>
+			</div>
 		</div>
 	</div>
 </div>
@@ -475,19 +479,5 @@
 <script src="js/keyboardShortcuts.js"></script>
 <script src="js/crossReferences.js"></script>
 <script src="js/bookSelect.js"></script>
-<script>
-		var getRandomReference = function() {
-			var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
-				chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length);
-				numberOfVerses = bible.Data.verses[bookNumber][chapterNumber];
-				verseNumber = Math.floor(Math.random() * numberOfVerses);
-				referenceObject = {};
-			referenceObject.book = bible.Data.books[bookNumber][0];
-			referenceObject.chapter = chapterNumber + 1;
-			referenceObject.verse = verseNumber + 1;
-			return referenceObject;
-		};
-		var randomReference = getRandomReference();
-		window.location.hash = 'book=' + randomReference.book + '&chapter=' + randomReference.chapter + '&verse=' + randomReference.verse;
-</script>
+<script src="js/randomReference.js"></script>
 </html>
