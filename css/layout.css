@@ -491,6 +491,9 @@ form.search #advanced {
   min-width: 50px;
   text-indent: .5em;
 }
+.dock select#bookSelect {
+  min-width: 160px;
+}
 .dock .heading-wrapper {
   font-size: 160%;
   line-height: 1.8em;
