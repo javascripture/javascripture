@@ -399,6 +399,9 @@ dvnnm {
   font-family: 'Helvetica Neue';
   font-weight: 100;
 }
+.popup .content .content-padding ul {
+  margin: 0 0 1em 1em;
+}
 .popup .content input[type=submit],
 .popup .content input[type=text] {
   text-indent: .5em;
