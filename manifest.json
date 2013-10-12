@@ -24,4 +24,7 @@
 
 	// Optional
 	"author": "scruffian"
+	"permissions": {
+		"unlimitedStorage": true
+	}
 }
