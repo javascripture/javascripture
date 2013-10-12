@@ -46,7 +46,7 @@
 				<option value="Jonah">Jonah</option>
 				<option value="Micah">Micah</option>
 				<option value="Nahum">Nahum</option>
-				<option value="Habbakuk">Habbakuk</option>
+				<option value="Habakkuk">Habakkuk</option>
 				<option value="Zephaniah">Zephaniah</option>
 				<option value="Haggai">Haggai</option>
 				<option value="Zechariah">Zechariah</option>
@@ -83,18 +83,15 @@
 		</div>
 		<nav class="left">
 			<a href="javascript:history.back();";>&laquo; Back</a>
+			<a href="#help-popup" class="open-popup">Help</a>
 		</nav>
 		<nav class="right">
 			<a href="#search-popup" class="open-popup" id="keyCode83">Search</a>
 			<a href="#settings-popup" class="open-popup" id="keyCode48">Settings</a>
 			<a href="#bookmarks-popup" class="open-popup" id="keyCode66">Bookmarks</a>
 			<a href="#go-to-popup" class="open-popup" id="keyCode71">Go to</a>
-			<a href="#help-popup" class="open-popup">Help</a>
 		</nav>
 	</div>
-
-		
-
 	<div class="goToPanel">
 		<div class="lookup bookSelect">
 			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
@@ -177,7 +174,9 @@
 				</div>
 			</div>
 
-			<div id="verse"><!--<button class="random-verse">Load random verse</button>--></div>
+			<div id="verse">
+				<div class="loading">Loading...</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -476,4 +475,19 @@
 <script src="js/keyboardShortcuts.js"></script>
 <script src="js/crossReferences.js"></script>
 <script src="js/bookSelect.js"></script>
+<script>
+		var getRandomReference = function() {
+			var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
+				chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length);
+				numberOfVerses = bible.Data.verses[bookNumber][chapterNumber];
+				verseNumber = Math.floor(Math.random() * numberOfVerses);
+				referenceObject = {};
+			referenceObject.book = bible.Data.books[bookNumber][0];
+			referenceObject.chapter = chapterNumber + 1;
+			referenceObject.verse = verseNumber + 1;
+			return referenceObject;
+		};
+		var randomReference = getRandomReference();
+		window.location.hash = 'book=' + randomReference.book + '&chapter=' + randomReference.chapter + '&verse=' + randomReference.verse;
+</script>
 </html>
