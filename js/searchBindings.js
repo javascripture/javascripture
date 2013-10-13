@@ -178,6 +178,7 @@
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).serializeObject() );
+		$( '.popup' ).popup( 'close' );
 	});
 	
 	$( document ).on( 'click', 'a.word-tree', function( event ) {

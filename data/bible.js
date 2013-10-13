@@ -231,7 +231,7 @@ bible.parseReference = function(textReference) {
 	// finalize
 
 	return new bible.Reference(bookID, chapter1, verse1, chapter2, verse2);
-}
+};
 
 bible.Reference = function() {
 
