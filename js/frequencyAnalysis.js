@@ -1,6 +1,6 @@
 /*global javascripture*/
 ;( function ( $ ) {
-	$( document ).on( 'click', '.frequencyAnalysis', function( event ) {
+/*	$( document ).on( 'click', '.frequencyAnalysis', function( event ) {
 		event.preventDefault();
 		var data = $( this ).closest( '.reference' ).data(),
 		    frequencyAnalysis = {};
@@ -34,22 +34,5 @@
 		} );
 		$( '.full-page' ).show();
 		Raphael("holder", 700, 700).pieChart(350, 350, 200, values, labels, "#fff");
-
-
-
-
-		//$.each( frequencyAnalysis, function)
-/*		console.log( frequencyAnalysis.sort( function( a, b ) { 
-			return b[1] - a[1];
-		} ) );
-		$.each( frequencyAnalysis, function( key, value ) {
-			console.log(key, value);
-		} );
-		console.log( frequencyAnalysis['added'] );
-		console.log( frequencyAnalysis[0] );
-		console.log( frequencyAnalysis[0][0] );
-		console.log( frequencyAnalysis.sort( function( a, b ) { 
-			return b[1] - a[1];
-		} ) );*/
-	} );
+	} );*/
 } )( jQuery );
