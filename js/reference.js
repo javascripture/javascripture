@@ -122,7 +122,7 @@ var reference;
 			verseInArray = verse - 1,
 			context = false;
 
-		var chapterText = '<div class="reference" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
+		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
 		chapterText += '<ol class="wrapper">';
 	
 		var originalText, language;

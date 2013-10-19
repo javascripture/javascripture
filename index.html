@@ -441,14 +441,25 @@
 	<div class="definitions">
 		<strong>KJV Usage:</strong> <span class="wordControlPanelKJVDef"></span><br />
 		<strong>Strongs Definition:</strong> <span class="wordControlPanelStrongsDef"></span><br />
+		<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 	</div>
 	<span aria-hidden="true" class="icon-close close"></span>
+</div>
+
+<div class="full-page">
+	<div id="holder">
+		<img src="icon.svg" /><br />
+		<br />
+		Loading JavaScripture. Once it's loaded it will be installed into your browser, so it will also work offline. Even if you close the tab.
+	</div>
 </div>
 
 </body>
 <script type="text/javascript" src="js/jquery-2.0.3.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
 <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+<script src="js/raphael-min.js"></script>
+<script src="js/raphael.pie.js"></script>
 <script type="text/javascript" src="data/bible.js"></script>
 <script>
 	var javascripture = {
@@ -461,6 +472,7 @@
 <script type="text/javascript" src="data/hebrew6.js"></script>
 <script type="text/javascript" src="data/greek4.js"></script>
 <script src="data/crossReferences.js"></script>
+<script src="data/morphology.js"></script>
 
 
 <script type="text/javascript" src="js/colors.js"></script>
@@ -468,6 +480,7 @@
 <script type="text/javascript" src="js/events.js"></script>
 <script type="text/javascript" src="js/functionalScripts.js"></script>
 <script src="js/searchApi.js"></script>
+<script src="js/morphologyApi.js"></script>
 <script src="js/searchBindings.js"></script>
 <script src="js/wordPanel.js"></script>
 <script src="js/loading.js"></script>
@@ -479,5 +492,7 @@
 <script src="js/keyboardShortcuts.js"></script>
 <script src="js/crossReferences.js"></script>
 <script src="js/bookSelect.js"></script>
+<script src="js/frequencyAnalysis.js"></script>
 <script src="js/randomReference.js"></script>
+
 </html>

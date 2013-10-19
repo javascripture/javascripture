@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 3
+#version: 3.1
 index.html
 css/layout.css
 js/jquery-2.0.3.js
@@ -12,12 +12,14 @@ data/strongsObjectWithFamilies.js
 data/hebrew6.js
 data/greek4.js
 data/crossReferences.js
+data/morphology.js
 js/colors.js
 js/jquery.hoverIntent.min.js
 js/colorpicker.js
 js/events.js
 js/functionalScripts.js
 js/searchApi.js
+js/morphologyApi.js
 js/searchBindings.js
 js/wordPanel.js
 js/loading.js
@@ -29,4 +31,5 @@ js/wayPoint.js
 js/keyboardShortcuts.js
 js/crossReferences.js
 js/bookSelect.js
-js/randomReference.js  
+js/frequencyAnalysis.js
+js/randomReference.js

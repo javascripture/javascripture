@@ -13,7 +13,8 @@
 		var kjvDef = '';
 		var englishWord = '';
 		var infoObjects = [],
-		    language;
+		    language,
+		    morphology = spanObject.data( 'morph' );
 		$.each(strongsNumberArray, function(i,strongsNumber) {
 			if ( strongsNumber === 'G3588' ) {
 				//do nothing
@@ -38,6 +39,7 @@
 					infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 					infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
 					infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
+					infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphologyApi.get( morphology ) );
 				}
 		
 				var roots = '';

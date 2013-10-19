@@ -13,6 +13,7 @@ var getRandomReference = function() {
 var loadRandomRefernece = function() {
 	var randomReference = getRandomReference();
 	window.location.hash = 'book=' + randomReference.book + '&chapter=' + randomReference.chapter + '&verse=' + randomReference.verse;
+	$( '.full-page' ).hide();
 };
 $( '.randomReference' ).click( function( event ) {
 	event.preventDefault();
