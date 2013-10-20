@@ -129,7 +129,7 @@
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
 			var header = createTrackingBoxString( data, ' ' ),
-			    family = reference.getFamily( data.lemma),
+			    family = javascripture.modules.reference.getFamily( data.lemma),
 			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 ),
 				title = '';
 			$.each( data, function ( key, value ) {

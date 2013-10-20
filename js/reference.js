@@ -1,5 +1,5 @@
-var reference;
-( function ( $ ) {
+/*globals javascripture*/
+;( function ( $ ) {
 	$.fn.scrollStopped = function(callback) {
 	    $(this).scroll( function () {
 	        var self = this, $this = $(self);
@@ -10,7 +10,7 @@ var reference;
 	    });
 	};
 
-	reference = {
+	javascripture.modules.reference = {
 		load: function( reference ) {
 			var book = reference.book,
 			    chapter = reference.chapter,
@@ -178,7 +178,7 @@ var reference;
 		if ( lemma ) {
 			lemmaArray = lemma.split( ' ' );
 			$.each( lemmaArray, function( key, lemmaValue ) {
-				families.push( reference.getFamily( lemmaValue ) );
+				families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
 			} );
 		}
 		wordString += '<span'; 
@@ -245,7 +245,7 @@ var reference;
 		        if ( parameterPairArray[2] ) {
 		            verse = parseInt(parameterPairArray[2].split('=')[1], 10);
 		        }
-		        reference.load( {
+				javascripture.modules.reference.load( {
 			        book: book,
 			        chapter: chapter,
 			        verse: verse
@@ -269,14 +269,14 @@ var reference;
 		if ( scrollTop <= 0 ) {
 			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );
-			anchoringData = reference.getAnchoringData( 'prev' );
-			reference.load( prev ).anchorReference( anchoringData );
+			anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
+			javascripture.modules.reference.load( prev ).anchorReference( anchoringData );
 		}
 		if ( scrollTop >= verseHeight ) {
 			console.log('next');
 			var next = $( '.three-references' ).data( 'next' );
-			anchoringData = reference.getAnchoringData( 'next' );
-			reference.load( next ).anchorReference( anchoringData );
+			anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
+			javascripture.modules.reference.load( next ).anchorReference( anchoringData );
 		}
 	});
 	
