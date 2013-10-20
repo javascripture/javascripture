@@ -17,7 +17,14 @@ var loadRandomRefernece = function() {
 };
 $( '.randomReference' ).click( function( event ) {
 	event.preventDefault();
-	loadRandomRefernece();
+	loadRandomReference();
 	$( '.popup' ).popup( 'close' );
 } );
-loadRandomRefernece();
+if ( window.location.hash !== '' ) {
+	hash = window.location.hash;
+	window.location.hash = '';
+	window.location.hash = hash;
+} else {
+	loadRandomReference();
+}
+$( '.full-page' ).hide();

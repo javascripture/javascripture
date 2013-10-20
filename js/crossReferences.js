@@ -26,7 +26,7 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse;
 	    console.log( bookId );
 	    console.log( reference );
-	    crossReferencesMarkup = 'Cross references for <a href="#' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>';
+	    crossReferencesMarkup = 'Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>';
 
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {

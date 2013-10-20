@@ -104,7 +104,9 @@
 		}
 		if ( data.lemma ) {
 			string += separator + data.lemma.replace( / /gi, separator );
-			string += separator + stripPointing( strongsDictionary[ data.lemma ].lemma )
+			if ( strongsDictionary[ data.lemma ] ) {
+				string += separator + stripPointing( strongsDictionary[ data.lemma ].lemma );
+			}
 		}
 		if ( data.morph ) {
 			string += separator + data.morph.replace( / /gi, separator );			
