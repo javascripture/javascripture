@@ -98,7 +98,10 @@
 				infoObjects[ i ].find('#wordTreeRoots').html( wordTreeRoots );
 				infoObjects[ i ].find('#wordTreeBranches').html( wordTreeBranches );
 	
-				var family = reference.getFamily( strongsNumber );
+				var family = reference.getFamily( strongsNumber ),
+				    wordTreeFamily = 'family: ' + family;
+				infoObjects[ i ].find('#wordTreeFamily').html( wordTreeFamily );
+
 				var strongsInt = parseInt( family.substring( 1, family.length ), 10 );
 	
 				var newColor = colors.getStrongsColor( strongsInt );
