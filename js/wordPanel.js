@@ -33,8 +33,20 @@
 						kjvDef += '<a href="#" class="kjv-def" data-language="english" data-clusivity="exclusive" data-range="word" data-lemma="' + strongsNumber + '" data-word="' + kjvWord + '">' + kjvWord + '</a>, ';
 					} );
 					englishWord = spanObject.text();
+					if ( osidStrongsNumber.substring( 0, 1 ) === "H" ) {
+						language = 'hebrew';
+					}
+					if ( osidStrongsNumber.substring( 0, 1 ) === "G" ) {
+						language = 'greek';
+					}
+
 					infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass( 'wordControlPanelTemplate' ).addClass( 'wordControlPanel' );
-					infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay );
+					infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay ).data( {
+						language: language,
+						lemma: osidStrongsNumber,
+						range: 'verse'
+						
+					} );
 					infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 					infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 					infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );

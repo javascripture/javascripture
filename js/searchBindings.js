@@ -171,11 +171,20 @@
 		return '<li><a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">'+book+' '+(chapter)+':'+(verse)+'</a></li>';
 	}
 
-	$(document).on( 'dblclick', '#verse ol > li span', function () {
-		var data = $(this).data();
+	function searchOnClick( element ) {
+		var data = $( element ).data();
 		data.word = '';
 		data.morph = '';
+		data.lemma = data.lemma.replace('G3588 ','');
 		createSearchReferencesPanel(data);
+	}
+	
+
+	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
+		searchOnClick( this );
+	});
+	$(document).on( 'dblclick', '#verse ol > li span', function () {
+		searchOnClick( this );
 	});
 	
 	$( 'form.search' ).submit( function (event) {
