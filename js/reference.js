@@ -135,7 +135,7 @@ var reference;
 		}
 
 		$.each( javascripture.data.kjv[book][chapterInArray], function(verseNumber, verseText ) {
-			chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '">';
+			chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
 			chapterText += '<div class="wrapper"';
 			if(verseNumber === verseInArray) {
 				chapterText += ' id="current"';
