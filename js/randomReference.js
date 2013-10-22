@@ -10,7 +10,7 @@ var getRandomReference = function() {
 	referenceObject.verse = verseNumber + 1;
 	return referenceObject;
 };
-var loadRandomRefernece = function() {
+var loadRandomReference = function() {
 	var randomReference = getRandomReference();
 	window.location.hash = 'book=' + randomReference.book + '&chapter=' + randomReference.chapter + '&verse=' + randomReference.verse;
 	$( '.full-page' ).hide();
