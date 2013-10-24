@@ -1,4 +1,4 @@
-/*global colors*/
+/*global javascripture*/
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -143,8 +143,8 @@
 
 				var strongsStyle = '';
 				if(familyInt > 0) {
-					var newColor = colors.getStrongsColor( familyInt );
-					strongsStyle = colors.getStrongsStyle( family, newColor );
+					var newColor = javascripture.modules.colors.getStrongsColor( familyInt );
+					strongsStyle = javascripture.modules.colors.getStrongsStyle( family, newColor );
 				}
 
 				if(familyInt > 0) {

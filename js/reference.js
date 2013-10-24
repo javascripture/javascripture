@@ -106,8 +106,8 @@
 			this.scrollToVerse( $anchorPoint, offset );
 		},
 		getFamily: function ( strongsNumber ) {
-			if ( strongsObjectWithFamilies[ strongsNumber ] ) {
-				return strongsObjectWithFamilies[ strongsNumber ].family;
+			if ( javascripture.data.strongsObjectWithFamilies[ strongsNumber ] ) {
+				return javascripture.data.strongsObjectWithFamilies[ strongsNumber ].family;
 			} else {
 				return strongsNumber;
 			}

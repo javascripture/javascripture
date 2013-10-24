@@ -1,4 +1,5 @@
-var colors = {
+/*global javascripture*/
+javascripture.modules.colors = {
 	getStrongsColor: function ( strongsInt ) {
 		var theSizeOfAColorSegment = 360 / 8000,
 			hue = strongsInt * theSizeOfAColorSegment;
@@ -7,7 +8,6 @@ var colors = {
 	},
 
 	getStrongsStyle: function ( strongsNumber, newColor ) {
-		return '.' + strongsNumber + ' {color:#fff;background:' + newColor + ' !important;}';	
+		return '.' + strongsNumber + ' {color:#fff;background:' + newColor + ' !important;}';
 	}
-	
 };
