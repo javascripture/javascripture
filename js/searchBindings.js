@@ -104,8 +104,8 @@
 		}
 		if ( data.lemma ) {
 			string += separator + data.lemma.replace( / /gi, separator );
-			if ( strongsDictionary[ data.lemma ] ) {
-				string += separator + stripPointing( strongsDictionary[ data.lemma ].lemma );
+			if ( javascripture.data.strongsDictionary[ data.lemma ] ) {
+				string += separator + stripPointing( javascripture.data.strongsDictionary[ data.lemma ].lemma );
 			}
 		}
 		if ( data.morph ) {
