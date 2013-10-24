@@ -105,7 +105,7 @@
 		if ( data.lemma ) {
 			string += separator + data.lemma.replace( / /gi, separator );
 			if ( javascripture.data.strongsDictionary[ data.lemma ] ) {
-				string += separator + stripPointing( javascripture.data.strongsDictionary[ data.lemma ].lemma );
+				string += separator + javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ data.lemma ].lemma );
 			}
 		}
 		if ( data.morph ) {

@@ -25,7 +25,7 @@
 						//convert
 						var osidStrongsNumber = strongsNumber;
 		
-						lemma = stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
+						lemma = javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
 						strongsDef = javascripture.data.strongsDictionary[osidStrongsNumber].strongs_def;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {

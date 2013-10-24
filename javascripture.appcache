@@ -13,6 +13,7 @@ data/hebrew6.js
 data/greek4.js
 data/crossReferences.js
 data/morphology.js
+modules/hebrew.js
 js/colors.js
 js/jquery.hoverIntent.min.js
 js/colorpicker.js
