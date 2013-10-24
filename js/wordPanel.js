@@ -15,7 +15,7 @@
 			    infoObjects = [],
 			    language,
 			    morphology = $element.data( 'morph' );
-			$.each(strongsNumberArray, function(i,strongsNumber) {
+			$.each(strongsNumberArray, function( i, strongsNumber ) {
 				if ( strongsNumber === 'G3588' ) {
 					//do nothing
 				} else {
@@ -51,7 +51,7 @@
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 						infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
 						infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
-						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphologyApi.get( morphology ) );
+						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( javascripture.api.morphology.get( morphology ) );
 					}
 			
 					var roots = '';

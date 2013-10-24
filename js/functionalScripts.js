@@ -170,7 +170,7 @@ var hoverIntentConfig = {
 }
 
 /*Word Tree*/
-function wordTree(strongsNumber){
+function wordTree( strongsNumber ) {
 	$('#wordTree').html('Loading');
 	var roots = '';
 	if(typeof(strongsObject[strongsNumber]) != "undefined"){
