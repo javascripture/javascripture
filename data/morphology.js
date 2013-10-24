@@ -1,5 +1,5 @@
-/*global define*/
-var morphologyDictionary = {
+/*global javascripture*/
+javascripture.data.morphology = {
 		hebrew: {
 			TH8712: 'Kal Infinitive',
 			TH8798: 'Kal Imperitive',

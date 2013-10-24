@@ -1,10 +1,21 @@
-/*global javasscripture*/
+/*global javascripture*/
 javascripture.api.morphology = {
 	get: function (morph, includeLinks) {
 		if (includeLinks === undefined) {
 			includeLinks = 'noLinks';
 		}
-		markup = '';
+		var morphologyDictionary = javascripture.data.morphology,
+			markup = '',
+		    gender,
+		    morphArray,
+		    number,
+		    Case,
+		    person,
+		    case2,
+		    mood,
+		    voice,
+		    tense,
+		    partOfSpeech;
 		if (morph !== undefined) { //hebrew
 			if (morphologyDictionary.hebrew[morph] !== undefined) {
 				markup += morphologyDictionary.hebrew[morph];
