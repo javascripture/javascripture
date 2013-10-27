@@ -427,8 +427,14 @@ form.search {
 		-webkit-transition: opacity .5s; /* Safari */
 	}
 	nav a:hover { opacity: 1; }
-	nav span {
+	nav span[class*="icon-"] {
 		margin-right: .5em;
+	}
+	nav span.link-text {
+		display: none;
+		@media only screen and (min-width: 1200px) {
+			display: inline;
+		}
 	}
 }
 .referencePanel {

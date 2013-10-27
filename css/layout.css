@@ -526,8 +526,16 @@ form.search #advanced {
 .dock nav a:hover {
   opacity: 1;
 }
-.dock nav span {
+.dock nav span[class*="icon-"] {
   margin-right: .5em;
+}
+.dock nav span.link-text {
+  display: none;
+}
+@media only screen and (min-width: 1200px) {
+  .dock nav span.link-text {
+    display: inline;
+  }
 }
 .referencePanel {
   margin: 50px 200px 0;
