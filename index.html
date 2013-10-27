@@ -84,14 +84,14 @@
 			<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 		</div>
 		<nav class="left">
-			<a href="javascript:history.back();";>&laquo; Back</a>
-			<a href="#help-popup" class="open-popup">Help</a>
+			<a href="javascript:history.back();"><span aria-hidden="true" class="icon-arrow-left"></span>Back</a>
+			<a href="#help-popup" class="open-popup"><span aria-hidden="true" class="icon-question"></span>Help</a>
 		</nav>
 		<nav class="right">
-			<a href="#search-popup" class="open-popup" id="keyCode83">Search</a>
-			<a href="#settings-popup" class="open-popup" id="keyCode48">Settings</a>
-			<a href="#bookmarks-popup" class="open-popup" id="keyCode66">Bookmarks</a>
-			<a href="#go-to-popup" class="open-popup" id="keyCode71">Go to</a>
+			<a href="#search-popup" class="open-popup" id="keyCode83"><span aria-hidden="true" class="icon-search"></span>Search</a>
+			<a href="#settings-popup" class="open-popup" id="keyCode48"><span aria-hidden="true" class="icon-cog2"></span>Settings</a>
+			<a href="#bookmarks-popup" class="open-popup" id="keyCode66"><span aria-hidden="true" class="icon-bookmark2"></span>Bookmarks</a>
+			<a href="#go-to-popup" class="open-popup" id="keyCode71"><span aria-hidden="true" class="icon-book"></span>Go to</a>
 		</nav>
 	</div>
 	<div class="goToPanel">
@@ -186,7 +186,7 @@
 <!-- Search popup -->
 <div id="search-popup" class="popup">
 	<div class="content">
-		<a aria-hidden="true" class="icon-close close-popup"></a>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<h2>Search</h2>
 			<form class="search">
@@ -279,7 +279,7 @@
 <!-- Settings popup -->
 <div id="settings-popup" class="popup">
 	<div class="content">
-		<a aria-hidden="true" class="icon-close close-popup"></a>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<h2>Settings</h2>
 			<form>
@@ -349,7 +349,7 @@
 </div>
 <div id="bookmarks-popup" class="popup">
 	<div class="content">
-		<a aria-hidden="true" class="icon-close close-popup"></a>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<h2>Bookmarks</h2>
 			<form>
@@ -363,7 +363,7 @@
 <div id="go-to-popup" class="popup">
 	<div class="content">
 		<h2>Go to...</h2>
-		<a aria-hidden="true" class="icon-close close-popup"></a>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<form class="goToReference">
 				<input type="text" id="goToReference" placeholder="Go to reference..." />
@@ -376,7 +376,7 @@
 </div>
 <div id="help-popup" class="popup">
 	<div class="content">
-		<a aria-hidden="true" class="icon-close close-popup"></a>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<h2>Help</h2>
 			<ul>
@@ -444,7 +444,7 @@
 		<strong>Strongs Definition:</strong> <span class="wordControlPanelStrongsDef"></span><br />
 		<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 	</div>
-	<span aria-hidden="true" class="icon-close close"></span>
+	<span aria-hidden="true" class="icon-cross close"></span>
 </div>
 
 <div class="full-page">
