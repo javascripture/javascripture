@@ -20,7 +20,14 @@
 				reference.verse = 1;				
 			}
 
-			$('head title').text(book + ' ' + (chapter) + ':' + (verse));
+			var title = book;
+			if ( typeof chapter !== 'undefined' )
+				title += ' ' + chapter;
+			
+			if ( typeof verse !== 'undefined' )
+				title += ':' + verse;
+
+			$( 'head title' ).text( title );
 	
 			var $threeChapters = $('<div class="three-references" />'),
 				prev = getOffsetChapter( reference, -1 ),
