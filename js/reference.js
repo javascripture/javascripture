@@ -118,6 +118,19 @@
 			} else {
 				return strongsNumber;
 			}
+		},
+		getReferenceFromUrl: function () {
+			var hashArray = window.location.hash.split('&'),
+				reference = {};
+
+			if ( hashArray.length > 1 ) {
+				reference.book = hashArray[0].split('=')[1],
+				reference.chapter = parseInt(hashArray[1].split('=')[1], 10),
+				reference.verse = 1;
+		        if ( hashArray[2] )
+		            reference.verse = parseInt(hashArray[2].split('=')[1], 10);
+			}
+			return reference;
 		}
 	};
 	
@@ -141,37 +154,39 @@
 			language = 'greek';
 		}
 
-		$.each( javascripture.data.kjv[book][chapterInArray], function(verseNumber, verseText ) {
-			chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
-			chapterText += '<div class="wrapper"';
-			if(verseNumber === verseInArray) {
-				chapterText += ' id="current"';
-			}
-			if(verseNumber === verseInArray-5) {
-				chapterText += ' id="context"';
-				context = true;
-			}
-			chapterText += '>';
-			chapterText += '<div class="english">';
-				$.each( javascripture.data.kjv[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-					if ( wordObject ) {
-						chapterText += createWordString( wordObject, language );
-					}
-				});
-			chapterText += "</div>";
-
-			//Load hebrew
-			if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
-				chapterText += "<div class='original " + language + "'>";
-				$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-					chapterText += createWordString( wordObject, language );
-				});
+		if ( javascripture.data.kjv[book][chapterInArray] ) {
+			$.each( javascripture.data.kjv[book][chapterInArray], function(verseNumber, verseText ) {
+				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
+				chapterText += '<div class="wrapper"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' id="current"';
+				}
+				if(verseNumber === verseInArray-5) {
+					chapterText += ' id="context"';
+					context = true;
+				}
+				chapterText += '>';
+				chapterText += '<div class="english">';
+					$.each( javascripture.data.kjv[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+						if ( wordObject ) {
+							chapterText += createWordString( wordObject, language );
+						}
+					});
 				chapterText += "</div>";
-			}
-			chapterText += '</div>';
-			chapterText += '</li>';
-		});
 	
+				//Load hebrew
+				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
+					chapterText += "<div class='original " + language + "'>";
+					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+						chapterText += createWordString( wordObject, language );
+					});
+					chapterText += "</div>";
+				}
+				chapterText += '</div>';
+				chapterText += '</li>';
+			});
+		}
+
 		chapterText += '</ol>';
 		chapterText += '</div>';
 		return chapterText;
