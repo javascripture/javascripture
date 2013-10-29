@@ -111,8 +111,11 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 				}
 			}
 
-			
-			jQuery.fn.slowEach( booksToSearch, 1, function( bookNumber, bookName ) {
+			var searchSpeed = 1;
+			if ( $('#searchSpeed').length > 0 ) {
+				searchSpeed = $('#searchSpeed').val();
+			}
+			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
 			//for( var bookName in dataSource ) {
 
 				var book = dataSource[ bookName ];
