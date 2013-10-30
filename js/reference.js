@@ -178,7 +178,9 @@
 				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
 					chapterText += "<div class='original " + language + "'>";
 					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-						chapterText += createWordString( wordObject, language );
+						if ( wordObject ) {
+							chapterText += createWordString( wordObject, language );
+						}
 					});
 					chapterText += "</div>";
 				}
@@ -195,8 +197,11 @@
 	function createWordString( wordArray, language ) {
 		var self = this,
 		    wordString = '',
-		    families = [],
-		    lemma = wordArray[ 1 ];
+		    families = [];
+		if ( typeof wordArray[ 1 ] === 'undefined' )
+			return wordString;
+			
+		lemma = wordArray[ 1 ];	
 		if ( lemma ) {
 			lemmaArray = lemma.split( ' ' );
 			$.each( lemmaArray, function( key, lemmaValue ) {
