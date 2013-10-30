@@ -577,11 +577,11 @@ form.search #advanced {
   position: relative;
 }
 .searchPanel h2 .remove {
-  font-size: 14px;
+  font-size: 32px;
   opacity: .8;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 0;
+  right: 0;
   z-index: 999;
 }
 .searchPanel h2 .remove:hover {

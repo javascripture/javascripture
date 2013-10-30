@@ -137,7 +137,7 @@
 			} );
 
 			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'" title="' + title + '"><style></style><h2 class="'+family+'">' + header;
-			strongsTracking += '<a aria-hidden="true" class="icon-close remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
+			strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
 
