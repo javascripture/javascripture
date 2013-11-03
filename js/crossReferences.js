@@ -26,8 +26,8 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse;
 	    console.log( bookId );
 	    console.log( reference );
-	    crossReferencesMarkup = 'Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>';
-
+	    crossReferencesMarkup = '<div class="crossReferences">Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>';
+	console.log(crossReferences[ reference ] );
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),
@@ -39,5 +39,6 @@ console.log(bookId);
 	} else {
 		crossReferencesMarkup += 'None';
 	}
+	crossReferencesMarkup += '</div>';
 	$('#wordControlPanel').html( crossReferencesMarkup );
 } );

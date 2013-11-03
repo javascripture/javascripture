@@ -235,6 +235,9 @@ form ul li {
   z-index: 8;
   color: #000;
 }
+#wordControlPanel .crossReferences {
+  padding: .1em .5em;
+}
 .wordControlPanelTemplate {
   display: none;
 }
