@@ -4,7 +4,7 @@
 		event.preventDefault();
 		var data = $( this ).closest( '.reference' ).data(),
 		    frequencyAnalysis = {};
-		$.each( javascripture.data.kjv[ data.book ][ data.chapter ], function ( verseNumber, verseArray ) {
+		$.each( javascripture.data.english[ data.book ][ data.chapter ], function ( verseNumber, verseArray ) {
 			$.each( verseArray, function ( wordNumber, wordArray ) {
 				if ( wordArray[ 1 ] ) {
 					$.each( wordArray[ 1 ].split( ' ' ), function ( key, lemma ) {
@@ -17,7 +17,7 @@
 				}
 			} );
 		} );
-		
+
 		var sortable = [];
 		for (var word in frequencyAnalysis) {
 			sortable.push([word, frequencyAnalysis[word]]);

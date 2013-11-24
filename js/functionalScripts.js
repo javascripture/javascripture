@@ -62,7 +62,7 @@
  //               $('#referenceTracking').append(strongsTracking);
 
 			}
-		});		
+		});
 		if(wordString!=""){
 			highlightStrongsNumber(wordString,'word');
 		}*/
@@ -122,7 +122,7 @@
 	var book = hrefArray[0];
 	var chapter = parseInt(hrefArray[1]) + 1;
 	var verse = parseInt(hrefArray[2]) + 1;
-	goToReference(book,chapter,verse);	
+	goToReference(book,chapter,verse);
 }*/
 
 var findArrayElementsInString = function(array, string, searchType) {
@@ -209,10 +209,10 @@ function goToReference(book,chapter,verse){
 function maintainState(book,chapter,verse){
 	$('.dynamic').each(function(){
 		if($(this).hasClass('chapterSelect')){
-			var size = javascripture.data.kjv[book].length;
+			var size = javascripture.data.english[book].length;
 		} else if($(this).hasClass('verseSelect')){
 			var chapterInArray = chapter - 1;
-			var size = javascripture.data.kjv[book][chapterInArray].length;
+			var size = javascripture.data.english[book][chapterInArray].length;
 		}
 		if($(this).attr('size') > 0){
 			$(this).attr('size',size);
@@ -225,11 +225,11 @@ function maintainState(book,chapter,verse){
 		}
 		$(this).html(options);
 	});
-	
+
 	$('select.bookSelect').val(book);
 	$('select.chapterSelect').val(chapter);
 	$('select.verseSelect').val(verse);
-	
+
 	/*broken now wwe have historyif(context) {
 		window.location.href = '#context';
 	} else {
@@ -345,17 +345,17 @@ Array.prototype.unique =
     }
     return a;
   };
-  
-  
+
+
   //actual converter function called by main function
- 
+
 function toHex(N) {
 	if (N==null) return "00";
 	N=parseInt(N); if (N==0 || isNaN(N)) return "00";
 	N=Math.max(0,N); N=Math.min(N,255); N=Math.round(N);
 	return "0123456789ABCDEF".charAt((N-N%16)/16) + "0123456789ABCDEF".charAt(N%16);
 }
- 
+
 //function called to return hex string value
 function RGBtoHEX(str)
 {
@@ -368,10 +368,10 @@ function RGBtoHEX(str)
 			toHex(g),
 			toHex(b)
 		];
-		return "#" + hex.join('');				
+		return "#" + hex.join('');
 	}
 	else{
-		//string not rgb so return original string unchanged		
+		//string not rgb so return original string unchanged
     return str;
 	}
 }

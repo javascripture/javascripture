@@ -5,7 +5,7 @@
 	    waitingForAnotherNumber = false,
 	    waitingForNumberTimer;
 	$(document).on('keydown', function (event) {
-	
+
 		//esc
 		if ( 27 === event.keyCode ) {
 			$( '.popup' ).popup( 'close' );
@@ -23,7 +23,7 @@
 			waitingForAnotherNumber = true;
 			clearTimeout( waitingForNumberTimer );
 
-			if ( javascripture.data.kjv[currentReference.book][chapter] ) {
+			if ( javascripture.data.english[currentReference.book][chapter] ) {
 				window.location.hash = '#book=' + currentReference.book + '&chapter=' + chapter;
 			}
 			waitingForNumberTimer = setTimeout( function () {
@@ -31,7 +31,7 @@
 					waitingForAnotherNumber = false;
 				}
 			}, 1000);
-			
+
 		}
 
 		if ( event.keyCode === 18 ) {
@@ -43,7 +43,7 @@
 					event.preventDefault();
 					$('#keyCode' + event.keyCode).click();
 				}
-		
+
 				if (event.keyCode === 14 || event.keyCode === 16 || event.keyCode === 45 || event.keyCode === 61) {
 					if ($('#results .collapsible-wrapper').length) { //there should be a better way to see if the widget has been initialized
 						var currentLink = $('#results').find('.ui-btn-active'),

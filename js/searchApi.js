@@ -21,7 +21,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 
 	var searchApi = {
 		language: { //helper object to access different languages
-			english: javascripture.data.kjv,
+			english: javascripture.data.english,
 			greek: javascripture.data.greek,
 			hebrew: javascripture.data.hebrew
 		},
@@ -51,13 +51,13 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			if ( data === term ) { //exact match
 				return true;
 			}
-			/*this get very complex 
+			/*this get very complex
 			if (data.indexOf( ' ' + term + ' ') > -1 ) { //part of a string
 				return true;
 			}
 			if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
 				return true;
-			}	
+			}
 			if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
 				return true;
 			}
@@ -99,7 +99,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 
 			var booksToSearch = this.books[ parameters.language ];
 
-			//work out how many terms there are			
+			//work out how many terms there are
 			var termsLength = 0;
 			for( var typeKey in self.types ) {
 				var type = self.types[typeKey];
@@ -134,7 +134,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 						if (parameters.range === 'verse' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 							self.resetMatches();
 						}
-						
+
 						for (var wordNumber = 0, verseLength = verse.length; wordNumber < verseLength; wordNumber++) {
 							var wordObject = verse[ wordNumber ];
 							if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
@@ -165,7 +165,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 									}
 								}
 							}
-							//terms are combined for exclusive searches here							
+							//terms are combined for exclusive searches here
 							if (parameters.clusivity === 'exclusive' ) {
 								matchesLength = 0;
 
@@ -192,6 +192,6 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			return word.replace(/ם/gi, 'מ');
 		},
 		getTranslations: function ( lemma ) {
-			
+
 		}
 	};

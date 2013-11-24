@@ -26,19 +26,19 @@
 		var trackingBoxId = createTrackingBoxId( data, '_' );
 		createTrackingBox( data );
 		strongsNumberArray = data.lemma.split(' ');
-		
+
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
-		
+
 		searchApi.getReferences(data);
 		searchApi.deferred.done( function(){
 			var referenceArray =  searchApi.results.references;
-	
+
 			references += '<form><ol class="references">';
 			var wordCount = 0;
-	
-			var searchObject = javascripture.data.kjv;
+
+			var searchObject = javascripture.data.english;
 			if($("select[name=searchLanguage]").val() === "hebrew") {
 				searchObject = javascripture.data.hebrew;
 				$.each(strongsNumberArray, function(index, strongsNumber) {
@@ -71,20 +71,20 @@
 				}
 			});*/
 				references += createReferenceList(referenceArray);
-				
+
 			//});
-	
+
 			references += '</ol></form>';
-	
+
 			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
 				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
 			}
 			goToFirstReference();
 	//		$('.popup').popup( 'close' );
-	
+
 			var endDate = new Date();
 			timer(startDate, endDate);
-			
+
 		});
 	}
 
@@ -95,8 +95,8 @@
 		});
 		return referenceList;
 	};
-	
-	
+
+
 	function createTrackingBoxString( data, separator ) {
 		var string = '';
 		if ( data.word ) {
@@ -109,11 +109,11 @@
 			}
 		}
 		if ( data.morph ) {
-			string += separator + data.morph.replace( / /gi, separator );			
+			string += separator + data.morph.replace( / /gi, separator );
 		}
 		return string;
 	}
-	
+
 	function createTrackingBoxId( data ) {
 		var string = '';
 		$.each( data, function ( key, value ) {
@@ -178,7 +178,7 @@
 		data.lemma = data.lemma.replace('G3588 ','');
 		createSearchReferencesPanel(data);
 	}
-	
+
 
 	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
 		searchOnClick( this );
@@ -186,18 +186,18 @@
 	$(document).on( 'dblclick', '#verse ol > li span', function () {
 		searchOnClick( this );
 	});
-	
+
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).serializeObject() );
 		$( '.popup' ).popup( 'close' );
 	});
-	
+
 	$( document ).on( 'click', 'a.word-tree', function( event ) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).data() );
 	} );
-	
+
 	$( document ).on( 'click', 'a.kjv-def', function( event ) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).data() );

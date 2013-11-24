@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 3.9.3
+#version: 3.9.4
 index.html
 css/layout.css
 js/jquery-2.0.3.js
@@ -8,6 +8,8 @@ js/jquery.scrollTo.js
 data/bible.js
 data/strongs-dictionary.js
 data/kjvdwyer7.js
+data/web3.js
+modules/versionSelector.js
 data/strongsObjectWithFamilies.js
 data/hebrew6.js
 data/greek4.js

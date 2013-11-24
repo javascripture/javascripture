@@ -1,5 +1,6 @@
 /*globals javascripture*/
 ;( function ( $ ) {
+	var english = javascripture.data.english;
 	$.fn.scrollStopped = function(callback) {
 	    $(this).scroll( function () {
 	        var self = this, $this = $(self);
@@ -17,18 +18,18 @@
 			    verse = reference.verse;
 
 			if ( 'undefined' == typeof verse ) {
-				reference.verse = 1;				
+				reference.verse = 1;
 			}
 
 			var title = book;
 			if ( typeof chapter !== 'undefined' )
 				title += ' ' + chapter;
-			
+
 			if ( typeof verse !== 'undefined' )
 				title += ':' + verse;
 
 			$( 'head title' ).text( title );
-	
+
 			var $threeChapters = $('<div class="three-references" />'),
 				prev = getOffsetChapter( reference, -1 ),
 				next = getOffsetChapter( reference, 1 );
@@ -36,11 +37,11 @@
 			//add the previous chapter if it exists
 			if ( prev.book ) {
 				$threeChapters.data( 'prev', prev );
-				$threeChapters.append( getChapterText( prev ) );				
+				$threeChapters.append( getChapterText( prev ) );
 			}
-			
+
 			$threeChapters.append( getChapterText( reference ) );
-			
+
 			//add the next chapter if it exists
 			if ( next.book ) {
 				$threeChapters.data( 'next', next );
@@ -48,11 +49,11 @@
 			}
 
 			if ( $.fn.waypoint ) {
-				$('.reference').waypoint('destroy');				
+				$('.reference').waypoint('destroy');
 			}
 
 			$('#verse').html( $threeChapters );
-	
+
 			maintainState(book,chapter,verse);
 
 			return this; //makes it chainable
@@ -68,8 +69,8 @@
 //				$('#verse').closest('.panel').scrollTop(verse.offset().top - $('.dock').height() - $('h1').height() );
 				$('body').scrollTo( verse, { offset: offset } );
 			}
-			
-			$( document ).trigger( 'createWayPoint' );				
+
+			$( document ).trigger( 'createWayPoint' );
 		},
 		getAnchoringData: function ( direction ) {
 			//anchor to current verse
@@ -83,7 +84,7 @@
 				if ( direction === 'prev' ) {
 					$anchorVerse = $('.reference:first-child ol.wrapper li:first-child');
 				}
-	
+
 				if ( direction === 'next' ) {
 					$anchorVerse = $('.reference:last-child ol.wrapper li:last-child');
 				}
@@ -101,7 +102,7 @@
 
 			if ( anchorPointSelector === '.current-verse' ) {
 				verseHeight = $anchorPoint.height(),
-				offset = -$(window).height() / 2 + verseHeight;				
+				offset = -$(window).height() / 2 + verseHeight;
 			}
 
 			//anchor to a chapter
@@ -109,7 +110,7 @@
 				$anchorPoint = $( '#' + jsonCollection.currentId );
 				offset = - $('[data-role=header]').height();// - 10;
 			}
-			
+
 			this.scrollToVerse( $anchorPoint, offset );
 		},
 		getFamily: function ( strongsNumber ) {
@@ -131,9 +132,32 @@
 		            reference.verse = parseInt(hashArray[2].split('=')[1], 10);
 			}
 			return reference;
+		},
+		loadReferenceFromHash: function () {
+		    var hash = window.location.hash;
+		    if(hash.indexOf('search') > -1){
+		        var word = hash.split('=')[1];
+		        searchByStrongsNumber(word);
+		    } else {
+		        var parameterPairArray = hash.split('&');
+		        //this is bad
+		        if ( parameterPairArray.length > 1 ) {
+					var book = parameterPairArray[0].split('=')[1];
+			        var chapter = parseInt(parameterPairArray[1].split('=')[1], 10);
+			        var verse = 1;
+			        if ( parameterPairArray[2] ) {
+			            verse = parseInt(parameterPairArray[2].split('=')[1], 10);
+			        }
+					javascripture.modules.reference.load( {
+				        book: book,
+				        chapter: chapter,
+				        verse: verse
+			        } ).scrollToVerse($('#current'));
+		        }
+		    }
 		}
 	};
-	
+
 	function getChapterText ( reference ) {
 		var book = reference.book,
 		    chapter = reference.chapter,
@@ -144,7 +168,7 @@
 
 		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
 		chapterText += '<ol class="wrapper">';
-	
+
 		var originalText, language;
 		if( javascripture.data.hebrew[book] ) {
 			originalText = javascripture.data.hebrew;
@@ -154,8 +178,8 @@
 			language = 'greek';
 		}
 
-		if ( javascripture.data.kjv[book][chapterInArray] ) {
-			$.each( javascripture.data.kjv[book][chapterInArray], function(verseNumber, verseText ) {
+		if ( javascripture.data.english[book][chapterInArray] ) {
+			$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
 				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
 				chapterText += '<div class="wrapper"';
 				if(verseNumber === verseInArray) {
@@ -167,13 +191,13 @@
 				}
 				chapterText += '>';
 				chapterText += '<div class="english">';
-					$.each( javascripture.data.kjv[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+					$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 						if ( wordObject ) {
 							chapterText += createWordString( wordObject, language );
 						}
 					});
 				chapterText += "</div>";
-	
+
 				//Load hebrew
 				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
 					chapterText += "<div class='original " + language + "'>";
@@ -193,22 +217,22 @@
 		chapterText += '</div>';
 		return chapterText;
 	}
-	
+
 	function createWordString( wordArray, language ) {
 		var self = this,
 		    wordString = '',
 		    families = [];
 		if ( typeof wordArray[ 1 ] === 'undefined' )
-			return wordString;
-			
-		lemma = wordArray[ 1 ];	
+			return '<span>' + wordArray[0] + '</span> ';
+
+		lemma = wordArray[ 1 ];
 		if ( lemma ) {
 			lemmaArray = lemma.split( ' ' );
 			$.each( lemmaArray, function( key, lemmaValue ) {
 				families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
 			} );
 		}
-		wordString += '<span'; 
+		wordString += '<span';
 		wordString += ' class="' + families.join( ' ' ) + '"';
 		wordString += ' title="' + lemma;
 		if ( wordArray[2] ) {
@@ -226,7 +250,7 @@
 		wordString += '>' + wordArray[0] + '</span> ';
 		return wordString;
 	}
-	
+
 	function getOffsetChapter( reference, offset) {
 		var book = reference.book,
 		    chapter = reference.chapter,
@@ -234,7 +258,7 @@
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
-		if (javascripture.data.kjv[book] && javascripture.data.kjv[book][offsetNumberJavascript] !== undefined) {
+		if ( javascripture.data.english[book] && javascripture.data.english[book][offsetNumberJavascript] !== undefined) {
 			offsetChapter.book = book;
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {
@@ -257,38 +281,15 @@
 		return offsetChapter;
 	}
 
-	function loadReferenceFromHash() {
-	    var hash = window.location.hash;
-	    if(hash.indexOf('search') > -1){
-	        var word = hash.split('=')[1];
-	        searchByStrongsNumber(word);
-	    } else {
-	        var parameterPairArray = hash.split('&');
-	        //this is bad
-	        if ( parameterPairArray.length > 1 ) {
-				var book = parameterPairArray[0].split('=')[1];
-		        var chapter = parseInt(parameterPairArray[1].split('=')[1], 10);
-		        var verse = 1;
-		        if ( parameterPairArray[2] ) {
-		            verse = parseInt(parameterPairArray[2].split('=')[1], 10);
-		        }
-				javascripture.modules.reference.load( {
-			        book: book,
-			        chapter: chapter,
-			        verse: verse
-		        } ).scrollToVerse($('#current'));
-	        }
-	    }
-	}
-	loadReferenceFromHash();
+	javascripture.modules.reference.loadReferenceFromHash();
 
 	$(window).bind( 'hashchange', function(e) {
 	    var startDate = new Date();
-	    loadReferenceFromHash();
+	    javascripture.modules.reference.loadReferenceFromHash();
 	    var endDate = new Date();
 	    timer(startDate, endDate);
 	});
-	
+
 	$( window ).scrollStopped( function() {
 		var scrollTop = $( 'body' ).scrollTop(),
 		    verseHeight = $( '.referencePanel' ).height() - $( window ).height() + $( '.dock' ).height(),
@@ -306,7 +307,7 @@
 			javascripture.modules.reference.load( next ).anchorReference( anchoringData );
 		}
 	});
-	
+
 	$('.goToReference').submit(function (event) {
 		event.preventDefault();
 		console.log($('#goToReference').val());
