@@ -19,6 +19,8 @@
 				document.getElementById( 'bookSelect' ).value = $this.data( 'book' );
 				document.getElementById( 'chapterSelect' ).value = $this.data( 'chapter' );				
 			}
+		}, {
+			offset: $('.dock').height()
 		} );
 	} );
 } )( jQuery );

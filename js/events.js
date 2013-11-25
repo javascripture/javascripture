@@ -110,11 +110,11 @@
             if(typeof(bibleObject[book][chapter-1]) != "undefined"){
                 setHashState(book,chapter,verse);
             } else {
-            	previousBook = $('#bookSelect option:selected').prev().val();
-            	var lastChapter = bibleObject[previousBook].length;
-            	var lastVerse = bibleObject[previousBook][lastChapter-1].length;
-            	setHashState(previousBook,lastChapter,lastVerse);
-            }
+				previousBook = $('#bookSelect option:selected').prev().val();
+				var lastChapter = bibleObject[previousBook].length;
+				var lastVerse = bibleObject[previousBook][lastChapter-1].length;
+				setHashState(previousBook,lastChapter,lastVerse);
+			}
 		});
 		$('#previousVerse').on('click',function(){
             verse = $('#verseSelect').val()-1;
@@ -191,12 +191,13 @@
 		
 		/*Keyboard shortcuts*/
 		$(document).keyup(function (e) {
-      		if(e.keyCode == 78){
+			console.log( e.keyCode );
+      		if( e.keyCode == 187 ) {
 				if($('#currentRef').next().length>0){
 		            markReference($('#currentRef').next());
 	    	    }
       		}
-			if(e.keyCode == 80){
+			if( e.keyCode == 189 ) {
 				if($('#currentRef').prev().length>0){
     	        	markReference($('#currentRef').prev());
         	    }

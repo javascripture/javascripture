@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html manifest="javascripture.appcache?v=3.9.4">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" content="notranslate" />
 		<title>Javascripture</title>
 		<link rel="stylesheet" href="css/layout.css" />
-		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+<!--		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />-->
 		<style id="bodyFontFamily"></style>
 		<style id="bodyFontSize"></style>
 	</head>
@@ -12,6 +13,7 @@
 	<div class="dock">
 		<div class="heading-wrapper">
 			<select id="bookSelect" class="lookup bookSelect" tabindex="1">
+				<option></option>
 				<option value="Genesis">Genesis</option>
 				<option value="Exodus">Exodus</option>
 				<option value="Leviticus">Leviticus</option>
@@ -33,7 +35,7 @@
 				<option value="Psalm">Psalm</option>
 				<option value="Proverbs">Proverbs</option>
 				<option value="Ecclesiastes">Ecclesiastes</option>
-				<option value="Song of songs">Song of Songs</option>
+				<option value="Song of Songs">Song of Songs</option>
 				<option value="Isaiah">Isaiah</option>
 				<option value="Jeremiah">Jeremiah</option>
 				<option value="Lamentations">Lamentations</option>
@@ -46,7 +48,7 @@
 				<option value="Jonah">Jonah</option>
 				<option value="Micah">Micah</option>
 				<option value="Nahum">Nahum</option>
-				<option value="Habbakuk">Habbakuk</option>
+				<option value="Habakkuk">Habakkuk</option>
 				<option value="Zephaniah">Zephaniah</option>
 				<option value="Haggai">Haggai</option>
 				<option value="Zechariah">Zechariah</option>
@@ -61,7 +63,7 @@
 				<option value="2 Corinthians">2 Corinthians</option>
 				<option value="Galatians">Galatians</option>
 				<option value="Ephesians">Ephesians</option>
-				<option value="Philipians">Philipians</option>
+				<option value="Philippians">Philippians</option>
 				<option value="Colossians">Colossians</option>
 				<option value="1 Thessalonians">1 Thessalonians</option>
 				<option value="2 Thessalonians">2 Thessalonians</option>
@@ -82,18 +84,16 @@
 			<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 		</div>
 		<nav class="left">
-			<a href="javascript:history.back();";>&laquo; Back</a>
+			<a href="javascript:history.back();" title="back"><span aria-hidden="true" class="icon-arrow-left"></span><span class="link-text">Back</span></a>
+			<a href="#help-popup" class="open-popup" title="help"><span aria-hidden="true" class="icon-question"></span><span class="link-text">Help</span></a>
 		</nav>
 		<nav class="right">
-			<a href="#search-popup" class="open-popup" id="keyCode83">Search</a>
-			<a href="#settings-popup" class="open-popup" id="keyCode48">Settings</a>
-			<a href="#bookmarks-popup" class="open-popup" id="keyCode66">Bookmarks</a>
-			<a href="#go-to-popup" class="open-popup" id="keyCode71">Go to</a>
+			<a href="#search-popup" class="open-popup" id="keyCode83" title="search"><span aria-hidden="true" class="icon-search"></span><span class="link-text">Search</span></a>
+			<a href="#settings-popup" class="open-popup" id="keyCode48" title="settings"><span aria-hidden="true" class="icon-cog2"></span><span class="link-text">Settings</span></a>
+			<a href="#bookmarks-popup" class="open-popup" id="keyCode66" title="bookmarks"><span aria-hidden="true" class="icon-bookmark2"></span><span class="link-text">Bookmarks</span></a>
+			<a href="#go-to-popup" class="open-popup" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span><span class="link-text">Go to</span></a>
 		</nav>
 	</div>
-
-		
-
 	<div class="goToPanel">
 		<div class="lookup bookSelect">
 			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
@@ -111,16 +111,16 @@
 			<a href="#book=1 Chronicles&chapter=1" data-chapters="29">1 Chronicles <span class="chapter"></span></a>
 			<a href="#book=2 Chronicles&chapter=1" data-chapters="36">2 Chronicles <span class="chapter"></span></a>
 			<a href="#book=Ezra&chapter=1" data-chapters="10">Ezra <span class="chapter"></span></a>
-			<a href="#book=Nehemia&chapter=1" data-chapters="13">Nehemiah <span class="chapter"></span></a>
+			<a href="#book=Nehemiah&chapter=1" data-chapters="13">Nehemiah <span class="chapter"></span></a>
 			<a href="#book=Esther&chapter=1" data-chapters="10">Esther <span class="chapter"></span></a>
 			<a href="#book=Job&chapter=1" data-chapters="42">Job <span class="chapter"></span></a>
 			<a href="#book=Psalm&chapter=1" data-chapters="150">Psalm <span class="chapter"></span></a>
 			<a href="#book=Proverbs&chapter=1" data-chapters="31">Proverbs <span class="chapter"></span></a>
 			<a href="#book=Ecclesiastes&chapter=1" data-chapters="12">Ecclesiastes <span class="chapter"></span></a>
-			<a href="#book=Song Of Songs&chapter=1" data-chapters="8">Song of Songs <span class="chapter"></span></a>
+			<a href="#book=Song of Songs&chapter=1" data-chapters="8">Song of Songs <span class="chapter"></span></a>
 			<a href="#book=Isaiah&chapter=1" data-chapters="66">Isaiah <span class="chapter"></span></a>
 			<a href="#book=Jeremiah&chapter=1" data-chapters="52">Jeremiah <span class="chapter"></span></a>
-			<a href="#book=Lamentation&chapter=1" data-chapters="4">Lamentations <span class="chapter"></span></a>
+			<a href="#book=Lamentations&chapter=1" data-chapters="4">Lamentations <span class="chapter"></span></a>
 			<a href="#book=Ezekiel&chapter=1" data-chapters="48">Ezekiel <span class="chapter"></span></a>
 			<a href="#book=Daniel&chapter=1" data-chapters="12">Daniel <span class="chapter"></span></a>
 			<a href="#book=Hosea&chapter=1" data-chapters="14">Hosea <span class="chapter"></span></a>
@@ -130,7 +130,7 @@
 			<a href="#book=Jonah&chapter=1" data-chapters="4">Jonah <span class="chapter"></span></a>
 			<a href="#book=Micah&chapter=1" data-chapters="7">Micah <span class="chapter"></span></a>
 			<a href="#book=Nahum&chapter=1" data-chapters="3">Nahum <span class="chapter"></span></a>
-			<a href="#book=Habbakuk&chapter=1" data-chapters="3">Habbakuk <span class="chapter"></span></a>
+			<a href="#book=Habakkuk&chapter=1" data-chapters="3">Habakkuk <span class="chapter"></span></a>
 			<a href="#book=Zephaniah&chapter=1" data-chapters="3">Zephaniah <span class="chapter"></span></a>
 			<a href="#book=Haggai&chapter=1" data-chapters="2">Haggai <span class="chapter"></span></a>
 			<a href="#book=Zechariah&chapter=1" data-chapters="14">Zechariah <span class="chapter"></span></a>
@@ -145,7 +145,7 @@
 			<a href="#book=2 Corinthians&chapter=1" data-chapters="13">2 Corinthians <span class="chapter"></span></a>
 			<a href="#book=Galatians&chapter=1" data-chapters="6">Galatians <span class="chapter"></span></a>
 			<a href="#book=Ephesians&chapter=1" data-chapters="6">Ephesians <span class="chapter"></span></a>
-			<a href="#book=Philipians&chapter=1" data-chapters="4">Philipians <span class="chapter"></span></a>
+			<a href="#book=Philippians&chapter=1" data-chapters="4">Philippians <span class="chapter"></span></a>
 			<a href="#book=Colossians&chapter=1" data-chapters="4">Colossians <span class="chapter"></span></a>
 			<a href="#book=1 Thessalonians&chapter=1" data-chapters="5">1 Thessalonians <span class="chapter"></span></a>
 			<a href="#book=2 Thessalonians&chapter=1" data-chapters="3">2 Thessalonians <span class="chapter"></span></a>
@@ -172,11 +172,13 @@
 			<div id="wordControlPanel" class="not-active">
 				<style></style>
 				<div class="control-panel">
-					<div class="duplicated">Select a word to show more details about it here</div>
+					<div class="duplicated">Select a word to show more details about it here. Double click to search.</div>
 				</div>
 			</div>
 
-			<div id="verse"><!--<button class="random-verse">Load random verse</button>--></div>
+			<div id="verse">
+				<div class="loading">Loading...</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -184,178 +186,229 @@
 <!-- Search popup -->
 <div id="search-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
-		<h2>Search</h2>
-		<form class="search">
-			<ul>
-				<li>
-					<label for="word" class="has-placeholder">Word</label>
-					<input type="text" name="word" id="word" value="" placeholder="Word" />
-				</li>
-			</ul>
-			<a href="#advanced" class="shower">Advanced</a>
-			<ul id="advanced">
-				<li>
-					<label for="lemma" class="has-placeholder">Strongs number</label>
-					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
-				</li>
-				<li>
-					<label for="morph" class="has-placeholder">Morphology</label>
-					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
-				</li>
-				<li>
-					
-					<!--<div data-role="fieldcontain">
-						<fieldset data-role="controlgroup" class="ui-hide-label">
-							<legend>Combine terms?</legend>
-							<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
-							<label for="combineTerms">Combine terms?</label>
-						</fieldset>
-					</div>-->
-					<label for="language">Language:</label>
-					<select name="language" id="language">
-						<option>english</option>
-						<option>hebrew</option>
-						<option>greek</option>
-					</select>
-				</li>
-				<li>
-					<label for="clusivity">Look for</label>
-					<select name="clusivity" id="clusivity">
-						<option value="exclusive">All</option>
-						<option value="inclusive">Any</option>
-					</select>
-					<label for="range">terms in a</label>
-					<select name="range" id="range">
-						<option>word</option>
-						<option selected>verse</option>
-						<option>chapter</option>
-					</select>
-				</li>
-<!--				<li>
-					<label>Search term:</label>
-					<input type="text" value="search" name="searchTerm" id="searchTerm" />
-				</li>
-				<li>
-					<label>Search for:</label>
-					<select id="searchSelect" name="searchSelect">
-						<option value="any">Any</option>
-						<option value="all">All</option>
-					</select>
-				</li>
-				<li>
-					<label>Search language:</label>
-					<select id="searchLanguage" name="searchLanguage">
-						<option value="english">English</option>
-						<option value="hebrew">Hebrew</option>
-					</select>
-				</li>
-				<li>
-					<label>Search range:</label>							
-					<select id="searchRange" name="searchRange">
-						<option value="verse">Verse</option>
-						<option value="chapter">Chapter</option>
-						<option value="book">Book</option>
-					</select>
-				</li>
-				<li>
-					<input type="submit" value="search" name="search" id="search" />
-				</li>
-				<li>
-					<br /><button class="highlight-all">Highlight all</button>
-				</li>-->
-			</ul>
-			<input type="submit" value="search" id="searchLoading" />
-		</form>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
+		<div class="content-padding">
+			<h2>Search</h2>
+			<form class="search">
+				<ul>
+					<li>
+						<label for="word" class="has-placeholder">Word</label>
+						<input type="text" name="word" id="word" value="" placeholder="Word" />
+					</li>
+				</ul>
+				<ul id="advanced">
+					<li>
+						<label for="lemma" class="has-placeholder">Strongs number</label>
+						<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
+					</li>
+					<li>
+						<label for="morph" class="has-placeholder">Morphology</label>
+						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
+					</li>
+					<li>
+
+						<!--<div data-role="fieldcontain">
+							<fieldset data-role="controlgroup" class="ui-hide-label">
+								<legend>Combine terms?</legend>
+								<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
+								<label for="combineTerms">Combine terms?</label>
+							</fieldset>
+						</div>-->
+						<label for="language">Language:</label>
+						<select name="language" id="language">
+							<option>english</option>
+							<option>hebrew</option>
+							<option>greek</option>
+						</select>
+					</li>
+					<li>
+						<label for="clusivity">Look for</label>
+						<select name="clusivity" id="clusivity">
+							<option value="exclusive">All</option>
+							<option value="inclusive">Any</option>
+						</select>
+						<label for="range">terms in a</label>
+						<select name="range" id="range">
+							<option>word</option>
+							<option selected>verse</option>
+							<option>chapter</option>
+						</select>
+					</li>
+	<!--				<li>
+						<label>Search term:</label>
+						<input type="text" value="search" name="searchTerm" id="searchTerm" />
+					</li>
+					<li>
+						<label>Search for:</label>
+						<select id="searchSelect" name="searchSelect">
+							<option value="any">Any</option>
+							<option value="all">All</option>
+						</select>
+					</li>
+					<li>
+						<label>Search language:</label>
+						<select id="searchLanguage" name="searchLanguage">
+							<option value="english">English</option>
+							<option value="hebrew">Hebrew</option>
+						</select>
+					</li>
+					<li>
+						<label>Search range:</label>
+						<select id="searchRange" name="searchRange">
+							<option value="verse">Verse</option>
+							<option value="chapter">Chapter</option>
+							<option value="book">Book</option>
+						</select>
+					</li>
+					<li>
+						<input type="submit" value="search" name="search" id="search" />
+					</li>
+					<li>
+						<br /><button class="highlight-all">Highlight all</button>
+					</li>-->
+				</ul>
+				<input type="submit" value="Search" />
+				<div class="advanced">
+					<a href="#advanced" class="toggler">Advanced</a>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 
 <!-- Settings popup -->
 <div id="settings-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
-		<h2>Settings</h2>
-		<form>
-			<ul>
-				<li>
-					Fonts: <select name="bodyFontFamily" class="changeStyle">
-						<option value="Arial, Helvetica;">Arial</option>
-						<option value="font-family: 'Bookman Old Style';">Bookman Old Style</option>
-						<option value="font-family: 'Courier New', Courier;">Courier</option>
-						<option value="font-family: Georgia;">Georgia</option>
-						<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande';">Lucida</option>
-						<option value="font-family: 'Times New Roman', Times;">Times</option>
-						<option value="font-family: Verdana, Geneva;">Verdana</option>
-					</select>
-				</li>
-				<li>
-					Font size: <select name="bodyFontSize" class="changeStyle">
-						<option value="font-size: 80%;">80%</option>
-						<option value="font-size: 90%;">90%</option>
-						<option value="font-size: 100%;">100%</option>
-						<option value="font-size: 110%;">110%</option>
-						<option value="font-size: 120%;">120%</option>
-						<option value="font-size: 130%;">130%</option>
-						<option value="font-size: 140%;">140%</option>
-						<option value="font-size: 150%;">150%</option>
-						<option value="font-size: 160%;">160%</option>
-						<option value="font-size: 170%;">170%</option>
-						<option value="font-size: 180%;">180%</option>
-						<option value="font-size: 190%;">190%</option>
-						<option value="font-size: 200%;">200%</option>
-					</select>
-				</li>
-				<li>
-					Colours: <select id="subdueColorBy">
-						<option value="1">Very Bright</option>
-						<option value="1.5" selected="selected">Bright</option>
-						<option value="2">Normal</option>
-						<option value="3">Dark</option>
-						<option value="4">Very Dark</option>
-					</select>
-				</li>
-				<li>
-					<p><input type="checkbox" id="showNotes" />show notes</p>
-				</li>
-				<li>
-					<p><input type="checkbox" id="strictSearch" />strict search</p>
-				</li>
-				<li>
-					Keyboard shortcuts:<br /><br />
-					Chapter &raquo;: <strong>right arrow</strong><br />
-					Verse &raquo;: <strong>down arrow</strong><br />
-					&laquo; Chapter: <strong>left arrow</strong><br />
-					&laquo; Verse: <strong>up arrow</strong><br />
-					Next reference: <strong>n</strong><br />
-					Prev reference: <strong>p</strong><br />
-				</li>
-				<li>
-					Show original: <input type="checkbox" id="showHebrew" checked />
-				</li>
-				<li>
-					Reading mode: <input type="checkbox" id="readingMode" />
-				</li>
-			</ul>
-		</form>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
+		<div class="content-padding">
+			<h2>Settings</h2>
+			<form>
+				<ul>
+					<li>
+						Version:
+						<select name="version" id="versionSelector">
+							<option value="kjv">King James Version</option>
+							<option value="web">World English Bible</option>
+						</select>
+					</li>
+					<li>
+						Fonts: <select name="bodyFontFamily" class="changeStyle">
+							<option value="Arial, Helvetica;">Arial</option>
+							<option value="font-family: 'Bookman Old Style';">Bookman Old Style</option>
+							<option value="font-family: 'Courier New', Courier;">Courier</option>
+							<option value="font-family: Georgia;">Georgia</option>
+							<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande';">Lucida</option>
+							<option value="font-family: 'Times New Roman', Times;">Times</option>
+							<option value="font-family: Verdana, Geneva;">Verdana</option>
+						</select>
+					</li>
+					<li>
+						Font size: <select name="bodyFontSize" class="changeStyle">
+							<option value="font-size: 80%;">80%</option>
+							<option value="font-size: 90%;">90%</option>
+							<option value="font-size: 100%;">100%</option>
+							<option value="font-size: 110%;">110%</option>
+							<option value="font-size: 120%;">120%</option>
+							<option value="font-size: 130%;">130%</option>
+							<option value="font-size: 140%;">140%</option>
+							<option value="font-size: 150%;">150%</option>
+							<option value="font-size: 160%;">160%</option>
+							<option value="font-size: 170%;">170%</option>
+							<option value="font-size: 180%;">180%</option>
+							<option value="font-size: 190%;">190%</option>
+							<option value="font-size: 200%;">200%</option>
+						</select>
+					</li>
+					<li>
+						Colours: <select id="subdueColorBy">
+							<option value="1">Very Bright</option>
+							<option value="1.5" selected="selected">Bright</option>
+							<option value="2">Normal</option>
+							<option value="3">Dark</option>
+							<option value="4">Very Dark</option>
+						</select>
+					</li>
+					<li>
+						<p><input type="checkbox" id="showNotes" />show notes</p>
+					</li>
+					<li>
+						<p><input type="checkbox" id="strictSearch" />strict search</p>
+					</li>
+					<li>
+						Keyboard shortcuts:<br /><br />
+						Chapter &raquo;: <strong>right arrow</strong><br />
+						Verse &raquo;: <strong>down arrow</strong><br />
+						&laquo; Chapter: <strong>left arrow</strong><br />
+						&laquo; Verse: <strong>up arrow</strong><br />
+						Next reference: <strong>n</strong><br />
+						Prev reference: <strong>p</strong><br />
+					</li>
+					<li>
+						Show original: <input type="checkbox" id="showHebrew" checked />
+					</li>
+					<li>
+						Reading mode: <input type="checkbox" id="readingMode" />
+					</li>
+					<li>
+						Search speed:
+						<select id="searchSpeed">
+							<option value="1">Fast</option>
+							<option value="1000">Slow</option>
+							<option value="10000">Super slow</option>
+						</select><br />
+						Slow devices crash if you try to search to fast!
+					</li>
+				</ul>
+			</form>
+		</div>
 	</div>
 </div>
 <div id="bookmarks-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
-		<h2>Bookmarks</h2>
-		<form>
-			<a href="#" class="bookmark">save current passage</a>
-			<br /><br />
-			<ol id="bookmarks"></ol>
-		</form>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
+		<div class="content-padding">
+			<h2>Bookmarks</h2>
+			<form>
+				<a href="#" class="bookmark">save current passage</a>
+				<br /><br />
+				<ol id="bookmarks"></ol>
+			</form>
+		</div>
 	</div>
 </div>
 <div id="go-to-popup" class="popup">
 	<div class="content">
-		<a href="#" class="close-popup">Close</a>
-		<form class="goToReference">
-			<input type="text" id="goToReference" placeholder="Go to reference..." />
-		</form>
+		<h2>Go to...</h2>
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
+		<div class="content-padding">
+			<form class="goToReference">
+				<input type="text" id="goToReference" placeholder="Go to reference..." />
+			</form>
+			<div class="advanced">
+				<a href="#" class="randomReference">Load random reference</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="help-popup" class="popup">
+	<div class="content">
+		<a aria-hidden="true" class="icon-cross close-popup"></a>
+		<div class="content-padding">
+			<h2>Help</h2>
+			<ul>
+				<li>To find out about a work, click on it</li>
+				<li>To search for a word, double click it</li>
+			</ul>
+			<p>Keyboard shortcuts</p>
+			<ul>
+				<li>Open search popup: alt then s</li>
+				<li>Open go-to popup: alt then g</li>
+				<li>Next reference: =</li>
+				<li>Previous reference: -</li>
+				<li>Jump to chapter: just type in a number!</li>
+			</ul>
+			<p>Tested in Chrome. Should work everywhere except IE.</p>
+		</div>
 	</div>
 </div>
 <!--			<div class="collapsable closed">
@@ -401,43 +454,77 @@
 		<span class="wordControlPanelStrongsNumber"></span> | <span class="wordControlPanelEnglish"></span> | <span class="wordControlPanelLemma"></span>
 		<div class="word-tree" id="wordTreeRoots"></div>
 		<div class="word-tree" id="wordTreeBranches"></div>
+		<div class="word-tree" id="wordTreeFamily"></div>
 	</div>
 	<div class="definitions">
 		<strong>KJV Usage:</strong> <span class="wordControlPanelKJVDef"></span><br />
 		<strong>Strongs Definition:</strong> <span class="wordControlPanelStrongsDef"></span><br />
+		<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 	</div>
-	<a href="#" class="close">x</a>
+	<span aria-hidden="true" class="icon-cross close"></span>
+</div>
+
+<div class="full-page">
+	<div id="holder">
+		<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+		 <g>
+		  <title>Layer 1</title>
+		  <g id="svg_10">
+		   <path fill="black" d="m127.999985,0.028161l-111.333313,0c-9.204685,0 -16.666673,6.963784 -16.666673,15.553915l0,97.056138c0,8.590668 7.461988,15.554077 16.666673,15.554077l111.333313,0l0,-105.602276c0,0 -9.164078,0 -22.15741,0l0,42.161671l-12.595032,-11.753773l-12.594299,11.753773l0,-42.161671c-27.748608,0 -57.905231,0 -60.65329,0c-7.8703,0 -7.8703,-10.74092 0,-10.74092c4.545073,0 71.127983,0 108.000031,0l0,-11.820934z" id="svg_8"/>
+		  </g>
+		  <text transform="matrix(0.136985 0 0 0.136985 7.25415 217.045)" font-weight="normal" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="350" id="svg_2" y="-779.99747" x="432.482218" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff">{js}</text>
+		 </g>
+
+		</svg>
+		<br />
+		<br />
+		Loading JavaScripture. Once it's loaded it will be installed into your browser, so it will also work offline. Even if you close the tab.
+	</div>
 </div>
 
 </body>
-<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
 <script type="text/javascript" src="js/json2.js"></script>
 <script type="text/javascript" src="js/jquery.scrollTo.js"></script>
-<!--<script src="js/lib/jquery.indexeddb.min.js"></script>
-<script src="js/database.js"></script>-->
+<script src="js/raphael-min.js"></script>
+<script src="js/raphael.pie.js"></script>
 <script type="text/javascript" src="data/bible.js"></script>
+<script>
+	var javascripture = {
+		api: {},
+		data: {},
+		modules: {}
+	};
+</script>
 <script type="text/javascript" src="data/strongs-dictionary.js"></script>
 <script type="text/javascript" src="data/kjvdwyer7.js"></script>
+<script type="text/javascript" src="data/web3.js"></script>
+<script type="text/javascript" src="modules/versionSelector.js"></script>
 <script type="text/javascript" src="data/strongsObjectWithFamilies.js"></script>
 <script type="text/javascript" src="data/hebrew6.js"></script>
 <script type="text/javascript" src="data/greek4.js"></script>
 <script src="data/crossReferences.js"></script>
+<script src="data/morphology.js"></script>
 
-
-<script type="text/javascript" src="js/jquery.hoverIntent.min.js"></script>
+<script src="modules/hebrew.js"></script>
+<script type="text/javascript" src="js/colors.js"></script>
 <script type="text/javascript" src="js/colorpicker.js"></script>
 <script type="text/javascript" src="js/events.js"></script>
 <script type="text/javascript" src="js/functionalScripts.js"></script>
 <script src="js/searchApi.js"></script>
+<script src="js/morphologyApi.js"></script>
 <script src="js/searchBindings.js"></script>
 <script src="js/wordPanel.js"></script>
 <script src="js/loading.js"></script>
 <script src="js/reference.js"></script>
 <script src="js/popup.js"></script>
-<script src="js/shower.js"></script>
+<script src="js/toggler.js"></script>
 <script src="js/jquery.waypoints.js"></script>
 <script src="js/wayPoint.js"></script>
 <script src="js/keyboardShortcuts.js"></script>
 <script src="js/crossReferences.js"></script>
 <script src="js/bookSelect.js"></script>
+<script src="js/frequencyAnalysis.js"></script>
+<script src="js/randomReference.js"></script>
+
 </html>

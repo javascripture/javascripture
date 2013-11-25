@@ -1,4 +1,5 @@
-var strongsDictionary = {"H1":{"lemma":"אָב","xlit":"ʼâb","pron":"awb","derivation":"a primitive word;","strongs_def":"father, in a literal and immediate, or figurative and remote application","kjv_def":"chief, (fore-) father(-less), [idiom] patrimony, principal. Compare names in 'Abi-'."},
+/*global javascripture*/
+javascripture.data.strongsDictionary = {"H1":{"lemma":"אָב","xlit":"ʼâb","pron":"awb","derivation":"a primitive word;","strongs_def":"father, in a literal and immediate, or figurative and remote application","kjv_def":"chief, (fore-) father(-less), [idiom] patrimony, principal. Compare names in 'Abi-'."},
 "H2":{"lemma":"אַב","xlit":"ʼab","pron":"ab","derivation":"(Aramaic) corresponding to H1 (אָב)","strongs_def":"{father}","kjv_def":"father."},
 "H3":{"lemma":"אֵב","xlit":"ʼêb","pron":"abe","derivation":"from the same as H24 (אָבִיב);","strongs_def":"a green plant","kjv_def":"greenness, fruit."},
 "H4":{"lemma":"אֵב","xlit":"ʼêb","pron":"abe","derivation":"(Aramaic) corresponding to H3 (אֵב)","strongs_def":"{a green plant}","kjv_def":"fruit."},

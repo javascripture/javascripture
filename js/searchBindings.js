@@ -1,3 +1,4 @@
+/*global javascripture*/
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -22,77 +23,69 @@
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
 		var strongsNumberAsId = data.lemma.replace(/ /gi,"");
-		var trackingBoxId = createTrackingBoxString( data, '_' );
+		var trackingBoxId = createTrackingBoxId( data, '_' );
 		createTrackingBox( data );
 		strongsNumberArray = data.lemma.split(' ');
-/*
-		//to differentiate between strongs numbers and not strongs numbers
-		$.each(strongsNumberArray, function(index, strongsNumber) {
-			if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-				highlightStrongsNumber(strongsNumber,'number');
-				wordTree(strongsNumber);
-				//this doesn't work as one word can have 2 strongs numbers... strongsNumberArray[index] = strongsNumber + '"';
-			} else { //not a strongs number
-				wordString = wordString + " " + strongsNumber;
-//			    var strongsTracking += '<div class="collapsable"><h2 class="'+strongsNumber+'">'+strongsNumber+' <a class="remove" href="#"></a></h2></div>';
- //               $('#referenceTracking').append(strongsTracking);
-
-			}
-		});		
-		if(wordString!=""){
-			highlightStrongsNumber(wordString,'word');
-		}*/
-		references += '<form><ol class="references">';
-		var wordCount = 0;
-
-		var searchObject = bibleObject;
-		if($("select[name=searchLanguage]").val() === "hebrew") {
-			searchObject = hebrewObject;
-			$.each(strongsNumberArray, function(index, strongsNumber) {
-				if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-					strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-				}
-			});
-		}
-		/*var referenceArray = new Array();
-		$.each(searchObject, function(bookName, bookContent) {
-			if($('#searchRange').val() === "book") {
-				//search this string and return a reference
-				if(findArrayElementsInString(strongsNumberArray, bookContent, searchType)){
-					referenceArray.push([bookName,1,1,wordCount]);
-				}
-			} else {
-				$.each(bookContent, function(chapterNumber, chapterContent) {
-					if($('#searchRange').val() === "chapter") {
-						if(findArrayElementsInString(strongsNumberArray, chapterContent, searchType)){
-							referenceArray.push([bookName,chapterNumber+1,1,wordCount]);
-						}
-					} else {
-						$.each(chapterContent, function(verseNumber, verseContent) {
-							if(findArrayElementsInString(strongsNumberArray, verseContent, searchType)){
-								referenceArray.push([bookName,chapterNumber+1,verseNumber+1,wordCount]);
-							}
-						});
-					}
-				});
-			}
-		});*/
-		var referenceArray = searchApi.getReferences(data);
-		references += createReferenceList(referenceArray);
-
-		references += '</ol></form>';
 
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
-		$('#referenceTracking #'+trackingBoxId).removeClass('closed');
-		if(!$('#referenceTracking #'+trackingBoxId+' form').length > 0 ) {
-			$('#referenceTracking #'+trackingBoxId).append(references);
-		}
-		goToFirstReference();
-//		$('.popup').popup( 'close' );
+		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
-		var endDate = new Date();
-		timer(startDate, endDate);
+		searchApi.getReferences(data);
+		searchApi.deferred.done( function(){
+			var referenceArray =  searchApi.results.references;
+
+			references += '<form><ol class="references">';
+			var wordCount = 0;
+
+			var searchObject = javascripture.data.english;
+			if($("select[name=searchLanguage]").val() === "hebrew") {
+				searchObject = javascripture.data.hebrew;
+				$.each(strongsNumberArray, function(index, strongsNumber) {
+					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
+					}
+				});
+			}
+			/*var referenceArray = new Array();
+			$.each(searchObject, function(bookName, bookContent) {
+				if($('#searchRange').val() === "book") {
+					//search this string and return a reference
+					if(findArrayElementsInString(strongsNumberArray, bookContent, searchType)){
+						referenceArray.push([bookName,1,1,wordCount]);
+					}
+				} else {
+					$.each(bookContent, function(chapterNumber, chapterContent) {
+						if($('#searchRange').val() === "chapter") {
+							if(findArrayElementsInString(strongsNumberArray, chapterContent, searchType)){
+								referenceArray.push([bookName,chapterNumber+1,1,wordCount]);
+							}
+						} else {
+							$.each(chapterContent, function(verseNumber, verseContent) {
+								if(findArrayElementsInString(strongsNumberArray, verseContent, searchType)){
+									referenceArray.push([bookName,chapterNumber+1,verseNumber+1,wordCount]);
+								}
+							});
+						}
+					});
+				}
+			});*/
+				references += createReferenceList(referenceArray);
+
+			//});
+
+			references += '</ol></form>';
+
+			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+			}
+			goToFirstReference();
+	//		$('.popup').popup( 'close' );
+
+			var endDate = new Date();
+			timer(startDate, endDate);
+
+		});
 	}
 
 	var createReferenceList = function(referenceArray) {
@@ -102,8 +95,8 @@
 		});
 		return referenceList;
 	};
-	
-	
+
+
 	function createTrackingBoxString( data, separator ) {
 		var string = '';
 		if ( data.word ) {
@@ -111,37 +104,60 @@
 		}
 		if ( data.lemma ) {
 			string += separator + data.lemma.replace( / /gi, separator );
+			if ( javascripture.data.strongsDictionary[ data.lemma ] ) {
+				string += separator + javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ data.lemma ].lemma );
+			}
 		}
 		if ( data.morph ) {
-			string += separator + data.morph.replace( / /gi, separator );			
+			string += separator + data.morph.replace( / /gi, separator );
 		}
 		return string;
 	}
 
+	function createTrackingBoxId( data ) {
+		var string = '';
+		$.each( data, function ( key, value ) {
+			if ( value !== '' ) {
+				string += value.replace( / /gi, '_' ) + '_';
+			}
+		} );
+		return string;
+	}
+
 	function createTrackingBox( data, type) {
-		var trackingBoxId = createTrackingBoxString( data, '_' );
+		var trackingBoxId = createTrackingBoxId( data );
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
-			var header = createTrackingBoxString( data, ' ' );
-			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+data.lemma+'"><style></style><h2 class="'+data.lemma+'">' + header + ' <a class="remove" href="#"></a></h2></div>';
+			var header = createTrackingBoxString( data, ' ' ),
+			    family = javascripture.modules.reference.getFamily( data.lemma),
+			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 ),
+				title = '';
+			$.each( data, function ( key, value ) {
+				title += key + ': ' + value + '\r\n';
+			} );
+
+			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'" title="' + title + '"><style></style><h2 class="'+family+'">' + header;
+			strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
 			$('#referenceTracking').append(strongsTracking);
 			if ( data.lemma ) {
-				var strongsInt = parseFloat( data.lemma.substring( 1, data.lemma.length ), 10 );
 
-				if(strongsInt > 0) {
-					var newColor = getStrongsColor( strongsInt );
-					strongsStyle = getStrongsStyle( data.lemma, newColor );
-			    }
+				var strongsStyle = '';
+				if(familyInt > 0) {
+					var newColor = javascripture.modules.colors.getStrongsColor( familyInt );
+					strongsStyle = javascripture.modules.colors.getStrongsStyle( family, newColor );
+				}
 
-				if(strongsInt > 0) {
-	        	    $('#'+trackingBoxId+' style').html(strongsStyle);
-	            	$('#changeColor #colorFormStrongsNumber').val( data.lemma );
-		            color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");
+				if(familyInt > 0) {
+					$('#' + trackingBoxId + ' style').html(strongsStyle);
+					$('#changeColor #colorFormStrongsNumber').val( data.lemma );
+					var color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");
 					$('#changeColor #colorFormColor').val(color);
 					//$('#colorSelector div').css('background',newColor);
 					//$('#colorSelector').ColorPickerSetColor(RGBtoHEX(newColor));
-			        //$('#wordControlPanel').hide();
-	    	        $('#referenceTracking h2').hoverIntent(hoverIntentConfig);
+					//$('#wordControlPanel').hide();
+
+					//TODO highlight only these words on hover
+					//$('#referenceTracking h2').hoverIntent(hoverIntentConfig);
 				}
 			}
         }
@@ -155,21 +171,36 @@
 		return '<li><a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">'+book+' '+(chapter)+':'+(verse)+'</a></li>';
 	}
 
-	$(document).on( 'dblclick', '#verse ol > li span', function () {
-		var data = $(this).data();
+	function searchOnClick( element ) {
+		var data = $( element ).data();
 		data.word = '';
 		data.morph = '';
+		data.lemma = data.lemma.replace('G3588 ','');
 		createSearchReferencesPanel(data);
+	}
+
+
+	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
+		searchOnClick( this );
 	});
-	
+	$(document).on( 'dblclick', '#verse ol > li span', function () {
+		searchOnClick( this );
+	});
+
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).serializeObject() );
+		$( '.popup' ).popup( 'close' );
 	});
-	
+
 	$( document ).on( 'click', 'a.word-tree', function( event ) {
 		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data() );		
+		createSearchReferencesPanel( $( this ).data() );
+	} );
+
+	$( document ).on( 'click', 'a.kjv-def', function( event ) {
+		event.preventDefault();
+		createSearchReferencesPanel( $( this ).data() );
 	} );
 
 } )( jQuery );

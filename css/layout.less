@@ -1,8 +1,8 @@
 * {border:none;margin:0;padding:0;}
-body {background:#fff;color:#000;font-family: Helvetica, Arial, sans-serif; font-size: 100%; }
+body {background:#fff;color:#000;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 100%; }
 a{text-decoration: none;}
 .trans-change.added { font-style: italic;}
-#current { background:rgba(0,0,0,.2);}
+#current { background:rgba(0,0,0,.1);}
 div#tabs {float:left}
 .selects{overflow:hidden;}
 .selects select {float:left;}
@@ -16,7 +16,7 @@ body > .wrapper { height: 0;}
 .verse .added, transchange {color:#aaa; font-style: italic;}
 .verse {line-height:1.4em; }
 .reference span {white-space: nowrap;}
-.verse h1 {text-align: center; line-height: 150%; }
+.verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }
 span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
 .reference span:hover {
 /*	color: #fff;*/
@@ -73,7 +73,7 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 	white-space: nowrap;
 }
 .bookSelect a:hover {
-	
+
 }
 
 .panel .heading-wrapper {margin: 0 auto; text-align: center;}
@@ -112,7 +112,7 @@ form ul li {list-style:none;}
 	border-bottom: 1px solid #666;
 	color:#fff; cursor:pointer; font-size: 1.3em; font-weight:normal; padding:3px 5px;
 }
-.collapsable.closed h2 { 
+.collapsable.closed h2 {
 	background:#666 url(arrow.png) no-repeat bottom right;
 	background: url(arrow.png) no-repeat bottom right, -webkit-gradient(
         linear,
@@ -127,21 +127,7 @@ form ul li {list-style:none;}
         rgb(190,190,190) 100%
     );
 }
-.collapsable h2 a.remove {
-	background: url(images/remove.png);
-	color: #fff;
-	display: block;
-	float: right;
-	height: 14px;
-	margin: 2px 0 0 0;
-	padding: 0;
-	width: 14px;
-}
-.collapsable h2 a.remove:hover {
-	background-position: 0 -14px;
-}
 .collapsable.closed form { display:none;}
-#referenceTracking .collapsable h2 { background-position: -26px -26px; }
 
 #wordControlPanel {
 	background: rgba( 255, 255, 255, .9 );
@@ -153,24 +139,14 @@ form ul li {list-style:none;}
 	right: 202px;
 //	overflow: hidden;
 	position: fixed;
-	z-index:999;
+	z-index:8;
 	color: #000;
+	.crossReferences {
+		padding: .1em .5em;
+	}
+
 }
-.wordControlPanel {
-	clear: both;
-}
-.wordControlPanel .close {
-	background: #000;
-	color: #fff;
-	font-size: 15px;
-	height: 18px;
-	line-height: 1em;
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 14px;
-	text-align: center;
-}
+
 
 .wordControlPanelTemplate {display:none;}
 .control-panel .duplicated {
@@ -262,6 +238,12 @@ note:hover {
 }
 
 dvnnm {text-transform: uppercase;}
+#verse {
+	.loading {
+		padding: 1em;
+		text-align: center;
+	}
+}
 #verse ol li {margin: 0 0 0 20px;
   margin-left: 50%;
 }
@@ -284,18 +266,21 @@ dvnnm {text-transform: uppercase;}
 
 /*popups*/
 .popup {
+	background: rgba(255, 255, 255, .5);
 	display: none;
 	position: fixed;
+	bottom: 0;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 0;
+	height: 100%;
+	width: 100%;
 	z-index: 9;
 	.content {
 		background: #fff;
 		border-bottom-left-radius: 1em;
 		border-bottom-right-radius: 1em;
-		border: 1px solid black;
+		border: 1px solid #ccc;
 		border-top: none;
 //		box-shadow: 0 0 10px #000;
 		margin: 0 auto;
@@ -303,21 +288,53 @@ dvnnm {text-transform: uppercase;}
 		padding: 1em;
 		position: relative;
 		width: 320px;
+		.content-padding {
+			h2, input, a {
+				font-family: 'Helvetica Neue';
+				font-weight: 100;
+			}
+			ul {
+				margin: 0 0 1em 1em;
+			}
+			.search ul {
+				margin: 0;
+			}
+		}
+		input[type=submit],
+		input[type=text] {
+			text-indent: .5em;
+			width: 100%;
+		}
 		.close-popup {
-			border-radius: 3px;
-			color: #000;
+			color: #ccc;
 			padding: 1em;
 			position: absolute;
 			right: 0;
 			top: 0;
+		}
+		.close-popup:hover {
+			color: #000;
+		}
+	}
+	.advanced {
+		display: block;
+		margin-top: 1em;
+		text-align: center;
+		a {
+			color: #999;
 		}
 	}
 }
 
 /*Forms*/
 input, select {
-	border: 1px solid #ccc;
+	border: none;
 	border-radius: 5px;
+
+    box-shadow: inset 0 0 1px #000,
+                inset 0 1px 0 rgba(0, 0, 0, .1),
+                0 1px 1px -1px rgba(0, 0, 0, .5);
+
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 20px;
 	line-height: 2em;
@@ -353,18 +370,12 @@ form.search {
 	li {
 		line-height: 3em;
 	}
-	input[type=text] {
-		text-indent: .5em;
-	}
-	input {
-		width: 100%;
-	}
 	#advanced {
 		display: none;
 	}
 }
 #currentRef {
-	background: #ddd;
+	background: #eee;
 }
 @dock-height: 50px;
 .dock {
@@ -386,6 +397,9 @@ form.search {
 		-webkit-appearance: none;
 		min-width: 50px;
 		text-indent: .5em;
+		&#bookSelect {
+			min-width: 160px;
+		}
 	}
 	.heading-wrapper {
 		font-size: 160%;
@@ -404,9 +418,9 @@ form.search {
 		left: 4px;
 	}
 	nav a {
-		background: #000;
+		//background: #000;
 		border-radius: 3px;
-		color:#fff;
+		color:#000;
 		cursor:pointer;
 		display: inline-block;
 		line-height: 2.5em;
@@ -417,9 +431,32 @@ form.search {
 		-webkit-transition: opacity .5s; /* Safari */
 	}
 	nav a:hover { opacity: 1; }
+	nav span[class*="icon-"] {
+		margin-right: .5em;
+	}
+	nav span.link-text {
+		display: none;
+		@media only screen and (min-width: 1200px) {
+			display: inline;
+		}
+	}
 }
 .referencePanel {
 	margin: @dock-height 200px 0;
+	.wordControlPanel {
+		clear: both;
+		.close {
+			color: #000;
+			height: 18px;
+			line-height: 1em;
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 5px;
+			width: 18px;
+			text-align: center;
+		}
+	}
 }
 .goToPanel, .searchPanel {
 	bottom: 0;
@@ -435,6 +472,31 @@ form.search {
 .searchPanel {
 	border-left: 1px solid #ccc;
 	right: 0;
+	h2 {
+		border: none;
+		font-family: 'Helvetica Neue';
+		font-weight: 100;
+		position: relative;
+		.remove {
+			font-size: 32px;
+			opacity: .8;
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 999;
+		}
+		.remove:hover {
+			opacity: 1;
+		}
+	}
+	ol li {
+		color: #ddd;
+		line-height: 1.5em;
+		padding-left: .5em;
+		a {
+			color: #000;
+		}
+	}
 }
 .reading-mode {
 	.dock, .goToPanel, .searchPanel, .popup, #wordControlPanel {
@@ -443,4 +505,58 @@ form.search {
 	.referencePanel {
 		margin: 0 9%;
 	}
+}
+
+/*Fonts*/
+@font-face {
+	font-family: 'icomoon';
+	src: url(data:application/x-font-woff;charset=utf-8;base64,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) format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+[class*="icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-book:before {
+	content: "\e605";
+}
+.icon-bookmark2:before {
+	content: "\e606";
+}
+.icon-cog2:before {
+	content: "\e607";
+}
+.icon-question:before {
+	content: "\e608";
+}
+.icon-search:before {
+	content: "\e609";
+}
+.icon-arrow-left:before {
+	content: "\e60a";
+}
+.icon-cross:before {
+	content: "\e600";
+}
+.full-page {
+	background: white;
+	padding-top: 1em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	z-index: 9;
 }

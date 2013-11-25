@@ -39,26 +39,6 @@
 	function subdueColor(color, subdueColorBy){
 		return parseInt(color/subdueColorBy);
 	}
-	
-	function getStrongsColor( strongsInt ) {
-/*		var subdueColorBy = $('#subdueColorBy').val();
-		var color = colors[strongsInt];
-		var colorArray = color.split('(')[1].split(')')[0].split(',')
-		var red = subdueColor(colorArray[0], subdueColorBy);
-		var green = subdueColor(colorArray[1], subdueColorBy);
-		var blue = subdueColor(colorArray[2], subdueColorBy);
-		return createColorCode(red,green,blue);*/
-		//Using HSL there are 360 colors with different % saturation and lightness
-		//There are about 2135 different word families
-		var theSizeOfAColorSegment = 360 / 8000,
-			hue = strongsInt * theSizeOfAColorSegment;
-
-		return 'hsl( ' + hue + ', 50%, 50% )';
-	}
-	
-	function getStrongsStyle( strongsNumber, newColor ) {
-		return '.' + strongsNumber + ' {color:#fff;background:' + newColor + ' !important;}';	
-	}
 
 	function searchByStrongsNumber(strongsNumberString) {
 		var startDate = new Date();
@@ -82,7 +62,7 @@
  //               $('#referenceTracking').append(strongsTracking);
 
 			}
-		});		
+		});
 		if(wordString!=""){
 			highlightStrongsNumber(wordString,'word');
 		}*/
@@ -142,7 +122,7 @@
 	var book = hrefArray[0];
 	var chapter = parseInt(hrefArray[1]) + 1;
 	var verse = parseInt(hrefArray[2]) + 1;
-	goToReference(book,chapter,verse);	
+	goToReference(book,chapter,verse);
 }*/
 
 var findArrayElementsInString = function(array, string, searchType) {
@@ -189,115 +169,8 @@ var hoverIntentConfig = {
     out: function(){hideWordPanel();} // function = onMouseOut callback (REQUIRED)
 }
 
-/*Word panel*/
-function initializeWordPanel(spanObject) {
-	if ( ! spanObject.data('lemma') ) {
-		return false;
-	}
-	var strongsNumberArray = spanObject.data('lemma').split(' ');
-	var strongsNumberPrefix = '';
-	var strongsNumberDisplay = '';
-	var lemma = '';
-	var strongsDef = '';
-	var kjvDef = '';
-	var englishWord = '';
-	$('.control-panel .duplicated').remove();
-	$.each(strongsNumberArray, function(i,strongsNumber) {
-		if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' ) {
-			strongsNumberDisplay = strongsNumber;
-			/*convert*/
-			osidStrongsNumber = strongsNumber;
-/*			strongsNumberPrefix = strongsNumber.substring(0,1);
-			if(strongsNumberPrefix==="H") {
-				osidStrongsNumber = strongsNumberPrefix + strongsNumber.substring(2,strongsNumber.length);
-			} else {
-				osidStrongsNumber = strongsNumberPrefix + strongsNumber.substring(1,strongsNumber.length);
-			}*/
-			lemma = stripPointing(strongsDictionary[osidStrongsNumber]["lemma"]);
-			strongsDef = strongsDictionary[osidStrongsNumber]["strongs_def"];
-			kjvDef = strongsDictionary[osidStrongsNumber]["kjv_def"];
-			englishWord = spanObject.text();
-			var infoObject = $('.control-panel .template').clone().removeClass('template').addClass('duplicated');
-			infoObject.appendTo('#wordControlPanel .control-panel')
-			infoObject.find('.wordControlPanelStrongsNumber').addClass(strongsNumberDisplay).text(strongsNumberDisplay);
-			infoObject.find('.wordControlPanelLemma').text(lemma);
-			infoObject.find('.wordControlPanelEnglish').text(englishWord);
-			infoObject.find('.wordControlPanelStrongsDef').text(strongsDef);
-			infoObject.find('.wordControlPanelKJVDef').text(kjvDef);
-		}
-
-		var roots = '';
-		if(typeof(strongsObject[strongsNumber]) != "undefined"){
-	        $.each(strongsObject[strongsNumber], function(index,rootNumber){
-    	        roots += '<a href="#search='+rootNumber+'" class="'+rootNumber+'">'+rootNumber+'</a><br />';
-        	});
-		}
-		var branches = '';
-		$.each(strongsObject, function(strongsObjectKey, strongsObjectRoot){
-			$.each(strongsObjectRoot, function(strongsObjectRootKey,strongsObjectRootValue){
-				if(strongsObjectRootValue==strongsNumber){
-					branches += '<a href="#search='+strongsObjectKey+'" class="'+strongsObjectKey+'">' + strongsObjectKey + '</a><br />';
-				}
-			});
-		});
-		wordTreeString = '';
-		if(roots == ''){
-			wordTreeString += '<p>no roots</p>';
-		} else {
-			wordTreeString += 'roots:<br />' + roots + '</p>';
-		}
-		if(branches == ''){
-			wordTreeString += '<p>no branches</p>';
-		} else {
-			wordTreeString += 'branches:<br />' + branches + '</p>';
-		}
-		infoObject.find('#wordTree').html(wordTreeString);
-		
-		var strongsInt = parseInt(strongsNumber.substring(1,strongsNumber.length), 10);
-		var newColor = getStrongsColor( strongsInt );
-		strongsStyle = getStrongsStyle( strongsNumber, newColor );
-
-        $('#wordControlPanel').find('style').html(strongsStyle);
-
-	
-	});
-	
-	
-
-	//showWordPanel(spanObject);
-}
-function showWordPanel(spanObject) {
-
-	/*position*/
-	$('#wordControlPanel').show();
-	var positionClass = "";
-	var topPosition = spanObject.offset().top + spanObject.height();//$('#wordControlPanel').height()
-	if(topPosition + $('#wordControlPanel').height() > $('body').height()){
-		var topPosition = spanObject.offset().top - $('#wordControlPanel').height();
-		positionClass += "bottom";
-	} else {
-		positionClass += "top";
-	}
-	var leftPosition = spanObject.offset().left + spanObject.width(); /// 2; //0 - ($('#wordControlPanel').width() / 2 - $(this).width() / 2);
-	positionClass += " ";
-	if(leftPosition + $('#wordControlPanel').width() > $('body').width()){
-		var leftPosition = spanObject.offset().left - $('#wordControlPanel').width();// / 2 - $(this).width() / 2);
-		positionClass += "right";
-	} else {
-		positionClass += "left";
-	}
-
-	$('#wordControlPanel').css({
-		'top': topPosition,
-		'left': leftPosition
-	}).attr('class','').addClass('not-active').addClass(positionClass);
-	$('#wordControlPanel .definitions').addClass('hide');
-}
-function hideWordPanel() {
-	//$('#wordControlPanel.not-active').hide();
-}
 /*Word Tree*/
-function wordTree(strongsNumber){
+function wordTree( strongsNumber ) {
 	$('#wordTree').html('Loading');
 	var roots = '';
 	if(typeof(strongsObject[strongsNumber]) != "undefined"){
@@ -336,10 +209,10 @@ function goToReference(book,chapter,verse){
 function maintainState(book,chapter,verse){
 	$('.dynamic').each(function(){
 		if($(this).hasClass('chapterSelect')){
-			var size = bibleObject[book].length;
+			var size = javascripture.data.english[book].length;
 		} else if($(this).hasClass('verseSelect')){
 			var chapterInArray = chapter - 1;
-			var size = bibleObject[book][chapterInArray].length;
+			var size = javascripture.data.english[book][chapterInArray].length;
 		}
 		if($(this).attr('size') > 0){
 			$(this).attr('size',size);
@@ -352,11 +225,11 @@ function maintainState(book,chapter,verse){
 		}
 		$(this).html(options);
 	});
-	
+
 	$('select.bookSelect').val(book);
 	$('select.chapterSelect').val(chapter);
 	$('select.verseSelect').val(verse);
-	
+
 	/*broken now wwe have historyif(context) {
 		window.location.href = '#context';
 	} else {
@@ -384,74 +257,6 @@ function createColorCode(red,green,blue){
 	return 'rgb('+red+','+green+','+blue+')';
 }
 
-
-function stripPointing(word) {
-var cleanWord = word.replace(/֑/gi,'')
-.replace(/֓/gi,'')
-.replace(/֕/gi,'')
-.replace(/֖/gi,'')
-.replace(/֘/gi,'')
-.replace(/֙/gi,'')
-.replace(/֚/gi,'')
-.replace(/֛/gi,'')
-.replace(/֜/gi,'')
-.replace(/֝/gi,'')
-.replace(/֞/gi,'')
-.replace(/֟/gi,'')
-.replace(/֠/gi,'')
-.replace(/֡/gi,'')
-.replace(/֢/gi,'')
-.replace(/֣/gi,'')
-.replace(/֤/gi,'')
-.replace(/֥/gi,'')
-.replace(/֦/gi,'')
-.replace(/֧/gi,'')
-.replace(/֩/gi,'')
-.replace(/֪/gi,'')
-.replace(/֫/gi,'')
-.replace(/֬/gi,'')
-.replace(/֭/gi,'')
-.replace(/֮/gi,'')
-.replace(/֯/gi,'')
-.replace(/ֱ/gi,'')
-.replace(/ֲ/gi,'')
-.replace(/ֳ/gi,'')
-.replace(/ֵ/gi,'')
-.replace(/ֶ/gi,'')
-.replace(/ַ/gi,'')
-.replace(/ָ/gi,'')
-.replace(/ֹ/gi,'')
-.replace(/ֺ/gi,'')
-.replace(/ֻ/gi,'')
-.replace(/ּ/gi,'')
-.replace(/ֽ/gi,'')
-.replace(/־/gi,'')
-.replace(/׀/gi,'')
-.replace(/ׂ/gi,'')
-.replace(/׃/gi,'')
-.replace(/ׄ/gi,'')
-.replace(/ׇ/gi,'')
-.replace(/ׁ/gi,'')
-.replace(/ִ/gi,'')
-.replace(/ְ/,'')
-//new ones
-.replace(/ְ/,'')
-.replace(/ְ/,'')
-.replace(/ְ/,'')
-.replace(/֗/,'')
-.replace(/ְ/,'')
-.replace(/ְ/,'')
-.replace(/֔/,'')
-.replace(/ְ/,'')
-.replace(/ְ/,'')
-.replace(/֨/,'')
-.replace(/֑/,'')
-.replace(/֗/,'')
-.replace(/֨/,'')
-.replace(/֔/,'');
-//.replace(/\//,'');
-return cleanWord;
-}
 function findRareWords(maximumNumberOfUses) {
 	loading($('#rareWords'));
 	setTimeout(function() {
@@ -540,17 +345,17 @@ Array.prototype.unique =
     }
     return a;
   };
-  
-  
+
+
   //actual converter function called by main function
- 
+
 function toHex(N) {
 	if (N==null) return "00";
 	N=parseInt(N); if (N==0 || isNaN(N)) return "00";
 	N=Math.max(0,N); N=Math.min(N,255); N=Math.round(N);
 	return "0123456789ABCDEF".charAt((N-N%16)/16) + "0123456789ABCDEF".charAt(N%16);
 }
- 
+
 //function called to return hex string value
 function RGBtoHEX(str)
 {
@@ -563,10 +368,10 @@ function RGBtoHEX(str)
 			toHex(g),
 			toHex(b)
 		];
-		return "#" + hex.join('');				
+		return "#" + hex.join('');
 	}
 	else{
-		//string not rgb so return original string unchanged		
+		//string not rgb so return original string unchanged
     return str;
 	}
 }

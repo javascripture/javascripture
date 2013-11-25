@@ -1,8 +1,34 @@
+function slowLoop( array, i ) {
+	if( array[i] ){
+		setTimeout( function () {
+			i++;
+			slowLoop(array, i);
+		}, 1000 );
+    }
+}
+
+jQuery.fn.slowEach = function(array, interval, callback ) {
+  if( ! array.length ) return;
+  var i = 0;
+  next();
+  function next() {
+    if( callback.call( array[i], i, array[i] ) !== false )
+      if( ++i < array.length )
+        setTimeout( next, interval );
+  }
+};
+
+
 	var searchApi = {
 		language: { //helper object to access different languages
-				english: bibleObject,
-				greek: greekObject,
-				hebrew: hebrewObject
+			english: javascripture.data.english,
+			greek: javascripture.data.greek,
+			hebrew: javascripture.data.hebrew
+		},
+		books: {
+			english: ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Songs','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'],
+			hebrew: ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Songs','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi'],
+			greek: ['Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation']
 		},
 		types: [
 			'word',
@@ -14,44 +40,45 @@
 			matches: {} //used to keep track of which word has been matched when searching - for when you need to match more than one word
 		},
 		getReferences: function (parameters) {
+			var self = this;
 			console.log(parameters);
+			this.deferred = $.Deferred();
 			this.lookForTerm(parameters);
-            return this.results.references;
 		},
         doesDataMatchTerm: function(type, data, term) {
 			data = data.toLowerCase();
 			term = term.toLowerCase();
-        	if ( data === term ) { //exact match
-        		return true;
-        	}
-        	/*this get very complex 
-        	if (data.indexOf( ' ' + term + ' ') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ';') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term + ':') > -1 ) { //part of a string
-	        	return true;
-        	}
-        	if (data.indexOf( term + ' ') === 0 ) { //start of a string
-	        	return true;
-        	}
-        	if (data.indexOf( ' ' + term) === 0 ) { //start of a string
-	        	return true;
-        	}*/
-        	//skip this for lemma
-        	if ( type !== 'lemma' ) {
-	            if ( data.search( term ) > -1 ) {
-    	        	return true;
-        	    }
-            }
+			if ( data === term ) { //exact match
+				return true;
+			}
+			/*this get very complex
+			if (data.indexOf( ' ' + term + ' ') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ',') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + '.') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ';') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term + ':') > -1 ) { //part of a string
+				return true;
+			}
+			if (data.indexOf( term + ' ') === 0 ) { //start of a string
+				return true;
+			}
+			if (data.indexOf( ' ' + term) === 0 ) { //start of a string
+				return true;
+			}*/
+			//skip this for lemma
+			if ( type !== 'lemma' ) {
+				if ( data.search( term ) > -1 ) {
+					return true;
+				}
+			}
             return false;
         },
         resetMatches: function () {
@@ -70,11 +97,32 @@
 			self.results.references = [];
 			self.resetMatches();
 
-			//use JS for loop with caching: for (var i = 0, l = myArray.length; i < l; i++) {}
-			for( var bookName in dataSource ) {
-				book = dataSource[ bookName ];
+			var booksToSearch = this.books[ parameters.language ];
+
+			//work out how many terms there are
+			var termsLength = 0;
+			for( var typeKey in self.types ) {
+				var type = self.types[typeKey];
+					termString = parameters[type];
+
+				if ( termString !== undefined && termString !== '') {
+					var terms = termString.split(' ');
+					termsLength = termsLength + terms.length;
+				}
+			}
+
+			var searchSpeed = 1;
+			if ( $('#searchSpeed').length > 0 ) {
+				searchSpeed = $('#searchSpeed').val();
+			}
+			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
+			//for( var bookName in dataSource ) {
+
+				var book = dataSource[ bookName ];
+
 				$( document ).trigger( 'loading', 'searching ' + bookName );
 
+//				jQuery.fn.slowEach(book, 1, function( chapterNumber, chapter ) {
 				for (var chapterNumber = 0, bookLength = book.length; chapterNumber < bookLength; chapterNumber++) {
 					chapter = book[ chapterNumber ];
 
@@ -86,15 +134,15 @@
 						if (parameters.range === 'verse' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 							self.resetMatches();
 						}
-						
+
 						for (var wordNumber = 0, verseLength = verse.length; wordNumber < verseLength; wordNumber++) {
 							var wordObject = verse[ wordNumber ];
 							if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 								self.resetMatches();
 							}
-							var termsLength = 0,
-								matchesLength,
-								termString;
+
+							var matchesLength,
+							    termString;
 
 							for( var typeKey in self.types ) {
 								var type = self.types[typeKey];
@@ -102,11 +150,10 @@
 
 								if ( termString !== undefined && termString !== '') {
 									if ( wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined' ) { //sometimes wordObjects are undefined in hebrew
-										var terms = termString.split(' '),
-											termsLength = termsLength + terms.length,
-											matchesLength = 0;
+										var terms = termString.split(' ');
 
-										$.each(terms, function (key, term) {
+										for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
+											var term = terms[ termNumber ];
 											if ( self.doesDataMatchTerm(type, wordObject[typeKey], term) ) {
 												if (parameters.clusivity === 'exclusive' ) {
 													self.results.matches[term] = true;
@@ -114,35 +161,37 @@
 													self.addReference(bookName, chapterNumber, verseNumber);
 												}
 											}
-										});
+										}
 									}
 								}
 							}
-
-							//terms are combined for exclusive searches here							
+							//terms are combined for exclusive searches here
 							if (parameters.clusivity === 'exclusive' ) {
 								matchesLength = 0;
-								$.each(self.results.matches, function (term) {
+
+								$.each(self.results.matches, function (key, term) {
 									matchesLength++;
 								});
-								if ( matchesLength >= termsLength) {
+								if ( matchesLength > 0 && matchesLength >= termsLength) {
+								console.log(matchesLength, termsLength);
 									self.addReference(bookName, chapterNumber, verseNumber);
 									self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 								}
 							}
-
-
-
 						}
 					}
+//				} );
 				}
-			}
+				if (bookNumber === booksToSearch.length - 1 ) {
+					self.deferred.resolve();
+				}
+			} );
 
 		},
 		standarizeWordEndings: function (word) {
 			return word.replace(/ם/gi, 'מ');
 		},
 		getTranslations: function ( lemma ) {
-			
+
 		}
 	};

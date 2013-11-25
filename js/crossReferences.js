@@ -5,6 +5,7 @@ $( document ).on('click', '#verse .wrapper li', function() {
 		var bookId = bible.getBookId( id ),
 		    referenceArray = id.split( '_' ),
 		    url = '#';
+		console.log( bookId );
 		if ( bookId ) {
 			url += 'book=' + bible.Data.books[ bookId - 1 ][ 0 ];
 		}
@@ -16,11 +17,17 @@ $( document ).on('click', '#verse .wrapper li', function() {
 		}
 		return url;
 	};
-	var bookId = bible.getBookId( this.id ),
-	    chapterAndVerse = this.id.substr(this.id.indexOf( '_' ), this.id.length),
-	    reference = bible.Data.books[bookId - 1][1] + chapterAndVerse.replace(/_/gi, '.'),
-	    crossReferencesMarkup = 'Cross references for <a href="' + idToUrl( this.id ) + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>' ;
-
+	var book = $( this ).closest( '.reference' ).data( 'book' ),
+	    bookId = bible.getBookId( book ),
+	    chapter = $( this ).closest( '.reference' ).data( 'chapter' ),
+		verse = $( this ).data( 'verse' ),
+//	    chapterAndVerse = this.id.substr(this.id.indexOf( '_' ), this.id.length),
+//	    reference = bible.Data.books[bookId - 1][1] + chapterAndVerse.replace(/_/gi, '.'),
+	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse;
+	    console.log( bookId );
+	    console.log( reference );
+	    crossReferencesMarkup = '<div class="crossReferences">Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + this.id.replace( /_/gi, ' ' ) + '</a>:<br>';
+	console.log(crossReferences[ reference ] );
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),
@@ -32,5 +39,6 @@ console.log(bookId);
 	} else {
 		crossReferencesMarkup += 'None';
 	}
+	crossReferencesMarkup += '</div>';
 	$('#wordControlPanel').html( crossReferencesMarkup );
 } );

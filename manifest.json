@@ -1,0 +1,30 @@
+{
+	// Required
+	"manifest_version": 2,
+	"name": "javascripture",
+	"version": "3",
+
+	// Recommended
+	"description": "A JavaScript bible exploration app",
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	
+	"app": {
+		"urls": [
+			"*://javascripture.org/",
+			"*://javascripture.org/"
+		],
+		"launch": {
+			"web_url": "http://javascripture.org/"
+		}
+	},
+
+	// Optional
+	"author": "scruffian"
+	"permissions": {
+		"unlimitedStorage": true
+	}
+}
