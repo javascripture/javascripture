@@ -63,11 +63,11 @@
 			if ( undefined === offset ) {
 				offset = 0;
 			}
-			$('body').scrollTop(0);
+			$( document ).scrollTop( 0 );
 			offset = offset - $('.dock').height();
 			if(verse.length > 0) {
 //				$('#verse').closest('.panel').scrollTop(verse.offset().top - $('.dock').height() - $('h1').height() );
-				$('body').scrollTo( verse, { offset: offset } );
+				$( document ).scrollTo( verse, { offset: offset } );
 			}
 
 			$( document ).trigger( 'createWayPoint' );
@@ -76,7 +76,7 @@
 			//anchor to current verse
 			var anchorPointSelector = '#current',
 				offset = 0,
-				$bodyOffset = $('body').scrollTop(),
+				$bodyOffset = $( document ).scrollTop(),
 				$anchorVerse;
 
 			//anchor to scrollstop point
@@ -152,7 +152,7 @@
 				        book: book,
 				        chapter: chapter,
 				        verse: verse
-			        } ).scrollToVerse($('#current'));
+			        } ).scrollToVerse( $( '#current' ) );
 		        }
 		    }
 		}
@@ -291,9 +291,10 @@
 	});
 
 	$( window ).scrollStopped( function() {
-		var scrollTop = $( 'body' ).scrollTop(),
-		    verseHeight = $( '.referencePanel' ).height() - $( window ).height() + $( '.dock' ).height(),
-		    anchoringData;
+		var scrollTop = $( document ).scrollTop(),
+			verseHeight = $( '.referencePanel' ).height() - $( window ).height() + $( '.dock' ).height(),
+			anchoringData;
+
 		if ( scrollTop <= 0 ) {
 			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );

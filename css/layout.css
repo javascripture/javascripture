@@ -506,6 +506,7 @@ form.search #advanced {
   line-height: 50px;
   position: absolute;
   top: 0;
+  white-space: nowrap;
 }
 .dock nav.right {
   right: 4px;
