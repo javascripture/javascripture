@@ -137,7 +137,9 @@
 		    var hash = window.location.hash;
 		    if(hash.indexOf('search') > -1){
 		        var word = hash.split('=')[1];
-		        searchByStrongsNumber(word);
+		        setTimeout(function(){
+			        createSearchReferencesPanel({lemma:word});
+			    } );
 		    } else {
 		        var parameterPairArray = hash.split('&');
 		        //this is bad

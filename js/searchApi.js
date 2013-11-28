@@ -93,6 +93,9 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
         },
 		lookForTerm: function (parameters) {
 			var self = this;
+			if ( 'undefined' === typeof parameters.language ) {
+				parameters.language = self.inferLanguage( parameters );
+			}
 			var dataSource = this.language[parameters.language]; //work out what language to search in
 			self.results.references = [];
 			self.resetMatches();
@@ -115,6 +118,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			if ( $('#searchSpeed').length > 0 ) {
 				searchSpeed = $('#searchSpeed').val();
 			}
+
 			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
 			//for( var bookName in dataSource ) {
 
@@ -193,5 +197,15 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 		},
 		getTranslations: function ( lemma ) {
 
+		},
+		inferLanguage: function( parameters ) {
+			var language = 'english';
+			if ( parameters.lemma.substr( 0,1 ) === 'H' ) {
+				language = 'hebrew';
+			}
+			if ( parameters.lemma.substr( 0,1 ) === 'G' ) {
+				language = 'greek';
+			}
+			return language;
 		}
 	};

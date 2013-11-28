@@ -1,4 +1,5 @@
 /*global javascripture*/
+var createSearchReferencesPanel;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -16,7 +17,7 @@
 		return o;
 	};
 
-	function createSearchReferencesPanel( data ) {
+	createSearchReferencesPanel = function( data ) {
 		var startDate = new Date();
 		var references = '';
 //		var strongsNumberArray = new Array();
@@ -86,7 +87,7 @@
 			timer(startDate, endDate);
 
 		});
-	}
+	};
 
 	var createReferenceList = function(referenceArray) {
 		var referenceList = "";
