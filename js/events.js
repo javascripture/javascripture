@@ -14,7 +14,7 @@
 			$(this).blur();
 		});
 		$(document).on('mouseover', '#verse ol > li span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
-			if($('#'+$(this).attr('class')).length > 0) {		
+			if($('#'+$(this).attr('class')).length > 0) {
 				$('#verse').addClass('isolate');
 				$('.verse').attr('id',$(this).attr('class'));
 			}
@@ -25,7 +25,7 @@
 				$(this).addClass(root[0]);
 			}*/
 		});
-		
+
 		$(document).on('mouseout', '#verse ol > li  span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
 //			var lemma = $( this ).data( 'lemma' );
 //			$('html').removeClass( lemma );
@@ -162,7 +162,7 @@
 				$('#colorFormColor').val('#'+hex).change();
 			}
 		});
-		
+
 		$('.findRareWords').click(function(){
 			findRareWords($('#maximumNumberOfUses').val());
 			return false;
@@ -188,7 +188,7 @@
 		$('#showHebrew').on('change', function(){
 			showHebrew();
 		});
-		
+
 		/*Keyboard shortcuts*/
 		$(document).keyup(function (e) {
 			console.log( e.keyCode );
@@ -202,17 +202,17 @@
     	        	markReference($('#currentRef').prev());
         	    }
       		}
-			if(e.keyCode == 37) { //prev chapter 
-				$('#previousChapter').click();			
+			if(e.keyCode == 37) { //prev chapter
+				$('#previousChapter').click();
 			}
-			if(e.keyCode == 38) { //prev chapter 
-				$('#previousVerse').click();			
+			if(e.keyCode == 38) { //prev chapter
+				$('#previousVerse').click();
 			}
 			if(e.keyCode == 39) { //next chapter
-				$('#nextChapter').click();			
+				$('#nextChapter').click();
 			}
-			if(e.keyCode == 40) { //prev chapter 
-				$('#nextVerse').click();			
+			if(e.keyCode == 40) { //prev chapter
+				$('#nextVerse').click();
 			}
       	});
 
@@ -239,6 +239,7 @@
 			resizeWrapperToWindow();
 		});*/
 		$( '#readingMode' ).bind( 'touchstart click', function () {
+			$(this).toggleClass( 'icon-fullscreen-exit' );
 			$( 'html' ).toggleClass( 'reading-mode' );
 		} );
 	});

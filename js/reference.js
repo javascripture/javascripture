@@ -294,9 +294,10 @@
 
 	$( window ).scrollStopped( function() {
 		var scrollTop = $( document ).scrollTop(),
-			verseHeight = $( '.referencePanel' ).height() - $( window ).height() + $( '.dock' ).height(),
+			verseHeight = $( '.referencePanel' ).height() - $( window ).height(),// + $( '.dock' ).height(),
 			anchoringData;
-
+console.log( verseHeight );
+console.log( scrollTop );
 		if ( scrollTop <= 0 ) {
 			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );
