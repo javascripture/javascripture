@@ -231,6 +231,7 @@ function maintainState(book,chapter,verse){
 	$('select.chapterSelect').val(chapter);
 	$('select.verseSelect').val(verse);
 
+	$( '#goToReference' ).val( book + ' ' + chapter + ':' + verse );
 	/*broken now wwe have historyif(context) {
 		window.location.href = '#context';
 	} else {

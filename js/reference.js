@@ -53,7 +53,6 @@
 			}
 
 			$('#verse').html( $threeChapters );
-
 			maintainState(book,chapter,verse);
 
 			return this; //makes it chainable
@@ -156,6 +155,7 @@
 				        verse: verse
 			        } ).scrollToVerse( $( '#current' ) );
 		        }
+
 		    }
 		}
 	};

@@ -238,15 +238,21 @@
 /*		$(window).resize(function(){
 			resizeWrapperToWindow();
 		});*/
-		$( '#readingMode' ).bind( 'touchstart click', function () {
-			$(this).toggleClass( 'icon-fullscreen-exit' );
-			$( 'html' ).toggleClass( 'reading-mode' );
-/*			if ( localStorage ) {
-				localStore.readingMode = true
-			}*/
-		} );
 	});
 /*function resizeWrapperToWindow() {
 	$('body > .wrapper').css('height',$(window).height()-$('.dock').height() );
 }
 resizeWrapperToWindow();*/
+var body = document.body,
+    timer;
+
+window.addEventListener('scroll', function() {
+  clearTimeout(timer);
+  if(!body.classList.contains('disable-hover')) {
+    body.classList.add('disable-hover')
+  }
+
+  timer = setTimeout(function(){
+    body.classList.remove('disable-hover');
+  },500);
+}, false);
