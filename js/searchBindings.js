@@ -23,10 +23,16 @@ var createSearchReferencesPanel;
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
-		var strongsNumberAsId = data.lemma.replace(/ /gi,"");
+		var strongsNumberAsId;
+		if ( data.lemma ) {
+			strongsNumberAsId = data.lemma.replace( / /gi, "" );
+		}
 		var trackingBoxId = createTrackingBoxId( data, '_' );
 		createTrackingBox( data );
-		strongsNumberArray = data.lemma.split(' ');
+		strongsNumberArray = [];
+		if ( data.lemma ) {
+			data.lemma.split(' ');
+		}
 
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
@@ -130,9 +136,13 @@ var createSearchReferencesPanel;
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
 			var header = createTrackingBoxString( data, ' ' ),
-			    family = javascripture.modules.reference.getFamily( data.lemma),
-			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 ),
+			    family = '',
+			    familyInt = '',
 				title = '';
+			if ( data.lemma ) {
+				family = javascripture.modules.reference.getFamily( data.lemma);
+				familyInt = parseFloat( family.substring( 1, family.length ), 10 );
+			}
 			$.each( data, function ( key, value ) {
 				title += key + ': ' + value + '\r\n';
 			} );

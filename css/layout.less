@@ -348,6 +348,10 @@ input, select {
 	font-size: 20px;
 	line-height: 2em;
 }
+input {
+	text-indent: .5em;
+	width: 100%;
+}
 label.has-placeholder{ display: none; }
 button, input[type=button], input[type=submit] {
 	border: none;
@@ -481,7 +485,19 @@ form.search {
 }
 .searchPanel {
 	border-left: 1px solid #ccc;
+	float: right;
 	right: 0;
+	width: 200px;
+	form.search {
+		padding: .5rem;
+		input {
+			background: #eee;
+			border: none;
+			color: #000;
+			font-family: 'Helvetica Neue';
+			font-weight: 100;
+		}
+	}
 	h2 {
 		border: none;
 		font-family: 'Helvetica Neue';

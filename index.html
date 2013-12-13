@@ -166,7 +166,19 @@
 		</div>
 	</div>
 
-	<div id="referenceTracking" class="searchPanel" style="float: right; width: 200px;"></div>
+	<div id="referenceTracking" class="searchPanel" method="get" action="#search">
+		<form class="search">
+			<ul>
+				<li>
+					<label for="word" class="has-placeholder">Search for a word</label>
+					<input type="search" name="word" id="word" value="" placeholder="Search for a word" />
+				</li>
+			</ul>
+			<input type="hidden" name="language" value="english" />
+			<input type="hidden" name="clusivity" value="exclusive" />
+			<input type="hidden" name="range" value="verse" />
+		</form>
+	</div>
 
 	<div class="referencePanel" id="reference">
 		 <div class="reading-mode-switch">
@@ -200,8 +212,6 @@
 						<label for="word" class="has-placeholder">Word</label>
 						<input type="text" name="word" id="word" value="" placeholder="Word" />
 					</li>
-				</ul>
-				<ul id="advanced">
 					<li>
 						<label for="lemma" class="has-placeholder">Strongs number</label>
 						<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
@@ -273,9 +283,6 @@
 					</li>-->
 				</ul>
 				<input type="submit" value="Search" />
-				<div class="advanced">
-					<a href="#advanced" class="toggler">Advanced</a>
-				</div>
 			</form>
 		</div>
 	</div>

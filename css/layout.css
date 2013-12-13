@@ -458,6 +458,10 @@ select {
   font-size: 20px;
   line-height: 2em;
 }
+input {
+  text-indent: .5em;
+  width: 100%;
+}
 label.has-placeholder {
   display: none;
 }
@@ -584,7 +588,19 @@ form.search #advanced {
 }
 .searchPanel {
   border-left: 1px solid #ccc;
+  float: right;
   right: 0;
+  width: 200px;
+}
+.searchPanel form.search {
+  padding: .5rem;
+}
+.searchPanel form.search input {
+  background: #eee;
+  border: none;
+  color: #000;
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
 }
 .searchPanel h2 {
   border: none;
