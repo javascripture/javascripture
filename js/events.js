@@ -124,7 +124,7 @@
                 setHashState(book,chapter,verse);
             } else {
                 if(typeof(bibleObject[book][chapter-2]) != "undefined"){
-                    var lastVerse = bibleObject[book][chapter-2].length
+                    var lastVerse = bibleObject[book][chapter-2].length;
                     setHashState(book,chapter-1,lastVerse);
                 }
             }
@@ -174,7 +174,7 @@
 			});//TODO - slow each
 		});
 		$('.random-verse').click(function(){
-			var randomBook = parseInt(Math.random()*66);
+			var randomBook = parseInt( Math.random()*66, 10 );
 			$('select.bookSelect option:nth-child('+randomBook+')');
 		});
 		showHebrew();
@@ -192,16 +192,16 @@
 		/*Keyboard shortcuts*/
 		$(document).keyup(function (e) {
 			console.log( e.keyCode );
-      		if( e.keyCode == 187 ) {
+			if( e.keyCode == 187 ) {
 				if($('#currentRef').next().length>0){
 		            markReference($('#currentRef').next());
-	    	    }
-      		}
+				}
+			}
 			if( e.keyCode == 189 ) {
 				if($('#currentRef').prev().length>0){
-    	        	markReference($('#currentRef').prev());
-        	    }
-      		}
+					markReference($('#currentRef').prev());
+				}
+			}
 			if(e.keyCode == 37) { //prev chapter
 				$('#previousChapter').click();
 			}
@@ -214,11 +214,11 @@
 			if(e.keyCode == 40) { //prev chapter
 				$('#nextVerse').click();
 			}
-      	});
+		});
 
         $('.bookmark').click(function(event){
-        	event.preventDefault();
-        	$('ol#bookmarks').append(createReferenceListItem(currentReference()));
+			event.preventDefault();
+			$('ol#bookmarks').append(createReferenceListItem(currentReference()));
         });
 		$(document).on('click', '.collapsable h2 a.remove', function(event){
 			event.preventDefault();
@@ -241,6 +241,9 @@
 		$( '#readingMode' ).bind( 'touchstart click', function () {
 			$(this).toggleClass( 'icon-fullscreen-exit' );
 			$( 'html' ).toggleClass( 'reading-mode' );
+/*			if ( localStorage ) {
+				localStore.readingMode = true
+			}*/
 		} );
 	});
 /*function resizeWrapperToWindow() {
