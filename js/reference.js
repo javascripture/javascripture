@@ -182,7 +182,11 @@
 
 		if ( javascripture.data.english[book][chapterInArray] ) {
 			$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
-				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
+				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' class="current"';
+				}
+				chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
 				chapterText += '<div class="wrapper"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' id="current"';
@@ -289,7 +293,7 @@
 	    var startDate = new Date();
 	    javascripture.modules.reference.loadReferenceFromHash();
 	    var endDate = new Date();
-	    timer(startDate, endDate);
+		timer(startDate, endDate);
 	});
 
 	$( window ).scrollStopped( function() {

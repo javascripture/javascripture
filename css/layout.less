@@ -2,7 +2,7 @@
 body {background:#fff;color:#000;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 100%; }
 a{text-decoration: none;}
 .trans-change.added { font-style: italic;}
-#current {
+.current {
 	background: #f6f6f6; /* Old browsers */
 	background: -moz-linear-gradient(top,  #f6f6f6 0%, #ffffff 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
@@ -422,6 +422,9 @@ form.search {
 		font-size: 160%;
 		line-height: 1.8em;
 		text-align: center;
+		#goToReference {
+			max-width: 200px;
+		}
 	}
 	nav {
 		line-height: @dock-height;

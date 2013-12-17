@@ -10,6 +10,7 @@
 			    strongsNumberDisplay = '',
 			    lemma = '',
 			    strongsDef = '',
+			    derivation = '',
 			    kjvDef = '',
 			    englishWord = '',
 			    infoObjects = [],
@@ -27,6 +28,7 @@
 
 						lemma = javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
 						strongsDef = javascripture.data.strongsDictionary[osidStrongsNumber].strongs_def;
+						derivation = javascripture.data.strongsDictionary[osidStrongsNumber].derivation;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {
 							var kjvWord = word.trim();
@@ -50,8 +52,9 @@
 						infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 						infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
+						infoObjects[ i ].find( '.wordControlPanelDerivation' ).text( derivation );
 						infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
-						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( javascripture.api.morphology.get( morphology ) );
+						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphology + ': ' + javascripture.api.morphology.get( morphology ) );
 					}
 
 					var roots = '';

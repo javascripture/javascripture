@@ -10,7 +10,7 @@ javascripture.modules.versionSelector = {
 	switchVersion: function ( version ) {
 		javascripture.data.english = javascripture.data[ version ];
 		localStorage.english = version;
-		if ( 'undefined' !== typeof $.fn.popup ) {
+		if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
 			$( '.popup' ).popup( 'close' );
 		}
 		$( javascripture.modules.versionSelector.switcher ).val( version );

@@ -12,7 +12,7 @@
 	<body>
 	<div class="dock">
 		<div class="heading-wrapper">
-			<select id="bookSelect" class="lookup bookSelect" tabindex="1">
+			<!--<select id="bookSelect" class="lookup bookSelect" tabindex="1">
 				<option></option>
 				<option value="Genesis">Genesis</option>
 				<option value="Exodus">Exodus</option>
@@ -81,7 +81,10 @@
 				<option value="Jude">Jude</option>
 				<option value="Revelation">Revelation</option>
 			</select>
-			<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
+			<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>-->
+			<form class="goToReference">
+				<input type="text" id="goToReference" placeholder="Go to reference" />
+			</form>
 		</div>
 		<nav class="left">
 			<a href="javascript:history.back();" title="back"><span aria-hidden="true" class="icon-arrow-left"></span><span class="link-text">Back</span></a>
@@ -91,7 +94,7 @@
 			<a href="#search-popup" class="open-popup" id="keyCode83" title="search"><span aria-hidden="true" class="icon-search"></span><span class="link-text">Search</span></a>
 			<a href="#settings-popup" class="open-popup" id="keyCode48" title="settings"><span aria-hidden="true" class="icon-cog2"></span><span class="link-text">Settings</span></a>
 			<a href="#bookmarks-popup" class="open-popup" id="keyCode66" title="bookmarks"><span aria-hidden="true" class="icon-bookmark2"></span><span class="link-text">Bookmarks</span></a>
-			<a href="#go-to-popup" class="open-popup" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span><span class="link-text">Go to</span></a>
+<!---			<a href="#go-to-popup" class="open-popup" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span><span class="link-text">Go to</span></a>-->
 			<span href="#" class="randomReference icon-die" title="Load random reference"></span>
 		</nav>
 	</div>
@@ -301,6 +304,7 @@
 						<select name="version" id="versionSelector">
 							<option value="kjv">King James Version</option>
 							<option value="web">World English Bible</option>
+							<option value="lc">Literal Consistent</option>
 						</select>
 					</li>
 					<li>
@@ -394,7 +398,6 @@
 		<a aria-hidden="true" class="icon-cross close-popup"></a>
 		<div class="content-padding">
 			<form class="goToReference">
-				<input type="text" id="goToReference" placeholder="Go to reference..." />
 			</form>
 		</div>
 	</div>
@@ -468,6 +471,7 @@
 	<div class="definitions">
 		<strong>KJV Usage:</strong> <span class="wordControlPanelKJVDef"></span><br />
 		<strong>Strongs Definition:</strong> <span class="wordControlPanelStrongsDef"></span><br />
+		<strong>Derivation:</strong> <span class="wordControlPanelDerivation"></span><br />
 		<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 	</div>
 	<span aria-hidden="true" class="icon-cross close"></span>

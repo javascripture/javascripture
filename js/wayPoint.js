@@ -16,8 +16,8 @@
 			console.log( typeof ( $this ) );
 			if ( typeof ( $this ) !== 'undefined' ) {
 				console.log( $this.data() );
-				document.getElementById( 'bookSelect' ).value = $this.data( 'book' );
-				document.getElementById( 'chapterSelect' ).value = $this.data( 'chapter' );
+//				document.getElementById( 'bookSelect' ).value = $this.data( 'book' );
+//				document.getElementById( 'chapterSelect' ).value = $this.data( 'chapter' );
 				var reference = $this.data( 'book' ) + ' ' + $this.data( 'chapter' );
 				if ( $this.data( 'verse' ) ) {
 					reference += ':' + $this.data( 'verse' );

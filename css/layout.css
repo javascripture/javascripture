@@ -15,7 +15,7 @@ a {
 .trans-change.added {
   font-style: italic;
 }
-#current {
+.current {
   background: #f6f6f6;
   /* Old browsers */
   background: -moz-linear-gradient(top, #f6f6f6 0%, #ffffff 100%);
@@ -521,6 +521,9 @@ form.search #advanced {
   font-size: 160%;
   line-height: 1.8em;
   text-align: center;
+}
+.dock .heading-wrapper #goToReference {
+  max-width: 200px;
 }
 .dock nav {
   line-height: 50px;
