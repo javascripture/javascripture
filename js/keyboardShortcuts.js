@@ -63,6 +63,10 @@
 				}
 				listenForKeyboardShortcuts = false;
 			}
+
+			if ( event.keyCode > 64 && event.keyCode < 91 ) {
+				$( '#goToReference' ).val( '' ).focus();
+			}
 		}
 	});
 } )( jQuery );

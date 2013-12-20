@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 3.9.8
+#version: 3.9.9
 index.html
 css/layout.css
 js/jquery-2.0.3.js
@@ -15,6 +15,7 @@ data/hebrew6.js
 data/greek4.js
 data/crossReferences.js
 data/morphology.js
+data/literalConsistent.js
 modules/hebrew.js
 js/colors.js
 js/jquery.hoverIntent.min.js
@@ -22,6 +23,7 @@ js/colorpicker.js
 js/events.js
 modules/readingMode.js
 js/functionalScripts.js
+modules/translateLiterally.js
 js/searchApi.js
 js/morphologyApi.js
 js/searchBindings.js

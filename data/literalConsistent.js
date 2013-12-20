@@ -1,4 +1,8 @@
-var literalConsistent = {
+/*global javascripture*/
+javascripture.data.literalConsistent = {
+"Pp":"to",
+"Pc":"and",
+"Pa":"the",
 "H7225":"beginning",
 "H1254":"created",
 "H430":"god",
@@ -1465,7 +1469,7 @@ var literalConsistent = {
 "H7167":"cut out",
 "H2881":"dip",
 "H2963":"catch",
-"H8242":"sackcloth",
+"H8242":"sack",
 "H4975":"greyhound",
 "H56":"lament",
 "H3985":"refuse",

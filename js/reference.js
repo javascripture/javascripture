@@ -174,10 +174,10 @@
 		var originalText, language;
 		if( javascripture.data.hebrew[book] ) {
 			originalText = javascripture.data.hebrew;
-			language = 'hebrew';
+			testament = 'hebrew';
 		} else {
 			originalText = javascripture.data.greek;
-			language = 'greek';
+			testament = 'greek';
 		}
 
 		if ( javascripture.data.english[book][chapterInArray] ) {
@@ -197,19 +197,28 @@
 				}
 				chapterText += '>';
 				chapterText += '<div class="english">';
-					$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-						if ( wordObject ) {
-							chapterText += createWordString( wordObject, language );
-						}
-					});
+					if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
+						//same as below
+						$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					} else {
+						$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					}
 				chapterText += "</div>";
 
 				//Load hebrew
 				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
-					chapterText += "<div class='original " + language + "'>";
+					chapterText += "<div class='original " + testament + "'>";
 					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 						if ( wordObject ) {
-							chapterText += createWordString( wordObject, language );
+							chapterText += createWordString( wordObject, testament, testament );
 						}
 					});
 					chapterText += "</div>";
@@ -224,7 +233,7 @@
 		return chapterText;
 	}
 
-	function createWordString( wordArray, language ) {
+	function createWordString( wordArray, language, testament ) {
 		var self = this,
 		    wordString = '',
 		    families = [];
@@ -247,13 +256,19 @@
 		wordString += '"';
 		wordString += ' data-word="' + wordArray[0] + '"';
 		wordString += ' data-lemma="' + wordArray[1] + '"';
-		wordString += ' data-language="' + language + '"';
+		wordString += ' data-language="' + testament + '"';
 		wordString += ' data-range="verse"';
 		wordString += ' data-family="' + families.join( ' ' ) + '"';
 		if ( wordArray[2] ) {
 			wordString += ' data-morph="' + wordArray[2] + '"';
 		}
-		wordString += '>' + wordArray[0] + '</span> ';
+		wordString += '>';
+		if ( javascripture.modules.versionSelector.getVersion() === 'lc' && language === 'english' ) {
+			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+		} else {
+			wordString += wordArray[0];
+		}
+		wordString += '</span> ';
 		return wordString;
 	}
 
@@ -325,6 +340,7 @@ console.log( scrollTop );
 		console.log(hash);
 		window.location.hash = hash;
 		$( this ).closest( '.popup' ).popup( 'close' );
+		$('#goToReference').blur();
 		return false;
 	});
 
