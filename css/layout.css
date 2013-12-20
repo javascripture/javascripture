@@ -370,12 +370,12 @@ dvnnm {
   line-height: 1em;
   text-align: right;
 }
-.showHebrew .english {
+.english {
   float: right;
   width: 45%;
   padding: 0 2%;
 }
-.showHebrew .original {
+.original {
   display: block;
   float: left;
   padding: 0 4% 0 2%;

@@ -177,17 +177,6 @@
 			var randomBook = parseInt( Math.random()*66, 10 );
 			$('select.bookSelect option:nth-child('+randomBook+')');
 		});
-		showHebrew();
-		function showHebrew() {
-			if($('#showHebrew:checked').length > 0) {
-				$('#verse').addClass('showHebrew');
-			} else {
-				$('#verse').removeClass('showHebrew');
-			}
-		}
-		$('#showHebrew').on('change', function(){
-			showHebrew();
-		});
 
 		/*Keyboard shortcuts*/
 		$(document).keyup(function (e) {
