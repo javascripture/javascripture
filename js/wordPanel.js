@@ -13,6 +13,8 @@
 			    derivation = '',
 			    kjvDef = '',
 			    englishWord = '',
+			    transliteration = '',
+			    pronounciation = '',
 			    infoObjects = [],
 			    language,
 			    morphology = $element.data( 'morph' );
@@ -29,6 +31,8 @@
 						lemma = javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
 						strongsDef = javascripture.data.strongsDictionary[osidStrongsNumber].strongs_def;
 						derivation = javascripture.data.strongsDictionary[osidStrongsNumber].derivation;
+						transliteration = javascripture.data.strongsDictionary[osidStrongsNumber].xlit;
+						pronounciation = javascripture.data.strongsDictionary[osidStrongsNumber].pron;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {
 							var kjvWord = word.trim();
@@ -53,6 +57,8 @@
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 						infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
 						infoObjects[ i ].find( '.wordControlPanelDerivation' ).text( derivation );
+						infoObjects[ i ].find( '.wordControlPanelTransliteration' ).text( transliteration );
+						infoObjects[ i ].find( '.wordControlPanelPronounciation' ).text( pronounciation );
 						infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
 						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphology + ': ' + javascripture.api.morphology.get( morphology ) );
 					}
