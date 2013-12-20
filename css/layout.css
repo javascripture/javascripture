@@ -71,7 +71,6 @@ a.word-tree {
 }
 .reference span:hover {
   /*	color: #fff;*/
-
   background: #eff;
 }
 .reference span.dwyer-added:hover,
@@ -133,7 +132,6 @@ ul.verseSelect {
 		rgb(240,240,240) 0%,
         rgb(255,255,255) 100%
     );*/
-
   border-bottom: 1px #ccc solid;
   color: #666;
   display: block;
@@ -524,7 +522,6 @@ form.search #advanced {
   text-decoration: none;
   -webkit-transition: opacity .5s;
   /* Safari */
-
 }
 .dock nav a:hover {
   opacity: 1;
@@ -624,7 +621,6 @@ form.search #advanced {
   text-transform: none;
   line-height: 1;
   /* Better Font Rendering =========== */
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
