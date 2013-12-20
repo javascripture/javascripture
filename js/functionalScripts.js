@@ -4,7 +4,7 @@
 	}
 	function previousChapter(){
 		if($('select#chapterSelect option:selected').prev().attr('selected', 'selected').change().length > 0) {
-			return true
+			return true;
 		}
 	}
 	function previousBook(){
@@ -14,23 +14,24 @@
 	function selectOptionDisplay(selectObject) {
         var startDate = new Date();
 		var context = false;
+		var book, chapter, verse;
 		$('.current').removeClass('current');
 		if(selectObject.hasClass('bookSelect')){
-			var book = selectObject.val();
-			var chapter = 1;
-			var verse = 1;
+			book = selectObject.val();
+			chapter = 1;
+			verse = 1;
 		} else if(selectObject.hasClass('chapterSelect')){
-			var book = $('select#bookSelect').val();
-			var chapter = selectObject.val();
-			var verse = 1;
+			book = $('select#bookSelect').val();
+			chapter = selectObject.val();
+			verse = 1;
 		} else if(selectObject.hasClass('verseSelect')) {
-			var book = $('select#bookSelect').val();
-			var chapter = $('select#chapterSelect').val();
-			var verse = selectObject.val();
+			book = $('select#bookSelect').val();
+			chapter = $('select#chapterSelect').val();
+			verse = selectObject.val();
 		} else {
-			var book = $('select#bookSelect').val();
-			var chapter = $('select#chapterSelect').val();
-			var verse = $('select#verseSelect').val();
+			book = $('select#bookSelect').val();
+			chapter = $('select#chapterSelect').val();
+			verse = $('select#verseSelect').val();
 		}
 		setHashState(book,chapter,verse);
 		var endDate = new Date();
@@ -47,7 +48,7 @@
 		var searchType = $('#searchSelect').val();
 		var wordString = "";
 		var strongsNumberAsId = strongsNumberString.replace(/ /gi,"");
-		highlightStrongsNumber(strongsNumberString);
+//		highlightStrongsNumber(strongsNumberString);
 		strongsNumberArray = strongsNumberString.split(' ');
 /*
 		//to differentiate between strongs numbers and not strongs numbers
@@ -230,6 +231,7 @@ function maintainState(book,chapter,verse){
 	$('select.chapterSelect').val(chapter);
 	$('select.verseSelect').val(verse);
 
+	$( '#goToReference' ).val( book + ' ' + chapter + ':' + verse );
 	/*broken now wwe have historyif(context) {
 		window.location.href = '#context';
 	} else {

@@ -1,4 +1,5 @@
 /*global javascripture*/
+var createSearchReferencesPanel;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -16,16 +17,22 @@
 		return o;
 	};
 
-	function createSearchReferencesPanel( data ) {
+	createSearchReferencesPanel = function( data ) {
 		var startDate = new Date();
 		var references = '';
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
-		var strongsNumberAsId = data.lemma.replace(/ /gi,"");
+		var strongsNumberAsId;
+		if ( data.lemma ) {
+			strongsNumberAsId = data.lemma.replace( / /gi, "" );
+		}
 		var trackingBoxId = createTrackingBoxId( data, '_' );
 		createTrackingBox( data );
-		strongsNumberArray = data.lemma.split(' ');
+		strongsNumberArray = [];
+		if ( data.lemma ) {
+			data.lemma.split(' ');
+		}
 
 		//collapse all the others
 		$('#referenceTracking .collapsable').addClass('closed');
@@ -86,7 +93,7 @@
 			timer(startDate, endDate);
 
 		});
-	}
+	};
 
 	var createReferenceList = function(referenceArray) {
 		var referenceList = "";
@@ -129,9 +136,13 @@
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
 			var header = createTrackingBoxString( data, ' ' ),
-			    family = javascripture.modules.reference.getFamily( data.lemma),
-			    familyInt =  parseFloat( family.substring( 1, family.length ), 10 ),
+			    family = '',
+			    familyInt = '',
 				title = '';
+			if ( data.lemma ) {
+				family = javascripture.modules.reference.getFamily( data.lemma);
+				familyInt = parseFloat( family.substring( 1, family.length ), 10 );
+			}
 			$.each( data, function ( key, value ) {
 				title += key + ': ' + value + '\r\n';
 			} );

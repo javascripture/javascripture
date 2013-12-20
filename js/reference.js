@@ -53,7 +53,6 @@
 			}
 
 			$('#verse').html( $threeChapters );
-
 			maintainState(book,chapter,verse);
 
 			return this; //makes it chainable
@@ -63,11 +62,11 @@
 			if ( undefined === offset ) {
 				offset = 0;
 			}
-			$('body').scrollTop(0);
+			$( document ).scrollTop( 0 );
 			offset = offset - $('.dock').height();
 			if(verse.length > 0) {
 //				$('#verse').closest('.panel').scrollTop(verse.offset().top - $('.dock').height() - $('h1').height() );
-				$('body').scrollTo( verse, { offset: offset } );
+				$( document ).scrollTo( verse, { offset: offset } );
 			}
 
 			$( document ).trigger( 'createWayPoint' );
@@ -76,7 +75,7 @@
 			//anchor to current verse
 			var anchorPointSelector = '#current',
 				offset = 0,
-				$bodyOffset = $('body').scrollTop(),
+				$bodyOffset = $( document ).scrollTop(),
 				$anchorVerse;
 
 			//anchor to scrollstop point
@@ -137,7 +136,9 @@
 		    var hash = window.location.hash;
 		    if(hash.indexOf('search') > -1){
 		        var word = hash.split('=')[1];
-		        searchByStrongsNumber(word);
+		        setTimeout(function(){
+			        createSearchReferencesPanel({lemma:word});
+			    } );
 		    } else {
 		        var parameterPairArray = hash.split('&');
 		        //this is bad
@@ -152,8 +153,9 @@
 				        book: book,
 				        chapter: chapter,
 				        verse: verse
-			        } ).scrollToVerse($('#current'));
+			        } ).scrollToVerse( $( '#current' ) );
 		        }
+
 		    }
 		}
 	};
@@ -172,15 +174,19 @@
 		var originalText, language;
 		if( javascripture.data.hebrew[book] ) {
 			originalText = javascripture.data.hebrew;
-			language = 'hebrew';
+			testament = 'hebrew';
 		} else {
 			originalText = javascripture.data.greek;
-			language = 'greek';
+			testament = 'greek';
 		}
 
 		if ( javascripture.data.english[book][chapterInArray] ) {
 			$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
-				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '" data-verse="' + ( verseNumber + 1 ) + '">';
+				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' class="current"';
+				}
+				chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
 				chapterText += '<div class="wrapper"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' id="current"';
@@ -191,19 +197,28 @@
 				}
 				chapterText += '>';
 				chapterText += '<div class="english">';
-					$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-						if ( wordObject ) {
-							chapterText += createWordString( wordObject, language );
-						}
-					});
+					if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
+						//same as below
+						$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					} else {
+						$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					}
 				chapterText += "</div>";
 
 				//Load hebrew
 				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
-					chapterText += "<div class='original " + language + "'>";
+					chapterText += "<div class='original " + testament + "'>";
 					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 						if ( wordObject ) {
-							chapterText += createWordString( wordObject, language );
+							chapterText += createWordString( wordObject, testament, testament );
 						}
 					});
 					chapterText += "</div>";
@@ -218,7 +233,7 @@
 		return chapterText;
 	}
 
-	function createWordString( wordArray, language ) {
+	function createWordString( wordArray, language, testament ) {
 		var self = this,
 		    wordString = '',
 		    families = [];
@@ -241,13 +256,19 @@
 		wordString += '"';
 		wordString += ' data-word="' + wordArray[0] + '"';
 		wordString += ' data-lemma="' + wordArray[1] + '"';
-		wordString += ' data-language="' + language + '"';
+		wordString += ' data-language="' + testament + '"';
 		wordString += ' data-range="verse"';
 		wordString += ' data-family="' + families.join( ' ' ) + '"';
 		if ( wordArray[2] ) {
 			wordString += ' data-morph="' + wordArray[2] + '"';
 		}
-		wordString += '>' + wordArray[0] + '</span> ';
+		wordString += '>';
+		if ( javascripture.modules.versionSelector.getVersion() === 'lc' && language === 'english' ) {
+			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+		} else {
+			wordString += wordArray[0];
+		}
+		wordString += '</span> ';
 		return wordString;
 	}
 
@@ -287,13 +308,15 @@
 	    var startDate = new Date();
 	    javascripture.modules.reference.loadReferenceFromHash();
 	    var endDate = new Date();
-	    timer(startDate, endDate);
+		timer(startDate, endDate);
 	});
 
 	$( window ).scrollStopped( function() {
-		var scrollTop = $( 'body' ).scrollTop(),
-		    verseHeight = $( '.referencePanel' ).height() - $( window ).height() + $( '.dock' ).height(),
-		    anchoringData;
+		var scrollTop = $( document ).scrollTop(),
+			verseHeight = $( '.referencePanel' ).height() - $( window ).height(),// + $( '.dock' ).height(),
+			anchoringData;
+console.log( verseHeight );
+console.log( scrollTop );
 		if ( scrollTop <= 0 ) {
 			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );
@@ -317,6 +340,7 @@
 		console.log(hash);
 		window.location.hash = hash;
 		$( this ).closest( '.popup' ).popup( 'close' );
+		$('#goToReference').blur();
 		return false;
 	});
 

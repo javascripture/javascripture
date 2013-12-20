@@ -10,6 +10,7 @@
 			    strongsNumberDisplay = '',
 			    lemma = '',
 			    strongsDef = '',
+			    derivation = '',
 			    kjvDef = '',
 			    englishWord = '',
 			    infoObjects = [],
@@ -24,9 +25,10 @@
 						var className = javascripture.modules.reference.getFamily( strongsNumber );
 						//convert
 						var osidStrongsNumber = strongsNumber;
-		
+
 						lemma = javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
 						strongsDef = javascripture.data.strongsDictionary[osidStrongsNumber].strongs_def;
+						derivation = javascripture.data.strongsDictionary[osidStrongsNumber].derivation;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {
 							var kjvWord = word.trim();
@@ -39,21 +41,22 @@
 						if ( osidStrongsNumber.substring( 0, 1 ) === "G" ) {
 							language = 'greek';
 						}
-	
+
 						infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass( 'wordControlPanelTemplate' ).addClass( 'wordControlPanel' );
 						infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay ).data( {
 							language: language,
 							lemma: osidStrongsNumber,
 							range: 'verse'
-							
+
 						} );
 						infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 						infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
+						infoObjects[ i ].find( '.wordControlPanelDerivation' ).text( derivation );
 						infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
-						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( javascripture.api.morphology.get( morphology ) );
+						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphology + ': ' + javascripture.api.morphology.get( morphology ) );
 					}
-			
+
 					var roots = '';
 					if( typeof javascripture.data.strongsObjectWithFamilies[ strongsNumber ] !== 'undefined' && javascripture.data.strongsObjectWithFamilies[ strongsNumber ].roots ) {
 				        $.each( javascripture.data.strongsObjectWithFamilies[ strongsNumber ].roots, function( index, rootNumber ) {
@@ -68,7 +71,7 @@
 					} else {
 						roots += 'No roots';
 					}
-	
+
 					var wordTreeRoots = '';
 					if(roots === ''){
 						wordTreeRoots += '<p>no roots</p>';
@@ -84,20 +87,20 @@
 					}
 					infoObjects[ i ].find('#wordTreeRoots').html( wordTreeRoots );
 					infoObjects[ i ].find('#wordTreeBranches').html( wordTreeBranches );
-		
+
 					var family = javascripture.modules.reference.getFamily( strongsNumber ),
 					    wordTreeFamily = 'family: ' + family;
 					infoObjects[ i ].find('#wordTreeFamily').html( wordTreeFamily );
-	
+
 					var strongsInt = parseInt( family.substring( 1, family.length ), 10 );
-		
+
 					var newColor = javascripture.modules.colors.getStrongsColor( strongsInt );
 					var strongsStyle = javascripture.modules.colors.getStrongsStyle( family, newColor );
-	
+
 					infoObjects[ i ].find('style').html( strongsStyle );
 				}
 			});
-		
+
 			$('#wordControlPanel').html( infoObjects ).show();
 			$.each( infoObjects, function ( key, infoObject ) {
 				$('#wordControlPanel').append( infoObject );

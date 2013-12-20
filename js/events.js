@@ -14,7 +14,7 @@
 			$(this).blur();
 		});
 		$(document).on('mouseover', '#verse ol > li span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
-			if($('#'+$(this).attr('class')).length > 0) {		
+			if($('#'+$(this).attr('class')).length > 0) {
 				$('#verse').addClass('isolate');
 				$('.verse').attr('id',$(this).attr('class'));
 			}
@@ -25,7 +25,7 @@
 				$(this).addClass(root[0]);
 			}*/
 		});
-		
+
 		$(document).on('mouseout', '#verse ol > li  span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
 //			var lemma = $( this ).data( 'lemma' );
 //			$('html').removeClass( lemma );
@@ -100,48 +100,7 @@
 			$('#'+strongsNumber).find('style').html('.'+strongsNumber+'{background:'+color+';color:#fff;}');
 			return false;
 		});
-		$('#previousBook').on('click',function(){
-			$('select#bookSelect option:selected').attr('selected','').prev().attr('selected','selected').change();
-		});
-		$('#previousChapter').on('click',function(){
-            verse = 1;
-            chapter = $('#chapterSelect').val()-1;
-            book = $('#bookSelect').val();
-            if(typeof(bibleObject[book][chapter-1]) != "undefined"){
-                setHashState(book,chapter,verse);
-            } else {
-				previousBook = $('#bookSelect option:selected').prev().val();
-				var lastChapter = bibleObject[previousBook].length;
-				var lastVerse = bibleObject[previousBook][lastChapter-1].length;
-				setHashState(previousBook,lastChapter,lastVerse);
-			}
-		});
-		$('#previousVerse').on('click',function(){
-            verse = $('#verseSelect').val()-1;
-            chapter = $('#chapterSelect').val();
-            book = $('#bookSelect').val();
-            if(typeof(bibleObject[book][chapter-1][verse-1]) != "undefined"){
-                setHashState(book,chapter,verse);
-            } else {
-                if(typeof(bibleObject[book][chapter-2]) != "undefined"){
-                    var lastVerse = bibleObject[book][chapter-2].length
-                    setHashState(book,chapter-1,lastVerse);
-                }
-            }
-		});
-		$('#nextBook').on('click',function(){
-			$('select#bookSelect option:selected').attr('selected','').next().attr('selected','selected').change();
-		});
-		$('#nextChapter').on('click',function(){
-			if($('select#chapterSelect option:selected').attr('selected','').next().attr('selected','selected').change().length < 1) {
-				$('#nextBook').click();
-			}
-		});
-		$('#nextVerse').on('click',function(){
-			if($('select#verseSelect option:selected').attr('selected','').next().attr('selected','selected').change().length < 1) {
-				$('#nextChapter').click();
-			}
-		});
+
 		$('#findBranches').click(function() {
 			wordTree($('#reverseRootStrongsNumber').val());
 			return false;
@@ -162,7 +121,7 @@
 				$('#colorFormColor').val('#'+hex).change();
 			}
 		});
-		
+
 		$('.findRareWords').click(function(){
 			findRareWords($('#maximumNumberOfUses').val());
 			return false;
@@ -174,51 +133,13 @@
 			});//TODO - slow each
 		});
 		$('.random-verse').click(function(){
-			var randomBook = parseInt(Math.random()*66);
+			var randomBook = parseInt( Math.random()*66, 10 );
 			$('select.bookSelect option:nth-child('+randomBook+')');
 		});
-		showHebrew();
-		function showHebrew() {
-			if($('#showHebrew:checked').length > 0) {
-				$('#verse').addClass('showHebrew');
-			} else {
-				$('#verse').removeClass('showHebrew');
-			}
-		}
-		$('#showHebrew').on('change', function(){
-			showHebrew();
-		});
-		
-		/*Keyboard shortcuts*/
-		$(document).keyup(function (e) {
-			console.log( e.keyCode );
-      		if( e.keyCode == 187 ) {
-				if($('#currentRef').next().length>0){
-		            markReference($('#currentRef').next());
-	    	    }
-      		}
-			if( e.keyCode == 189 ) {
-				if($('#currentRef').prev().length>0){
-    	        	markReference($('#currentRef').prev());
-        	    }
-      		}
-			if(e.keyCode == 37) { //prev chapter 
-				$('#previousChapter').click();			
-			}
-			if(e.keyCode == 38) { //prev chapter 
-				$('#previousVerse').click();			
-			}
-			if(e.keyCode == 39) { //next chapter
-				$('#nextChapter').click();			
-			}
-			if(e.keyCode == 40) { //prev chapter 
-				$('#nextVerse').click();			
-			}
-      	});
 
         $('.bookmark').click(function(event){
-        	event.preventDefault();
-        	$('ol#bookmarks').append(createReferenceListItem(currentReference()));
+			event.preventDefault();
+			$('ol#bookmarks').append(createReferenceListItem(currentReference()));
         });
 		$(document).on('click', '.collapsable h2 a.remove', function(event){
 			event.preventDefault();
@@ -238,11 +159,21 @@
 /*		$(window).resize(function(){
 			resizeWrapperToWindow();
 		});*/
-		$( '#readingMode' ).bind( 'touchstart click', function () {
-			$( 'html' ).toggleClass( 'reading-mode' );
-		} );
 	});
 /*function resizeWrapperToWindow() {
 	$('body > .wrapper').css('height',$(window).height()-$('.dock').height() );
 }
 resizeWrapperToWindow();*/
+var body = document.body,
+    timer;
+
+window.addEventListener('scroll', function() {
+  clearTimeout(timer);
+  if(!body.classList.contains('disable-hover')) {
+    body.classList.add('disable-hover');
+  }
+
+  timer = setTimeout(function(){
+    body.classList.remove('disable-hover');
+  },500);
+}, false);
