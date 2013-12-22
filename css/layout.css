@@ -247,6 +247,9 @@ form ul li {
   display: block;
   left: 201px;
   right: 202px;
+  max-height: 200px;
+  overflow: scroll;
+  padding: .5rem;
   position: fixed;
   z-index: 8;
   color: #000;
@@ -268,9 +271,6 @@ form ul li {
 #wordControlPanel .definitions {
   float: right;
   width: 49%;
-}
-.control-panel {
-  padding: 7px;
 }
 .top.left .control-panel {
   border-top-left-radius: 0;
