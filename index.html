@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="javascripture.appcache?v=3.9.10">
+<html manifest="javascripture.appcache?v=4">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="google" content="notranslate" />
@@ -21,15 +21,13 @@
 			<a href="#help-popup" class="open-popup" title="help"><span aria-hidden="true" class="icon-question"></span><span class="link-text">Help</span></a>
 		</nav>
 		<nav class="right">
-			<a href="#search-popup" class="open-popup" id="keyCode83" title="search"><span aria-hidden="true" class="icon-search"></span><span class="link-text">Search</span></a>
 			<a href="#settings-popup" class="open-popup" id="keyCode48" title="settings"><span aria-hidden="true" class="icon-cog2"></span><span class="link-text">Settings</span></a>
-			<a href="#bookmarks-popup" class="open-popup" id="keyCode66" title="bookmarks"><span aria-hidden="true" class="icon-bookmark2"></span><span class="link-text">Bookmarks</span></a>
-			<a href="#go-to-popup" class="open-popup" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span><span class="link-text">Go to</span></a>
 			<span href="#" class="randomReference icon-die" title="Load random reference"></span>
 		</nav>
 	</div>
 	<div class="goToPanel">
 		<div class="lookup bookSelect">
+			<h2><a href="#"><span class="link-text">Go to</span></a><a href="#go-to-popup" class="open-popup icon-book" id="keyCode71" title="go to"></a></h2>
 			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
 			<a href="#book=Exodus&chapter=1" data-chapters="40">Exodus <span class="chapter"></span></a>
 			<a href="#book=Leviticus&chapter=1" data-chapters="27">Leviticus <span class="chapter"></span></a>
@@ -97,6 +95,9 @@
 			<a href="#book=Jude&chapter=1">Jude</a>
 			<a href="#book=Revelation&chapter=1" data-chapters="22">Revelation <span class="chapter"></span></a>
 		</div>
+		<div class="bookmarks">
+			<h2><a href="#"><span class="link-text">Bookmarks</span></a><a class="bookmark-current-passage icon-plus"></a></h2>
+		</div>
 	</div>
 
 	<div id="referenceTracking" class="searchPanel" method="get" action="#search">
@@ -106,6 +107,12 @@
 					<label for="word" class="has-placeholder">Search for a word</label>
 					<input type="search" name="word" id="word" value="" placeholder="Search for a word" />
 				</li>
+				<li class="advanced">
+					<a href="#search-popup" class="open-popup" id="keyCode83" title="search">
+						<span class="link-text">Advanced</span>
+						<span aria-hidden="true" class="icon-search"></span>
+					</a>
+				</li>
 			</ul>
 			<input type="hidden" name="language" value="english" />
 			<input type="hidden" name="clusivity" value="exclusive" />
@@ -114,9 +121,7 @@
 	</div>
 
 	<div class="referencePanel" id="reference">
-		 <div class="reading-mode-switch">
-		 	<span id="readingMode" class="icon-fullscreen"></span>
-		 </div>
+		<span id="readingMode" class="reading-mode-switch icon-fullscreen"></span>
 
 		<div class="verse">
 			<div id="wordControlPanel" class="not-active">
@@ -287,19 +292,6 @@
 						Slow devices crash if you try to search too fast!
 					</li>
 				</ul>
-			</form>
-		</div>
-	</div>
-</div>
-<div id="bookmarks-popup" class="popup">
-	<div class="content">
-		<a aria-hidden="true" class="icon-cross close-popup"></a>
-		<div class="content-padding">
-			<h2>Bookmarks</h2>
-			<form>
-				<a href="#" class="bookmark">save current passage</a>
-				<br /><br />
-				<ol id="bookmarks"></ol>
 			</form>
 		</div>
 	</div>
@@ -507,6 +499,7 @@
 <script src="modules/readingMode.js"></script>
 <script src="js/functionalScripts.js"></script>
 <script src="modules/translateLiterally.js"></script>
+<script src="modules/bookmarks.js"></script>
 <script src="js/searchApi.js"></script>
 <script src="js/morphologyApi.js"></script>
 <script src="js/searchBindings.js"></script>

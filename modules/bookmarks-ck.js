@@ -1,0 +1,1 @@
+/*global javascripture*/javascripture.modules.bookmarks={};$(".bookmark-current-passage").on("click",function(){$(".bookmarks").append('<a href="'+window.location.hash+'">'+$("#goToReference").val()+"</a>")});
