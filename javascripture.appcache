@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 3.9.9
+#version: 4
 index.html
 css/layout.css
 js/jquery-2.0.3.js
@@ -24,6 +24,7 @@ js/events.js
 modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
+modules/bookmarks.js
 js/searchApi.js
 js/morphologyApi.js
 js/searchBindings.js

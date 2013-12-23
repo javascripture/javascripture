@@ -165,7 +165,7 @@
 }
 resizeWrapperToWindow();*/
 var body = document.body,
-    timer;
+    timer2;
 
 window.addEventListener('scroll', function() {
   clearTimeout(timer);
@@ -173,7 +173,7 @@ window.addEventListener('scroll', function() {
     body.classList.add('disable-hover');
   }
 
-  timer = setTimeout(function(){
+  timer2 = setTimeout(function(){
     body.classList.remove('disable-hover');
   },500);
 }, false);

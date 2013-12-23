@@ -5,6 +5,7 @@
 	    waitingForAnotherNumber = false,
 	    waitingForNumberTimer;
 	$(document).on('keydown', function (event) {
+		console.log( event.keyCode );
 		if ( $( 'input:focus' ).length === 0 ) {
 			//esc
 			if ( 27 === event.keyCode ) {
@@ -32,6 +33,18 @@
 					}
 				}, 1000);
 
+			}
+
+			//next / prev buttons in search
+			if ( event.keyCode === 187 || event.keyCode === 61 ) {
+				if($('#currentRef').next().length>0){
+					markReference($('#currentRef').next());
+				}
+			}
+			if ( event.keyCode === 189 || event.keyCode === 173 ) {
+				if($('#currentRef').prev().length>0){
+					markReference($('#currentRef').prev());
+				}
 			}
 
 			if ( event.keyCode === 18 ) {
