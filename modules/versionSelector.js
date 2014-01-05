@@ -8,18 +8,23 @@ javascripture.modules.versionSelector = {
 		return 'kjv';
 	},
 	switchVersion: function ( version ) {
-		if ( version === 'lc' ) {
-			javascripture.data.english = javascripture.data.kjv;
+		if ( version === 'original' ) {
+			$('html').addClass( 'read-original' );
 		} else {
-			javascripture.data.english = javascripture.data[ version ];
-		}
-		localStorage.english = version;
-		if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
-			$( '.popup' ).popup( 'close' );
-		}
-		$( javascripture.modules.versionSelector.switcher ).val( version );
-		if ( 'undefined' !== typeof javascripture.modules.reference ) {
-			javascripture.modules.reference.loadReferenceFromHash();
+			$('html').removeClass( 'read-original' );
+			if ( version === 'lc' ) {
+				javascripture.data.english = javascripture.data.kjv;
+			} else {
+				javascripture.data.english = javascripture.data[ version ];
+			}
+			localStorage.english = version;
+			if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
+				$( '.popup' ).popup( 'close' );
+			}
+			$( javascripture.modules.versionSelector.switcher ).val( version );
+			if ( 'undefined' !== typeof javascripture.modules.reference ) {
+				javascripture.modules.reference.loadReferenceFromHash();
+			}
 		}
 	}
 };

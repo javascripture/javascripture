@@ -13,6 +13,13 @@
 	<div class="dock">
 		<div class="heading-wrapper">
 			<form class="goToReference">
+				<select name="version" id="versionSelector">
+					<option value="kjv">KJV</option>
+					<option value="web">WEB</option>
+				</select>
+
+<!--					<option value="lc">Literal Consistent</option>-->
+				</select>
 				<input type="text" id="goToReference" placeholder="Go to reference" />
 			</form>
 		</div>
@@ -121,8 +128,8 @@
 	</div>
 
 	<div class="referencePanel" id="reference">
+		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
 		<span id="readingMode" class="reading-mode-switch icon-fullscreen"></span>
-
 		<div class="verse">
 			<div id="wordControlPanel" class="not-active">
 				<style></style>
@@ -234,14 +241,6 @@
 			<h2>Settings</h2>
 			<form>
 				<ul>
-					<li>
-						Version:
-						<select name="version" id="versionSelector">
-							<option value="kjv">King James Version</option>
-							<option value="web">World English Bible</option>
-							<option value="lc">Literal Consistent</option>
-						</select>
-					</li>
 					<li>
 						Fonts: <select name="bodyFontFamily" class="changeStyle">
 							<option value="Arial, Helvetica;">Arial</option>

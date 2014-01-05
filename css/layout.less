@@ -414,14 +414,10 @@ form.search {
 	top: 0;
 	z-index: 9;
 	select {
+		background: none;
 		font-family: 'Helvetica Neue';
 		font-weight: 100;
-		-webkit-appearance: none;
-		min-width: 50px;
-		text-indent: .5em;
-		&#bookSelect {
-			min-width: 160px;
-		}
+		height: 2em;
 	}
 	.heading-wrapper {
 		font-size: 160%;
@@ -544,11 +540,30 @@ form.search {
 	}
 }
 .reading-mode {
-	font-size: 2em;
-	.dock, .goToPanel, .searchPanel, .popup, #wordControlPanel, .original {
+	.dock {
+		background: none;
+		border: none;
+//		top: -@dock-height - 13px;
+		nav {
+			display: none;
+		}
+		.reading-mode-version {
+			display: inline;
+		}
+		.goToReference {
+			background: #fff;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+			display: inline-block;
+			padding: 3px 10px 10px;
+		}
+	}
+	.goToPanel, .searchPanel, .popup, #wordControlPanel, .original {
 		display: none !important;
 	}
 	.referencePanel {
+		font-size: 2em;
 		margin: 0 9%;
 	}
 	#verse ol {
@@ -558,7 +573,7 @@ form.search {
 			display: inline;
 			margin: 0 !important;
 			line-height: 1.8em;
-			.english, .wrapper {
+			.original, .english, .wrapper {
 				display: inline;
 				float: none;
 				margin: 0;
@@ -581,6 +596,17 @@ form.search {
 	}
 	#current {
 		background: none;
+	}
+	&.read-original {
+		.original {
+			display: inline !important;
+		}
+		.english {
+			display: none !important;
+		}
+	}
+	.reading-mode-switch.icon-book {
+		display: block;
 	}
 }
 
@@ -657,6 +683,12 @@ form.search {
 	line-height: 0;
 	z-index: 9;
 	&.icon-fullscreen-exit {
+		font-size: 22px;
 		right: 14px;
+	}
+	&.icon-book {
+		display: none;
+		font-size: 26px;
+		right: 50px;
 	}
 }

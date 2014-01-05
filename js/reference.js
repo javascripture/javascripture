@@ -64,6 +64,12 @@
 			}
 			$( document ).scrollTop( 0 );
 			offset = offset - $('.dock').height();
+			
+			//there must be a better way to do this, but the problem is that the top animation hasn't happened by this point
+			if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
+				offset = offset - 50;
+			}
+
 			if(verse.length > 0) {
 //				$('#verse').closest('.panel').scrollTop(verse.offset().top - $('.dock').height() - $('h1').height() );
 				$( document ).scrollTo( verse, { offset: offset } );
@@ -341,6 +347,9 @@ console.log( scrollTop );
 		window.location.hash = hash;
 		$( this ).closest( '.popup' ).popup( 'close' );
 		$('#goToReference').blur();
+		if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
+			hideDock();
+		}
 		return false;
 	});
 

@@ -511,14 +511,10 @@ form.search #advanced {
   z-index: 9;
 }
 .dock select {
+  background: none;
   font-family: 'Helvetica Neue';
   font-weight: 100;
-  -webkit-appearance: none;
-  min-width: 50px;
-  text-indent: .5em;
-}
-.dock select#bookSelect {
-  min-width: 160px;
+  height: 2em;
 }
 .dock .heading-wrapper {
   font-size: 160%;
@@ -643,10 +639,24 @@ form.search #advanced {
 .searchPanel ol li a {
   color: #000;
 }
-.reading-mode {
-  font-size: 2em;
+.reading-mode .dock {
+  background: none;
+  border: none;
 }
-.reading-mode .dock,
+.reading-mode .dock nav {
+  display: none;
+}
+.reading-mode .dock .reading-mode-version {
+  display: inline;
+}
+.reading-mode .dock .goToReference {
+  background: #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  padding: 3px 10px 10px;
+}
 .reading-mode .goToPanel,
 .reading-mode .searchPanel,
 .reading-mode .popup,
@@ -655,6 +665,7 @@ form.search #advanced {
   display: none !important;
 }
 .reading-mode .referencePanel {
+  font-size: 2em;
   margin: 0 9%;
 }
 .reading-mode #verse ol {
@@ -665,6 +676,7 @@ form.search #advanced {
   margin: 0 !important;
   line-height: 1.8em;
 }
+.reading-mode #verse ol li .original,
 .reading-mode #verse ol li .english,
 .reading-mode #verse ol li .wrapper {
   display: inline;
@@ -673,6 +685,7 @@ form.search #advanced {
   padding: 0;
   width: auto;
 }
+.reading-mode #verse ol li .original span,
 .reading-mode #verse ol li .english span,
 .reading-mode #verse ol li .wrapper span {
   margin: 0 -6px;
@@ -688,6 +701,15 @@ form.search #advanced {
 }
 .reading-mode #current {
   background: none;
+}
+.reading-mode.read-original .original {
+  display: inline !important;
+}
+.reading-mode.read-original .english {
+  display: none !important;
+}
+.reading-mode .reading-mode-switch.icon-book {
+  display: block;
 }
 /*Fonts*/
 @font-face {
@@ -761,5 +783,11 @@ form.search #advanced {
   z-index: 9;
 }
 .reading-mode-switch.icon-fullscreen-exit {
+  font-size: 22px;
   right: 14px;
+}
+.reading-mode-switch.icon-book {
+  display: none;
+  font-size: 26px;
+  right: 50px;
 }

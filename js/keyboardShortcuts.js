@@ -78,6 +78,7 @@
 			}
 
 			if ( event.keyCode > 64 && event.keyCode < 91 ) {
+				$( '.dock' ).css( 'top', 0 );
 				$( '#goToReference' ).val( '' ).focus();
 			}
 		}

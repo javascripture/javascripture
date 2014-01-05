@@ -114,9 +114,10 @@
 		},
 		getBranchesMarkup: function( strongsNumber ) {
 			var branchesMarkup = '';
+			console.log(strongsNumber);
 			$.each(javascripture.data.strongsObjectWithFamilies, function(strongsObjectKey, strongsObjectRoot){
 				$.each(strongsObjectRoot, function(strongsObjectRootKey,strongsObjectRootValue){
-					if(strongsObjectRootValue === strongsNumber){
+					if( strongsObjectRootValue == strongsNumber ){
 						var language;
 						if ( strongsObjectKey.substring( 0, 1 ) === "H" ) {
 							language = 'hebrew';
