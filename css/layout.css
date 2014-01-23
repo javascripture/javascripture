@@ -139,10 +139,11 @@ ul.verseSelect {
 }
 .goToPanel h2 {
   background: #ccc;
+  color: #666;
+  font-weight: 100;
   height: 51px;
-}
-.goToPanel h2 a {
-  color: #fff;
+  line-height: 2em;
+  padding-left: .5em;
 }
 .goToPanel div {
   position: relative;

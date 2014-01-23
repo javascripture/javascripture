@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 4.2.9
+#version: 4.3
 index.html
 css/layout.css
 js/jquery-2.0.3.js
@@ -21,6 +21,7 @@ js/colors.js
 js/jquery.hoverIntent.min.js
 js/colorpicker.js
 js/events.js
+modules/disableHover.js
 modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
