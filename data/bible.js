@@ -59,7 +59,7 @@ bible.Data.books = [
 ['Titus','Tit','Ti'],
 ['Philemon','Phile', 'Philm'],
 ['Hebrews','Heb','He'],
-['James','Jam','Jas','Ja'],
+['James','Jas','Jam','Ja'],
 ['1 Peter','1Pet','1 Pet','1Pe','I Peter','I Pet','I Pe'],
 ['2 Peter','2Pet','2 Pet','2Pe','II Peter','II Pet','II Pe'],
 ['1 John','1John','1 Jn','1Jn','1 Jo','1Jo','I John','I Jo','I Jn'],
@@ -196,7 +196,7 @@ bible.parseReference = function(textReference) {
 		}
 	}
 
-	// reassign 1:1-2	
+	// reassign 1:1-2
 	if (chapter1 > 0 && verse1 > 0 && chapter2 > 0 && verse2 <= 0) {
 		verse2 = chapter2;
 		chapter2 = chapter1;
@@ -242,7 +242,7 @@ bible.Reference = function() {
 	var _verse2 = -1;
 
 	if (arguments.length == 0) {
-		// error		
+		// error
 	} else if (arguments.length == 1) { // a string that needs to be parsed
 		return bible.parseReference(arguments[0]);
 	} else {
@@ -333,7 +333,7 @@ bible.Reference = function() {
 		},
 		isLastChapter: function() {
 			var v = bible.Data.verses[this.bookID-1];
-			
+
 			return (this.bookID	== bible.Data.books.length &&
 				this.chapter1 == v.length);//  && 	this.verse1 == v[v.length-1]);
 		}

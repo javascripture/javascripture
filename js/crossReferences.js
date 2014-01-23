@@ -20,9 +20,10 @@ $( document ).on('click', '#verse .wrapper li', function() {
 		var idArray = id.split( '_' );
 		return idArray[0] + ' ' + idArray[1] + ':' + idArray[2];
 	};
-	var book = $( this ).closest( '.reference' ).data( 'book' ),
+	var $reference = $( this ).closest( '.reference' );
+		book = $reference.data( 'book' ),
 	    bookId = bible.getBookId( book ),
-	    chapter = $( this ).closest( '.reference' ).data( 'chapter' ),
+	    chapter = $reference.data( 'chapter' ),
 		verse = $( this ).data( 'verse' ),
 //	    chapterAndVerse = this.id.substr(this.id.indexOf( '_' ), this.id.length),
 //	    reference = bible.Data.books[bookId - 1][1] + chapterAndVerse.replace(/_/gi, '.'),
