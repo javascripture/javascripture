@@ -385,20 +385,39 @@
 </div>
 
 <div class="full-page">
-	<div id="holder">
-		<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-		 <g>
-		  <title>Layer 1</title>
-		  <g id="svg_10">
-		   <path fill="black" d="m127.999985,0.028161l-111.333313,0c-9.204685,0 -16.666673,6.963784 -16.666673,15.553915l0,97.056138c0,8.590668 7.461988,15.554077 16.666673,15.554077l111.333313,0l0,-105.602276c0,0 -9.164078,0 -22.15741,0l0,42.161671l-12.595032,-11.753773l-12.594299,11.753773l0,-42.161671c-27.748608,0 -57.905231,0 -60.65329,0c-7.8703,0 -7.8703,-10.74092 0,-10.74092c4.545073,0 71.127983,0 108.000031,0l0,-11.820934z" id="svg_8"/>
-		  </g>
-		  <text transform="matrix(0.136985 0 0 0.136985 7.25415 217.045)" font-weight="normal" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="350" id="svg_2" y="-779.99747" x="432.482218" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff">{js}</text>
-		 </g>
-
-		</svg>
-		<br />
-		<br />
-		Loading JavaScripture. Once it's loaded it will be installed into your browser, so it will also work offline. Even if you close the tab.
+	<div id="holder" class="content">
+		<div class="logo">
+			<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+			 <g>
+			  <title>Javascripture</title>
+			  <g id="svg_10">
+			   <path fill="black" d="m127.999985,0.028161l-111.333313,0c-9.204685,0 -16.666673,6.963784 -16.666673,15.553915l0,97.056138c0,8.590668 7.461988,15.554077 16.666673,15.554077l111.333313,0l0,-105.602276c0,0 -9.164078,0 -22.15741,0l0,42.161671l-12.595032,-11.753773l-12.594299,11.753773l0,-42.161671c-27.748608,0 -57.905231,0 -60.65329,0c-7.8703,0 -7.8703,-10.74092 0,-10.74092c4.545073,0 71.127983,0 108.000031,0l0,-11.820934z" id="svg_8"/>
+			  </g>
+			  <text transform="matrix(0.136985 0 0 0.136985 7.25415 217.045)" font-weight="normal" xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="350" id="svg_2" y="-779.99747" x="432.482218" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff">{js}</text>
+			 </g>
+			</svg>
+			<div class="intro">
+				<h1>Javascripture</h1>
+				<p>JavaScripture is a tool to help you understand the bible better.</p>
+			</div>
+		</div>
+		<div class="button">
+			<button id="loadingJavascripture" disabled>Loading</button>
+			<script>
+				if ( localStorage ) {
+					document.write( '<p class="installation-info">Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
+				}
+			</script>
+		</div>
+		<div class="features">
+			<p>Features:<p/>
+			<ul>
+				<li>Interlinear English and Hebrew/Greek</li>
+				<li>Search for English, Hebrew or Greek words, Strong's numbers and morphological data (Greek only)</li>
+				<li>Additional word information, including Strong's roots and branches</li>
+				<li>Cross references</li>
+			</ul>
+		</div>
 	</div>
 </div>
 

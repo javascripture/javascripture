@@ -370,27 +370,16 @@ input[type=checkbox] {
 label.has-placeholder{ display: none; }
 button, input[type=button], input[type=submit] {
 	border: none;
-	background:#666;
-    background: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0, rgb(50,50,50)),
-        color-stop(1, rgb(100,100,100))
-    );
-    background: -moz-linear-gradient(
-        center bottom,
-        rgb(50,50,50) 0%,
-        rgb(100,100,100) 100%
-    );
+	box-shadow: none;
+	background:#999;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 	color: #fff;
-//    box-shadow: 10px 10px 5px #000;
-//    -webkit-box-shadow: 1px 1px 2px #000;
-//    -moz-box-shadow: 1px 1px 2px #000;
-    padding: 3px;
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
+//	font-size: 2rem;
+//	padding: 1rem;
 }
 form input[type=checkbox] {
 	height: 20px;
@@ -691,6 +680,52 @@ form.search {
 	bottom: 0;
 	text-align: center;
 	z-index: 10;
+	.content {
+		font-weight: 300;
+		margin: 0 auto;
+		position: relative;
+		text-align: left;
+		width: 100%;
+		max-width: 600px;
+		.logo {
+			overflow: auto;
+			position: relative;
+			h1 {
+				font-size: 3rem;
+				font-weight: 100;
+			}
+			svg {
+				float: left;
+				margin-right: 1rem;
+			}
+		}
+		.features {
+			margin-top: 1em;
+			ul {
+				list-style: disc;
+				margin: 0 0 0 1em;
+			}
+			p {
+				margin-bottom: 1rem;
+			}
+		}
+		.button {
+			margin: 1em 0;
+			text-align: center;
+			.installation-info {
+				margin-top: 1rem;
+			}
+			button {
+				background: #333;
+				cursor: pointer;
+				font-size: 3rem;
+				padding: .5rem 1rem;
+				&[disabled] {
+					background: #ccc;
+				}
+			}
+		}
+	}
 }
 .reading-mode-switch {
 	font-size: 14px;

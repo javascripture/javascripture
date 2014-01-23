@@ -27,4 +27,7 @@ if ( window.location.hash !== '' ) {
 } else {
 	loadRandomReference();
 }
-$( '.full-page' ).hide();
+$( '#loadingJavascripture' ).text( 'Start' ).prop( 'disabled', false ).click( function() {
+	$( '.full-page' ).hide();
+} );
+
