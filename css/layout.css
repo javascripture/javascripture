@@ -465,6 +465,7 @@ select {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 20px;
   line-height: 2em;
+  height: 2em;
 }
 input {
   text-indent: .5em;
@@ -516,6 +517,10 @@ form.search #advanced {
   font-family: 'Helvetica Neue';
   font-weight: 100;
   height: 2em;
+}
+.dock select,
+.dock input {
+  vertical-align: middle;
 }
 .dock .heading-wrapper {
   font-size: 160%;
