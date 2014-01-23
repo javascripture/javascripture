@@ -1,12 +1,16 @@
-/*global javascripture*/
+/*global javascripture, console*/
 ;( function ( $ ) {
 	"use strict";
 	var listenForKeyboardShortcuts = false,
 	    waitingForAnotherNumber = false,
-	    waitingForNumberTimer;
+	    waitingForNumberTimer,
+	    functionPressed = false;
 	$(document).on('keydown', function (event) {
 		console.log( event.keyCode );
-		if ( $( 'input:focus' ).length === 0 && event.keyCode === 91 ) { //don't capture inside form fields, or when option is pressed
+		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 ) {
+			functionPressed = true;
+		}
+		if ( $( 'input:focus' ).length === 0 && ! functionPressed ) { //don't capture inside form fields or when function is held down
 			//esc
 			if ( 27 === event.keyCode ) {
 				$( '.popup' ).popup( 'close' );
@@ -83,4 +87,9 @@
 			}
 		}
 	});
+	$(document).on('keyup', function (event) {
+		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 ) {
+			functionPressed = false;
+		}
+	} );
 } )( jQuery );
