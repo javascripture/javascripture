@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html manifest="javascripture-lite.appcache">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" content="notranslate" />
+		<title>Javascripture Lite</title>
+	</head>
+	<body>
+		<p><input type="text" id="referenceString" /></p>
+		<div id="reference"></div>
+		<script>
+			var javascripture = {
+				api: {},
+				data: {},
+				modules: {}
+			};
+		</script>
+		<script type="text/javascript" src="data/kjvdwyer7.js"></script>
+		<script>
+			document.getElementById( 'referenceString' ).addEventListener('change', function() {
+				var referenceString = this.value.split( ' ' ),
+				    reference = javascripture.data.kjv[ referenceString[0] ][ [ referenceString[1] ] ],
+				    markup = '';
+				for( var verse = 0 ; verse < reference.length ; verse++ ) {
+					for( var word = 0 ; word < reference[verse].length ; word++ ) {
+						markup += reference[verse][word][0] + ' ';
+					}
+				}
+				document.getElementById( 'reference' ).innerHTML = markup;
+			} );
+		</script>
+	</body>
+</html>
