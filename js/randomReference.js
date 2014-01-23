@@ -24,9 +24,19 @@ if ( window.location.hash !== '' ) {
 	hash = window.location.hash;
 	window.location.hash = '';
 	window.location.hash = hash;
+	$( '.full-page' ).hide();
+} else if ( localStorage && localStorage.reference !== '' ) {
+	var reference = localStorage.reference.split( ',' ),
+		book = reference[0],
+		chapter = reference[1],
+		verse = reference[2],
+		hash = 'book=' + book + '&chapter=' + chapter + '&verse=' + verse;
+	window.location.hash = hash;
+	$( '.full-page' ).hide();
 } else {
 	loadRandomReference();
 }
+
 $( '#loadingJavascripture' ).text( 'Start' ).prop( 'disabled', false ).click( function() {
 	$( '.full-page' ).hide();
 } );

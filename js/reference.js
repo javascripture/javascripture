@@ -64,7 +64,7 @@
 			}
 			$( document ).scrollTop( 0 );
 			offset = offset - $('.dock').height();
-			
+
 			//there must be a better way to do this, but the problem is that the top animation hasn't happened by this point
 			if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
 				offset = offset - 50;
@@ -155,6 +155,9 @@
 			        if ( parameterPairArray[2] ) {
 			            verse = parseInt(parameterPairArray[2].split('=')[1], 10);
 			        }
+				    if ( localStorage ) {
+					    localStorage.reference = [ book, chapter, verse];
+				    }
 					javascripture.modules.reference.load( {
 				        book: book,
 				        chapter: chapter,
