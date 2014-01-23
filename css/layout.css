@@ -247,11 +247,11 @@ form ul li {
 }
 #wordControlPanel {
   background: rgba(255, 255, 255, 0.9);
-  border-top: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   bottom: 0;
   display: block;
   left: 201px;
-  right: 202px;
+  right: 201px;
   max-height: 200px;
   overflow: scroll;
   padding: .5rem;
@@ -591,11 +591,13 @@ form.search #advanced {
 }
 .goToPanel,
 .searchPanel {
+  background: #fff;
   bottom: 0;
   overflow: scroll;
   position: fixed;
   top: 0;
   width: 200px;
+  z-index: 10;
 }
 .goToPanel {
   border-right: 1px solid #ccc;
@@ -606,7 +608,6 @@ form.search #advanced {
   float: right;
   padding-top: 4.7em;
   right: 0;
-  width: 200px;
 }
 .searchPanel form.search {
   background: #ccc;
@@ -786,7 +787,7 @@ form.search #advanced {
   right: 0;
   bottom: 0;
   text-align: center;
-  z-index: 9;
+  z-index: 10;
 }
 .reading-mode-switch {
   font-size: 14px;
