@@ -1,0 +1,53 @@
+<script src="js/jquery-2.0.3.js"></script>
+<script src="data/crossReferences.js"></script>
+<script>
+function sortAssoc(aInput)
+{
+var aTemp = [];
+for (var sKey in aInput)
+aTemp.push([sKey, aInput[sKey]]);
+aTemp.sort(function () {return arguments[0][1] < arguments[1][1]});
+
+var aOutput = [];
+for (var nIndex = aTemp.length-1; nIndex >=0; nIndex--)
+aOutput[aTemp[nIndex][0]] = aTemp[nIndex][1];
+
+return aOutput;
+}
+
+	var crossReferencesCombined = {};
+	var getCrossReferencesForChapter = function ( chapter, verse ) {
+		if ( crossReferences[ chapter + verse ] ) {
+			$.each( crossReferences[ chapter + verse ], function ( key, ref ) {
+				bookpos = ref.indexOf( '.' ) + 1;
+				chapterVerse = ref.substring( bookpos, ref.length );
+				chapterpos = chapterVerse.indexOf( '.' );
+				bookChapter = ref.substring(0,bookpos + chapterpos);
+				if ( 'undefined' === typeof crossReferencesCombined[ bookChapter ] ) {
+					crossReferencesCombined[ bookChapter ] = 0;
+				}
+				crossReferencesCombined[ bookChapter ]++;
+			} );
+		}
+	
+	};
+	for (var verse = 1; verse < 49; verse++) {
+		getCrossReferencesForChapter( 'Matt.5.', verse );
+	}
+	for (var verse = 1; verse < 35; verse++) {
+		getCrossReferencesForChapter( 'Matt.6.', verse );
+	}
+	for (var verse = 1; verse < 29; verse++) {
+		getCrossReferencesForChapter( 'Matt.7.', verse );
+	}
+	var sortable = [];
+	for (var occ in crossReferencesCombined) {
+		sortable.push([occ, crossReferencesCombined[occ]]);
+	}
+	sortable.sort(function(a, b) {return a[1] - b[1]})
+	$.each( sortable, function( key, val ) {
+		console.log( key + ' ' + val );
+	} );
+
+
+</script>
