@@ -5,7 +5,6 @@
 		<meta name="google" content="notranslate" />
 		<title>Javascripture</title>
 		<link rel="stylesheet" href="css/layout.css" />
-<!--		<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />-->
 		<style id="bodyFontFamily"></style>
 		<style id="bodyFontSize"></style>
 	</head>
@@ -166,14 +165,6 @@
 						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
 					</li>
 					<li>
-
-						<!--<div data-role="fieldcontain">
-							<fieldset data-role="controlgroup" class="ui-hide-label">
-								<legend>Combine terms?</legend>
-								<input type="checkbox" name="combineTerms" id="combineTerms" class="custom" />
-								<label for="combineTerms">Combine terms?</label>
-							</fieldset>
-						</div>-->
 						<label for="language">Language:</label>
 						<select name="language" id="language">
 							<option>english</option>
@@ -194,38 +185,6 @@
 							<option>chapter</option>
 						</select>
 					</li>
-	<!--				<li>
-						<label>Search term:</label>
-						<input type="text" value="search" name="searchTerm" id="searchTerm" />
-					</li>
-					<li>
-						<label>Search for:</label>
-						<select id="searchSelect" name="searchSelect">
-							<option value="any">Any</option>
-							<option value="all">All</option>
-						</select>
-					</li>
-					<li>
-						<label>Search language:</label>
-						<select id="searchLanguage" name="searchLanguage">
-							<option value="english">English</option>
-							<option value="hebrew">Hebrew</option>
-						</select>
-					</li>
-					<li>
-						<label>Search range:</label>
-						<select id="searchRange" name="searchRange">
-							<option value="verse">Verse</option>
-							<option value="chapter">Chapter</option>
-							<option value="book">Book</option>
-						</select>
-					</li>
-					<li>
-						<input type="submit" value="search" name="search" id="search" />
-					</li>
-					<li>
-						<br /><button class="highlight-all">Highlight all</button>
-					</li>-->
 				</ul>
 				<input type="submit" value="Search" />
 			</form>
@@ -404,43 +363,6 @@
 		</div>
 	</div>
 </div>
-<!--			<div class="collapsable closed">
-				<h2>Colours</h2>
-				<form id="changeColor">
-					<ul>
-						<li>
-							<label for="colorFormStrongsNumber">Strongs Number</label>
-							<input type="text" id="colorFormStrongsNumber" />
-						</li>
-						<li>
-							<div id="colorSelector"><div style="background-color: #0000ff; height:50px; width:50px;"></div></div>
-						</li>
-						<li class="hide">
-							<label for="colorFormColor">Colour</label>
-							<input type="text" id="colorFormColor" />
-						</li>
-						<li class="hide">
-							<input type="submit" value="change colour" />
-						</li>
-					</ul>
-				</form>
-			</div>
-			<div class="collapsable closed">
-				<h2>Rare Words</h2>
-				<form>
-					Use this to find rare words in your current chapter.<br /><br />
-					Max uses: <input type="text" id="maximumNumberOfUses" value="5" style="width:30px;" /><br />
-					<button class="findRareWords">Find Rare Words</button>
-					<div id="rareWords"></div>
-				</form>
-			</div>
-			<div class="collapsable closed">
-				<h2>Statistics</h2>
-				<form>
-					<button id="wordUsageCount">Word usage count</button>
-				</form>
-			</div>
--->
 <div class="wordControlPanelTemplate">
 	<style></style>
 	<div class="word-details">
@@ -500,7 +422,6 @@
 <script src="data/crossReferences.js"></script>
 <script src="data/morphology.js"></script>
 <script src="data/literalConsistent.js"></script>
-
 <script src="modules/hebrew.js"></script>
 <script src="js/colors.js"></script>
 <script src="js/colorpicker.js"></script>
@@ -527,7 +448,6 @@
 <script src="js/randomReference.js"></script>
 
 <script>
-
 	// Check if a new cache is available on page load.
 	window.addEventListener('load', function(e) {
 
@@ -535,15 +455,8 @@
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.
 				$( '#cache-popup' ).popup( 'open' );
-
-	/*			if (confirm('A new version of this site is available. Load it?')) {
-					window.location.reload();
-				}*/
-			} else {
-				// Manifest didn't changed. Nothing new to server.
 			}
 		}, false);
 	}, false);
-
 </script>
 </html>
