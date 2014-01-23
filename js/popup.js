@@ -25,4 +25,11 @@
 		event.preventDefault();
 		$( this ).closest('.popup').popup( 'close' );
 	} );
+	$( document ).on( 'click', '.popup', function ( event ) {
+		event.preventDefault();
+		if ( $( event.target ).hasClass( 'popup' ) ) {
+			$( this ).popup( 'close' );
+		}
+	} );
+
 } )( jQuery );

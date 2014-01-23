@@ -499,11 +499,16 @@ form.search {
 .searchPanel {
 	border-left: 1px solid #ccc;
 	float: right;
+	padding-top: 4.7em;
 	right: 0;
 	width: 200px;
 	form.search {
 		background: #ccc;
 		padding: .1rem .5rem .5rem;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 1;
 		input {
 			border: none;
 			color: #000;
@@ -529,7 +534,7 @@ form.search {
 			position: absolute;
 			top: 5px;
 			right: 5px;
-			z-index: 999;
+//			z-index: 999;
 		}
 		.remove:hover {
 			opacity: 1;

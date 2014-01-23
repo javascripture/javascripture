@@ -600,12 +600,17 @@ form.search #advanced {
 .searchPanel {
   border-left: 1px solid #ccc;
   float: right;
+  padding-top: 4.7em;
   right: 0;
   width: 200px;
 }
 .searchPanel form.search {
   background: #ccc;
   padding: .1rem .5rem .5rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }
 .searchPanel form.search input {
   border: none;
@@ -632,7 +637,6 @@ form.search #advanced {
   position: absolute;
   top: 5px;
   right: 5px;
-  z-index: 999;
 }
 .searchPanel h2 .remove:hover {
   opacity: 1;
