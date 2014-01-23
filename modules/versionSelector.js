@@ -30,6 +30,11 @@ javascripture.modules.versionSelector = {
 };
 
 //when page loads
+
+//default
+javascripture.data.english = javascripture.data.kjv;
+
+//change it if necessary
 javascripture.modules.versionSelector.switchVersion( javascripture.modules.versionSelector.getVersion() );
 
 //bind version switcher
