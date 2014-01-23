@@ -364,6 +364,9 @@ input {
 	text-indent: .5em;
 	width: 100%;
 }
+input[type=checkbox] {
+	box-shadow: none
+}
 label.has-placeholder{ display: none; }
 button, input[type=button], input[type=submit] {
 	border: none;
@@ -389,7 +392,10 @@ button, input[type=button], input[type=submit] {
 //    -moz-box-shadow: 1px 1px 2px #000;
     padding: 3px;
 }
-form input[type=checkbox]{width:20px;}
+form input[type=checkbox] {
+	height: 20px;
+	width:20px;
+}
 /*Search form*/
 form.search {
 	li {
@@ -700,5 +706,19 @@ form.search {
 		display: none;
 		font-size: 26px;
 		right: 50px;
+	}
+}
+#settings-popup {
+	ul {
+		margin: 0;
+	}
+	label {
+		display: inline-block;
+		line-height: 2em;
+		margin-bottom: 1rem;
+		width: 150px;
+	}
+	select {
+		width: 150px;
 	}
 }
