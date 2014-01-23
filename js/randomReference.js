@@ -25,7 +25,7 @@ if ( window.location.hash !== '' ) {
 	window.location.hash = '';
 	window.location.hash = hash;
 	$( '.full-page' ).hide();
-} else if ( localStorage && localStorage.reference !== '' ) {
+} else if ( localStorage && localStorage.reference && localStorage.reference !== '' ) {
 	var reference = localStorage.reference.split( ',' ),
 		book = reference[0],
 		chapter = reference[1],
