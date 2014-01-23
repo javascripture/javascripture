@@ -6,7 +6,7 @@
 	    waitingForNumberTimer;
 	$(document).on('keydown', function (event) {
 		console.log( event.keyCode );
-		if ( $( 'input:focus' ).length === 0 ) {
+		if ( $( 'input:focus' ).length === 0 && event.keyCode === 91 ) { //don't capture inside form fields, or when option is pressed
 			//esc
 			if ( 27 === event.keyCode ) {
 				$( '.popup' ).popup( 'close' );
