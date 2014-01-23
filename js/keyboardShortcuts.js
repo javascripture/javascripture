@@ -13,7 +13,7 @@
 			}
 
 			//jump to chapter
-			if ( event.which > 48 && event.which < 58 ) {
+			if ( event.which > 47 && event.which < 58 ) {
 				var chapter = event.which - 48,
 				    currentReference = javascripture.modules.reference.getReferenceFromUrl();
 
