@@ -30,7 +30,7 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse;
 
 	    var crossReferencesMarkup = '<div class="crossReferences">Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + idToPrettyReference( this.id ) + '</a>:<br>';
-
+		console.log( reference );
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),

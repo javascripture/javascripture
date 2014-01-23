@@ -41,7 +41,7 @@ bible.Data.books = [
 ['Zechariah','Zech','Zec'],
 ['Malachi','Mal'],
 ['Matthew','Matt','Mat','Mt'],
-['Mar','Mark','Mk'],
+['MarK','Mar','Mk'],
 ['Luke','Luk','Lu'],
 ['John','Joh','Jn'],
 ['Acts','Acts','Act','Ac'],
