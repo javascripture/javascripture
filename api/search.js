@@ -100,19 +100,18 @@ javascripture.api.search = {
 		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
 			searchSpeed = $('#searchSpeed').val();
 			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-				var book = dataSource[ bookName ];
-				self.searchInABook( book, bookName, results, bookNumber, booksToSearch );
+				self.searchInABook( dataSource, bookName, results, bookNumber, booksToSearch );
 			} );
 		} else {
 			booksToSearch.forEach( function( bookName, bookNumber ) {
-				var book = dataSource[ bookName ];
-				self.searchInABook( book, bookName, results, bookNumber, booksToSearch );
+				self.searchInABook( dataSource, bookName, results, bookNumber, booksToSearch );
 			} );
 		}
 	},
-	searchInABook: function( book, bookName, results, bookNumber, booksToSearch ) {
+	searchInABook: function( dataSource, bookName, results, bookNumber, booksToSearch ) {
 		var self = this,
-			parameters = self.parameters;
+			parameters = self.parameters,
+			book = dataSource[ bookName ];
 
 		//work out how many terms there are
 		var termsLength = 0;
