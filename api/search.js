@@ -96,6 +96,24 @@ javascripture.api.search = {
 
 		var booksToSearch = this.books[ parameters.language ];
 
+		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
+		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
+			searchSpeed = $('#searchSpeed').val();
+			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
+				var book = dataSource[ bookName ];
+				self.searchInABook( book, bookName, results, bookNumber, booksToSearch );
+			} );
+		} else {
+			booksToSearch.forEach( function( bookName, bookNumber ) {
+				var book = dataSource[ bookName ];
+				self.searchInABook( book, bookName, results, bookNumber, booksToSearch );
+			} );
+		}
+	},
+	searchInABook: function( book, bookName, results, bookNumber, booksToSearch ) {
+		var self = this,
+			parameters = self.parameters;
+
 		//work out how many terms there are
 		var termsLength = 0;
 		for( var typeKey in self.types ) {
@@ -108,28 +126,6 @@ javascripture.api.search = {
 			}
 		}
 
-		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
-		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
-			searchSpeed = $('#searchSpeed').val();
-			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-				var book = dataSource[ bookName ];
-				self.searchInABook( book, bookName, results, parameters, termsLength );
-				if (bookNumber === booksToSearch.length - 1 ) {
-					results.resolve();
-				}
-			} );
-		} else {
-			booksToSearch.forEach( function( bookName, bookNumber ) {
-				var book = dataSource[ bookName ];
-				self.searchInABook( book, bookName, results, parameters, termsLength );
-				if (bookNumber === booksToSearch.length - 1 ) {
-					results.resolve();
-				}
-			} );
-		}
-	},
-	searchInABook: function( book, bookName, results, parameters, termsLength ) {
-		var self = this;
 		$( document ).trigger( 'loading', 'searching ' + bookName );
 
 		book.forEach( function ( chapter, chapterNumber ) {
@@ -186,6 +182,9 @@ javascripture.api.search = {
 				} );
 			} );
 		} );
+		if (bookNumber === booksToSearch.length - 1 ) {
+			results.resolve();
+		}
 	},
 	standarizeWordEndings: function (word) {
 		return word.replace(/ם/gi, 'מ');
