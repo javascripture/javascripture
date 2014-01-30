@@ -18,17 +18,9 @@
 				$('#verse').addClass('isolate');
 				$('.verse').attr('id',$(this).attr('class'));
 			}
-//			var lemma = $( this ).data( 'lemma' );
-//			$('html').addClass( lemma );
-/*			var root = strongsObject[$(this).attr('class')];
-			if(root){
-				$(this).addClass(root[0]);
-			}*/
 		});
 
 		$(document).on('mouseout', '#verse ol > li  span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
-//			var lemma = $( this ).data( 'lemma' );
-//			$('html').removeClass( lemma );
 			$('#verse').removeClass('isolate');
 		});
 		$(document).on( 'mouseover', '#wordControlPanel', function() {
@@ -129,22 +121,7 @@
 			event.preventDefault();
 			$(this).closest('.collapsable').remove();
 		});
-/*		$('#referenceTracking .collapsable h2').on('click', function(event){
-			if($(this).closest('.collapsable').find('form').length === 0) {
-				var strongsNumber = $(this).attr('class');
-				$('input#reverseRootStrongsNumber').val(strongsNumber);
-				$('input#searchTerm').val(strongsNumber);
-				$('input#search').click();
-			}
-		});*/
 		$('.changeStyle').change(function(){
 			$('#'+$(this).attr('name')).html('body { '+$(this).val()+'}');
 		});
-/*		$(window).resize(function(){
-			resizeWrapperToWindow();
-		});*/
 	});
-/*function resizeWrapperToWindow() {
-	$('body > .wrapper').css('height',$(window).height()-$('.dock').height() );
-}
-resizeWrapperToWindow();*/
