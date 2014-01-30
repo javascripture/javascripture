@@ -7,6 +7,7 @@ css/layout.css
 lib/jquery-2.0.3.min.js
 lib/json2.js
 lib/jquery.scrollTo.js
+lib/jquery.waypoints.js
 
 #data
 data/bible.js
@@ -40,7 +41,6 @@ js/loading.js
 js/reference.js
 js/popup.js
 js/toggler.js
-js/jquery.waypoints.js
 js/wayPoint.js
 js/keyboardShortcuts.js
 js/crossReferences.js
