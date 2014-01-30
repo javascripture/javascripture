@@ -45,7 +45,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 			this.deferred = $.Deferred();
 			this.lookForTerm(parameters);
 		},
-        doesDataMatchTerm: function(type, data, term) {
+        doesDataMatchTerm: function( type, data, term, strict ) {
 			data = data.toLowerCase();
 			term = term.toLowerCase();
 			if ( data === term ) { //exact match
@@ -74,7 +74,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 				return true;
 			}*/
 			//skip this for lemma
-			if ( type !== 'lemma' ) {
+			if ( type !== 'lemma' && ! strict ) {
 				if ( data.search( term ) > -1 ) {
 					return true;
 				}
@@ -158,7 +158,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 
 										for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
 											var term = terms[ termNumber ];
-											if ( self.doesDataMatchTerm(type, wordObject[typeKey], term) ) {
+											if ( self.doesDataMatchTerm(type, wordObject[typeKey], term, parameters.strict ) ) {
 												if (parameters.clusivity === 'exclusive' ) {
 													self.results.matches[term] = true;
 												} else {
