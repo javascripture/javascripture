@@ -38,6 +38,7 @@ var createSearchReferencesPanel;
 		$('#referenceTracking .collapsable').addClass('closed');
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
+		var searchApi = javascripture.api.search;
 		searchApi.getReferences(data);
 		searchApi.deferred.done( function(){
 			var referenceArray =  searchApi.results.references;
