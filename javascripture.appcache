@@ -2,9 +2,13 @@ CACHE MANIFEST
 #version: 4.3.3
 index.html
 css/layout.css
+
+#libs
 js/jquery-2.0.3.js
 js/json2.js
 js/jquery.scrollTo.js
+
+#data
 data/bible.js
 data/strongs-dictionary.js
 data/kjvdwyer7.js
@@ -16,17 +20,19 @@ data/greek4.js
 data/crossReferences.js
 data/morphology.js
 data/literalConsistent.js
+
+#apis
+api/search.js
+
+#modules
 modules/hebrew.js
 js/colors.js
-js/jquery.hoverIntent.min.js
-js/colorpicker.js
 js/events.js
 modules/disableHover.js
 modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
 modules/bookmarks.js
-js/searchApi.js
 js/morphologyApi.js
 js/searchBindings.js
 js/wordPanel.js
