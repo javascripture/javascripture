@@ -138,22 +138,21 @@ javascripture.api.search = {
 						var matchesLength,
 						    termString;
 
+						//now loop through types
 						for( var typeKey in self.types ) {
 							var type = self.types[typeKey];
 								termString = parameters[type];
 
-							if ( termString !== undefined && termString !== '') {
-								if ( wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined' ) { //sometimes wordObjects are undefined in hebrew
-									var terms = termString.split(' ');
+							if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, wordObject, typeKey ) ) {
+								var terms = termString.split(' ');
 
-									for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
-										var term = terms[ termNumber ];
-										if ( self.doesDataMatchTerm(type, wordObject[typeKey], term, parameters.strict ) ) {
-											if (parameters.clusivity === 'exclusive' ) {
-												self.results.matches[term] = true;
-											} else {
-												self.addReference(bookName, chapterNumber, verseNumber);
-											}
+								for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
+									var term = terms[ termNumber ];
+									if ( self.doesDataMatchTerm(type, wordObject[typeKey], term, parameters.strict ) ) {
+										if (parameters.clusivity === 'exclusive' ) {
+											self.results.matches[term] = true;
+										} else {
+											self.addReference(bookName, chapterNumber, verseNumber);
 										}
 									}
 								}
@@ -197,5 +196,8 @@ javascripture.api.search = {
 			language = 'greek';
 		}
 		return language;
+	},
+	areTheTermStringAndWordObjectAreGoodToSearch: function ( termString, wordObject, typeKey ) {
+		return termString !== undefined && termString !== '' && wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined'; //sometimes wordObjects are undefined in hebrew
 	}
 };
