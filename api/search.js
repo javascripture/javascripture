@@ -32,8 +32,10 @@ javascripture.api.search = {
 	getReferences: function (parameters) {
 		var self = this;
 		console.log(parameters);
-		this.deferred = $.Deferred();
-		this.lookForTerm(parameters);
+		results = $.Deferred();
+		results.references = [];
+		this.lookForTerm( parameters, results );
+		return results;
 	},
     doesDataMatchTerm: function( type, data, term, strict ) {
 		data = data.toLowerCase();
@@ -74,14 +76,14 @@ javascripture.api.search = {
     resetMatches: function () {
         this.results.matches = {};
     },
-    addReference: function (bookName, chapterNumber, verseNumber) {
-		this.results.references.push({
+    addReference: function (bookName, chapterNumber, verseNumber, results ) {
+		return results.references.push({
             book: bookName,
             chapter: chapterNumber + 1,
             verse: verseNumber + 1
         });
     },
-	lookForTerm: function (parameters) {
+	lookForTerm: function (parameters, results ) {
 		var self = this;
 		if ( 'undefined' === typeof parameters.language ) {
 			parameters.language = self.inferLanguage( parameters );
@@ -152,7 +154,7 @@ javascripture.api.search = {
 										if (parameters.clusivity === 'exclusive' ) {
 											self.results.matches[term] = true;
 										} else {
-											self.addReference(bookName, chapterNumber, verseNumber);
+											self.addReference(bookName, chapterNumber, verseNumber, results );
 										}
 									}
 								}
@@ -167,7 +169,7 @@ javascripture.api.search = {
 							});
 							if ( matchesLength > 0 && matchesLength >= termsLength) {
 							console.log(matchesLength, termsLength);
-								self.addReference(bookName, chapterNumber, verseNumber);
+								self.addReference(bookName, chapterNumber, verseNumber, results );
 								self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 							}
 						}
@@ -176,10 +178,9 @@ javascripture.api.search = {
 //				} );
 			}
 			if (bookNumber === booksToSearch.length - 1 ) {
-				self.deferred.resolve();
+				results.resolve();
 			}
 		} );
-
 	},
 	standarizeWordEndings: function (word) {
 		return word.replace(/ם/gi, 'מ');

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+	<title>Javascripture</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"  href="lib/qunit-1.13.0.css" />
+	<script src="lib/qunit-1.13.0.js"></script>
+</head>
+<body>
+	<div id="reference" data-role="page">
+		<h1 id="qunit-header">jQuery Mobile Page Test Suite</h1>
+		<h2 id="qunit-banner"></h2>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+		<div data-role="content"></div>
+	</div>
+</body>
+
+<script>
+	var javascripture = {
+		api: {},
+		data: {},
+		modules: {}
+	};
+</script>
+
+<script src="lib/jquery-2.0.3.min.js"></script>
+<script src="lib/json2.js"></script>
+<script src="lib/jquery.scrollTo.js"></script>
+<script src="lib/jquery.waypoints.js"></script>
+<!--<script src="lib/raphael-min.js"></script>
+<script src="lib/raphael.pie.js"></script>-->
+
+<!-- data -->
+<script src="data/bible.js"></script>
+<script src="data/strongs-dictionary.js"></script>
+<script src="data/kjvdwyer7.js"></script>
+<script src="data/web3.js"></script>
+<script src="modules/versionSelector.js"></script>
+<script src="data/strongsObjectWithFamilies.js"></script>
+<script src="data/hebrew6.js"></script>
+<script src="data/greek4.js"></script>
+<script src="data/crossReferences.js"></script>
+<script src="data/morphology.js"></script>
+<script src="data/literalConsistent.js"></script>
+
+<!-- apis -->
+<script src="api/search.js"></script>
+
+<!--modules -->
+<script src="modules/hebrew.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/events.js"></script>
+<script src="modules/disableHover.js"></script>
+<script src="modules/readingMode.js"></script>
+<script src="js/functionalScripts.js"></script>
+<script src="modules/translateLiterally.js"></script>
+<script src="modules/bookmarks.js"></script>
+
+<script src="js/morphologyApi.js"></script>
+<script src="js/searchBindings.js"></script>
+<script src="js/wordPanel.js"></script>
+<script src="js/loading.js"></script>
+<script src="js/reference.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/toggler.js"></script>
+<script src="js/wayPoint.js"></script>
+<script src="js/keyboardShortcuts.js"></script>
+<script src="js/crossReferences.js"></script>
+<script src="js/bookSelect.js"></script>
+<script src="js/frequencyAnalysis.js"></script>
+<script src="js/randomReference.js"></script>
+
+<script src="tests/search.js"></script>
+
+</html>

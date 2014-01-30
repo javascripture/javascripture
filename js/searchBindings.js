@@ -39,9 +39,9 @@ var createSearchReferencesPanel;
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
 		var searchApi = javascripture.api.search;
-		searchApi.getReferences(data);
-		searchApi.deferred.done( function(){
-			var referenceArray =  searchApi.results.references;
+		var results = searchApi.getReferences(data);
+		results.done( function(){
+			var referenceArray =  results.references;
 
 			references += '<form><ol class="references">';
 			var wordCount = 0;
