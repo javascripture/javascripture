@@ -653,6 +653,7 @@ form.search #advanced {
 }
 .searchPanel ol li a {
   color: #000;
+  display: block;
 }
 .reading-mode .dock {
   background: none;
