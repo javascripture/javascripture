@@ -32,7 +32,7 @@ javascripture.api.search = {
 	getReferences: function (parameters) {
 		var self = this;
 		console.log(parameters);
-		results = $.Deferred();
+		var results = $.Deferred();
 		results.references = [];
 		this.lookForTerm( parameters, results );
 		return results;
@@ -106,80 +106,83 @@ javascripture.api.search = {
 			}
 		}
 
-		var searchSpeed = 1;
-		if ( $('#searchSpeed').length > 0 ) {
+		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
+		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
 			searchSpeed = $('#searchSpeed').val();
+			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
+				var book = dataSource[ bookName ];
+				self.searchInABook( book, bookName, results, parameters, termsLength );
+				if (bookNumber === booksToSearch.length - 1 ) {
+					results.resolve();
+				}
+			} );
+		} else {
+			booksToSearch.forEach( function( bookName, bookNumber ) {
+				var book = dataSource[ bookName ];
+				self.searchInABook( book, bookName, results, parameters, termsLength );
+				if (bookNumber === booksToSearch.length - 1 ) {
+					results.resolve();
+				}
+			} );
 		}
+	},
+	searchInABook: function( book, bookName, results, parameters, termsLength ) {
+		var self = this;
+		$( document ).trigger( 'loading', 'searching ' + bookName );
 
-		jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-		//for( var bookName in dataSource ) {
+		book.forEach( function ( chapter, chapterNumber ) {
 
-			var book = dataSource[ bookName ];
-
-			$( document ).trigger( 'loading', 'searching ' + bookName );
-
-//				jQuery.fn.slowEach(book, 1, function( chapterNumber, chapter ) {
-			for (var chapterNumber = 0, bookLength = book.length; chapterNumber < bookLength; chapterNumber++) {
-				chapter = book[ chapterNumber ];
-
-				if (parameters.range === 'chapter' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
+			if (parameters.range === 'chapter' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
+				self.resetMatches();
+			}
+			chapter.forEach( function ( verse, verseNumber ) {
+				if (parameters.range === 'verse' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 					self.resetMatches();
 				}
-				for (var verseNumber = 0, chapterLength = chapter.length; verseNumber < chapterLength; verseNumber++) {
-					verse = chapter[ verseNumber ];
-					if (parameters.range === 'verse' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
+
+				verse.forEach( function ( word, wordNumber ) {
+					if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 						self.resetMatches();
 					}
 
-					for (var wordNumber = 0, verseLength = verse.length; wordNumber < verseLength; wordNumber++) {
-						var wordObject = verse[ wordNumber ];
-						if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
-							self.resetMatches();
-						}
+					var matchesLength,
+					    termString;
 
-						var matchesLength,
-						    termString;
+					//now loop through types
+					self.types.forEach( function ( type, typeKey ) {
+//							var type = self.types[typeKey];
+							termString = parameters[type];
 
-						//now loop through types
-						for( var typeKey in self.types ) {
-							var type = self.types[typeKey];
-								termString = parameters[type];
+						if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
+							var terms = termString.split(' ');
 
-							if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, wordObject, typeKey ) ) {
-								var terms = termString.split(' ');
-
-								for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
-									var term = terms[ termNumber ];
-									if ( self.doesDataMatchTerm(type, wordObject[typeKey], term, parameters.strict ) ) {
-										if (parameters.clusivity === 'exclusive' ) {
-											self.results.matches[term] = true;
-										} else {
-											self.addReference(bookName, chapterNumber, verseNumber, results );
-										}
+							//for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
+							terms.forEach( function( term, termNumber ) {
+								if ( self.doesDataMatchTerm(type, word[typeKey], term, parameters.strict ) ) {
+									if (parameters.clusivity === 'exclusive' ) {
+										self.results.matches[term] = true;
+									} else {
+										self.addReference(bookName, chapterNumber, verseNumber, results );
 									}
 								}
-							}
+							} );
 						}
-						//terms are combined for exclusive searches here
-						if (parameters.clusivity === 'exclusive' ) {
-							matchesLength = 0;
+					} );
+					//terms are combined for exclusive searches here
+					if (parameters.clusivity === 'exclusive' ) {
+						matchesLength = 0;
 
-							$.each(self.results.matches, function (key, term) {
-								matchesLength++;
-							});
-							if ( matchesLength > 0 && matchesLength >= termsLength) {
-							console.log(matchesLength, termsLength);
-								self.addReference(bookName, chapterNumber, verseNumber, results );
-								self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
-							}
+						$.each(self.results.matches, function (key, term) {
+							matchesLength++;
+						});
+						if ( matchesLength > 0 && matchesLength >= termsLength) {
+							//console.log(matchesLength, termsLength);
+							self.addReference(bookName, chapterNumber, verseNumber, results );
+							self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 						}
 					}
-				}
-//				} );
-			}
-			if (bookNumber === booksToSearch.length - 1 ) {
-				results.resolve();
-			}
+				} );
+			} );
 		} );
 	},
 	standarizeWordEndings: function (word) {

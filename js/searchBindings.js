@@ -38,62 +38,38 @@ var createSearchReferencesPanel;
 		$('#referenceTracking .collapsable').addClass('closed');
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
-		var searchApi = javascripture.api.search;
-		var results = searchApi.getReferences(data);
-		results.done( function(){
-			var referenceArray =  results.references;
+		//wait for the result section to be created
+		setTimeout( function () {
+			var searchApi = javascripture.api.search;
+			var results = searchApi.getReferences(data);
+			results.done( function(){
+				var referenceArray =  results.references;
+				references += '<form><ol class="references">';
+				var wordCount = 0;
 
-			references += '<form><ol class="references">';
-			var wordCount = 0;
-
-			var searchObject = javascripture.data.english;
-			if($("select[name=searchLanguage]").val() === "hebrew") {
-				searchObject = javascripture.data.hebrew;
-				$.each(strongsNumberArray, function(index, strongsNumber) {
-					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-					}
-				});
-			}
-			/*var referenceArray = new Array();
-			$.each(searchObject, function(bookName, bookContent) {
-				if($('#searchRange').val() === "book") {
-					//search this string and return a reference
-					if(findArrayElementsInString(strongsNumberArray, bookContent, searchType)){
-						referenceArray.push([bookName,1,1,wordCount]);
-					}
-				} else {
-					$.each(bookContent, function(chapterNumber, chapterContent) {
-						if($('#searchRange').val() === "chapter") {
-							if(findArrayElementsInString(strongsNumberArray, chapterContent, searchType)){
-								referenceArray.push([bookName,chapterNumber+1,1,wordCount]);
-							}
-						} else {
-							$.each(chapterContent, function(verseNumber, verseContent) {
-								if(findArrayElementsInString(strongsNumberArray, verseContent, searchType)){
-									referenceArray.push([bookName,chapterNumber+1,verseNumber+1,wordCount]);
-								}
-							});
+				var searchObject = javascripture.data.english;
+				if($("select[name=searchLanguage]").val() === "hebrew") {
+					searchObject = javascripture.data.hebrew;
+					$.each(strongsNumberArray, function(index, strongsNumber) {
+						if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+							strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
 						}
 					});
 				}
-			});*/
 				references += createReferenceList(referenceArray);
+				references += '</ol></form>';
 
-			//});
+				if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+					$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+				}
+				goToFirstReference();
+		//		$('.popup').popup( 'close' );
 
-			references += '</ol></form>';
+				var endDate = new Date();
+				timer(startDate, endDate);
 
-			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
-			}
-			goToFirstReference();
-	//		$('.popup').popup( 'close' );
-
-			var endDate = new Date();
-			timer(startDate, endDate);
-
-		});
+			} );
+		}, 100 );
 	};
 
 	var createReferenceList = function(referenceArray) {

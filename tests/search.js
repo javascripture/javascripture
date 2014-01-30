@@ -18,34 +18,44 @@
 		ok(search, 'the search object exists');
 	});
 	test('search for one term in a verse', function testWordInVerse () {
-		expect(1);
-		var results = search.getReferences({
+		expect(4);
+//		stop();
+
+		var result1 = search.getReferences({
 			language: 'english',
 			word: 'void',
 			range: 'verse'
 		});
-		results.done( function() {
-			start();
-			equal( results.references.length, 32, 'there are 32 verses that contain "void" in Englush');
+		result1.done( function() {
+			equal( result2.references.length, 32, 'there are 32 verses that contain "void" in Englush');
 		} );
-stop();
-		/*equal(search.getReferences({
+
+		var result2 = search.getReferences({
 			language: 'english',
 			word: 'cheese',
 			range: 'verse'
-		}).length, 3, 'there are 3 verses that contain "cheese" in English');
+		});
+		result2.done( function() {
+			equal( result2.references.length, 3, 'there are 3 verses that contain "cheese" in English');
+		} );
 
-		equal(search.getReferences({
+		var result3 = search.getReferences({
 			language: 'english',
 			word: 'immanuel',
 			range: 'verse'
-		}).length, 2, 'there are 2 verses that contain "immanuel" in English.  Search is case insensitive.');
+		});
+		result3.done( function() {
+			equal( result3.references.length, 2, 'there are 2 verses that contain "immanuel" in English.  Search is case insensitive.');
+		} );
 
-		equal(search.getReferences({
+		var result4 = search.getReferences({
 			language: 'english',
 			word: 'Immanuel',
 			range: 'verse'
-		}).length, 2, 'there are 2 verses that contain "Immanuel" in English.');*/
+		});
+		result4.done( function() {
+			equal( result4.references.length, 2, 'there are 2 verses that contain "Immanuel" in English.  Search is case insensitive.');
+		} );
 
 	});
 
