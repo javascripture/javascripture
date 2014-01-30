@@ -31,10 +31,11 @@ javascripture.api.search = {
 	},
 	getReferences: function (parameters) {
 		var self = this;
+		self.parameters = parameters;
 		console.log(parameters);
 		var results = $.Deferred();
 		results.references = [];
-		this.lookForTerm( parameters, results );
+		this.lookForTerm( results );
 		return results;
 	},
     doesDataMatchTerm: function( type, data, term, strict ) {
@@ -83,8 +84,9 @@ javascripture.api.search = {
             verse: verseNumber + 1
         });
     },
-	lookForTerm: function (parameters, results ) {
-		var self = this;
+	lookForTerm: function ( results ) {
+		var self = this,
+		    parameters = self.parameters;
 		if ( 'undefined' === typeof parameters.language ) {
 			parameters.language = self.inferLanguage( parameters );
 		}
