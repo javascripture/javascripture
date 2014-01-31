@@ -1,12 +1,17 @@
+/*global console, javascripture*/
 jQuery.fn.slowEach = function(array, interval, callback ) {
-	if( ! array.length ) return;
+	if( ! array.length ) {
+		return;
+	}
 	var i = 0;
-	next();
 	function next() {
-		if( callback.call( array[i], i, array[i] ) !== false )
-	    	if( ++i < array.length )
+		if( callback.call( array[i], i, array[i] ) !== false ) {
+			if( ++i < array.length ) {
 				setTimeout( next, interval );
 			}
+		}
+	}
+	next();
 };
 
 javascripture.api.search = {
@@ -97,7 +102,7 @@ javascripture.api.search = {
 
 		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
 		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
-			searchSpeed = $('#searchSpeed').val();
+			var searchSpeed = $('#searchSpeed').val();
 			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
 				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 			} );
@@ -115,7 +120,7 @@ javascripture.api.search = {
 		//work out how many terms there are
 		var termsLength = 0;
 		for( var typeKey in self.types ) {
-			var type = self.types[typeKey];
+			var type = self.types[typeKey],
 				termString = parameters[type];
 
 			if ( termString !== undefined && termString !== '') {
@@ -136,7 +141,7 @@ javascripture.api.search = {
 					self.resetMatches();
 				}
 
-				verse.forEach( function ( word, wordNumber ) {
+				verse.forEach( function ( word ) {
 					if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
 						self.resetMatches();
 					}
@@ -153,7 +158,7 @@ javascripture.api.search = {
 							var terms = termString.split(' ');
 
 							//for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
-							terms.forEach( function( term, termNumber ) {
+							terms.forEach( function( term ) {
 								if ( self.doesDataMatchTerm(type, word[typeKey], term, parameters.strict ) ) {
 									if (parameters.clusivity === 'exclusive' ) {
 										self.results.matches[term] = true;
@@ -168,7 +173,7 @@ javascripture.api.search = {
 					if (parameters.clusivity === 'exclusive' ) {
 						matchesLength = 0;
 
-						$.each(self.results.matches, function (key, term) {
+						$.each(self.results.matches, function () {
 							matchesLength++;
 						});
 						if ( matchesLength > 0 && matchesLength >= termsLength) {
@@ -186,9 +191,6 @@ javascripture.api.search = {
 	},
 	standarizeWordEndings: function (word) {
 		return word.replace(/ם/gi, 'מ');
-	},
-	getTranslations: function ( lemma ) {
-
 	},
 	inferLanguage: function( parameters ) {
 		var language = 'english';
