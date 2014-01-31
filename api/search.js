@@ -42,7 +42,8 @@ javascripture.api.search = {
 		this.lookForTerm();
 		return self.deferred;
 	},
-    doesDataMatchTerm: function( type, data, term, strict ) {
+	doesDataMatchTerm: function( type, data, term ) {
+		var self = this;
 		data = data.toLowerCase();
 		term = term.toLowerCase();
 		if ( data === term ) { //exact match
@@ -71,7 +72,7 @@ javascripture.api.search = {
 			return true;
 		}*/
 		//skip this for lemma
-		if ( type !== 'lemma' && ! strict ) {
+		if ( type !== 'lemma' && ! self.parameters.strict ) {
 			if ( data.search( term ) > -1 ) {
 				return true;
 			}
@@ -81,12 +82,12 @@ javascripture.api.search = {
     resetMatches: function () {
         this.results.matches = {};
     },
-    addReference: function (bookName, chapterNumber, verseNumber ) {
+	addReference: function (bookName, chapterNumber, verseNumber ) {
 		this.results.references.push({
-            book: bookName,
-            chapter: chapterNumber + 1,
-            verse: verseNumber + 1
-        });
+			book: bookName,
+			chapter: chapterNumber + 1,
+			verse: verseNumber + 1
+		});
     },
 	lookForTerm: function () {
 		var self = this,
@@ -159,7 +160,7 @@ javascripture.api.search = {
 
 							//for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
 							terms.forEach( function( term ) {
-								if ( self.doesDataMatchTerm(type, word[typeKey], term, parameters.strict ) ) {
+								if ( self.doesDataMatchTerm(type, word[typeKey], term ) ) {
 									if (parameters.clusivity === 'exclusive' ) {
 										self.results.matches[term] = true;
 									} else {

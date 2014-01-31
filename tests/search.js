@@ -1,4 +1,9 @@
 /*global start, equal, module, test, ok, asyncTest, expect, javascripture*/
+/*var javascriptureTestHelper = {
+	referenceCount: function (parameters, expected, message) {
+		equal(search.getReferences(parameters).length, expected, message.replace(/EXPECTED/gi, expected).replace(/TERM/gi, parameters.word).replace(/LANGUAGE/gi, parameters.language));
+	}
+};*/
 
 module("search english");
 test("search", function () {
@@ -46,7 +51,6 @@ asyncTest('test that search is case insensitve', function testWordInVerse () {
 	} ).done( function() {
 		equal( search4.countResults(), 2, 'there are 2 verses that contain "Immanuel" in English.  Search is case insensitive.');
 	} );
-
 });
 
 asyncTest('search for form or void in the same verse', function testWordInVerse () {
@@ -104,80 +108,75 @@ asyncTest('search for strongs number in a verse in english', function () {
 		lemma: 'H3588',
 		range: 'verse'
 	} ).done( function() {
-		equal( search3.countResults(), 47, 'there are 47 occurances of "H3588" in English');
+		equal( search3.countResults(), 47, 'there are 47 occurances of "H3588" in English, some of which are in the same verse');
 	} );
 });
 
-
-
-/*
-
-test('search for strongs number in a verse in english', function () {
-	expect(3);
-	equal(search.getReferences({
-		language: 'english',
-		lemma: 'H1234',
-		range: 'verse'
-	}).length, 51, 'there are 51 occurances of "H1234" in English');
-	equal(search.getReferences({
-		language: 'english',
-		lemma: 'H1235',
-		range: 'verse'
-	}).length, 2, 'there are 2 occurances of "H1235" in English');
-	equal(search.getReferences({
-		language: 'english',
-		lemma: 'H3588',
-		range: 'verse'
-	}).length, 47, 'there are 47 occurances of "H3588" in English');
-});
-
-test('search for a morphology in a verse in english', function () {
+asyncTest( 'search for a morphology in a verse in english', function () {
 	expect(1);
-	equal(search.getReferences({
+	var search = Object.create( javascripture.api.search );
+	search.getReferences( {
 		language: 'english',
 		morph: 'TH8799',
 		range: 'verse'
-	}).length, 19877, 'there are 19877 occurances of "TH8799" in English');
+	} ).done( function() {
+		equal( search.countResults(), 19877, 'there are 19877 occurances of "TH8799" in English');
+		start();
+	} );
 });
 
-test('search for a word and strongs number in a verse in english', function () {
+asyncTest( 'search for a word and strongs number in a verse in english', function () {
 	expect(2);
-	equal(search.getReferences({
+	var search1 = Object.create( javascripture.api.search );
+	search1.getReferences( {
 		clusivity: 'inclusive',
 		language: 'english',
 		lemma: 'H3588',
 		range: 'verse',
 		word: 'form'
-	}).length, 245, 'there are 245 occurances of "H3588" or "form" in English');
-	equal(search.getReferences({
+	} ).done( function() {
+		equal( search1.countResults(), 245, 'there are 245 occurances of "H3588" or "form" in English');
+		start();
+	} );
+
+	var search2 = Object.create( javascripture.api.search );
+	search2.getReferences( {
 		clusivity: 'exclusive',
 		language: 'english',
 		lemma: 'H3588',
 		range: 'verse',
 		word: 'God'
-	}).length, 13, 'there are 12 occurances of "H3588" and "God" in the same verse in English');
-
+	} ).done( function() {
+		equal( search2.countResults(), 13, 'there are 12 occurances of "H3588" and "God" in the same verse in English');
+	} );
 });
 
-test('search for a word and strongs number in a word in english', function () {
+asyncTest( 'search for a word and strongs number in a word in english', function () {
 	expect(2);
-	equal(search.getReferences({
+	var search1 = Object.create( javascripture.api.search );
+	search1.getReferences( {
 		clusivity: 'exclusive',
 		language: 'english',
 		lemma: 'H7363',
 		range: 'word',
 		word: 'moved'
-	}).length, 1, 'there is 1 occurance of "H7363" translated "moved" in English');
-	equal(search.getReferences({
+	} ).done( function() {
+		equal( search1.countResults(), 1, 'there is 1 occurance of "H7363" translated "moved" in English' );
+		start();
+	} );
+
+	var search2 = Object.create( javascripture.api.search );
+	search2.getReferences( {
 		clusivity: 'exclusive',
 		language: 'english',
 		lemma: 'H1877',
 		range: 'word',
 		word: 'grass'
-	}).length, 8, 'there are 8 occurances of "H1877" translated "grass" in English');
-
+	} ).done( function() {
+		equal( search2.countResults(), 8, 'there are 8 occurances of "H1877" translated "grass" in English' );
+	} );
 });
-
+/*
 module("search hebrew");
 parameters.language = 'hebrew';
 parameters.word = '';
