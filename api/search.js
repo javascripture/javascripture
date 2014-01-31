@@ -33,10 +33,9 @@ javascripture.api.search = {
 		var self = this;
 		self.parameters = parameters;
 		console.log(parameters);
-		var results = $.Deferred();
-		results.references = [];
-		this.lookForTerm( results );
-		return results;
+		self.deferred = $.Deferred();
+		this.lookForTerm();
+		return self.deferred;
 	},
     doesDataMatchTerm: function( type, data, term, strict ) {
 		data = data.toLowerCase();
@@ -77,14 +76,14 @@ javascripture.api.search = {
     resetMatches: function () {
         this.results.matches = {};
     },
-    addReference: function (bookName, chapterNumber, verseNumber, results ) {
-		return results.references.push({
+    addReference: function (bookName, chapterNumber, verseNumber ) {
+		this.results.references.push({
             book: bookName,
             chapter: chapterNumber + 1,
             verse: verseNumber + 1
         });
     },
-	lookForTerm: function ( results ) {
+	lookForTerm: function () {
 		var self = this,
 		    parameters = self.parameters;
 		if ( 'undefined' === typeof parameters.language ) {
@@ -100,15 +99,15 @@ javascripture.api.search = {
 		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
 			searchSpeed = $('#searchSpeed').val();
 			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-				self.searchInABook( dataSource, bookName, results, bookNumber, booksToSearch );
+				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 			} );
 		} else {
 			booksToSearch.forEach( function( bookName, bookNumber ) {
-				self.searchInABook( dataSource, bookName, results, bookNumber, booksToSearch );
+				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 			} );
 		}
 	},
-	searchInABook: function( dataSource, bookName, results, bookNumber, booksToSearch ) {
+	searchInABook: function( dataSource, bookName, bookNumber, booksToSearch ) {
 		var self = this,
 			parameters = self.parameters,
 			book = dataSource[ bookName ];
@@ -159,7 +158,7 @@ javascripture.api.search = {
 									if (parameters.clusivity === 'exclusive' ) {
 										self.results.matches[term] = true;
 									} else {
-										self.addReference(bookName, chapterNumber, verseNumber, results );
+										self.addReference(bookName, chapterNumber, verseNumber );
 									}
 								}
 							} );
@@ -174,7 +173,7 @@ javascripture.api.search = {
 						});
 						if ( matchesLength > 0 && matchesLength >= termsLength) {
 							//console.log(matchesLength, termsLength);
-							self.addReference(bookName, chapterNumber, verseNumber, results );
+							self.addReference(bookName, chapterNumber, verseNumber );
 							self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 						}
 					}
@@ -182,7 +181,7 @@ javascripture.api.search = {
 			} );
 		} );
 		if (bookNumber === booksToSearch.length - 1 ) {
-			results.resolve();
+			self.deferred.resolve();
 		}
 	},
 	standarizeWordEndings: function (word) {
@@ -203,5 +202,8 @@ javascripture.api.search = {
 	},
 	areTheTermStringAndWordObjectAreGoodToSearch: function ( termString, wordObject, typeKey ) {
 		return termString !== undefined && termString !== '' && wordObject !== undefined && typeof wordObject[typeKey] !== 'undefined'; //sometimes wordObjects are undefined in hebrew
+	},
+	countResults: function() {
+		return this.results.references.length;
 	}
 };

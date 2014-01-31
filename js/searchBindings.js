@@ -40,10 +40,9 @@ var createSearchReferencesPanel;
 
 		//wait for the result section to be created
 		setTimeout( function () {
-			var searchApi = javascripture.api.search;
-			var results = searchApi.getReferences(data);
-			results.done( function(){
-				var referenceArray =  results.references;
+			var searchApi = Object.create( javascripture.api.search );
+			searchApi.getReferences( data ).done( function(){
+				var referenceArray =  searchApi.results.references;
 				references += '<form><ol class="references">';
 				var wordCount = 0;
 
