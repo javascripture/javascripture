@@ -48,36 +48,69 @@ asyncTest('test that search is case insensitve', function testWordInVerse () {
 	} );
 
 });
-/*
-asyncTest('search for form or void in the same verse', function () {
-	var result5 = search.getReferences({
+
+asyncTest('search for form or void in the same verse', function testWordInVerse () {
+	expect(1);
+	var search5 = Object.create( javascripture.api.search );
+	search5.getReferences( {
 		language: 'english',
 		word: 'form void',
 		range: 'verse',
 		clusivity: 'inclusive'
-	});
-	result5.done( function() {
-		equal(result5.references.length, 230, 'there are 230 verses that contain "form" or "void"');
+	} ).done( function() {
+		equal( search5.countResults(), 230, 'there are 230 verses that contain "form" or "void"');
 		start();
 	} );
-} );
-/*test('search for form and void in the same verse', function () {
-	equal(search.getReferences({
+});
+
+asyncTest('search for form and void in the same verse', function () {
+	expect(1);
+	var search6 = Object.create( javascripture.api.search );
+	search6.getReferences( {
 		language: 'english',
 		word: 'form void',
 		range: 'verse',
 		clusivity: 'exclusive'
-	}).length, 2, 'there are 2 verses that contain "form" and "void"');
+	} ).done( function() {
+		equal( search6.countResults(), 2, 'there are 2 verses that contain "form" and "void"');
+		start();
+	} );
 });
 
-test('search for form and void in the same chapter', function () {
-	equal(search.getReferences({
+asyncTest('search for strongs number in a verse in english', function () {
+	expect(3);
+	var search1 = Object.create( javascripture.api.search );
+	search1.getReferences( {
 		language: 'english',
-		word: 'form void',
-		range: 'chapter',
-		clusivity: 'exclusive'
-	}).length, 8, 'there are 8 chapters that contain "form" and "void"');
+		lemma: 'H1234',
+		range: 'verse'
+	} ).done( function() {
+		equal( search1.countResults(), 51, 'there are 51 occurances of "H1234" in English');
+		start();
+	} );
+
+	var search2 = Object.create( javascripture.api.search );
+	search2.getReferences( {
+		language: 'english',
+		lemma: 'H1235',
+		range: 'verse'
+	} ).done( function() {
+		equal( search2.countResults(), 2, 'there are 2 occurances of "H1235" in English');
+	} );
+
+	var search3 = Object.create( javascripture.api.search );
+	search3.getReferences( {
+		language: 'english',
+		lemma: 'H3588',
+		range: 'verse'
+	} ).done( function() {
+		equal( search3.countResults(), 47, 'there are 47 occurances of "H3588" in English');
+	} );
 });
+
+
+
+/*
 
 test('search for strongs number in a verse in english', function () {
 	expect(3);
