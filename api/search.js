@@ -160,11 +160,11 @@ javascripture.api.search = {
 
 							//for ( var termNumber = 0, allTermsLength = terms.length; termNumber < allTermsLength; termNumber++ ) {
 							terms.forEach( function( term ) {
-								if ( self.doesDataMatchTerm(type, word[typeKey], term ) ) {
+								if ( self.doesDataMatchTerm( type, word[typeKey], term ) ) {
 									if (parameters.clusivity === 'exclusive' ) {
-										self.results.matches[term] = true;
+										self.results.matches[ term ] = true;
 									} else {
-										self.addReference(bookName, chapterNumber, verseNumber );
+										self.addReference( bookName, chapterNumber, verseNumber );
 									}
 								}
 							} );
