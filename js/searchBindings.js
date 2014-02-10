@@ -23,6 +23,16 @@ var createSearchReferencesPanel;
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
+		if ( data.word ) {
+			data.word = data.word.trim();
+		}
+		if ( data.lemma ) {
+			data.lemma = data.lemma.trim();
+		}
+		if ( data.morph ) {
+			data.morph = data.morph.trim();
+		}
+
 		var strongsNumberAsId;
 		if ( data.lemma ) {
 			strongsNumberAsId = data.lemma.replace( / /gi, "" );

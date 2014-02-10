@@ -120,7 +120,7 @@ asyncTest( 'search for a morphology in a verse in english', function () {
 		morph: 'TH8799',
 		range: 'verse'
 	} ).done( function() {
-		equal( search.countResults(), 19877, 'there are 19877 occurances of "TH8799" in English');
+		equal( search.countResults(), 19886, 'there are 19886 occurances of "TH8799" in English');
 		start();
 	} );
 });
