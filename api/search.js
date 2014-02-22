@@ -164,7 +164,6 @@ javascripture.api.search = {
 										if (parameters.clusivity === 'exclusive' ) {
 											self.results.matches[ term ] = true;
 										} else {
-											console.log( bookName + ' ' + chapterNumber + ' ' + verseNumber + ' ' + word[ typeKey ] );
 											self.addReference( bookName, chapterNumber, verseNumber );
 										}
 									}
