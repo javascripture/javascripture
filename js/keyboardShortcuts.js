@@ -10,6 +10,9 @@
 		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 ) {
 			functionPressed = true;
 		}
+		if ( $( 'input:focus' ).length !== 0 ) {
+			console.log( $( 'input:focus' ) );
+		}
 		if ( $( 'input:focus' ).length === 0 && ! functionPressed ) { //don't capture inside form fields or when function is held down
 			//esc
 			if ( 27 === event.keyCode ) {
