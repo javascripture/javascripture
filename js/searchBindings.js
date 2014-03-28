@@ -51,33 +51,33 @@ var createSearchReferencesPanel;
 		//wait for the result section to be created
 		setTimeout( function () {
 			var searchApi = Object.create( javascripture.api.search );
-			searchApi.getReferences( data ).done( function(){
-				var referenceArray =  searchApi.results.references;
-				references += '<form><ol class="references">';
-				var wordCount = 0;
+			searchApi.getReferences( data );
 
-				var searchObject = javascripture.data.english;
-				if($("select[name=searchLanguage]").val() === "hebrew") {
-					searchObject = javascripture.data.hebrew;
-					$.each(strongsNumberArray, function(index, strongsNumber) {
-						if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-							strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-						}
-					});
-				}
-				references += createReferenceList(referenceArray);
-				references += '</ol></form>';
+			var referenceArray =  searchApi.results.references;
+			references += '<form><ol class="references">';
+			var wordCount = 0;
 
-				if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-					$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
-				}
-				goToFirstReference();
-		//		$('.popup').popup( 'close' );
+			var searchObject = javascripture.data.english;
+			if($("select[name=searchLanguage]").val() === "hebrew") {
+				searchObject = javascripture.data.hebrew;
+				$.each(strongsNumberArray, function(index, strongsNumber) {
+					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
+					}
+				});
+			}
+			references += createReferenceList(referenceArray);
+			references += '</ol></form>';
 
-				var endDate = new Date();
-				timer(startDate, endDate);
+			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+			}
+			goToFirstReference();
+	//		$('.popup').popup( 'close' );
 
-			} );
+			var endDate = new Date();
+			timer(startDate, endDate);
+
 		}, 100 );
 	};
 

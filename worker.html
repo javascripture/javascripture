@@ -1,0 +1,13 @@
+<script>
+var worker = new Worker('workers/search.js');
+
+worker.addEventListener('message', function(e) {
+	var result = '';
+	for( key in e.data ) {
+		result += e.data[ key ]['book'] + ':' +  e.data[ key ]['chapter'] + ':' + e.data[ key ]['verse'] + '<br />';
+	}
+  document.write('Worker said: ', result );
+}, false);
+
+worker.postMessage('Hello World'); // Send data to our worker.
+</script>

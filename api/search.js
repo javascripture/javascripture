@@ -1,5 +1,5 @@
 /*global console, javascripture*/
-jQuery.fn.slowEach = function(array, interval, callback ) {
+/*jQuery.fn.slowEach = function(array, interval, callback ) {
 	if( ! array.length ) {
 		return;
 	}
@@ -12,7 +12,7 @@ jQuery.fn.slowEach = function(array, interval, callback ) {
 		}
 	}
 	next();
-};
+};*/
 
 javascripture.api.search = {
 	language: { //helper object to access different languages
@@ -37,10 +37,11 @@ javascripture.api.search = {
 	getReferences: function (parameters) {
 		var self = this;
 		self.parameters = parameters;
-		console.log(parameters);
-		self.deferred = $.Deferred();
+//		console.log(parameters);
+//		self.deferred = $.Deferred();
 		this.lookForTerm();
-		return self.deferred;
+//		return self.deferred;
+		return self.results.references;
 	},
 	doesDataMatchTerm: function( type, data, term ) {
 		var self = this;
@@ -102,16 +103,16 @@ javascripture.api.search = {
 		var booksToSearch = this.books[ parameters.language ];
 
 		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
-		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
-			var searchSpeed = $('#searchSpeed').val();
-			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
-			} );
-		} else {
+//		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
+//			var searchSpeed = $('#searchSpeed').val();
+//			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
+//				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
+//			} );
+//		} else {
 			booksToSearch.forEach( function( bookName, bookNumber ) {
 				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 			} );
-		}
+//		}
 	},
 	searchInABook: function( dataSource, bookName, bookNumber, booksToSearch ) {
 		var self = this,
@@ -130,7 +131,7 @@ javascripture.api.search = {
 			}
 		}
 
-		$( document ).trigger( 'loading', 'searching ' + bookName );
+//		$( document ).trigger( 'loading', 'searching ' + bookName );
 
 		book.forEach( function ( chapter, chapterNumber ) {
 
@@ -175,9 +176,11 @@ javascripture.api.search = {
 					if (parameters.clusivity === 'exclusive' ) {
 						matchesLength = 0;
 
-						$.each(self.results.matches, function () {
-							matchesLength++;
-						});
+//						$.each(self.results.matches, function () {
+//							matchesLength++;
+//						});
+						matchesLength = Object.keys( self.results.matches ).length;
+
 						if ( matchesLength > 0 && matchesLength >= termsLength) {
 							//console.log(matchesLength, termsLength);
 							self.addReference(bookName, chapterNumber, verseNumber );
@@ -188,7 +191,7 @@ javascripture.api.search = {
 			} );
 		} );
 		if (bookNumber === booksToSearch.length - 1 ) {
-			self.deferred.resolve();
+//			self.deferred.resolve();
 		}
 	},
 	standarizeWordEndings: function (word) {
