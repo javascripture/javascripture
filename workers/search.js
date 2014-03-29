@@ -1,16 +1,18 @@
 var javascripture = {};
 javascripture.data = {};
+javascripture.data.kjv = {};
+javascripture.data.web = {};
 javascripture.data.greek = {};
+javascripture.data.hebrew = {};
 javascripture.api = {};
+importScripts('../data/kjvdwyer7.js');
+importScripts('../data/web3.js');
+importScripts('../data/hebrew6.js');
 importScripts('../data/greek4.js');
-importScripts('../api/search.js?1');
+importScripts('../api/search.js?2');
 self.addEventListener('message', function(e) {
 	// var data = e.data;
-	var result = javascripture.api.search.getReferences( {
-		language: "greek",
-		lemma: "G4864",
-		range: "verse",
-	} );
+	var result = javascripture.api.search.getReferences( e.data );
   self.postMessage(result);
 }, false);
 

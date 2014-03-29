@@ -9,5 +9,9 @@ worker.addEventListener('message', function(e) {
   document.write('Worker said: ', result );
 }, false);
 
-worker.postMessage('Hello World'); // Send data to our worker.
+worker.postMessage({
+		language: "greek",
+		lemma: "G4864",
+		range: "verse",
+	}); // Send data to our worker.
 </script>

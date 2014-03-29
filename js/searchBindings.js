@@ -1,4 +1,5 @@
 /*global javascripture*/
+var worker = new Worker('workers/search.js');
 var createSearchReferencesPanel;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
@@ -50,33 +51,42 @@ var createSearchReferencesPanel;
 
 		//wait for the result section to be created
 		setTimeout( function () {
-			var searchApi = Object.create( javascripture.api.search );
-			searchApi.getReferences( data );
 
-			var referenceArray =  searchApi.results.references;
-			references += '<form><ol class="references">';
-			var wordCount = 0;
+			worker.addEventListener('message', function(e) {
 
-			var searchObject = javascripture.data.english;
-			if($("select[name=searchLanguage]").val() === "hebrew") {
-				searchObject = javascripture.data.hebrew;
-				$.each(strongsNumberArray, function(index, strongsNumber) {
-					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-					}
-				});
-			}
-			references += createReferenceList(referenceArray);
-			references += '</ol></form>';
+//				var searchApi = Object.create( javascripture.api.search );
+//				searchApi.getReferences( data );
 
-			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
-			}
-			goToFirstReference();
-	//		$('.popup').popup( 'close' );
+//				var referenceArray =  searchApi.results.references;
+				var referenceArray = e.data;
+				references += '<form><ol class="references">';
+				var wordCount = 0;
 
-			var endDate = new Date();
-			timer(startDate, endDate);
+				var searchObject = javascripture.data.english;
+				if($("select[name=searchLanguage]").val() === "hebrew") {
+					searchObject = javascripture.data.hebrew;
+					$.each(strongsNumberArray, function(index, strongsNumber) {
+						if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+							strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
+						}
+					});
+				}
+				references += createReferenceList(referenceArray);
+				references += '</ol></form>';
+
+				if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+					$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+				}
+				goToFirstReference();
+		//		$('.popup').popup( 'close' );
+
+				var endDate = new Date();
+				timer(startDate, endDate);
+
+			}, false);
+
+			worker.postMessage(data); // Send data to our worker.
+
 
 		}, 100 );
 	};
@@ -186,7 +196,9 @@ var createSearchReferencesPanel;
 
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
-		createSearchReferencesPanel( $( this ).serializeObject() );
+		var data = $( this ).serializeObject();
+		data.language = $( '#versionSelector' ).val();
+		createSearchReferencesPanel( data );
 		$( '.popup' ).popup( 'close' );
 	});
 
