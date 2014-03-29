@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 4.5.2
+#version: 4.5.3
 index.html
 css/layout.css
 
@@ -23,7 +23,7 @@ data/morphology.js
 data/literalConsistent.js
 
 #apis
-api/search.js
+api/searchApi.js
 
 #modules
 modules/hebrew.js
