@@ -9,7 +9,7 @@ importScripts('../data/kjvdwyer7.js');
 importScripts('../data/web3.js');
 importScripts('../data/hebrew6.js');
 importScripts('../data/greek4.js');
-importScripts('../api/search.js?2');
+importScripts('../api/search.js');
 self.addEventListener('message', function(e) {
 	// var data = e.data;
 	var result = javascripture.api.search.getReferences( e.data );
