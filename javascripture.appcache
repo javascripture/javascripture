@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 4.5.3
+#version: 4.5.4
 index.html
 css/layout.css
 
@@ -49,4 +49,4 @@ js/frequencyAnalysis.js
 js/randomReference.js
 
 #workers
-workers/searchWorker.js
+workers/search.js
