@@ -1,5 +1,5 @@
 /*global javascripture*/
-var worker = new Worker('workers/search.js');
+var worker = new Worker('workers/searchWorker.js');
 var createSearchReferencesPanel;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {

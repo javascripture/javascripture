@@ -49,4 +49,4 @@ js/frequencyAnalysis.js
 js/randomReference.js
 
 #workers
-workers/search.js
+workers/searchWorker.js
