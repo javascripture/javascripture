@@ -52,7 +52,7 @@ var createSearchReferencesPanel;
 		//wait for the result section to be created
 		setTimeout( function () {
 
-/*			worker.addEventListener('message', function(e) {
+			worker.addEventListener('message', function(e) {
 
 //				var searchApi = Object.create( javascripture.api.search );
 //				searchApi.getReferences( data );
@@ -85,7 +85,7 @@ var createSearchReferencesPanel;
 
 			}, false);
 
-			worker.postMessage(data); // Send data to our worker.*/
+			worker.postMessage(data); // Send data to our worker.
 
 
 		}, 100 );
