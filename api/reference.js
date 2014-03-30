@@ -1,7 +1,8 @@
 /*globals javascripture*/
 javascripture.modules.reference = {
 	load: function( reference ) {
-		var book = reference.book,
+		var self = this,
+		    book = reference.book,
 		    chapter = reference.chapter,
 		    verse = reference.verse;
 
@@ -25,15 +26,15 @@ javascripture.modules.reference = {
 		//add the previous chapter if it exists
 		if ( prev.book ) {
 			$threeChapters.data( 'prev', prev );
-			$threeChapters.append( getChapterText( prev ) );
+			$threeChapters.append( self.getChapterText( prev ) );
 		}
 
-		$threeChapters.append( getChapterText( reference ) );
+		$threeChapters.append( self.getChapterText( reference ) );
 
 		//add the next chapter if it exists
 		if ( next.book ) {
 			$threeChapters.data( 'next', next );
-			$threeChapters.append( getChapterText( next ) );
+			$threeChapters.append( self.getChapterText( next ) );
 		}
 
 		if ( $.fn.waypoint ) {
@@ -154,81 +155,80 @@ javascripture.modules.reference = {
 	        }
 
 	    }
-	}
-};
+	},
+	getChapterText: function ( reference ) {
+		var book = reference.book,
+		    chapter = reference.chapter,
+		    verse = reference.verse,
+			chapterInArray = chapter - 1,
+			verseInArray = verse - 1,
+			context = false;
 
-function getChapterText ( reference ) {
-	var book = reference.book,
-	    chapter = reference.chapter,
-	    verse = reference.verse,
-		chapterInArray = chapter - 1,
-		verseInArray = verse - 1,
-		context = false;
+		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
+		chapterText += '<ol class="wrapper">';
 
-	var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
-	chapterText += '<ol class="wrapper">';
+		var originalText, language;
+		if( javascripture.data.hebrew[book] ) {
+			originalText = javascripture.data.hebrew;
+			testament = 'hebrew';
+		} else {
+			originalText = javascripture.data.greek;
+			testament = 'greek';
+		}
 
-	var originalText, language;
-	if( javascripture.data.hebrew[book] ) {
-		originalText = javascripture.data.hebrew;
-		testament = 'hebrew';
-	} else {
-		originalText = javascripture.data.greek;
-		testament = 'greek';
-	}
+		if ( javascripture.data.english[book][chapterInArray] ) {
+			$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
+				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' class="current"';
+				}
+				chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
+				chapterText += '<div class="wrapper"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' id="current"';
+				}
+				if(verseNumber === verseInArray-5) {
+					chapterText += ' id="context"';
+					context = true;
+				}
+				chapterText += '>';
+				chapterText += '<div class="english">';
+					if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
+						//same as below
+						$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					} else {
+						$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+							if ( wordObject ) {
+								chapterText += createWordString( wordObject, 'english', testament );
+							}
+						});
+					}
+				chapterText += "</div>";
 
-	if ( javascripture.data.english[book][chapterInArray] ) {
-		$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
-			chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
-			if(verseNumber === verseInArray) {
-				chapterText += ' class="current"';
-			}
-			chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
-			chapterText += '<div class="wrapper"';
-			if(verseNumber === verseInArray) {
-				chapterText += ' id="current"';
-			}
-			if(verseNumber === verseInArray-5) {
-				chapterText += ' id="context"';
-				context = true;
-			}
-			chapterText += '>';
-			chapterText += '<div class="english">';
-				if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
-					//same as below
+				//Load hebrew
+				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
+					chapterText += "<div class='original " + testament + "'>";
 					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 						if ( wordObject ) {
-							chapterText += createWordString( wordObject, 'english', testament );
+							chapterText += createWordString( wordObject, testament, testament );
 						}
 					});
-				} else {
-					$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-						if ( wordObject ) {
-							chapterText += createWordString( wordObject, 'english', testament );
-						}
-					});
+					chapterText += "</div>";
 				}
-			chapterText += "</div>";
+				chapterText += '</div>';
+				chapterText += '</li>';
+			});
+		}
 
-			//Load hebrew
-			if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
-				chapterText += "<div class='original " + testament + "'>";
-				$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
-					if ( wordObject ) {
-						chapterText += createWordString( wordObject, testament, testament );
-					}
-				});
-				chapterText += "</div>";
-			}
-			chapterText += '</div>';
-			chapterText += '</li>';
-		});
-	}
-
-	chapterText += '</ol>';
-	chapterText += '</div>';
-	return chapterText;
-}
+		chapterText += '</ol>';
+		chapterText += '</div>';
+		return chapterText;
+	},
+};
 
 function createWordString( wordArray, language, testament ) {
 	var self = this,
