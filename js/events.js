@@ -123,5 +123,9 @@
 		});
 		$('.changeStyle').change(function(){
 			$('#'+$(this).attr('name')).html('body { '+$(this).val()+'}');
+			localStorage.font = $(this).val();
 		});
+		if ( localStorage.font ) {
+			$('#'+$('.changeStyle').attr('name')).html('body { ' + localStorage.font + '}');
+		}
 	});

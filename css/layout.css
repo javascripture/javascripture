@@ -164,6 +164,12 @@ ul.verseSelect {
   top: 0;
   right: 15px;
 }
+.bookSelect .icon-book {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 13px;
+}
 .panel .heading-wrapper {
   margin: 0 auto;
   text-align: center;
