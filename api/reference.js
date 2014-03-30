@@ -157,7 +157,8 @@ javascripture.modules.reference = {
 	    }
 	},
 	getChapterText: function ( reference ) {
-		var book = reference.book,
+		var self = this,
+		    book = reference.book,
 		    chapter = reference.chapter,
 		    verse = reference.verse,
 			chapterInArray = chapter - 1,
@@ -197,13 +198,13 @@ javascripture.modules.reference = {
 						//same as below
 						$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 							if ( wordObject ) {
-								chapterText += createWordString( wordObject, 'english', testament );
+								chapterText += self.createWordString( wordObject, 'english', testament );
 							}
 						});
 					} else {
 						$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 							if ( wordObject ) {
-								chapterText += createWordString( wordObject, 'english', testament );
+								chapterText += self.createWordString( wordObject, 'english', testament );
 							}
 						});
 					}
@@ -214,7 +215,7 @@ javascripture.modules.reference = {
 					chapterText += "<div class='original " + testament + "'>";
 					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
 						if ( wordObject ) {
-							chapterText += createWordString( wordObject, testament, testament );
+							chapterText += self.createWordString( wordObject, testament, testament );
 						}
 					});
 					chapterText += "</div>";
@@ -228,46 +229,45 @@ javascripture.modules.reference = {
 		chapterText += '</div>';
 		return chapterText;
 	},
+	createWordString: function ( wordArray, language, testament ) {
+		var self = this,
+		    wordString = '',
+		    families = [];
+		if ( typeof wordArray[ 1 ] === 'undefined' )
+			return '<span>' + wordArray[0] + '</span> ';
+
+		lemma = wordArray[ 1 ];
+		if ( lemma ) {
+			lemmaArray = lemma.split( ' ' );
+			$.each( lemmaArray, function( key, lemmaValue ) {
+				families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
+			} );
+		}
+		wordString += '<span';
+		wordString += ' class="' + families.join( ' ' ) + '"';
+		wordString += ' title="' + lemma;
+		if ( wordArray[2] ) {
+			wordString += ' ' + wordArray[2];
+		}
+		wordString += '"';
+		wordString += ' data-word="' + wordArray[0] + '"';
+		wordString += ' data-lemma="' + wordArray[1] + '"';
+		wordString += ' data-language="' + testament + '"';
+		wordString += ' data-range="verse"';
+		wordString += ' data-family="' + families.join( ' ' ) + '"';
+		if ( wordArray[2] ) {
+			wordString += ' data-morph="' + wordArray[2] + '"';
+		}
+		wordString += '>';
+		if ( javascripture.modules.versionSelector.getVersion() === 'lc' && language === 'english' ) {
+			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+		} else {
+			wordString += wordArray[0];
+		}
+		wordString += '</span> ';
+		return wordString;
+	}
 };
-
-function createWordString( wordArray, language, testament ) {
-	var self = this,
-	    wordString = '',
-	    families = [];
-	if ( typeof wordArray[ 1 ] === 'undefined' )
-		return '<span>' + wordArray[0] + '</span> ';
-
-	lemma = wordArray[ 1 ];
-	if ( lemma ) {
-		lemmaArray = lemma.split( ' ' );
-		$.each( lemmaArray, function( key, lemmaValue ) {
-			families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
-		} );
-	}
-	wordString += '<span';
-	wordString += ' class="' + families.join( ' ' ) + '"';
-	wordString += ' title="' + lemma;
-	if ( wordArray[2] ) {
-		wordString += ' ' + wordArray[2];
-	}
-	wordString += '"';
-	wordString += ' data-word="' + wordArray[0] + '"';
-	wordString += ' data-lemma="' + wordArray[1] + '"';
-	wordString += ' data-language="' + testament + '"';
-	wordString += ' data-range="verse"';
-	wordString += ' data-family="' + families.join( ' ' ) + '"';
-	if ( wordArray[2] ) {
-		wordString += ' data-morph="' + wordArray[2] + '"';
-	}
-	wordString += '>';
-	if ( javascripture.modules.versionSelector.getVersion() === 'lc' && language === 'english' ) {
-		 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
-	} else {
-		wordString += wordArray[0];
-	}
-	wordString += '</span> ';
-	return wordString;
-}
 
 function getOffsetChapter( reference, offset) {
 	var book = reference.book,
