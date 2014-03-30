@@ -274,8 +274,8 @@ form ul li {
   width: 49%;
 }
 #wordControlPanel .definitions {
-  float: right;
-  width: 49%;
+  float: left;
+  width: 47%;
 }
 .top.left .control-panel {
   border-top-left-radius: 0;
@@ -612,7 +612,7 @@ form.search #advanced {
 .searchPanel form.search {
   background: #ccc;
   padding: .1rem .5rem .5rem;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   z-index: 1;
