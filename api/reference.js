@@ -1,4 +1,4 @@
-/*globals javascripture*/
+/*globals javascripture bible*/
 javascripture.api.reference = {
 	getThreeChapters: function( reference ) {
 		var self = this,
@@ -6,7 +6,7 @@ javascripture.api.reference = {
 		    chapter = reference.chapter,
 		    verse = reference.verse,
 			prev = self.getOffsetChapter( reference, -1 ),
-			next = self.getOffsetChapter( reference, 1 );
+			next = self.getOffsetChapter( reference, 1 ),
 		    threeChapters = '<div class="three-references"';
 
 		if ( prev.book ) {
@@ -33,7 +33,6 @@ javascripture.api.reference = {
 			threeChapters +=  javascripture.api.reference.getChapterText( next );
 		}
 		threeChapters += '</div>';
-		console.log( threeChapters );
 		return threeChapters;
 	},
 	getChapterText: function ( reference ) {
@@ -58,7 +57,7 @@ javascripture.api.reference = {
 		}
 
 		if ( javascripture.data.english[book][chapterInArray] ) {
-			$.each( javascripture.data.english[book][chapterInArray], function(verseNumber, verseText ) {
+			javascripture.data.english[book][chapterInArray].forEach( function( verseText, verseNumber ) {
 				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' class="current"';
@@ -76,13 +75,13 @@ javascripture.api.reference = {
 				chapterText += '<div class="english">';
 					if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
 						//same as below
-						$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+						originalText[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
 								chapterText += self.createWordString( wordObject, 'english', testament );
 							}
 						});
 					} else {
-						$.each( javascripture.data.english[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+						javascripture.data.english[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
 								chapterText += self.createWordString( wordObject, 'english', testament );
 							}
@@ -93,7 +92,7 @@ javascripture.api.reference = {
 				//Load hebrew
 				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
 					chapterText += "<div class='original " + testament + "'>";
-					$.each( originalText[book][chapterInArray][verseNumber], function( wordNumber, wordObject ) {
+					originalText[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
 						if ( wordObject ) {
 							chapterText += self.createWordString( wordObject, testament, testament );
 						}
@@ -119,7 +118,7 @@ javascripture.api.reference = {
 		lemma = wordArray[ 1 ];
 		if ( lemma ) {
 			lemmaArray = lemma.split( ' ' );
-			$.each( lemmaArray, function( key, lemmaValue ) {
+			lemmaArray.forEach( function( lemmaValue, key ) {
 				families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
 			} );
 		}
@@ -159,7 +158,7 @@ javascripture.api.reference = {
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {
 			//get the offset book
-			$.each(bible.Data.books, function (index, loopBookArray) {
+			bible.Data.books.forEach( function ( loopBookArray, index ) {
 				if (loopBookArray[0] === book) {
 					offsetBook = index + offset;
 					if (bible.Data.books[offsetBook] !== undefined) {
@@ -172,7 +171,7 @@ javascripture.api.reference = {
 						}
 					}
 				}
-			});
+			} );
 		}
 		return offsetChapter;
 	}
