@@ -1,5 +1,4 @@
 /*global javascripture*/
-var worker = new Worker('workers/search.js');
 var createSearchReferencesPanel;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
@@ -85,7 +84,10 @@ var createSearchReferencesPanel;
 
 			}, false);
 
-			worker.postMessage(data); // Send data to our worker.
+			worker.postMessage( {
+				task: 'search',
+				parameters: data
+			} ); // Send data to our worker.
 
 
 		}, 100 );

@@ -10,10 +10,10 @@ importScripts('../data/web3.js');
 importScripts('../data/hebrew6.js');
 importScripts('../data/greek4.js');
 importScripts('../api/searchApi.js');
-self.addEventListener('message', function(e) {
-	// var data = e.data;
-	var result = javascripture.api.search.getReferences( e.data );
-  self.postMessage(result);
+self.addEventListener('message', function( e ) {
+	if ( e.data.task === 'search' ) {
+		self.postMessage( javascripture.api.search.getReferences( e.data.parameters ) );
+	}
 }, false);
 
 //self.addEventListener('message', function(e) {
