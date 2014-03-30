@@ -20,8 +20,8 @@ javascripture.modules.reference = {
 		$( 'head title' ).text( title );
 
 		var $threeChapters = $('<div class="three-references" />'),
-			prev = getOffsetChapter( reference, -1 ),
-			next = getOffsetChapter( reference, 1 );
+			prev = self.getOffsetChapter( reference, -1 ),
+			next = self.getOffsetChapter( reference, 1 );
 
 		//add the previous chapter if it exists
 		if ( prev.book ) {
@@ -266,35 +266,34 @@ javascripture.modules.reference = {
 		}
 		wordString += '</span> ';
 		return wordString;
-	}
-};
-
-function getOffsetChapter( reference, offset) {
-	var book = reference.book,
-	    chapter = reference.chapter,
-	    offsetChapter = {},
-		offsetChapterNumber = parseInt(chapter, 10) + offset,
-		offsetNumberJavascript = offsetChapterNumber - 1,
-		offsetBook;
-	if ( javascripture.data.english[book] && javascripture.data.english[book][offsetNumberJavascript] !== undefined) {
-		offsetChapter.book = book;
-		offsetChapter.chapter = offsetChapterNumber;
-	} else {
-		//get the offset book
-		$.each(bible.Data.books, function (index, loopBookArray) {
-			if (loopBookArray[0] === book) {
-				offsetBook = index + offset;
-				if (bible.Data.books[offsetBook] !== undefined) {
-					offsetChapter.book = bible.Data.books[offsetBook][0];
-					//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
-					if (offset > 0) {
-						offsetChapter.chapter = 1;
-					} else {
-						offsetChapter.chapter = bible.Data.verses[offsetBook].length;
+	},
+	getOffsetChapter: function ( reference, offset) {
+		var book = reference.book,
+		    chapter = reference.chapter,
+		    offsetChapter = {},
+			offsetChapterNumber = parseInt(chapter, 10) + offset,
+			offsetNumberJavascript = offsetChapterNumber - 1,
+			offsetBook;
+		if ( javascripture.data.english[book] && javascripture.data.english[book][offsetNumberJavascript] !== undefined) {
+			offsetChapter.book = book;
+			offsetChapter.chapter = offsetChapterNumber;
+		} else {
+			//get the offset book
+			$.each(bible.Data.books, function (index, loopBookArray) {
+				if (loopBookArray[0] === book) {
+					offsetBook = index + offset;
+					if (bible.Data.books[offsetBook] !== undefined) {
+						offsetChapter.book = bible.Data.books[offsetBook][0];
+						//only supports offsets of 1 or -1. to make it work with bigger values this will have to change
+						if (offset > 0) {
+							offsetChapter.chapter = 1;
+						} else {
+							offsetChapter.chapter = bible.Data.verses[offsetBook].length;
+						}
 					}
 				}
-			}
-		});
+			});
+		}
+		return offsetChapter;
 	}
-	return offsetChapter;
-}
+};
