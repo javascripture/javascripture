@@ -35,6 +35,8 @@ modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
 modules/bookmarks.js
+modules/reference.js
+
 js/morphologyApi.js
 js/searchBindings.js
 js/wordPanel.js
