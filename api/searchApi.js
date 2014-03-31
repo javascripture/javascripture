@@ -159,7 +159,6 @@ javascripture.api.search = {
 						matchesLength = Object.keys( self.results.matches ).length;
 
 						if ( matchesLength > 0 && matchesLength >= termsLength) {
-							//console.log(matchesLength, termsLength);
 							self.addReference(bookName, chapterNumber, verseNumber );
 							self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 						}

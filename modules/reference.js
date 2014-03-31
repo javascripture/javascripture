@@ -13,7 +13,23 @@ javascripture.modules.reference = {
 //		$('#verse').html( $threeChapters );
 		worker.addEventListener('message', function(e) {
 			if( e.data.task === 'reference' ) {
-				$('#verse').html( e.data.result );
+				var chapterText = '<div class="three-references"';
+
+				if ( e.data.result.prev.book ) {
+					chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
+				}
+				if ( e.data.result.next.book ) {
+					chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
+				}
+				chapterText += '>';
+
+				e.data.result.chapters.forEach( function( chapterData ) {
+					chapterText += self.getChapterText( reference, chapterData, e.data.result.testament );
+				} );
+
+				chapterText += '</div>';
+
+				$('#verse').html( chapterText );
 
 				var title = book;
 				if ( typeof chapter !== 'undefined' )
@@ -142,6 +158,108 @@ javascripture.modules.reference = {
 	        }
 
 	    }
+	},
+	getChapterText: function ( reference, chapterData, testament ) {
+		var self = this,
+		    book = reference.book,
+		    chapter = reference.chapter,
+		    verse = reference.verse,
+			chapterInArray = chapter - 1,
+			verseInArray = verse - 1,
+			context = false;
+
+		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
+		chapterText += '<ol class="wrapper">';
+
+		if ( chapterData.translation ) {
+			chapterData.translation.forEach( function( verseText, verseNumber ) {
+				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' class="current"';
+				}
+				chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
+				chapterText += '<div class="wrapper"';
+				if(verseNumber === verseInArray) {
+					chapterText += ' id="current"';
+				}
+				if(verseNumber === verseInArray-5) {
+					chapterText += ' id="context"';
+					context = true;
+				}
+				chapterText += '>';
+				chapterText += '<div class="english">';
+					if ( reference.version === 'lc' ) {
+						//same as below
+						chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
+							if ( wordObject ) {
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
+							}
+						});
+					} else {
+						chapterData.translation[verseNumber].forEach( function( wordObject, wordNumber ) {
+							if ( wordObject ) {
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
+							}
+						});
+					}
+				chapterText += "</div>";
+
+				//Load hebrew
+				if(	chapterData.original[verseNumber] ) {
+					chapterText += "<div class='original " + testament + "'>";
+					chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
+						if ( wordObject ) {
+							chapterText += self.createWordString( wordObject, testament, testament );
+						}
+					});
+					chapterText += "</div>";
+				}
+				chapterText += '</div>';
+				chapterText += '</li>';
+			});
+		}
+
+		chapterText += '</ol>';
+		chapterText += '</div>';
+		return chapterText;
+	},
+	createWordString: function ( wordArray, language, testament, version ) {
+		var self = this,
+		    wordString = '',
+		    families = [];
+		if ( typeof wordArray[ 1 ] === 'undefined' )
+			return '<span>' + wordArray[0] + '</span> ';
+
+		lemma = wordArray[ 1 ];
+		if ( lemma ) {
+			lemmaArray = lemma.split( ' ' );
+			lemmaArray.forEach( function( lemmaValue, key ) {
+				families.push( javascripture.api.word.getFamily( lemmaValue ) );
+			} );
+		}
+		wordString += '<span';
+		wordString += ' class="' + families.join( ' ' ) + '"';
+		wordString += ' title="' + lemma;
+		if ( wordArray[2] ) {
+			wordString += ' ' + wordArray[2];
+		}
+		wordString += '"';
+		wordString += ' data-word="' + wordArray[0] + '"';
+		wordString += ' data-lemma="' + wordArray[1] + '"';
+		wordString += ' data-language="' + testament + '"';
+		wordString += ' data-range="verse"';
+		wordString += ' data-family="' + families.join( ' ' ) + '"';
+		if ( wordArray[2] ) {
+			wordString += ' data-morph="' + wordArray[2] + '"';
+		}
+		wordString += '>';
+		if ( version === 'lc' && language === 'english' ) {
+			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+		} else {
+			wordString += wordArray[0];
+		}
+		wordString += '</span> ';
+		return wordString;
 	}
 };
 
@@ -174,11 +292,13 @@ javascripture.modules.reference = {
 			verseHeight = $( '.referencePanel' ).height() - $( window ).height(),// + $( '.dock' ).height(),
 			anchoringData;
 		if ( scrollTop <= 0 ) {
+			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );
 			anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
 			javascripture.modules.reference.load( prev ).anchorReference( anchoringData );
 		}
 		if ( scrollTop >= verseHeight ) {
+			console.log('next');
 			var next = $( '.three-references' ).data( 'next' );
 			anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
 			javascripture.modules.reference.load( next ).anchorReference( anchoringData );
@@ -187,7 +307,6 @@ javascripture.modules.reference = {
 
 	$('.goToReference').submit(function (event) {
 		event.preventDefault();
-		console.log($('#goToReference').val());
 		var reference = bible.parseReference( $('#goToReference').val() );
 
 		var hash = 'book=' + bible.Data.books[reference.bookID - 1][0] + '&chapter=' + reference.chapter + '&verse=' + reference.verse;

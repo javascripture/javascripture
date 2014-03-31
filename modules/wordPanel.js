@@ -114,7 +114,6 @@
 		},
 		getBranchesMarkup: function( strongsNumber ) {
 			var branchesMarkup = '';
-			console.log(strongsNumber);
 			$.each(javascripture.data.strongsObjectWithFamilies, function(strongsObjectKey, strongsObjectRoot){
 				$.each(strongsObjectRoot, function(strongsObjectRootKey,strongsObjectRootValue){
 					if( strongsObjectRootValue == strongsNumber ){
