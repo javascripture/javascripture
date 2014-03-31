@@ -35,6 +35,28 @@ javascripture.api.reference = {
 		threeChapters += '</div>';
 		return threeChapters;
 	},
+	getChapterData: function( reference ) {
+		var self = this,
+		    book = reference.book,
+		    chapter = reference.chapter,
+		    verse = reference.verse,
+			chapterInArray = chapter - 1,
+			result = {};
+
+		if( javascripture.data.hebrew[book] ) {
+			testament = 'hebrew';
+		} else {
+			testament = 'greek';
+		}
+
+		if ( javascripture.data[reference.version][book][chapterInArray] ) {
+			 result.translation = javascripture.data[reference.version][book][chapterInArray];
+			 if( javascripture.data[testament][book] && javascripture.data[testament][book][chapterInArray] ) {
+			 	result.original = javascripture.data[testament][book][chapterInArray];
+			 }
+		}
+		return result;
+	},
 	getChapterText: function ( reference ) {
 		var self = this,
 		    book = reference.book,
@@ -47,17 +69,16 @@ javascripture.api.reference = {
 		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
 		chapterText += '<ol class="wrapper">';
 
-		var originalText, language;
 		if( javascripture.data.hebrew[book] ) {
-			originalText = javascripture.data.hebrew;
 			testament = 'hebrew';
 		} else {
-			originalText = javascripture.data.greek;
 			testament = 'greek';
 		}
 
-		if ( javascripture.data[reference.version][book][chapterInArray] ) {
-			javascripture.data[reference.version][book][chapterInArray].forEach( function( verseText, verseNumber ) {
+		var chapterData = self.getChapterData( reference );
+
+		if ( chapterData.translation ) {
+			chapterData.translation.forEach( function( verseText, verseNumber ) {
 				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' class="current"';
@@ -75,13 +96,13 @@ javascripture.api.reference = {
 				chapterText += '<div class="english">';
 					if ( reference.version === 'lc' ) {
 						//same as below
-						originalText[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
+						chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
 								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
 							}
 						});
 					} else {
-						javascripture.data[reference.version][book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
+						chapterData.translation[verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
 								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
 							}
@@ -90,9 +111,9 @@ javascripture.api.reference = {
 				chapterText += "</div>";
 
 				//Load hebrew
-				if(originalText[book] && originalText[book][chapterInArray][verseNumber]) {
+				if(	chapterData.original[verseNumber] ) {
 					chapterText += "<div class='original " + testament + "'>";
-					originalText[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
+					chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
 						if ( wordObject ) {
 							chapterText += self.createWordString( wordObject, testament, testament );
 						}
