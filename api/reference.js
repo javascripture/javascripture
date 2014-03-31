@@ -1,13 +1,11 @@
-/*globals javascripture bible*/
+/*globals javascripture, bible*/
 javascripture.api.reference = {
 	getThreeChapters: function( reference ) {
 		var self = this,
 		    book = reference.book,
-		    chapter = reference.chapter,
-		    verse = reference.verse,
 			prev = self.getOffsetChapter( reference, -1 ),
 			next = self.getOffsetChapter( reference, 1 ),
-			result = {};
+			result = { reference: reference };
 
 		if ( prev.book ) {
 			result.prev = prev;
@@ -38,12 +36,11 @@ javascripture.api.reference = {
 		return result;
 	},
 	getChapterData: function( reference ) {
-		var self = this,
-		    book = reference.book,
+		var book = reference.book,
 		    chapter = reference.chapter,
-		    verse = reference.verse,
 			chapterInArray = chapter - 1,
-			result = {};
+			result = {},
+			testament;
 
 		if( javascripture.data.hebrew[book] ) {
 			testament = 'hebrew';
@@ -52,10 +49,10 @@ javascripture.api.reference = {
 		}
 
 		if ( javascripture.data[reference.version][book][chapterInArray] ) {
-			 result.translation = javascripture.data[reference.version][book][chapterInArray];
-			 if( javascripture.data[ testament ][book] && javascripture.data[ testament ][book][chapterInArray] ) {
-			 	result.original = javascripture.data[ testament ][book][chapterInArray];
-			 }
+			result.translation = javascripture.data[reference.version][book][chapterInArray];
+			if( javascripture.data[ testament ][book] && javascripture.data[ testament ][book][chapterInArray] ) {
+				result.original = javascripture.data[ testament ][book][chapterInArray];
+			}
 		}
 		return result;
 	},

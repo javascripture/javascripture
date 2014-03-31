@@ -1,4 +1,4 @@
-/*globals javascripture*/
+/*globals javascripture, bible, worker*/
 javascripture.modules.reference = {
 	load: function( reference ) {
 		var self = this,
@@ -9,43 +9,6 @@ javascripture.modules.reference = {
 		if ( 'undefined' == typeof verse ) {
 			reference.verse = 1;
 		}
-
-//		$('#verse').html( $threeChapters );
-		worker.addEventListener('message', function(e) {
-			if( e.data.task === 'reference' ) {
-				var chapterText = '<div class="three-references"';
-
-				if ( e.data.result.prev.book ) {
-					chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
-				}
-				if ( e.data.result.next.book ) {
-					chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
-				}
-				chapterText += '>';
-
-				e.data.result.chapters.forEach( function( chapterData ) {
-					chapterText += self.getChapterText( reference, chapterData, e.data.result.testament );
-				} );
-
-				chapterText += '</div>';
-
-				$('#verse').html( chapterText );
-
-				var title = book;
-				if ( typeof chapter !== 'undefined' )
-					title += ' ' + chapter;
-
-				if ( typeof verse !== 'undefined' )
-					title += ':' + verse;
-
-				$( 'head title' ).text( title );
-
-				if ( $.fn.waypoint ) {
-					$('.reference').waypoint('destroy');
-				}
-				self.scrollToVerse( $( '#current' ) );
-			}
-		} );
 
 		reference.version = $('#versionSelector').val();
 
@@ -99,7 +62,6 @@ javascripture.modules.reference = {
 		return [offset, anchorPointSelector];
 	},
 	anchorReference: function ( anchoringData ) {
-
 		var anchorPointSelector = anchoringData[1],
 		    offset = anchoringData[0],
 		    $anchorPoint = $( anchorPointSelector );
@@ -153,7 +115,8 @@ javascripture.modules.reference = {
 				javascripture.modules.reference.load( {
 			        book: book,
 			        chapter: chapter,
-			        verse: verse
+			        verse: verse,
+			        anchoringData: javascripture.modules.reference.getAnchoringData( null )
 		        } );
 	        }
 
@@ -280,7 +243,7 @@ javascripture.modules.reference = {
 
 	javascripture.modules.reference.loadReferenceFromHash();
 
-	$(window).bind( 'hashchange', function(e) {
+	$(window).bind( 'hashchange', function() {
 	    var startDate = new Date();
 	    javascripture.modules.reference.loadReferenceFromHash();
 	    var endDate = new Date();
@@ -292,16 +255,15 @@ javascripture.modules.reference = {
 			verseHeight = $( '.referencePanel' ).height() - $( window ).height(),// + $( '.dock' ).height(),
 			anchoringData;
 		if ( scrollTop <= 0 ) {
-			console.log('prev');
 			var prev = $( '.three-references' ).data( 'prev' );
 			anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
-			javascripture.modules.reference.load( prev ).anchorReference( anchoringData );
+			prev.anchoringData = anchoringData;
+			javascripture.modules.reference.load( prev );
 		}
 		if ( scrollTop >= verseHeight ) {
-			console.log('next');
 			var next = $( '.three-references' ).data( 'next' );
-			anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
-			javascripture.modules.reference.load( next ).anchorReference( anchoringData );
+			next.anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
+			javascripture.modules.reference.load( next );
 		}
 	});
 
@@ -318,5 +280,51 @@ javascripture.modules.reference = {
 		}
 		return false;
 	});
+
+	worker.addEventListener('message', function(e) {
+		if( e.data.task === 'reference' ) {
+			var reference = e.data.result.reference;
+			console.log('h');
+			var chapterText = '<div class="three-references"';
+
+			if ( e.data.result.prev.book ) {
+				chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
+			}
+			if ( e.data.result.next.book ) {
+				chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
+			}
+			chapterText += '>';
+
+			if ( e.data.result.prev.book ) {
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result.prev, e.data.result.chapters[0], e.data.result.testament );
+			}
+			chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[1], e.data.result.testament );
+			if ( e.data.result.next.book ) {
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
+			}
+
+			chapterText += '</div>';
+
+			$('#verse').html( chapterText );
+
+			var title = reference.book,
+				chapter = reference.chapter -1,
+				verse = reference.verse - 1;
+			if ( typeof chapter !== 'undefined' ) {
+				title += ' ' + chapter;
+			}
+
+			if ( typeof verse !== 'undefined' ) {
+				title += ':' + verse;
+			}
+
+			$( 'head title' ).text( title );
+
+			if ( $.fn.waypoint ) {
+				$('.reference').waypoint('destroy');
+			}
+			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
+		}
+	} );
 
 } )( jQuery );

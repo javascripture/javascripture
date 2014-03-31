@@ -30,6 +30,7 @@ self.addEventListener('message', function( e ) {
 	if ( result ) {
 		self.postMessage( {
 			task: e.data.task,
+			parameters: e.data.parameters,
 			result: result
 		} );
 	}

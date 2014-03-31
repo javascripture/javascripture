@@ -19,7 +19,7 @@ var createSearchReferencesPanel;
 
 	createSearchReferencesPanel = function( data ) {
 		var startDate = new Date();
-		var references = '';
+
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";
@@ -51,41 +51,7 @@ var createSearchReferencesPanel;
 		//wait for the result section to be created
 //		setTimeout( function () {
 
-			worker.addEventListener('message', function(e) {
 
-//				var searchApi = Object.create( javascripture.api.search );
-//				searchApi.getReferences( data );
-
-//				var referenceArray =  searchApi.results.references;
-				if( e.data.task === 'search' ) {
-					var referenceArray = e.data.result;
-
-					references += '<form><ol class="references">';
-					var wordCount = 0;
-
-					var searchObject = javascripture.data.english;
-					if($("select[name=searchLanguage]").val() === "hebrew") {
-						searchObject = javascripture.data.hebrew;
-						$.each(strongsNumberArray, function(index, strongsNumber) {
-							if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-								strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-							}
-						});
-					}
-					references += createReferenceList(referenceArray);
-					references += '</ol></form>';
-
-					if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-						$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
-					}
-	//				goToFirstReference();
-			//		$('.popup').popup( 'close' );
-
-					var endDate = new Date();
-					timer(startDate, endDate);
-				}
-
-			}, false);
 
 			// Send data to our worker.
 			worker.postMessage( {
@@ -217,5 +183,42 @@ var createSearchReferencesPanel;
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).data() );
 	} );
+
+	worker.addEventListener('message', function(e) {
+
+//				var searchApi = Object.create( javascripture.api.search );
+//				searchApi.getReferences( data );
+
+//				var referenceArray =  searchApi.results.references;
+		if( e.data.task === 'search' ) {
+			var referenceArray = e.data.result;
+
+			var references = '<form><ol class="references">';
+			var wordCount = 0;
+			var trackingBoxId = createTrackingBoxId( e.data.parameters, '_' );
+
+			var searchObject = javascripture.data.english;
+			if($("select[name=searchLanguage]").val() === "hebrew") {
+				searchObject = javascripture.data.hebrew;
+				$.each(strongsNumberArray, function(index, strongsNumber) {
+					if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+						strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
+					}
+				});
+			}
+			references += createReferenceList(referenceArray);
+			references += '</ol></form>';
+
+			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+			}
+//				goToFirstReference();
+	//		$('.popup').popup( 'close' );
+
+			var endDate = new Date();
+			timer(startDate, endDate);
+		}
+
+	}, false);
 
 } )( jQuery );
