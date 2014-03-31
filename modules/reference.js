@@ -284,13 +284,12 @@ javascripture.modules.reference = {
 	worker.addEventListener('message', function(e) {
 		if( e.data.task === 'reference' ) {
 			var reference = e.data.result.reference;
-			console.log('h');
 			var chapterText = '<div class="three-references"';
 
-			if ( e.data.result.prev.book ) {
+			if ( e.data.result.prev ) {
 				chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
 			}
-			if ( e.data.result.next.book ) {
+			if ( e.data.result.next ) {
 				chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
 			}
 			chapterText += '>';
