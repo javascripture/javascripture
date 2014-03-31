@@ -24,7 +24,7 @@
 				} else {
 					if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' ) {
 						strongsNumberDisplay = strongsNumber;
-						var className = javascripture.modules.reference.getFamily( strongsNumber );
+						var className = javascripture.api.word.getFamily( strongsNumber );
 						//convert
 						var osidStrongsNumber = strongsNumber;
 
@@ -72,7 +72,7 @@
 							if ( rootNumber.substring( 0, 1 ) === "G" ) {
 								language = 'greek';
 							}
-							roots += '<a href="#search=' + rootNumber + '" class="' + javascripture.modules.reference.getFamily( rootNumber ) + ' word-tree" data-lemma="' + rootNumber + '" data-language="' + language + '">' + rootNumber + '</a> ';
+							roots += '<a href="#search=' + rootNumber + '" class="' + javascripture.api.word.getFamily( rootNumber ) + ' word-tree" data-lemma="' + rootNumber + '" data-language="' + language + '">' + rootNumber + '</a> ';
 						});
 					} else {
 						roots += 'No roots';
@@ -94,7 +94,7 @@
 					infoObjects[ i ].find('#wordTreeRoots').html( wordTreeRoots );
 					infoObjects[ i ].find('#wordTreeBranches').html( wordTreeBranches );
 
-					var family = javascripture.modules.reference.getFamily( strongsNumber ),
+					var family = javascripture.api.word.getFamily( strongsNumber ),
 					    wordTreeFamily = 'family: ' + family;
 					infoObjects[ i ].find('#wordTreeFamily').html( wordTreeFamily );
 
@@ -125,7 +125,7 @@
 						if ( strongsObjectKey.substring( 0, 1 ) === "G" ) {
 							language = 'greek';
 						}
-						branchesMarkup += '<a href="#search='+strongsObjectKey+'" class="'+ javascripture.modules.reference.getFamily( strongsObjectKey ) +' word-tree" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
+						branchesMarkup += '<a href="#search='+strongsObjectKey+'" class="'+ javascripture.api.word.getFamily( strongsObjectKey ) +' word-tree" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
 					}
 				});
 			});

@@ -10,22 +10,33 @@ javascripture.modules.reference = {
 			reference.verse = 1;
 		}
 
-		var title = book;
-		if ( typeof chapter !== 'undefined' )
-			title += ' ' + chapter;
-
-		if ( typeof verse !== 'undefined' )
-			title += ':' + verse;
-
-		$( 'head title' ).text( title );
-
-		if ( $.fn.waypoint ) {
-			$('.reference').waypoint('destroy');
-		}
-
 //		$('#verse').html( $threeChapters );
-		$('#verse').html( javascripture.api.reference.getThreeChapters( reference ) );
-		maintainState(book,chapter,verse);
+		worker.addEventListener('message', function(e) {
+			if( e.data.task === 'reference' ) {
+				$('#verse').html( e.data.result );
+
+				var title = book;
+				if ( typeof chapter !== 'undefined' )
+					title += ' ' + chapter;
+
+				if ( typeof verse !== 'undefined' )
+					title += ':' + verse;
+
+				$( 'head title' ).text( title );
+
+				if ( $.fn.waypoint ) {
+					$('.reference').waypoint('destroy');
+				}
+				self.scrollToVerse( $( '#current' ) );
+			}
+		} );
+
+		reference.version = $('#versionSelector').val();
+
+		worker.postMessage( {
+			task: 'reference',
+			parameters: reference
+		} ); // Send data to our worker.
 
 		return this; //makes it chainable
 
@@ -90,13 +101,6 @@ javascripture.modules.reference = {
 
 		this.scrollToVerse( $anchorPoint, offset );
 	},
-	getFamily: function ( strongsNumber ) {
-		if ( javascripture.data.strongsObjectWithFamilies[ strongsNumber ] ) {
-			return javascripture.data.strongsObjectWithFamilies[ strongsNumber ].family;
-		} else {
-			return strongsNumber;
-		}
-	},
 	getReferenceFromUrl: function () {
 		var hashArray = window.location.hash.split('&'),
 			reference = {};
@@ -134,9 +138,66 @@ javascripture.modules.reference = {
 			        book: book,
 			        chapter: chapter,
 			        verse: verse
-		        } ).scrollToVerse( $( '#current' ) );
+		        } );
 	        }
 
 	    }
 	}
 };
+
+
+
+/*globals javascripture*/
+;( function ( $ ) {
+	var english = javascripture.data.english;
+	$.fn.scrollStopped = function(callback) {
+	    $(this).scroll( function () {
+	        var self = this, $this = $(self);
+	        if ($this.data('scrollTimeout')) {
+	          clearTimeout($this.data('scrollTimeout'));
+	        }
+	        $this.data('scrollTimeout', setTimeout(callback,250,self));
+	    });
+	};
+
+	javascripture.modules.reference.loadReferenceFromHash();
+
+	$(window).bind( 'hashchange', function(e) {
+	    var startDate = new Date();
+	    javascripture.modules.reference.loadReferenceFromHash();
+	    var endDate = new Date();
+		timer(startDate, endDate);
+	});
+
+	$( window ).scrollStopped( function() {
+		var scrollTop = $( document ).scrollTop(),
+			verseHeight = $( '.referencePanel' ).height() - $( window ).height(),// + $( '.dock' ).height(),
+			anchoringData;
+		if ( scrollTop <= 0 ) {
+			var prev = $( '.three-references' ).data( 'prev' );
+			anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
+			javascripture.modules.reference.load( prev ).anchorReference( anchoringData );
+		}
+		if ( scrollTop >= verseHeight ) {
+			var next = $( '.three-references' ).data( 'next' );
+			anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
+			javascripture.modules.reference.load( next ).anchorReference( anchoringData );
+		}
+	});
+
+	$('.goToReference').submit(function (event) {
+		event.preventDefault();
+		console.log($('#goToReference').val());
+		var reference = bible.parseReference( $('#goToReference').val() );
+
+		var hash = 'book=' + bible.Data.books[reference.bookID - 1][0] + '&chapter=' + reference.chapter + '&verse=' + reference.verse;
+		window.location.hash = hash;
+		$( this ).closest( '.popup' ).popup( 'close' );
+		$('#goToReference').blur();
+		if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
+			hideDock();
+		}
+		return false;
+	});
+
+} )( jQuery );

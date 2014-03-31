@@ -49,7 +49,7 @@ var createSearchReferencesPanel;
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
 		//wait for the result section to be created
-		setTimeout( function () {
+//		setTimeout( function () {
 
 			worker.addEventListener('message', function(e) {
 
@@ -57,40 +57,44 @@ var createSearchReferencesPanel;
 //				searchApi.getReferences( data );
 
 //				var referenceArray =  searchApi.results.references;
-				var referenceArray = e.data;
-				references += '<form><ol class="references">';
-				var wordCount = 0;
+				if( e.data.task === 'search' ) {
+					var referenceArray = e.data.result;
 
-				var searchObject = javascripture.data.english;
-				if($("select[name=searchLanguage]").val() === "hebrew") {
-					searchObject = javascripture.data.hebrew;
-					$.each(strongsNumberArray, function(index, strongsNumber) {
-						if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-							strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
-						}
-					});
+					references += '<form><ol class="references">';
+					var wordCount = 0;
+
+					var searchObject = javascripture.data.english;
+					if($("select[name=searchLanguage]").val() === "hebrew") {
+						searchObject = javascripture.data.hebrew;
+						$.each(strongsNumberArray, function(index, strongsNumber) {
+							if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
+								strongsNumberArray[index] = strongsNumber.substring(2, strongsNumber.length); //strip off the H and the 0 for hebrew searches
+							}
+						});
+					}
+					references += createReferenceList(referenceArray);
+					references += '</ol></form>';
+
+					if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
+						$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+					}
+	//				goToFirstReference();
+			//		$('.popup').popup( 'close' );
+
+					var endDate = new Date();
+					timer(startDate, endDate);
 				}
-				references += createReferenceList(referenceArray);
-				references += '</ol></form>';
-
-				if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-					$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
-				}
-				goToFirstReference();
-		//		$('.popup').popup( 'close' );
-
-				var endDate = new Date();
-				timer(startDate, endDate);
 
 			}, false);
 
+			// Send data to our worker.
 			worker.postMessage( {
 				task: 'search',
 				parameters: data
-			} ); // Send data to our worker.
+			} );
 
 
-		}, 100 );
+//		}, 100 );
 	};
 
 	var createReferenceList = function(referenceArray) {
@@ -138,7 +142,7 @@ var createSearchReferencesPanel;
 			    familyInt = '',
 				title = '';
 			if ( data.lemma ) {
-				family = javascripture.modules.reference.getFamily( data.lemma);
+				family = javascripture.api.word.getFamily( data.lemma);
 				familyInt = parseFloat( family.substring( 1, family.length ), 10 );
 			}
 			$.each( data, function ( key, value ) {

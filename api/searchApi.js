@@ -1,18 +1,4 @@
 /*global console, javascripture*/
-/*jQuery.fn.slowEach = function(array, interval, callback ) {
-	if( ! array.length ) {
-		return;
-	}
-	var i = 0;
-	function next() {
-		if( callback.call( array[i], i, array[i] ) !== false ) {
-			if( ++i < array.length ) {
-				setTimeout( next, interval );
-			}
-		}
-	}
-	next();
-};*/
 
 javascripture.api.search = {
 	language: { //helper object to access different languages
@@ -39,10 +25,7 @@ javascripture.api.search = {
 	getReferences: function (parameters) {
 		var self = this;
 		self.parameters = parameters;
-//		console.log(parameters);
-//		self.deferred = $.Deferred();
 		this.lookForTerm();
-//		return self.deferred;
 		return self.results.references;
 	},
 	doesDataMatchTerm: function( type, data, term ) {
@@ -104,17 +87,9 @@ javascripture.api.search = {
 
 		var booksToSearch = this.books[ parameters.language ];
 
-		//some code duplication here, but this allows us to turn slowEach on and off. it's fast when it's turned off
-//		if ( $('#searchSpeed').length > 0 && $('#searchSpeed').val() > 1 ) {
-//			var searchSpeed = $('#searchSpeed').val();
-//			jQuery.fn.slowEach( booksToSearch, searchSpeed, function( bookNumber, bookName ) {
-//				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
-//			} );
-//		} else {
-			booksToSearch.forEach( function( bookName, bookNumber ) {
-				self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
-			} );
-//		}
+		booksToSearch.forEach( function( bookName, bookNumber ) {
+			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
+		} );
 	},
 	searchInABook: function( dataSource, bookName, bookNumber, booksToSearch ) {
 		var self = this,

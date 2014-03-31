@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#version: 4.5.8
+#version: 4.5.10
 index.html
 css/layout.css
 
@@ -25,6 +25,7 @@ data/literalConsistent.js
 #apis
 api/searchApi.js
 api/reference.js
+api/word.js
 
 #modules
 modules/hebrew.js
@@ -38,10 +39,9 @@ modules/bookmarks.js
 modules/reference.js
 
 js/morphologyApi.js
-js/searchBindings.js
-js/wordPanel.js
+modules/search.js
+modules/wordPanel.js
 js/loading.js
-js/reference.js
 js/popup.js
 js/toggler.js
 js/wayPoint.js

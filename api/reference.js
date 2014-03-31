@@ -21,16 +21,16 @@ javascripture.api.reference = {
 		if ( prev.book ) {
 //			$threeChapters.data( 'prev', prev );
 //			$threeChapters.append( javascripture.api.reference.getChapterText( prev ) );
-			threeChapters +=  javascripture.api.reference.getChapterText( prev );
+			threeChapters += javascripture.api.reference.getChapterText( prev );
 		}
 
 		//$threeChapters.append( javascripture.api.reference.getChapterText( reference ) );
-		threeChapters +=  javascripture.api.reference.getChapterText( reference );
+		threeChapters += javascripture.api.reference.getChapterText( reference );
 
 		//add the next chapter if it exists
 		if ( next.book ) {
 //			$threeChapters.data( 'next', next );
-			threeChapters +=  javascripture.api.reference.getChapterText( next );
+			threeChapters += javascripture.api.reference.getChapterText( next );
 		}
 		threeChapters += '</div>';
 		return threeChapters;
@@ -56,8 +56,8 @@ javascripture.api.reference = {
 			testament = 'greek';
 		}
 
-		if ( javascripture.data.english[book][chapterInArray] ) {
-			javascripture.data.english[book][chapterInArray].forEach( function( verseText, verseNumber ) {
+		if ( javascripture.data[reference.version][book][chapterInArray] ) {
+			javascripture.data[reference.version][book][chapterInArray].forEach( function( verseText, verseNumber ) {
 				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' class="current"';
@@ -73,17 +73,17 @@ javascripture.api.reference = {
 				}
 				chapterText += '>';
 				chapterText += '<div class="english">';
-					if ( javascripture.modules.versionSelector.getVersion() === 'lc' ) {
+					if ( reference.version === 'lc' ) {
 						//same as below
 						originalText[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament );
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
 							}
 						});
 					} else {
-						javascripture.data.english[book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
+						javascripture.data[reference.version][book][chapterInArray][verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament );
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
 							}
 						});
 					}
@@ -108,7 +108,7 @@ javascripture.api.reference = {
 		chapterText += '</div>';
 		return chapterText;
 	},
-	createWordString: function ( wordArray, language, testament ) {
+	createWordString: function ( wordArray, language, testament, version ) {
 		var self = this,
 		    wordString = '',
 		    families = [];
@@ -119,7 +119,7 @@ javascripture.api.reference = {
 		if ( lemma ) {
 			lemmaArray = lemma.split( ' ' );
 			lemmaArray.forEach( function( lemmaValue, key ) {
-				families.push( javascripture.modules.reference.getFamily( lemmaValue ) );
+				families.push( javascripture.api.word.getFamily( lemmaValue ) );
 			} );
 		}
 		wordString += '<span';
@@ -138,7 +138,7 @@ javascripture.api.reference = {
 			wordString += ' data-morph="' + wordArray[2] + '"';
 		}
 		wordString += '>';
-		if ( javascripture.modules.versionSelector.getVersion() === 'lc' && language === 'english' ) {
+		if ( version === 'lc' && language === 'english' ) {
 			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
 		} else {
 			wordString += wordArray[0];
@@ -149,11 +149,11 @@ javascripture.api.reference = {
 	getOffsetChapter: function ( reference, offset) {
 		var book = reference.book,
 		    chapter = reference.chapter,
-		    offsetChapter = {},
+		    offsetChapter = { version: reference.version },
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
-		if ( javascripture.data.english[book] && javascripture.data.english[book][offsetNumberJavascript] !== undefined) {
+		if ( javascripture.data[reference.version][book] && javascripture.data[reference.version][book][offsetNumberJavascript] !== undefined) {
 			offsetChapter.book = book;
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {
