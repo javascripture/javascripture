@@ -256,14 +256,17 @@ javascripture.modules.reference = {
 			anchoringData;
 		if ( scrollTop <= 0 ) {
 			var prev = $( '.three-references' ).data( 'prev' );
-			anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
-			prev.anchoringData = anchoringData;
-			javascripture.modules.reference.load( prev );
+			if ( prev ) {
+				prev.anchoringData = javascripture.modules.reference.getAnchoringData( 'prev' );
+				javascripture.modules.reference.load( prev );
+			}
 		}
 		if ( scrollTop >= verseHeight ) {
 			var next = $( '.three-references' ).data( 'next' );
-			next.anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
-			javascripture.modules.reference.load( next );
+			if ( next ) {
+				next.anchoringData = javascripture.modules.reference.getAnchoringData( 'next' );
+				javascripture.modules.reference.load( next );
+			}
 		}
 	});
 
@@ -294,12 +297,18 @@ javascripture.modules.reference = {
 			}
 			chapterText += '>';
 
-			if ( e.data.result.prev.book ) {
+			// This is a bit messy
+			if ( e.data.result.prev ) {
 				chapterText += javascripture.modules.reference.getChapterText( e.data.result.prev, e.data.result.chapters[0], e.data.result.testament );
-			}
-			chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[1], e.data.result.testament );
-			if ( e.data.result.next.book ) {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[1], e.data.result.testament );
+				if ( e.data.result.next ) {
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
+				}
+			} else {
+				chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[0], e.data.result.testament );
+				if ( e.data.result.next ) {
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[1], e.data.result.testament );
+				}
 			}
 
 			chapterText += '</div>';
