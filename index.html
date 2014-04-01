@@ -10,7 +10,7 @@
 		<style id="bodyFontSize"></style>
 	</head>
 	<body>
-	<div class="dock">
+	<div id="dock" class="input">
 		<div class="heading-wrapper">
 			<form class="goToReference">
 				<select name="version" id="versionSelector">
@@ -19,20 +19,105 @@
 					<!--<option value="lc">Literal Consistent</option>-->
 				</select>
 				<input type="text" id="goToReference" placeholder="Go to reference" />
+				<select id="bookSelect" class="lookup bookSelect" tabindex="1">
+					<option></option>
+					<option value="Genesis">Genesis</option>
+					<option value="Exodus">Exodus</option>
+					<option value="Leviticus">Leviticus</option>
+					<option value="Numbers">Numbers</option>
+					<option value="Deuteronomy">Deuteronomy</option>
+					<option value="Joshua">Joshua</option>
+					<option value="Judges">Judges</option>
+					<option value="Ruth">Ruth</option>
+					<option value="1 Samuel">1 Samuel</option>
+					<option value="2 Samuel">2 Samuel</option>
+					<option value="1 Kings">1 Kings</option>
+					<option value="2 Kings">2 Kings</option>
+					<option value="1 Chronicles">1 Chronicles</option>
+					<option value="2 Chronicles">2 Chronicles</option>
+					<option value="Ezra">Ezra</option>
+					<option value="Nehemiah">Nehemiah</option>
+					<option value="Esther">Esther</option>
+					<option value="Job">Job</option>
+					<option value="Psalm">Psalm</option>
+					<option value="Proverbs">Proverbs</option>
+					<option value="Ecclesiastes">Ecclesiastes</option>
+					<option value="Song of Songs">Song of Songs</option>
+					<option value="Isaiah">Isaiah</option>
+					<option value="Jeremiah">Jeremiah</option>
+					<option value="Lamentations">Lamentations</option>
+					<option value="Ezekiel">Ezekiel</option>
+					<option value="Daniel">Daniel</option>
+					<option value="Hosea">Hosea</option>
+					<option value="Joel">Joel</option>
+					<option value="Amos">Amos</option>
+					<option value="Obadiah">Obadiah</option>
+					<option value="Jonah">Jonah</option>
+					<option value="Micah">Micah</option>
+					<option value="Nahum">Nahum</option>
+					<option value="Habakkuk">Habakkuk</option>
+					<option value="Zephaniah">Zephaniah</option>
+					<option value="Haggai">Haggai</option>
+					<option value="Zechariah">Zechariah</option>
+					<option value="Malachi">Malachi</option>
+					<option value="Matthew">Matthew</option>
+					<option value="Mark">Mark</option>
+					<option value="Luke">Luke</option>
+					<option value="John">John</option>
+					<option value="Acts">Acts</option>
+					<option value="Romans">Romans</option>
+					<option value="1 Corinthians">1 Corinthians</option>
+					<option value="2 Corinthians">2 Corinthians</option>
+					<option value="Galatians">Galatians</option>
+					<option value="Ephesians">Ephesians</option>
+					<option value="Philippians">Philippians</option>
+					<option value="Colossians">Colossians</option>
+					<option value="1 Thessalonians">1 Thessalonians</option>
+					<option value="2 Thessalonians">2 Thessalonians</option>
+					<option value="1 Timothy">1 Timothy</option>
+					<option value="2 Timothy">2 Timothy</option>
+					<option value="Titus">Titus</option>
+					<option value="Philemon">Philemon</option>
+					<option value="Hebrews">Hebrews</option>
+					<option value="James">James</option>
+					<option value="1 Peter">1 Peter</option>
+					<option value="2 Peter">2 Peter</option>
+					<option value="1 John">1 John</option>
+					<option value="2 John">2 John</option>
+					<option value="3 John">3 John</option>
+					<option value="Jude">Jude</option>
+					<option value="Revelation">Revelation</option>
+				</select>
+				<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 			</form>
 		</div>
 		<nav class="left">
-			<a href="javascript:history.back();" title="back"><span aria-hidden="true" class="icon-arrow-left"></span><span class="link-text">Back</span></a>
+			<a href="#goToPanel" class="link-text open-menu" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span> <span class="link-text">Go to</span></a>
 			<a href="#help-popup" class="open-popup" title="help"><span aria-hidden="true" class="icon-question"></span><span class="link-text">Help</span></a>
+			<a href="#settings-popup" class="open-popup" id="keyCode48" title="settings"><span aria-hidden="true" class="icon-cog2"></span><span class="link-text">Settings</span></a>
 		</nav>
 		<nav class="right">
-			<a href="#settings-popup" class="open-popup" id="keyCode48" title="settings"><span aria-hidden="true" class="icon-cog2"></span><span class="link-text">Settings</span></a>
 			<span href="#" class="randomReference icon-die" title="Load random reference"></span>
+
+			<a href="#search-popup" class="open-popup" id="keyCode83" title="search">
+				<span aria-hidden="true" class="icon-search"></span>
+				<span class="link-text">Advanced</span>
+			</a>
+
+			<form class="search">
+				<ul>
+					<li>
+						<label for="word" class="has-placeholder">Search for a word</label>
+						<input type="search" name="word" id="word" value="" placeholder="Search for a word" />
+					</li>
+				</ul>
+				<input type="hidden" name="clusivity" value="exclusive" />
+				<input type="hidden" name="range" value="verse" />
+			</form>
 		</nav>
 	</div>
-	<div class="goToPanel">
+	<div class="goToPanel menu" id="goToPanel">
 		<div class="lookup bookSelect">
-			<h2><a href="#go-to-popup" class="link-text open-popup" id="keyCode71" title="go to">Go to<span class="icon-book"></span></a></h2>
 			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
 			<a href="#book=Exodus&chapter=1" data-chapters="40">Exodus <span class="chapter"></span></a>
 			<a href="#book=Leviticus&chapter=1" data-chapters="27">Leviticus <span class="chapter"></span></a>
@@ -106,22 +191,6 @@
 	</div>
 
 	<div id="referenceTracking" class="searchPanel" method="get" action="#search">
-		<form class="search">
-			<ul>
-				<li>
-					<label for="word" class="has-placeholder">Search for a word</label>
-					<input type="search" name="word" id="word" value="" placeholder="Search for a word" />
-				</li>
-				<li class="advanced">
-					<a href="#search-popup" class="open-popup" id="keyCode83" title="search">
-						<span class="link-text">Advanced</span>
-						<span aria-hidden="true" class="icon-search"></span>
-					</a>
-				</li>
-			</ul>
-			<input type="hidden" name="clusivity" value="exclusive" />
-			<input type="hidden" name="range" value="verse" />
-		</form>
 	</div>
 
 	<div class="referencePanel" id="reference">
@@ -205,7 +274,7 @@
 					<li>
 						<label>Fonts:</label>
 						<select name="bodyFontFamily" class="changeStyle">
-							<option value="font-family: Helvetica, Arial !important;">Arial</option>
+							<option value="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Helvetica</option>
 							<option value="font-family: 'Bookman Old Style' !important;">Bookman Old Style</option>
 							<option value="font-family: 'Courier New', Courier !important;">Courier</option>
 							<option value="font-family: Georgia !important;">Georgia</option>
@@ -243,95 +312,14 @@
 						</select>
 					</li>
 					<li>
-						<label>Search speed:</label>
-						<select id="searchSpeed">
-							<option value="1">Hare</option>
-							<option value="10">Rabbit</option>
-							<option value="100">Tortoise</option>
-							<option value="1000">Snail</option>
-						</select><br />
-						This is a test - slow devices crash if you try to search too fast!
+						<label>Reference picker:</label>
+						<select id="referencePicker">
+							<option value="input">Typing</option>
+							<option value="select">Drop down menu</option>
+						</select>
 					</li>
 				</ul>
 			</form>
-		</div>
-	</div>
-</div>
-<div id="go-to-popup" class="popup">
-	<div class="content">
-		<h2>Go to...</h2>
-		<a aria-hidden="true" class="icon-cross close-popup"></a>
-		<div class="content-padding">
-			<select id="bookSelect" class="lookup bookSelect" tabindex="1">
-				<option></option>
-				<option value="Genesis">Genesis</option>
-				<option value="Exodus">Exodus</option>
-				<option value="Leviticus">Leviticus</option>
-				<option value="Numbers">Numbers</option>
-				<option value="Deuteronomy">Deuteronomy</option>
-				<option value="Joshua">Joshua</option>
-				<option value="Judges">Judges</option>
-				<option value="Ruth">Ruth</option>
-				<option value="1 Samuel">1 Samuel</option>
-				<option value="2 Samuel">2 Samuel</option>
-				<option value="1 Kings">1 Kings</option>
-				<option value="2 Kings">2 Kings</option>
-				<option value="1 Chronicles">1 Chronicles</option>
-				<option value="2 Chronicles">2 Chronicles</option>
-				<option value="Ezra">Ezra</option>
-				<option value="Nehemiah">Nehemiah</option>
-				<option value="Esther">Esther</option>
-				<option value="Job">Job</option>
-				<option value="Psalm">Psalm</option>
-				<option value="Proverbs">Proverbs</option>
-				<option value="Ecclesiastes">Ecclesiastes</option>
-				<option value="Song of Songs">Song of Songs</option>
-				<option value="Isaiah">Isaiah</option>
-				<option value="Jeremiah">Jeremiah</option>
-				<option value="Lamentations">Lamentations</option>
-				<option value="Ezekiel">Ezekiel</option>
-				<option value="Daniel">Daniel</option>
-				<option value="Hosea">Hosea</option>
-				<option value="Joel">Joel</option>
-				<option value="Amos">Amos</option>
-				<option value="Obadiah">Obadiah</option>
-				<option value="Jonah">Jonah</option>
-				<option value="Micah">Micah</option>
-				<option value="Nahum">Nahum</option>
-				<option value="Habakkuk">Habakkuk</option>
-				<option value="Zephaniah">Zephaniah</option>
-				<option value="Haggai">Haggai</option>
-				<option value="Zechariah">Zechariah</option>
-				<option value="Malachi">Malachi</option>
-				<option value="Matthew">Matthew</option>
-				<option value="Mark">Mark</option>
-				<option value="Luke">Luke</option>
-				<option value="John">John</option>
-				<option value="Acts">Acts</option>
-				<option value="Romans">Romans</option>
-				<option value="1 Corinthians">1 Corinthians</option>
-				<option value="2 Corinthians">2 Corinthians</option>
-				<option value="Galatians">Galatians</option>
-				<option value="Ephesians">Ephesians</option>
-				<option value="Philippians">Philippians</option>
-				<option value="Colossians">Colossians</option>
-				<option value="1 Thessalonians">1 Thessalonians</option>
-				<option value="2 Thessalonians">2 Thessalonians</option>
-				<option value="1 Timothy">1 Timothy</option>
-				<option value="2 Timothy">2 Timothy</option>
-				<option value="Titus">Titus</option>
-				<option value="Philemon">Philemon</option>
-				<option value="Hebrews">Hebrews</option>
-				<option value="James">James</option>
-				<option value="1 Peter">1 Peter</option>
-				<option value="2 Peter">2 Peter</option>
-				<option value="1 John">1 John</option>
-				<option value="2 John">2 John</option>
-				<option value="3 John">3 John</option>
-				<option value="Jude">Jude</option>
-				<option value="Revelation">Revelation</option>
-			</select>
-			<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 		</div>
 	</div>
 </div>
@@ -346,8 +334,7 @@
 			</ul>
 			<p>Keyboard shortcuts</p>
 			<ul>
-				<li>Open search popup: alt then s</li>
-				<li>Open go-to popup: alt then g</li>
+				<li>Go to a reference: just start typing</li>
 				<li>Next reference: =</li>
 				<li>Previous reference: -</li>
 				<li>Jump to chapter: just type in a number!</li>

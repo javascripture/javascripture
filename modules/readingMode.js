@@ -1,8 +1,8 @@
 function hideDock() {
-	$( '.dock' ).animate( { 'top': '-63px' });
+	$( '#dock' ).animate( { 'top': '-63px' });
 }
 function showDock() {
-	$( '.dock' ).animate( { 'top': 0 });
+	$( '#dock' ).animate( { 'top': 0 });
 }
 $( '#readingMode' ).bind( 'touchstart click', function () {
 	var readingMode = $( 'html' ).toggleClass( 'reading-mode' ).hasClass( 'reading-mode' );
@@ -26,7 +26,7 @@ if ( localStorage && localStorage.readingMode && localStorage.readingMode === 't
 }
 
 $( '#showGoToReference' ).bind( 'touchstart click', function () {
-	var $dock = $( '.dock' );
+	var $dock = $( '#dock' );
 	if ( $dock.css( 'top' ) === '0px' ) {
 		hideDock();
 	} else {

@@ -1,4 +1,4 @@
-.dock {
+#dock {
 	background: #fff;
 	border-bottom: 1px solid #ccc;
 	font-family: 'Helvetica Neue';
@@ -6,15 +6,14 @@
 	height: $dock-height;
 
 	position: fixed;
-	left: 201px;
-	right: 201px;
+	left: 0;
+	right: 0;
 	top: 0;
 	z-index: 9;
 	select {
 		background: none;
 		font-family: 'Helvetica Neue';
 		font-weight: 100;
-		height: 2em;
 	}
 	select, input {
 		vertical-align: middle;
@@ -34,16 +33,20 @@
 		white-space: nowrap;
 	}
 	nav.right {
-		right: 34px;
+		right: 4px;
 	}
 	nav.left {
 		left: 4px;
+	}
+	nav a,
+	nav span,
+	nav form {
+		display: inline-block;
 	}
 	nav a {
 		border-radius: 3px;
 		color:#000;
 		cursor:pointer;
-		display: inline-block;
 		line-height: 2.5em;
 
 		opacity:.4;
@@ -59,6 +62,22 @@
 		display: none;
 		@media only screen and (min-width: 1200px) {
 			display: inline;
+		}
+	}
+	&.input {
+		.lookup {
+			display: none;
+		}
+		#goToReference {
+			display: inline;
+		}
+	}
+	&.select {
+		.lookup {
+			display: inline;
+		}
+		#goToReference {
+			display: none;
 		}
 	}
 }

@@ -25,7 +25,7 @@
 				document.getElementById( 'goToReference' ).value = reference;
 			}
 		}, {
-			offset: $('.dock').height()
+			offset: $('#dock').height()
 		} );
 	} );
 } )( jQuery );

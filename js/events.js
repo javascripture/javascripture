@@ -124,8 +124,36 @@
 		$('.changeStyle').change(function(){
 			$('#'+$(this).attr('name')).html('body { '+$(this).val()+'}');
 			localStorage.font = $(this).val();
+			$( '.popup' ).popup( 'close' );
 		});
 		if ( localStorage.font ) {
 			$('#'+$('.changeStyle').attr('name')).html('body { ' + localStorage.font + '}');
+			$('.changeStyle').val( localStorage.font );
+		}
+		$('.open-menu').click( function( event ) {
+			event.preventDefault();
+			var $this = $( $(this).attr('href') ),
+			    left = 0
+			if ( $this.hasClass( 'show' ) ) {
+				left = '-220px';
+			}
+
+			$this.toggleClass( 'show').animate( {
+				'left': left
+			} );
+		} );
+
+		// #referencePicker
+		$('#referencePicker').change( function() {
+			var type = $( this ).val();
+			$( '#dock' ).attr( 'class', type );
+			$( '.popup' ).popup( 'close' );
+			localStorage.referencePicker = type;
+		} );
+
+		if ( localStorage.referencePicker ) {
+			var type = localStorage.referencePicker;
+			$( '#dock' ).attr( 'class', type );
+			$('#referencePicker').val( type );
 		}
 	});

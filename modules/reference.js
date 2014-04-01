@@ -25,7 +25,7 @@ javascripture.modules.reference = {
 			offset = 0;
 		}
 		$( document ).scrollTop( 0 );
-		offset = offset - $('.dock').height();
+		offset = offset - $('#dock').height();
 
 		//there must be a better way to do this, but the problem is that the top animation hasn't happened by this point
 		if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
@@ -56,7 +56,7 @@ javascripture.modules.reference = {
 				$anchorVerse = $('.reference:last-child ol.wrapper li:last-child');
 			}
 			anchorPointSelector = '#' + $anchorVerse.attr('id');
-			offset = $bodyOffset - $anchorVerse.offset().top + $('.dock').height();
+			offset = $bodyOffset - $anchorVerse.offset().top + $('#dock').height();
 		}
 
 		return [offset, anchorPointSelector];
@@ -332,6 +332,7 @@ javascripture.modules.reference = {
 				$('.reference').waypoint('destroy');
 			}
 			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
+			maintainState( reference );
 		}
 	} );
 

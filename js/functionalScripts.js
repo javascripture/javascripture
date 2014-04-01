@@ -207,17 +207,15 @@ function goToReference(book,chapter,verse){
 	$('select#chapterSelect').val(chapter);
 	$('select#verseSelect').val(verse).change();
 }
-function maintainState(book,chapter,verse){
+function maintainState( reference ){
 	$('.dynamic').each(function(){
-		if($(this).hasClass('chapterSelect')){
-			var size = javascripture.data.english[book].length;
-		} else if($(this).hasClass('verseSelect')){
-			var chapterInArray = chapter - 1;
-			var size = javascripture.data.english[book][chapterInArray].length;
-		}
+		var bookId = bible.getBookId( reference.book ),
+		    size = bible.Data.verses[ bookId - 1 ].length;
+
 		if($(this).attr('size') > 0){
 			$(this).attr('size',size);
 		}
+
 		var options = '';
 		var option = 0;
 		while(option<size) {
@@ -227,11 +225,10 @@ function maintainState(book,chapter,verse){
 		$(this).html(options);
 	});
 
-	$('select.bookSelect').val(book);
-	$('select.chapterSelect').val(chapter);
-	$('select.verseSelect').val(verse);
+	$('select.bookSelect').val( reference.book );
+	$('select.chapterSelect').val( reference.chapter );
 
-	$( '#goToReference' ).val( book + ' ' + chapter + ':' + verse );
+//	$( '#goToReference' ).val( book + ' ' + chapter + ':' + verse );
 	/*broken now wwe have historyif(context) {
 		window.location.href = '#context';
 	} else {

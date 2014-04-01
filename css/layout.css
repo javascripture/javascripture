@@ -183,7 +183,7 @@ ul.verseSelect {
   position: relative;
   z-index: 9; }
 
-.goToPanel h2 {
+.goToPanel h2, .goToPanel .h2 {
   background: #ccc;
   color: #666;
   font-weight: 100;
@@ -193,8 +193,6 @@ ul.verseSelect {
 .goToPanel div {
   position: relative; }
 .goToPanel a {
-  border-bottom: 1px #ccc solid;
-  color: #666;
   display: block;
   font-weight: 100;
   line-height: 2em;
@@ -298,7 +296,7 @@ form ul li {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   bottom: 0;
   display: block;
-  left: 201px;
+  left: 221px;
   right: 201px;
   max-height: 200px;
   overflow: scroll;
@@ -496,8 +494,11 @@ input, select {
   box-shadow: inset 0 0 1px black, inset 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -1px rgba(0, 0, 0, 0.5);
   font-family: Helvetica, Arial, sans-serif;
   font-size: 20px;
-  line-height: 2em;
+  line-height: 1em;
   height: 2em; }
+
+select {
+  padding: .3em 0; }
 
 input {
   text-indent: .5em;
@@ -532,61 +533,71 @@ form.search #advanced {
 #currentRef {
   background: #eee; }
 
-.dock {
+#dock {
   background: #fff;
   border-bottom: 1px solid #ccc;
   font-family: 'Helvetica Neue';
   font-weight: 100;
   height: 50px;
   position: fixed;
-  left: 201px;
-  right: 201px;
+  left: 0;
+  right: 0;
   top: 0;
   z-index: 9; }
-  .dock select {
+  #dock select {
     background: none;
     font-family: 'Helvetica Neue';
-    font-weight: 100;
-    height: 2em; }
-  .dock select, .dock input {
+    font-weight: 100; }
+  #dock select, #dock input {
     vertical-align: middle; }
-  .dock .heading-wrapper {
+  #dock .heading-wrapper {
     font-size: 160%;
     line-height: 1.8em;
     text-align: center; }
-    .dock .heading-wrapper #goToReference {
+    #dock .heading-wrapper #goToReference {
       max-width: 200px; }
-  .dock nav {
+  #dock nav {
     line-height: 50px;
     position: absolute;
     top: 0;
     white-space: nowrap; }
-  .dock nav.right {
-    right: 34px; }
-  .dock nav.left {
+  #dock nav.right {
+    right: 4px; }
+  #dock nav.left {
     left: 4px; }
-  .dock nav a {
+  #dock nav a,
+  #dock nav span,
+  #dock nav form {
+    display: inline-block; }
+  #dock nav a {
     border-radius: 3px;
     color: #000;
     cursor: pointer;
-    display: inline-block;
     line-height: 2.5em;
     opacity: .4;
     padding: 0 1em;
     text-decoration: none;
     -webkit-transition: opacity .5s; }
-  .dock nav a:hover {
+  #dock nav a:hover {
     opacity: 1; }
-  .dock nav span[class*="icon-"] {
+  #dock nav span[class*="icon-"] {
     margin-right: .5em; }
-  .dock nav span.link-text {
+  #dock nav span.link-text {
     display: none; }
     @media only screen and (min-width: 1200px) {
-      .dock nav span.link-text {
+      #dock nav span.link-text {
         display: inline; } }
+  #dock.input .lookup {
+    display: none; }
+  #dock.input #goToReference {
+    display: inline; }
+  #dock.select .lookup {
+    display: inline; }
+  #dock.select #goToReference {
+    display: none; }
 
 .referencePanel {
-  margin: 50px 200px 0; }
+  margin: 50px 200px 0 220px; }
   .referencePanel .wordControlPanel {
     clear: both; }
     .referencePanel .wordControlPanel .close {
@@ -605,36 +616,40 @@ form.search #advanced {
   bottom: 0;
   overflow: scroll;
   position: fixed;
-  top: 0;
+  top: 51px;
   width: 200px;
   z-index: 10; }
 
 .goToPanel {
   border-right: 1px solid #ccc;
-  left: 0; }
+  left: 0;
+  width: 220px; }
 
 .searchPanel {
   border-left: 1px solid #ccc;
   float: right;
-  padding-top: 4.7em;
-  right: 0; }
-  .searchPanel form.search {
-    background: #ccc;
-    padding: .1rem .5rem .5rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1; }
-    .searchPanel form.search input {
-      border: none;
-      color: #000;
-      font-family: 'Helvetica Neue';
-      font-weight: 100; }
-    .searchPanel form.search .advanced {
-      line-height: 1em;
-      text-align: center; }
-      .searchPanel form.search .advanced a {
-        color: #333; }
+  right: 0;
+  /*	form.search {
+  		background: #ccc;
+  		padding: .1rem .5rem .5rem;
+  		position: absolute;
+  		right: 0;
+  		top: 0;
+  		z-index: 1;
+  		input {
+  			border: none;
+  			color: #000;
+  			font-family: 'Helvetica Neue';
+  			font-weight: 100;
+  		}
+  		.advanced {
+  			line-height: 1em;
+  			text-align: center;
+  			a {
+  				color: #333;
+  			}
+  		}
+  	}*/ }
   .searchPanel h2 {
     border: none;
     font-family: 'Helvetica Neue';
@@ -656,14 +671,20 @@ form.search #advanced {
       color: #000;
       display: inline-block; }
 
-.reading-mode .dock {
+.menu {
+  background: #333;
+  left: -220px; }
+  .menu a {
+    color: #fff; }
+
+.reading-mode #dock {
   background: none;
   border: none; }
-  .reading-mode .dock nav {
+  .reading-mode #dock nav {
     display: none; }
-  .reading-mode .dock .reading-mode-version {
+  .reading-mode #dock .reading-mode-version {
     display: inline; }
-  .reading-mode .dock .goToReference {
+  .reading-mode #dock .goToReference {
     background: #fff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -755,10 +776,10 @@ form.search #advanced {
 .reading-mode-switch {
   font-size: 14px;
   position: fixed;
-  right: 214px;
-  top: 24px;
+  right: 24px;
+  bottom: 24px;
   line-height: 0;
-  z-index: 9; }
+  z-index: 99; }
   .reading-mode-switch.icon-fullscreen-exit {
     font-size: 22px;
     right: 14px; }

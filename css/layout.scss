@@ -62,7 +62,7 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 }
 
 .goToPanel {
-	h2 {
+	h2, .h2 {
 		background: #ccc;
 		color: #666;
 		font-weight: 100;
@@ -74,8 +74,8 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 		position: relative;
 	}
 	a {
-	    border-bottom: 1px #ccc solid;
-		color: #666;
+//	    border-bottom: 1px #ccc solid;
+//		color: #666;
 		display: block;
 		font-weight: 100;
 		line-height: 2em;
@@ -157,7 +157,7 @@ form ul li {list-style:none;}
     box-shadow: 0 0 5px rgba(0,0,0,.5);
 	bottom: 0;
 	display: block;
-	left: 201px;
+	left: 221px;
 	right: 201px;
 	max-height: 200px;
 	overflow: scroll;
@@ -298,8 +298,11 @@ input, select {
 
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 20px;
-	line-height: 2em;
+	line-height: 1em;
 	height: 2em;
+}
+select {
+	padding: .3em 0;
 }
 input {
 	text-indent: .5em;
@@ -341,7 +344,7 @@ form.search {
 @import 'dock';
 
 .referencePanel {
-	margin: $dock-height 200px 0;
+	margin: $dock-height 200px 0 220px;
 	.wordControlPanel {
 		clear: both;
 		.close {
@@ -362,20 +365,21 @@ form.search {
 	bottom: 0;
 	overflow: scroll;
 	position: fixed;
-	top: 0;
+	top: $dock-height + 1;
 	width: 200px;
 	z-index: 10;
 }
 .goToPanel {
 	border-right: 1px solid #ccc;
 	left: 0;
+	width: 220px;
 }
 .searchPanel {
 	border-left: 1px solid #ccc;
 	float: right;
-	padding-top: 4.7em;
+//	padding-top: 4.7em;
 	right: 0;
-	form.search {
+/*	form.search {
 		background: #ccc;
 		padding: .1rem .5rem .5rem;
 		position: absolute;
@@ -395,7 +399,7 @@ form.search {
 				color: #333;
 			}
 		}
-	}
+	}*/
 	h2 {
 		border: none;
 		font-family: 'Helvetica Neue';
@@ -422,8 +426,10 @@ form.search {
 		}
 	}
 }
+@import 'menu';
+
 .reading-mode {
-	.dock {
+	#dock {
 		background: none;
 		border: none;
 		nav {
@@ -496,10 +502,10 @@ form.search {
 .reading-mode-switch {
 	font-size: 14px;
 	position: fixed;
-	right: 214px;
-	top: 24px;
+	right: 24px;
+	bottom: 24px;
 	line-height: 0;
-	z-index: 9;
+	z-index: 99;
 	&.icon-fullscreen-exit {
 		font-size: 22px;
 		right: 14px;
