@@ -1,0 +1,57 @@
+.full-page {
+	background: white;
+	padding-top: 1em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	z-index: 10;
+	.content {
+		font-weight: 300;
+		margin: 0 auto;
+		position: relative;
+		text-align: left;
+		width: 100%;
+		max-width: 600px;
+		.logo {
+			overflow: auto;
+			position: relative;
+			h1 {
+				font-size: 3rem;
+				font-weight: 100;
+			}
+			svg {
+				float: left;
+				margin-right: 1rem;
+			}
+		}
+		.features {
+			margin-top: 1em;
+			ul {
+				list-style: disc;
+				margin: 0 0 0 1em;
+			}
+			p {
+				margin-bottom: 1rem;
+			}
+		}
+		.button {
+			margin: 1em 0;
+			text-align: center;
+			.installation-info {
+				margin-top: 1rem;
+			}
+			button {
+				background: #333;
+				cursor: pointer;
+				font-size: 3rem;
+				padding: .5rem 1rem;
+				&[disabled] {
+					background: #ccc;
+				}
+			}
+		}
+	}
+}

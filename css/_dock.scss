@@ -1,0 +1,64 @@
+.dock {
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
+	height: $dock-height;
+
+	position: fixed;
+	left: 201px;
+	right: 201px;
+	top: 0;
+	z-index: 9;
+	select {
+		background: none;
+		font-family: 'Helvetica Neue';
+		font-weight: 100;
+		height: 2em;
+	}
+	select, input {
+		vertical-align: middle;
+	}
+	.heading-wrapper {
+		font-size: 160%;
+		line-height: 1.8em;
+		text-align: center;
+		#goToReference {
+			max-width: 200px;
+		}
+	}
+	nav {
+		line-height: $dock-height;
+		position: absolute;
+		top: 0;
+		white-space: nowrap;
+	}
+	nav.right {
+		right: 34px;
+	}
+	nav.left {
+		left: 4px;
+	}
+	nav a {
+		border-radius: 3px;
+		color:#000;
+		cursor:pointer;
+		display: inline-block;
+		line-height: 2.5em;
+
+		opacity:.4;
+		padding: 0 1em;
+		text-decoration: none;
+		-webkit-transition: opacity .5s; // For Safari
+	}
+	nav a:hover { opacity: 1; }
+	nav span[class*="icon-"] {
+		margin-right: .5em;
+	}
+	nav span.link-text {
+		display: none;
+		@media only screen and (min-width: 1200px) {
+			display: inline;
+		}
+	}
+}

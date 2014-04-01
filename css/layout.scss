@@ -1,4 +1,8 @@
+$dock-height: 50px;
 * {border:none;margin:0;padding:0;}
+
+@import 'fonts';
+
 body {background:#fff;color:#000;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 100%; }
 a{text-decoration: none;}
 .trans-change.added { font-style: italic;}
@@ -32,16 +36,11 @@ body > .wrapper { height: 0;}
 .verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }
 span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
 .reference span:hover {
-/*	color: #fff;*/
 	background: #eff;
-//	outline: 1px solid #000;
-//    box-shadow: 0 0 5px #000;
 }
 .reference span.dwyer-added:hover,
 .reference span.added:hover {
 	background:none;
-//	outline: none;
-//    box-shadow: none;
 }
 #verse.isolate {
 	color: #999;
@@ -49,7 +48,6 @@ span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-ra
 #verse.isolate ol li span {
 	background: none;
 	color: #999;
-
 }
 
 .selectWrapper {position:absolute;left:0;top:0;}
@@ -68,7 +66,7 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 		background: #ccc;
 		color: #666;
 		font-weight: 100;
-		height: @dock-height + 1;
+		height: $dock-height + 1;
 		line-height: 2em;
 		padding-left: .5em;
 	}
@@ -79,7 +77,6 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 	    border-bottom: 1px #ccc solid;
 		color: #666;
 		display: block;
-	//	font-family: 'Helvetica Neue';
 		font-weight: 100;
 		line-height: 2em;
 		text-indent: 15px;
@@ -92,9 +89,6 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 			right: 15px;
 		}
 	}
-}
-.bookSelect a:hover {
-
 }
 
 .bookSelect {
@@ -111,7 +105,6 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 .panel .heading select {position:relative;z-index:1;}
 
 form ul li {list-style:none;}
-
 
 .references {clear:both;}
 .references li {list-style-position: inside;}
@@ -161,7 +154,6 @@ form ul li {list-style:none;}
 
 #wordControlPanel {
 	background: rgba( 255, 255, 255, .9 );
-//		border-top: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0,0,0,.5);
 	bottom: 0;
 	display: block;
@@ -293,69 +285,9 @@ dvnnm {text-transform: uppercase;}
 
 .verse .wrapper { display:inline-block; vertical-align:top; }
 
-/*popups*/
-.popup {
-	background: rgba(255, 255, 255, .5);
-	display: none;
-	position: fixed;
-	bottom: 0;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 9;
-	.content {
-		background: #fff;
-		border-bottom-left-radius: 1em;
-		border-bottom-right-radius: 1em;
-		border: 1px solid #ccc;
-		border-top: none;
-//		box-shadow: 0 0 10px #000;
-		margin: 0 auto;
-		overflow: auto;
-		padding: 1em;
-		position: relative;
-		width: 320px;
-		.content-padding {
-			h2, input, a {
-				font-family: 'Helvetica Neue';
-				font-weight: 100;
-			}
-			ul {
-				margin: 0 0 1em 1em;
-			}
-			.search ul {
-				margin: 0;
-			}
-		}
-		input[type=submit],
-		input[type=text] {
-			text-indent: .5em;
-			width: 100%;
-		}
-		.close-popup {
-			color: #ccc;
-			padding: 1em;
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-		.close-popup:hover {
-			color: #000;
-		}
-	}
-	.advanced {
-		display: block;
-		margin-top: 1em;
-		text-align: center;
-		a {
-			color: #999;
-		}
-	}
-}
+@import 'popups';
 
-/*Forms*/
+// Forms
 input, select {
 	border: none;
 	border-radius: 5px;
@@ -387,14 +319,13 @@ button, input[type=button], input[type=submit] {
 	color: #fff;
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
-//	font-size: 2rem;
-//	padding: 1rem;
 }
 form input[type=checkbox] {
 	height: 20px;
 	width:20px;
 }
-/*Search form*/
+
+// Search form
 form.search {
 	li {
 		line-height: 3em;
@@ -406,74 +337,11 @@ form.search {
 #currentRef {
 	background: #eee;
 }
-@dock-height: 50px;
-.dock {
-	background: #fff;
-	border-bottom: 1px solid #ccc;
-	font-family: 'Helvetica Neue';
-	font-weight: 100;
-	height: @dock-height;
 
-	position: fixed;
-	left: 201px;
-	right: 201px;
-	top: 0;
-	z-index: 9;
-	select {
-		background: none;
-		font-family: 'Helvetica Neue';
-		font-weight: 100;
-		height: 2em;
-	}
-	select, input {
-		vertical-align: middle;
-	}
-	.heading-wrapper {
-		font-size: 160%;
-		line-height: 1.8em;
-		text-align: center;
-		#goToReference {
-			max-width: 200px;
-		}
-	}
-	nav {
-		line-height: @dock-height;
-		position: absolute;
-		top: 0;
-		white-space: nowrap;
-	}
-	nav.right {
-		right: 34px;
-	}
-	nav.left {
-		left: 4px;
-	}
-	nav a {
-		//background: #000;
-		border-radius: 3px;
-		color:#000;
-		cursor:pointer;
-		display: inline-block;
-		line-height: 2.5em;
+@import 'dock';
 
-		opacity:.4;
-		padding: 0 1em;
-		text-decoration: none;
-		-webkit-transition: opacity .5s; /* Safari */
-	}
-	nav a:hover { opacity: 1; }
-	nav span[class*="icon-"] {
-		margin-right: .5em;
-	}
-	nav span.link-text {
-		display: none;
-		@media only screen and (min-width: 1200px) {
-			display: inline;
-		}
-	}
-}
 .referencePanel {
-	margin: @dock-height 200px 0;
+	margin: $dock-height 200px 0;
 	.wordControlPanel {
 		clear: both;
 		.close {
@@ -539,7 +407,6 @@ form.search {
 			position: absolute;
 			top: 5px;
 			right: 5px;
-//			z-index: 999;
 		}
 		.remove:hover {
 			opacity: 1;
@@ -559,7 +426,6 @@ form.search {
 	.dock {
 		background: none;
 		border: none;
-//		top: -@dock-height - 13px;
 		nav {
 			display: none;
 		}
@@ -584,7 +450,6 @@ form.search {
 	}
 	#verse ol {
 		counter-reset: verse;
-//		list-style: none;
 		li {
 			display: inline;
 			margin: 0 !important;
@@ -626,117 +491,8 @@ form.search {
 	}
 }
 
-/*Fonts*/
-@font-face {
-	font-family: 'icomoon';
-	src: url(data:application/x-font-woff;charset=utf-8;base64,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) format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
-[class*="icon-"] {
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+@import 'loading-screen';
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.icon-book:before {
-	content: "\e605";
-}
-.icon-bookmark2:before {
-	content: "\e606";
-}
-.icon-cog2:before {
-	content: "\e607";
-}
-.icon-question:before {
-	content: "\e608";
-}
-.icon-search:before {
-	content: "\e609";
-}
-.icon-arrow-left:before {
-	content: "\e60a";
-}
-.icon-plus:before {
-	content: "\e600";
-}
-.icon-cross:before {
-	content: "\e604";
-}
-.icon-die:before {
-	content: "\e601";
-}
-.icon-fullscreen:before {
-	content: "\e603";
-}
-.icon-fullscreen-exit:before {
-	content: "\e602";
-}
-.full-page {
-	background: white;
-	padding-top: 1em;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	text-align: center;
-	z-index: 10;
-	.content {
-		font-weight: 300;
-		margin: 0 auto;
-		position: relative;
-		text-align: left;
-		width: 100%;
-		max-width: 600px;
-		.logo {
-			overflow: auto;
-			position: relative;
-			h1 {
-				font-size: 3rem;
-				font-weight: 100;
-			}
-			svg {
-				float: left;
-				margin-right: 1rem;
-			}
-		}
-		.features {
-			margin-top: 1em;
-			ul {
-				list-style: disc;
-				margin: 0 0 0 1em;
-			}
-			p {
-				margin-bottom: 1rem;
-			}
-		}
-		.button {
-			margin: 1em 0;
-			text-align: center;
-			.installation-info {
-				margin-top: 1rem;
-			}
-			button {
-				background: #333;
-				cursor: pointer;
-				font-size: 3rem;
-				padding: .5rem 1rem;
-				&[disabled] {
-					background: #ccc;
-				}
-			}
-		}
-	}
-}
 .reading-mode-switch {
 	font-size: 14px;
 	position: fixed;
