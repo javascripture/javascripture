@@ -31,7 +31,8 @@
 				waitingForAnotherNumber = true;
 				clearTimeout( waitingForNumberTimer );
 
-				if ( javascripture.data.english[currentReference.book][chapter] ) {
+				var bookId = bible.getBookId( currentReference.book );
+				if ( bible.Data.verses[bookId - 1][ chapter - 1] ) {
 					window.location.hash = '#book=' + currentReference.book + '&chapter=' + chapter;
 				}
 				waitingForNumberTimer = setTimeout( function () {

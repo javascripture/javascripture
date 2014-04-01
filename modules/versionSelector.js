@@ -38,6 +38,6 @@ javascripture.data.english = javascripture.data.kjv;
 javascripture.modules.versionSelector.switchVersion( javascripture.modules.versionSelector.getVersion() );
 
 //bind version switcher
-$( document ).on( 'change', javascripture.modules.versionSelector.switcher, function () {
+$( javascripture.modules.versionSelector.switcher ).change( function () {
 	javascripture.modules.versionSelector.switchVersion( $(this).val() );
 } );
