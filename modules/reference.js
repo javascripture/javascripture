@@ -11,6 +11,12 @@ javascripture.modules.reference = {
 		}
 
 		reference.version = $('#versionSelector').val();
+		if ( reference.version === 'original' ) {
+			reference.version = 'kjv'; // Backup
+			if ( localStorage.version ) {
+				reference.version = localStorage.version;
+			}
+		}
 
 		worker.postMessage( {
 			task: 'reference',
