@@ -133,14 +133,20 @@
 		$('.open-menu').click( function( event ) {
 			event.preventDefault();
 			var $this = $( $(this).attr('href') ),
+				$menu = $( '.menu' )
 			    left = 0
-			if ( $this.hasClass( 'show' ) ) {
-				left = '-220px';
+			if ( $this.hasClass( 'top' ) ) {
+				left = '-200px';
 			}
 
-			$this.toggleClass( 'show').animate( {
+			$menu.animate( {
 				'left': left
 			} );
+
+			$('.menu').removeClass( 'top' );
+			if ( left === 0 ) {
+				$this.addClass('top');
+			}
 		} );
 
 		// #referencePicker

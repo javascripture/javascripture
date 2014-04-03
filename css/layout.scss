@@ -363,7 +363,6 @@ form.search {
 .goToPanel, .searchPanel {
 	background: #fff;
 	bottom: 0;
-	overflow: scroll;
 	position: fixed;
 	top: $dock-height + 1;
 	width: 200px;
@@ -373,8 +372,14 @@ form.search {
 	border-right: 1px solid #ccc;
 	left: 0;
 	width: 220px;
+	.bookSelect {
+		height: 100%;
+		overflow: scroll;
+	}
 }
 .searchPanel {
+	overflow: scroll;
+
 	border-left: 1px solid #ccc;
 	float: right;
 //	padding-top: 4.7em;
