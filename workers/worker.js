@@ -6,7 +6,7 @@ javascripture.data.greek = {};
 javascripture.data.hebrew = {};
 javascripture.api = {};
 importScripts('../data/kjvdwyer7.js');
-importScripts('../data/web3.js');
+//importScripts('../data/web3.js');
 importScripts('../data/hebrew6.js');
 importScripts('../data/greek4.js');
 
