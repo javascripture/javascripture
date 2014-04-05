@@ -2,9 +2,10 @@
 javascripture.modules.colors = {
 	getStrongsColor: function ( strongsInt ) {
 		var theSizeOfAColorSegment = 360 / 8000,
-			hue = strongsInt * theSizeOfAColorSegment;
-
-		return 'hsl( ' + hue + ', 50%, 50% )';
+			hue = strongsInt * theSizeOfAColorSegment,
+			staturation = $( '#subdueColorBy' ).val() * 100 + '%',
+			lightness = $( '#subdueColorBy' ).val() * 100 + '%';
+		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 	},
 
 	getStrongsStyle: function ( strongsNumber, newColor ) {

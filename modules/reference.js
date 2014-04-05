@@ -85,8 +85,11 @@ javascripture.modules.reference = {
 
 		this.scrollToVerse( $anchorPoint, offset );
 	},
-	getReferenceFromUrl: function () {
-		var hashArray = window.location.hash.split('&'),
+	getReferenceFromCurrentUrl: function () {
+		return this.getReferenceFromUrl( window.location.hash );
+	},
+	getReferenceFromUrl: function ( url ) {
+		var hashArray = url.split('&'),
 			reference = {};
 
 		if ( hashArray.length > 1 ) {
@@ -321,15 +324,13 @@ javascripture.modules.reference = {
 
 			$('#verse').html( chapterText );
 
-			var title = reference.book,
-				chapter = reference.chapter -1,
-				verse = reference.verse - 1;
-			if ( typeof chapter !== 'undefined' ) {
-				title += ' ' + chapter;
+			var title = reference.book;
+			if ( typeof reference.chapter !== 'undefined' ) {
+				title += ' ' + reference.chapter;
 			}
 
-			if ( typeof verse !== 'undefined' ) {
-				title += ':' + verse;
+			if ( typeof reference.verse !== 'undefined' ) {
+				title += ':' + reference.verse;
 			}
 
 			$( 'head title' ).text( title );
@@ -339,6 +340,12 @@ javascripture.modules.reference = {
 			}
 			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
 			maintainState( reference );
+		}
+	} );
+
+	worker.addEventListener('message', function(e) {
+		if( e.data.task === 'loading' ) {
+			$( '.loading' ).html( e.data.html );
 		}
 	} );
 

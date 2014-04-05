@@ -111,6 +111,9 @@
 			$.each( infoObjects, function ( key, infoObject ) {
 				$('#wordControlPanel').append( infoObject );
 			} );
+			//Yuk
+			$( '.menu.left' ).removeClass('top');
+			$('#wordDetailsPanel').addClass('top');
 		},
 		getBranchesMarkup: function( strongsNumber ) {
 			var branchesMarkup = '';

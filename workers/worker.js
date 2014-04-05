@@ -5,15 +5,21 @@ javascripture.data.web = {};
 javascripture.data.greek = {};
 javascripture.data.hebrew = {};
 javascripture.api = {};
+self.postMessage( { task: 'loading', html: 'loading KJV' } );
 importScripts('../data/kjvdwyer7.js');
+self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
+self.postMessage( { task: 'loading', html: 'loading hebrew' } );
 importScripts('../data/hebrew6.js');
+self.postMessage( { task: 'loading', html: 'loading greek' } );
 importScripts('../data/greek4.js');
 
 importScripts('../data/bible.js');
+self.postMessage( { task: 'loading', html: 'loading Strongs' } );
 importScripts('../data/strongsObjectWithFamilies.js');
-importScripts('../api/word.js');
 
+self.postMessage( { task: 'loading', html: 'loading API' } );
+importScripts('../api/word.js');
 importScripts('../api/searchApi.js');
 importScripts('../api/reference.js');
 self.addEventListener('message', function( e ) {

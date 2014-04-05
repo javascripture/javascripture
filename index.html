@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html manifest="javascripture.appcache">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="google" content="notranslate" />
 		<title>Javascripture</title>
@@ -90,27 +91,30 @@
 				<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
 			</form>
 		</div>
-		<nav class="right">
-			<span href="#" class="randomReference icon-die" title="Load random reference"></span>
-
-			<a href="#search-popup" class="open-popup" id="keyCode83" title="search">
-				<span aria-hidden="true" class="icon-search"></span>
-				<span class="link-text">Advanced</span>
-			</a>
-
-			<form class="search">
-				<ul>
-					<li>
-						<label for="word" class="has-placeholder">Search for a word</label>
-						<input type="search" name="word" id="word" value="" placeholder="Search for a word" />
-					</li>
-				</ul>
-				<input type="hidden" name="clusivity" value="exclusive" />
-				<input type="hidden" name="range" value="verse" />
-			</form>
-		</nav>
 	</div>
-	<div class="goToPanel menu" id="goToPanel">
+
+	<div class="referencePanel" id="reference">
+		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
+		<span id="readingMode" class="reading-mode-switch icon-fullscreen"></span>
+		<div class="verse">
+			<div id="verse">
+				<div class="loading">Loading...</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wordDetailsPanel" class="menu left top">
+		<a href="#wordDetailsPanel" class="link-text open-menu" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-details"></span> <span class="link-text">Word details</span></a>
+		<div id="wordControlPanel">
+			<style></style>
+			<div class="control-panel">
+				<div class="duplicated">Select a word to show more details about it here. Double click to search.</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="goToPanel menu left" id="goToPanel">
 		<a href="#goToPanel" class="link-text open-menu" id="keyCode71" title="go to"><span aria-hidden="true" class="icon-book"></span> <span class="link-text">Go to</span></a>
 		<div class="lookup bookSelect">
 			<a href="#book=Genesis&chapter=1" data-chapters="50">Genesis <span class="chapter"></span></a>
@@ -179,13 +183,11 @@
 			<a href="#book=3 John&chapter=1">3 John</a>
 			<a href="#book=Jude&chapter=1">Jude</a>
 			<a href="#book=Revelation&chapter=1" data-chapters="22">Revelation <span class="chapter"></span></a>
-		</div>
-		<div class="bookmarks">
-			<h2><a href="#"><span class="link-text">Bookmarks</span></a><a class="bookmark-current-passage icon-plus"></a></h2>
+			<a href="#" class="randomReference" title="Load random reference">Bibliomancy<span class="icon-die"> </span></a>
 		</div>
 	</div>
 
-	<div id="helpPanel" class="menu">
+	<div id="helpPanel" class="menu left">
 		<a href="#helpPanel" class="link-text open-menu" title="help"><span aria-hidden="true" class="icon-question"></span> <span class="link-text">Help</span></a>
 		<div class="content">
 			<div class="content-padding">
@@ -207,7 +209,7 @@
 	</div>
 
 	<!-- Settings Panel -->
-	<div id="settingsPanel" class="menu">
+	<div id="settingsPanel" class="menu left">
 		<a href="#settingsPanel" class="link-text open-menu" title="settings">
 			<span aria-hidden="true" class="icon-cog2"></span> <span class="link-text">Settings</span>
 		</a>
@@ -220,7 +222,7 @@
 							<label>Fonts:</label>
 							<select name="bodyFontFamily" class="changeStyle">
 								<option selected="selected" value="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Helvetica</option>
-								<option value="font-family: 'Bookman Old Style' !important;">Bookman Old Style</option>
+								<option value="font-family: 'Bookman Old Style' !important;">Bookman</option>
 								<option value="font-family: 'Courier New', Courier !important;">Courier</option>
 								<option value="font-family: Georgia !important;">Georgia</option>
 								<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande' !important;">Lucida</option>
@@ -249,11 +251,11 @@
 						<li>
 							<label>Colours:</label>
 							<select id="subdueColorBy">
-								<option value="1">Very Bright</option>
-								<option value="1.5" selected="selected">Bright</option>
-								<option value="2">Normal</option>
-								<option value="3">Dark</option>
-								<option value="4">Very Dark</option>
+								<option value=".9">Very Bright</option>
+								<option value=".75">Bright</option>
+								<option value=".5" selected="selected">Normal</option>
+								<option value=".3">Dark</option>
+								<option value=".2">Very Dark</option>
 							</select>
 						</li>
 						<li>
@@ -270,78 +272,67 @@
 	</div>
 
 
+	<div id="referenceTracking" class="searchPanel menu right top">
+		<a href="#referenceTracking" class="link-text open-menu" title="Search">
+			<span aria-hidden="true" class="icon-search"></span> <span class="link-text">Search</span>
+		</a>
+		<form class="search">
+			<ul>
+				<li>
+					<label for="word" class="has-placeholder">Word</label>
+					<input type="text" name="word" id="word" value="" placeholder="Word" />
+				</li>
+				<li class="advanced">
+					<label for="lemma" class="has-placeholder">Strongs number</label>
+					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
+				</li>
+				<li class="advanced">
+					<label for="morph" class="has-placeholder">Morphology</label>
+					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
+				</li>
+				<li class="advanced">
+					<label for="language">Language:</label>
+					<select name="language" id="language">
+						<option selected>kjv</option>
+						<option>hebrew</option>
+						<option>greek</option>
+						<option>web</option>
+					</select>
+				</li>
+				<li class="advanced">
+					<label for="clusivity">Look for</label>
+					<select name="clusivity" id="clusivity">
+						<option value="exclusive" selected>All</option>
+						<option value="inclusive">Any</option>
+					</select>
+					<label for="range">terms in a</label>
+					<select name="range" id="range">
+						<option>word</option>
+						<option selected>verse</option>
+						<option>chapter</option>
+					</select>
+				</li>
+				<li class="advanced">
+					<label>Strict search</label>
+					<input type="checkbox" name="strict" id="strict" />
+				</li>
+				<li class="advanced">
+					<input type="submit" value="Search" />
+				</li>
+			</ul>
+			<a href="#advanced" class="advanced-search">Advanced</a>
+		</form>
 
-	<div id="referenceTracking" class="searchPanel" method="get" action="#search">
+		<div class="searchResults"></div>
 	</div>
 
-	<div class="referencePanel" id="reference">
-		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
-		<span id="readingMode" class="reading-mode-switch icon-fullscreen"></span>
-		<div class="verse">
-			<div id="wordControlPanel" class="not-active">
-				<style></style>
-				<div class="control-panel">
-					<div class="duplicated">Select a word to show more details about it here. Double click to search.</div>
-				</div>
-			</div>
-
-			<div id="verse">
-				<div class="loading">Loading...</div>
-			</div>
-		</div>
+	<div id="bookmarksPanel" class="menu right">
+		<a href="#bookmarksPanel" class="link-text open-menu" title="help"><span aria-hidden="true" class="icon-bookmark2"></span> <span class="link-text">Bookmarks</span></a>
+		<h2><a href="#"><span class="link-text">Bookmarks</span></a><a class="bookmark-current-passage icon-plus"></a></h2>
+		<ol class="bookmarks references"></ol>
 	</div>
-</div>
 
-<!-- Search popup -->
-<div id="search-popup" class="popup">
-	<div class="content">
-		<a aria-hidden="true" class="icon-cross close-popup"></a>
-		<div class="content-padding">
-			<h2>Search</h2>
-			<form class="search">
-				<ul>
-					<li>
-						<label for="word" class="has-placeholder">Word</label>
-						<input type="text" name="word" id="word" value="" placeholder="Word" />
-					</li>
-					<li>
-						<label for="lemma" class="has-placeholder">Strongs number</label>
-						<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
-					</li>
-					<li>
-						<label for="morph" class="has-placeholder">Morphology</label>
-						<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
-					</li>
-					<li>
-						<label for="language">Language:</label>
-						<select name="language" id="language">
-							<option>english</option>
-							<option>hebrew</option>
-							<option>greek</option>
-						</select>
-					</li>
-					<li>
-						<label for="clusivity">Look for</label>
-						<select name="clusivity" id="clusivity">
-							<option value="exclusive">All</option>
-							<option value="inclusive">Any</option>
-						</select>
-						<label for="range">terms in a</label>
-						<select name="range" id="range">
-							<option>word</option>
-							<option selected>verse</option>
-							<option>chapter</option>
-						</select>
-					</li>
-					<li>
-						<label>Strict search</label>
-						<input type="checkbox" name="strict" id="strict" />
-					</li>
-				</ul>
-				<input type="submit" value="Search" />
-			</form>
-		</div>
-	</div>
+
 </div>
 
 <div id="cache-popup" class="popup">
@@ -367,7 +358,6 @@
 		<strong>Derivation:</strong> <span class="wordControlPanelDerivation"></span><br />
 		<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 	</div>
-	<span aria-hidden="true" class="icon-cross close"></span>
 </div>
 
 <div class="full-page">
@@ -453,8 +443,8 @@
 <script src="modules/readingMode.js"></script>
 <script src="js/functionalScripts.js"></script>
 <script src="modules/translateLiterally.js"></script>
-<script src="modules/bookmarks.js"></script>
 <script src="modules/reference.js"></script>
+<script src="modules/bookmarks.js"></script>
 
 <script src="js/morphologyApi.js"></script>
 <script src="modules/search.js"></script>

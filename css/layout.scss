@@ -152,7 +152,7 @@ form ul li {list-style:none;}
 }
 .collapsable.closed form { display:none;}
 
-#wordControlPanel {
+/*#wordControlPanel {
 	background: rgba( 255, 255, 255, .9 );
     box-shadow: 0 0 5px rgba(0,0,0,.5);
 	bottom: 0;
@@ -169,6 +169,16 @@ form ul li {list-style:none;}
 		padding: .1em .5em;
 	}
 
+}*/
+
+.searchPanel {
+	.advanced {
+		display: none;
+	}
+	.advanced-search {
+		display: block;
+		text-align: center;
+	}
 }
 
 
@@ -177,14 +187,14 @@ form ul li {list-style:none;}
 	display: block;
 	margin: 0 0 1em 0;
 }
-#wordControlPanel .word-details {
+/*#wordControlPanel .word-details {
 	float: left;
 	width: 49%;
 }
 #wordControlPanel .definitions {
 	float: left;
 	width: 47%;
-}
+}*/
 .top.left .control-panel {
 	border-top-left-radius: 0;
 	-moz-border-radius-topleft: 0;
@@ -344,7 +354,8 @@ form.search {
 @import 'dock';
 
 .referencePanel {
-	margin: $dock-height 200px 0 220px;
+	margin: $dock-height auto 0;
+	max-width: 960px;
 	.wordControlPanel {
 		clear: both;
 		.close {
@@ -378,8 +389,11 @@ form.search {
 	}
 }
 .searchPanel {
-	overflow: scroll;
-
+//	overflow: scroll;
+	.searchResults {
+		height: 100%;
+		overflow-y: scroll;
+	}
 	border-left: 1px solid #ccc;
 	float: right;
 //	padding-top: 4.7em;
@@ -405,6 +419,9 @@ form.search {
 			}
 		}
 	}*/
+	a.remove {
+		color: #fff;
+	}
 	h2 {
 		border: none;
 		font-family: 'Helvetica Neue';
@@ -434,24 +451,6 @@ form.search {
 @import 'menu';
 
 .reading-mode {
-	#dock {
-		background: none;
-		border: none;
-		nav {
-			display: none;
-		}
-		.reading-mode-version {
-			display: inline;
-		}
-		.goToReference {
-			background: #fff;
-			border-bottom-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, .3);
-			display: inline-block;
-			padding: 3px 10px 10px;
-		}
-	}
 	.goToPanel, .searchPanel, .popup, #wordControlPanel, .original {
 		display: none !important;
 	}

@@ -22,7 +22,7 @@
 			//jump to chapter
 			if ( event.which > 47 && event.which < 58 ) {
 				var chapter = event.which - 48,
-				    currentReference = javascripture.modules.reference.getReferenceFromUrl();
+				    currentReference = javascripture.modules.reference.getReferenceFromCurrentUrl();
 
 				if ( waitingForAnotherNumber ) {
 					chapter = '' + currentReference.chapter + chapter;

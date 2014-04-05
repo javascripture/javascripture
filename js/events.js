@@ -113,10 +113,6 @@
 			$('select.bookSelect option:nth-child('+randomBook+')');
 		});
 
-        $('.bookmark').click(function(event){
-			event.preventDefault();
-			$('ol#bookmarks').append(createReferenceListItem(currentReference()));
-        });
 		$(document).on('click', '.collapsable h2 a.remove', function(event){
 			event.preventDefault();
 			$(this).closest('.collapsable').remove();
@@ -133,18 +129,32 @@
 		$('.open-menu').click( function( event ) {
 			event.preventDefault();
 			var $this = $( $(this).attr('href') ),
-				$menu = $( '.menu' )
-			    left = 0
+				$leftMenu = $( '.menu.left' ),
+				$rightMenu = $( '.menu.right' ),
+			    offset = 0,
+			    axis = 'left';
+
+			if ( $this.hasClass( 'right' ) ) {
+				axis = 'right';
+			}
 			if ( $this.hasClass( 'top' ) ) {
-				left = '-200px';
+				offset = '-200px';
 			}
 
-			$menu.animate( {
-				'left': left
-			} );
+			if ( axis === 'left' ) {
+				$leftMenu.animate( {
+					left: offset
+				} ).removeClass( 'top' );
+			}
 
-			$('.menu').removeClass( 'top' );
-			if ( left === 0 ) {
+			if ( axis === 'right' ) {
+				$rightMenu.animate( {
+					right: offset
+				} ).removeClass( 'top' );
+
+			}
+
+			if ( offset === 0 ) {
 				$this.addClass('top');
 			}
 		} );

@@ -48,19 +48,11 @@ var createSearchReferencesPanel;
 		$('#referenceTracking .collapsable').addClass('closed');
 		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
 
-		//wait for the result section to be created
-//		setTimeout( function () {
-
-
-
-			// Send data to our worker.
-			worker.postMessage( {
-				task: 'search',
-				parameters: data
-			} );
-
-
-//		}, 100 );
+		// Send data to our worker.
+		worker.postMessage( {
+			task: 'search',
+			parameters: data
+		} );
 	};
 
 	var createReferenceList = function(referenceArray) {
@@ -117,7 +109,7 @@ var createSearchReferencesPanel;
 
 			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'" title="' + title + '"><style></style><h2 class="'+family+'">' + header;
 			strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
-			$('#referenceTracking').append(strongsTracking);
+			$('#referenceTracking .searchResults').append(strongsTracking);
 			if ( data.lemma ) {
 
 				var strongsStyle = '';
@@ -169,7 +161,6 @@ var createSearchReferencesPanel;
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		var data = $( this ).serializeObject();
-		data.language = $( '#versionSelector' ).val();
 		createSearchReferencesPanel( data );
 		$( '.popup' ).popup( 'close' );
 	});
@@ -182,6 +173,11 @@ var createSearchReferencesPanel;
 	$( document ).on( 'click', 'a.kjv-def', function( event ) {
 		event.preventDefault();
 		createSearchReferencesPanel( $( this ).data() );
+	} );
+
+	$( '.advanced-search' ).click( function( event ) {
+		event.preventDefault();
+		$( '.advanced' ).toggle();
 	} );
 
 	worker.addEventListener('message', function(e) {
@@ -215,8 +211,13 @@ var createSearchReferencesPanel;
 //				goToFirstReference();
 	//		$('.popup').popup( 'close' );
 
+			$( '.menu.right' ).removeClass('top');
+			$('#referenceTracking').addClass('top');
+
 			var endDate = new Date();
 			timer(startDate, endDate);
+
+
 		}
 
 	}, false);
