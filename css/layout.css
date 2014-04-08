@@ -694,6 +694,8 @@ form.search #advanced {
   z-index: 10; }
   .menu a {
     color: #333; }
+    .menu a.word-tree {
+      color: #fff; }
   .menu .open-menu {
     background: #eee;
     box-shadow: 3px -3px 3px -2px rgba(0, 0, 0, 0.5);
@@ -734,6 +736,9 @@ form.search #advanced {
     .menu ol li a {
       color: #000;
       display: inline-block; }
+  .menu div.content {
+    height: 100%;
+    overflow: scroll; }
   .menu div.content-padding {
     padding: 1em; }
   .menu.top {
