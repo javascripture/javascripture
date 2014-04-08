@@ -641,8 +641,23 @@ form.search #advanced {
   		}
   	}*/ }
   .searchPanel .searchResults {
-    height: 100%;
-    overflow-y: scroll; }
+    overflow-y: scroll;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    width: 200px; }
+    .searchPanel .searchResults.advanced-search-open {
+      top: 370px; }
+  .searchPanel form.search {
+    padding: .1em .5em; }
+    .searchPanel form.search li {
+      line-height: 2em; }
+      .searchPanel form.search li input {
+        margin: 6px 0; }
+      .searchPanel form.search li select {
+        height: 1em;
+        line-height: 1em;
+        padding: 0; }
   .searchPanel a.remove {
     color: #fff; }
   .searchPanel h2 {

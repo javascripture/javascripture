@@ -178,6 +178,7 @@ var createSearchReferencesPanel;
 	$( '.advanced-search' ).click( function( event ) {
 		event.preventDefault();
 		$( '.advanced' ).toggle();
+		$( '.searchResults' ).toggleClass( 'advanced-search-open' );
 	} );
 
 	worker.addEventListener('message', function(e) {

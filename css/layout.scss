@@ -391,8 +391,28 @@ form.search {
 .searchPanel {
 //	overflow: scroll;
 	.searchResults {
-		height: 100%;
 		overflow-y: scroll;
+		position: fixed;
+		top: 80px;
+		bottom: 0;
+		width: 200px;
+		&.advanced-search-open {
+			top: 370px;
+		}
+	}
+	form.search {
+		padding: .1em .5em;
+		li {
+			line-height: 2em;
+			input {
+				margin: 6px 0;
+			}
+			select {
+				height: 1em;
+				line-height: 1em;
+				padding: 0;
+			}
+		}
 	}
 	border-left: 1px solid #ccc;
 	float: right;
