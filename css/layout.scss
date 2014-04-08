@@ -354,8 +354,8 @@ form.search {
 @import 'dock';
 
 .referencePanel {
-	margin: $dock-height auto 0;
-	max-width: 960px;
+	margin: $dock-height 240px 0;
+//	max-width: 960px;
 	.wordControlPanel {
 		clear: both;
 		.close {
@@ -529,7 +529,7 @@ form.search {
 	right: 24px;
 	bottom: 24px;
 	line-height: 0;
-	z-index: 99;
+	z-index: 999;
 	&.icon-fullscreen-exit {
 		font-size: 22px;
 		right: 14px;

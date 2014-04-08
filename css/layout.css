@@ -584,8 +584,7 @@ form.search #advanced {
     padding: 0 10px; }
 
 .referencePanel {
-  margin: 50px auto 0;
-  max-width: 960px; }
+  margin: 50px 240px 0; }
   .referencePanel .wordControlPanel {
     clear: both; }
     .referencePanel .wordControlPanel .close {
@@ -853,7 +852,7 @@ form.search #advanced {
   right: 24px;
   bottom: 24px;
   line-height: 0;
-  z-index: 99; }
+  z-index: 999; }
   .reading-mode-switch.icon-fullscreen-exit {
     font-size: 22px;
     right: 14px; }
