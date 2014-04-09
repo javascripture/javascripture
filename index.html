@@ -13,7 +13,8 @@
 	<div id="dock" class="input">
 		<div class="heading-wrapper">
 			<form class="goToReference">
-				<select name="version" id="versionSelector">
+				<select name="leftVersion" id="versionSelectorLeft" class="versionSelector" data-target="left">
+					<option value="original" selected>Original</option>
 					<option value="kjv">KJV</option>
 					<option value="web">WEB</option>
 					<!--<option value="lc">Literal Consistent</option>-->
@@ -89,6 +90,12 @@
 					<option value="Revelation">Revelation</option>
 				</select>
 				<select id="chapterSelect" class="lookup dynamic chapterSelect" tabindex="2"></select>
+				<select name="rightVersion" id="versionSelectorRight" class="versionSelector" data-target="right">
+					<option value="original">Original</option>
+					<option value="kjv" selected>KJV</option>
+					<option value="web">WEB</option>
+					<!--<option value="lc">Literal Consistent</option>-->
+				</select>
 			</form>
 		</div>
 	</div>

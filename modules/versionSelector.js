@@ -1,6 +1,6 @@
 /*global javascripture*/
 javascripture.modules.versionSelector = {
-	switcher: '#versionSelector',
+	switcher: '.versionSelector',
 	getVersion: function () {
 		if ( localStorage && localStorage.english ) {
 			return localStorage.english;

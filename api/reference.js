@@ -48,10 +48,10 @@ javascripture.api.reference = {
 			testament = 'greek';
 		}
 
-		if ( javascripture.data[reference.version][book][chapterInArray] ) {
-			result.translation = javascripture.data[reference.version][book][chapterInArray];
-			if( javascripture.data[ testament ][book] && javascripture.data[ testament ][book][chapterInArray] ) {
-				result.original = javascripture.data[ testament ][book][chapterInArray];
+		if ( javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ] ) {
+			result.right = javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ];
+			if( javascripture.data[ testament ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {
+				result.left = javascripture.data[ testament ][ book ][ chapterInArray ];
 			}
 		}
 		return result;
@@ -59,11 +59,11 @@ javascripture.api.reference = {
 	getOffsetChapter: function ( reference, offset) {
 		var book = reference.book,
 		    chapter = reference.chapter,
-		    offsetChapter = { version: reference.version },
+		    offsetChapter = { rightVersion: reference.rightVersion },
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
-		if ( javascripture.data[reference.version][book] && javascripture.data[reference.version][book][offsetNumberJavascript] !== undefined) {
+		if ( javascripture.data[reference.rightVersion][book] && javascripture.data[reference.rightVersion][book][offsetNumberJavascript] !== undefined) {
 			offsetChapter.book = book;
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {

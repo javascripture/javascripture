@@ -10,11 +10,11 @@ javascripture.modules.reference = {
 			reference.verse = 1;
 		}
 
-		reference.version = $('#versionSelector').val();
-		if ( reference.version === 'original' ) {
-			reference.version = 'kjv'; // Backup
-			if ( localStorage.version ) {
-				reference.version = localStorage.version;
+		reference.rightVersion = $('#versionSelectorRight').val();
+		if ( reference.rightVersion === 'original' ) {
+			reference.rightVersion = 'kjv'; // Backup
+			if ( localStorage.rightVersion ) {
+				reference.rightVersion = localStorage.rightVersion;
 			}
 		}
 
@@ -79,7 +79,7 @@ javascripture.modules.reference = {
 
 		//anchor to a chapter
 		if ( $anchorPoint.length === 0 ) {
-			$anchorPoint = $( '#' + jsonCollection.currentId );
+			$anchorPoint = $( '#' + anchoringData.currentId );
 			offset = - $('[data-role=header]').height();// - 10;
 		}
 
@@ -103,13 +103,13 @@ javascripture.modules.reference = {
 	},
 	loadReferenceFromHash: function () {
 	    var hash = window.location.hash;
-	    if(hash.indexOf('search') > -1){
-	        var word = hash.split('=')[1];
-	        setTimeout(function(){
-		        createSearchReferencesPanel({lemma:word});
+	    if( hash.indexOf( 'search' ) > -1 ) {
+	        var word = hash.split( '=' )[ 1 ];
+	        setTimeout( function () {
+		        createSearchReferencesPanel( { lemma: word } );
 		    } );
 	    } else {
-	        var parameterPairArray = hash.split('&');
+	        var parameterPairArray = hash.split( '&' );
 	        //this is bad
 	        if ( parameterPairArray.length > 1 ) {
 				var book = parameterPairArray[0].split('=')[1];
@@ -143,8 +143,8 @@ javascripture.modules.reference = {
 		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
 		chapterText += '<ol class="wrapper">';
 
-		if ( chapterData.translation ) {
-			chapterData.translation.forEach( function( verseText, verseNumber ) {
+		if ( chapterData && chapterData.right ) {
+			chapterData.right.forEach( function( verseText, verseNumber ) {
 				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 				if(verseNumber === verseInArray) {
 					chapterText += ' class="current"';
@@ -160,26 +160,26 @@ javascripture.modules.reference = {
 				}
 				chapterText += '>';
 				chapterText += '<div class="english">';
-					if ( reference.version === 'lc' ) {
+					if ( reference.rightVersion === 'lc' ) {
 						//same as below
-						chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
+						chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
 							}
 						});
 					} else {
-						chapterData.translation[verseNumber].forEach( function( wordObject, wordNumber ) {
+						chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
 							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament, reference.version );
+								chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
 							}
 						});
 					}
 				chapterText += "</div>";
 
 				//Load hebrew
-				if(	chapterData.original[verseNumber] ) {
+				if(	chapterData.left[verseNumber] ) {
 					chapterText += "<div class='original " + testament + "'>";
-					chapterData.original[verseNumber].forEach( function( wordObject, wordNumber ) {
+					chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 						if ( wordObject ) {
 							chapterText += self.createWordString( wordObject, testament, testament );
 						}
@@ -296,6 +296,8 @@ javascripture.modules.reference = {
 	worker.addEventListener('message', function(e) {
 		if( e.data.task === 'reference' ) {
 			var reference = e.data.result.reference;
+			console.log(reference);
+
 			var chapterText = '<div class="three-references"';
 
 			if ( e.data.result.prev ) {
