@@ -212,8 +212,9 @@ var createSearchReferencesPanel;
 //				goToFirstReference();
 	//		$('.popup').popup( 'close' );
 
-			$( '.menu.right' ).removeClass('top');
-			$('#referenceTracking').addClass('top');
+			if( ! $('#referenceTracking').hasClass('top') ) {
+				$('#keyCode83').click();
+			}
 
 			var endDate = new Date();
 			timer(startDate, endDate);

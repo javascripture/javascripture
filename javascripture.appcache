@@ -37,8 +37,9 @@ modules/disableHover.js
 modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
-modules/bookmarks.js
 modules/reference.js
+modules/bookmarks.js
+modules/menu.js
 
 js/morphologyApi.js
 modules/search.js

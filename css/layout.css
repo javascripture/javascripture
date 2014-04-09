@@ -584,7 +584,10 @@ form.search #advanced {
     padding: 0 10px; }
 
 .referencePanel {
-  margin: 50px 240px 0; }
+  margin: 50px 40px 0; }
+  @media (min-width: 960px) {
+    .referencePanel {
+      margin: 50px 240px 0; } }
   .referencePanel .wordControlPanel {
     clear: both; }
     .referencePanel .wordControlPanel .close {
@@ -641,7 +644,7 @@ form.search #advanced {
   	}*/ }
   .searchPanel .searchResults {
     overflow-y: scroll;
-    position: fixed;
+    position: absolute;
     top: 80px;
     bottom: 0;
     width: 200px; }
@@ -687,6 +690,7 @@ form.search #advanced {
   color: #333;
   font-weight: 100;
   height: 100%;
+  left: -200px;
   position: fixed;
   top: 0;
   width: 200px;
@@ -747,7 +751,7 @@ form.search #advanced {
   .menu.right {
     box-shadow: -3px 3px 3px -2px rgba(0, 0, 0, 0.5);
     left: auto;
-    right: 0; }
+    right: -200px; }
     .menu.right .open-menu {
       box-shadow: 3px 3px 3px -2px rgba(0, 0, 0, 0.5);
       left: -76px;

@@ -1,4 +1,6 @@
 $dock-height: 50px;
+$menu-width: 200px;
+
 * {border:none;margin:0;padding:0;}
 
 @import 'fonts';
@@ -354,7 +356,10 @@ form.search {
 @import 'dock';
 
 .referencePanel {
-	margin: $dock-height 240px 0;
+	margin: $dock-height 40px 0;
+	@media ( min-width: 960px ) {
+		margin: $dock-height $menu-width + 40 0;
+	}
 //	max-width: 960px;
 	.wordControlPanel {
 		clear: both;
@@ -371,6 +376,7 @@ form.search {
 		}
 	}
 }
+
 .goToPanel, .searchPanel {
 	background: #fff;
 	bottom: 0;
@@ -392,10 +398,10 @@ form.search {
 //	overflow: scroll;
 	.searchResults {
 		overflow-y: scroll;
-		position: fixed;
+		position: absolute;
 		top: 80px;
 		bottom: 0;
-		width: 200px;
+		width: $menu-width;
 		&.advanced-search-open {
 			top: 370px;
 		}

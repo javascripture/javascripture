@@ -112,8 +112,9 @@
 				$('#wordControlPanel').append( infoObject );
 			} );
 			//Yuk
-			$( '.menu.left' ).removeClass('top');
-			$('#wordDetailsPanel').addClass('top');
+			if( ! $('#wordDetailsPanel').hasClass('top') ) {
+				$( '#keyCode68' ).click();
+			}
 		},
 		getBranchesMarkup: function( strongsNumber ) {
 			var branchesMarkup = '';
