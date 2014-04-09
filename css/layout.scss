@@ -34,7 +34,6 @@ body > .wrapper { height: 0;}
 .verse {color: #000;}
 .verse .added, transchange {color:#aaa; font-style: italic;}
 .verse {line-height:1.4em; }
-.reference span {white-space: nowrap;}
 .verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }
 span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
 .reference span:hover {
@@ -270,33 +269,7 @@ note:hover {
 	display: inline-block;
 }
 
-dvnnm {text-transform: uppercase;}
-#verse {
-	.loading {
-		padding: 1em;
-		text-align: center;
-	}
-}
-#verse ol li {margin: 0 0 0 20px;
-  margin-left: 50%;
-}
-#verse ol li .wrapper {
-	margin-left: -100%;
-	width: 200%;
-}
-
-.hebrew { direction: rtl; display: none; font-size: 140%;
-  font-family: 'Times New Roman', Times serif;
-  line-height: 1em;
-  text-align: right;
-}
-.english { float: right; width: 45%; padding: 0 2%; }
-.original { display: block; float: left; padding: 0 4% 0 2%; width: 43%; }
-.hebrew span { margin: 0 2px; }
-.hebrew seg {display:none;}
-
-.verse .wrapper { display:inline-block; vertical-align:top; }
-
+@import 'reference';
 @import 'popups';
 
 // Forms
@@ -317,7 +290,7 @@ select {
 	padding: .3em 0;
 }
 input {
-	text-indent: .5em;
+	text-indent: .3em;
 	width: 100%;
 }
 input[type=checkbox] {
@@ -356,10 +329,6 @@ form.search {
 @import 'dock';
 
 .referencePanel {
-	margin: $dock-height 40px 0;
-	@media ( min-width: 960px ) {
-		margin: $dock-height $menu-width + 40 0;
-	}
 //	max-width: 960px;
 	.wordControlPanel {
 		clear: both;
