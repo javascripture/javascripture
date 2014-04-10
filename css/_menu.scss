@@ -1,0 +1,114 @@
+$menu-width: 200px;
+.menu {
+	background: #fff;
+	border: none;
+	box-shadow: 3px -3px 3px -2px rgba(0,0,0,.5);
+	color: #333;
+	font-weight: 100;
+	height: 100%;
+	left: -$menu-width;
+	position: fixed;
+	top: 0;
+	width: $menu-width;
+	z-index: 10;
+	a {
+		color: #333;
+		&.word-tree {
+			color: #fff;
+		}
+	}
+	.open-menu {
+		background: #eee;
+		box-shadow: 3px -3px 3px -2px rgba(0,0,0,.5);
+		color: #333;
+		display: block;
+		line-height: 2em;
+		padding: 0 10px;
+		text-indent: 0;
+
+		position: absolute;
+		right: -76px;
+		top: 44px;
+
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		transform: rotate(90deg);
+
+		font-weight: 100;
+		width: 100px;
+		span {
+			margin: 0;
+			padding: 0;
+		}
+/*		.link-text {
+			display: none;
+			@media ( min-width: 1024px ) {
+				display: inline;
+			}
+		}*/
+		&[class*="icon-"] {
+			border: none;
+			display: inline;
+			position: absolute;
+			top: 0;
+			right: 15px;
+		}
+	}
+	ol li {
+		color: #ddd;
+		line-height: 1.5em;
+		padding-left: .5em;
+		a {
+			color: #000;
+			display: inline-block;
+		}
+	}
+	div.content {
+		height: 100%;
+		overflow: scroll;
+	}
+	div.content-padding {
+		padding: 1em;
+	}
+	&.top {
+		z-index: 100;
+		.open-menu {
+			background: #fff;
+		}
+	}
+	&.right {
+		box-shadow: -3px 3px 3px -2px rgba(0,0,0,.5);
+		left: auto;
+		right: -$menu-width;
+		.open-menu {
+			box-shadow: 3px 3px 3px -2px rgba(0,0,0,.5);
+			left: -76px;
+			right: auto;
+		}
+		&.top {
+			right: 0;
+		}
+	}
+	&#bookmarksPanel,
+	&#goToPanel {
+		.open-menu {
+			top: 164px;
+		}
+	}
+	&#helpPanel {
+		.open-menu {
+			top: 284px;
+		}
+		ul li {
+			list-style-position: inside;
+			margin-bottom: 1em;
+		}
+	}
+	&#settingsPanel {
+		.open-menu {
+			top: 404px;
+		}
+	}
+}
