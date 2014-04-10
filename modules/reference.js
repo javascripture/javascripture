@@ -18,6 +18,14 @@ javascripture.modules.reference = {
 			}
 		}
 
+		reference.leftVersion = $('#versionSelectorLeft').val();
+		if ( reference.leftVersion === 'original' ) {
+			reference.leftVersion = 'kjv'; // Backup
+			if ( localStorage.leftVersion ) {
+				reference.leftVersion = localStorage.leftVersion;
+			}
+		}
+
 		worker.postMessage( {
 			task: 'reference',
 			parameters: reference

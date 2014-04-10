@@ -59,7 +59,10 @@ javascripture.api.reference = {
 	getOffsetChapter: function ( reference, offset) {
 		var book = reference.book,
 		    chapter = reference.chapter,
-		    offsetChapter = { rightVersion: reference.rightVersion },
+		    offsetChapter = {
+		    	leftVersion: reference.leftVersion,
+		    	rightVersion: reference.rightVersion
+		    },
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
