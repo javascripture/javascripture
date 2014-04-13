@@ -116,22 +116,29 @@
 				$( '#keyCode68' ).click();
 			}
 		},
-		getBranchesMarkup: function( strongsNumber ) {
-			var branchesMarkup = '';
-			$.each(javascripture.data.strongsObjectWithFamilies, function(strongsObjectKey, strongsObjectRoot){
-				$.each(strongsObjectRoot, function(strongsObjectRootKey,strongsObjectRootValue){
-					if( strongsObjectRootValue == strongsNumber ){
-						var language;
-						if ( strongsObjectKey.substring( 0, 1 ) === "H" ) {
-							language = 'hebrew';
-						}
-						if ( strongsObjectKey.substring( 0, 1 ) === "G" ) {
-							language = 'greek';
-						}
-						branchesMarkup += '<a href="#search='+strongsObjectKey+'" class="'+ javascripture.api.word.getFamily( strongsObjectKey ) +' word-tree" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
-					}
-				});
+		getBranches: function( strongsNumber ) {
+			var branches = {};
+			$.each( javascripture.data.strongsObjectWithFamilies, function( strongsObjectKey, strongsObjectData ) {
+				if( $.inArray( strongsNumber, strongsObjectData.roots ) !== -1 ) {
+					branches[ strongsObjectKey ] = true;
+				}
 			});
+			return branches;
+		},
+		getBranchesMarkup: function( strongsNumber ) {
+			var branches = this.getBranches( strongsNumber ),
+			    branchesMarkup = '';
+
+			$.each( branches, function( strongsObjectKey, value ) {
+				var language;
+				if ( strongsObjectKey.substring( 0, 1 ) === "H" ) {
+					language = 'hebrew';
+				}
+				if ( strongsObjectKey.substring( 0, 1 ) === "G" ) {
+					language = 'greek';
+				}
+				branchesMarkup += '<a href="#search='+strongsObjectKey+'" class="'+ javascripture.api.word.getFamily( strongsObjectKey ) +' word-tree" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
+			} );
 			return branchesMarkup;
 		}
 	};

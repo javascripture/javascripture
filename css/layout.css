@@ -694,6 +694,7 @@ form.search #advanced {
   .menu a {
     color: #333; }
     .menu a.word-tree {
+      background: #ccc;
       color: #fff; }
   .menu .open-menu {
     background: #eee;
