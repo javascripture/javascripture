@@ -9,6 +9,6 @@ javascripture.modules.colors = {
 	},
 
 	getStrongsStyle: function ( strongsNumber, newColor ) {
-		return '.' + strongsNumber + ' {color:#fff;background:' + newColor + ' !important;}';
+		return '.' + strongsNumber + ' {color:#fff !important;background:' + newColor + ' !important;}';
 	}
 };

@@ -113,7 +113,11 @@ body > .wrapper {
 .verse {
   color: #000; }
 
-.verse .added, transchange {
+.verse span[class] {
+  color: #000;
+  font-style: normal; }
+
+.verse span, .verse span.added, transchange {
   color: #aaa;
   font-style: italic; }
 
