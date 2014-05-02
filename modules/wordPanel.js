@@ -100,11 +100,12 @@
 					infoObjects[ i ].find('#wordTreeFamily').html( wordTreeFamily );
 
 					//var strongsInt = parseInt( family.substring( 1, family.length ), 10 );
-					var strongsInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+					//var strongsInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
 
-					var newColor = javascripture.modules.colors.getStrongsColor( familyInt );
-//					var strongsStyle = javascripture.modules.colors.getStrongsStyle( family, newColor );
-					var strongsStyle = javascripture.modules.colors.getStrongsStyle( family + '-family', newColor );
+					//var newColor = javascripture.modules.colors.getStrongsColor( strongsInt );
+					var strongsStyle = javascripture.modules.colors.getStrongsStyle( strongsNumber );
+//					var newColor = javascripture.modules.colors.getStrongsColor( familyInt );
+//					var strongsStyle = javascripture.modules.colors.getStrongsStyle( family + '-family', newColor );
 
 
 					infoObjects[ i ].find('style').html( strongsStyle );

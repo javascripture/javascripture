@@ -8,7 +8,28 @@ javascripture.modules.colors = {
 		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 	},
 
-	getStrongsStyle: function ( strongsNumber, newColor ) {
-		return '.' + strongsNumber + ' {color:#fff !important;background:' + newColor + ' !important;}';
+	getStrongsStyle: function ( strongsNumber ) {
+		var hightlightFamilies = $( '#highlightWordsWith' ).val() === 'family',
+			className,
+			classInt;
+		if ( hightlightFamilies ) {
+			className = javascripture.api.word.getFamily( strongsNumber ) + '-family';
+			classInt = parseFloat( className.substring( 1, className.length ), 10 );
+		} else {
+			className = strongsNumber;
+			classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+		}
+
+		var newColor = javascripture.modules.colors.getStrongsColor( classInt );
+		return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important;}';
 	}
 };
+
+$( '#highlightWordsWith' ).change( function() {
+	var type = $( this ).val();
+	localStorage.highlightWordsWith = type;
+} );
+
+if ( localStorage.highlightWordsWith ) {
+	$( '#highlightWordsWith' ).val( localStorage.highlightWordsWith );
+}
