@@ -107,7 +107,7 @@ var createSearchReferencesPanel;
 				title += key + ': ' + value + '\r\n';
 			} );
 
-			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'" title="' + title + '"><style></style><h2 class="'+family+'">' + header;
+			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'-family" title="' + title + '"><style></style><h2 class="'+family+'-family">' + header;
 			strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
 			$('#referenceTracking .searchResults').append(strongsTracking);
 			if ( data.lemma ) {
@@ -115,7 +115,7 @@ var createSearchReferencesPanel;
 				var strongsStyle = '';
 				if(familyInt > 0) {
 					var newColor = javascripture.modules.colors.getStrongsColor( familyInt );
-					strongsStyle = javascripture.modules.colors.getStrongsStyle( family, newColor );
+					strongsStyle = javascripture.modules.colors.getStrongsStyle( family+'-family', newColor );
 				}
 
 				if(familyInt > 0) {

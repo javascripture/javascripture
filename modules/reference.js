@@ -218,7 +218,7 @@ javascripture.modules.reference = {
 			} );
 		}
 		wordString += '<span';
-		wordString += ' class="' + families.join( ' ' ) + '"';
+		wordString += ' class="' + families.join( ' ' ) + '-family ' + lemma + '"';
 		wordString += ' title="' + lemma;
 		if ( wordArray[2] ) {
 			wordString += ' ' + wordArray[2];
