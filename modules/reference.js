@@ -118,27 +118,23 @@ javascripture.modules.reference = {
 		        createSearchReferencesPanel( { lemma: word } );
 		    } );
 	    } else if( hash.indexOf( 'reference' ) > -1 ) {
-	        var reference = hash.split( '=' )[1].split(':'),
-	            book = reference[0];
-		        chapter = parseInt(reference[1], 10);
-		        verse = 1;
-		        if ( reference[2] ) {
-		            verse = parseInt(reference[2], 10);
-		        }
-			    if ( localStorage ) {
-					var referenceObject = {};
-						referenceObject.book = book;
-						referenceObject.chapter = chapter;
-						referenceObject.verse = verse;
-						localStorage.reference = JSON.stringify( referenceObject );
-			    }
-				javascripture.modules.reference.load( {
-			        book: book,
-			        chapter: chapter,
-			        verse: verse,
-			        anchoringData: javascripture.modules.reference.getAnchoringData( null )
-		        } );
+	        var referenceObject = this.getReferenceFromHash();
+			if ( localStorage ) {
+				localStorage.reference = JSON.stringify( referenceObject );
+			}
+			referenceObject.anchoringData = javascripture.modules.reference.getAnchoringData( null );
+			javascripture.modules.reference.load( referenceObject );
 	    }
+	},
+	getReferenceFromHash: function () {
+		var reference = window.location.hash.split( '=' )[1].split(':'),
+		    book = reference[0],
+		    chapter = parseInt(reference[1], 10),
+		    verse = 1;
+	    if ( reference[2] ) {
+	        verse = parseInt(reference[2], 10);
+	    }
+		return { book: book, chapter: chapter, verse: verse };
 	},
 	createReferenceLink: function( reference ) {
 		return 'reference=' + reference.book + ':' + reference.chapter + ':' + reference.verse;

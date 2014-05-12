@@ -22,7 +22,7 @@
 			//jump to chapter
 			if ( event.which > 47 && event.which < 58 ) {
 				var chapter = event.which - 48,
-				    currentReference = javascripture.modules.reference.getReferenceFromCurrentUrl();
+				    currentReference = javascripture.modules.reference.getReferenceFromHash();
 
 				if ( waitingForAnotherNumber ) {
 					chapter = '' + currentReference.chapter + chapter;
@@ -33,13 +33,15 @@
 
 				var bookId = bible.getBookId( currentReference.book );
 				if ( bible.Data.verses[bookId - 1][ chapter - 1] ) {
-					window.location.hash = '#book=' + currentReference.book + '&chapter=' + chapter;
+					var newReference = currentReference;
+					newReference.chapter = chapter;
+					window.location.hash = javascripture.modules.reference.createReferenceLink( currentReference );
 				}
 				waitingForNumberTimer = setTimeout( function () {
 					if ( waitingForAnotherNumber === true ) {
 						waitingForAnotherNumber = false;
 					}
-				}, 1000);
+				}, 800);
 
 			}
 
