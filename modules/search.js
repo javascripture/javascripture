@@ -138,7 +138,7 @@ var createSearchReferencesPanel;
 		var book = referenceArray.book;
 		var chapter = referenceArray.chapter;
 		var verse = referenceArray.verse;
-		return '<li><a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">'+book+' '+(chapter)+':'+(verse)+'</a></li>';
+		return '<li><a href="#' + javascripture.modules.reference.createReferenceLink( referenceArray ) + '">'+book+' '+(chapter)+':'+(verse)+'</a></li>';
 	}
 
 	function searchOnClick( element ) {

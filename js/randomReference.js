@@ -1,4 +1,4 @@
-/*global bible*/
+/*global bible javascripture*/
 var getRandomReference = function() {
 	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
 		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
@@ -26,12 +26,7 @@ if ( window.location.hash !== '' ) {
 	window.location.hash = hash;
 	$( '.full-page' ).hide();
 } else if ( localStorage && typeof( localStorage.reference ) != 'undefined' && localStorage.reference !== '' ) {
-	var reference = localStorage.reference.split( ',' ),
-		book = reference[0],
-		chapter = reference[1],
-		verse = reference[2],
-		hash = 'book=' + book + '&chapter=' + chapter + '&verse=' + verse;
-	window.location.hash = hash;
+	window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
 	$( '.full-page' ).hide();
 } else {
 	loadRandomReference();

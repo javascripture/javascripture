@@ -78,7 +78,8 @@ javascripture.modules.reference = {
 	anchorReference: function ( anchoringData ) {
 		var anchorPointSelector = anchoringData[1],
 		    offset = anchoringData[0],
-		    $anchorPoint = $( anchorPointSelector );
+		    $anchorPoint = $( anchorPointSelector ),
+		    verseHeight;
 
 		if ( anchorPointSelector === '.current-verse' ) {
 			verseHeight = $anchorPoint.height(),
@@ -116,18 +117,16 @@ javascripture.modules.reference = {
 	        setTimeout( function () {
 		        createSearchReferencesPanel( { lemma: word } );
 		    } );
-	    } else {
-	        var parameterPairArray = hash.split( '&' );
-	        //this is bad
-	        if ( parameterPairArray.length > 1 ) {
-				var book = parameterPairArray[0].split('=')[1];
-		        var chapter = parseInt(parameterPairArray[1].split('=')[1], 10);
-		        var verse = 1;
-		        if ( parameterPairArray[2] ) {
-		            verse = parseInt(parameterPairArray[2].split('=')[1], 10);
+	    } else if( hash.indexOf( 'reference' ) > -1 ) {
+	        var reference = hash.split( '=' )[1].split(':'),
+	            book = reference[0];
+		        chapter = parseInt(reference[1], 10);
+		        verse = 1;
+		        if ( reference[2] ) {
+		            verse = parseInt(reference[2], 10);
 		        }
 			    if ( localStorage ) {
-				    localStorage.reference = [ book, chapter, verse];
+				    localStorage.reference = { book: book, chapter: chapter, verse: verse };
 			    }
 				javascripture.modules.reference.load( {
 			        book: book,
@@ -135,9 +134,10 @@ javascripture.modules.reference = {
 			        verse: verse,
 			        anchoringData: javascripture.modules.reference.getAnchoringData( null )
 		        } );
-	        }
-
 	    }
+	},
+	createReferenceLink: function( reference ) {
+		return 'reference=' + reference.book + ':' + reference.chapter + ':' + reference.verse;
 	},
 	getChapterText: function ( reference, chapterData, testament ) {
 		var self = this,
