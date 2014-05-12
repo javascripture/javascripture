@@ -126,7 +126,11 @@ javascripture.modules.reference = {
 		            verse = parseInt(reference[2], 10);
 		        }
 			    if ( localStorage ) {
-				    localStorage.reference = { book: book, chapter: chapter, verse: verse };
+					var referenceObject = {};
+						referenceObject.book = book;
+						referenceObject.chapter = chapter;
+						referenceObject.verse = verse;
+						localStorage.reference = JSON.stringify( referenceObject );
 			    }
 				javascripture.modules.reference.load( {
 			        book: book,

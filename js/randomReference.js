@@ -12,7 +12,7 @@ var getRandomReference = function() {
 };
 var loadRandomReference = function() {
 	var randomReference = getRandomReference();
-	window.location.hash = 'book=' + randomReference.book + '&chapter=' + randomReference.chapter + '&verse=' + randomReference.verse;
+	window.location.hash = javascripture.modules.reference.createReferenceLink( randomReference );
 	$( '.full-page' ).hide();
 };
 $( '.randomReference' ).click( function( event ) {
@@ -20,13 +20,17 @@ $( '.randomReference' ).click( function( event ) {
 	loadRandomReference();
 	$( '.popup' ).popup( 'close' );
 } );
+
+if ( localStorage && 'undefined' != typeof( localStorage.reference ) && '{' === localStorage.reference.substr(0, 1) ) {
+	var localReference = $.parseJSON( localStorage.reference );
+}
 if ( window.location.hash !== '' ) {
-	hash = window.location.hash;
+	var hash = window.location.hash;
 	window.location.hash = '';
 	window.location.hash = hash;
 	$( '.full-page' ).hide();
-} else if ( localStorage && typeof( localStorage.reference ) != 'undefined' && localStorage.reference !== '' ) {
-	window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
+} else if ( typeof( localReference ) != 'undefined' && localReference !== '' && localReference.book ) {
+	window.location.hash = javascripture.modules.reference.createReferenceLink( localReference );
 	$( '.full-page' ).hide();
 } else {
 	loadRandomReference();

@@ -34,9 +34,13 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),
-			    bookId = bible.getBookId( referenceArray[0] );
-
-			crossReferencesMarkup += '<a href="#book=' + bible.Data.books[bookId - 1][0] + '&chapter=' + referenceArray[1] + '&verse=' + referenceArray[2] + '">' + referenceString + '</a> ';
+			    bookId = bible.getBookId( referenceArray[0] ),
+			    reference = {
+				    book: bible.Data.books[bookId - 1][0],
+				    chapter: referenceArray[1],
+				    verse: referenceArray[2]
+			    };
+			crossReferencesMarkup += '<a href="#' + javascripture.modules.reference.createReferenceLink( reference ) + '">' + referenceString + '</a> ';
 		} );
 	} else {
 		crossReferencesMarkup += 'None';
