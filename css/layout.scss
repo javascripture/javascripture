@@ -32,7 +32,7 @@ body > .wrapper { height: 0;}
 
 .panel .heading {height:10%;}
 .verse {color: #000;}
-.verse span[class] {color: #000; font-style: normal;}
+.verse .original span, .verse span[class] {color: #000; font-style: normal;}
 .verse span, .verse span.added, transchange {color:#aaa; font-style: italic;}
 .verse {line-height:1.4em; }
 .verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }

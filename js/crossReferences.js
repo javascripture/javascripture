@@ -9,8 +9,13 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	    bookId = bible.getBookId( book ),
 	    chapter = $reference.data( 'chapter' ),
 		verse = $( this ).data( 'verse' ),
-	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse;
-	    var crossReferencesMarkup = '<div class="crossReferences content-padding">Cross references for <a href="#book=' + book + '&chapter=' + chapter + '&verse=' + verse + '">' + idToPrettyReference( this.id ) + '</a>:<br>';
+	    reference = bible.Data.books[bookId - 1][1] + '.' + chapter + '.' + verse,
+	    referenceObject = {
+		    book: book,
+		    chapter: chapter,
+		    verse: verse
+	    };
+	    var crossReferencesMarkup = '<div class="crossReferences content-padding">Cross references for <a href="#' + javascripture.modules.reference.createReferenceLink( referenceObject ) + '">' + idToPrettyReference( this.id ) + '</a>:<br>';
 
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
