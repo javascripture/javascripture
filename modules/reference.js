@@ -289,9 +289,13 @@ javascripture.modules.reference = {
 
 	$('.goToReference').submit(function (event) {
 		event.preventDefault();
-		var reference = bible.parseReference( $('#goToReference').val() );
-
-		var hash = 'book=' + bible.Data.books[reference.bookID - 1][0] + '&chapter=' + reference.chapter + '&verse=' + reference.verse;
+		var reference = bible.parseReference( $('#goToReference').val() ),
+			referenceObject = {
+				book: bible.Data.books[reference.bookID - 1][0],
+				chapter: reference.chapter,
+				verse: reference.verse
+			};
+		var hash = javascripture.modules.reference.createReferenceLink( referenceObject );
 		window.location.hash = hash;
 		$( this ).closest( '.popup' ).popup( 'close' );
 		$('#goToReference').blur();

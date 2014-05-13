@@ -1,6 +1,6 @@
 	/*History Functions*/
 	function setHashState(book,chapter,verse){
-		window.location.href='#book='+book+'&chapter='+chapter+'&verse='+verse;
+		window.location.hash = javascripture.modules.reference.createReferenceLink( { book: book, chapter: chapter, verse: verse } );
 	}
 	function previousChapter(){
 		if($('select#chapterSelect option:selected').prev().attr('selected', 'selected').change().length > 0) {
@@ -38,35 +38,18 @@
 		timer(startDate, endDate);
 	}
 	function subdueColor(color, subdueColorBy){
-		return parseInt(color/subdueColorBy);
+		return parseInt(color/subdueColorBy, 10);
 	}
 
 	function searchByStrongsNumber(strongsNumberString) {
 		var startDate = new Date();
 		var references = '';
-		var strongsNumberArray = new Array();
+		var strongsNumberArray = [];
 		var searchType = $('#searchSelect').val();
 		var wordString = "";
 		var strongsNumberAsId = strongsNumberString.replace(/ /gi,"");
-//		highlightStrongsNumber(strongsNumberString);
 		strongsNumberArray = strongsNumberString.split(' ');
-/*
-		//to differentiate between strongs numbers and not strongs numbers
-		$.each(strongsNumberArray, function(index, strongsNumber) {
-			if(parseFloat(strongsNumber.substring(1, strongsNumber.length)) > 0) { //this is a number
-				highlightStrongsNumber(strongsNumber,'number');
-				wordTree(strongsNumber);
-				//this doesn't work as one word can have 2 strongs numbers... strongsNumberArray[index] = strongsNumber + '"';
-			} else { //not a strongs number
-				wordString = wordString + " " + strongsNumber;
-//			    var strongsTracking += '<div class="collapsable"><h2 class="'+strongsNumber+'">'+strongsNumber+' <a class="remove" href="#"></a></h2></div>';
- //               $('#referenceTracking').append(strongsTracking);
 
-			}
-		});
-		if(wordString!=""){
-			highlightStrongsNumber(wordString,'word');
-		}*/
 		references += '<form><ol class="references">';
 		var wordCount = 0;
 
@@ -79,7 +62,7 @@
 				}
 			});
 		}
-		var referenceArray = new Array();
+		var referenceArray = [];
 		$.each(searchObject, function(bookName, bookContent) {
 			if($('#searchRange').val() === "book") {
 				//search this string and return a reference

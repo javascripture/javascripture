@@ -1,4 +1,4 @@
-/*global javascripture, console*/
+/*global javascripture bible */
 ;( function ( $ ) {
 	"use strict";
 	var listenForKeyboardShortcuts = false,

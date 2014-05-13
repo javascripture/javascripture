@@ -1,13 +1,14 @@
 CACHE MANIFEST
 
-#version: 4.9
+#version: 4.9.1
 
 index.html
 css/layout.css
 
 #libs
 lib/jquery-2.0.3.min.js
-lib/json2.js
+lib/underscore.js
+lib/backbone.js
 lib/jquery.scrollTo.js
 lib/jquery.waypoints.js
 
