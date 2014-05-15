@@ -763,6 +763,8 @@ form.search #advanced {
     font-size: .8em; }
   .menu#bookmarksPanel .open-menu, .menu#goToPanel .open-menu {
     top: 164px; }
+  .menu#helpPanel .content a {
+    color: blue; }
   .menu#helpPanel .open-menu {
     top: 284px; }
   .menu#helpPanel ul li {

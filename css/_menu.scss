@@ -117,6 +117,9 @@ $menu-width: 200px;
 		}
 	}
 	&#helpPanel {
+		.content a {
+			color: blue;
+		}
 		.open-menu {
 			top: 284px;
 		}
