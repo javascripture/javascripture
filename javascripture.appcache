@@ -58,3 +58,8 @@ js/randomReference.js
 
 #workers
 workers/worker.js
+
+# network
+NETWORK:
+http://javascripture.org/javascripture.appcache
+http://www.google-analytics.com/analytics.js
