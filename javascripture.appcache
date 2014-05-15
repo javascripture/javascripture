@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 4.9.2
+#version: 5
 
 index.html
 css/layout.css
@@ -9,6 +9,7 @@ css/layout.css
 lib/jquery-2.0.3.min.js
 lib/underscore.js
 lib/backbone.js
+lib/backbone.localStorage.js
 lib/jquery.scrollTo.js
 lib/jquery.waypoints.js
 

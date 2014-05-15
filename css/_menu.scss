@@ -57,13 +57,16 @@ $menu-width: 200px;
 			right: 15px;
 		}
 	}
-	ol li {
-		color: #ddd;
-		line-height: 1.5em;
-		padding-left: .5em;
-		a {
-			color: #000;
-			display: inline-block;
+	ol {
+		li {
+			color: #ddd;
+			line-height: 1.5em;
+			padding-left: .5em;
+			position: relative;
+			a {
+				color: #000;
+				display: inline-block;
+			}
 		}
 	}
 	div.content {
@@ -72,6 +75,16 @@ $menu-width: 200px;
 	}
 	div.content-padding {
 		padding: 1em;
+	}
+	.remove {
+		font-size: 20px;
+		opacity: .8;
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		&:hover {
+			opacity: 1;
+		}
 	}
 	&.top {
 		z-index: 100;
@@ -90,6 +103,11 @@ $menu-width: 200px;
 		}
 		&.top {
 			right: 0;
+		}
+	}
+	&#bookmarksPanel {
+		ol.bookmarks li .remove {
+			font-size: .8em;
 		}
 	}
 	&#bookmarksPanel,

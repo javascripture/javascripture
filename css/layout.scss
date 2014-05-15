@@ -40,7 +40,6 @@ span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-ra
 .reference span:hover {
 	background: #eff;
 }
-.reference span.dwyer-added:hover,
 .reference span.added:hover {
 	background:none;
 }
@@ -423,16 +422,6 @@ form.search {
 		font-family: 'Helvetica Neue';
 		font-weight: 100;
 		position: relative;
-		.remove {
-			font-size: 20px;
-			opacity: .8;
-			position: absolute;
-			top: 5px;
-			right: 5px;
-		}
-		.remove:hover {
-			opacity: 1;
-		}
 	}
 	ol li {
 		color: #ddd;

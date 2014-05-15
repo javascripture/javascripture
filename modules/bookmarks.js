@@ -1,5 +1,5 @@
 /*global javascripture Backbone _*/
-javascripture.modules.bookmarks = {
+/*javascripture.modules.bookmarks = {
 	init: function() {
 		var bookmarks = [];
 		if ( ! localStorage.bookmarks ) {
@@ -57,61 +57,66 @@ alert('h');
 
 javascripture.modules.bookmarks.init();
 
+*/
 
-/*
 var Bookmark = Backbone.Model.extend( { } );
 
 var BookmarkList = Backbone.Collection.extend({
-    model: Bookmark
+    model: Bookmark,
+
+    // Save all of the todo items under the `"todos-backbone"` namespace.
+    localStorage: new Backbone.LocalStorage("bookmarks-backbone")
+
 });
 
-var bookmark1 = new Bookmark( { book: "Genesis", chapter: "1", verse: "1" } );
-var bookmark2 = new Bookmark( { book: "Genesis", chapter: "2", verse: "1" } );
-var bookmark3 = new Bookmark( { book: "Genesis", chapter: "3", verse: "1" } );
-
-var bookmarkList = new BookmarkList([ bookmark1, bookmark2, bookmark3]);
-console.log( bookmarkList.models ); // [song1, song2, song3]
-
 var BookmarkView = Backbone.View.extend({
-	el: 'li',
+	tagName: 'li',
+	events: {
+		'click .remove' : 'deleteBookmark'
+	},
+	deleteBookmark: function() {
+		this.model.destroy();
+	},
     initialize: function() {
-      this.listenTo( this.model, 'change', this.render );
       this.listenTo( this.model, 'destroy', this.remove );
+    },
+    render: function() {
+		// Compile the template using underscore
+		var template = _.template( $("#bookmark-template").html(), this.model.attributes );
+		// Load the compiled HTML into the Backbone "el"
+		this.$el.html( template );
+		return this.$el;
     }
 });
 
-var BooknmarksView = Backbone.View.extend({
-	el: '#bookmarks',
+var BookmarksView = Backbone.View.extend({
+	el: '#bookmarksPanel',
 	initialize: function(){
+		this.collection = new BookmarkList();
 		this.render();
-		this.listenTo( bookmarkList, 'add', this.addOne );
-		this.listenTo( bookmarkList, 'reset', this.addAll );
-	},
-
-    addOne: function( bookmark ) {
-		// Compile the template using underscore
-		var template = _.template( $("#bookmark-template").html(), bookmark.attributes );
-		// Load the compiled HTML into the Backbone "el"
-		this.$el.append( template );
-    },
-
-    // Add all items in the **Todos** collection at once.
-    addAll: function() {
-      Todos.each(this.addOne, this);
-    },
-
-	render: function(){
-		//Pass variables in using Underscore.js Template
-		var self = this;
-		var bookmarkList = new BookmarkList([ bookmark1, bookmark2, bookmark3]);
-		console.log( bookmarkList );
-		bookmarkList.each( function( bookmark ) {
-			self.addOne( bookmark );
-		} );
+		this.listenTo( this.collection, 'add', this.addOne );
 	},
 	events: {
-		"click input[type=submit]": "addOne"
+		"click .bookmark-current-passage": "clickAdd"
+	},
+	clickAdd: function() {
+		var reference = javascripture.modules.reference.getReferenceFromHash();
+		var bookmark = new Bookmark( reference );
+		this.collection.create( bookmark );
+	},
+	addOne: function( bookmark ) {
+		var bookmarkView = new BookmarkView( { model: bookmark } );
+		this.$( 'ol.bookmarks' ).append( bookmarkView.render() );
+    },
+
+	render: function() {
+		//Pass variables in using Underscore.js Template
+		var self = this;
+		this.collection.fetch();
+		this.collection.each( function( bookmark ) {
+			self.addOne( bookmark );
+		} );
 	}
 });
-var bookmarksView = new BooknmarksView();
-*/
+
+var bookmarksView = new BookmarksView();

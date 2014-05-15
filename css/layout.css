@@ -142,7 +142,6 @@ span, a.word-tree {
 .reference span:hover {
   background: #eff; }
 
-.reference span.dwyer-added:hover,
 .reference span.added:hover {
   background: none; }
 
@@ -667,14 +666,6 @@ form.search #advanced {
     font-family: 'Helvetica Neue';
     font-weight: 100;
     position: relative; }
-    .searchPanel h2 .remove {
-      font-size: 20px;
-      opacity: .8;
-      position: absolute;
-      top: 5px;
-      right: 5px; }
-    .searchPanel h2 .remove:hover {
-      opacity: 1; }
   .searchPanel ol li {
     color: #ddd;
     line-height: 1.5em;
@@ -736,7 +727,8 @@ form.search #advanced {
   .menu ol li {
     color: #ddd;
     line-height: 1.5em;
-    padding-left: .5em; }
+    padding-left: .5em;
+    position: relative; }
     .menu ol li a {
       color: #000;
       display: inline-block; }
@@ -745,6 +737,14 @@ form.search #advanced {
     overflow: scroll; }
   .menu div.content-padding {
     padding: 1em; }
+  .menu .remove {
+    font-size: 20px;
+    opacity: .8;
+    position: absolute;
+    top: 5px;
+    right: 5px; }
+    .menu .remove:hover {
+      opacity: 1; }
   .menu.top {
     z-index: 100; }
     .menu.top .open-menu {
@@ -759,6 +759,8 @@ form.search #advanced {
       right: auto; }
     .menu.right.top {
       right: 0; }
+  .menu#bookmarksPanel ol.bookmarks li .remove {
+    font-size: .8em; }
   .menu#bookmarksPanel .open-menu, .menu#goToPanel .open-menu {
     top: 164px; }
   .menu#helpPanel .open-menu {

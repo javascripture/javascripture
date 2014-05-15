@@ -345,6 +345,11 @@
 		<h2><a href="#"><span class="link-text">Bookmarks</span></a><a class="bookmark-current-passage icon-plus"></a></h2>
 		<ol class="bookmarks references"></ol>
 	</div>
+	<script type="text/template" id="bookmark-template">
+		<% var reference = { book: book, chapter: chapter, verse: verse }; %>
+		<% var link = javascripture.modules.reference.createReferenceLink( reference ); %>
+		<a href="#<%= link %>"><%= book %> <%= chapter %>:<%= verse %></a><a href="#" class="icon-cross remove" aria-hidden="true"></a>;
+	</script>
 
 
 </div>
@@ -428,6 +433,7 @@
 <script src="lib/jquery-2.0.3.min.js"></script>
 <script src="lib/underscore.js"></script>
 <script src="lib/backbone.js"></script>
+<script src="lib/backbone.localStorage.js"></script>
 <script src="lib/jquery.scrollTo.js"></script>
 <script src="lib/jquery.waypoints.js"></script>
 <!--<script src="lib/raphael-min.js"></script>
