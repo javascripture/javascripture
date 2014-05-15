@@ -153,54 +153,60 @@ javascripture.modules.reference = {
 
 		if ( chapterData && chapterData.right ) {
 			chapterData.right.forEach( function( verseText, verseNumber ) {
-				chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
-				if(verseNumber === verseInArray) {
-					chapterText += ' class="current"';
-				}
-				chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
-				chapterText += '<div class="wrapper"';
-				if(verseNumber === verseInArray) {
-					chapterText += ' id="current"';
-				}
-				if(verseNumber === verseInArray-5) {
-					chapterText += ' id="context"';
-					context = true;
-				}
-				chapterText += '>';
-				chapterText += '<div class="english">';
-					if ( reference.rightVersion === 'lc' ) {
-						//same as below
-						chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
-							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
-							}
-						});
-					} else {
-						chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
-							if ( wordObject ) {
-								chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
-							}
-						});
-					}
-				chapterText += "</div>";
-
-				//Load hebrew
-				if(	chapterData.left[verseNumber] ) {
-					chapterText += "<div class='original " + testament + "'>";
-					chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
-						if ( wordObject ) {
-							chapterText += self.createWordString( wordObject, testament, testament );
-						}
-					});
-					chapterText += "</div>";
-				}
-				chapterText += '</div>';
-				chapterText += '</li>';
+				chapterText += self.getVerseString( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament );
 			});
 		}
 
 		chapterText += '</ol>';
 		chapterText += '</div>';
+		return chapterText;
+	},
+	getVerseString: function( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
+		var self = this,
+		    chapterText = '';
+		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+		if(verseNumber === verseInArray) {
+			chapterText += ' class="current"';
+		}
+		chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
+		chapterText += '<div class="wrapper"';
+		if(verseNumber === verseInArray) {
+			chapterText += ' id="current"';
+		}
+		if(verseNumber === verseInArray-5) {
+			chapterText += ' id="context"';
+			context = true;
+		}
+		chapterText += '>';
+		chapterText += '<div class="english">';
+			if ( reference.rightVersion === 'lc' ) {
+				//same as below
+				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
+					if ( wordObject ) {
+						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+					}
+				});
+			} else {
+				chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
+					if ( wordObject ) {
+						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+					}
+				});
+			}
+		chapterText += "</div>";
+
+		//Load hebrew
+		if(	chapterData.left[verseNumber] ) {
+			chapterText += "<div class='original " + testament + "'>";
+			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
+				if ( wordObject ) {
+					chapterText += self.createWordString( wordObject, testament, testament );
+				}
+			});
+			chapterText += "</div>";
+		}
+		chapterText += '</div>';
+		chapterText += '</li>';
 		return chapterText;
 	},
 	createWordString: function ( wordArray, language, testament, version ) {
