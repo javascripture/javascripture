@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 5
+#version: 5.1
 
 index.html
 css/layout.css
@@ -61,5 +61,6 @@ workers/worker.js
 
 # network
 NETWORK:
+*
 http://javascripture.org/javascripture.appcache
 http://www.google-analytics.com/analytics.js
