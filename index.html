@@ -443,14 +443,16 @@
 </script>
 
 <script type="text/template" id="word-template">
-	<span class="<%= families %>-family <%= lemma %>"
-	      title="<%= lemma %> <%= morph %>"
-	      data-word="<%= word %>"
-	      data-lemma="<%= lemma %>"
-	      data-language="<%= testament %>"
-	      data-range="<%= range %>"
-	      data-family="<%= families %>"
-	      data-morph="<%= morph %>"
+	<span <% if ( className ) { %>
+		class="<%= className %>"
+	    title="<%= lemma %> <%= morph %>"
+	    data-word="<%= word %>"
+	    data-lemma="<%= lemma %>"
+	    data-language="<%= testament %>"
+	    data-range="<%= range %>"
+	    data-family="<%= families %>"
+	    data-morph="<%= morph %>"
+	<% } %>
 	><%= wordDisplay %></span>
 </script>
 
@@ -529,4 +531,5 @@
 		}, false);
 	}, false);
 </script>
+
 </html>
