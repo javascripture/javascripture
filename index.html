@@ -423,40 +423,6 @@
 
 </body>
 
-<script type="text/template" id="chapter-template">
-	<div class="reference frequencyAnalysis" data-book="<%= book %>" data-chapter="<%= chapter %>">
-		<h1><%= book %> <%= chapter %></h1>
-		<ol class="wrapper">
-			<%= verses %>
-		</ol>
-	</div>
-</script>
-
-<script type="text/template" id="verse-template">
-	<li id="<%= verseId %>" class="<%= className %>" data-verse="<%= verseNumber %>">
-		<div class="wrapper" id="<%= wrapperId %>">
-			<div class="english">
-				<%= rightString %>
-			</div>
-			<div class="original <%= testament %>">
-				<%= leftString %>
-			</div>
-		</div>
-	</li>
-</script>
-
-<script type="text/template" id="word-template">
-	<span class="<%= families %>-family <%= lemma %>"
-	      title="<%= lemma %> <%= morph %>"
-	      data-word="<%= word %>"
-	      data-lemma="<%= lemma %>"
-	      data-language="<%= testament %>"
-	      data-range="<%= range %>"
-	      data-family="<%= families %>"
-	      data-morph="<%= morph %>"
-	><%= wordDisplay %></span>
-</script>
-
 <script>
 	var javascripture = {
 		api: {},

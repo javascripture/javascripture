@@ -1,8 +1,5 @@
-/*globals javascripture, bible, worker, _ */
+/*globals javascripture, bible, worker*/
 javascripture.modules.reference = {
-	wordTemplate: _.template( $("#word-template").html() ),
-	verseTemplate: _.template( $("#verse-template").html() ),
-	chapterTemplate: _.template( $("#chapter-template").html() ),
 	load: function( reference ) {
 		var self = this,
 		    book = reference.book,
@@ -149,72 +146,68 @@ javascripture.modules.reference = {
 		    verse = reference.verse,
 			chapterInArray = chapter - 1,
 			verseInArray = verse - 1,
-			context = false,
-			verses = '';
+			context = false;
+
+		var chapterText = '<div class="reference frequencyAnalysis" data-book="' + book + '" data-chapter="' + chapter + '"><h1>' + book + ' ' + chapter + '</h1>';
+		chapterText += '<ol class="wrapper">';
 
 		if ( chapterData && chapterData.right ) {
 			chapterData.right.forEach( function( verseText, verseNumber ) {
-				verses += self.getVerseString( reference, chapterData, verseText, verseNumber, verseInArray, testament );
+				chapterText += self.getVerseString( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament );
 			});
 		}
 
-		return this.chapterTemplate( {
-			book: book,
-			chapter: chapter,
-			verses: verses
-		} );
-
+		chapterText += '</ol>';
+		chapterText += '</div>';
+		return chapterText;
 	},
-	getVerseString: function( reference, chapterData, verseText, verseNumber, verseInArray, testament ) {
+	getVerseString: function( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
 		var self = this,
-		    className = '',
-		    wrapperId = '',
-		    rightString = '',
-		    leftString = '';
-//		chapterText += '<li id="' + reference.book.replace( / /gi, '_' ) + '_' + reference.chapter + '_' + ( verseNumber + 1 ) + '"';
+		    chapterText = '';
+		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 		if(verseNumber === verseInArray) {
-			className = 'current';
+			chapterText += ' class="current"';
 		}
+		chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
+		chapterText += '<div class="wrapper"';
 		if(verseNumber === verseInArray) {
-			wrapperId = 'current';
+			chapterText += ' id="current"';
 		}
 		if(verseNumber === verseInArray-5) {
-			wrapperId = 'context';
+			chapterText += ' id="context"';
 			context = true;
 		}
-		if ( reference.rightVersion === 'lc' ) {
-			//same as below
-			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
-				if ( wordObject ) {
-					rightString += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
-				}
-			});
-		} else {
-			chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
-				if ( wordObject ) {
-					rightString += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
-				}
-			});
-		}
+		chapterText += '>';
+		chapterText += '<div class="english">';
+			if ( reference.rightVersion === 'lc' ) {
+				//same as below
+				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
+					if ( wordObject ) {
+						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+					}
+				});
+			} else {
+				chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
+					if ( wordObject ) {
+						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+					}
+				});
+			}
+		chapterText += "</div>";
 
 		//Load hebrew
 		if(	chapterData.left[verseNumber] ) {
+			chapterText += "<div class='original " + testament + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
-					leftString += self.createWordString( wordObject, testament, testament );
+					chapterText += self.createWordString( wordObject, testament, testament );
 				}
 			});
+			chapterText += "</div>";
 		}
-
-		return this.verseTemplate( {
-			verseId: reference.book.replace( / /gi, '_' ) + '_' + reference.chapter + '_' + ( verseNumber + 1 ),
-			wrapperId: wrapperId,
-			className: className,
-			verseNumber: verseNumber,
-			rightString: rightString,
-			testament: testament,
-			leftString: leftString
-		} );
+		chapterText += '</div>';
+		chapterText += '</li>';
+		return chapterText;
 	},
 	createWordString: function ( wordArray, language, testament, version ) {
 		var self = this,
@@ -230,20 +223,29 @@ javascripture.modules.reference = {
 				families.push( javascripture.api.word.getFamily( lemmaValue ) );
 			} );
 		}
-		wordDisplay = wordArray[0];
-		if ( version === 'lc' && language === 'english' ) {
-			wordDisplay += javascripture.modules.translateLiterally.getWord( wordArray );
+		wordString += '<span';
+		wordString += ' class="' + families.join( ' ' ) + '-family ' + lemma + '"';
+		wordString += ' title="' + lemma;
+		if ( wordArray[2] ) {
+			wordString += ' ' + wordArray[2];
 		}
-
-		return this.wordTemplate( {
-			families: families.join( ' ' ),
-			lemma: lemma,
-			morph: wordArray[2],
-			word: wordArray[0],
-			wordDisplay: wordDisplay,
-			testament: testament,
-			range: 'verse'
-		} );
+		wordString += '"';
+		wordString += ' data-word="' + wordArray[0] + '"';
+		wordString += ' data-lemma="' + wordArray[1] + '"';
+		wordString += ' data-language="' + testament + '"';
+		wordString += ' data-range="verse"';
+		wordString += ' data-family="' + families.join( ' ' ) + '"';
+		if ( wordArray[2] ) {
+			wordString += ' data-morph="' + wordArray[2] + '"';
+		}
+		wordString += '>';
+		if ( version === 'lc' && language === 'english' ) {
+			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+		} else {
+			wordString += wordArray[0];
+		}
+		wordString += '</span> ';
+		return wordString;
 	}
 };
 
@@ -265,8 +267,10 @@ javascripture.modules.reference = {
 	javascripture.modules.reference.loadReferenceFromHash();
 
 	$(window).bind( 'hashchange', function() {
-	    startDate = new Date();
+	    var startDate = new Date();
 	    javascripture.modules.reference.loadReferenceFromHash();
+	    var endDate = new Date();
+		timer(startDate, endDate);
 	});
 
 	$( window ).scrollStopped( function() {
@@ -310,6 +314,7 @@ javascripture.modules.reference = {
 	worker.addEventListener('message', function(e) {
 		if( e.data.task === 'reference' ) {
 			var reference = e.data.result.reference;
+			console.log(reference);
 
 			var chapterText = '<div class="three-references"';
 
@@ -355,8 +360,6 @@ javascripture.modules.reference = {
 			}
 			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
 			maintainState( reference );
-			var endDate = new Date();
-			timer(startDate, endDate);
 		}
 	} );
 
