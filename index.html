@@ -446,16 +446,14 @@
 </script>
 
 <script type="text/template" id="word-template">
-	<span <% if ( className ) { %>
-		class="<%= className %>"
-	    title="<%= lemma %> <%= morph %>"
-	    data-word="<%= word %>"
-	    data-lemma="<%= lemma %>"
-	    data-language="<%= testament %>"
-	    data-range="<%= range %>"
-	    data-family="<%= families %>"
-	    data-morph="<%= morph %>"
-	<% } %>
+	<span class="<%= families %>-family <%= lemma %>"
+	      title="<%= lemma %> <%= morph %>"
+	      data-word="<%= word %>"
+	      data-lemma="<%= lemma %>"
+	      data-language="<%= testament %>"
+	      data-range="<%= range %>"
+	      data-family="<%= families %>"
+	      data-morph="<%= morph %>"
 	><%= wordDisplay %></span>
 </script>
 
@@ -534,6 +532,7 @@
 		}, false);
 	}, false);
 </script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

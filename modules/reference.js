@@ -1,59 +1,4 @@
-/*globals Backbone javascripture, bible, worker, _ */
-
-var WordModel = Backbone.Model.extend( {
-
-} );
-
-
-var WordView = Backbone.View.extend({
-
-	model: WordModel,
-
-	tagName: "span",
-
-	template: _.template( $("#word-template").html() ),
-
-	render: function( wordArray, language, testament, version ) {
-		var self = this,
-		    wordString = '',
-		    families = [];
-
-		lemma = wordArray[ 1 ];
-		if ( lemma ) {
-			lemmaArray = lemma.split( ' ' );
-			lemmaArray.forEach( function( lemmaValue, key ) {
-				families.push( javascripture.api.word.getFamily( lemmaValue ) );
-			} );
-		}
-		wordDisplay = wordArray[0];
-		if ( version === 'lc' && language === 'english' ) {
-			wordDisplay += javascripture.modules.translateLiterally.getWord( wordArray );
-		}
-
-		var familyClass = '',
-		    className = '';
-		if ( families.length > 0 ) {
-			familyClass = families.join( ' ' ) + '-family';
-			className += families.join( ' ' ) + '-family';
-		}
-		if ( lemma ) {
-			className += ' ' + lemma;
-		}
-
-		return this.template( {
-			className: className,
-			families: familyClass,
-			lemma: lemma,
-			morph: wordArray[2],
-			word: wordArray[0],
-			wordDisplay: wordDisplay,
-			testament: testament,
-			range: 'verse'
-		} );
-	}
-
-});
-
+/*globals javascripture, bible, worker, _ */
 javascripture.modules.reference = {
 	wordTemplate: _.template( $("#word-template").html() ),
 	verseTemplate: _.template( $("#verse-template").html() ),
@@ -272,17 +217,36 @@ javascripture.modules.reference = {
 		} );
 	},
 	createWordString: function ( wordArray, language, testament, version ) {
-		var word = new WordModel( {
+		var self = this,
+		    wordString = '',
+		    families = [];
+		if ( typeof wordArray[ 1 ] === 'undefined' )
+			return '<span>' + wordArray[0] + '</span> ';
+
+		lemma = wordArray[ 1 ];
+		if ( lemma ) {
+			lemmaArray = lemma.split( ' ' );
+			lemmaArray.forEach( function( lemmaValue, key ) {
+				families.push( javascripture.api.word.getFamily( lemmaValue ) );
+			} );
+		}
+		wordDisplay = wordArray[0];
+		if ( version === 'lc' && language === 'english' ) {
+			wordDisplay += javascripture.modules.translateLiterally.getWord( wordArray );
+		}
+
+		return this.wordTemplate( {
+			families: families.join( ' ' ),
+			lemma: lemma,
+			morph: wordArray[2],
 			word: wordArray[0],
-			lemma: wordArray[ 1 ],
-			morph: wordArray[2]
+			wordDisplay: wordDisplay,
+			testament: testament,
+			range: 'verse'
 		} );
-		var wordView = new WordView( {
-			model: word
-		} );
-		return wordView.render( wordArray, language, testament, version );
 	}
 };
+
 
 
 /*globals javascripture*/
