@@ -12,20 +12,22 @@ javascripture.modules.reference = {
 
 		reference.rightVersion = $('#versionSelectorRight').val();
 		if ( reference.rightVersion === 'original' ) {
-			reference.rightVersion = 'kjv'; // Backup
+//			reference.rightVersion = 'kjv'; // Backup
 			if ( localStorage.rightVersion ) {
 				reference.rightVersion = localStorage.rightVersion;
 			}
 		}
 
 		reference.leftVersion = $('#versionSelectorLeft').val();
+console.log(reference.leftVersion);
+
 		if ( reference.leftVersion === 'original' ) {
-			reference.leftVersion = 'kjv'; // Backup
+//			reference.leftVersion = 'hebrew'; // Backup
 			if ( localStorage.leftVersion ) {
 				reference.leftVersion = localStorage.leftVersion;
 			}
 		}
-
+console.log(reference.leftVersion);
 		worker.postMessage( {
 			task: 'reference',
 			parameters: reference
@@ -178,7 +180,7 @@ javascripture.modules.reference = {
 			context = true;
 		}
 		chapterText += '>';
-		chapterText += '<div class="english">';
+		chapterText += '<div class="english ' + reference.rightVersion + '">';
 			if ( reference.rightVersion === 'lc' ) {
 				//same as below
 				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
@@ -197,7 +199,7 @@ javascripture.modules.reference = {
 
 		//Load hebrew
 		if(	chapterData.left[verseNumber] ) {
-			chapterText += "<div class='original " + testament + "'>";
+			chapterText += "<div class='original " + reference.leftVersion + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
 					chapterText += self.createWordString( wordObject, testament, testament );

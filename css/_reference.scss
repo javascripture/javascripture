@@ -12,10 +12,12 @@
 		}
 	}
 
-	.hebrew { direction: rtl; display: none; font-size: 140%;
-	  font-family: 'Times New Roman', Times serif;
-	  line-height: 1em;
-	  text-align: right;
+	.hebrew {
+		direction: rtl;
+		font-family: 'Times New Roman', Times serif;
+		font-size: 140%;
+		line-height: 1em;
+		text-align: right;
 	}
 
 	.english { width: 95%; padding: 0 2%; }

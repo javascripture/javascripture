@@ -1,6 +1,12 @@
 /*globals javascripture, bible*/
 javascripture.api.reference = {
 	getThreeChapters: function( reference ) {
+		var testament = this.getTestament( reference.book );
+
+		if ( "original" === reference.rightVersion ) {
+			reference.rightVersion = testament;
+		}
+
 		var self = this,
 		    book = reference.book,
 			prev = self.getOffsetChapter( reference, -1 ),
@@ -35,23 +41,27 @@ javascripture.api.reference = {
 		}
 		return result;
 	},
+	getTestament: function( book ) {
+		if( javascripture.data.hebrew[ book ] ) {
+			return 'hebrew';
+		} else {
+			return 'greek';
+		}
+	},
 	getChapterData: function( reference ) {
 		var book = reference.book,
 		    chapter = reference.chapter,
 			chapterInArray = chapter - 1,
 			result = {},
-			testament;
-
-		if( javascripture.data.hebrew[book] ) {
-			testament = 'hebrew';
-		} else {
-			testament = 'greek';
-		}
+			testament = this.getTestament( book );
 
 		if ( javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ] ) {
 			result.right = javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ];
-			if( javascripture.data[ testament ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {
-				result.left = javascripture.data[ testament ][ book ][ chapterInArray ];
+			if ( "original" === reference.leftVersion ) {
+				reference.leftVersion = testament;
+			}
+			if( javascripture.data[ reference.leftVersion ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {
+				result.left = javascripture.data[ reference.leftVersion ][ book ][ chapterInArray ];
 			}
 		}
 		return result;
@@ -60,8 +70,8 @@ javascripture.api.reference = {
 		var book = reference.book,
 		    chapter = reference.chapter,
 		    offsetChapter = {
-		    	leftVersion: reference.leftVersion,
-		    	rightVersion: reference.rightVersion
+				leftVersion: reference.leftVersion,
+				rightVersion: reference.rightVersion
 		    },
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,

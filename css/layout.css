@@ -113,11 +113,11 @@ body > .wrapper {
 .verse {
   color: #000; }
 
-.verse .original span, .verse span[class] {
+.verse .original span, .verse .web span[class] {
   color: #000;
   font-style: normal; }
 
-.verse span, .verse span.added, transchange {
+.verse .web span, .verse span.added, transchange {
   color: #aaa;
   font-style: italic; }
 
@@ -419,9 +419,8 @@ note:hover {
     text-align: center; }
   .referencePanel .hebrew {
     direction: rtl;
-    display: none;
-    font-size: 140%;
     font-family: 'Times New Roman', Times serif;
+    font-size: 140%;
     line-height: 1em;
     text-align: right; }
   .referencePanel .english {
