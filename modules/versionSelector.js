@@ -7,25 +7,27 @@ javascripture.modules.versionSelector = {
 		}
 		return 'kjv';
 	},
-	switchVersion: function ( version, target ) {
-		//if ( version === 'original' ) {
-		//	$('html').addClass( 'read-original' );
-		//} else {
-		//	$('html').removeClass( 'read-original' );
-			if ( version === 'lc' ) {
-				javascripture.data[ target ] = javascripture.data.kjv;
-			} else {
-				javascripture.data[ target ] = javascripture.data[ version ];
-			}
-			localStorage[ target ] = version;
-			if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
-				$( '.popup' ).popup( 'close' );
-			}
-//			$( javascripture.modules.versionSelector.switcher ).val( version );
-			if ( 'undefined' !== typeof javascripture.modules.reference ) {
-				javascripture.modules.reference.loadReferenceFromHash();
-			}
-		//}
+	switchVersion: function ( $this, version ) {
+		var target = $this.data('target');
+		if ( 'undefined' === typeof version ) {
+			version = $this.val();
+		}
+
+		if ( version === 'lc' ) {
+			javascripture.data[ target ] = javascripture.data.kjv;
+		} else {
+			javascripture.data[ target ] = javascripture.data[ version ];
+		}
+
+		localStorage[ target ] = version;
+		if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
+			$( '.popup' ).popup( 'close' );
+		}
+		$this.val( version );
+		if ( 'undefined' !== typeof javascripture.modules.reference ) {
+			javascripture.modules.reference.loadReferenceFromHash();
+		}
+
 	}
 };
 
@@ -35,10 +37,10 @@ javascripture.modules.versionSelector = {
 javascripture.data.english = javascripture.data.kjv;
 
 //change it if necessary
-javascripture.modules.versionSelector.switchVersion( javascripture.modules.versionSelector.getVersion( 'left' ), 'left' );
-javascripture.modules.versionSelector.switchVersion( javascripture.modules.versionSelector.getVersion( 'right' ), 'right' );
+javascripture.modules.versionSelector.switchVersion( $( '[name=leftVersion]'), javascripture.modules.versionSelector.getVersion( 'left' ) );
+javascripture.modules.versionSelector.switchVersion( $( '[name=rightVersion]'), javascripture.modules.versionSelector.getVersion( 'right' ) );
 
 //bind version switcher
 $( javascripture.modules.versionSelector.switcher ).change( function () {
-	javascripture.modules.versionSelector.switchVersion( $(this).val(), $(this).data('target') );
+	javascripture.modules.versionSelector.switchVersion( $(this) );
 } );
