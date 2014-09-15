@@ -105,8 +105,8 @@ javascripture.modules.reference = {
 			reference = {};
 
 		if ( hashArray.length > 1 ) {
-			reference.book = hashArray[0].split('=')[1],
-			reference.chapter = parseInt(hashArray[1].split('=')[1], 10),
+			reference.book = hashArray[0].split('=')[1];
+			reference.chapter = parseInt(hashArray[1].split('=')[1], 10);
 			reference.verse = 1;
 			if ( hashArray[2] ) {
 				reference.verse = parseInt(hashArray[2].split('=')[1], 10);
@@ -244,7 +244,7 @@ javascripture.modules.reference = {
 		}
 		wordString += '>';
 
-		if ( version === 'lc' ) { //&& language === 'english' ) {
+		if ( version === 'lc' ) {
 			wordString += javascripture.modules.translateLiterally.getWord( wordArray );
 		} else {
 			wordString += wordArray[0];
