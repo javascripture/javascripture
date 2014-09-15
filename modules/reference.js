@@ -3,9 +3,9 @@ javascripture.modules.reference = {
 	load: function( reference ) {
 
 		var self = this,
-		    book = reference.book,
-		    chapter = reference.chapter,
-		    verse = reference.verse;
+			book = reference.book,
+			chapter = reference.chapter,
+			verse = reference.verse;
 
 		if ( 'undefined' == typeof verse ) {
 			reference.verse = 1;
@@ -80,12 +80,12 @@ javascripture.modules.reference = {
 	},
 	anchorReference: function ( anchoringData ) {
 		var anchorPointSelector = anchoringData[1],
-		    offset = anchoringData[0],
-		    $anchorPoint = $( anchorPointSelector ),
-		    verseHeight;
+			offset = anchoringData[0],
+			$anchorPoint = $( anchorPointSelector ),
+			verseHeight;
 
 		if ( anchorPointSelector === '.current-verse' ) {
-			verseHeight = $anchorPoint.height(),
+			verseHeight = $anchorPoint.height();
 			offset = -$(window).height() / 2 + verseHeight;
 		}
 
@@ -108,35 +108,36 @@ javascripture.modules.reference = {
 			reference.book = hashArray[0].split('=')[1],
 			reference.chapter = parseInt(hashArray[1].split('=')[1], 10),
 			reference.verse = 1;
-	        if ( hashArray[2] )
-	            reference.verse = parseInt(hashArray[2].split('=')[1], 10);
+			if ( hashArray[2] ) {
+				reference.verse = parseInt(hashArray[2].split('=')[1], 10);
+			}
 		}
 		return reference;
 	},
 	loadReferenceFromHash: function () {
-	    var hash = window.location.hash;
-	    if( hash.indexOf( 'search' ) > -1 ) {
-	        var word = hash.split( '=' )[ 1 ];
-	        setTimeout( function () {
-		        createSearchReferencesPanel( { lemma: word } );
-		    } );
-	    } else if( hash.indexOf( 'reference' ) > -1 ) {
-	        var referenceObject = this.getReferenceFromHash();
+		var hash = window.location.hash;
+		if( hash.indexOf( 'search' ) > -1 ) {
+			var word = hash.split( '=' )[ 1 ];
+			setTimeout( function () {
+				createSearchReferencesPanel( { lemma: word } );
+			} );
+		} else if( hash.indexOf( 'reference' ) > -1 ) {
+			var referenceObject = this.getReferenceFromHash();
 			if ( localStorage ) {
 				localStorage.reference = JSON.stringify( referenceObject );
 			}
 			referenceObject.anchoringData = javascripture.modules.reference.getAnchoringData( null );
 			javascripture.modules.reference.load( referenceObject );
-	    }
+		}
 	},
 	getReferenceFromHash: function () {
 		var reference = window.location.hash.split( '=' )[1].split(':'),
-		    book = reference[0],
-		    chapter = parseInt(reference[1], 10),
-		    verse = 1;
-	    if ( reference[2] ) {
-	        verse = parseInt(reference[2], 10);
-	    }
+			book = reference[0],
+			chapter = parseInt(reference[1], 10),
+			verse = 1;
+		if ( reference[2] ) {
+			verse = parseInt(reference[2], 10);
+		}
 		return { book: book, chapter: chapter, verse: verse };
 	},
 	createReferenceLink: function( reference ) {
@@ -144,9 +145,9 @@ javascripture.modules.reference = {
 	},
 	getChapterText: function ( reference, chapterData, testament ) {
 		var self = this,
-		    book = reference.book,
-		    chapter = reference.chapter,
-		    verse = reference.verse,
+			book = reference.book,
+			chapter = reference.chapter,
+			verse = reference.verse,
 			chapterInArray = chapter - 1,
 			verseInArray = verse - 1,
 			context = false;
@@ -166,7 +167,7 @@ javascripture.modules.reference = {
 	},
 	getVerseString: function( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
 		var self = this,
-		    chapterText = '';
+			chapterText = '';
 		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
 		if(verseNumber === verseInArray) {
 			chapterText += ' class="current"';
@@ -214,8 +215,8 @@ javascripture.modules.reference = {
 	},
 	createWordString: function ( wordArray, language, testament, version ) {
 		var self = this,
-		    wordString = '',
-		    families = [];
+			wordString = '',
+			families = [];
 		if ( typeof wordArray[ 1 ] === 'undefined' )
 			return '<span>' + wordArray[0] + '</span> ';
 
@@ -244,7 +245,7 @@ javascripture.modules.reference = {
 		wordString += '>';
 
 		if ( version === 'lc' ) { //&& language === 'english' ) {
-			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
+			wordString += javascripture.modules.translateLiterally.getWord( wordArray );
 		} else {
 			wordString += wordArray[0];
 		}
