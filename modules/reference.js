@@ -260,21 +260,21 @@ javascripture.modules.reference = {
 ;( function ( $ ) {
 	var english = javascripture.data.english;
 	$.fn.scrollStopped = function(callback) {
-	    $(this).scroll( function () {
-	        var self = this, $this = $(self);
-	        if ($this.data('scrollTimeout')) {
-	          clearTimeout($this.data('scrollTimeout'));
-	        }
-	        $this.data('scrollTimeout', setTimeout(callback,250,self));
-	    });
+		$(this).scroll( function () {
+			var self = this, $this = $(self);
+			if ($this.data('scrollTimeout')) {
+				clearTimeout($this.data('scrollTimeout'));
+			}
+			$this.data('scrollTimeout', setTimeout(callback,250,self));
+		});
 	};
 
 	javascripture.modules.reference.loadReferenceFromHash();
 
 	$(window).bind( 'hashchange', function() {
-	    var startDate = new Date();
-	    javascripture.modules.reference.loadReferenceFromHash();
-	    var endDate = new Date();
+		var startDate = new Date();
+		javascripture.modules.reference.loadReferenceFromHash();
+		var endDate = new Date();
 		timer(startDate, endDate);
 	});
 
@@ -319,7 +319,6 @@ javascripture.modules.reference = {
 	worker.addEventListener('message', function(e) {
 		if( e.data.task === 'reference' ) {
 			var reference = e.data.result.reference;
-			console.log(reference);
 
 			var chapterText = '<div class="three-references"';
 
