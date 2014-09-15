@@ -3,21 +3,28 @@ javascripture.api.reference = {
 	getThreeChapters: function( reference ) {
 		var testament = this.getTestament( reference.book );
 
-		if ( "original" === reference.rightVersion ) {
-			reference.rightVersion = testament;
+		var result = { reference: reference };
+
+		reference.rightData = reference.rightVersion;
+		reference.leftData = reference.leftVersion;
+		if ( "original" === reference.rightVersion ||  "lc" === reference.rightVersion ) {
+			reference.rightData = testament;
 		}
 
+			if ( "original" === reference.leftVersion || "lc" === reference.leftVersion ) {
+				reference.leftData = testament;
+			}
+console.log( result );
 		var self = this,
 			book = reference.book,
 			prev = self.getOffsetChapter( reference, -1 ),
-			next = self.getOffsetChapter( reference, 1 ),
-			result = { reference: reference };
+			next = self.getOffsetChapter( reference, 1 );
 
 		if ( prev.book ) {
-			result.prev = prev;
+			reference.prev = prev;
 		}
 		if ( next.book ) {
-			result.next = next;
+			reference.next = next;
 		}
 
 		if( javascripture.data.hebrew[book] ) {
@@ -34,11 +41,12 @@ javascripture.api.reference = {
 		}
 
 		result.chapters.push( javascripture.api.reference.getChapterData( reference ) );
-
+		console.log( result );
 		//add the next chapter if it exists
 		if ( next.book ) {
 			result.chapters.push( javascripture.api.reference.getChapterData( next ) );
 		}
+
 		return result;
 	},
 	getTestament: function( book ) {
@@ -55,13 +63,11 @@ javascripture.api.reference = {
 			result = {},
 			testament = this.getTestament( book );
 
-		if ( javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ] ) {
-			result.right = javascripture.data[ reference.rightVersion ][ book ][ chapterInArray ];
-			if ( "original" === reference.leftVersion ) {
-				reference.leftVersion = testament;
-			}
-			if( javascripture.data[ reference.leftVersion ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {
-				result.left = javascripture.data[ reference.leftVersion ][ book ][ chapterInArray ];
+		if ( javascripture.data[ reference.rightData ][ book ][ chapterInArray ] ) {
+			result.right = javascripture.data[ reference.rightData ][ book ][ chapterInArray ];
+
+			if( javascripture.data[ reference.leftData ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {
+				result.left = javascripture.data[ reference.leftData ][ book ][ chapterInArray ];
 			}
 		}
 		return result;
@@ -70,13 +76,13 @@ javascripture.api.reference = {
 		var book = reference.book,
 			chapter = reference.chapter,
 			offsetChapter = {
-				leftVersion: reference.leftVersion,
-				rightVersion: reference.rightVersion
+				leftData: reference.leftData,
+				rightData: reference.rightData
 			},
 			offsetChapterNumber = parseInt(chapter, 10) + offset,
 			offsetNumberJavascript = offsetChapterNumber - 1,
 			offsetBook;
-		if ( javascripture.data[reference.rightVersion][book] && javascripture.data[reference.rightVersion][book][offsetNumberJavascript] !== undefined) {
+		if ( javascripture.data[reference.rightData][book] && javascripture.data[reference.rightData][book][offsetNumberJavascript] !== undefined) {
 			offsetChapter.book = book;
 			offsetChapter.chapter = offsetChapterNumber;
 		} else {

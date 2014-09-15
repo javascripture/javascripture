@@ -14,7 +14,7 @@ javascripture.modules.versionSelector = {
 		}
 
 		if ( version === 'lc' ) {
-			javascripture.data[ target ] = javascripture.data.kjv;
+			javascripture.data[ target ] = javascripture.data.original;
 		} else {
 			javascripture.data[ target ] = javascripture.data[ version ];
 		}

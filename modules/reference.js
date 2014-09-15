@@ -1,6 +1,7 @@
 /*globals javascripture, bible, worker*/
 javascripture.modules.reference = {
 	load: function( reference ) {
+
 		var self = this,
 		    book = reference.book,
 		    chapter = reference.chapter,
@@ -19,7 +20,7 @@ javascripture.modules.reference = {
 		}
 
 		reference.leftVersion = $('#versionSelectorLeft').val();
-console.log(reference.leftVersion);
+
 
 		if ( reference.leftVersion === 'original' ) {
 //			reference.leftVersion = 'hebrew'; // Backup
@@ -27,7 +28,7 @@ console.log(reference.leftVersion);
 				reference.leftVersion = localStorage.leftVersion;
 			}
 		}
-console.log(reference.leftVersion);
+
 		worker.postMessage( {
 			task: 'reference',
 			parameters: reference
@@ -180,7 +181,7 @@ console.log(reference.leftVersion);
 			context = true;
 		}
 		chapterText += '>';
-		chapterText += '<div class="english ' + reference.rightVersion + '">';
+		chapterText += '<div class="right ' + reference.rightVersion + ' ' + testament + '">';
 			if ( reference.rightVersion === 'lc' ) {
 				//same as below
 				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
@@ -197,12 +198,12 @@ console.log(reference.leftVersion);
 			}
 		chapterText += "</div>";
 
-		//Load hebrew
+		//Load left
 		if(	chapterData.left[verseNumber] ) {
-			chapterText += "<div class='original " + reference.leftVersion + "'>";
+			chapterText += "<div class='left " + reference.leftVersion + ' ' + testament + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
-					chapterText += self.createWordString( wordObject, testament, testament );
+					chapterText += self.createWordString( wordObject, testament, testament, reference.leftVersion );
 				}
 			});
 			chapterText += "</div>";
@@ -241,7 +242,8 @@ console.log(reference.leftVersion);
 			wordString += ' data-morph="' + wordArray[2] + '"';
 		}
 		wordString += '>';
-		if ( version === 'lc' && language === 'english' ) {
+
+		if ( version === 'lc' ) { //&& language === 'english' ) {
 			 wordString += javascripture.modules.translateLiterally.getWord( wordArray );
 		} else {
 			wordString += wordArray[0];
