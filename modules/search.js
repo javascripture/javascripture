@@ -1,5 +1,5 @@
 /*global javascripture*/
-var createSearchReferencesPanel;
+var createSearchReferencesPanel, startDate;
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -32,6 +32,11 @@ var createSearchReferencesPanel;
 		if ( data.morph ) {
 			data.morph = data.morph.trim();
 		}
+
+		if ( 'undefined' === typeof data.clusivity ) {
+			data.clusivity = 'exclusive';
+		}
+
 
 		var strongsNumberAsId;
 		if ( data.lemma ) {
@@ -153,7 +158,7 @@ var createSearchReferencesPanel;
 	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
 		searchOnClick( this );
 	});
-	$(document).on( 'dblclick', '#verse ol > li span', function () {
+	$(document).on( 'dblclick', '#verse ol > li span.searchable', function () {
 		searchOnClick( this );
 	});
 
@@ -217,7 +222,6 @@ var createSearchReferencesPanel;
 
 			var endDate = new Date();
 			timer(startDate, endDate);
-
 
 		}
 

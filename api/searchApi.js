@@ -77,16 +77,16 @@ javascripture.api.search = {
     },
 	lookForTerm: function () {
 		var self = this,
-		    parameters = self.parameters;
+			parameters = self.parameters;
 		if ( 'undefined' === typeof parameters.language ) {
 			parameters.language = self.inferLanguage( parameters );
 		}
+
 		var dataSource = this.language[parameters.language]; //work out what language to search in
 		self.results.references = [];
 		self.resetMatches();
 
 		var booksToSearch = this.books[ parameters.language ];
-
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 		} );
@@ -96,6 +96,7 @@ javascripture.api.search = {
 			parameters = self.parameters,
 			book = dataSource[ bookName ];
 
+		console.log( parameters.clusivity );
 		//work out how many terms there are
 		var termsLength = 0;
 		for( var typeKey in self.types ) {
@@ -125,8 +126,7 @@ javascripture.api.search = {
 						self.resetMatches();
 					}
 
-					var matchesLength,
-					    termString;
+					var matchesLength, termString;
 
 					//now loop through types
 					self.types.forEach( function ( type, typeKey ) {
@@ -135,11 +135,11 @@ javascripture.api.search = {
 
 						if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
 							var terms = termString.split(' '),
-								wordTypes = word[typeKey].split(' '); //because sometimes words have spaces in them
+								wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
 							wordTypes.forEach( function( wordType ) {
 								terms.forEach( function( term ) {
 									if ( self.doesDataMatchTerm( type, wordType, term ) ) {
-										if (parameters.clusivity === 'exclusive' ) {
+										if ( parameters.clusivity === 'exclusive' ) {
 											self.results.matches[ term ] = true;
 										} else {
 											self.addReference( bookName, chapterNumber, verseNumber );
@@ -163,6 +163,8 @@ javascripture.api.search = {
 							self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 						}
 					}
+
+
 				} );
 			} );
 		} );

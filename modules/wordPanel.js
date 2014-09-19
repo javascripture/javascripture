@@ -6,28 +6,27 @@
 			if ( ! $element.data('lemma') ) {
 				return false;
 			}
-			var strongsNumberArray = $element.data('lemma').split(' '),
-			    strongsNumberDisplay = '',
-			    lemma = '',
-			    strongsDef = '',
-			    derivation = '',
-			    kjvDef = '',
-			    englishWord = '',
-			    transliteration = '',
-			    pronounciation = '',
-			    infoObjects = [],
-			    language,
-			    morphology = $element.data( 'morph' );
-			$.each(strongsNumberArray, function( i, strongsNumber ) {
-				if ( strongsNumber === 'G3588' ) {
-					//do nothing
+			var strongsNumberArray = $element.data('lemma').toString().split(/ |\//),
+				strongsNumberDisplay = '',
+				lemma = '',
+				strongsDef = '',
+				derivation = '',
+				kjvDef = '',
+				englishWord = '',
+				transliteration = '',
+				pronounciation = '',
+				infoObjects = [],
+				language = $element.data('language'),
+				morphology = $element.data( 'morph' );
+			strongsNumberArray.forEach( function( strongsNumber, i ) {
+				if ( 'undefined' === typeof javascripture.data.strongsDictionary[ strongsNumber ] ) {
+					return false;
 				} else {
-					if(strongsNumber !== 'added' && strongsNumber !== 'trans-change' ) {
+//					if ( 'undefined' !== typeof javascripture.data.strongsDictionary[ strongsNumber ] ) {
 						strongsNumberDisplay = strongsNumber;
 						var className = javascripture.api.word.getFamily( strongsNumber ) + '-family ' + strongsNumber;
 						//convert
 						var osidStrongsNumber = strongsNumber;
-
 						lemma = javascripture.modules.hebrew.stripPointing( javascripture.data.strongsDictionary[ osidStrongsNumber ].lemma );
 						strongsDef = javascripture.data.strongsDictionary[osidStrongsNumber].strongs_def;
 						derivation = javascripture.data.strongsDictionary[osidStrongsNumber].derivation;
@@ -60,8 +59,8 @@
 						infoObjects[ i ].find( '.wordControlPanelTransliteration' ).text( transliteration );
 						infoObjects[ i ].find( '.wordControlPanelPronounciation' ).text( pronounciation );
 						infoObjects[ i ].find( '.wordControlPanelKJVDef' ).html( kjvDef );
-						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphology + ': ' + javascripture.api.morphology.get( morphology ) );
-					}
+						infoObjects[ i ].find( '.wordControlPanelMorphology' ).html( morphology + ': ' + javascripture.api.morphology.get( morphology, 'noLinks', strongsNumber ) );
+					//}
 
 					var roots = '';
 					if( typeof javascripture.data.strongsObjectWithFamilies[ strongsNumber ] !== 'undefined' && javascripture.data.strongsObjectWithFamilies[ strongsNumber ].roots ) {
@@ -95,8 +94,8 @@
 					infoObjects[ i ].find('#wordTreeBranches').html( wordTreeBranches );
 
 					var family = javascripture.api.word.getFamily( strongsNumber ),
-					    familyInt = parseFloat( family.substring( 1, family.length ), 10 ),
-					    wordTreeFamily = 'family: ' + family;
+						familyInt = parseFloat( family.substring( 1, family.length ), 10 ),
+						wordTreeFamily = 'family: ' + family;
 					infoObjects[ i ].find('#wordTreeFamily').html( wordTreeFamily );
 
 					//var strongsInt = parseInt( family.substring( 1, family.length ), 10 );

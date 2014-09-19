@@ -2,9 +2,9 @@
 javascripture.modules.translateLiterally = {
 	getWord: function (word) {
 		var lemma = word[ 1 ],
-		    literalWord,
-		    literalConsistent = javascripture.data.literalConsistent,
-		    morph = word[2];
+			literalWord,
+			literalConsistent = javascripture.data.literalConsistent,
+			morph = word[2];
 		if ( 'string' === typeof morph ) {
 			morph = morph.replace(/-/gi, '');
 		}
@@ -22,7 +22,7 @@ javascripture.modules.translateLiterally = {
 						}
 						literalWord += ' ';
 					} );
-				} else if ( 'undefined' !== typeof literalConsistent[ lemma ][ morph ] ) {
+				} else if ( 'undefined' !== typeof literalConsistent[ lemma ] && 'undefined' !== typeof literalConsistent[ lemma ][ morph ] ) {
 					literalWord = literalConsistent[ lemma ][ morph ];
 				} else {
 					literalWord = literalConsistent[ lemma ];
@@ -40,7 +40,7 @@ javascripture.modules.translateLiterally = {
 				literalWord = translation;
 				var first;
 				for (var i in literalWord) {
-				    if (literalWord.hasOwnProperty(i) && typeof(i) !== 'function') {
+					if (literalWord.hasOwnProperty(i) && typeof(i) !== 'function') {
 						first = literalWord[i];
 						break;
 					}
@@ -52,5 +52,15 @@ javascripture.modules.translateLiterally = {
 			literalWord = '';
 		}
 		return literalWord;
+	},
+
+	getByLemmaAndMorph: function( lemma, morph ) {
+		if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ] ) {
+			if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ][ morph ] ) {
+				return javascripture.data.literalConsistent[ lemma ][ morph ];
+			}
+			return javascripture.data.literalConsistent[ lemma ];
+		}
+		return 'todo';
 	}
 };

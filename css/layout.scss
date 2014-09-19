@@ -37,19 +37,19 @@ body > .wrapper { height: 0;}
 .verse {line-height:1.4em; }
 .verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }
 span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
-.reference span:hover {
+.reference span.word:hover {
 	background: #eff;
 }
-.reference span.added:hover {
+.reference span.word.added:hover {
 	background:none;
 }
-#verse.isolate {
+/*#verse.isolate {
 	color: #999;
 }
 #verse.isolate ol li span {
 	background: none;
 	color: #999;
-}
+}*/
 
 .selectWrapper {position:absolute;left:0;top:0;}
 .selectWrapper select {border-bottom:1px solid #333;}

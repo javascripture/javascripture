@@ -216,26 +216,81 @@ javascripture.modules.reference = {
 	createWordString: function ( wordArray, language, testament, version ) {
 		var self = this,
 			wordString = '',
-			families = [];
+			families = [],
+			wordDisplay,// = wordArray[0].replace(/\//g, ''),
+			lemma,
+			lemmaString = '';
 		if ( typeof wordArray[ 1 ] === 'undefined' )
 			return '<span>' + wordArray[0] + '</span> ';
 
-		lemma = wordArray[ 1 ];
+		//if ( language === 'hebrew' ) {
+			wordDisplayArray = wordArray[0].split( /\//g );
+
+			lemma = wordArray[1].split( /\//g );
+			morph = [];
+			if ( wordArray[2] ) {
+				morph = wordArray[2].split( / |\//g );
+			}
+			lemma.forEach( function( lemmaValue, key ) {
+				var morphLanguage = '';
+				if ( version === 'original' || version === 'lc' ) {
+					if ( 'undefined' !== typeof wordDisplayArray[ key ] ) {
+						wordDisplay = wordDisplayArray[ key ];
+					}
+				} else {
+					wordDisplay = wordArray[0];
+				}
+				wordString += '<span';
+				wordString += ' class="' + families.join( ' ' ) + '-family ' + lemmaValue + ' searchable' + '"';
+				wordString += ' title="' + lemmaValue;
+				if ( morph ) {
+					wordString += ' ' + morph;
+				}
+				wordString += '"';
+				wordString += ' data-word="' + wordDisplay + '"';
+				wordString += ' data-lemma="' + lemmaValue + '"';
+				wordString += ' data-language="' + testament + '"';
+				wordString += ' data-range="verse"';
+				wordString += ' data-family="' + families.join( ' ' ) + '"';
+				if ( morph && 'undefined' !== typeof morph[ key ] ) {
+					if ( 'H' !== morph[ key ].charAt(0) ) {
+						var morphLanguage = 'H';
+					}
+					wordString += ' data-morph="' + morphLanguage + morph[ key ] + '"';
+				}
+				wordString += '>';
+
+				if ( version === 'lc' ) {
+					wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morph[ key ] );
+				} else {
+					wordString += wordDisplay;
+				}
+				wordString += '</span>';
+			} );
+		//}
+		return '<span class="word">' + wordString + '</span> ';
+
+		/*lemma = wordArray[ 1 ];
 		if ( lemma ) {
-			lemmaArray = lemma.split( ' ' );
+			lemmaArray = lemma.split( / |\// );
 			lemmaArray.forEach( function( lemmaValue, key ) {
 				families.push( javascripture.api.word.getFamily( lemmaValue ) );
+				if ( language === 'hebrew' ) {
+					lemmaString += 'H' + lemmaValue + ' ';
+				} else {
+					lemmaString += lemmaValue + ' ';
+				}
 			} );
 		}
 		wordString += '<span';
-		wordString += ' class="' + families.join( ' ' ) + '-family ' + lemma + '"';
-		wordString += ' title="' + lemma;
+		wordString += ' class="' + families.join( ' ' ) + '-family ' + lemmaString + '"';
+		wordString += ' title="' + lemmaString;
 		if ( wordArray[2] ) {
 			wordString += ' ' + wordArray[2];
 		}
 		wordString += '"';
-		wordString += ' data-word="' + wordArray[0] + '"';
-		wordString += ' data-lemma="' + wordArray[1] + '"';
+		wordString += ' data-word="' + wordDisplay + '"';
+		wordString += ' data-lemma="' + lemma + '"';
 		wordString += ' data-language="' + testament + '"';
 		wordString += ' data-range="verse"';
 		wordString += ' data-family="' + families.join( ' ' ) + '"';
@@ -247,10 +302,10 @@ javascripture.modules.reference = {
 		if ( version === 'lc' ) {
 			wordString += javascripture.modules.translateLiterally.getWord( wordArray );
 		} else {
-			wordString += wordArray[0];
+			wordString += wordDisplay;
 		}
 		wordString += '</span> ';
-		return wordString;
+		return wordString;*/
 	}
 };
 

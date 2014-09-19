@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html manifest="javascripture.appcache">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" content="notranslate" />
+		<title>Javascripture</title>
+		<link rel="stylesheet" href="css/layout.css" />
+		<style id="bodyFontFamily"></style>
+		<style id="bodyFontSize"></style>
+	</head>
+	<body>
+
+<script src="lib/jquery-2.0.3.min.js"></script>
+
+<script>
+var javascripture = {
+	data: {
+		hebrew: {}
+	},
+	modules: {}
+};
+
+</script>
+<script src="modules/hebrew.js"></script>
+
+<div id="result"></div>
+
+<script>
+
+function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+};
+
+function jsonToArray( chapters ) {
+
+	// Create the return object
+	var bookArray = [];
+
+	// do children
+	if ( 'undefined' === typeof chapters.forEach ) {
+		bookArray.push( createChapterArray( chapters ) );
+	} else {
+		chapters.forEach( function( chapterElement ) {
+			var chapterArray = createChapterArray( chapterElement );
+			bookArray.push( chapterArray );
+		} );
+	}
+
+	return bookArray;
+};
+function createChapterArray( chapterElement ) {
+	var chapterArray = [];
+	chapterElement.verse.forEach( function( verseElement ) {
+		var verseArray = [];
+		verseElement.w.forEach( function( wordElement ) {
+			var wordArray = [];
+
+			var text =  wordElement['#text'];
+			var word;
+			if ( 'undefined' !== typeof text.replace ) {
+				word = javascripture.modules.hebrew.stripPointing( text );
+			}
+
+			var lemma = wordElement['@attributes'].lemma;
+			var morph = wordElement['@attributes'].morph;
+
+			wordArray[0] = word;
+			if ( lemma ) {
+				lemma = lemma.replace( / a/g, '').replace( / b/g, '').replace( / c/g, '').replace( / d/g, '').replace( / e/g, '').replace( / f/g, '');
+				lemmaArray = lemma.split( /\//);
+				lemmaArrayPrefixed = lemmaArray.map( function( lemmaValue) {
+					return 'H' + lemmaValue;
+				} );
+				wordArray[1] = lemmaArrayPrefixed.join('/');
+			}
+			if ( morph ) {
+				wordArray[2] = morph;
+			}
+			verseArray.push( wordArray );
+		} );
+		chapterArray.push( verseArray );
+	} );
+	return chapterArray;
+}
+
+</script>
+
+
+
+<script>
+	hebrew = {};
+
+	var books = {
+		'Genesis': 'Gen.xml',
+		'Exodus': 'Exod.xml',
+		'Leviticus': 'Lev.xml',
+		'Numbers': 'Num.xml',
+		'Deuteronomy': 'Deut.xml',
+		'Joshua': 'Josh.xml',
+		'Judges': 'Judg.xml',
+		'Ruth': 'Ruth.xml',
+		'1 Samuel': '1Sam.xml',
+		'2 Samuel': '2Sam.xml',
+		'1 Kings': '1Kgs.xml',
+		'2 Kings': '2Kgs.xml',
+		'1 Chronicles': '1Chr.xml',
+		'2 Chronicles': '2Chr.xml',
+		'Ezra': 'Ezra.xml',
+		'Nehemiah': 'Neh.xml',
+		'Esther': 'Esth.xml',
+		'Job': 'Job.xml',
+		'Psalm': 'Ps.xml',
+		'Proverbs': 'Prov.xml',
+		'Ecclesiastes': 'Eccl.xml',
+		'Song of Songs': 'Song.xml',
+		'Isaiah': 'Isa.xml',
+		'Jeremiah': 'Jer.xml',
+		'Lamentations': 'Lam.xml',
+		'Ezekiel': 'Ezek.xml',
+		'Daniel': 'Dan.xml',
+		'Hosea': 'Hos.xml',
+		'Joel': 'Joel.xml',
+		'Amos': 'Amos.xml',
+		'Obadiah': 'Obad.xml',
+		'Jonah': 'Jonah.xml',
+		'Micah': 'Mic.xml',
+		'Nahum': 'Nah.xml',
+		'Habakkuk': 'Hab.xml',
+		'Zephaniah': 'Zeph.xml',
+		'Haggai': 'Hag.xml',
+		'Zechariah': 'Zech.xml',
+		'Malachi': 'Mal.xml'
+	};
+
+	$.each( books, function( bookName, bookFile ) {
+		$.get( '../morphhb/wlc/' + bookFile, function( data ) {
+			var json = xmlToJson( data ).osis.osisText.div.chapter;
+			hebrew[ bookName ] = jsonToArray( json );
+		} );
+	} );
+
+</script>
+
+	</body>
+</html>

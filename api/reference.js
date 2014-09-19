@@ -14,17 +14,17 @@ javascripture.api.reference = {
 			if ( "original" === reference.leftVersion || "lc" === reference.leftVersion ) {
 				reference.leftData = testament;
 			}
-console.log( result );
+
 		var self = this,
 			book = reference.book,
 			prev = self.getOffsetChapter( reference, -1 ),
 			next = self.getOffsetChapter( reference, 1 );
 
 		if ( prev.book ) {
-			reference.prev = prev;
+			result.prev = prev;
 		}
 		if ( next.book ) {
-			reference.next = next;
+			result.next = next;
 		}
 
 		if( javascripture.data.hebrew[book] ) {
@@ -41,11 +41,11 @@ console.log( result );
 		}
 
 		result.chapters.push( javascripture.api.reference.getChapterData( reference ) );
-		console.log( result );
 		//add the next chapter if it exists
 		if ( next.book ) {
 			result.chapters.push( javascripture.api.reference.getChapterData( next ) );
 		}
+		console.log( result );
 
 		return result;
 	},
