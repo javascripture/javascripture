@@ -257,8 +257,8 @@ javascripture.modules.reference = {
 				wordString += ' data-range="verse"';
 				wordString += ' data-family="' + families.join( ' ' ) + '"';
 				if ( morph && 'undefined' !== typeof morph[ key ] ) {
-					if ( 'H' !== morph[ key ].charAt(0) ) {
-						var morphLanguage = 'H';
+					if ( language === 'hebrew' && ( version === 'original' || version === 'lc' ) && 'H' !== morph[ key ].charAt(0) ) {
+						morphLanguage = 'H';
 					}
 					wordString += ' data-morph="' + morphLanguage + morph[ key ] + '"';
 				}
