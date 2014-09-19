@@ -240,6 +240,10 @@ javascripture.modules.reference = {
 				} else {
 					wordDisplay = wordArray[0];
 				}
+
+				// Add families
+				families.push( javascripture.api.word.getFamily( lemmaValue ) );
+
 				wordString += '<span';
 				wordString += ' class="' + families.join( ' ' ) + '-family ' + lemmaValue + ' searchable' + '"';
 				wordString += ' title="' + lemmaValue;
