@@ -96,7 +96,6 @@ javascripture.api.search = {
 			parameters = self.parameters,
 			book = dataSource[ bookName ];
 
-		console.log( parameters.clusivity );
 		//work out how many terms there are
 		var termsLength = 0;
 		for( var typeKey in self.types ) {
