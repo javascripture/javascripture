@@ -1,4 +1,3 @@
-/*globals javascripture, bible, worker*/
 javascripture.modules.reference = {
 	load: function( reference ) {
 

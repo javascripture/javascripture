@@ -1,5 +1,3 @@
-/*global console, javascripture*/
-
 javascripture.api.search = {
 	language: { //helper object to access different languages
 		kjv: javascripture.data.kjv,
