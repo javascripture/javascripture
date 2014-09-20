@@ -10,16 +10,16 @@ javascripture.api.morphology = {
 		}
 		var morphologyDictionary = javascripture.data.morphology,
 			markup = '',
-		    gender,
-		    morphArray,
-		    number,
-		    Case,
-		    person,
-		    case2,
-		    mood,
-		    voice,
-		    tense,
-		    partOfSpeech;
+			gender,
+			morphArray,
+			number,
+			Case,
+			person,
+			case2,
+			mood,
+			voice,
+			tense,
+			partOfSpeech;
 		if (morph !== undefined) {
 			//hebrew
 			if (morphologyDictionary.hebrew[morph] !== undefined) {

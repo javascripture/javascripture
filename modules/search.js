@@ -147,11 +147,12 @@ var createSearchReferencesPanel, startDate;
 	}
 
 	function searchOnClick( element ) {
-		var data = $( element ).data();
-		data.word = '';
-		data.morph = '';
-		data.lemma = data.lemma.replace('G3588 ','');
-		createSearchReferencesPanel(data);
+		// Deep copy the data from the element
+		var searchParameters = jQuery.extend(true, {}, $( element ).data());
+		searchParameters.word = '';
+		searchParameters.morph = '';
+		searchParameters.lemma = searchParameters.lemma.replace('G3588 ','');
+		createSearchReferencesPanel( searchParameters );
 	}
 
 
