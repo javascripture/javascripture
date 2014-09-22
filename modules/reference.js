@@ -224,25 +224,30 @@ javascripture.modules.reference = {
 		}
 
 		//if ( language === 'hebrew' ) {
-			wordDisplayArray = wordArray[0].split( /\//g );
+
+			// Don't split out words for english
+			if ( version === 'original' || version === 'lc' ) {
+				wordDisplayArray = wordArray[0].split( /\//g );
+			} else {
+				wordDisplayArray = [ wordArray[0] ];
+			}
+
+//			wordDisplayArray = wordArray[0].split( /\//g );
 
 			lemma = wordArray[1].split( /\//g );
 			morph = [];
 			if ( wordArray[2] ) {
 				morph = wordArray[2].split( / |\//g );
 			}
-			lemma.forEach( function( lemmaValue, key ) {
+			wordDisplayArray.forEach( function( wordDisplay, key ) {
 				var morphLanguage = '';
-				if ( version === 'original' || version === 'lc' ) {
-					if ( 'undefined' !== typeof wordDisplayArray[ key ] ) {
-						wordDisplay = wordDisplayArray[ key ];
-					}
-				} else {
-					wordDisplay = wordArray[0];
-				}
+				var lemmaValue;
+				if ( lemma && lemma[ key ] ) {
+					lemmaValue = lemma[ key ];
+					// Add families
+					families.push( javascripture.api.word.getFamily( lemmaValue ) );
 
-				// Add families
-				families.push( javascripture.api.word.getFamily( lemmaValue ) );
+				}
 
 				wordString += '<span';
 				wordString += ' class="' + families.join( ' ' ) + '-family ' + lemmaValue + ' searchable' + '"';
@@ -252,7 +257,9 @@ javascripture.modules.reference = {
 				}
 				wordString += '"';
 				wordString += ' data-word="' + wordDisplay + '"';
-				wordString += ' data-lemma="' + lemmaValue + '"';
+				if ( lemmaValue ) {
+					wordString += ' data-lemma="' + lemmaValue + '"';
+				}
 				wordString += ' data-language="' + testament + '"';
 				wordString += ' data-range="verse"';
 				wordString += ' data-family="' + families.join( ' ' ) + '"';
@@ -271,6 +278,8 @@ javascripture.modules.reference = {
 				}
 				wordString += '</span>';
 			} );
+
+
 		//}
 		return '<span class="word">' + wordString + '</span> ';
 
