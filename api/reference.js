@@ -35,6 +35,8 @@ javascripture.api.reference = {
 			result.next = next;
 		}
 
+		result.leftVersion = reference.leftVersion;
+		result.rightVersion = reference.rightVersion;
 		if( javascripture.data.hebrew[book] ) {
 			result.testament = 'hebrew';
 		} else {

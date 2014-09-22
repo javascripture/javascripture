@@ -142,7 +142,7 @@ javascripture.modules.reference = {
 	createReferenceLink: function( reference ) {
 		return 'reference=' + reference.book + ':' + reference.chapter + ':' + reference.verse;
 	},
-	getChapterText: function ( reference, chapterData, testament ) {
+	getChapterText: function ( result, reference, chapterData, testament ) {
 		var self = this,
 			book = reference.book,
 			chapter = reference.chapter,
@@ -156,7 +156,7 @@ javascripture.modules.reference = {
 
 		if ( chapterData && chapterData.right ) {
 			chapterData.right.forEach( function( verseText, verseNumber ) {
-				chapterText += self.getVerseString( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament );
+				chapterText += self.getVerseString( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament );
 			});
 		}
 
@@ -164,7 +164,7 @@ javascripture.modules.reference = {
 		chapterText += '</div>';
 		return chapterText;
 	},
-	getVerseString: function( reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
+	getVerseString: function( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
 		var self = this,
 			chapterText = '';
 		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
@@ -181,18 +181,18 @@ javascripture.modules.reference = {
 			context = true;
 		}
 		chapterText += '>';
-		chapterText += '<div class="right ' + reference.rightVersion + ' ' + testament + '">';
-			if ( reference.rightVersion === 'lc' ) {
+		chapterText += '<div class="right ' + result.rightVersion + ' ' + testament + '">';
+			if ( result.rightVersion === 'lc' ) {
 				//same as below
 				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 					if ( wordObject ) {
-						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+						chapterText += self.createWordString( wordObject, 'english', testament, result.rightVersion );
 					}
 				});
 			} else {
 				chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
 					if ( wordObject ) {
-						chapterText += self.createWordString( wordObject, 'english', testament, reference.rightVersion );
+						chapterText += self.createWordString( wordObject, 'english', testament, result.rightVersion );
 					}
 				});
 			}
@@ -200,10 +200,10 @@ javascripture.modules.reference = {
 
 		//Load left
 		if(	chapterData.left[verseNumber] ) {
-			chapterText += "<div class='left " + reference.leftVersion + ' ' + testament + "'>";
+			chapterText += "<div class='left " + result.leftVersion + ' ' + testament + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
-					chapterText += self.createWordString( wordObject, testament, testament, reference.leftVersion );
+					chapterText += self.createWordString( wordObject, testament, testament, result.leftVersion );
 				}
 			});
 			chapterText += "</div>";
@@ -219,8 +219,9 @@ javascripture.modules.reference = {
 			wordDisplay,// = wordArray[0].replace(/\//g, ''),
 			lemma,
 			lemmaString = '';
-		if ( typeof wordArray[ 1 ] === 'undefined' )
+		if ( typeof wordArray[ 1 ] === 'undefined' ) {
 			return '<span>' + wordArray[0] + '</span> ';
+		}
 
 		//if ( language === 'hebrew' ) {
 			wordDisplayArray = wordArray[0].split( /\//g );
@@ -232,6 +233,7 @@ javascripture.modules.reference = {
 			}
 			lemma.forEach( function( lemmaValue, key ) {
 				var morphLanguage = '';
+				console.log( version );
 				if ( version === 'original' || version === 'lc' ) {
 					if ( 'undefined' !== typeof wordDisplayArray[ key ] ) {
 						wordDisplay = wordDisplayArray[ key ];
@@ -390,15 +392,15 @@ javascripture.modules.reference = {
 
 			// This is a bit messy
 			if ( e.data.result.prev ) {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result.prev, e.data.result.chapters[0], e.data.result.testament );
-				chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[1], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.prev, e.data.result.chapters[0], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[1], e.data.result.testament );
 				if ( e.data.result.next ) {
-					chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
 				}
 			} else {
-				chapterText += javascripture.modules.reference.getChapterText( reference, e.data.result.chapters[0], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[0], e.data.result.testament );
 				if ( e.data.result.next ) {
-					chapterText += javascripture.modules.reference.getChapterText( e.data.result.next, e.data.result.chapters[1], e.data.result.testament );
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[1], e.data.result.testament );
 				}
 			}
 
