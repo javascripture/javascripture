@@ -5,6 +5,9 @@ javascripture.modules.versionSelector = {
 		if ( localStorage && localStorage[ target ] ) {
 			return localStorage[ target ];
 		}
+		if ( $( '[name=' + target + 'Version]').val() ) {
+			return $( '[name=' + target + 'Version]').val();
+		}
 		return 'kjv';
 	},
 	switchVersion: function ( $this, version ) {

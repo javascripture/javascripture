@@ -11,9 +11,9 @@ javascripture.api.reference = {
 			reference.rightData = testament;
 		}
 
-			if ( "original" === reference.leftVersion || "lc" === reference.leftVersion ) {
-				reference.leftData = testament;
-			}
+		if ( "original" === reference.leftVersion || "lc" === reference.leftVersion ) {
+			reference.leftData = testament;
+		}
 
 		var self = this,
 			book = reference.book,
@@ -21,17 +21,9 @@ javascripture.api.reference = {
 			next = self.getOffsetChapter( reference, 1 );
 
 		if ( prev.book ) {
-			// Pass through the version etc. Should be done with $.extend?
-			prev.rightVersion = reference.rightVersion;
-			prev.leftVersion = reference.leftVersion;
-			prev.rightData = reference.rightData;
-			prev.leftData = reference.leftData;
 			result.prev = prev;
 		}
 		if ( next.book ) {
-			// Pass through the version etc. Should be done with $.extend?
-			next.rightData = reference.rightData;
-			next.leftData = reference.leftData;
 			result.next = next;
 		}
 
