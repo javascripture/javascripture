@@ -199,7 +199,7 @@ javascripture.modules.reference = {
 		chapterText += "</div>";
 
 		//Load left
-		if(	chapterData.left[verseNumber] ) {
+		if(	chapterData.left && chapterData.left[verseNumber] ) {
 			chapterText += "<div class='left " + result.leftVersion + ' ' + testament + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
@@ -233,7 +233,6 @@ javascripture.modules.reference = {
 			}
 			lemma.forEach( function( lemmaValue, key ) {
 				var morphLanguage = '';
-				console.log( version );
 				if ( version === 'original' || version === 'lc' ) {
 					if ( 'undefined' !== typeof wordDisplayArray[ key ] ) {
 						wordDisplay = wordDisplayArray[ key ];
