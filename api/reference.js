@@ -63,7 +63,7 @@ javascripture.api.reference = {
 			result = {},
 			testament = this.getTestament( book );
 
-		if ( javascripture.data[ reference.rightData ][ book ][ chapterInArray ] ) {
+		if ( javascripture.data[ reference.rightData ] && javascripture.data[ reference.rightData ][ book ] && javascripture.data[ reference.rightData ][ book ][ chapterInArray ] ) {
 			result.right = javascripture.data[ reference.rightData ][ book ][ chapterInArray ];
 
 			if( javascripture.data[ reference.leftData ][ book ] && javascripture.data[ testament ][ book ][ chapterInArray ] ) {

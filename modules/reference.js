@@ -72,7 +72,11 @@ javascripture.modules.reference = {
 				$anchorVerse = $('.reference:last-child ol.wrapper li:last-child');
 			}
 			anchorPointSelector = '#' + $anchorVerse.attr('id');
-			offset = $bodyOffset - $anchorVerse.offset().top + $('#dock').height();
+			if ( $anchorVerse.length ) {
+				offset = $bodyOffset - $anchorVerse.offset().top + $('#dock').height();
+			} else {
+				offset = $bodyOffset + $('#dock').height();
+			}
 		}
 
 		return [offset, anchorPointSelector];

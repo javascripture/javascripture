@@ -101,7 +101,7 @@ function createChapterArray( chapterElement ) {
 
 			wordArray[0] = word;
 			if ( lemma ) {
-				lemma = lemma.replace( / a/g, '').replace( / b/g, '').replace( / c/g, '').replace( / d/g, '').replace( / e/g, '').replace( / f/g, '');
+				lemma = lemma.replace( / a/g, '').replace( / b/g, '').replace( / c/g, '').replace( / d/g, '').replace( / e/g, '').replace( / f/g, '').replace('+','');
 				lemmaArray = lemma.split( /\//);
 				lemmaArrayPrefixed = lemmaArray.map( function( lemmaValue) {
 					return 'H' + lemmaValue;
