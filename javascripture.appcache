@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 6.1.1
+#version: 6.1.2
 #literal consistent
 
 index.html
@@ -24,7 +24,7 @@ data/kjvdwyer7.js
 data/web3.js
 modules/versionSelector.js
 data/strongsObjectWithFamilies.js
-data/hebrew-with-morph.js
+data/hebrew-with-morph2.js
 data/greek4.js
 data/crossReferences.js
 data/morphology.js

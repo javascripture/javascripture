@@ -10,7 +10,7 @@ importScripts('../data/kjvdwyer7.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
 self.postMessage( { task: 'loading', html: 'loading hebrew' } );
-importScripts('../data/hebrew-with-morph.js');
+importScripts('../data/hebrew-with-morph2.js');
 self.postMessage( { task: 'loading', html: 'loading greek' } );
 importScripts('../data/greek4.js');
 
