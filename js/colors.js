@@ -1,6 +1,9 @@
 /*global javascripture*/
 javascripture.modules.colors = {
 	getStrongsColor: function ( strongsInt ) {
+		if ( isNaN ( strongsInt ) ) {
+			strongsInt = 0;
+		}
 		var theSizeOfAColorSegment = 360 / 8000,
 			hue = strongsInt * theSizeOfAColorSegment,
 			staturation = $( '#subdueColorBy' ).val() * 100 + '%',

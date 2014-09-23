@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="javascripture.appcache">
+<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -109,6 +109,9 @@ function createChapterArray( chapterElement ) {
 				wordArray[1] = lemmaArrayPrefixed.join('/');
 			}
 			if ( morph ) {
+				if ( 'H' === morph.charAt( 0 ) ) {
+					morph = morph.substring( 1 );
+				}
 				wordArray[2] = morph;
 			}
 			verseArray.push( wordArray );

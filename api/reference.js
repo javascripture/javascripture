@@ -47,7 +47,6 @@ javascripture.api.reference = {
 		if ( next.book ) {
 			result.chapters.push( javascripture.api.reference.getChapterData( next ) );
 		}
-
 		return result;
 	},
 	getTestament: function( book ) {

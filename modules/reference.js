@@ -182,20 +182,11 @@ javascripture.modules.reference = {
 		}
 		chapterText += '>';
 		chapterText += '<div class="right ' + result.rightVersion + ' ' + testament + '">';
-			if ( result.rightVersion === 'lc' ) {
-				//same as below
-				chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
-					if ( wordObject ) {
-						chapterText += self.createWordString( wordObject, 'english', testament, result.rightVersion );
-					}
-				});
-			} else {
-				chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
-					if ( wordObject ) {
-						chapterText += self.createWordString( wordObject, 'english', testament, result.rightVersion );
-					}
-				});
-			}
+			chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
+				if ( wordObject ) {
+					chapterText += self.createWordString( wordObject, testament, testament, result.rightVersion );
+				}
+			});
 		chapterText += "</div>";
 
 		//Load left
@@ -236,8 +227,9 @@ javascripture.modules.reference = {
 			morph = wordArray[2].split( / |\//g );
 		}
 		wordDisplayArray.forEach( function( wordDisplay, key ) {
+			families = [];
 			var morphLanguage = '';
-			var lemmaValue;
+			var lemmaValue, morphValue;
 			if ( lemma && lemma[ key ] ) {
 				lemmaValue = lemma[ key ];
 				// Add families
@@ -262,12 +254,13 @@ javascripture.modules.reference = {
 				if ( language === 'hebrew' && ( version === 'original' || version === 'lc' ) && 'H' !== morph[ key ].charAt(0) ) {
 					morphLanguage = 'H';
 				}
-				wordString += ' data-morph="' + morphLanguage + morph[ key ] + '"';
+				morphValue = morphLanguage + morph[ key ].replace( /\-/g, '');
+				wordString += ' data-morph="' + morphValue + '"';
 			}
 			wordString += '>';
 
 			if ( version === 'lc' ) {
-				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morph[ key ] );
+				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue ) + ' ';
 			} else {
 				wordString += wordDisplay;
 			}

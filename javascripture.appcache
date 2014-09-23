@@ -19,11 +19,12 @@ lib/MorphParse.js
 #data
 data/bible.js
 data/strongs-dictionary.js
+data/extra-dictionary.js
 data/kjvdwyer7.js
 data/web3.js
 modules/versionSelector.js
 data/strongsObjectWithFamilies.js
-data/hebrew6.js
+data/hebrew-with-morph.js
 data/greek4.js
 data/crossReferences.js
 data/morphology.js
