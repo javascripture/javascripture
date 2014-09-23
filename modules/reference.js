@@ -146,7 +146,7 @@ javascripture.modules.reference = {
 	createReferenceLink: function( reference ) {
 		return 'reference=' + reference.book + ':' + reference.chapter + ':' + reference.verse;
 	},
-	getChapterText: function ( result, reference, chapterData, testament ) {
+	getChapterText: function ( result, reference, chapterData ) {
 		var self = this,
 			book = reference.book,
 			chapter = reference.chapter,
@@ -160,7 +160,7 @@ javascripture.modules.reference = {
 
 		if ( chapterData && chapterData.right ) {
 			chapterData.right.forEach( function( verseText, verseNumber ) {
-				chapterText += self.getVerseString( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament );
+				chapterText += self.getVerseString( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray );
 			});
 		}
 
@@ -168,37 +168,37 @@ javascripture.modules.reference = {
 		chapterText += '</div>';
 		return chapterText;
 	},
-	getVerseString: function( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray, testament ) {
+	getVerseString: function( result, reference, chapterData, book, chapter, verseText, verseNumber, verseInArray ) {
 		var self = this,
 			chapterText = '';
 		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
-		if(verseNumber === verseInArray) {
+		if ( verseNumber === verseInArray ) {
 			chapterText += ' class="current"';
 		}
 		chapterText += 'data-verse="' + ( verseNumber + 1 ) + '">';
 		chapterText += '<div class="wrapper"';
-		if(verseNumber === verseInArray) {
+		if ( verseNumber === verseInArray ) {
 			chapterText += ' id="current"';
 		}
-		if(verseNumber === verseInArray-5) {
+		if ( verseNumber === verseInArray-5 ) {
 			chapterText += ' id="context"';
 			context = true;
 		}
 		chapterText += '>';
-		chapterText += '<div class="right ' + result.rightVersion + ' ' + testament + '">';
+		chapterText += '<div class="right ' + result.rightVersion + ' ' + result.testament + '">';
 			chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
-					chapterText += self.createWordString( wordObject, testament, testament, result.rightVersion );
+					chapterText += self.createWordString( wordObject, result.testament, result.rightVersion );
 				}
 			});
 		chapterText += "</div>";
 
 		//Load left
 		if(	chapterData.left && chapterData.left[verseNumber] ) {
-			chapterText += "<div class='left " + result.leftVersion + ' ' + testament + "'>";
+			chapterText += "<div class='left " + result.leftVersion + ' ' + result.testament + "'>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
-					chapterText += self.createWordString( wordObject, testament, testament, result.leftVersion );
+					chapterText += self.createWordString( wordObject, result.testament, result.leftVersion );
 				}
 			});
 			chapterText += "</div>";
@@ -207,7 +207,7 @@ javascripture.modules.reference = {
 		chapterText += '</li>';
 		return chapterText;
 	},
-	createWordString: function ( wordArray, language, testament, version ) {
+	createWordString: function ( wordArray, testament, version ) {
 		var self = this,
 			wordString = '',
 			families = [],
@@ -255,7 +255,7 @@ javascripture.modules.reference = {
 			wordString += ' data-range="verse"';
 			wordString += ' data-family="' + families.join( ' ' ) + '"';
 			if ( morph && 'undefined' !== typeof morph[ key ] ) {
-				if ( language === 'hebrew' && ( version === 'original' || version === 'lc' ) && 'H' !== morph[ key ].charAt(0) ) {
+				if ( testament === 'hebrew' && ( version === 'original' || version === 'lc' ) && 'H' !== morph[ key ].charAt(0) ) {
 					morphLanguage = 'H';
 				}
 				morphValue = morphLanguage + morph[ key ].replace( /\-/g, '');
@@ -264,11 +264,14 @@ javascripture.modules.reference = {
 			wordString += '>';
 
 			if ( version === 'lc' ) {
-				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue ) + ' ';
+				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue );
 			} else {
 				wordString += wordDisplay;
 			}
 			wordString += '</span>';
+			if ( version === 'lc' ) {
+				wordString += ' ';
+			}
 		} );
 		return '<span class="word">' + wordString + '</span> ';
 	}
@@ -352,15 +355,15 @@ javascripture.modules.reference = {
 
 			// This is a bit messy
 			if ( e.data.result.prev ) {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.prev, e.data.result.chapters[0], e.data.result.testament );
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[1], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.prev, e.data.result.chapters[0] );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[1] );
 				if ( e.data.result.next ) {
-					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[2], e.data.result.testament );
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[2] );
 				}
 			} else {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[0], e.data.result.testament );
+				chapterText += javascripture.modules.reference.getChapterText( e.data.result, reference, e.data.result.chapters[0] );
 				if ( e.data.result.next ) {
-					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[1], e.data.result.testament );
+					chapterText += javascripture.modules.reference.getChapterText( e.data.result, e.data.result.next, e.data.result.chapters[1] );
 				}
 			}
 

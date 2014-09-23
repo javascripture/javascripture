@@ -128,54 +128,90 @@ function createChapterArray( chapterElement ) {
 <script>
 	hebrew = {};
 
-	var books = {
-		'Genesis': 'Gen.xml',
-		'Exodus': 'Exod.xml',
-		'Leviticus': 'Lev.xml',
-		'Numbers': 'Num.xml',
-		'Deuteronomy': 'Deut.xml',
-		'Joshua': 'Josh.xml',
-		'Judges': 'Judg.xml',
-		'Ruth': 'Ruth.xml',
-		'1 Samuel': '1Sam.xml',
-		'2 Samuel': '2Sam.xml',
-		'1 Kings': '1Kgs.xml',
-		'2 Kings': '2Kgs.xml',
-		'1 Chronicles': '1Chr.xml',
-		'2 Chronicles': '2Chr.xml',
-		'Ezra': 'Ezra.xml',
-		'Nehemiah': 'Neh.xml',
-		'Esther': 'Esth.xml',
-		'Job': 'Job.xml',
-		'Psalm': 'Ps.xml',
-		'Proverbs': 'Prov.xml',
-		'Ecclesiastes': 'Eccl.xml',
-		'Song of Songs': 'Song.xml',
-		'Isaiah': 'Isa.xml',
-		'Jeremiah': 'Jer.xml',
-		'Lamentations': 'Lam.xml',
-		'Ezekiel': 'Ezek.xml',
-		'Daniel': 'Dan.xml',
-		'Hosea': 'Hos.xml',
-		'Joel': 'Joel.xml',
-		'Amos': 'Amos.xml',
-		'Obadiah': 'Obad.xml',
-		'Jonah': 'Jonah.xml',
-		'Micah': 'Mic.xml',
-		'Nahum': 'Nah.xml',
-		'Habakkuk': 'Hab.xml',
-		'Zephaniah': 'Zeph.xml',
-		'Haggai': 'Hag.xml',
-		'Zechariah': 'Zech.xml',
-		'Malachi': 'Mal.xml'
-	};
+	var books = [
+		{ bookName: 'Genesis', bookFile: 'Gen.xml' },
+		{ bookName: 'Exodus', bookFile: 'Exod.xml'},
+		{ bookName: 'Leviticus', bookFile: 'Lev.xml'},
+		{ bookName: 'Numbers', bookFile: 'Num.xml'},
+		{ bookName: 'Deuteronomy', bookFile: 'Deut.xml'},
+		{ bookName: 'Joshua', bookFile: 'Josh.xml'},
+		{ bookName: 'Judges', bookFile: 'Judg.xml'},
+		{ bookName: 'Ruth', bookFile: 'Ruth.xml'},
+		{ bookName: '1 Samuel', bookFile: '1Sam.xml'},
+		{ bookName: '2 Samuel', bookFile: '2Sam.xml'},
+		{ bookName: '1 Kings', bookFile: '1Kgs.xml'},
+		{ bookName: '2 Kings', bookFile: '2Kgs.xml'},
+		{ bookName: '1 Chronicles', bookFile: '1Chr.xml'},
+		{ bookName: '2 Chronicles', bookFile: '2Chr.xml'},
+		{ bookName: 'Ezra', bookFile: 'Ezra.xml'},
+		{ bookName: 'Nehemiah', bookFile: 'Neh.xml'},
+		{ bookName: 'Esther', bookFile: 'Esth.xml'},
+		{ bookName: 'Job', bookFile: 'Job.xml'},
+		{ bookName: 'Psalm', bookFile: 'Ps.xml'},
+		{ bookName: 'Proverbs', bookFile: 'Prov.xml'},
+		{ bookName: 'Ecclesiastes', bookFile: 'Eccl.xml'},
+		{ bookName: 'Song of Songs', bookFile: 'Song.xml'},
+		{ bookName: 'Isaiah', bookFile: 'Isa.xml'},
+		{ bookName: 'Jeremiah', bookFile: 'Jer.xml'},
+		{ bookName: 'Lamentations', bookFile: 'Lam.xml'},
+		{ bookName: 'Ezekiel', bookFile: 'Ezek.xml'},
+		{ bookName: 'Daniel', bookFile: 'Dan.xml'},
+		{ bookName: 'Hosea', bookFile: 'Hos.xml'},
+		{ bookName: 'Joel', bookFile: 'Joel.xml'},
+		{ bookName: 'Amos', bookFile: 'Amos.xml'},
+		{ bookName: 'Obadiah', bookFile: 'Obad.xml'},
+		{ bookName: 'Jonah', bookFile: 'Jonah.xml'},
+		{ bookName: 'Micah', bookFile: 'Mic.xml'},
+		{ bookName: 'Nahum', bookFile: 'Nah.xml'},
+		{ bookName: 'Habakkuk', bookFile: 'Hab.xml'},
+		{ bookName: 'Zephaniah', bookFile: 'Zeph.xml'},
+		{ bookName: 'Haggai', bookFile: 'Hag.xml'},
+		{ bookName: 'Zechariah', bookFile: 'Zech.xml'},
+		{ bookName: 'Malachi', bookFile: 'Mal.xml' }
+	];
 
+
+function rotator(arr) {
+    var iterator = function (index) {
+    	console.log( index );
+        if (index >= arr.length) {
+            alert( 'done' );
+            document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
+        } else {
+	        var book = arr[index];
+	        console.log( book );
+			$.get( '../morphhb/wlc/' + book.bookFile, function( data ) {
+				var json = xmlToJson( data ).osis.osisText.div.chapter;
+				hebrew[ book.bookName ] = jsonToArray( json );
+				iterator(++index);
+			} );
+		}
+    };
+
+    iterator(0);
+};
+
+rotator(books);
+
+	/*for( bookName in books ) {
+		var bookFile = books[ bookName ];
+		console.log( bookName );
+		$.get( '../morphhb/wlc/' + bookFile, function( data ) {
+			var json = xmlToJson( data ).osis.osisText.div.chapter;
+			hebrew[ bookName ] = jsonToArray( json );
+		} );
+	}
 	$.each( books, function( bookName, bookFile ) {
 		$.get( '../morphhb/wlc/' + bookFile, function( data ) {
 			var json = xmlToJson( data ).osis.osisText.div.chapter;
 			hebrew[ bookName ] = jsonToArray( json );
 		} );
-	} );
+	} );*/
+
+		$.get( '../morphhb/wlc/VerseMap.xml', function( data ) {
+			var verseMap = xmlToJson( data );
+			console.log( verseMap );
+		} );
 
 </script>
 

@@ -1,6 +1,3 @@
-//javascripture bugs
-________________________________________
-
 // todo - sept 2014
 - remove H from morph
 - why doesn't matthew 1 load?
@@ -9,16 +6,17 @@ ________________________________________
 - remove + from lemma
 
 
+//javascripture bugs
+________________________________________
+
 //scrolling deferred object
 
 
 number of refs found when searching
 scrolling load ref
 keyboard shortcuts
-load random ref
 
 
-clicking chapter 10 box
 search for H232
 
 H01657 is a root of H0566
