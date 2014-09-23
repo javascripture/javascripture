@@ -1,0 +1,9 @@
+javascripture.data.literalConsistent['H1254']['Vqp3ms'] = 'he created';
+javascripture.data.literalConsistent['H430']['Ncmpa'] = 'God';
+javascripture.data.literalConsistent['H430']['no-morph'] = 'God';
+javascripture.data.literalConsistent['H853']['To'] = ' ';
+javascripture.data.literalConsistent['H8064']['Ncmpa'] = 'heavens';
+javascripture.data.literalConsistent['H776']['Ncfsa'] = 'earth';
+javascripture.data.literalConsistent['H1961']['Vqp3fs'] = 'he was';
+javascripture.data.literalConsistent['H1961']['no-morph'] = 'he will be';
+javascripture.data.literalConsistent['H559']['no-morph'] = 'he said';
