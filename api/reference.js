@@ -63,6 +63,14 @@ javascripture.api.reference = {
 			result = {},
 			testament = this.getTestament( book );
 
+		result.book = book;
+		result.chapter = chapter;
+		if ( reference.verse ) {
+			result.verse = reference.verse;
+		} else {
+			result.verse = 0;
+		}
+
 		if ( javascripture.data[ reference.rightData ] && javascripture.data[ reference.rightData ][ book ] && javascripture.data[ reference.rightData ][ book ][ chapterInArray ] ) {
 			result.right = javascripture.data[ reference.rightData ][ book ][ chapterInArray ];
 

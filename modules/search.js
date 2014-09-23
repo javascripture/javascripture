@@ -18,8 +18,7 @@ var createSearchReferencesPanel, startDate;
 	};
 
 	createSearchReferencesPanel = function( data ) {
-		var startDate = new Date();
-
+		startDate = new Date();
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
 //		var wordString = "";

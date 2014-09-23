@@ -1,7 +1,7 @@
 ;( function () {
 	$( document ).bind( 'createWayPoint', function () {
-		console.log('create way point');
 		$('.reference').waypoint( function ( direction ) {
+			console.log( 'hit way point' );
 //			console.log(this);
 //			console.log(direction);
 			var $this;
@@ -23,6 +23,17 @@
 					reference += ':' + $this.data( 'verse' );
 				}
 				document.getElementById( 'goToReference' ).value = reference;
+
+				// Update URL?
+				var newReference = '#reference=' + $this.data( 'book' ) + ':' + $this.data( 'chapter' );
+				if ( $this.data( 'verse' ) ) {
+					newReference += ':' + $this.data( 'verse' );
+				}
+
+				if ( newReference !== window.location.hash ) {
+//					console.log( 'change hash?' );
+//					window.location.hash = 'reference=' + $this.data( 'book' ) + ':' + $this.data( 'chapter' );
+				}
 			}
 		}, {
 			offset: $('#dock').height()

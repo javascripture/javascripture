@@ -193,7 +193,7 @@ function goToReference(book,chapter,verse){
 function maintainState( reference ){
 	$('.dynamic').each(function(){
 		var bookId = bible.getBookId( reference.book ),
-		    size = bible.Data.verses[ bookId - 1 ].length;
+			size = bible.Data.verses[ bookId - 1 ].length;
 
 		if($(this).attr('size') > 0){
 			$(this).attr('size',size);

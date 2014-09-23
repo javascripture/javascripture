@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 6.0.5
+#version: 6.1
 #literal consistent
 
 index.html
@@ -29,6 +29,7 @@ data/greek4.js
 data/crossReferences.js
 data/morphology.js
 data/literalConsistent.js
+data/literalConsistentExtra.js
 
 #apis
 api/searchApi.js

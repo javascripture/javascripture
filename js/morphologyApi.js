@@ -28,7 +28,7 @@ javascripture.api.morphology = {
 				if ( 'hebrew' === language ) {
 					morphParse = new MorphParse();
 					if ( 'undefined' !== typeof morphParse.Parse( morph ) ) {
-						markup += morphParse.Parse( morph ); // The morphology API expexts the morph to be appended with an H
+						markup += morphParse.Parse( 'H' + morph ); // The morphology API expexts the morph to be prepended with an H
 					}
 				} else {
 
