@@ -255,13 +255,13 @@ javascripture.modules.reference = {
 			wordString += ' data-range="verse"';
 			wordString += ' data-family="' + families.join( ' ' ) + '"';
 			if ( morph && 'undefined' !== typeof morph[ key ] ) {
-				morphValue = morph[ key ].replace( /\-/g, '');
+				morphValue = morph[ key ];
 				wordString += ' data-morph="' + morphValue + '"';
 			}
 			wordString += '>';
 
 			if ( version === 'lc' ) {
-				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue );
+				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue.replace( /\-/g, '') );
 			} else {
 				wordString += wordDisplay;
 			}
