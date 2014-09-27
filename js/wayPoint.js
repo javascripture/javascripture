@@ -1,7 +1,7 @@
 ;( function () {
 	$( document ).bind( 'createWayPoint', function () {
 		$('.reference').waypoint( function ( direction ) {
-			console.log( 'hit way point' );
+//			console.log( 'hit way point' );
 //			console.log(this);
 //			console.log(direction);
 			var $this;
