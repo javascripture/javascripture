@@ -214,15 +214,20 @@ javascripture.modules.reference = {
 			wordDisplay,// = wordArray[0].replace(/\//g, ''),
 			lemma,
 			lemmaString = '';
+
 		if ( typeof wordArray[ 1 ] === 'undefined' ) {
 			return '<span>' + wordArray[0] + '</span> ';
 		}
 
-		// Don't split out words for english
-		if ( version === 'original' || version === 'lc' ) {
-			wordDisplayArray = wordArray[0].split( /\//g );
+		if ( null === wordArray[0] ) {
+			wordDisplayArray = [ '' ];
 		} else {
-			wordDisplayArray = [ wordArray[0] ];
+			// Don't split out words for english
+			if ( version === 'original' || version === 'lc' ) {
+				wordDisplayArray = wordArray[0].split( /\//g );
+			} else {
+				wordDisplayArray = [ wordArray[0] ];
+			}
 		}
 
 		lemma = wordArray[1].split( /\//g );
