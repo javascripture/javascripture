@@ -61,6 +61,10 @@ javascripture.modules.translateLiterally = {
 			}
 			return javascripture.data.literalConsistent[ lemma ]['no-morph'];
 		}
+		if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ morph ] ) {
+			return javascripture.data.literalConsistent[ morph ];
+		}
 		return 'todo';
 	}
+
 };
