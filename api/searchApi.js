@@ -131,19 +131,21 @@ javascripture.api.search = {
 							termString = parameters[type];
 
 						if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
-							var terms = termString.split(' '),
-								wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
-							wordTypes.forEach( function( wordType ) {
-								terms.forEach( function( term ) {
-									if ( self.doesDataMatchTerm( type, wordType, term ) ) {
-										if ( parameters.clusivity === 'exclusive' ) {
-											self.results.matches[ term ] = true;
-										} else {
-											self.addReference( bookName, chapterNumber, verseNumber );
+							if ( word[typeKey] ) {
+								var terms = termString.split(' '),
+									wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
+								wordTypes.forEach( function( wordType ) {
+									terms.forEach( function( term ) {
+										if ( self.doesDataMatchTerm( type, wordType, term ) ) {
+											if ( parameters.clusivity === 'exclusive' ) {
+												self.results.matches[ term ] = true;
+											} else {
+												self.addReference( bookName, chapterNumber, verseNumber );
+											}
 										}
-									}
+									} );
 								} );
-							} );
+							}
 						}
 					} );
 					//terms are combined for exclusive searches here
