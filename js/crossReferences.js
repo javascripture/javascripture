@@ -17,6 +17,7 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	    };
 	    var crossReferencesMarkup = '<div class="crossReferences content-padding">Cross references for <a href="#' + javascripture.modules.reference.createReferenceLink( referenceObject ) + '">' + idToPrettyReference( this.id ) + '</a>:<br>';
 
+	crossReferencesMarkup += '<ul>';
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),
@@ -26,11 +27,12 @@ $( document ).on('click', '#verse .wrapper li', function() {
 				    chapter: referenceArray[1],
 				    verse: referenceArray[2]
 			    };
-			crossReferencesMarkup += '<a href="#' + javascripture.modules.reference.createReferenceLink( reference ) + '">' + referenceString + '</a> ';
+			crossReferencesMarkup += '<li><a href="#' + javascripture.modules.reference.createReferenceLink( reference ) + '">' + referenceString + '</a></li> ';
 		} );
 	} else {
 		crossReferencesMarkup += 'None';
 	}
+	crossReferencesMarkup += '</ul>';
 	crossReferencesMarkup += '</div>';
 	$('#wordControlPanel').html( crossReferencesMarkup );
 	if( ! $('#wordDetailsPanel').hasClass('top') ) {
