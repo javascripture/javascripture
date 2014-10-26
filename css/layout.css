@@ -312,6 +312,9 @@ form ul li {
 	}
 
 }*/
+.crossReferences ul {
+  margin-left: 1em; }
+
 .searchPanel .advanced {
   display: none; }
 .searchPanel .advanced-search {
@@ -739,7 +742,7 @@ form.search #advanced {
     opacity: .8;
     position: absolute;
     top: 5px;
-    right: 5px; }
+    right: 20px; }
     .menu .remove:hover {
       opacity: 1; }
   .menu.top {
