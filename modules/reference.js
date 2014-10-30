@@ -124,7 +124,7 @@ javascripture.modules.reference = {
 			setTimeout( function () {
 				createSearchReferencesPanel( { lemma: word } );
 			} );
-		} else if( hash.indexOf( 'reference' ) > -1 ) {
+		} else {
 			var referenceObject = this.getReferenceFromHash();
 			if ( localStorage ) {
 				localStorage.reference = JSON.stringify( referenceObject );
@@ -134,17 +134,17 @@ javascripture.modules.reference = {
 		}
 	},
 	getReferenceFromHash: function () {
-		var reference = window.location.hash.split( '=' )[1].split(':'),
-			book = reference[0],
-			chapter = parseInt(reference[1], 10),
+		var reference = window.location.hash.split( '/' ),
+			book = reference[1],
+			chapter = parseInt(reference[2], 10),
 			verse = 1;
-		if ( reference[2] ) {
-			verse = parseInt(reference[2], 10);
+		if ( reference[3] ) {
+			verse = parseInt(reference[3], 10);
 		}
 		return { book: book, chapter: chapter, verse: verse };
 	},
 	createReferenceLink: function( reference ) {
-		return 'reference=' + reference.book + ':' + reference.chapter + ':' + reference.verse;
+		return '/' + reference.book + '/' + reference.chapter + '/' + reference.verse;
 	},
 	getChapterText: function ( result, chapterData ) {
 		var self = this,

@@ -154,9 +154,9 @@
 		javascripture.modules.wordPanel.init( $( this ) );
 	});
 
-	$(document).on( 'click', '.wordControlPanel .close', function ( event ) {
+	$(document).on( 'click', '.wordControlPanel .close-word-details', function ( event ) {
 		event.preventDefault();
-		$( '#wordControlPanel' ).hide();
+		$( '#wordControlPanel' ).html('');
 	} );
 
 } )(jQuery);

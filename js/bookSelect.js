@@ -14,8 +14,8 @@ $('.bookSelect a').bind( 'mousemove touchmove', function( event ) {
 	if ( chapter > numberOfChapters ) {
 		chapter = numberOfChapters;
 	}
-	var hrefArray = $( this ).attr( 'href' ).split( ':' ),
-		newHref = hrefArray[0] + ':' + chapter;
+	var hrefArray = $( this ).attr( 'href' ).split( '/' ),
+		newHref = hrefArray[0] + '/' + hrefArray[1] + '/' + chapter;
 
 	$( this ).attr( 'href', newHref ).find('.chapter').text( chapter );
 });
