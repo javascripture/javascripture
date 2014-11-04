@@ -1,0 +1,61 @@
+@font-face {
+	font-family: 'javascripture';
+	src:url('fonts/javascripture.eot?-kwrot9');
+	src:url('fonts/javascripture.eot?#iefix-kwrot9') format('embedded-opentype'),
+		url('fonts/javascripture.woff?-kwrot9') format('woff'),
+		url('fonts/javascripture.ttf?-kwrot9') format('truetype'),
+		url('fonts/javascripture.svg?-kwrot9#javascripture') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'javascripture';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-die:before {
+	content: "\e609";
+}
+.icon-expand:before {
+	content: "\e605";
+}
+.icon-contract:before {
+	content: "\e606";
+}
+.icon-close:before {
+	content: "\e608";
+}
+.icon-search:before {
+	content: "\e60a";
+}
+.icon-cog:before {
+	content: "\e601";
+}
+.icon-book:before {
+	content: "\e607";
+}
+.icon-plus:before {
+	content: "\e60b";
+}
+.icon-question:before {
+	content: "\e604";
+}
+.icon-bookmark:before {
+	content: "\e600";
+}
+.icon-book2:before {
+	content: "\e603";
+}
+.icon-arrow-left:before {
+	content: "\e602";
+}

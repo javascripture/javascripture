@@ -60,10 +60,13 @@ javascripture.data.literalConsistent['H8141']['Ncfpa'] = 'years';
 javascripture.data.literalConsistent['H1571']['D'] = 'also';
 javascripture.data.literalConsistent['H7931']['no-morph'] = 'dwell';
 
+
 // Greek
 javascripture.data.literalConsistent['G3735']['NASN'] = 'mount';
 javascripture.data.literalConsistent['G1510']['VPAPAPM'] = 'are';
 javascripture.data.literalConsistent['G5210']['P2GP'] = 'of you';
+javascripture.data.literalConsistent['G1063']['CONJ'] = 'for';
+javascripture.data.literalConsistent['G1140']['NASN'] = 'daemon';
 
 // Morph only
 javascripture.data.literalConsistent['Sp3ms'] = 'his';
