@@ -119,6 +119,10 @@ javascripture.modules.reference = {
 	},
 	loadReferenceFromHash: function () {
 		var hash = window.location.hash;
+		if ( ! hash ) {
+			console.log( localStorage.reference );
+			referenceObject
+		}
 		if( hash.indexOf( 'search' ) > -1 ) {
 			var word = hash.split( '=' )[ 1 ];
 			setTimeout( function () {
@@ -134,12 +138,15 @@ javascripture.modules.reference = {
 		}
 	},
 	getReferenceFromHash: function () {
-		var reference = window.location.hash.split( '/' ),
-			book = reference[1],
-			chapter = parseInt(reference[2], 10),
+		return this.getReferenceObject( window.location.hash );
+	},
+	getReferenceObject: function( reference ) {
+		var referenceArray = reference.split( '/' ),
+			book = referenceArray[1],
+			chapter = parseInt(referenceArray[2], 10),
 			verse = 1;
-		if ( reference[3] ) {
-			verse = parseInt(reference[3], 10);
+		if ( referenceArray[3] ) {
+			verse = parseInt(referenceArray[3], 10);
 		}
 		return { book: book, chapter: chapter, verse: verse };
 	},
