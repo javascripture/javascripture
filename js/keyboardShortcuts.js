@@ -1,18 +1,19 @@
 /*global javascripture bible */
 ;( function ( $ ) {
 	"use strict";
-	var listenForKeyboardShortcuts = false,
+	var listenForKeyboardShortcuts = true,
 	    waitingForAnotherNumber = false,
 	    waitingForNumberTimer,
 	    functionPressed = false;
 	$(document).on('keydown', function (event) {
 		console.log( event.keyCode );
-		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 ) {
+		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 || event.keyCode === 224 ) {
 			functionPressed = true;
 		}
 		if ( $( 'input:focus' ).length !== 0 ) {
 			console.log( $( 'input:focus' ) );
 		}
+		console.log( functionPressed );
 		if ( $( 'input:focus' ).length === 0 && ! functionPressed ) { //don't capture inside form fields or when function is held down
 			//esc
 			if ( 27 === event.keyCode ) {
@@ -52,14 +53,14 @@
 				}
 			}
 			if ( event.keyCode === 189 || event.keyCode === 173 ) {
-				if($('#currentRef').prev().length>0){
+				if( $('#currentRef').prev().length > 0 ) {
 					markReference($('#currentRef').prev());
 				}
 			}
 
-			if ( event.keyCode === 18 ) {
-				listenForKeyboardShortcuts = true;
-			} else {
+			//if ( event.keyCode === 18 ) {
+				//listenForKeyboardShortcuts = true;
+			//} else {
 				if ( listenForKeyboardShortcuts ) {
 					var target = $('#keyCode' + event.keyCode);
 					if ( target.length > 0) {
@@ -84,8 +85,8 @@
 						}
 					}
 				}
-				listenForKeyboardShortcuts = false;
-			}
+				//listenForKeyboardShortcuts = false;
+			//}
 
 			if ( event.keyCode > 64 && event.keyCode < 91 ) {
 				$( '.dock' ).css( 'top', 0 );
@@ -94,7 +95,7 @@
 		}
 	});
 	$(document).on('keyup', function (event) {
-		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 ) {
+		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 || event.keyCode === 224 ) {
 			functionPressed = false;
 		}
 	} );
