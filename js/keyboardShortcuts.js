@@ -97,6 +97,7 @@
 	$(document).on('keyup', function (event) {
 		if ( event.keyCode === 91 || event.keyCode === 17 || event.keyCode === 18 || event.keyCode === 224 ) {
 			functionPressed = false;
+			console.log(functionPressed);
 		}
 	} );
 } )( jQuery );

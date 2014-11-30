@@ -60,16 +60,153 @@ javascripture.data.literalConsistent['H8141']['Ncfpa'] = 'years';
 javascripture.data.literalConsistent['H1571']['D'] = 'also';
 javascripture.data.literalConsistent['H7931']['no-morph'] = 'dwell';
 
-
-// Greek
-javascripture.data.literalConsistent['G3735']['NASN'] = 'mount';
-javascripture.data.literalConsistent['G1510']['VPAPAPM'] = 'are';
-javascripture.data.literalConsistent['G5210']['P2GP'] = 'of you';
-javascripture.data.literalConsistent['G1063']['CONJ'] = 'for';
-javascripture.data.literalConsistent['G1140']['NASN'] = 'daemon';
-
 // Morph only
 javascripture.data.literalConsistent['Sp3ms'] = 'his';
 javascripture.data.literalConsistent['Sp3mp'] = 'them';
 javascripture.data.literalConsistent['Sp3fs'] = 'her';
 javascripture.data.literalConsistent['Sp3fp'] = 'them';
+
+// Greek
+javascripture.data.literalConsistent['G1510']['V-PAN'] = 'to be';
+javascripture.data.literalConsistent['G1510']['V-PAI-3S'] = 'is';
+javascripture.data.literalConsistent['G1510']['V-PAP-APM'] = 'are';
+
+javascripture.data.literalConsistent['G3735']['NASN'] = 'mount';
+javascripture.data.literalConsistent['G1063']['CONJ'] = 'for';
+javascripture.data.literalConsistent['G1140']['NASN'] = 'daemon';
+javascripture.data.literalConsistent['G3402']['N-NPM'] = 'imitators';
+javascripture.data.literalConsistent['G1473']['P-1GS'] = 'of me';
+javascripture.data.literalConsistent['G1096']['V-PNM-2P'] = 'you should become';
+javascripture.data.literalConsistent['G2531']['ADV'] = 'as';
+javascripture.data.literalConsistent['G2504']['P-1NS-K'] = 'I also';
+javascripture.data.literalConsistent['G5547']['N-GSM'] = 'of Christ';
+javascripture.data.literalConsistent['G1867']['V-PAI-1S'] = 'I praise';
+javascripture.data.literalConsistent['G5210']['P-2AP'] = 'you';
+javascripture.data.literalConsistent['G5210']['P-2GP'] = 'of you';
+javascripture.data.literalConsistent['G5210']['P-2DP'] = 'you'; // to you?
+javascripture.data.literalConsistent['G3754']['CONJ'] = 'that';
+
+// All
+javascripture.data.literalConsistent['G3956']['A-GSM'] = 'of every';
+javascripture.data.literalConsistent['G3956']['A-NSM'] = 'every';
+javascripture.data.literalConsistent['G3956']['A-NSF'] = 'every';
+javascripture.data.literalConsistent['G3956']['A-APN'] = 'all things';
+javascripture.data.literalConsistent['G3956']['A-NPN'] = 'all things';
+
+javascripture.data.literalConsistent['G3403']['V-RPI-2P'] = 'you remember';
+javascripture.data.literalConsistent['G2532']['CONJ'] = 'and';
+javascripture.data.literalConsistent['G3860']['V-AAI-1S'] = 'delivered';
+//Definite article
+javascripture.data.literalConsistent['G3588']['T-APF'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-NSM'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-NSF'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-ASM'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-NSN'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-ASF'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-NPN'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-APM'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-NPF'] = 'the';
+javascripture.data.literalConsistent['G3588']['T-GSM'] = 'of';
+javascripture.data.literalConsistent['G3588']['T-GSF'] = 'of';
+javascripture.data.literalConsistent['G3588']['T-DSM'] = 'to';
+javascripture.data.literalConsistent['G3588']['T-DSF'] = 'to';
+
+// One
+javascripture.data.literalConsistent['G1520']['A-NSN'] = 'one';
+javascripture.data.literalConsistent['G1063']['CONJ'] = 'for';
+
+javascripture.data.literalConsistent['G3862']['N-APF'] = 'deliverances';
+javascripture.data.literalConsistent['G2722']['V-PAI-2P'] = 'you keep';
+javascripture.data.literalConsistent['G2309']['V-PAI-1S'] = 'I want';
+javascripture.data.literalConsistent['G1492']['V-RAN'] = 'to know';
+javascripture.data.literalConsistent['G435']['N-NSM'] = 'man';
+javascripture.data.literalConsistent['G435']['N-ASM'] = 'man';
+javascripture.data.literalConsistent['G435']['N-GSM'] = 'man';
+
+javascripture.data.literalConsistent['G2776']['N-GSM'] = 'of head';
+javascripture.data.literalConsistent['G2776']['N-GSF'] = 'of head';
+javascripture.data.literalConsistent['G2776']['N-NSF'] = 'head';
+javascripture.data.literalConsistent['G2776']['N-ASF'] = 'head';
+javascripture.data.literalConsistent['G2776']['N-DSF'] = 'to head';
+javascripture.data.literalConsistent['G2776']['N-DSM'] = 'to head';
+javascripture.data.literalConsistent['G5547']['N-NSM'] = 'Christ';
+javascripture.data.literalConsistent['G5547']['N-GSM'] = 'Christ';
+javascripture.data.literalConsistent['G1135']['N-NSF'] = 'woman';
+javascripture.data.literalConsistent['G1135']['N-ASF'] = 'woman';
+javascripture.data.literalConsistent['G1135']['N-GSF'] = 'of woman';
+javascripture.data.literalConsistent['G1135']['N-DSF'] = 'to woman';
+javascripture.data.literalConsistent['G2316']['N-NSM'] = 'God';
+javascripture.data.literalConsistent['G2316']['N-GSM'] = 'of God';
+javascripture.data.literalConsistent['G2316']['N-DSM'] = 'to God';
+javascripture.data.literalConsistent['G4336']['V-PNP-NSM'] = 'praying';
+javascripture.data.literalConsistent['G4336']['V-PNP-NSF'] = 'praying';
+javascripture.data.literalConsistent['G4336']['V-PNN'] = 'to pray';
+javascripture.data.literalConsistent['G4395']['V-PAP-NSM'] = 'prophesying';
+javascripture.data.literalConsistent['G4395']['V-PAP-NSF'] = 'prophesying';
+javascripture.data.literalConsistent['G177']['A-ASF'] = 'uncovered';
+javascripture.data.literalConsistent['G177']['A-DSF'] = 'uncovered';
+
+javascripture.data.literalConsistent['G2617']['V-PAI-3S'] = 'makes ashamed';
+javascripture.data.literalConsistent['G2596']['PREP'] = 'according to'; // against if with genative
+javascripture.data.literalConsistent['G2192']['V-PAP-NSM'] = 'having';
+javascripture.data.literalConsistent['G2192']['V-PAN'] = 'to have';
+javascripture.data.literalConsistent['G846']['P-GSM'] = 'of him';
+javascripture.data.literalConsistent['G846']['P-GSF'] = 'of her';
+javascripture.data.literalConsistent['G846']['P-DSF'] = 'to her';
+javascripture.data.literalConsistent['G846']['P-DSM'] = 'to him';
+javascripture.data.literalConsistent['G846']['P-DPM'] = 'yourselves';
+javascripture.data.literalConsistent['G846']['P-NSN'] = 'same'; // of it
+javascripture.data.literalConsistent['G846']['P-NSF'] = 'herself';
+javascripture.data.literalConsistent['G3587']['V-RPP-DSF'] = 'shaven';
+javascripture.data.literalConsistent['G3587']['V-PPN'] = 'to shave';
+javascripture.data.literalConsistent['G1487']['COND'] = 'if';
+javascripture.data.literalConsistent['G1437']['COND'] = 'if';
+javascripture.data.literalConsistent['G3756']['PRT-N'] = 'not';
+javascripture.data.literalConsistent['G2619']['V-PPI-3S'] = 'covered';
+javascripture.data.literalConsistent['G2619']['V-PPM-3S'] = 'she should be covered';
+javascripture.data.literalConsistent['G2619']['V-PPN'] = 'to cover';
+javascripture.data.literalConsistent['G2751']['V-AMM-3S'] = 'clipped';
+javascripture.data.literalConsistent['G2751']['V-AMN'] = 'to clip';
+javascripture.data.literalConsistent['G150']['A-NSN'] = 'shame';
+javascripture.data.literalConsistent['G3303']['PRT'] = 'indeed';
+javascripture.data.literalConsistent['G3784']['V-PAI-3S'] = 'is indebted';
+javascripture.data.literalConsistent['G3784']['V-PAI-3S'] = 'is indebted';
+javascripture.data.literalConsistent['G1504']['N-NSF'] = 'likeness';
+javascripture.data.literalConsistent['G1391']['N-NSF'] = 'glory';
+javascripture.data.literalConsistent['G5225']['V-PAP-NSM'] = 'he is';
+javascripture.data.literalConsistent['G1537']['PREP'] = 'from';
+javascripture.data.literalConsistent['G235']['CONJ'] = 'but';
+javascripture.data.literalConsistent['G2936']['V-API-3S'] = 'created';
+javascripture.data.literalConsistent['G3778']['D-ASN'] = 'this';
+javascripture.data.literalConsistent['G1849']['N-ASF'] = 'authority';
+javascripture.data.literalConsistent['G1909']['PREP'] = 'upon';
+javascripture.data.literalConsistent['G32']['N-APM'] = 'messengers';
+javascripture.data.literalConsistent['G4133']['ADV'] = 'nevertheless';
+javascripture.data.literalConsistent['G3761']['CONJ-N'] = 'neither';
+javascripture.data.literalConsistent['G3777']['CONJ'] = 'neither'; // second occorance should be nor
+javascripture.data.literalConsistent['G3777']['CONJ-N'] = 'neither';
+javascripture.data.literalConsistent['G5565']['ADV'] = 'without';
+javascripture.data.literalConsistent['G2962']['N-DSM'] = 'lord';
+javascripture.data.literalConsistent['G3779']['ADV'] = 'thus';
+javascripture.data.literalConsistent['G5618']['ADV'] = 'just as';
+javascripture.data.literalConsistent['G2919']['V-AAM-2P'] = 'judge';
+javascripture.data.literalConsistent['G4241']['V-PQP-NSN'] = 'appropriate';
+javascripture.data.literalConsistent['G5449']['N-NSF'] = 'nature';
+javascripture.data.literalConsistent['G1321']['V-PAI-3S'] = 'teach';
+javascripture.data.literalConsistent['G819']['N-NSF'] = 'dishonour';
+javascripture.data.literalConsistent['G2863']['V-PAS-3S'] = 'adorns';
+javascripture.data.literalConsistent['G2863']['N-NSF'] = 'adorning';
+javascripture.data.literalConsistent['G4018']['N-GSN'] = 'clothing';
+javascripture.data.literalConsistent['G473']['PREP'] = 'against';
+javascripture.data.literalConsistent['G1325']['V-RPI-3S'] = 'is given';
+javascripture.data.literalConsistent['G5100']['X-NSM'] = 'any';
+javascripture.data.literalConsistent['G1380']['V-PAI-3S'] = 'think';
+javascripture.data.literalConsistent['G5380']['A-NSM'] = 'quarrelsome';
+javascripture.data.literalConsistent['G5379']['N-NSF'] = 'quarrel';
+// Pro nouns
+javascripture.data.literalConsistent['G2249']['P-1NP'] = 'we';
+javascripture.data.literalConsistent['G5108']['D-ASF'] = 'such';
+javascripture.data.literalConsistent['G4914']['N-ASF'] = 'custom'; // with ethos?
+javascripture.data.literalConsistent['G2192']['V-PAI-1P'] = 'have';
+javascripture.data.literalConsistent['G1577']['N-NPF'] = 'ecclesias';
+

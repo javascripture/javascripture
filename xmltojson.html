@@ -129,45 +129,45 @@ function createChapterArray( chapterElement ) {
 	hebrew = {};
 
 	var books = [
-		{ bookName: 'Genesis', bookFile: 'Gen.xml' },
-		{ bookName: 'Exodus', bookFile: 'Exod.xml'},
-		{ bookName: 'Leviticus', bookFile: 'Lev.xml'},
-		{ bookName: 'Numbers', bookFile: 'Num.xml'},
-		{ bookName: 'Deuteronomy', bookFile: 'Deut.xml'},
-		{ bookName: 'Joshua', bookFile: 'Josh.xml'},
-		{ bookName: 'Judges', bookFile: 'Judg.xml'},
-		{ bookName: 'Ruth', bookFile: 'Ruth.xml'},
-		{ bookName: '1 Samuel', bookFile: '1Sam.xml'},
-		{ bookName: '2 Samuel', bookFile: '2Sam.xml'},
-		{ bookName: '1 Kings', bookFile: '1Kgs.xml'},
-		{ bookName: '2 Kings', bookFile: '2Kgs.xml'},
-		{ bookName: '1 Chronicles', bookFile: '1Chr.xml'},
-		{ bookName: '2 Chronicles', bookFile: '2Chr.xml'},
-		{ bookName: 'Ezra', bookFile: 'Ezra.xml'},
-		{ bookName: 'Nehemiah', bookFile: 'Neh.xml'},
-		{ bookName: 'Esther', bookFile: 'Esth.xml'},
-		{ bookName: 'Job', bookFile: 'Job.xml'},
-		{ bookName: 'Psalm', bookFile: 'Ps.xml'},
-		{ bookName: 'Proverbs', bookFile: 'Prov.xml'},
-		{ bookName: 'Ecclesiastes', bookFile: 'Eccl.xml'},
-		{ bookName: 'Song of Songs', bookFile: 'Song.xml'},
-		{ bookName: 'Isaiah', bookFile: 'Isa.xml'},
-		{ bookName: 'Jeremiah', bookFile: 'Jer.xml'},
-		{ bookName: 'Lamentations', bookFile: 'Lam.xml'},
-		{ bookName: 'Ezekiel', bookFile: 'Ezek.xml'},
-		{ bookName: 'Daniel', bookFile: 'Dan.xml'},
-		{ bookName: 'Hosea', bookFile: 'Hos.xml'},
-		{ bookName: 'Joel', bookFile: 'Joel.xml'},
-		{ bookName: 'Amos', bookFile: 'Amos.xml'},
-		{ bookName: 'Obadiah', bookFile: 'Obad.xml'},
-		{ bookName: 'Jonah', bookFile: 'Jonah.xml'},
-		{ bookName: 'Micah', bookFile: 'Mic.xml'},
-		{ bookName: 'Nahum', bookFile: 'Nah.xml'},
-		{ bookName: 'Habakkuk', bookFile: 'Hab.xml'},
-		{ bookName: 'Zephaniah', bookFile: 'Zeph.xml'},
-		{ bookName: 'Haggai', bookFile: 'Hag.xml'},
-		{ bookName: 'Zechariah', bookFile: 'Zech.xml'},
-		{ bookName: 'Malachi', bookFile: 'Mal.xml' }
+		{ bookName: 'Genesis', bookFile: 'Gen' },
+		{ bookName: 'Exodus', bookFile: 'Exod'},
+		{ bookName: 'Leviticus', bookFile: 'Lev'},
+		{ bookName: 'Numbers', bookFile: 'Num'},
+		{ bookName: 'Deuteronomy', bookFile: 'Deut'},
+		{ bookName: 'Joshua', bookFile: 'Josh'},
+		{ bookName: 'Judges', bookFile: 'Judg'},
+		{ bookName: 'Ruth', bookFile: 'Ruth'},
+		{ bookName: '1 Samuel', bookFile: '1Sam'},
+		{ bookName: '2 Samuel', bookFile: '2Sam'},
+		{ bookName: '1 Kings', bookFile: '1Kgs'},
+		{ bookName: '2 Kings', bookFile: '2Kgs'},
+		{ bookName: '1 Chronicles', bookFile: '1Chr'},
+		{ bookName: '2 Chronicles', bookFile: '2Chr'},
+		{ bookName: 'Ezra', bookFile: 'Ezra'},
+		{ bookName: 'Nehemiah', bookFile: 'Neh'},
+		{ bookName: 'Esther', bookFile: 'Esth'},
+		{ bookName: 'Job', bookFile: 'Job'},
+		{ bookName: 'Psalm', bookFile: 'Ps'},
+		{ bookName: 'Proverbs', bookFile: 'Prov'},
+		{ bookName: 'Ecclesiastes', bookFile: 'Eccl'},
+		{ bookName: 'Song of Songs', bookFile: 'Song'},
+		{ bookName: 'Isaiah', bookFile: 'Isa'},
+		{ bookName: 'Jeremiah', bookFile: 'Jer'},
+		{ bookName: 'Lamentations', bookFile: 'Lam'},
+		{ bookName: 'Ezekiel', bookFile: 'Ezek'},
+		{ bookName: 'Daniel', bookFile: 'Dan'},
+		{ bookName: 'Hosea', bookFile: 'Hos'},
+		{ bookName: 'Joel', bookFile: 'Joel'},
+		{ bookName: 'Amos', bookFile: 'Amos'},
+		{ bookName: 'Obadiah', bookFile: 'Obad'},
+		{ bookName: 'Jonah', bookFile: 'Jonah'},
+		{ bookName: 'Micah', bookFile: 'Mic'},
+		{ bookName: 'Nahum', bookFile: 'Nah'},
+		{ bookName: 'Habakkuk', bookFile: 'Hab'},
+		{ bookName: 'Zephaniah', bookFile: 'Zeph'},
+		{ bookName: 'Haggai', bookFile: 'Hag'},
+		{ bookName: 'Zechariah', bookFile: 'Zech'},
+		{ bookName: 'Malachi', bookFile: 'Mal' }
 	];
 
 
@@ -180,15 +180,19 @@ function rotator(arr) {
         } else {
 	        var book = arr[index];
 	        console.log( book );
-			$.get( '../morphhb/wlc/' + book.bookFile, function( data ) {
+			$.get( '../morphhb/wlc/' + book.bookFile + '.xml', function( data ) {
 				var json = xmlToJson( data ).osis.osisText.div.chapter;
 				hebrew[ book.bookName ] = jsonToArray( json );
-				iterator(++index);
+				fixOffsetVerses( function( hebrew) {
+					document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
+				} );
+				//iterator(++index);
 			} );
 		}
     };
 
     iterator(0);
+
 };
 
 rotator(books);
@@ -208,10 +212,50 @@ rotator(books);
 		} );
 	} );*/
 
-		$.get( '../morphhb/wlc/VerseMap.xml', function( data ) {
-			var verseMap = xmlToJson( data );
-			console.log( verseMap );
+		// fix offset verses
+function fixOffsetVerses( callback ) {
+	$.get( '../morphhb/wlc/VerseMap.xml', function( data ) {
+		var verseMap = xmlToJson( data ).verseMap;
+		verseMap.book.forEach( function( verseMapping ) {
+			if ( verseMapping.verse ) {
+				verseMapping.verse.forEach( function( verse ) {
+					var attributes = verse['@attributes'];
+					var wlc = attributes.wlc.split( '.' );
+					var kjv = attributes.kjv.split( '.' );
+					var bookName = books.filter( function( book ) {
+						return book.bookFile === wlc[0];
+					} )[0].bookName;
+
+					if ( hebrew[ bookName ] ) {
+						hebrew[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
+						hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+					}
+
+/*						if ( attributes.wlc.indexOf( 'Gen' ) > -1 ) {
+						var wlc = attributes.wlc.split( '.' );
+						var kjv = attributes.kjv.split( '.' );
+
+						//console.log( hebrew['Genesis'][ wlc[1] ][ wlc[2] ] );
+						//console.log( attributes.wlc.split(.) );
+						//console.log( attributes.kjv );
+
+
+
+    					hebrew[ 'Genesis' ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ 'Genesis' ][ wlc[1] - 1 ][ wlc[2] - 1 ];
+    					hebrew[ 'Genesis' ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+				    	//console.log( hebrew[ 'Genesis' ][31][0] );
+    					//console.log( hebrew[ 'Genesis' ][30][54] );
+
+					}*/
+				} );
+			}
 		} );
+		callback( hebrew );
+	} );
+}
+		setTimeout( function() {
+			console.log( hebrew );
+		}, 1000)
 
 </script>
 

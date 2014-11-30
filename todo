@@ -6,7 +6,11 @@
 - remove + from lemma
 
 - pushstate?
-- string accents from greek?
+- strip accents from greek?
+- fix greek roots
+- move word details to right
+- show the verse text with the search results
+
 
 
 

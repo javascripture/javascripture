@@ -273,11 +273,11 @@ javascripture.modules.reference = {
 			wordString += '>';
 
 			if ( version === 'lc' ) {
-				var newMorphValue = '';
+				/*var newMorphValue = '';
 				if ( 'undefined' !== typeof morphValue ) {
 					newMorphValue = morphValue.replace( /\-/g, '');
-				}
-				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, newMorphValue );
+				}*/
+				wordString += javascripture.modules.translateLiterally.getByLemmaAndMorph( lemmaValue, morphValue );
 			} else {
 				wordString += wordDisplay;
 			}
