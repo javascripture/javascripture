@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" content="notranslate" />
+		<title>Javascripture</title>
+		<link rel="stylesheet" href="css/layout.css" />
+		<style id="bodyFontFamily"></style>
+		<style id="bodyFontSize"></style>
+	</head>
+	<body>
+
+<script src="lib/jquery-2.0.3.min.js"></script>
+
+<script>
+var javascripture = {
+	data: {
+		hebrew: {}
+	},
+	modules: {}
+};
+
+</script>
+<script src="data/strongsObjectWithFamilies.js"></script>
+
+<div id="result"></div>
+
+<script>
+
+function getFamily( key ) {
+	console.log( key );
+	var word = javascripture.data.strongsObjectWithFamilies[ key ];
+	if ( word ) {
+		var roots = word.roots;
+		if ( roots ) {
+			var numberOfRoots = roots.length;
+			return getFamily( roots[ numberOfRoots - 1] );
+		}
+	} else {
+		console.log( key );
+	}
+	return key;
+}
+
+$.each( javascripture.data.strongsObjectWithFamilies, function( key, value ) {
+	if ( key.indexOf( 'G' ) === 0 ) {
+		if ( javascripture.data.strongsObjectWithFamilies[ key ] ) {
+			javascripture.data.strongsObjectWithFamilies[ key ].family = getFamily( key );
+		}
+	}
+} );
+document.getElementById( 'result' ).innerHTML = JSON.stringify( javascripture.data.strongsObjectWithFamilies );
+
+</script>
+
+	</body>
+</html>

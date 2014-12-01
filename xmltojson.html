@@ -175,18 +175,16 @@ function rotator(arr) {
     var iterator = function (index) {
     	console.log( index );
         if (index >= arr.length) {
-            alert( 'done' );
-            document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
+            fixOffsetVerses( function( hebrew) {
+				document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
+			} );
         } else {
 	        var book = arr[index];
 	        console.log( book );
 			$.get( '../morphhb/wlc/' + book.bookFile + '.xml', function( data ) {
 				var json = xmlToJson( data ).osis.osisText.div.chapter;
 				hebrew[ book.bookName ] = jsonToArray( json );
-				fixOffsetVerses( function( hebrew) {
-					document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
-				} );
-				//iterator(++index);
+				iterator(++index);
 			} );
 		}
     };
@@ -227,6 +225,9 @@ function fixOffsetVerses( callback ) {
 					} )[0].bookName;
 
 					if ( hebrew[ bookName ] ) {
+						if ( ! hebrew[ bookName ][ kjv[1] - 1 ] ) {
+							hebrew[ bookName ][ kjv[1] - 1 ] = [];
+						}
 						hebrew[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
 						hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
 					}
