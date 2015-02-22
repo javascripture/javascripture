@@ -360,4 +360,7 @@ bible.getBookId = function( textReference ) {
 			break;
 	}
 	return bookID;
-}
+};
+bible.getBook = function( bookId ) {
+	return bible.Data.books[reference.bookID - 1][0];
+};

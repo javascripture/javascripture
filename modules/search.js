@@ -137,12 +137,23 @@ var createSearchReferencesPanel, startDate;
         }
 	}
 
-
 	function createReferenceListItem(referenceArray) {
 		var book = referenceArray.book;
 		var chapter = referenceArray.chapter;
 		var verse = referenceArray.verse;
-		return '<li><a href="#' + javascripture.modules.reference.createReferenceLink( referenceArray ) + '">'+book+' '+(chapter)+':'+(verse)+'</a></li>';
+		var result = '<li>';
+		result += '<a href="#' + javascripture.modules.reference.createReferenceLink( referenceArray ) + '">'+book+' '+(chapter)+':'+(verse)+'</a><br />';
+		//result += createSnippet( referenceArray.snippet );
+		result += '</li>';
+		return result;
+	}
+
+	function createSnippet( snippet ) {
+		var result = '';
+		snippet.forEach( function( word ) {
+			result += word[ 0 ] + ' ';
+		} );
+		return  result;
 	}
 
 	function searchOnClick( element ) {

@@ -24,7 +24,13 @@ javascripture.api.search = {
 		var self = this;
 		self.parameters = parameters;
 		this.lookForTerm();
+		this.addSnippets();
 		return self.results.references;
+	},
+	addSnippets: function() {
+		this.results.references.forEach( function( reference ) {
+			reference.snippet = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+		} );
 	},
 	doesDataMatchTerm: function( type, data, term ) {
 		var self = this;
