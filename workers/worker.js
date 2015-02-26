@@ -10,13 +10,13 @@ importScripts('../data/kjvdwyer7.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
 self.postMessage( { task: 'loading', html: 'loading hebrew' } );
-importScripts('../data/hebrew-with-morph3.js');
+importScripts('../data/hebrew-with-morph4.js');
 self.postMessage( { task: 'loading', html: 'loading greek' } );
 importScripts('../data/greek4.js');
 
 importScripts('../data/bible.js');
 self.postMessage( { task: 'loading', html: 'loading Strongs' } );
-importScripts('../data/strongsObjectWithFamilies.js');
+importScripts('../data/strongsObjectWithFamilies2.js');
 
 self.postMessage( { task: 'loading', html: 'loading API' } );
 importScripts('../api/word.js');

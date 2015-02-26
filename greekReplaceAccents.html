@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="google" content="notranslate" />
+		<title>Javascripture</title>
+		<link rel="stylesheet" href="css/layout.css" />
+		<style id="bodyFontFamily"></style>
+		<style id="bodyFontSize"></style>
+	</head>
+	<body>
+
+<script src="lib/jquery-2.0.3.min.js"></script>
+
+<script>
+var javascripture = {
+	data: {
+		hebrew: {}
+	},
+	modules: {}
+};
+
+</script>
+<script src="data/greek4.js"></script>
+
+<div id="result"></div>
+
+<script>
+$.each( javascripture.data.greek, function( bookName, chapters ) {
+	chapters.forEach( function( verses ) {
+		verses.forEach( function( words ) {
+			words.forEach( function( wordArray ) {
+
+				// as
+				wordArray[0] = wordArray[0].replace( /ᾶ/gi, 'α');
+				wordArray[0] = wordArray[0].replace( /ὰ/gi, 'α');
+				wordArray[0] = wordArray[0].replace( /ᾶ/gi, 'α');
+				wordArray[0] = wordArray[0].replace( /ἀ/gi, 'α');
+				wordArray[0] = wordArray[0].replace( /ά/gi, 'α');
+
+				// es
+				wordArray[0] = wordArray[0].replace( /ἐ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /ὲ/gi, 'ε');
+
+				// us
+				wordArray[0] = wordArray[0].replace( /ῦ/gi, 'υ');
+				wordArray[0] = wordArray[0].replace( /ύ/gi, 'υ');
+				wordArray[0] = wordArray[0].replace( /ὖ/gi, 'υ');
+				wordArray[0] = wordArray[0].replace( /ὐ/gi, 'υ');
+
+				// hs
+				wordArray[0] = wordArray[0].replace( /ὴ/gi, 'η');
+				wordArray[0] = wordArray[0].replace( /ῇ/gi, 'η');
+				wordArray[0] = wordArray[0].replace( /ἡ/gi, 'η');
+				wordArray[0] = wordArray[0].replace( /ἤ/gi, 'η');
+				wordArray[0] = wordArray[0].replace( /ἦ/gi, 'η');
+				wordArray[0] = wordArray[0].replace( /ἠ/gi, 'η');
+
+				// ws
+				wordArray[0] = wordArray[0].replace( /ὼ/gi, 'ω');
+				wordArray[0] = wordArray[0].replace( /ῶ/gi, 'ω');
+
+				// os
+				wordArray[0] = wordArray[0].replace( /ὸ/gi, 'ο');
+
+				// is
+				wordArray[0] = wordArray[0].replace( /ἶ/gi, 'ι');
+				wordArray[0] = wordArray[0].replace( /ἶ/gi, 'ι');
+				wordArray[0] = wordArray[0].replace( /ί/gi, 'ι');
+				wordArray[0] = wordArray[0].replace( /ὶ/gi, 'ι');
+				wordArray[0] = wordArray[0].replace( /ἴ/gi, 'ι');
+
+
+
+/*				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');
+				wordArray[0] = wordArray[0].replace( /έ/gi, 'ε');*/
+			} );
+		});
+	});
+} );
+document.getElementById( 'result' ).innerHTML = JSON.stringify( javascripture.data.greek );
+</script>
+
+	</body>
+</html>

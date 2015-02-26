@@ -127,7 +127,7 @@ function createChapterArray( chapterElement ) {
 
 <script>
 	hebrew = {};
-
+	hebrewReordered = {};
 	var books = [
 		{ bookName: 'Genesis', bookFile: 'Gen' },
 		{ bookName: 'Exodus', bookFile: 'Exod'},
@@ -174,16 +174,19 @@ function createChapterArray( chapterElement ) {
 function rotator(arr) {
     var iterator = function (index) {
     	console.log( index );
+    	console.log( arr );
         if (index >= arr.length) {
-            fixOffsetVerses( function( hebrew) {
-				document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrew );
+            fixOffsetVerses( function( hebrewReordered ) {
+				document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrewReordered );
 			} );
         } else {
 	        var book = arr[index];
 	        console.log( book );
 			$.get( '../morphhb/wlc/' + book.bookFile + '.xml', function( data ) {
+				console.log(data);
 				var json = xmlToJson( data ).osis.osisText.div.chapter;
 				hebrew[ book.bookName ] = jsonToArray( json );
+				hebrewReordered[ book.bookName ] = jsonToArray( json );
 				iterator(++index);
 			} );
 		}
@@ -210,6 +213,7 @@ rotator(books);
 		} );
 	} );*/
 
+
 		// fix offset verses
 function fixOffsetVerses( callback ) {
 	$.get( '../morphhb/wlc/VerseMap.xml', function( data ) {
@@ -224,38 +228,33 @@ function fixOffsetVerses( callback ) {
 						return book.bookFile === wlc[0];
 					} )[0].bookName;
 
-					if ( hebrew[ bookName ] ) {
-						if ( ! hebrew[ bookName ][ kjv[1] - 1 ] ) {
-							hebrew[ bookName ][ kjv[1] - 1 ] = [];
+					if ( hebrewReordered[ bookName ] ) {
+
+						// If the chapter doesn't exist, create it
+						if ( ! hebrewReordered[ bookName ][ kjv[1] - 1 ] ) {
+							hebrewReordered[ bookName ][ kjv[1] - 1 ] = [];
 						}
-						hebrew[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
-						hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+
+						// Set the kjv verse number equal to the wlc verse content
+						// Use the hebrew object to define the hebrewReordered object, so that one doesn't disturb the other
+						hebrewReordered[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
+
+						// if the hebrew is ahead of the KJV then we use this approach
+						if ( wlc[1] > kjv[1] || ( wlc[1] === kjv[1] && wlc[2] > kjv[2] ) ) {
+							// Set the wlc verse number to empty. It should be populated on a future iteration
+							//hebrewReordered[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+						}
+
+
 					}
-
-/*						if ( attributes.wlc.indexOf( 'Gen' ) > -1 ) {
-						var wlc = attributes.wlc.split( '.' );
-						var kjv = attributes.kjv.split( '.' );
-
-						//console.log( hebrew['Genesis'][ wlc[1] ][ wlc[2] ] );
-						//console.log( attributes.wlc.split(.) );
-						//console.log( attributes.kjv );
-
-
-
-    					hebrew[ 'Genesis' ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ 'Genesis' ][ wlc[1] - 1 ][ wlc[2] - 1 ];
-    					hebrew[ 'Genesis' ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
-				    	//console.log( hebrew[ 'Genesis' ][31][0] );
-    					//console.log( hebrew[ 'Genesis' ][30][54] );
-
-					}*/
 				} );
 			}
 		} );
-		callback( hebrew );
+		callback( hebrewReordered );
 	} );
 }
 		setTimeout( function() {
-			console.log( hebrew );
+			//console.log( hebrew );
 		}, 1000)
 
 </script>
