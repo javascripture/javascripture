@@ -29,7 +29,9 @@ javascripture.api.search = {
 	},
 	addSnippets: function() {
 		this.results.references.forEach( function( reference ) {
-			reference.snippet = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+			if( javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ] && javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
+				reference.snippet = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+			}
 		} );
 	},
 	doesDataMatchTerm: function( type, data, term ) {
