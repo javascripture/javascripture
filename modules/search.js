@@ -228,7 +228,7 @@ var createSearchReferencesPanel, startDate;
 	//		$('.popup').popup( 'close' );
 
 			if( ! $('#referenceTracking').hasClass('top') ) {
-				$('#keyCode83').click();
+				$('#searchPanelLink').click();
 			}
 
 			var endDate = new Date();

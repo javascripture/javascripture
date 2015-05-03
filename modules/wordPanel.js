@@ -117,7 +117,7 @@
 			} );
 			//Yuk
 			if( ! $('#wordDetailsPanel').hasClass('top') ) {
-				$( '#keyCode68' ).click();
+				$( '#wordDetailsPanelLink' ).click();
 			}
 		},
 		getBranches: function( strongsNumber ) {
