@@ -183,7 +183,6 @@ function rotator(arr) {
 	        var book = arr[index];
 	        console.log( book );
 			$.get( '../morphhb/wlc/' + book.bookFile + '.xml', function( data ) {
-				console.log(data);
 				var json = xmlToJson( data ).osis.osisText.div.chapter;
 				hebrew[ book.bookName ] = jsonToArray( json );
 				hebrewReordered[ book.bookName ] = jsonToArray( json );
@@ -214,7 +213,7 @@ rotator(books);
 	} );*/
 
 
-		// fix offset verses
+// fix offset verses
 function fixOffsetVerses( callback ) {
 	$.get( '../morphhb/wlc/VerseMap.xml', function( data ) {
 		var verseMap = xmlToJson( data ).verseMap;
@@ -224,9 +223,14 @@ function fixOffsetVerses( callback ) {
 					var attributes = verse['@attributes'];
 					var wlc = attributes.wlc.split( '.' );
 					var kjv = attributes.kjv.split( '.' );
-					var bookName = books.filter( function( book ) {
+					var bookDetails = books.filter( function( book ) {
 						return book.bookFile === wlc[0];
-					} )[0].bookName;
+					} );
+
+					if ( ! bookDetails[0] ) {
+						return;
+					}
+					var bookName = bookDetails[0].bookName;
 
 					if ( hebrewReordered[ bookName ] ) {
 
@@ -240,9 +244,9 @@ function fixOffsetVerses( callback ) {
 						hebrewReordered[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
 
 						// if the hebrew is ahead of the KJV then we use this approach
-						if ( wlc[1] > kjv[1] || ( wlc[1] === kjv[1] && wlc[2] > kjv[2] ) ) {
+						if ( wlc[1] < kjv[1] ) { //|| ( wlc[1] === kjv[1] && wlc[2] < kjv[2] ) ) {
 							// Set the wlc verse number to empty. It should be populated on a future iteration
-							//hebrewReordered[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+							hebrewReordered[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
 						}
 
 
