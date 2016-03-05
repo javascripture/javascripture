@@ -30,6 +30,7 @@ $menu-width: 200px;
 		position: absolute;
 		right: -76px;
 		top: 44px;
+		z-index: -1;
 
 		-webkit-transform: rotate(90deg);
 		-moz-transform: rotate(90deg);

@@ -701,6 +701,7 @@ form.search #advanced {
     position: absolute;
     right: -76px;
     top: 44px;
+    z-index: -1;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
