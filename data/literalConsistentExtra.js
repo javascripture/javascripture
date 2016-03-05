@@ -59,6 +59,8 @@ javascripture.data.literalConsistent['H3427']['Vqw3mp'] = 'they dwelt';
 javascripture.data.literalConsistent['H8141']['Ncfpa'] = 'years';
 javascripture.data.literalConsistent['H1571']['D'] = 'also';
 javascripture.data.literalConsistent['H7931']['no-morph'] = 'dwell';
+javascripture.data.literalConsistent['H2822']['Ncmsa'] = 'darkness';
+javascripture.data.literalConsistent['H7121']['no-morph'] = 'call';
 
 // Morph only
 javascripture.data.literalConsistent['Sp3ms'] = 'his';
@@ -183,7 +185,7 @@ javascripture.data.literalConsistent['G1909']['PREP'] = 'upon';
 javascripture.data.literalConsistent['G32']['N-APM'] = 'messengers';
 javascripture.data.literalConsistent['G4133']['ADV'] = 'nevertheless';
 javascripture.data.literalConsistent['G3761']['CONJ-N'] = 'neither';
-javascripture.data.literalConsistent['G3777']['CONJ'] = 'neither'; // second occorance should be nor
+javascripture.data.literalConsistent['G3777']['CONJ'] = 'neither'; // second occourance should be nor
 javascripture.data.literalConsistent['G3777']['CONJ-N'] = 'neither';
 javascripture.data.literalConsistent['G5565']['ADV'] = 'without';
 javascripture.data.literalConsistent['G2962']['N-DSM'] = 'lord';
@@ -210,3 +212,7 @@ javascripture.data.literalConsistent['G4914']['N-ASF'] = 'custom'; // with ethos
 javascripture.data.literalConsistent['G2192']['V-PAI-1P'] = 'have';
 javascripture.data.literalConsistent['G1577']['N-NPF'] = 'ecclesias';
 
+javascripture.data.literalConsistent['G1388']['N-DSM'] = 'deceit';
+javascripture.data.literalConsistent['G5613']['ADV'] = 'like';
+javascripture.data.literalConsistent['G299']['A-APM'] = 'without blemish';
+javascripture.data.literalConsistent['G3778']['D-APN'] = 'these';
