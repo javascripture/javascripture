@@ -88,6 +88,9 @@ javascripture.data.literalConsistent['G5210']['P-2GP'] = 'of you';
 javascripture.data.literalConsistent['G5210']['P-2DP'] = 'you'; // to you?
 javascripture.data.literalConsistent['G3754']['CONJ'] = 'that';
 
+javascripture.data.literalConsistent['G2932']['V-ADM-2P'] = 'obtain';
+javascripture.data.literalConsistent['G5590']['N-APF'] = 'souls';
+
 // All
 javascripture.data.literalConsistent['G3956']['A-GSM'] = 'of every';
 javascripture.data.literalConsistent['G3956']['A-NSM'] = 'every';
