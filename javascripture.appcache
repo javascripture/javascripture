@@ -1,8 +1,6 @@
 CACHE MANIFEST
 
-<<<<<<< HEAD
-#version: 6.4.6
-#literal consistent
+#version: 6.4.7
 
 index.html
 css/layout.css
