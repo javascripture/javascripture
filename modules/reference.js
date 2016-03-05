@@ -118,7 +118,8 @@ javascripture.modules.reference = {
 		return reference;
 	},
 	loadReferenceFromHash: function () {
-		var hash = window.location.hash;
+		var hash = decodeURIComponent( window.location.hash );
+
 		if ( ! hash ) {
 			console.log( localStorage.reference );
 			referenceObject
@@ -138,13 +139,14 @@ javascripture.modules.reference = {
 		}
 	},
 	getReferenceFromHash: function () {
-		return this.getReferenceObject( window.location.hash );
+		return this.getReferenceObject( decodeURIComponent( window.location.hash ) );
 	},
 	getReferenceObject: function( reference ) {
 		var referenceArray = reference.split( '/' ),
 			book = referenceArray[1],
 			chapter = parseInt(referenceArray[2], 10),
 			verse = 1;
+
 		if ( referenceArray[3] ) {
 			verse = parseInt(referenceArray[3], 10);
 		}
