@@ -28,7 +28,7 @@ $menu-width: 200px;
 		text-indent: 0;
 
 		position: absolute;
-		right: -76px;
+		right: -81px;
 		top: 44px;
 
 		-webkit-transform: rotate(90deg);
@@ -113,7 +113,7 @@ $menu-width: 200px;
 	&#bookmarksPanel,
 	&#goToPanel {
 		.open-menu {
-			top: 164px;
+			top: 183px;
 		}
 	}
 	&#helpPanel {
@@ -121,7 +121,7 @@ $menu-width: 200px;
 			color: blue;
 		}
 		.open-menu {
-			top: 284px;
+			top: 321px;
 		}
 		ul li {
 			list-style-position: inside;
@@ -130,7 +130,7 @@ $menu-width: 200px;
 	}
 	&#settingsPanel {
 		.open-menu {
-			top: 404px;
+			top: 460px;
 		}
 	}
 }

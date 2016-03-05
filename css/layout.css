@@ -699,7 +699,7 @@ form.search #advanced {
     padding: 0 10px;
     text-indent: 0;
     position: absolute;
-    right: -76px;
+    right: -81px;
     top: 44px;
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
@@ -761,16 +761,16 @@ form.search #advanced {
   .menu#bookmarksPanel ol.bookmarks li .remove {
     font-size: .8em; }
   .menu#bookmarksPanel .open-menu, .menu#goToPanel .open-menu {
-    top: 164px; }
+    top: 183px; }
   .menu#helpPanel .content a {
     color: blue; }
   .menu#helpPanel .open-menu {
-    top: 284px; }
+    top: 321px; }
   .menu#helpPanel ul li {
     list-style-position: inside;
     margin-bottom: 1em; }
   .menu#settingsPanel .open-menu {
-    top: 404px; }
+    top: 460px; }
 
 .reading-mode .goToPanel, .reading-mode .searchPanel, .reading-mode .popup, .reading-mode #wordControlPanel, .reading-mode .original {
   display: none !important; }
