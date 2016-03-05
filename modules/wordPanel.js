@@ -54,7 +54,6 @@
 						} );
 						infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
-						infoObjects[ i ].find( '.wordControlPanelStrongsDef' ).text( strongsDef );
 						infoObjects[ i ].find( '.wordControlPanelDerivation' ).text( derivation );
 						infoObjects[ i ].find( '.wordControlPanelTransliteration' ).text( transliteration );
 						infoObjects[ i ].find( '.wordControlPanelPronounciation' ).text( pronounciation );
