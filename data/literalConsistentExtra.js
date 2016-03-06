@@ -61,6 +61,7 @@ javascripture.data.literalConsistent['H1571']['D'] = 'also';
 javascripture.data.literalConsistent['H7931']['no-morph'] = 'dwell';
 javascripture.data.literalConsistent['H2822']['Ncmsa'] = 'darkness';
 javascripture.data.literalConsistent['H7121']['no-morph'] = 'call';
+javascripture.data.literalConsistent['H7121']['no-morph'] = 'wing';
 
 // Morph only
 javascripture.data.literalConsistent['Sp3ms'] = 'his';
