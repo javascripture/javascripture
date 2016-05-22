@@ -1,0 +1,22 @@
+.referenceInput {
+	background: rgba( 255, 255, 255, 0.8 );
+	position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+	text-align: center;
+
+	@media ( min-width: 600px ) {
+		margin-left: 320px + 1;
+	}
+}
+
+.referenceInputField {
+	background: none;
+	border: none;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 2em;
+	font-weight: 100;
+	text-align: center;
+	width: calc( 100% - 10px );
+}

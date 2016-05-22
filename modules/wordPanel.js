@@ -115,9 +115,7 @@
 				$('#wordControlPanel').append( infoObject );
 			} );
 			//Yuk
-			if( ! $('#wordDetailsPanel').hasClass('top') ) {
-				$( '#wordDetailsPanelLink' ).click();
-			}
+			javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
 		},
 		getBranches: function( strongsNumber ) {
 			var branches = {};
