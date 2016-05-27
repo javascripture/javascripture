@@ -34,8 +34,6 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	}
 	crossReferencesMarkup += '</ul>';
 	crossReferencesMarkup += '</div>';
-	$('#wordControlPanel').html( crossReferencesMarkup );
-	if( ! $('#wordDetailsPanel').hasClass('top') ) {
-		$( '#keyCode68' ).click();
-	}
+	$( '#crossReferences' ).html( crossReferencesMarkup );
+	javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'bookmarks' ) );
 } );

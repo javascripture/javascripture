@@ -10,9 +10,10 @@ const WordTray = () => (
 		<div id="wordDetailsPanel" className={ styles.trayContent }>
 			<div id="wordControlPanel" className="content">
 				<style></style>
-				<div className="control-panel content-padding">
-					<div classNme="duplicated">Select a word to show more details about it here. Double click to search.</div>
+				<div className="inital-content">
+					Select a word to show more details about it here.
 				</div>
+				<div className="searchResults"></div>
 			</div>
 		</div>
 	</div>

@@ -10,6 +10,9 @@ const BookmarksTray = () => (
 		<div id="bookmarksPanel">
 			<h2><a href="#"><span className="link-text">Bookmarks</span></a><a className="bookmark-current-passage icon-plus"></a></h2>
 			<ol className="bookmarks references"></ol>
+
+			<h2>Cross references</h2>
+			<div id="crossReferences"></div>
 		</div>
 	</div>
 );

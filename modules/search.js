@@ -1,5 +1,54 @@
 /*global javascripture*/
-var createSearchReferencesPanel, startDate;
+var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
+
+	var searchForm = '<form class="search">\
+			<ul>\
+				<li>\
+					<label for="word" class="has-placeholder">Word</label>\
+					<input type="text" name="word" id="word" value="" placeholder="Word" />\
+				</li>\
+				<li class="advanced">\
+					<label for="lemma" class="has-placeholder">Strongs number</label>\
+					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />\
+				</li>\
+				<li class="advanced">\
+					<label for="morph" class="has-placeholder">Morphology</label>\
+					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />\
+				</li>\
+				<li class="advanced">\
+					<label for="language">Language:</label>\
+					<select name="language" id="language">\
+						<option selected>kjv</option>\
+						<option>hebrew</option>\
+						<option>greek</option>\
+						<option>web</option>\
+					</select>\
+				</li>\
+				<li class="advanced sentence">\
+					<label for="clusivity">Look for</label>\
+					<select name="clusivity" id="clusivity">\
+						<option value="exclusive" selected>All</option>\
+						<option value="inclusive">Any</option>\
+					</select>\
+					<label for="range">terms in a</label>\
+					<select name="range" id="range">\
+						<option>word</option>\
+						<option selected>verse</option>\
+						<option>chapter</option>\
+					</select>\
+				</li>\
+				<li class="advanced">\
+					<label>Strict search</label>\
+					<input type="checkbox" name="strict" id="strict" />\
+				</li>\
+				<li class="advanced">\
+					<input type="submit" value="Search" />\
+				</li>\
+			</ul>\
+		</form>\
+		<div class="searchResults"></div>';
+	$('#referenceTracking').html( searchForm );
+
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -17,7 +66,7 @@ var createSearchReferencesPanel, startDate;
 		return o;
 	};
 
-	createSearchReferencesPanel = function( data ) {
+	createSearchReferencesPanel = function( data, target ) {
 		startDate = new Date();
 //		var strongsNumberArray = new Array();
 //		var searchType = $('#searchSelect').val();
@@ -42,21 +91,29 @@ var createSearchReferencesPanel, startDate;
 			strongsNumberAsId = data.lemma.replace( / /gi, "" );
 		}
 		var trackingBoxId = createTrackingBoxId( data, '_' );
-		createTrackingBox( data );
+
+		var targetElement = '#referenceTracking';
+		if ( target === 'word' ) {
+			targetElement = '#wordDetailsPanel';
+		}
+
+		createTrackingBox( data, targetElement );
 		strongsNumberArray = [];
 		if ( data.lemma ) {
 			data.lemma.split(' ');
 		}
 
 		//collapse all the others
-		$('#referenceTracking .collapsable').addClass('closed');
-		$('#referenceTracking #' + trackingBoxId).removeClass('closed');
+		$( targetElement + ' .collapsable' ).addClass('closed');
+		$( targetElement + ' #' + trackingBoxId ).removeClass('closed');
 
 		// Send data to our worker.
 		worker.postMessage( {
 			task: 'search',
 			parameters: data
 		} );
+
+		return trackingBoxId;
 	};
 
 	var createReferenceList = function(referenceArray) {
@@ -95,7 +152,14 @@ var createSearchReferencesPanel, startDate;
 		return string;
 	}
 
-	function createTrackingBox( data, type) {
+	function getStrongsTracking( trackingBoxId, family, data, title, header ) {
+		var strongsTracking = '';
+		strongsTracking += '<div class="collapsable" id="' + trackingBoxId + '" class="' + family + '-family ' + data.lemma + '" title="' + title + '"><style></style><h2 class="' + family + '-family ' + data.lemma + '">' + header;
+		strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="reference-tracking-panel"><div class="wordDetails"></div><div class="referenceList"><div id="searchLoading">Searching...</div></div></div></div>';
+		return strongsTracking;
+	}
+
+	function createTrackingBox( data, targetElement ) {
 		var trackingBoxId = createTrackingBoxId( data );
 		var strongsTracking = '';
 		if( $('#'+trackingBoxId).length === 0 ) {
@@ -111,9 +175,9 @@ var createSearchReferencesPanel, startDate;
 				title += key + ': ' + value + '\r\n';
 			} );
 
-			strongsTracking += '<div class="collapsable" id="'+trackingBoxId+'" class="'+family+'-family '+data.lemma+'" title="' + title + '"><style></style><h2 class="'+family+'-family '+data.lemma+'">' + header;
-			strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="referenceList"><div id="searchLoading">Searching...</div></div></div>';
-			$('#referenceTracking .searchResults').append(strongsTracking);
+			strongsTracking = getStrongsTracking( trackingBoxId, family, data, title, header );
+			console.log( $( targetElement + ' .searchResults' ) );
+			$( targetElement + ' .searchResults' ).append( strongsTracking );
 			if ( data.lemma ) {
 
 				var strongsStyle = '';
@@ -156,44 +220,33 @@ var createSearchReferencesPanel, startDate;
 		return  result;
 	}
 
-	function searchOnClick( element ) {
+	searchOnClick = function( element, target ) {
 		// Deep copy the data from the element
 		var searchParameters = jQuery.extend(true, {}, $( element ).data());
 		searchParameters.word = '';
 		searchParameters.morph = '';
 		searchParameters.lemma = searchParameters.lemma.replace('G3588 ','');
-		createSearchReferencesPanel( searchParameters );
+		return createSearchReferencesPanel( searchParameters, target );
 	}
 
 
 	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
-		searchOnClick( this );
+		searchOnClick( this, 'word' );
 	});
-	$(document).on( 'dblclick', '#verse ol > li span.searchable', function () {
+	/*$(document).on( 'dblclick', '#verse ol > li span.searchable', function () {
 		searchOnClick( this );
-	});
+	});*/
 
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		var data = $( this ).serializeObject();
-		createSearchReferencesPanel( data );
+		createSearchReferencesPanel( data, 'search' );
 		$( '.popup' ).popup( 'close' );
 	});
 
-	$( document ).on( 'click', 'a.word-tree', function( event ) {
-		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data() );
-	} );
-
 	$( document ).on( 'click', 'a.kjv-def', function( event ) {
 		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data() );
-	} );
-
-	$( '.advanced-search' ).click( function( event ) {
-		event.preventDefault();
-		$( '.advanced' ).toggle();
-		$( '.searchResults' ).toggleClass( 'advanced-search-open' );
+		createSearchReferencesPanel( $( this ).data(), 'word' );
 	} );
 
 	worker.addEventListener('message', function(e) {
@@ -218,11 +271,11 @@ var createSearchReferencesPanel, startDate;
 					}
 				});
 			}
-			references += createReferenceList(referenceArray);
+			references += createReferenceList( referenceArray );
 			references += '</ol></form>';
 
-			if( $( '#referenceTracking #' + trackingBoxId + ' form' ).length <= 0 ) {
-				$( '#referenceTracking #' + trackingBoxId + ' .referenceList' ).html( references );
+			if( $( '#' + trackingBoxId + ' form' ).length <= 0 ) {
+				$( '#' + trackingBoxId + ' .referenceList' ).html( references );
 			}
 //				goToFirstReference();
 	//		$('.popup').popup( 'close' );
