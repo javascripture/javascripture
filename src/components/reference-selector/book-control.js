@@ -1,6 +1,6 @@
 // External
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
@@ -20,7 +20,7 @@ const BookControl = React.createClass( {
 
 		// load the reference
 		window.location.hash = '/' + this.props.name + '/' + this.state.chapter + '/1/'
-		//hashHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
+		//browserHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
 	},
 	handleMouseMove: function( event ) {
 		this.setChapter( event.clientX );

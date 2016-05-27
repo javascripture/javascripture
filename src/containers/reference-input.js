@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+//import { hashHistory } from 'react-router';
 import ReferenceInput from '../components/reference-input';
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -18,7 +18,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		goToReference: ( reference ) => {
 			const referenceObj = bible.parseReference( reference );
 			if( referenceObj.bookID > 0 ) {
-				hashHistory.push( '/' + referenceObj.getBook() + '/' + referenceObj.chapter + '/' );
+				//hashHistory.push( '/' + referenceObj.getBook() + '/' + referenceObj.chapter + '/' );
 			} else {
 				alert( 'No such reference' );
 			}

@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
 
 // Internal
 import Footer from './footer'

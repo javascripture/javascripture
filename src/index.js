@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory, hashHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
 
@@ -20,18 +20,16 @@ import Stylizer, { insertCss } from './lib/stylizer';
 const store = createStore(
 	reducers,
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
-	applyMiddleware( routerMiddleware( hashHistory ), thunk )
+	applyMiddleware( routerMiddleware( browserHistory ), thunk )
 );
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore( hashHistory, store );
-
-// use this to inject history <App history={ history } />
+const history = syncHistoryWithStore( browserHistory, store );
 
 ReactDOM.render(
 	<Provider store={ store }>
 		<Stylizer onInsertCss={ insertCss }>
-			<App />
+			<App history={ history } />
 		</Stylizer>
 	</Provider>,
 	document.getElementById( 'content' )
