@@ -26,10 +26,12 @@ const store = createStore(
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( hashHistory, store );
 
+// use this to inject history <App history={ history } />
+
 ReactDOM.render(
 	<Provider store={ store }>
 		<Stylizer onInsertCss={ insertCss }>
-			<App history={ history } />
+			<App />
 		</Stylizer>
 	</Provider>,
 	document.getElementById( 'content' )

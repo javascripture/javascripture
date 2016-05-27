@@ -19,7 +19,8 @@ const BookControl = React.createClass( {
 		//}
 
 		// load the reference
-		hashHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
+		window.location.hash = '/' + this.props.name + '/' + this.state.chapter + '/1/'
+		//hashHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
 	},
 	handleMouseMove: function( event ) {
 		this.setChapter( event.clientX );
