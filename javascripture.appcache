@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 6.4.7
+#version: 7.0.0
 
 index.html
 css/layout.css
@@ -17,8 +17,8 @@ lib/MorphParse.js
 
 #data
 data/bible.js
-data/strongs-dictionary.js
 data/extra-dictionary.js
+data/strongs-dictionary.js
 data/kjvdwyer7.js
 data/web3.js
 modules/versionSelector.js
