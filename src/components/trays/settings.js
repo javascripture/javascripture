@@ -7,35 +7,36 @@ import styles from './styles.scss';
 
 const SettingsTray = () => (
 	<div className={ styles.tray }>
-		<div id="helpPanel">
+		<div id="helpPanel" className={ styles.helpPanel }>
 			<div className="content">
 				<div className="content-padding">
 					<h2>Help</h2>
 					<p><a href="http://scruffian.wordpress.com/contact/">Having problems? Email for help!</a></p>
-
+					<br />
 					<ul>
 						<li>To find out about a word, click on it</li>
-						<li>To search for a word, double click it</li>
 					</ul>
-					<p>Keyboard shortcuts</p>
+					<br />
+					<h3>Keyboard shortcuts</h3>
 					<ul>
-						<li>Go to a reference: just start typing</li>
-						<li>Next reference: =</li>
-						<li>Previous reference: -</li>
-						<li>Jump to chapter: just type in a number!</li>
+						<li><strong>Go to a reference:</strong> just start typing</li>
+						<li><strong>Next reference:</strong> =</li>
+						<li><strong>Previous reference</strong>: -</li>
+						<li><strong>Jump to chapter</strong>: type a number</li>
 					</ul>
+					<br />
 					<p>Built in Chrome. Tested in FireFox.</p>
 				</div>
 			</div>
 		</div>
 
-		<div id="settingsPanel">
+		<div id="settingsPanel" className={ styles.helpPanel }>
 			<div className="content">
 				<div className="content-padding">
 					<h2>Settings</h2>
 					<form>
 						<ul>
-							<li>
+							<li className={ styles.settingsLi }>
 								<label>Fonts:</label>
 								<select name="bodyFontFamily" className="changeStyle">
 									<option selected="selected" value="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Helvetica</option>
@@ -47,7 +48,7 @@ const SettingsTray = () => (
 									<option value="font-family: Verdana, Geneva !important;">Verdana</option>
 								</select>
 							</li>
-							<li>
+							<li className={ styles.settingsLi }>
 								<label>Font size:</label>
 								<select name="bodyFontSize" className="changeStyle">
 									<option value="font-size: 80%;">80%</option>
@@ -65,7 +66,7 @@ const SettingsTray = () => (
 									<option value="font-size: 200%;">200%</option>
 								</select>
 							</li>
-							<li>
+							<li className={ styles.settingsLi }>
 								<label>Colours:</label>
 								<select id="subdueColorBy">
 									<option value=".9">Very Bright</option>
@@ -75,14 +76,14 @@ const SettingsTray = () => (
 									<option value=".2">Very Dark</option>
 								</select>
 							</li>
-							<li>
+							<li className={ styles.settingsLi }>
 								<label>Reference picker:</label>
 								<select id="referencePicker">
 									<option value="input">Typing</option>
 									<option value="select">Drop down menu</option>
 								</select>
 							</li>
-							<li>
+							<li className={ styles.settingsLi }>
 								<label>Highlight words with:</label>
 								<select id="highlightWordsWith">
 									<option value="same">Same Strong's number</option>

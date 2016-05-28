@@ -42,3 +42,15 @@
 	composes: trayFilter;
 	background: rgba( 150, 230, 255, 0.4 );
 }
+
+.help-panel {
+	padding: .5em;
+}
+
+.settings-li {
+	margin-bottom: 1em;
+
+	label {
+		display: block;
+	}
+}
