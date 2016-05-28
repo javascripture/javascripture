@@ -6,6 +6,10 @@
 
 	dvnnm {text-transform: uppercase;}
 	#verse {
+		ol {
+			list-style: none;
+		}
+
 		.loading {
 			padding: 1em;
 			text-align: center;
@@ -38,4 +42,13 @@
 
 
 	.verse .wrapper { display:inline-block; vertical-align:top; }
+}
+
+.verse-number {
+	color: #aaa;
+}
+.hebrew.original .verse-number {
+	color: #aaa;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }

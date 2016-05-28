@@ -420,6 +420,8 @@ note:hover {
       margin: 50px 0 0 320px; } }
   .referencePanel dvnnm {
     text-transform: uppercase; }
+  .referencePanel #verse ol {
+    list-style: none; }
   .referencePanel #verse .loading {
     padding: 1em;
     text-align: center; }
@@ -454,6 +456,14 @@ note:hover {
   .referencePanel .verse .wrapper {
     display: inline-block;
     vertical-align: top; }
+
+.verse-number {
+  color: #aaa; }
+
+.hebrew.original .verse-number {
+  color: #aaa;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px; }
 
 .popup {
   background: rgba(255, 255, 255, 0.5);

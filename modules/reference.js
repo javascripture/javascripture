@@ -195,6 +195,7 @@ javascripture.modules.reference = {
 		}
 		chapterText += '>';
 		chapterText += '<div class="right ' + result.rightVersion + ' ' + result.testament + '">';
+			chapterText += "<span class='verse-number'>" + ( verseNumber + 1 ) + ". </span>";
 			chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
 					chapterText += self.createWordString( wordObject, result.testament, result.rightVersion );
@@ -205,6 +206,7 @@ javascripture.modules.reference = {
 		//Load left
 		if(	chapterData.left && chapterData.left[verseNumber] ) {
 			chapterText += "<div class='left " + result.leftVersion + ' ' + result.testament + "'>";
+			chapterText += "<span class='verse-number'>" + ( verseNumber + 1 ) + ". </span>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
 					chapterText += self.createWordString( wordObject, result.testament, result.leftVersion );
