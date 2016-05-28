@@ -246,7 +246,8 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 
 	$( document ).on( 'click', 'a.kjv-def', function( event ) {
 		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data(), 'word' );
+		createSearchReferencesPanel( $( this ).data(), 'search' );
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'search' ) );
 	} );
 
 	worker.addEventListener('message', function(e) {
@@ -271,7 +272,11 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 					}
 				});
 			}
-			references += createReferenceList( referenceArray );
+			if ( referenceArray.length > 0 ) {
+				references += createReferenceList( referenceArray );
+			} else {
+				references += 'No results';
+			}
 			references += '</ol></form>';
 
 			if( $( '#' + trackingBoxId + ' form' ).length <= 0 ) {

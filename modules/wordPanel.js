@@ -47,7 +47,7 @@
 						pronounciation = javascripture.data.strongsDictionary[osidStrongsNumber].pron;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {
-							var kjvWord = word.trim();
+							var kjvWord = word.trim().replace( /\./g, '' );
 							kjvDef += '<a href="#" class="kjv-def" data-language="kjv" data-clusivity="exclusive" data-range="word" data-lemma="' + strongsNumber + '" data-word="' + kjvWord + '">' + kjvWord + '</a>, ';
 						} );
 						englishWord = $element.text();
