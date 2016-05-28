@@ -422,6 +422,16 @@ note:hover {
     text-transform: uppercase; }
   .referencePanel #verse ol {
     list-style: none; }
+  .referencePanel #verse li {
+    position: relative; }
+  .referencePanel #verse .bookmarker {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    left: -20px; }
+  .referencePanel #verse li:hover .bookmarker {
+    display: block; }
   .referencePanel #verse .loading {
     padding: 1em;
     text-align: center; }

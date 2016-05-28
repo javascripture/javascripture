@@ -40,3 +40,11 @@ export const addPreviousChapter = ( reference ) => {
 		type: 'ADD_PREVIOUS_CHAPTER'
 	}
 }
+
+export const addBookmark = ( reference ) => {
+	console.log( reference );
+	return {
+		reference,
+		type: 'ADD_BOOKMARK'
+	}
+}
