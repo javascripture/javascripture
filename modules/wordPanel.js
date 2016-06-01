@@ -32,7 +32,7 @@
 				language = $element.data('language'),
 				morphology = $element.data( 'morph' );
 			strongsNumberArray.forEach( function( strongsNumber, i ) {
-				if ( 'undefined' === typeof javascripture.data.strongsDictionary[ strongsNumber ] ) {
+				if ( 'undefined' === typeof javascripture.data.strongsDictionary[ strongsNumber ] || 'G3588' === strongsNumber ) {
 					return false;
 				} else {
 //					if ( 'undefined' !== typeof javascripture.data.strongsDictionary[ strongsNumber ] ) {
