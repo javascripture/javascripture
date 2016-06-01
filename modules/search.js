@@ -154,7 +154,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 
 	function getStrongsTracking( trackingBoxId, family, data, title, header ) {
 		var strongsTracking = '';
-		strongsTracking += '<div class="collapsable" id="' + trackingBoxId + '" class="' + family + '-family ' + data.lemma + '" title="' + title + '"><style></style><h2 class="' + family + '-family ' + data.lemma + '">' + header;
+		strongsTracking += '<div class="collapsable" id="' + trackingBoxId + '" class="' + family + '-family ' + data.lemma + '"><style></style><h2 class="' + family + '-family ' + data.lemma + '" title="' + title + '">' + header;
 		strongsTracking += '<a aria-hidden="true" class="icon-cross remove"></a></h2><div class="reference-tracking-panel"><div class="wordDetails"></div><div class="referenceList"><div id="searchLoading">Searching...</div></div></div></div>';
 		return strongsTracking;
 	}
