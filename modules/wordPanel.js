@@ -2,7 +2,12 @@
 ;( function ( $ ) {
 	javascripture.modules.wordPanel = {
 		preinit: function( $element ) {
+			if ( $element.data('lemma') === 'added' || $element.data('lemma') === 'dwyer-added' ) {
+				return;
+			}
+
 			$( '.inital-content' ).html( '' );
+
 			var trackingBoxId = searchOnClick( $element, 'word' );
 
 			var infoObjects = this.init( $element );
