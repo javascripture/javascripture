@@ -8,7 +8,7 @@ import styles from './styles.scss';
 
 const BookmarksTray = () => (
 	<div className={ styles.tray }>
-		<div id="bookmarksPanel">
+		<div id="bookmarksPanel" className={ styles.trayPadding }>
 			<h2>Bookmarks</h2>
 			<ol className="bookmarks references"></ol>
 			<BookMarks />
