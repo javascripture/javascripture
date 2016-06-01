@@ -177,10 +177,13 @@ javascripture.modules.reference = {
 		chapterText += '</div>';
 		return chapterText;
 	},
+	getVerseId: function( book, chapter, verseNumber ) {
+		return book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 );
+	},
 	getVerseString: function( result, chapterData, book, chapter, verseText, verseNumber, verseInArray ) {
 		var self = this,
 			chapterText = '';
-		chapterText += '<li id="' + book.replace( / /gi, '_' ) + '_' + chapter + '_' + ( verseNumber + 1 ) + '"';
+		chapterText += '<li id="' + this.getVerseId( book, chapter, verseNumber ) + '"';
 		if ( verseNumber === verseInArray ) {
 			chapterText += ' class="current"';
 		}
@@ -194,7 +197,16 @@ javascripture.modules.reference = {
 			context = true;
 		}
 		chapterText += '>';
+
+		// Bookmarker
+		chapterText += '<div class="bookmarker" + data-verse="' + ( verseNumber + 1 ) + '" id="' + this.getVerseId( book, chapter, verseNumber ) + '">';
+		chapterText += '<svg version="1.1" width="20" height="20" viewBox="0 0 20 20">';
+		chapterText += '<path d="M12.6 1h-5.4c-0.553 0-0.8 0.448-0.8 1v17l3.6-3.6 3.6 3.6v-17c0-0.552-0.448-1-1-1z" fill="666666"></path>';
+		chapterText += '</svg>'
+		chapterText += '</div>';
+
 		chapterText += '<div class="right ' + result.rightVersion + ' ' + result.testament + '">';
+			chapterText += "<span class='verse-number'>" + ( verseNumber + 1 ) + ". </span>";
 			chapterData.right[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
 					chapterText += self.createWordString( wordObject, result.testament, result.rightVersion );
@@ -205,6 +217,7 @@ javascripture.modules.reference = {
 		//Load left
 		if(	chapterData.left && chapterData.left[verseNumber] ) {
 			chapterText += "<div class='left " + result.leftVersion + ' ' + result.testament + "'>";
+			chapterText += "<span class='verse-number'>" + ( verseNumber + 1 ) + ". </span>";
 			chapterData.left[verseNumber].forEach( function( wordObject, wordNumber ) {
 				if ( wordObject ) {
 					chapterText += self.createWordString( wordObject, result.testament, result.leftVersion );

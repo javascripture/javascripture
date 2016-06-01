@@ -9,9 +9,9 @@ self.postMessage( { task: 'loading', html: 'loading KJV' } );
 importScripts('../data/kjvdwyer7.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
-self.postMessage( { task: 'loading', html: 'loading hebrew' } );
+self.postMessage( { task: 'loading', html: 'loading Hebrew' } );
 importScripts('../data/hebrew-with-morph5.js');
-self.postMessage( { task: 'loading', html: 'loading greek' } );
+self.postMessage( { task: 'loading', html: 'loading Greek' } );
 importScripts('../data/greek4.js');
 
 importScripts('../data/bible.js');
@@ -26,7 +26,6 @@ self.addEventListener('message', function( e ) {
 	var result;
 
 	if ( e.data.task === 'search' ) {
-
 		result = javascripture.api.search.getReferences( e.data.parameters );
 	}
 	if ( e.data.task === 'reference' ) {
@@ -42,8 +41,3 @@ self.addEventListener('message', function( e ) {
 	}
 
 }, false);
-
-//self.addEventListener('message', function(e) {
-	//e.data;
-//	self.postMessage( e.data );//javascripture.data.greek.Matthew[0][0]);
-//}, false);

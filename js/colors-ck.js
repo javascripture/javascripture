@@ -1,1 +1,0 @@
-/*global javascripture*/javascripture.modules.colors={getStrongsColor:function(e){var t=.045,n=e*t,r=$("#subdueColorBy").val()*100+"%",i=$("#subdueColorBy").val()*100+"%";return"hsl( "+n+","+r+", "+i+" )"},getStrongsStyle:function(e,t){return"."+e+" {color:#fff !important;background:"+t+" !important;}"}};

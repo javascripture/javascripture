@@ -1,0 +1,15 @@
+.bookControl {
+	line-height: 2em;
+	padding-left: .5em;
+	position: relative;
+
+	&:hover {
+		background: lightblue;
+	}
+}
+
+.go {
+	line-height: 2em;
+	position: absolute;
+		right: 0;
+}

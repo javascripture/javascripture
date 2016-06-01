@@ -10,6 +10,7 @@
 		<style id="bodyFontSize"></style>
 	</head>
 	<body>
+	<div id="content"></div>
 	<div id="dock" class="input">
 		<div class="heading-wrapper">
 			<form class="goToReference">
@@ -102,7 +103,6 @@
 
 	<div class="referencePanel" id="reference">
 		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
-		<span id="readingMode" class="reading-mode-switch icon-fullscreen"></span>
 		<div class="verse">
 			<div id="verse">
 				<div class="loading">Loading...</div>
@@ -110,249 +110,11 @@
 		</div>
 	</div>
 
-	<div id="wordDetailsPanel" class="menu left">
-		<a href="#wordDetailsPanel" id="wordDetailsPanelLink" class="link-text open-menu" title="go to"><span aria-hidden="true" class="icon-details"></span> <span class="link-text">Word details</span></a>
-		<div id="wordControlPanel" class="content">
-			<style></style>
-			<div class="control-panel content-padding">
-				<div class="duplicated">Select a word to show more details about it here. Double click to search.</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="goToPanel menu left" id="goToPanel">
-		<a href="#goToPanel" class="link-text open-menu" title="go to"><span aria-hidden="true" class="icon-book"></span> <span class="link-text">Go to</span></a>
-		<div class="lookup bookSelect">
-			<a href="#/Genesis/1" data-chapters="50">Genesis <span class="chapter"></span></a>
-			<a href="#/Exodus/1" data-chapters="40">Exodus <span class="chapter"></span></a>
-			<a href="#/Leviticus/1" data-chapters="27">Leviticus <span class="chapter"></span></a>
-			<a href="#/Numbers/1" data-chapters="36">Numbers <span class="chapter"></span></a>
-			<a href="#/Deuteronomy/1" data-chapters="34">Deuteronomy <span class="chapter"></span></a>
-			<a href="#/Joshua/1" data-chapters="24">Joshua <span class="chapter"></span></a>
-			<a href="#/Judges/1" data-chapters="21">Judges <span class="chapter"></span></a>
-			<a href="#/Ruth/1" data-chapters="4">Ruth <span class="chapter"></span></a>
-			<a href="#/1 Samuel/1" data-chapters="31">1 Samuel <span class="chapter"></span></a>
-			<a href="#/2 Samuel/1" data-chapters="24">2 Samuel <span class="chapter"></span></a>
-			<a href="#/1 Kings/1" data-chapters="24">1 Kings <span class="chapter"></span></a>
-			<a href="#/2 Kings/1" data-chapters="25">2 Kings <span class="chapter"></span></a>
-			<a href="#/1 Chronicles/1" data-chapters="29">1 Chronicles <span class="chapter"></span></a>
-			<a href="#/2 Chronicles/1" data-chapters="36">2 Chronicles <span class="chapter"></span></a>
-			<a href="#/Ezra/1" data-chapters="10">Ezra <span class="chapter"></span></a>
-			<a href="#/Nehemiah/1" data-chapters="13">Nehemiah <span class="chapter"></span></a>
-			<a href="#/Esther/1" data-chapters="10">Esther <span class="chapter"></span></a>
-			<a href="#/Job/1" data-chapters="42">Job <span class="chapter"></span></a>
-			<a href="#/Psalm/1" data-chapters="150">Psalm <span class="chapter"></span></a>
-			<a href="#/Proverbs/1" data-chapters="31">Proverbs <span class="chapter"></span></a>
-			<a href="#/Ecclesiastes/1" data-chapters="12">Ecclesiastes <span class="chapter"></span></a>
-			<a href="#/Song of Songs/1" data-chapters="8">Song of Songs <span class="chapter"></span></a>
-			<a href="#/Isaiah/1" data-chapters="66">Isaiah <span class="chapter"></span></a>
-			<a href="#/Jeremiah/1" data-chapters="52">Jeremiah <span class="chapter"></span></a>
-			<a href="#/Lamentations/1" data-chapters="4">Lamentations <span class="chapter"></span></a>
-			<a href="#/Ezekiel/1" data-chapters="48">Ezekiel <span class="chapter"></span></a>
-			<a href="#/Daniel/1" data-chapters="12">Daniel <span class="chapter"></span></a>
-			<a href="#/Hosea/1" data-chapters="14">Hosea <span class="chapter"></span></a>
-			<a href="#/Joel/1" data-chapters="3">Joel <span class="chapter"></span></a>
-			<a href="#/Amos/1" data-chapters="9">Amos <span class="chapter"></span></a>
-			<a href="#/Obadiah/1">Obadiah</a>
-			<a href="#/Jonah/1" data-chapters="4">Jonah <span class="chapter"></span></a>
-			<a href="#/Micah/1" data-chapters="7">Micah <span class="chapter"></span></a>
-			<a href="#/Nahum/1" data-chapters="3">Nahum <span class="chapter"></span></a>
-			<a href="#/Habakkuk/1" data-chapters="3">Habakkuk <span class="chapter"></span></a>
-			<a href="#/Zephaniah/1" data-chapters="3">Zephaniah <span class="chapter"></span></a>
-			<a href="#/Haggai/1" data-chapters="2">Haggai <span class="chapter"></span></a>
-			<a href="#/Zechariah/1" data-chapters="14">Zechariah <span class="chapter"></span></a>
-			<a href="#/Malachi/1" data-chapters="4">Malachi <span class="chapter"></span></a>
-			<a href="#/Matthew/1" data-chapters="28">Matthew <span class="chapter"></span></a>
-			<a href="#/Mark/1" data-chapters="16">Mark <span class="chapter"></span></a>
-			<a href="#/Luke/1" data-chapters="24">Luke <span class="chapter"></span></a>
-			<a href="#/John/1" data-chapters="21">John <span class="chapter"></span></a>
-			<a href="#/Acts/1" data-chapters="28">Acts <span class="chapter"></span></a>
-			<a href="#/Romans/1" data-chapters="16">Romans <span class="chapter"></span></a>
-			<a href="#/1 Corinthians/1" data-chapters="16">1 Corinthians <span class="chapter"></span></a>
-			<a href="#/2 Corinthians/1" data-chapters="13">2 Corinthians <span class="chapter"></span></a>
-			<a href="#/Galatians/1" data-chapters="6">Galatians <span class="chapter"></span></a>
-			<a href="#/Ephesians/1" data-chapters="6">Ephesians <span class="chapter"></span></a>
-			<a href="#/Philippians/1" data-chapters="4">Philippians <span class="chapter"></span></a>
-			<a href="#/Colossians/1" data-chapters="4">Colossians <span class="chapter"></span></a>
-			<a href="#/1 Thessalonians/1" data-chapters="5">1 Thessalonians <span class="chapter"></span></a>
-			<a href="#/2 Thessalonians/1" data-chapters="3">2 Thessalonians <span class="chapter"></span></a>
-			<a href="#/1 Timothy/1" data-chapters="6">1 Timothy <span class="chapter"></span></a>
-			<a href="#/2 Timothy/1" data-chapters="4">2 Timothy <span class="chapter"></span></a>
-			<a href="#/Titus/1" data-chapters="3">Titus <span class="chapter"></span></a>
-			<a href="#/Philemon/1">Philemon</span></a>
-			<a href="#/Hebrews/1" data-chapters="13">Hebrews <span class="chapter"></span></a>
-			<a href="#/James/1" data-chapters="5">James <span class="chapter"></span></a>
-			<a href="#/1 Peter/1" data-chapters="5">1 Peter <span class="chapter"></span></a>
-			<a href="#/2 Peter/1" data-chapters="3">2 Peter <span class="chapter"></span></a>
-			<a href="#/1 John/1" data-chapters="5">1 John <span class="chapter"></span></a>
-			<a href="#/2 John/1">2 John</a>
-			<a href="#/3 John/1">3 John</a>
-			<a href="#/Jude/1">Jude</a>
-			<a href="#/Revelation/1" data-chapters="22">Revelation <span class="chapter"></span></a>
-			<a href="#" class="randomReference" title="Load random reference">Bibliomancy<span class="icon-die"> </span></a>
-		</div>
-	</div>
-
-	<div id="helpPanel" class="menu left">
-		<a href="#helpPanel" class="link-text open-menu" title="help"><span aria-hidden="true" class="icon-question"></span> <span class="link-text">Help</span></a>
-		<div class="content">
-			<div class="content-padding">
-				<h2>Help</h2>
-				<p><a href="http://scruffian.wordpress.com/contact/">Having problems? Email for help!</a></p>
-
-				<ul>
-					<li>To find out about a word, click on it</li>
-					<li>To search for a word, double click it</li>
-				</ul>
-				<p>Keyboard shortcuts</p>
-				<ul>
-					<li>Go to a reference: just start typing</li>
-					<li>Next reference: =</li>
-					<li>Previous reference: -</li>
-					<li>Jump to chapter: just type in a number!</li>
-				</ul>
-				<p>Built in Chrome. Tested in FireFox.</p>
-			</div>
-		</div>
-	</div>
-
-	<!-- Settings Panel -->
-	<div id="settingsPanel" class="menu left">
-		<a href="#settingsPanel" class="link-text open-menu" title="settings">
-			<span aria-hidden="true" class="icon-cog2"></span> <span class="link-text">Settings</span>
-		</a>
-		<div class="content">
-			<div class="content-padding">
-				<h2>Settings</h2>
-				<form>
-					<ul>
-						<li>
-							<label>Fonts:</label>
-							<select name="bodyFontFamily" class="changeStyle">
-								<option selected="selected" value="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Helvetica</option>
-								<option value="font-family: 'Bookman Old Style' !important;">Bookman</option>
-								<option value="font-family: 'Courier New', Courier !important;">Courier</option>
-								<option value="font-family: Georgia !important;">Georgia</option>
-								<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande' !important;">Lucida</option>
-								<option value="font-family: 'Times New Roman', Times !important;">Times</option>
-								<option value="font-family: Verdana, Geneva !important;">Verdana</option>
-							</select>
-						</li>
-						<li>
-							<label>Font size:</label>
-							<select name="bodyFontSize" class="changeStyle">
-								<option value="font-size: 80%;">80%</option>
-								<option value="font-size: 90%;">90%</option>
-								<option selected="selected" value="font-size: 100%;">100%</option>
-								<option value="font-size: 110%;">110%</option>
-								<option value="font-size: 120%;">120%</option>
-								<option value="font-size: 130%;">130%</option>
-								<option value="font-size: 140%;">140%</option>
-								<option value="font-size: 150%;">150%</option>
-								<option value="font-size: 160%;">160%</option>
-								<option value="font-size: 170%;">170%</option>
-								<option value="font-size: 180%;">180%</option>
-								<option value="font-size: 190%;">190%</option>
-								<option value="font-size: 200%;">200%</option>
-							</select>
-						</li>
-						<li>
-							<label>Colours:</label>
-							<select id="subdueColorBy">
-								<option value=".9">Very Bright</option>
-								<option value=".75">Bright</option>
-								<option value=".5" selected="selected">Normal</option>
-								<option value=".3">Dark</option>
-								<option value=".2">Very Dark</option>
-							</select>
-						</li>
-						<li>
-							<label>Reference picker:</label>
-							<select id="referencePicker">
-								<option value="input">Typing</option>
-								<option value="select">Drop down menu</option>
-							</select>
-						</li>
-						<li>
-							<label>Highlight words with:</label>
-							<select id="highlightWordsWith">
-								<option value="same">Same Strong's number</option>
-								<option value="family">Same family</option>
-							</select>
-						</li>
-					</ul>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-	<div id="referenceTracking" class="searchPanel menu right">
-		<a href="#referenceTracking" id="searchPanelLink" class="link-text open-menu" title="Search">
-			<span aria-hidden="true" class="icon-search"></span> <span class="link-text">Search</span>
-		</a>
-		<form class="search">
-			<ul>
-				<li>
-					<label for="word" class="has-placeholder">Word</label>
-					<input type="text" name="word" id="word" value="" placeholder="Word" />
-				</li>
-				<li class="advanced">
-					<label for="lemma" class="has-placeholder">Strongs number</label>
-					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />
-				</li>
-				<li class="advanced">
-					<label for="morph" class="has-placeholder">Morphology</label>
-					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />
-				</li>
-				<li class="advanced">
-					<label for="language">Language:</label>
-					<select name="language" id="language">
-						<option selected>kjv</option>
-						<option>hebrew</option>
-						<option>greek</option>
-						<option>web</option>
-					</select>
-				</li>
-				<li class="advanced sentence">
-					<label for="clusivity">Look for</label>
-					<select name="clusivity" id="clusivity">
-						<option value="exclusive" selected>All</option>
-						<option value="inclusive">Any</option>
-					</select>
-					<label for="range">terms in a</label>
-					<select name="range" id="range">
-						<option>word</option>
-						<option selected>verse</option>
-						<option>chapter</option>
-					</select>
-				</li>
-				<li class="advanced">
-					<label>Strict search</label>
-					<input type="checkbox" name="strict" id="strict" />
-				</li>
-				<li class="advanced">
-					<input type="submit" value="Search" />
-				</li>
-			</ul>
-			<a href="#advanced" class="advanced-search">Advanced</a>
-		</form>
-
-		<div class="searchResults"></div>
-	</div>
-
-	<div id="bookmarksPanel" class="menu right">
-		<a href="#bookmarksPanel" class="link-text open-menu" title="help"><span aria-hidden="true" class="icon-bookmark2"></span> <span class="link-text">Bookmarks</span></a>
-		<h2><a href="#"><span class="link-text">Bookmarks</span></a><a class="bookmark-current-passage icon-plus"></a></h2>
-		<ol class="bookmarks references"></ol>
-	</div>
 	<script type="text/template" id="bookmark-template">
 		<% var reference = { book: book, chapter: chapter, verse: verse }; %>
 		<% var link = javascripture.modules.reference.createReferenceLink( reference ); %>
 		<a href="#<%= link %>"><%= book %> <%= chapter %>:<%= verse %></a><a href="#" class="icon-cross remove" aria-hidden="true"></a>;
 	</script>
-
 
 </div>
 
@@ -369,17 +131,22 @@
 	<div class="content-padding">
 		<style></style>
 		<div class="word-details">
-			<span class="wordControlPanelStrongsNumber"></span> | <span class="wordControlPanelEnglish"></span> | <span class="wordControlPanelLemma"></span> | <span class="wordControlPanelTransliteration"></span> | <span class="wordControlPanelPronounciation"></span>
+			<span class="wordControlPanelEnglish"></span> | <span class="wordControlPanelLemma"></span> | <span class="wordControlPanelTransliteration"></span> | <span class="wordControlPanelPronounciation"></span>
+			<br />
+			<br />
 			<div class="word-tree" id="wordTreeRoots"></div>
 			<div class="word-tree" id="wordTreeBranches"></div>
 			<div class="word-tree" id="wordTreeFamily"></div>
 		</div>
+		<br />
 		<div class="definitions">
 			<strong>KJV Usage:</strong> <span class="wordControlPanelKJVDef"></span><br />
+			<br />
 			<strong>Derivation:</strong> <span class="wordControlPanelDerivation"></span><br />
+			<br />
 			<strong>Morphology:</strong> <span class="wordControlPanelMorphology"></span><br />
 		</div>
-		<a aria-hidden="true" class="icon-cross close-word-details"></a>
+		<h3>Search results</h3>
 	</div>
 </div>
 
@@ -427,7 +194,8 @@
 	var javascripture = {
 		api: {},
 		data: {},
-		modules: {}
+		modules: {},
+		reactHelpers: {}
 	};
 	var worker = new Worker('workers/worker.js');
 </script>
@@ -435,8 +203,6 @@
 <!-- libs -->
 <script src="lib/jquery-2.0.3.min.js"></script>
 <script src="lib/underscore.js"></script>
-<script src="lib/backbone.js"></script>
-<script src="lib/backbone.localStorage.js"></script>
 <script src="lib/jquery.scrollTo.js"></script>
 <script src="lib/jquery.waypoints.js"></script>
 <script src="lib/MorphCodes.js"></script>
@@ -474,11 +240,8 @@
 <script src="js/functionalScripts.js"></script>
 <script src="modules/translateLiterally.js"></script>
 <script src="modules/reference.js"></script>
-<script src="modules/bookmarks.js"></script>
-<script src="modules/menu.js"></script>
 
 <script src="js/morphologyApi.js"></script>
-<script src="modules/search.js"></script>
 <script src="modules/wordPanel.js"></script>
 <script src="js/loading.js"></script>
 <script src="js/popup.js"></script>
@@ -490,6 +253,8 @@
 <script src="js/frequencyAnalysis.js"></script>
 <script src="js/randomReference.js"></script>
 
+<script src="build/bundle.js"></script>
+<script src="modules/search.js"></script>
 <script>
 	// Check if a new cache is available on page load.
 	window.addEventListener('load', function(e) {

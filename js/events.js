@@ -42,30 +42,12 @@
 		$(document).on('click', '#wordControlPanel .definitions-link', function(){
 			$(this).siblings('.definitions').toggleClass('hide');
 		});
-		/*$('#verse span').live('click',function(){
-			var strongsNumber = $(this).attr('class').split(' ')[0];
-			highlightStrongsNumber(strongsNumber);
-		});
-		$('#verse span').live('dblclick',function(){
-			$('input#searchTerm').val($(this).attr('class'));
-			$('input#search').click();
-		});*/
-		/*$('a').live('focus',function(){
-			$(this).click();
-		});*/
+
 		$(document).on('click', '.references a', function(){
 			markReference($(this).parent('li'));
             return false;
 		});
-/*		$(document).on('click', 'input#search', function() {
-			searchByStrongsNumber($('input#searchTerm').val());
-			return false;
-		});
-		$(document).on('dblclick', '#strongsTracking a.tracker', function() {
-			$('input#searchTerm').val($(this).attr('href'));
-			$('input#search').click();
-			return false;
-		});*/
+
 		$(document).on('click', '#strongsTracking a.close', function() {
 			var parentListItem = $(this).closest('li');
 			var id = parentListItem.attr('id');
@@ -77,9 +59,7 @@
 			highlightStrongsNumber($(this).attr('href'));
 			return false;
 		});
-		/*$('#searchByStrongsNumber').on('submit', function(){
-			$('input#search').click();
-		});*/
+
 		$('#colorFormColor').change(function(){
 			var strongsNumber = $('#changeColor #colorFormStrongsNumber').val();
 			var color = $('#changeColor #colorFormColor').val();

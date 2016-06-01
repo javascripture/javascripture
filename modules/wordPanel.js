@@ -1,7 +1,20 @@
 /*global javascripture*/
 ;( function ( $ ) {
 	javascripture.modules.wordPanel = {
+		preinit: function( $element ) {
+			$( '.inital-content' ).html( '' );
+			var trackingBoxId = searchOnClick( $element, 'word' );
+
+			var infoObjects = this.init( $element );
+			$( '#' + trackingBoxId + ' .wordDetails' ).html( infoObjects );
+
+			//Yuk
+			javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
+		},
+
 		init: function( $element ) {
+
+
 			var self = this;
 			if ( ! $element.data('lemma') ) {
 				return false;
@@ -34,7 +47,7 @@
 						pronounciation = javascripture.data.strongsDictionary[osidStrongsNumber].pron;
 						var kjvDefArray = javascripture.data.strongsDictionary[osidStrongsNumber].kjv_def.split( ',' );
 						$.each( kjvDefArray, function( key, word ) {
-							var kjvWord = word.trim();
+							var kjvWord = word.trim().replace( /\./g, '' );
 							kjvDef += '<a href="#" class="kjv-def" data-language="kjv" data-clusivity="exclusive" data-range="word" data-lemma="' + strongsNumber + '" data-word="' + kjvWord + '">' + kjvWord + '</a>, ';
 						} );
 						englishWord = $element.text();
@@ -46,12 +59,6 @@
 						}
 
 						infoObjects[ i ] = $( '.wordControlPanelTemplate' ).clone().removeClass( 'wordControlPanelTemplate' ).addClass( 'wordControlPanel' );
-						infoObjects[ i ].find( '.wordControlPanelStrongsNumber' ).addClass( className ).text( strongsNumberDisplay ).data( {
-							language: language,
-							lemma: osidStrongsNumber,
-							range: 'verse'
-
-						} );
 						infoObjects[ i ].find( '.wordControlPanelLemma' ).text( lemma );
 						infoObjects[ i ].find( '.wordControlPanelEnglish' ).text( englishWord );
 						infoObjects[ i ].find( '.wordControlPanelDerivation' ).text( derivation );
@@ -110,14 +117,12 @@
 				}
 			});
 
-			$('#wordControlPanel').html( infoObjects ).show();
-			$.each( infoObjects, function ( key, infoObject ) {
+			return infoObjects;
+
+			//$('#wordControlPanel').append( infoObjects ).show();
+			/*$.each( infoObjects, function ( key, infoObject ) {
 				$('#wordControlPanel').append( infoObject );
-			} );
-			//Yuk
-			if( ! $('#wordDetailsPanel').hasClass('top') ) {
-				$( '#wordDetailsPanelLink' ).click();
-			}
+			} );*/
 		},
 		getBranches: function( strongsNumber ) {
 			var branches = {};
@@ -150,8 +155,16 @@
 	$(document).on( 'click', '#verse ol > li span', function ( event ) {
 		event.preventDefault();
 		event.stopPropagation();
-		javascripture.modules.wordPanel.init( $( this ) );
+		javascripture.modules.wordPanel.preinit( $( this ) );
 	});
+
+	$( document ).on( 'click', 'a.word-tree', function( event ) {
+		event.preventDefault();
+
+		javascripture.modules.wordPanel.preinit( $( this ) );
+		//createSearchReferencesPanel( $( this ).data(), 'word' );
+	} );
+
 
 	$(document).on( 'click', '.wordControlPanel .close-word-details', function ( event ) {
 		event.preventDefault();

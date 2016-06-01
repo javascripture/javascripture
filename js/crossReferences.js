@@ -1,5 +1,5 @@
 /*global bible, crossReferences, javascripture*/
-$( document ).on('click', '#verse .wrapper li', function() {
+$( document ).on('click', '#verse .wrapper li, .bookmarker', function() {
 	var idToPrettyReference = function( id ) {
 		var idArray = id.split( '_' );
 		return idArray[0] + ' ' + idArray[1] + ':' + idArray[2];
@@ -34,8 +34,11 @@ $( document ).on('click', '#verse .wrapper li', function() {
 	}
 	crossReferencesMarkup += '</ul>';
 	crossReferencesMarkup += '</div>';
-	$('#wordControlPanel').html( crossReferencesMarkup );
-	if( ! $('#wordDetailsPanel').hasClass('top') ) {
-		$( '#keyCode68' ).click();
+	$( '#crossReferences' ).html( crossReferencesMarkup );
+	javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'bookmarks' ) );
+
+	if ( $( this ).hasClass( 'bookmarker') ) {
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addBookmark( referenceObject ) );
+		console.log( 'bookmarker' );
 	}
 } );

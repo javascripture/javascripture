@@ -5,10 +5,11 @@
 	font-weight: 100;
 	height: $dock-height;
 
+	margin-left: 320px;
 	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
+		left: 0;
+		right: 0;
+		top: 0;
 	z-index: 9;
 	select {
 		font-family: 'Helvetica Neue';

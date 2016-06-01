@@ -1,2 +1,0 @@
-//populate databases
-$.indexedDB("javascripture").objectStore("bibles",!0).add(bibleObject,"kjv");$.indexedDB("javascripture").objectStore("bibles",!0).add(hebrewObject,"hebrew");$.indexedDB("javascripture").objectStore("bibles",!0).add(greekObject,"greek");var bibles=$.indexedDB("javascripture").objectStore("bibles"),kjvObject,getKjv=bibles.get("kjv").then(function(e){kjvObject=e});

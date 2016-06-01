@@ -1,0 +1,56 @@
+.tray {
+	background: rgba( 255, 255, 255, .9 );
+	border-right: 1px solid #333;
+	overflow: scroll;
+	position: fixed;
+		bottom: 3.5em;
+		left: 0;
+		top: 0;
+	width: 320px;
+	z-index: 1;
+}
+
+.tray-content {
+	a {
+		color: #000;
+		text-decoration: underline;
+	}
+}
+
+.visible {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
+.trayFilter {
+	display: inline-block;
+	cursor: pointer;
+	margin: 0;
+	padding: 1em 0;
+	text-align: center;
+	width: 20%;
+
+	&:hover {
+		background: rgba( 150, 230, 255, 0.3 );
+	}
+}
+
+.active {
+	composes: trayFilter;
+	background: rgba( 150, 230, 255, 0.4 );
+}
+
+.help-panel {
+	padding: .5em;
+}
+
+.settings-li {
+	margin-bottom: 1em;
+
+	label {
+		display: block;
+	}
+}
