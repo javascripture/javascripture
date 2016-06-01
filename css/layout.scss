@@ -547,9 +547,13 @@ form.search {
 }
 
 #wordControlPanel {
-	.close-word-details {
-		position: absolute;
-		top: 10px;
-		right: 10px;
+	.clear-word-details {
+		background: lightblue;
+		color: #fff;
+		display: block;
+		padding: .5em;
+		text-align: center;
+		text-decoration: none;
 	}
 }
+

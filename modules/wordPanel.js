@@ -6,7 +6,7 @@
 				return;
 			}
 
-			$( '.inital-content' ).html( '' );
+			$( '.inital-content' ).html( '<a href="#" class="clear-word-details">Clear all</a>' );
 
 			var trackingBoxId = searchOnClick( $element, 'word' );
 
@@ -171,9 +171,9 @@
 	} );
 
 
-	$(document).on( 'click', '.wordControlPanel .close-word-details', function ( event ) {
+	$(document).on( 'click', '#wordControlPanel .clear-word-details', function ( event ) {
 		event.preventDefault();
-		$( '#wordControlPanel' ).html('');
+		$( '#wordControlPanel .searchResults, .inital-content' ).html('');
 	} );
 
 } )(jQuery);
