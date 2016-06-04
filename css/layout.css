@@ -414,7 +414,7 @@ note:hover {
   display: inline-block; }
 
 .referencePanel {
-  margin: 50px 40px 0 70px; }
+  margin: 50px 20px 0 20px; }
   @media (min-width: 768px) {
     .referencePanel {
       margin: 50px 0 0 320px; } }
@@ -470,8 +470,10 @@ note:hover {
 .verse-number {
   color: #aaa; }
 
+.verse .original .verse-number {
+  color: #aaa; }
+
 .hebrew.original .verse-number {
-  color: #aaa;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px; }
 

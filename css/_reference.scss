@@ -1,5 +1,5 @@
 .referencePanel {
-	margin: $dock-height 40px 0 70px;
+	margin: $dock-height 20px 0 20px;
 	@media ( min-width: 768px ) {
 		margin: $dock-height 0 0 320px;
 	}
@@ -65,8 +65,12 @@
 .verse-number {
 	color: #aaa;
 }
-.hebrew.original .verse-number {
+
+.verse .original .verse-number {
 	color: #aaa;
+}
+
+.hebrew.original .verse-number {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 16px;
 }
