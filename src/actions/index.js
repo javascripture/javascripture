@@ -42,9 +42,17 @@ export const addPreviousChapter = ( reference ) => {
 }
 
 export const addBookmark = ( reference ) => {
-	console.log( reference );
 	return {
 		reference,
 		type: 'ADD_BOOKMARK'
 	}
 }
+
+export const removeBookmark = ( reference ) => {
+	console.log( reference );
+	return {
+		reference,
+		type: 'REMOVE_BOOKMARK'
+	}
+}
+

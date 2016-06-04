@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import some from 'lodash/some';
 
-import { addBookmark } from '../actions'
+import { addBookmark, removeBookmark } from '../actions'
 import BookMarks from '../components/bookmarks'
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -18,6 +18,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addBookmark: () => {
 			dispatch( addBookmark( ownProps ) )
+		},
+
+		removeBookmark: ( reference ) => {
+			dispatch( removeBookmark( reference ) )
 		}
 	}
 };

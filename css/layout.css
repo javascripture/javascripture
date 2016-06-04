@@ -574,12 +574,19 @@ form.search #advanced {
   font-family: 'Helvetica Neue';
   font-weight: 100;
   height: 50px;
-  margin-left: 320px;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   z-index: 9; }
+  @media (min-width: 768px) {
+    #dock {
+      margin-left: 320px; } }
+  #dock .versionSelector.left {
+    display: none; }
+    @media (min-width: 960px) {
+      #dock .versionSelector.left {
+        display: inline-block; } }
   #dock select {
     font-family: 'Helvetica Neue';
     font-weight: 100; }

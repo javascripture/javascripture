@@ -2,4 +2,12 @@
 	line-height: 1.2em;
 	list-style: decimal;
 	list-style-position: inside;
+
+	svg {
+		cursor: pointer;
+		height: 15px;
+		margin-left: .5em;
+		vertical-align: top;
+		width: 15px;
+	}
 }

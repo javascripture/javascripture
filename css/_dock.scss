@@ -4,13 +4,24 @@
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
 	height: $dock-height;
-
-	margin-left: 320px;
 	position: fixed;
 		left: 0;
 		right: 0;
 		top: 0;
 	z-index: 9;
+
+	@media ( min-width: 768px ) {
+		margin-left: 320px;
+	}
+
+	.versionSelector.left {
+		display: none;
+
+		@media ( min-width: 960px ) {
+			display: inline-block;
+		}
+	}
+
 	select {
 		font-family: 'Helvetica Neue';
 		font-weight: 100;
