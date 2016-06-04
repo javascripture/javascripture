@@ -3,6 +3,7 @@
  */
 var webpack = require( 'webpack' ),
 	autoprefixer = require( 'autoprefixer' ),
+	NODE_ENV = process.env.NODE_ENV || 'development',
 	path = require( 'path' );
 
 var config = {
@@ -56,7 +57,15 @@ var config = {
 		__filename: 'mock',
 		__dirname: 'mock',
 		fs: 'empty'
-	}
+	},
+	plugins: [
+		new webpack.DefinePlugin( {
+			'process.env': {
+				NODE_ENV: JSON.stringify( NODE_ENV ),
+				BROWSER: JSON.stringify( true )
+			}
+		} )
+	]
 };
 
 if ( process.env.NODE_ENV !== 'production' ) {
@@ -80,12 +89,17 @@ if ( process.env.NODE_ENV !== 'production' ) {
 	} );
 }
 
-if ( process.env.NODE_ENV === 'production' ) {
-	new webpack.DefinePlugin({
-		"process.env": {
-			NODE_ENV: JSON.stringify("production")
-		}
-	} );
+if ( NODE_ENV === 'production' ) {
+	config.plugins.push(
+		new webpack.optimize.UglifyJsPlugin( {
+			output: {
+				comments: false
+			},
+			compress: {
+				warnings: false
+			}
+		} )
+	);
 }
 
 module.exports = config;
