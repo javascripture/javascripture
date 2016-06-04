@@ -587,6 +587,9 @@ form.search #advanced {
     @media (min-width: 960px) {
       #dock .versionSelector.left {
         display: inline-block; } }
+  @media (max-width: 480px) {
+    #dock .versionSelector.right {
+      width: 100px; } }
   #dock select {
     font-family: 'Helvetica Neue';
     font-weight: 100; }
