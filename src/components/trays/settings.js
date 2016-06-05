@@ -24,8 +24,6 @@ const SettingsTray = () => (
 						<li><strong>Previous reference</strong>: -</li>
 						<li><strong>Jump to chapter</strong>: type a number</li>
 					</ul>
-					<br />
-					<p>Built in Chrome. Tested in FireFox.</p>
 				</div>
 			</div>
 		</div>
@@ -94,6 +92,10 @@ const SettingsTray = () => (
 					</form>
 				</div>
 			</div>
+			<br />
+			<br />
+			<p>Built in Chrome. Tested in Firefox.</p>
+
 		</div>
 
 	</div>
