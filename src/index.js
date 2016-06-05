@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
+import { persistStore, autoRehydrate } from 'redux-persist'
 
 /**
  * Internal dependencies
@@ -17,11 +18,18 @@ import App from './app';
 import reducers from './reducers';
 import Stylizer, { insertCss } from './lib/stylizer';
 
+const enhancer = function() {
+	applyMiddleware( routerMiddleware( browserHistory ), thunk );
+	autoRehydrate();
+}();
+
 const store = createStore(
 	reducers,
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
-	applyMiddleware( routerMiddleware( browserHistory ), thunk )
+	enhancer
 );
+
+persistStore( store );
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore( browserHistory, store );
