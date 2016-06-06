@@ -1,41 +1,35 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import WordTray from '../components/trays/word';
-import GotoTray from '../components/trays/goto';
-import SearchTray from '../components/trays/search';
-import BookmarksTray from '../components/trays/bookmarks';
-import SettingsTray from '../components/trays/settings';
-
 const initalState = [
 	{
 		visible: true,
 		id: 'goto',
 		text: 'Go to',
-		component: GotoTray
+		component: 'GotoTray'
 	},
 	{
 		visible: false,
 		id: 'word',
 		text: 'Word Details',
-		component: WordTray
+		component: 'WordTray'
 	},
 	{
 		visible: false,
 		id: 'search',
 		text: 'Search',
-		component: SearchTray
+		component: 'SearchTray'
 	},
 	{
 		visible: false,
 		id: 'bookmarks',
 		text: 'Bookmarks',
-		component: BookmarksTray
+		component: 'BookmarksTray'
 	},
 	{
 		visible: false,
 		id: 'settings',
 		text: 'Settings',
-		component: SettingsTray
+		component: 'SettingsTray'
 	}
 ];
 

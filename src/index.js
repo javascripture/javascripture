@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
@@ -18,15 +18,13 @@ import App from './app';
 import reducers from './reducers';
 import Stylizer, { insertCss } from './lib/stylizer';
 
-const enhancer = function() {
-	applyMiddleware( routerMiddleware( browserHistory ), thunk );
-	autoRehydrate();
-}();
-
 const store = createStore(
 	reducers,
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
-	enhancer
+	compose(
+		autoRehydrate(),
+		applyMiddleware( routerMiddleware( browserHistory ), thunk )
+    )
 );
 
 persistStore( store );

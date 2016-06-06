@@ -26,8 +26,8 @@ const BookMark = React.createClass( {
 
 const BookMarks =  ( { bookmarks, removeBookmark } ) => (
 	<ol className={ styles.bookmarks }>
-		{ bookmarks.map( bookmark => {
-			return <BookMark bookmark={ bookmark } removeBookmark={ removeBookmark } />;
+		{ bookmarks.map( ( bookmark, key ) => {
+			return <BookMark bookmark={ bookmark } removeBookmark={ removeBookmark } key={ key } />;
 		} ) }
 	</ol>
 )

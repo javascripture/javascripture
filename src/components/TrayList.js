@@ -3,16 +3,43 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import styles from './trays/styles.scss';
 
+
+import WordTray from '../components/trays/word';
+import GotoTray from '../components/trays/goto';
+import SearchTray from '../components/trays/search';
+import BookmarksTray from '../components/trays/bookmarks';
+import SettingsTray from '../components/trays/settings';
+
+function getComponent( componentString ) {
+	switch ( componentString ) {
+		case 'WordTray':
+			return <WordTray />
+
+		case 'GotoTray':
+			return <GotoTray />
+
+		case 'SearchTray':
+			return <SearchTray />
+
+		case 'BookmarksTray':
+			return <BookmarksTray />
+
+		case 'SettingsTray':
+			return <SettingsTray />
+	}
+}
+
 const TrayList = ( { trays, filter, onTrayClick } ) => {
+	console.log( trays );
 	return (
 		<div>
 			{ trays.map( tray =>
 				<div
-					key={tray.id}
+					key={ tray.id }
 					className={ tray.visible ? styles.visible : styles.hidden }
-					{...tray}
+					{ ...tray }
 				>
-					<tray.component />
+					{ getComponent( tray.component ) }
 				</div>
 			) }
 		</div>
