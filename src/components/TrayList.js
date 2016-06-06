@@ -1,9 +1,9 @@
+// External
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
+// Internal
 import styles from './trays/styles.scss';
-
-
 import WordTray from '../components/trays/word';
 import GotoTray from '../components/trays/goto';
 import SearchTray from '../components/trays/search';
