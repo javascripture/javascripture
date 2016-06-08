@@ -4,7 +4,7 @@ import React from 'react';
 // Internal
 import Footer from './footer'
 import Trays from './trays';
-import VisibleTrays from '../containers/VisibleTrays';
+import VisibleTrays from '../containers/visible-trays';
 
 const CSS = {
 	root: {

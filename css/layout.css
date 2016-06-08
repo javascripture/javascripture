@@ -127,7 +127,7 @@ body > .wrapper {
 .verse h1 {
   text-align: center;
   line-height: 150%;
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue', Helvetica, Arial;
   font-weight: 100; }
 
 span, a.word-tree {
@@ -555,7 +555,7 @@ button, input[type=button], input[type=submit] {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   color: #fff;
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue', Helvetica, Arial;
   font-weight: 100; }
 
 form input[type=checkbox] {
@@ -706,7 +706,7 @@ form.search {
     color: #fff; }
   .searchPanel h2 {
     border: none;
-    font-family: 'Helvetica Neue';
+    font-family: 'Helvetica Neue', Helvetica, Arial;
     font-weight: 100;
     position: relative; }
   .searchPanel ol li {

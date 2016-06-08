@@ -3,12 +3,12 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import styles from './trays/styles.scss';
-import WordTray from '../components/trays/word';
-import GotoTray from '../components/trays/goto';
-import SearchTray from '../components/trays/search';
-import BookmarksTray from '../components/trays/bookmarks';
-import SettingsTray from '../components/trays/settings';
+import styles from './styles.scss';
+import WordTray from './word';
+import GotoTray from './goto';
+import SearchTray from './search';
+import BookmarksTray from './bookmarks';
+import SettingsTray from './settings';
 
 function getComponent( componentString ) {
 	switch ( componentString ) {
@@ -30,7 +30,6 @@ function getComponent( componentString ) {
 }
 
 const TrayList = ( { trays, filter, onTrayClick } ) => {
-	console.log( trays );
 	return (
 		<div>
 			{ trays.map( tray =>

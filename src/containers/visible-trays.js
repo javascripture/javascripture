@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleTray } from '../actions'
-import TrayList from '../components/TrayList'
+import TrayList from '../components/trays/tray-list'
 
 const mapStateToProps = ( state ) => {
   return {

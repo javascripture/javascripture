@@ -35,7 +35,7 @@ body > .wrapper { height: 0;}
 .verse .original span, .verse .web span[class] {color: #000; font-style: normal;}
 .verse .web span, .verse span.added, transchange { color:#aaa; font-style: italic; }
 .verse {line-height:1.4em; }
-.verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue'; font-weight: 100; }
+.verse h1 {text-align: center; line-height: 150%; font-family: 'Helvetica Neue', Helvetica, Arial; font-weight: 100; }
 span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;cursor:pointer;}
 .reference span.word:hover {
 	background: #eff;
@@ -314,7 +314,7 @@ button, input[type=button], input[type=submit] {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 	color: #fff;
-	font-family: 'Helvetica Neue';
+	font-family: 'Helvetica Neue', Helvetica, Arial;
 	font-weight: 100;
 }
 form input[type=checkbox] {
@@ -446,7 +446,7 @@ form.search {
 	}
 	h2 {
 		border: none;
-		font-family: 'Helvetica Neue';
+		font-family: 'Helvetica Neue', Helvetica, Arial;
 		font-weight: 100;
 		position: relative;
 	}
