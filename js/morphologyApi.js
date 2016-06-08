@@ -84,12 +84,22 @@ javascripture.api.morphology = {
 							if (morphologyDictionary.greek.Case[Case] !== undefined) { //there are some nouns that have a 3 letter case code
 								markup += morphologyDictionary.greek.Case[Case];
 							} else {
-								Case = morphArray[1][0];
+								if ( parseInt( morphArray[1][0] ) > 0 ) {
+									Person = morphArray[1][0];
+									Case = morphArray[1][1];
+									number = morphArray[1][2];
+									gender = morphArray[1][3];
+								} else {
+									Case = morphArray[1][0];
+									number = morphArray[1][1];
+									gender = morphArray[1][2];
+								}
+								markup += morphologyDictionary.greek.person[Person] + ' ';
 								markup += morphologyDictionary.greek.Case[Case] + ' ';
-								number = morphArray[1][1];
 								markup += morphologyDictionary.greek.number[number] + ' ';
-								gender = morphArray[1][2];
-								markup += morphologyDictionary.greek.gender[gender];
+								if ( gender ) {
+									markup += morphologyDictionary.greek.gender[gender];
+								}
 							}
 						}
 					}
