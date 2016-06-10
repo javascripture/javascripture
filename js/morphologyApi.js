@@ -94,7 +94,10 @@ javascripture.api.morphology = {
 									number = morphArray[1][1];
 									gender = morphArray[1][2];
 								}
-								markup += morphologyDictionary.greek.person[Person] + ' ';
+
+								if ( typeof Person !== 'undefined' ) {
+									markup += morphologyDictionary.greek.person[Person] + ' ';
+								}
 								markup += morphologyDictionary.greek.Case[Case] + ' ';
 								markup += morphologyDictionary.greek.number[number] + ' ';
 								if ( gender ) {
