@@ -21,12 +21,13 @@ $( document ).on('click', '#verse .wrapper li, .bookmarker', function() {
 	if ( crossReferences[ reference ] ) {
 		$.each( crossReferences[ reference ], function( key, referenceString ) {
 			var referenceArray = referenceString.split('.'),
-			    bookId = bible.getBookId( referenceArray[0] ),
+			    bookId = bible.getBookId( referenceArray[0] );
 			    reference = {
 				    book: bible.Data.books[bookId - 1][0],
 				    chapter: referenceArray[1],
 				    verse: referenceArray[2]
 			    };
+
 			crossReferencesMarkup += '<li><a href="#' + javascripture.modules.reference.createReferenceLink( reference ) + '">' + referenceString + '</a></li> ';
 		} );
 	} else {

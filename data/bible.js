@@ -57,7 +57,7 @@ bible.Data.books = [
 ['1 Timothy','1Tim','1 Tim','1 Ti','1Ti','I Timothy','I Tim','I Ti'],
 ['2 Timothy','2Tim','2 Tim','2 Ti','2Ti','II Timothy','II Tim','II Ti'],
 ['Titus','Tit','Ti'],
-['Philemon','Phile', 'Philm'],
+['Philemon','Phile', 'Philm','Phlm'],
 ['Hebrews','Heb','He'],
 ['James','Jas','Jam','Ja'],
 ['1 Peter','1Pet','1 Pet','1Pe','I Peter','I Pet','I Pe'],
