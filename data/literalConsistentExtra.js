@@ -1,3 +1,4 @@
+javascripture.data.literalConsistent['H7225']['Ncfsa'] = 'heading';
 javascripture.data.literalConsistent['H1254']['Vqp3ms'] = 'he created';
 javascripture.data.literalConsistent['H430']['Ncmpa'] = 'God';
 javascripture.data.literalConsistent['H430']['no-morph'] = 'God';
@@ -7,6 +8,16 @@ javascripture.data.literalConsistent['H776']['Ncfsa'] = 'earth';
 
 javascripture.data.literalConsistent['H1961']['no-morph'] = 'to be';
 javascripture.data.literalConsistent['H1961']['Vqp3fs'] = 'she was';
+javascripture.data.literalConsistent['H8414']['Ncmsa'] = 'formless';
+javascripture.data.literalConsistent['H922']['Ncmsa'] = 'empty';
+javascripture.data.literalConsistent['H2821']['Ncmsa'] = 'dark';
+javascripture.data.literalConsistent['H5921']['R'] = 'upon';
+javascripture.data.literalConsistent['H6440']['Ncmpc'] = 'faces';
+javascripture.data.literalConsistent['H8415']['no-morph'] = 'of deep';
+javascripture.data.literalConsistent['H7307']['Ncfsc'] = 'breath';
+javascripture.data.literalConsistent['H7363']['vpPfsa'] = 'hovering';
+javascripture.data.literalConsistent['H4325']['Ncmda'] = 'waters';
+
 javascripture.data.literalConsistent['H1961']['Vqw3ms'] = 'he was';
 javascripture.data.literalConsistent['H1961']['Vqw3mp'] = 'they were';
 
