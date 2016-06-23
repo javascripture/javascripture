@@ -14,8 +14,6 @@ const SettingsTray = React.createClass( {
 	},
 
 	render() {
-		console.log( this.props.subdue );
-
 		return (
 			<div className={ styles.tray }>
 				<div id="helpPanel" className={ styles.helpPanel }>
@@ -77,10 +75,10 @@ const SettingsTray = React.createClass( {
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>Colours:</label>
-										<select onChange={ this.changeSubdue }>
+										<select value={ this.props.subdue } onChange={ this.changeSubdue }>
 											<option value=".9">Very Bright</option>
 											<option value=".75">Bright</option>
-											<option value=".5" selected="selected">Normal</option>
+											<option value=".5">Normal</option>
 											<option value=".3">Dark</option>
 											<option value=".2">Very Dark</option>
 										</select>
