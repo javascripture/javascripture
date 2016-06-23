@@ -37,9 +37,6 @@
 		var endDate = new Date();
 		timer(startDate, endDate);
 	}
-	function subdueColor(color, subdueColorBy){
-		return parseInt(color/subdueColorBy, 10);
-	}
 
 	function searchByStrongsNumber(strongsNumberString) {
 		var startDate = new Date();

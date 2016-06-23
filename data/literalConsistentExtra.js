@@ -15,7 +15,7 @@ javascripture.data.literalConsistent['H5921']['R'] = 'upon';
 javascripture.data.literalConsistent['H6440']['Ncmpc'] = 'faces';
 javascripture.data.literalConsistent['H8415']['no-morph'] = 'of deep';
 javascripture.data.literalConsistent['H7307']['Ncfsc'] = 'breath';
-javascripture.data.literalConsistent['H7363']['vpPfsa'] = 'hovering';
+javascripture.data.literalConsistent['H7363']['vpPfsa'] = 'she hovered';
 javascripture.data.literalConsistent['H4325']['Ncmda'] = 'waters';
 
 javascripture.data.literalConsistent['H1961']['Vqw3ms'] = 'he was';

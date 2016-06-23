@@ -49,10 +49,17 @@ export const addBookmark = ( reference ) => {
 }
 
 export const removeBookmark = ( reference ) => {
-	console.log( reference );
 	return {
 		reference,
 		type: 'REMOVE_BOOKMARK'
 	}
 }
+
+export const settingsSubdue = ( subdueBy ) => {
+	return {
+		subdueBy,
+		type: 'SETTINGS_SUBDUE_BY'
+	}
+}
+
 

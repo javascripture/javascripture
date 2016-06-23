@@ -6,8 +6,8 @@ javascripture.modules.colors = {
 		}
 		var theSizeOfAColorSegment = 360 / 8000,
 			hue = strongsInt * theSizeOfAColorSegment,
-			staturation = $( '#subdueColorBy' ).val() * 100 + '%',
-			lightness = $( '#subdueColorBy' ).val() * 100 + '%';
+			staturation = javascripture.state.subdue * 100 + '%',
+			lightness = javascripture.state.subdue * 100 + '%';
 		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 	},
 
