@@ -1,21 +1,27 @@
 // External
 import React from 'react';
+import { connect } from 'react-redux';
 
 // Internal
 import Footer from './footer'
 import Trays from './trays';
 import VisibleTrays from '../containers/visible-trays';
 
-const CSS = {
-	root: {
-		fontFamily: 'Helvetica, Arial, sans-seif'
-	}
-};
+const Root = React.createClass( {
+	getBodyStyles() {
+		var bodyStyles = 'body { ';
+		bodyStyles += 'font-family: ' + this.props.settings.fontFamily + ';';
+		bodyStyles += 'font-size: ' + this.props.settings.fontSize + ';';
+		bodyStyles += '}';
 
-export default React.createClass( {
+		return bodyStyles;
+	},
+
 	render() {
+		console.log( this.props.settings );
 		return (
-			<div style={ CSS.root }>
+			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
+				<style>{ this.getBodyStyles() }</style>
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>
@@ -29,3 +35,21 @@ export default React.createClass( {
 		);
 	}
 } );
+
+//const SettingsTrayWithStyles = withStyles( styles )( SettingsTray );
+
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		settings: state.settings
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+	}
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)( Root );

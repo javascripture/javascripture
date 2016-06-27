@@ -4,7 +4,7 @@ import { routerReducer } from 'react-router-redux'
 import bookmarks from './bookmarks';
 import references from './references';
 import scrollChapter from './scroll-chapter';
-import subdue from './subdue';
+import settings from './settings';
 import trays from './trays';
 import wordHighlight from './word-highlight';
 
@@ -12,7 +12,7 @@ const app = combineReducers( {
 	bookmarks,
 	references,
 	scrollChapter,
-	subdue,
+	settings,
 	trays,
 	wordHighlight,
 	routing: routerReducer

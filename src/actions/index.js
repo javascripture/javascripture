@@ -55,11 +55,11 @@ export const removeBookmark = ( reference ) => {
 	}
 }
 
-export const settingsSubdue = ( subdueBy ) => {
-	return {
-		subdueBy,
-		type: 'SETTINGS_SUBDUE_BY'
+export const settingsChange = ( settingName, settingValue ) => {
+	var returnValue = {
+		type: 'SETTINGS_CHANGE'
 	}
+	returnValue[ settingName ] = settingValue;
+
+	return returnValue;
 }
-
-

@@ -4,13 +4,12 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { settingsSubdue } from '../../actions';
+import { settingsChange } from '../../actions';
 import styles from './styles.scss';
 
 const SettingsTray = React.createClass( {
-	changeSubdue( event ) {
-		const subdue = event.target.value;
-		this.props.settingsSubdue( subdue );
+	changeSetting( event ) {
+		this.props.settingsChange( event.target.name, event.target.value );
 	},
 
 	render() {
@@ -45,37 +44,37 @@ const SettingsTray = React.createClass( {
 								<ul>
 									<li className={ styles.settingsLi }>
 										<label>Fonts:</label>
-										<select name="bodyFontFamily" className="changeStyle">
-											<option selected="selected" value="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">Helvetica</option>
-											<option value="font-family: 'Bookman Old Style' !important;">Bookman</option>
-											<option value="font-family: 'Courier New', Courier !important;">Courier</option>
-											<option value="font-family: Georgia !important;">Georgia</option>
-											<option value="font-family: 'Lucida Sans Unicode', 'Lucida Grande' !important;">Lucida</option>
-											<option value="font-family: 'Times New Roman', Times !important;">Times</option>
-											<option value="font-family: Verdana, Geneva !important;">Verdana</option>
+										<select value={ this.props.settings.fontFamily } name="fontFamily" onChange={ this.changeSetting }>
+											<option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+											<option value="'Bookman Old Style' !important">Bookman</option>
+											<option value="'Courier New', Courier !important">Courier</option>
+											<option value="Georgia !important">Georgia</option>
+											<option value="'Lucida Sans Unicode', 'Lucida Grande' !important">Lucida</option>
+											<option value="'Times New Roman', Times !important">Times</option>
+											<option value="Verdana, Geneva !important">Verdana</option>
 										</select>
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>Font size:</label>
-										<select name="bodyFontSize" className="changeStyle">
-											<option value="font-size: 80%;">80%</option>
-											<option value="font-size: 90%;">90%</option>
-											<option selected="selected" value="font-size: 100%;">100%</option>
-											<option value="font-size: 110%;">110%</option>
-											<option value="font-size: 120%;">120%</option>
-											<option value="font-size: 130%;">130%</option>
-											<option value="font-size: 140%;">140%</option>
-											<option value="font-size: 150%;">150%</option>
-											<option value="font-size: 160%;">160%</option>
-											<option value="font-size: 170%;">170%</option>
-											<option value="font-size: 180%;">180%</option>
-											<option value="font-size: 190%;">190%</option>
-											<option value="font-size: 200%;">200%</option>
+										<select value={ this.props.settings.fontSize } name="fontSize" onChange={ this.changeSetting }>
+											<option value="80%">80%</option>
+											<option value="90%">90%</option>
+											<option value="100%">100%</option>
+											<option value="110%">110%</option>
+											<option value="120%">120%</option>
+											<option value="130%">130%</option>
+											<option value="140%">140%</option>
+											<option value="150%">150%</option>
+											<option value="160%">160%</option>
+											<option value="170%">170%</option>
+											<option value="180%">180%</option>
+											<option value="190%">190%</option>
+											<option value="200%">200%</option>
 										</select>
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>Colours:</label>
-										<select value={ this.props.subdue } onChange={ this.changeSubdue }>
+										<select value={ this.props.settings.subdue } name="subdue" onChange={ this.changeSetting }>
 											<option value=".9">Very Bright</option>
 											<option value=".75">Bright</option>
 											<option value=".5">Normal</option>
@@ -85,14 +84,14 @@ const SettingsTray = React.createClass( {
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>Reference picker:</label>
-										<select id="referencePicker">
+										<select value={ this.props.settings.referencePicker } name="referencePicker" onChange={ this.changeSetting } id="referencePicker">
 											<option value="input">Typing</option>
 											<option value="select">Drop down menu</option>
 										</select>
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>Highlight words with:</label>
-										<select id="highlightWordsWith">
+										<select value={ this.props.settings.highlightWordsWith } id="highlightWordsWith" name="highlightWordsWith" onChange={ this.changeSetting } >
 											<option value="same">Same Strong's number</option>
 											<option value="family">Same family</option>
 										</select>
@@ -114,17 +113,23 @@ SettingsTray.propTypes = {};
 
 const SettingsTrayWithStyles = withStyles( styles )( SettingsTray );
 
+// set up global - to be deleted
+javascripture.state = {};
+
 const mapStateToProps = ( state, ownProps ) => {
+ 	// remove this line
+	javascripture.state.settings = state.settings;
+
 	return {
 		bookmarks: state.bookmarks,
-		subdue: state.subdue
+		settings: state.settings
 	};
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		settingsSubdue: ( subdue ) => {
-			dispatch( settingsSubdue( subdue ) )
+		settingsChange: ( settingName, settingValue ) => {
+			dispatch( settingsChange( settingName, settingValue ) )
 		}
 	}
 };

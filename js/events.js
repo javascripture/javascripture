@@ -97,15 +97,6 @@
 			event.preventDefault();
 			$(this).closest('.collapsable').remove();
 		});
-		$('.changeStyle').change(function(){
-			$('#'+$(this).attr('name')).html('body { '+$(this).val()+'}');
-			localStorage.font = $(this).val();
-			$( '.popup' ).popup( 'close' );
-		});
-		if ( localStorage.font ) {
-			$('#'+$('.changeStyle').attr('name')).html('body { ' + localStorage.font + '}');
-			$('.changeStyle').val( localStorage.font );
-		}
 
 		// #referencePicker
 		$('#referencePicker').change( function() {
