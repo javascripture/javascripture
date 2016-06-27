@@ -18,7 +18,6 @@ const Root = React.createClass( {
 	},
 
 	render() {
-		console.log( this.props.settings );
 		return (
 			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
 				<style>{ this.getBodyStyles() }</style>
