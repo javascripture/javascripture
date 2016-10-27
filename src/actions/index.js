@@ -63,3 +63,10 @@ export const settingsChange = ( settingName, settingValue ) => {
 
 	return returnValue;
 }
+
+export const showCrossReferences = ( reference ) => {
+	return {
+		reference,
+		type: 'SHOW_CROSS_REFERENCES'
+	}
+}

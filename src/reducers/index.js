@@ -7,9 +7,11 @@ import scrollChapter from './scroll-chapter';
 import settings from './settings';
 import trays from './trays';
 import wordHighlight from './word-highlight';
+import crossReferences from './cross-references';
 
 const app = combineReducers( {
 	bookmarks,
+	crossReferences,
 	references,
 	scrollChapter,
 	settings,

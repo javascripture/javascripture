@@ -4,9 +4,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import BookMarks from '../../containers/bookmarks';
+import CrossReferences from '../../containers/cross-references';
 import styles from './styles.scss';
 
-const BookmarksTray = () => (
+const BookmarksTray = ( props ) => (
 	<div className={ styles.tray }>
 		<div id="bookmarksPanel" className={ styles.trayPadding }>
 			<h2>Bookmarks</h2>
@@ -14,8 +15,7 @@ const BookmarksTray = () => (
 			<BookMarks />
 
 			<br /><br />
-			<h2>Cross references</h2>
-			<div id="crossReferences"></div>
+			<CrossReferences />
 		</div>
 	</div>
 );
