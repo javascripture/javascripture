@@ -187,15 +187,6 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 
 				if(familyInt > 0) {
 					$('#' + trackingBoxId + ' style').html(strongsStyle);
-					$('#changeColor #colorFormStrongsNumber').val( data.lemma );
-					var color = $('#' + trackingBoxId + ' .' + data.lemma).css("background-color");
-					$('#changeColor #colorFormColor').val(color);
-					//$('#colorSelector div').css('background',newColor);
-					//$('#colorSelector').ColorPickerSetColor(RGBtoHEX(newColor));
-					//$('#wordControlPanel').hide();
-
-					//TODO highlight only these words on hover
-					//$('#referenceTracking h2').hoverIntent(hoverIntentConfig);
 				}
 			}
         }

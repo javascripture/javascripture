@@ -1,8 +1,5 @@
 	/*Event Handling*/
 	$(document).ready(function(){
-		$(document).on('click', '#showNotes', function(){
-			$('body').toggleClass('show-notes');
-		});
 		$(document).on('click', '.collapsable h2', function(){
 			$(this).parent().toggleClass('closed');
 		});
@@ -57,19 +54,6 @@
 		});
 		$(document).on('click', '#strongsTracking a.tracker', function() {
 			highlightStrongsNumber($(this).attr('href'));
-			return false;
-		});
-
-		$('#colorFormColor').change(function(){
-			var strongsNumber = $('#changeColor #colorFormStrongsNumber').val();
-			var color = $('#changeColor #colorFormColor').val();
-			//$('#'+strongsNumber).find('style').html('.'+strongsNumber+'{background:'+color+';color:#fff;}');
-			$('#'+strongsNumber).find('style').html('#'+strongsNumber+' #verse span.'+strongsNumber+', #'+strongsNumber+' .'+strongsNumber+', .'+strongsNumber+' {color:#fff;background:'+color+';}');
-		});
-		$('#changeColor').on('submit', function(){
-			var strongsNumber = $('#changeColor #colorFormStrongsNumber').val();
-			var color = $('#changeColor #colorFormColor').val();
-			$('#'+strongsNumber).find('style').html('.'+strongsNumber+'{background:'+color+';color:#fff;}');
 			return false;
 		});
 
