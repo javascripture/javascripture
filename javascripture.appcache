@@ -30,15 +30,12 @@ data/literalConsistentExtra.js
 
 #apis
 api/searchApi.js
-api/reference.js
 api/word.js
 
 #modules
 modules/hebrew.js
 js/colors.js
 js/events.js
-modules/disableHover.js
-modules/readingMode.js
 js/functionalScripts.js
 modules/translateLiterally.js
 modules/reference.js
