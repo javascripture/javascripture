@@ -66,12 +66,7 @@
 			findRareWords($('#maximumNumberOfUses').val());
 			return false;
 		});
-		$('.highlight-all').click(function(e) {
-			e.preventDefault();
-			$.each(createUniqueStrongsNumbersArray(), function(index, strongsNumber) {
-				highlightStrongsNumber(strongsNumber);
-			});//TODO - slow each
-		});
+
 		$('.random-verse').click(function(){
 			var randomBook = parseInt( Math.random()*66, 10 );
 			$('select.bookSelect option:nth-child('+randomBook+')');

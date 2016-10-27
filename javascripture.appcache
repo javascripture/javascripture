@@ -45,7 +45,6 @@ modules/search.js
 modules/wordPanel.js
 js/loading.js
 js/popup.js
-js/toggler.js
 js/wayPoint.js
 js/keyboardShortcuts.js
 js/crossReferences.js
