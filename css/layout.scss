@@ -53,7 +53,6 @@ span, a.word-tree {margin: 0 -2px; padding: 0 2px; position: relative; border-ra
 
 .selectWrapper {position:absolute;left:0;top:0;}
 .selectWrapper select {border-bottom:1px solid #333;}
-ul.bookSelect {margin:0 0 0 5px; width:96px}
 ul.chapterSelect {margin:0 0 0 5px; width:34px;}
 ul.verseSelect {margin:0 0 0 5px; width:35px;}
 .yahweh {text-transform:uppercase;}
@@ -89,15 +88,6 @@ ul.verseSelect {margin:0 0 0 5px; width:35px;}
 			top: 0;
 			right: 15px;
 		}
-	}
-}
-
-.bookSelect {
-	.icon-book {
-		position: absolute;
-		top: 0;
-		right: 0;
-		padding: 13px;
 	}
 }
 
@@ -367,10 +357,6 @@ form.search {
 	border-right: 1px solid #ccc;
 	left: 0;
 	width: 220px;
-	.bookSelect {
-		height: 100%;
-		overflow: scroll;
-	}
 }
 
 .searchResults {

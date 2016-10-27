@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.3.1 // Add new strongs data
+#version: 7.3.2 // Add new strongs data
 
 index.html
 css/layout.css
@@ -52,7 +52,6 @@ js/toggler.js
 js/wayPoint.js
 js/keyboardShortcuts.js
 js/crossReferences.js
-js/bookSelect.js
 js/frequencyAnalysis.js
 js/randomReference.js
 

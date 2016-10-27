@@ -160,10 +160,6 @@ span, a.word-tree {
 .selectWrapper select {
   border-bottom: 1px solid #333; }
 
-ul.bookSelect {
-  margin: 0 0 0 5px;
-  width: 96px; }
-
 ul.chapterSelect {
   margin: 0 0 0 5px;
   width: 34px; }
@@ -207,12 +203,6 @@ ul.verseSelect {
     position: absolute;
     top: 0;
     right: 15px; }
-
-.bookSelect .icon-book {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 13px; }
 
 .panel .heading-wrapper {
   margin: 0 auto;
@@ -645,9 +635,6 @@ form.search #advanced {
   border-right: 1px solid #ccc;
   left: 0;
   width: 220px; }
-  .goToPanel .bookSelect {
-    height: 100%;
-    overflow: scroll; }
 
 .searchResults .collapsable {
   position: relative; }
