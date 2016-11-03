@@ -161,6 +161,8 @@
 		event.preventDefault();
 		event.stopPropagation();
 		javascripture.modules.wordPanel.preinit( $( this ) );
+
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addWord( $( this ).data( 'lemma' ) ) );
 	});
 
 	$( document ).on( 'click', 'a.word-tree', function( event ) {

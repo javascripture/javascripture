@@ -6,6 +6,7 @@ import references from './references';
 import scrollChapter from './scroll-chapter';
 import settings from './settings';
 import trays from './trays';
+import wordDetails from './word-details';
 import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
 
@@ -16,6 +17,7 @@ const app = combineReducers( {
 	scrollChapter,
 	settings,
 	trays,
+	wordDetails,
 	wordHighlight,
 	routing: routerReducer
 } );

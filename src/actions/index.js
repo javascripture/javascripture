@@ -70,3 +70,17 @@ export const showCrossReferences = ( reference ) => {
 		type: 'SHOW_CROSS_REFERENCES'
 	}
 }
+
+export const addWord = ( word ) => {
+	return {
+		word,
+		type: 'ADD_WORD'
+	}
+}
+
+export const removeWord = ( word ) => {
+	return {
+		word,
+		type: 'REMOVE_WORD'
+	}
+}
