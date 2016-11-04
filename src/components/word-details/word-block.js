@@ -18,6 +18,35 @@ class WordBlock extends React.Component {
 		}
 	}
 
+	getSearchParameters() {
+		return {
+			clusivity: 'exclusive',
+			language: 'kjv',
+			lemma: this.props.strongsNumber,
+			range: 'verse'
+		};
+	}
+
+	renderSearch() {
+		console.log( 'renderSearch' );
+		const searchParameters = {
+				clusivity: 'exclusive',
+				language: 'kjv',
+				lemma: this.props.strongsNumber,
+				range: 'verse'
+			};
+			console.log( 'serarch box id' );
+//		const searchBoxId = searchHelperFunction( searchParameters, 'word' );
+//			console.log( searchBoxId );
+
+		worker.postMessage( {
+			task: 'search',
+			parameters: this.getSearchParameters()
+		} );
+
+		return ( <div className="referenceList">Loading...</div> );
+	}
+
 	getKJVDefinitions() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ];
@@ -104,7 +133,7 @@ class WordBlock extends React.Component {
 			wordFamily = javascripture.api.word.getFamily( strongsNumber );
 
 		return (
-			<div class="word-details">
+			<div className={ this.state.visible ? styles.visible : styles.hidden }>
 				{ strongsNumber } | { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
@@ -128,6 +157,7 @@ class WordBlock extends React.Component {
 					<strong>Morphology:</strong> { wordDetail.morphology }<br />
 				</div>
 				<h3>Search results</h3>
+				{ this.renderSearch() }
 			</div>
 		);
 	}
@@ -147,7 +177,7 @@ class WordBlock extends React.Component {
 
 		if ( wordDetail ) {
 			return (
-				<div>
+				<div id={ createTrackingBoxId( this.getSearchParameters() ) }>
 					<style>{ javascripture.modules.colors.getStrongsStyle( strongsNumber ) }</style>
 					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.showDetails( false ) }>
 						{ strongsNumber } { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
@@ -155,10 +185,12 @@ class WordBlock extends React.Component {
 							<CancelSvg fill={ fill } />
 						</a>
 					</h2>
-					{ this.state.visible && this.renderDetails() }
+					{ this.renderDetails() }
 				</div>
 			);
 		}
+
+		return null;
 	}
 };
 
@@ -166,7 +198,9 @@ class WordBlock extends React.Component {
 Still to do:
 1. show the morphology data - javascripture.api.morphology.get( morphology, 'noLinks', strongsNumber )
 2. search when you click a work in the KJV definitions
-3. remove word
+3. search on open
+4. dedupe words added to the list
+5. auto open words when added
 */
 
 WordBlock.propTypes = {};

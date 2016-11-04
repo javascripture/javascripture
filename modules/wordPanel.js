@@ -162,6 +162,7 @@
 		event.stopPropagation();
 		javascripture.modules.wordPanel.preinit( $( this ) );
 
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
 		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addWord( $( this ).data( 'lemma' ) ) );
 	});
 

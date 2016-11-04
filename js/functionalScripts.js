@@ -207,13 +207,6 @@ function maintainState( reference ){
 
 	$('select.bookSelect').val( reference.book );
 	$('select.chapterSelect').val( reference.chapter );
-
-//	$( '#goToReference' ).val( book + ' ' + chapter + ':' + verse );
-	/*broken now wwe have historyif(context) {
-		window.location.href = '#context';
-	} else {
-		window.location.href = '#start';
-	}*/
 }
 function goToFirstReference() {
 	$('.references ol li:first').attr('id','currentRef').find('a').click();
@@ -226,6 +219,10 @@ function markReference(referenceLink){
 }
 /*Helper Methods*/
 function timer(startDate, endDate){
+	if ( ! startDate || ! endDate ) {
+		return;
+	}
+
 	var startTime = startDate.getTime();
 	var endTime = endDate.getTime();
 	if(typeof(console) !== 'undefined'){

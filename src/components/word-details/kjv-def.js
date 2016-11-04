@@ -7,7 +7,15 @@ import styles from './styles.scss';
 
 const KJVDef = React.createClass( {
 	searchWord() {
-		console.log( this.props );
+		const searchParameters = {
+			clusivity: 'exclusive',
+			language: 'kjv',
+			lemma: this.props.strongsNumber,
+			range: 'verse',
+			word: this.props.word
+		};
+
+		searchHelperFunction( searchParameters, 'search' );
 	},
 
 	render() {

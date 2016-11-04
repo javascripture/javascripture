@@ -1,5 +1,5 @@
 /*global javascripture*/
-var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
+var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, searchHelperFunction;
 
 	var searchForm = '<form class="search">\
 			<ul>\
@@ -108,6 +108,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 		$( targetElement + ' #' + trackingBoxId ).removeClass('closed');
 
 		// Send data to our worker.
+		console.log( 'postMessage');
 		worker.postMessage( {
 			task: 'search',
 			parameters: data
@@ -142,7 +143,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 		return string;
 	}
 
-	function createTrackingBoxId( data ) {
+	createTrackingBoxId = function( data ) {
 		var string = '';
 		$.each( data, function ( key, value ) {
 			if ( value !== '' ) {
@@ -177,6 +178,8 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 
 			strongsTracking = getStrongsTracking( trackingBoxId, family, data, title, header );
 			console.log( $( targetElement + ' .searchResults' ) );
+			console.log(  'hello' );
+			console.log( targetElement );
 			$( targetElement + ' .searchResults' ).append( strongsTracking );
 			if ( data.lemma ) {
 
@@ -220,6 +223,12 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 		return createSearchReferencesPanel( searchParameters, target );
 	}
 
+	// Search parameters are clusivity, family, language, lemma, morph, range, word
+	searchHelperFunction = function( searchParameters, target ) {
+		searchParameters.lemma = searchParameters.lemma.replace('G3588 ','');
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( target ) );
+		return createSearchReferencesPanel( searchParameters, target );
+	}
 
 	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
 		searchOnClick( this, 'word' );
@@ -248,11 +257,13 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 
 //				var referenceArray =  searchApi.results.references;
 		if( e.data.task === 'search' ) {
+			console.log( 'here?');
 			var referenceArray = e.data.result;
 
 			var references = '<form><ol class="references">';
 			var wordCount = 0;
 			var trackingBoxId = createTrackingBoxId( e.data.parameters, '_' );
+			console.log( trackingBoxId );
 
 			var searchObject = javascripture.data.english;
 			if($("select[name=searchLanguage]").val() === "hebrew") {
@@ -263,6 +274,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 					}
 				});
 			}
+			console.log( 'two');
 			if ( referenceArray.length > 0 ) {
 				references += createReferenceList( referenceArray );
 			} else {
@@ -276,6 +288,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate;
 //				goToFirstReference();
 	//		$('.popup').popup( 'close' );
 
+			console.log( 'tree');
 			if( ! $('#referenceTracking').hasClass('top') ) {
 				$('#searchPanelLink').click();
 			}
