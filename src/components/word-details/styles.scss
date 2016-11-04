@@ -1,3 +1,16 @@
-.kjv-def {
+.title {
+	font-weight: normal;
+	padding-left: 5px;
+	position: relative;
+}
+
+.fake-link {
 	text-decoration: underline;
+}
+
+.remove {
+	color: #fff;
+	position: absolute;
+	top: 3px;
+	right: 3px;
 }

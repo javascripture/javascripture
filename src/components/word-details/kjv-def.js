@@ -11,7 +11,7 @@ const KJVDef = React.createClass( {
 	},
 
 	render() {
-		return <span className={ styles.kjvDef } onClick={ this.searchWord }>{ this.props.word }</span>;
+		return <span className={ styles.fakeLink } onClick={ this.searchWord }>{ this.props.word }</span>;
 	}
 } );
 

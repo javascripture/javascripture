@@ -2,14 +2,8 @@
 import { connect } from 'react-redux';
 
 // Internal
-import WordDetails from '../components/word-details';
+import WordBlock from '../components/word-details/word-block';
 import { addWord, removeWord } from '../actions'
-
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		words: state.wordDetails
-	}
-};
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	javascripture.reactHelpers.addWord = addWord;
@@ -26,9 +20,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	}
 };
 
-const WordDetailsContainer = connect(
- 	mapStateToProps,
+const WordBlockContainer = connect(
+ 	null,
  	mapDispatchToProps
-)( WordDetails )
+)( WordBlock )
 
-export default WordDetailsContainer;
+export default WordBlockContainer;

@@ -9,6 +9,7 @@ import styles from './styles.scss';
 const WordTray = () => (
 	<div className={ styles.tray }>
 		<div id="wordDetailsPanel" className={ styles.trayContent }>
+			<WordDetails />
 			<div id="wordControlPanel" className="content">
 				<style></style>
 				<div className="inital-content">
