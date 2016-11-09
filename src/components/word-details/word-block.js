@@ -80,10 +80,8 @@ class WordBlock extends React.Component {
 		}
 
 		const rootsData = javascripture.data.strongsObjectWithFamilies[ this.props.strongsNumber ].roots;
-		let language;
 		if( rootsData ) {
 	        return rootsData.map( ( rootNumber, index ) => {
-				// href="#search=' + rootNumber + '" class="' + javascripture.api.word.getFamily( rootNumber ) + '-family ' + rootNumber + ' word-tree" data-lemma="' + rootNumber + '" data-language="' + language + '">' + rootNumber +
 				return (
 					<span><span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) } key={ index }>
 						{ rootNumber }
@@ -99,7 +97,6 @@ class WordBlock extends React.Component {
 		return map( javascripture.data.strongsObjectWithFamilies, ( strongsObjectData, strongsObjectNumber ) => {
 			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( this.props.strongsNumber ) > -1 ) {
 				return (
-					//" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
 					<span key={ strongsObjectNumber }>
 						<span onClick={ this.searchForWord.bind( this, strongsObjectNumber ) } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
 							{ strongsObjectNumber }
