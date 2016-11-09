@@ -28,16 +28,12 @@ class WordBlock extends React.Component {
 	}
 
 	renderSearch() {
-		console.log( 'renderSearch' );
 		const searchParameters = {
 				clusivity: 'exclusive',
 				language: 'kjv',
 				lemma: this.props.strongsNumber,
 				range: 'verse'
 			};
-			console.log( 'serarch box id' );
-//		const searchBoxId = searchHelperFunction( searchParameters, 'word' );
-//			console.log( searchBoxId );
 
 		worker.postMessage( {
 			task: 'search',
@@ -67,8 +63,11 @@ class WordBlock extends React.Component {
 		this.setState( { visible: ! this.state.visible } );
 	}
 
-	searchForRoot() {
-		console.log( 'searchForRoot' );
+	searchForWord( strongsNumber ) {
+		const open = true,
+			morphology = null;
+
+		this.props.addWord( { strongsNumber, open, morphology } );
 	}
 
 	getClassName( rootNumber ) {
@@ -84,19 +83,11 @@ class WordBlock extends React.Component {
 		let language;
 		if( rootsData ) {
 	        return rootsData.map( ( rootNumber, index ) => {
-				if ( rootNumber.substring( 0, 1 ) === "H" ) {
-					language = 'hebrew';
-				}
-
-				if ( rootNumber.substring( 0, 1 ) === "G" ) {
-					language = 'greek';
-				}
-
 				// href="#search=' + rootNumber + '" class="' + javascripture.api.word.getFamily( rootNumber ) + '-family ' + rootNumber + ' word-tree" data-lemma="' + rootNumber + '" data-language="' + language + '">' + rootNumber +
 				return (
-					<span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForRoot } key={ index }>
+					<span><span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) } key={ index }>
 						{ rootNumber }
-					</span>
+					</span> </span>
 				);
 			} );
 		}
@@ -110,7 +101,7 @@ class WordBlock extends React.Component {
 				return (
 					//" data-lemma="' + strongsObjectKey + '"  data-language="' + language + '">' + strongsObjectKey + '</a> ';
 					<span key={ strongsObjectNumber }>
-						<span onClick={ this.searchForRoot } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
+						<span onClick={ this.searchForWord.bind( this, strongsObjectNumber ) } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
 							{ strongsObjectNumber }
 					</span> </span>
 				);
@@ -154,7 +145,7 @@ class WordBlock extends React.Component {
 					<br />
 					<strong>Derivation:</strong> { wordDetail.derivation }<br />
 					<br />
-					<strong>Morphology:</strong> { wordDetail.morphology }<br />
+					<strong>Morphology:</strong> { this.props.morphology }<br />
 				</div>
 				<h3>Search results</h3>
 				{ this.renderSearch() }

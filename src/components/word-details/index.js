@@ -10,7 +10,11 @@ const WordDetails = React.createClass( {
 	render() {
 		return (
 			<div>
-				{ this.props.words.map( ( word, index ) => <WordBlock strongsNumber={ word } key={ index } /> ) }
+				{ this.props.words.map( ( { strongsNumber, open, morphology }, index ) => {
+					return (
+						<WordBlock strongsNumber={ strongsNumber } open={ open } morphology={ morphology } key={ index } />
+					);
+				} ) }
 			</div>
 		);
 	}

@@ -71,16 +71,18 @@ export const showCrossReferences = ( reference ) => {
 	}
 }
 
-export const addWord = ( word ) => {
+export const addWord = ( { strongsNumber, open, morphology } ) => {
 	return {
-		word,
+		strongsNumber,
+		open,
+		morphology,
 		type: 'ADD_WORD'
 	}
 }
 
-export const removeWord = ( word ) => {
+export const removeWord = ( strongsNumber ) => {
 	return {
-		word,
+		strongsNumber,
 		type: 'REMOVE_WORD'
 	}
 }
