@@ -86,3 +86,10 @@ export const removeWord = ( strongsNumber ) => {
 		type: 'REMOVE_WORD'
 	}
 }
+
+export const toggleWord = ( strongsNumber ) => {
+	return {
+		strongsNumber,
+		type: 'TOGGLE_WORD'
+	}
+}

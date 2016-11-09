@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import WordBlock from '../components/word-details/word-block';
-import { addWord, removeWord } from '../actions'
+import { addWord, removeWord, toggleWord } from '../actions'
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
@@ -13,6 +13,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 		removeWord: ( lemma ) => {
 			dispatch( removeWord( lemma ) );
+		},
+
+		toggleWord: () => {
+			dispatch( toggleWord( ownProps.strongsNumber ) );
 		}
 	}
 };

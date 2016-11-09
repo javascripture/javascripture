@@ -11,13 +11,6 @@ import CancelSvg from '../svg/cancel.js';
 const fill = '#fff';
 
 class WordBlock extends React.Component {
-	constructor () {
-		super();
-		this.state = {
-			visible: false
-		}
-	}
-
 	getSearchParameters() {
 		return {
 			clusivity: 'exclusive',
@@ -59,8 +52,8 @@ class WordBlock extends React.Component {
 		} );
 	}
 
-	showDetails() {
-		this.setState( { visible: ! this.state.visible } );
+	toggleDetails() {
+		this.props.toggleWord();
 	}
 
 	searchForWord( strongsNumber ) {
@@ -121,7 +114,7 @@ class WordBlock extends React.Component {
 			wordFamily = javascripture.api.word.getFamily( strongsNumber );
 
 		return (
-			<div className={ this.state.visible ? styles.visible : styles.hidden }>
+			<div className={ this.props.open ? styles.visible : styles.hidden }>
 				{ strongsNumber } | { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
@@ -167,7 +160,7 @@ class WordBlock extends React.Component {
 			return (
 				<div id={ createTrackingBoxId( this.getSearchParameters() ) }>
 					<style>{ javascripture.modules.colors.getStrongsStyle( strongsNumber ) }</style>
-					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.showDetails( false ) }>
+					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
 						{ strongsNumber } { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
 							<CancelSvg fill={ fill } />

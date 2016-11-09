@@ -4,10 +4,16 @@ const wordDetails = ( state = [], action ) => {
 	console.log( action );
 	switch ( action.type ) {
 		case 'ADD_WORD':
-			const wordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber );
-			if ( wordPosition > -1 ) {
-				const newState = [ ...state ];
+			const wordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber ),
+				newState = state.map( word => {
+					return {
+						strongsNumber: word.strongsNumber,
+						open: false,
+						morphology: word.morphology
+					};
+				} )
 
+			if ( wordPosition > -1 ) {
 				newState[ wordPosition ] = {
 					strongsNumber: action.strongsNumber,
 					open: action.open,
@@ -18,13 +24,29 @@ const wordDetails = ( state = [], action ) => {
 			}
 
 			return [
-				...state,
+				...newState,
 				{
 					strongsNumber: action.strongsNumber,
 					open: action.open,
 					morphology: action.morphology
 				}
 			];
+
+		case 'TOGGLE_WORD':
+			const toggleWordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber );
+			if ( toggleWordPosition > -1 ) { // This should always be the case
+				const newState = [ ...state ];
+
+				newState[ toggleWordPosition ] = {
+					strongsNumber: state[ toggleWordPosition ].strongsNumber,
+					open: ! state[ toggleWordPosition ].open,
+					morphology: state[ toggleWordPosition ].morphology
+				};
+
+				return newState;
+			}
+
+			return state;
 
 		case 'REMOVE_WORD':
 			return state.filter( word => {
