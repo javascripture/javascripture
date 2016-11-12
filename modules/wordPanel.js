@@ -163,7 +163,10 @@
 		javascripture.modules.wordPanel.preinit( $( this ) );
 
 		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
-		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addWord( { strongsNumber: $( this ).data( 'lemma' ), open: true, morphology: $( this ).data( 'morph' ) } ) );
+
+		$( this ).data( 'lemma' ).split( ' ' ).map( strongsNumber => {
+			javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addWord( { strongsNumber, open: true, morphology: $( this ).data( 'morph' ) } ) );
+		} );
 	});
 
 	$( document ).on( 'click', 'a.word-tree', function( event ) {

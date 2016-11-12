@@ -153,7 +153,7 @@ class WordBlock extends React.Component {
 			wordFamily = javascripture.api.word.getFamily( strongsNumber );
 
 		if ( strongsNumber === 'G3588' ) {
-			return;
+			return null;
 		}
 
 		if ( wordDetail ) {
