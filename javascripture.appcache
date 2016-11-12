@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.3.2 // Add new strongs data
+#version: 7.4.0 // Move the word panel to redux
 
 index.html
 css/layout.css

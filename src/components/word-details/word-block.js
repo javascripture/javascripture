@@ -131,15 +131,15 @@ class WordBlock extends React.Component {
 					<strong>Family: </strong>{ wordFamily }
 				</div>
 				<br />
-				<br />
 				<div>
-					<strong>KJV Usage:</strong> { this.getKJVDefinitions( strongsNumber ) }<br />
+					<strong>Morphology</strong><br />{ this.props.morphology } - { javascripture.api.morphology.get( this.props.morphology, 'noLinks', strongsNumber ) }<br />
 					<br />
-					<strong>Derivation:</strong> { wordDetail.derivation }<br />
+					<strong>KJV translations</strong><br />{ this.getKJVDefinitions( strongsNumber ) }<br />
 					<br />
-					<strong>Morphology:</strong> { this.props.morphology }<br />
+					<strong>Strongs' Derivation</strong><br />{ wordDetail.derivation }<br />
 				</div>
-				<h3>Search results</h3>
+				<br />
+				<strong>Found in</strong>
 				{ this.renderSearch() }
 			</div>
 		);
@@ -163,7 +163,8 @@ class WordBlock extends React.Component {
 				<div id={ createTrackingBoxId( this.getSearchParameters() ) }>
 					<style>{ javascripture.modules.colors.getStrongsStyle( strongsNumber ) }</style>
 					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
-						{ strongsNumber } { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
+						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
+						{ javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
 							<CancelSvg fill={ fill } />
 						</a>
