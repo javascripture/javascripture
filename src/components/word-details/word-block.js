@@ -1,4 +1,5 @@
 // External dependencies
+import classnames from 'classnames';
 import map from 'lodash/map';
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -111,10 +112,11 @@ class WordBlock extends React.Component {
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ],
-			wordFamily = javascripture.api.word.getFamily( strongsNumber );
+			wordFamily = javascripture.api.word.getFamily( strongsNumber ),
+			className = classnames( styles.wordBlock, this.props.open ? styles.visible : styles.hidden );
 
 		return (
-			<div className={ this.props.open ? styles.visible : styles.hidden }>
+			<div className={ className }>
 				{ strongsNumber } | { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
@@ -174,15 +176,6 @@ class WordBlock extends React.Component {
 		return null;
 	}
 };
-
-/*
-Still to do:
-1. show the morphology data - javascripture.api.morphology.get( morphology, 'noLinks', strongsNumber )
-2. search when you click a work in the KJV definitions
-3. search on open
-4. dedupe words added to the list
-5. auto open words when added
-*/
 
 WordBlock.propTypes = {};
 

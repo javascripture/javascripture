@@ -160,7 +160,7 @@
 	$(document).on( 'click', '#verse ol > li span', function ( event ) {
 		event.preventDefault();
 		event.stopPropagation();
-		javascripture.modules.wordPanel.preinit( $( this ) );
+//		javascripture.modules.wordPanel.preinit( $( this ) );
 
 		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
 

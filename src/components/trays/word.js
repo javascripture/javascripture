@@ -10,13 +10,6 @@ const WordTray = () => (
 	<div className={ styles.tray }>
 		<div id="wordDetailsPanel" className={ styles.trayContent }>
 			<WordDetails />
-			<div id="wordControlPanel" className="content">
-				<style></style>
-				<div className="inital-content">
-					Select a word to show more details about it here.
-				</div>
-				<div className="searchResults"></div>
-			</div>
 		</div>
 	</div>
 );
