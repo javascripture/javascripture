@@ -8,15 +8,20 @@ import WordBlock from '../../containers/word-block';
 
 const WordDetails = React.createClass( {
 	render() {
-		return (
-			<div>
-				{ this.props.words.map( ( { strongsNumber, open, morphology }, index ) => {
-					return (
-						<WordBlock strongsNumber={ strongsNumber } open={ open } morphology={ morphology } key={ index } />
-					);
-				} ) }
-			</div>
-		);
+		if ( this.props.words.length ) {
+			return (
+				<div>
+					<a className={ styles.clearAll } onClick={ this.props.clearAll }>Clear all</a>
+					{ this.props.words.map( ( { strongsNumber, open, morphology }, index ) => {
+						return (
+							<WordBlock strongsNumber={ strongsNumber } open={ open } morphology={ morphology } key={ index } />
+						);
+					} ) }
+				</div>
+			);
+		}
+
+		return ( <div>Select a word to show more details about it here.</div> );
 	}
 } );
 

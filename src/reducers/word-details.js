@@ -52,6 +52,9 @@ const wordDetails = ( state = [], action ) => {
 				return word.strongsNumber !== action.strongsNumber;
 			} );
 
+		case 'CLEAR_ALL':
+			return [];
+
 		default:
 			return state;
 	}

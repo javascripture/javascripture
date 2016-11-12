@@ -22,3 +22,12 @@
 .hidden {
 	display: none;
 }
+
+a.clear-all {
+    background: lightblue;
+    color: #fff;
+    display: block;
+    padding: .5em;
+    text-align: right;
+    text-decoration: none;
+}

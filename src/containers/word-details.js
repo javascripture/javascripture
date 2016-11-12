@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import WordDetails from '../components/word-details';
-import { addWord, removeWord } from '../actions'
+import { addWord, clearAll, removeWord } from '../actions'
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
@@ -18,6 +18,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addWord: ( lemma, open, morphology ) => {
 			dispatch( addWord( { lemma, open, morphology } ) );
+		},
+
+		clearAll: () => {
+			dispatch( clearAll() );
 		},
 
 		removeWord: ( lemma ) => {

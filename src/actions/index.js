@@ -87,6 +87,12 @@ export const removeWord = ( strongsNumber ) => {
 	}
 }
 
+export const clearAll = () => {
+	return {
+		type: 'CLEAR_ALL'
+	}
+}
+
 export const toggleWord = ( strongsNumber ) => {
 	return {
 		strongsNumber,
