@@ -1,7 +1,6 @@
 import findIndex from 'lodash/findIndex';
 
 const wordDetails = ( state = [], action ) => {
-	console.log( action );
 	switch ( action.type ) {
 		case 'ADD_WORD':
 			const wordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber ),

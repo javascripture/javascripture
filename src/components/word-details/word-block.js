@@ -44,7 +44,7 @@ class WordBlock extends React.Component {
 			const wordString = word.trim().replace( /\./g, '' );
 
 			return (
-				<span>
+				<span key={ index }>
 					{ index === 0 ? '' : ', ' }
 					<KJVDef word={ wordString } strongsNumber={ strongsNumber } />
 				</span>
@@ -76,7 +76,7 @@ class WordBlock extends React.Component {
 		if( rootsData ) {
 	        return rootsData.map( ( rootNumber, index ) => {
 				return (
-					<span><span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) } key={ index }>
+					<span key={ index }><span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) }>
 						{ rootNumber }
 					</span> </span>
 				);
@@ -119,18 +119,18 @@ class WordBlock extends React.Component {
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
 				<br />
-				<div class="word-tree">
+				<div>
 					<strong>Roots: </strong>{ this.getRoots() }
 				</div>
-				<div class="word-tree">
+				<div>
 					<strong>Branches: </strong>{ this.getBranches() }
 				</div>
-				<div class="word-tree">
+				<div>
 					<strong>Family: </strong>{ wordFamily }
 				</div>
 				<br />
 				<br />
-				<div class="definitions">
+				<div>
 					<strong>KJV Usage:</strong> { this.getKJVDefinitions( strongsNumber ) }<br />
 					<br />
 					<strong>Derivation:</strong> { wordDetail.derivation }<br />
