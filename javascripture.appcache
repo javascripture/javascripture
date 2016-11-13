@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.4.0 // Move the word panel to redux
+#version: 7.5.0 // Add psalm titles
 
 index.html
 css/layout.css
