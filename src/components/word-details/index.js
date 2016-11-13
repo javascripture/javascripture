@@ -21,7 +21,7 @@ const WordDetails = React.createClass( {
 			);
 		}
 
-		return ( <div>Select a word to show more details about it here.</div> );
+		return ( <div className={ styles.wordBlock }>Select a word to show more details about it here.</div> );
 	}
 } );
 

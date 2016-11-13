@@ -132,7 +132,7 @@ class WordBlock extends React.Component {
 				</div>
 				<br />
 				<div>
-					<strong>Morphology</strong><br />{ this.props.morphology } - { javascripture.api.morphology.get( this.props.morphology, 'noLinks', strongsNumber ) }<br />
+					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && javascripture.api.morphology.get( this.props.morphology, 'noLinks', strongsNumber ) }<br />
 					<br />
 					<strong>KJV translations</strong><br />{ this.getKJVDefinitions( strongsNumber ) }<br />
 					<br />

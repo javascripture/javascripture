@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.5.0 // Add psalm titles
+#version: 7.5.1 // bug fix
 
 index.html
 css/layout.css
