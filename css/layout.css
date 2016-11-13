@@ -454,8 +454,7 @@ note:hover {
           padding: 0 4% 0 2%;
           width: 43%; } }
   .referencePanel .verse .wrapper {
-    display: inline-block;
-    vertical-align: top; }
+      vertical-align: top; }
 
 .verse-number {
   color: #aaa; }
