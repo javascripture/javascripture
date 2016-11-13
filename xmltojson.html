@@ -28,6 +28,12 @@ var javascripture = {
 
 <script>
 
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 function xmlToJson(xml) {
 
 	// Create the return object
@@ -177,6 +183,14 @@ function rotator(arr) {
     	console.log( arr );
         if (index >= arr.length) {
             fixOffsetVerses( function( hebrewReordered ) {
+				books.forEach(function( book ) {
+					hebrewReordered[ book.bookName ].forEach( function( chapter, chapterIndex ) {
+						hebrewReordered[ book.bookName ][ chapterIndex ] = chapter.filter( function( verse ) {
+							return verse.length > 0;
+						} );
+					} );
+				} );
+
 				document.getElementById( 'result' ).innerHTML = JSON.stringify( hebrewReordered );
 			} );
         } else {
@@ -233,27 +247,34 @@ function fixOffsetVerses( callback ) {
 					var bookName = bookDetails[0].bookName;
 
 					if ( hebrewReordered[ bookName ] ) {
+						var kjvChapter = kjv[1] - 1;
+						var kjvVerse = kjv[2] - 1;
+						var wlcChapter = wlc[1] - 1;
+						var wlcVerse = wlc[2] - 1;
 
 						// If the chapter doesn't exist, create it
-						if ( ! hebrewReordered[ bookName ][ kjv[1] - 1 ] ) {
-							hebrewReordered[ bookName ][ kjv[1] - 1 ] = [];
+						if ( ! hebrewReordered[ bookName ][ kjvChapter ] ) {
+							hebrewReordered[ bookName ][ kjvChapter ] = [];
 						}
 
 						// Set the kjv verse number equal to the wlc verse content
 						// Use the hebrew object to define the hebrewReordered object, so that one doesn't disturb the other
-						hebrewReordered[ bookName ][ kjv[1] - 1 ][ kjv[2] - 1 ] = hebrew[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ];
-
-						// if the hebrew is ahead of the KJV then we use this approach
-						if ( wlc[1] < kjv[1] ) { //|| ( wlc[1] === kjv[1] && wlc[2] < kjv[2] ) ) {
-							// Set the wlc verse number to empty. It should be populated on a future iteration
-							hebrewReordered[ bookName ][ wlc[1] - 1 ][ wlc[2] - 1 ] = [];
+						if ( bookName === 'Psalm' && kjvVerse === 0 ) {
+							hebrewReordered[ bookName ][ kjvChapter ][ kjvVerse ] = hebrew[ bookName ][ kjvChapter ][ kjvVerse ].concat ( hebrew[ bookName ][ wlcChapter ][ wlcVerse ] );
+						} else {
+							hebrewReordered[ bookName ][ kjvChapter ][ kjvVerse ] = hebrew[ bookName ][ wlcChapter ][ wlcVerse ];
 						}
 
-
+						// if the hebrew is ahead of the KJV then we use this approach
+						if ( wlc[1] < kjv[1] || ( wlc[1] === kjv[1] && wlc[2] > kjv[2] ) ) {
+							// Set the wlc verse number to empty. It should be populated on a future iteration
+							hebrewReordered[ bookName ][ wlcChapter ][ wlcVerse ] = [];
+						}
 					}
 				} );
 			}
 		} );
+
 		callback( hebrewReordered );
 	} );
 }

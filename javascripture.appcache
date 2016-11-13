@@ -29,6 +29,7 @@ data/literalConsistent.js
 data/literalConsistentExtra.js
 
 #apis
+api/reference.js
 api/searchApi.js
 api/word.js
 
