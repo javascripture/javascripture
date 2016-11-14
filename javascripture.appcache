@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.5.2 // layout bug fix
+#version: 7.5.3 // layout bug revert
 
 index.html
 css/layout.css
