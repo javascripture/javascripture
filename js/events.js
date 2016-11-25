@@ -20,25 +20,6 @@
 		$(document).on('mouseout', '#verse ol > li  span, #strongsTracking ul > li > span, #referenceTracking h2', function(){
 			$('#verse').removeClass('isolate');
 		});
-		$(document).on( 'mouseover', '#wordControlPanel', function() {
-			$(this).removeClass('not-active');
-		} );
-		$(document).on( 'mouseout', '#wordControlPanel', function() {
-		//	$(this).hide('slow');
-		});
-		$(document).on('click', '#wordControlPanel .highlight', function(){
-			var strongsNumber = $(this).parent().find('.wordControlPanelStrongsNumber').text();
-			highlightStrongsNumber(strongsNumber);
-		});
-		$(document).on('click', '#wordControlPanel .search', function(){
-			var strongsNumber = $(this).parent().find('.wordControlPanelStrongsNumber').text();
-			$('input#reverseRootStrongsNumber').val(strongsNumber);
-			$('input#searchTerm').val(strongsNumber);
-			$('input#search').click();
-		});
-		$(document).on('click', '#wordControlPanel .definitions-link', function(){
-			$(this).siblings('.definitions').toggleClass('hide');
-		});
 
 		$(document).on('click', '.references a', function(){
 			markReference($(this).parent('li'));
@@ -55,16 +36,6 @@
 		$(document).on('click', '#strongsTracking a.tracker', function() {
 			highlightStrongsNumber($(this).attr('href'));
 			return false;
-		});
-
-		$('#findBranches').click(function() {
-			wordTree($('#reverseRootStrongsNumber').val());
-			return false;
-		});
-
-		$('.random-verse').click(function(){
-			var randomBook = parseInt( Math.random()*66, 10 );
-			$('select.bookSelect option:nth-child('+randomBook+')');
 		});
 
 		$(document).on('click', '.collapsable h2 a.remove', function(event){

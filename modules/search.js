@@ -177,10 +177,6 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 		return createSearchReferencesPanel( searchParameters, target );
 	}
 
-	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
-		searchOnClick( this, 'word' );
-	});
-
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
 		var data = $( this ).serializeObject();
