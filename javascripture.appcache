@@ -43,8 +43,6 @@ modules/reference.js
 
 js/morphologyApi.js
 modules/search.js
-modules/wordPanel.js
-js/loading.js
 js/popup.js
 js/wayPoint.js
 js/keyboardShortcuts.js

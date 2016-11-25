@@ -62,11 +62,6 @@
 			return false;
 		});
 
-		$('.findRareWords').click(function(){
-			findRareWords($('#maximumNumberOfUses').val());
-			return false;
-		});
-
 		$('.random-verse').click(function(){
 			var randomBook = parseInt( Math.random()*66, 10 );
 			$('select.bookSelect option:nth-child('+randomBook+')');
@@ -91,3 +86,17 @@
 			$('#referencePicker').val( type );
 		}
 	});
+
+/*global javascripture*/
+;( function ( $ ) {
+	$(document).on( 'click', '#verse ol > li span', function ( event ) {
+		event.preventDefault();
+		event.stopPropagation();
+
+		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'word' ) );
+
+		$( this ).data( 'lemma' ).split( ' ' ).map( strongsNumber => {
+			javascripture.reactHelpers.dispatch( javascripture.reactHelpers.addWord( { strongsNumber, open: true, morphology: $( this ).data( 'morph' ) } ) );
+		} );
+	});
+} )(jQuery);
