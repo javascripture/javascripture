@@ -1,54 +1,6 @@
 /*global javascripture*/
 var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, searchHelperFunction;
 
-	var searchForm = '<form class="search">\
-			<ul>\
-				<li>\
-					<label for="word" class="has-placeholder">Word</label>\
-					<input type="text" name="word" id="word" value="" placeholder="Word" />\
-				</li>\
-				<li class="advanced">\
-					<label for="lemma" class="has-placeholder">Strongs number</label>\
-					<input type="text" name="lemma" id="lemma" value="" placeholder="Strongs number" />\
-				</li>\
-				<li class="advanced">\
-					<label for="morph" class="has-placeholder">Morphology</label>\
-					<input type="text" name="morph" id="morph" value="" placeholder="Morphology" />\
-				</li>\
-				<li class="advanced">\
-					<label for="language">Language:</label>\
-					<select name="language" id="language">\
-						<option selected>kjv</option>\
-						<option>hebrew</option>\
-						<option>greek</option>\
-						<option>web</option>\
-					</select>\
-				</li>\
-				<li class="advanced sentence">\
-					<label for="clusivity">Look for</label>\
-					<select name="clusivity" id="clusivity">\
-						<option value="exclusive" selected>All</option>\
-						<option value="inclusive">Any</option>\
-					</select>\
-					<label for="range">terms in a</label>\
-					<select name="range" id="range">\
-						<option>word</option>\
-						<option selected>verse</option>\
-						<option>chapter</option>\
-					</select>\
-				</li>\
-				<li class="advanced">\
-					<label>Strict search</label>\
-					<input type="checkbox" name="strict" id="strict" />\
-				</li>\
-				<li class="advanced">\
-					<input type="submit" value="Search" />\
-				</li>\
-			</ul>\
-		</form>\
-		<div class="searchResults"></div>';
-	$('#referenceTracking').html( searchForm );
-
 ( function ( $ ) {
 	$.fn.serializeObject = function () {
 		var o = {},
@@ -68,9 +20,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 
 	createSearchReferencesPanel = function( data, target ) {
 		startDate = new Date();
-//		var strongsNumberArray = new Array();
-//		var searchType = $('#searchSelect').val();
-//		var wordString = "";
+
 		if ( data.word ) {
 			data.word = data.word.trim();
 		}
@@ -230,9 +180,6 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 	$(document).on( 'click', '.wordControlPanelStrongsNumber', function () {
 		searchOnClick( this, 'word' );
 	});
-	/*$(document).on( 'dblclick', '#verse ol > li span.searchable', function () {
-		searchOnClick( this );
-	});*/
 
 	$( 'form.search' ).submit( function (event) {
 		event.preventDefault();
@@ -241,18 +188,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 		$( '.popup' ).popup( 'close' );
 	});
 
-	$( document ).on( 'click', 'a.kjv-def', function( event ) {
-		event.preventDefault();
-		createSearchReferencesPanel( $( this ).data(), 'search' );
-		javascripture.reactHelpers.dispatch( javascripture.reactHelpers.setTrayVisibilityFilter( 'search' ) );
-	} );
-
 	worker.addEventListener('message', function(e) {
-
-//				var searchApi = Object.create( javascripture.api.search );
-//				searchApi.getReferences( data );
-
-//				var referenceArray =  searchApi.results.references;
 		if( e.data.task === 'search' ) {
 			var referenceArray = e.data.result;
 
@@ -287,9 +223,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 
 			var endDate = new Date();
 			timer(startDate, endDate);
-
 		}
-
 	}, false);
 
 } )( jQuery );
