@@ -13,7 +13,7 @@ var getRandomReference = function() {
 var loadRandomReference = function() {
 	var randomReference = getRandomReference();
 	window.location.hash = javascripture.modules.reference.createReferenceLink( randomReference );
-	$( '.full-page' ).hide();
+	//$( '.full-page' ).hide();
 };
 $( '.randomReference' ).click( function( event ) {
 	event.preventDefault();
@@ -28,15 +28,15 @@ if ( window.location.hash !== '' ) {
 	var hash = window.location.hash;
 	window.location.hash = '';
 	window.location.hash = hash;
-	$( '.full-page' ).hide();
+	//$( '.full-page' ).hide();
 } else if ( typeof( localReference ) != 'undefined' && localReference !== '' && localReference.book ) {
 	window.location.hash = javascripture.modules.reference.createReferenceLink( localReference );
-	$( '.full-page' ).hide();
+	//$( '.full-page' ).hide();
 } else {
 	loadRandomReference();
 }
 
 $( '#loadingJavascripture' ).text( 'Start' ).prop( 'disabled', false ).click( function() {
-	$( '.full-page' ).hide();
+	//$( '.full-page' ).hide();
 } );
 

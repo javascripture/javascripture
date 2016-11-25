@@ -739,7 +739,6 @@ form.search {
   display: none !important; }
 .reading-mode .reading-mode-switch.icon-book {
   display: block; }
-
 .full-page {
   background: white;
   padding-top: 1em;
@@ -759,13 +758,11 @@ form.search {
     max-width: 600px; }
     .full-page .content .logo {
       overflow: auto;
-      position: relative; }
+      position: relative;
+      text-align: center; }
       .full-page .content .logo h1 {
         font-size: 3rem;
         font-weight: 100; }
-      .full-page .content .logo svg {
-        float: left;
-        margin-right: 1rem; }
     .full-page .content .features {
       margin-top: 1em; }
       .full-page .content .features ul {
@@ -785,7 +782,6 @@ form.search {
         padding: .5rem 1rem; }
         .full-page .content .button button[disabled] {
           background: #ccc; }
-
 .reading-mode-switch {
   font-size: 14px;
   position: fixed;
