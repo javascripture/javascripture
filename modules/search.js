@@ -95,7 +95,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 	createTrackingBoxId = function( data ) {
 		var string = '';
 		$.each( data, function ( key, value ) {
-			if ( value !== '' ) {
+			if ( value && value !== '' ) {
 				string += value.replace( / /gi, '_' ) + '_';
 			}
 		} );
@@ -177,13 +177,6 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 		return createSearchReferencesPanel( searchParameters, target );
 	}
 
-	$( 'form.search' ).submit( function (event) {
-		event.preventDefault();
-		var data = $( this ).serializeObject();
-		createSearchReferencesPanel( data, 'search' );
-		$( '.popup' ).popup( 'close' );
-	});
-
 	worker.addEventListener('message', function(e) {
 		if( e.data.task === 'search' ) {
 			var referenceArray = e.data.result;
@@ -223,3 +216,5 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 	}, false);
 
 } )( jQuery );
+
+javascripture.modules.createSearchReferencesPanel = createSearchReferencesPanel;
