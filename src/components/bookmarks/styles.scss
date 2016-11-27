@@ -1,4 +1,14 @@
 .bookmarks {
+	padding: 1em;
+}
+
+.title {
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
+	letter-spacing: .02em;
+}
+
+.bookmarksList {
 	line-height: 1.2em;
 	list-style: decimal;
 	list-style-position: inside;
@@ -9,5 +19,9 @@
 		margin-left: .5em;
 		vertical-align: top;
 		width: 15px;
+	}
+
+	a {
+		color: black;
 	}
 }

@@ -1,0 +1,30 @@
+.cross-references {
+	border-top: 1px solid #ccc;
+	padding: 1em;
+
+	a {
+		color: black;
+		text-decoration: underline;
+	}
+}
+
+.title {
+	font-family: 'Helvetica Neue';
+	font-weight: 100;
+	letter-spacing: .02em;
+}
+
+.cross-references-list {
+	list-style-position: outside;
+	margin-left: 1em;
+	padding: 0;
+
+	li {
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		text-decoration: none;
+	}
+}

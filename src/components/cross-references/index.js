@@ -25,7 +25,7 @@ const CrossReferences = React.createClass( {
 					<p>Cross references for&nbsp;
 						<a href={ '#' + javascripture.modules.reference.createReferenceLink( this.props.reference ) }>
 							{ this.props.reference.book + ' ' + this.props.reference.chapter + ':' + this.props.reference.verse }
-						</a>
+						</a>:
 					</p>
 					{ this.showReferences() }
 				</div>
@@ -43,7 +43,7 @@ const CrossReferences = React.createClass( {
 
 	showReferences() {
 		return (
-			<ul>
+			<ul className={ styles.crossReferencesList }>
 				{ this.getCrossReferences()	.map( reference => {
 					const referenceArray = reference.split('.'),
 		    			bookId = bible.getBookId( referenceArray[0] ),
@@ -67,11 +67,10 @@ const CrossReferences = React.createClass( {
 
 	render() {
 		return (
-			<div>
-				<h2>Cross references</h2>
+			<div className={ styles.crossReferences }>
+				<h2 className={ styles.title }>Cross references</h2>
 
 				{ this.crossReferences() }
-				<div id="crossReferences"></div>
 			</div>
 		);
 	}
