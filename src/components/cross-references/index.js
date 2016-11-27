@@ -9,7 +9,7 @@ const CrossReferences = React.createClass( {
 	getCrossReferences() {
     	const bookId = bible.getBookId( this.props.reference.book ),
 			referenceString = bible.Data.books[ bookId - 1 ][ 1 ] + '.' + this.props.reference.chapter + '.' + this.props.reference.verse;
-
+console.log( referenceString );
 		return crossReferences[ referenceString ];
 	},
 
@@ -44,7 +44,7 @@ const CrossReferences = React.createClass( {
 	showReferences() {
 		return (
 			<ul className={ styles.crossReferencesList }>
-				{ this.getCrossReferences()	.map( reference => {
+				{ this.getCrossReferences().map( reference => {
 					const referenceArray = reference.split('.'),
 		    			bookId = bible.getBookId( referenceArray[0] ),
 		    			referenceObject = {
