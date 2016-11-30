@@ -1,6 +1,11 @@
 <!DOCTYPE HTML>
 <html manifest="javascripture.appcache">
 	<head>
+		<script type="text/javascript">
+			var host = "javascripture.org";
+			if ((host == window.location.host) && (window.location.protocol != "https:"))
+				window.location.protocol = "https";
+		</script>
 		<!-- Favicon code -->
 		<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -23,6 +28,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="google" content="notranslate" />
+		<link rel="canonical" href="https://javascripture.org" />
+		<link rel="manifest" href="/manifest.json">
 		<title>Javascripture</title>
 		<link rel="stylesheet" href="css/layout.css" />
 		<style id="bodyFontFamily"></style>
