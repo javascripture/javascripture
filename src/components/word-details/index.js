@@ -11,12 +11,12 @@ const WordDetails = React.createClass( {
 		if ( this.props.words.length ) {
 			return (
 				<div>
-					<a className={ styles.clearAll } onClick={ this.props.clearAll }>Clear all</a>
 					{ this.props.words.map( ( { strongsNumber, open, morphology }, index ) => {
 						return (
 							<WordBlock strongsNumber={ strongsNumber } open={ open } morphology={ morphology } key={ index } />
 						);
 					} ) }
+					<a className={ styles.clearAll } onClick={ this.props.clearAll }>Clear all</a>
 				</div>
 			);
 		}

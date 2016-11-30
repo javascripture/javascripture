@@ -140,7 +140,9 @@ class WordBlock extends React.Component {
 				</div>
 				<br />
 				<strong>Found in</strong>
-				{ this.renderSearch() }
+				<div className={ styles.searchResults }>
+					{ this.renderSearch() }
+				</div>
 			</div>
 		);
 	}
