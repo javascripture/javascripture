@@ -1,8 +1,9 @@
 {
 	// Required
-	"manifest_version": 2,
+	"manifest_version": 4,
 	"name": "javascripture",
-	"version": "3",
+	"short_name": "javascripture",
+	"version": "4",
 
 	// Recommended
 	"description": "A JavaScript bible exploration app",
@@ -50,12 +51,17 @@
 			"*://javascripture.org/"
 		],
 		"launch": {
-			"web_url": "http://javascripture.org/"
+			"web_url": "https://javascripture.org/"
 		}
 	},
 
+	"start_url": "/index.html",
+	"display": "standalone",
+	"background_color": "#3E4EB8",
+	"theme_color": "#2F3BA2",
+
 	// Optional
-	"author": "scruffian"
+	"author": "scruffian",
 	"permissions": {
 		"unlimitedStorage": true
 	}
