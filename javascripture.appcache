@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.6.0 // Cleanup + move search
+#version: 7.7.0 // make PWA
 
 index.html
 css/layout.css
