@@ -95,7 +95,7 @@ var createSearchReferencesPanel, createTrackingBoxId, searchOnClick, startDate, 
 	createTrackingBoxId = function( data ) {
 		var string = '';
 		$.each( data, function ( key, value ) {
-			if ( value && value !== '' ) {
+			if ( value && typeof value === 'string' && value !== '' ) {
 				string += value.replace( / /gi, '_' ) + '_';
 			}
 		} );

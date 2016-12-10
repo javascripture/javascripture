@@ -1,3 +1,8 @@
+export const goToReference = ( reference ) => {
+	console.log( 'goToReference' );
+	window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
+}
+
 export const setTrayVisibilityFilter = ( filter ) => {
 	return {
 		type: 'SET_TRAY_VISIBILITY_FILTER',
@@ -99,3 +104,52 @@ export const toggleWord = ( strongsNumber ) => {
 		type: 'TOGGLE_WORD'
 	}
 }
+
+export const addSearch = ( terms ) => {
+	// Send data to our worker.
+	worker.postMessage( {
+		task: 'search',
+		parameters: terms
+	} );
+
+	return {
+		open: true,
+		terms,
+		type: 'ADD_SEARCH'
+	}
+}
+
+export const removeSearch = ( terms ) => {
+	return {
+		terms,
+		type: 'REMOVE_SEARCH'
+	}
+}
+
+export const toggleSearch = ( terms ) => {
+	return {
+		terms,
+		type: 'TOGGLE_SEARCH'
+	}
+}
+
+export const setCurrentVerse = ( terms, reference ) => {
+	return {
+		reference,
+		terms,
+		type: 'SET_CURRENT_VERSE'
+	}
+}
+
+export const goToNextCurrentVerse = () => {
+	return {
+		type: 'GO_TO_NEXT_CURRENT_VERSE'
+	}
+}
+
+export const goToPreviousCurrentVerse = () => {
+	return {
+		type: 'GO_TO_PREVIOUS_CURRENT_VERSE'
+	}
+}
+

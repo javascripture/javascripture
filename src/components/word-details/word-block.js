@@ -5,9 +5,9 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import CancelSvg from '../svg/cancel.js';
 import KJVDef from './kjv-def'
 import styles from './styles.scss';
-import CancelSvg from '../svg/cancel.js';
 
 const fill = '#fff';
 

@@ -40,6 +40,7 @@
     "isomorphic-style-loader": "^1.0.0",
     "json-loader": "^0.5.4",
     "keyboard-shortcut": "^1.2.0",
+    "mousetrap": "^1.6.0",
     "node-sass": "^3.7.0",
     "postcss-loader": "^0.8.2",
     "react": "^15.0.2",

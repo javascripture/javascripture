@@ -2,8 +2,9 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
 import bookmarks from './bookmarks';
-import references from './references';
+import reference from './reference';
 import scrollChapter from './scroll-chapter';
+import searchTerms from './search-terms';
 import settings from './settings';
 import trays from './trays';
 import wordDetails from './word-details';
@@ -13,8 +14,9 @@ import crossReferences from './cross-references';
 const app = combineReducers( {
 	bookmarks,
 	crossReferences,
-	references,
+	reference,
 	scrollChapter,
+	searchTerms,
 	settings,
 	trays,
 	wordDetails,

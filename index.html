@@ -269,6 +269,19 @@
 <script src="build/bundle.js"></script>
 <script src="modules/search.js"></script>
 <script>
+	// Attach web workers
+	worker.addEventListener( 'message', function( e ) {
+		if( e.data.task === 'search' ) {
+			javascripture.reactHelpers.dispatch( {
+				open: true,
+				terms: e.data.parameters,
+				results: e.data.result,
+				type: 'ADD_SEARCH_RESULTS'
+			} );
+		}
+	}, false );
+
+
 	// Check if a new cache is available on page load.
 	window.addEventListener('load', function(e) {
 		window.applicationCache.addEventListener('updateready', function(e) {
