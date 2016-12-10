@@ -1,3 +1,4 @@
+import clone from 'lodash/clone';
 import findIndex from 'lodash/findIndex';
 
 const wordDetails = ( state = [], action ) => {
@@ -54,6 +55,24 @@ const wordDetails = ( state = [], action ) => {
 
 		case 'CLEAR_ALL':
 			return [];
+
+		case 'ADD_WORD_RESULTS':
+			const wordResultsPosition = findIndex( state, word => word.strongsNumber === action.terms.lemma ),
+				clonedState = clone( state );
+
+			if ( wordResultsPosition === -1 ) {
+				console.log( 'error - word not found' );
+				return clonedState;
+			}
+
+			clonedState[ wordResultsPosition ] = {
+				morphology: state[ wordResultsPosition ].morphology,
+				open: clonedState[ wordResultsPosition ].open,
+				results: action.results.length > 0 ? action.results : 'No results',
+				strongsNumber: state[ wordResultsPosition ].strongsNumber,
+			};
+
+			return clonedState;
 
 		default:
 			return state;

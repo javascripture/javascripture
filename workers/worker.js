@@ -25,7 +25,7 @@ importScripts('../api/reference.js');
 self.addEventListener('message', function( e ) {
 	var result;
 
-	if ( e.data.task === 'search' ) {
+	if ( e.data.task === 'search' || e.data.task === 'word' ) {
 		result = javascripture.api.search.getReferences( e.data.parameters );
 	}
 	if ( e.data.task === 'reference' ) {

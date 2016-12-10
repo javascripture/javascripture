@@ -14,7 +14,7 @@ const mapStateToProps = ( state, ownProps ) => {
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addSearch: ( terms ) => {
-			dispatch( addSearch( terms ) );
+			dispatch( addSearch( terms, 'search' ) );
 		},
 		removeSearch: ( terms ) => {
 			dispatch( removeSearch( terms ) );

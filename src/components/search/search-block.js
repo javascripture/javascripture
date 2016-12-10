@@ -8,7 +8,7 @@ import styles from './styles.scss';
 
 class SearchBlock extends React.Component{
 	renderDetails() {
-		if ( ! this.props.open ) {
+		if ( ! this.props.open || ! this.props.results ) {
 			return null;
 		}
 

@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
 import KJVDef from './kjv-def'
+import SearchBlock from '../../containers/search-block';
 import styles from './styles.scss';
 
 const fill = '#fff';
@@ -22,19 +23,11 @@ class WordBlock extends React.Component {
 	}
 
 	renderSearch() {
-		const searchParameters = {
-				clusivity: 'exclusive',
-				language: 'kjv',
-				lemma: this.props.strongsNumber,
-				range: 'verse'
-			};
-
-		worker.postMessage( {
-			task: 'search',
-			parameters: this.getSearchParameters()
-		} );
-
-		return ( <div className="referenceList">Loading...</div> );
+		return (
+			<div className="referenceList">
+				<SearchBlock { ...this.props } />
+			</div>
+		);
 	}
 
 	getKJVDefinitions() {

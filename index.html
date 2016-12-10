@@ -271,12 +271,21 @@
 <script>
 	// Attach web workers
 	worker.addEventListener( 'message', function( e ) {
-		if( e.data.task === 'search' ) {
+		if( e.data.task === 'search' || e.data.task === 'word' ) {
+			let type;
+			if ( e.data.task === 'search' ) {
+				type = 'ADD_SEARCH_RESULTS';
+			}
+
+			if ( e.data.task === 'word' ) {
+				type = 'ADD_WORD_RESULTS';
+			}
+
 			javascripture.reactHelpers.dispatch( {
 				open: true,
 				terms: e.data.parameters,
 				results: e.data.result,
-				type: 'ADD_SEARCH_RESULTS'
+				type,
 			} );
 		}
 	}, false );

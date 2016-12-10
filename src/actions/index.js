@@ -77,11 +77,24 @@ export const showCrossReferences = ( reference ) => {
 }
 
 export const addWord = ( { strongsNumber, open, morphology } ) => {
+	const searchParameters = {
+		clusivity: 'exclusive',
+		language: 'kjv',
+		lemma: strongsNumber,
+		range: 'verse',
+	};
+
+	// Send data to our worker.
+	worker.postMessage( {
+		task: 'word',
+		parameters: searchParameters,
+	} );
+
 	return {
 		strongsNumber,
 		open,
 		morphology,
-		type: 'ADD_WORD'
+		type: 'ADD_WORD',
 	}
 }
 
@@ -105,15 +118,16 @@ export const toggleWord = ( strongsNumber ) => {
 	}
 }
 
-export const addSearch = ( terms ) => {
+export const addSearch = ( terms, target ) => {
 	// Send data to our worker.
 	worker.postMessage( {
-		task: 'search',
+		task: target,
 		parameters: terms
 	} );
 
 	return {
 		open: true,
+		target,
 		terms,
 		type: 'ADD_SEARCH'
 	}
