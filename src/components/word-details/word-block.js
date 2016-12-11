@@ -25,7 +25,7 @@ class WordBlock extends React.Component {
 	renderSearch() {
 		return (
 			<div className="referenceList">
-				<SearchBlock { ...this.props } />
+				<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
 			</div>
 		);
 	}

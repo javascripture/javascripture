@@ -92,7 +92,7 @@ const searchTerms = ( state = [], action ) => {
 				};
 			} );
 
-			if ( setCurrentVerseWordPosition > -1 ) { // This should always be the case
+			if ( setCurrentVerseWordPosition > -1 ) { // This wont' always be the case because of the word details
 				const setCurrentVerseReferencePosition = findIndex( newState[ setCurrentVerseWordPosition ].results, reference => {
 					return reference.book === action.reference.book && reference.chapter === action.reference.chapter && reference.verse === action.reference.verse
 				} );
@@ -101,13 +101,13 @@ const searchTerms = ( state = [], action ) => {
 				return newState;
 			}
 
-			return state;
+			return newState;
 
 		case 'GO_TO_NEXT_CURRENT_VERSE':
 			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
 			newState = [ ...state ];
 
-			if ( newState[ getCurrentVersePosition ].activeReference < newState[ getCurrentVersePosition ].results.length - 1 ) {
+			if ( getCurrentVersePosition > -1 && newState[ getCurrentVersePosition ].activeReference < newState[ getCurrentVersePosition ].results.length - 1 ) {
 				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference + 1;
 			}
 
@@ -117,7 +117,7 @@ const searchTerms = ( state = [], action ) => {
 			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
 			newState = [ ...state ];
 
-			if ( newState[ getCurrentVersePosition ].activeReference > 0 ) {
+			if ( getCurrentVersePosition > -1 && newState[ getCurrentVersePosition ].activeReference > 0 ) {
 				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference - 1;
 			}
 

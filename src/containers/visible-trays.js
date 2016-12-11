@@ -4,11 +4,17 @@ import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse, toggleTr
 import TrayList from '../components/trays/tray-list';
 
 function getCurrentReferenceOffset( state, offset ) {
-	const activeTerm = find( state.searchTerms, searchTerm => searchTerm.hasOwnProperty( 'activeReference' ) );
+	let activeTerm = find( state.searchTerms, searchTerm => searchTerm.hasOwnProperty( 'activeReference' ) );
+
+	if ( ! activeTerm ) {
+ 		activeTerm = find( state.wordDetails, word => word.hasOwnProperty( 'activeReference' ) );
+	}
 
 	if ( activeTerm ) {
 		return activeTerm.results[ activeTerm.activeReference + offset ];
 	}
+
+	return null;
 }
 
 const mapStateToProps = ( state ) => {

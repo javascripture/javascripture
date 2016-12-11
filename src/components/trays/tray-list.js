@@ -32,13 +32,17 @@ function getComponent( componentString ) {
 
 class TrayList extends React.Component{
 	goToNextCurrentVerse() {
-		this.props.goToReference( this.props.nextReference );
-		this.props.markNextCurrentReference();
+		if ( this.props.nextReference ) {
+			this.props.goToReference( this.props.nextReference );
+			this.props.markNextCurrentReference();
+		}
 	}
 
 	goToPreviousCurrentVerse() {
-		this.props.goToReference( this.props.previousReference );
-		this.props.markPreviousCurrentReference();
+		if ( this.props.previousReference ) {
+			this.props.goToReference( this.props.previousReference );
+			this.props.markPreviousCurrentReference();
+		}
 	}
 
 	componentDidMount() {

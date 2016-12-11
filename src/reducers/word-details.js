@@ -2,16 +2,20 @@ import clone from 'lodash/clone';
 import findIndex from 'lodash/findIndex';
 
 const wordDetails = ( state = [], action ) => {
+	let newState,
+		getCurrentVersePosition,
+		reference;
+
 	switch ( action.type ) {
 		case 'ADD_WORD':
-			const wordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber ),
-				newState = state.map( word => {
-					return {
-						strongsNumber: word.strongsNumber,
-						open: false,
-						morphology: word.morphology
-					};
-				} )
+			const wordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber );
+			newState = state.map( word => {
+				return {
+					strongsNumber: word.strongsNumber,
+					open: false,
+					morphology: word.morphology
+				};
+			} );
 
 			if ( wordPosition > -1 ) {
 				newState[ wordPosition ] = {
@@ -35,7 +39,7 @@ const wordDetails = ( state = [], action ) => {
 		case 'TOGGLE_WORD':
 			const toggleWordPosition = findIndex( state, word => word.strongsNumber === action.strongsNumber );
 			if ( toggleWordPosition > -1 ) { // This should always be the case
-				const newState = [ ...state ];
+				newState = [ ...state ];
 
 				newState[ toggleWordPosition ] = {
 					strongsNumber: state[ toggleWordPosition ].strongsNumber,
@@ -73,6 +77,50 @@ const wordDetails = ( state = [], action ) => {
 			};
 
 			return clonedState;
+
+		case 'SET_CURRENT_VERSE':
+			const setCurrentVerseWordPosition = findIndex( state, word => word.strongsNumber === action.terms.lemma );
+
+			newState = state.map( word => {
+				return {
+					open: word.open,
+					results: word.results,
+					strongsNumber: word.strongsNumber,
+				};
+			} );
+
+			if ( setCurrentVerseWordPosition > -1 ) { // This wont' always be the case because of the word details
+				const setCurrentVerseReferencePosition = findIndex( newState[ setCurrentVerseWordPosition ].results, reference => {
+					return reference.book === action.reference.book && reference.chapter === action.reference.chapter && reference.verse === action.reference.verse
+				} );
+
+				newState[ setCurrentVerseWordPosition ].activeReference = setCurrentVerseReferencePosition;
+				return newState;
+			}
+
+			return newState;
+
+		case 'GO_TO_NEXT_CURRENT_VERSE':
+			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
+			newState = [ ...state ];
+			console.log( 'sfsadf' );
+			console.log( getCurrentVersePosition );
+
+			if ( newState[ getCurrentVersePosition ].activeReference < newState[ getCurrentVersePosition ].results.length - 1 ) {
+				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference + 1;
+			}
+
+			return newState;
+
+		case 'GO_TO_PREVIOUS_CURRENT_VERSE':
+			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
+			newState = [ ...state ];
+
+			if ( newState[ getCurrentVersePosition ].activeReference > 0 ) {
+				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference - 1;
+			}
+
+			return newState;
 
 		default:
 			return state;
