@@ -26,7 +26,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 		removeWord: ( lemma ) => {
 			dispatch( removeWord( lemma ) );
-		}
+		},
 	}
 };
 

@@ -9,10 +9,7 @@ import { setCurrentVerse } from '../actions';
 
 function getSearchResults( searchResults, terms ) {
 	const searchResultsData = searchResults.find( searchResult => isEqual( searchResult.terms, terms ) );
-	console.log( 'getSearchResults' );
-	console.log( searchResults );
-	console.log( terms );
-	console.log(searchResultsData);
+
 	if ( searchResultsData ) {
 		return searchResultsData.results;
 	}

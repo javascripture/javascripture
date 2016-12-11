@@ -125,9 +125,6 @@ class WordBlock extends React.Component {
 				</div>
 				<br />
 				<strong>Found in</strong>
-				<div className={ styles.searchResults }>
-					<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
-				</div>
 			</div>
 		);
 	}
@@ -147,7 +144,7 @@ class WordBlock extends React.Component {
 
 		if ( wordDetail ) {
 			return (
-				<div id={ createTrackingBoxId( this.getSearchParameters() ) }>
+				<div>
 					<style>{ javascripture.modules.colors.getStrongsStyle( strongsNumber ) }</style>
 					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
 						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
@@ -157,6 +154,7 @@ class WordBlock extends React.Component {
 						</a>
 					</h2>
 					{ this.renderDetails() }
+					<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
 				</div>
 			);
 		}

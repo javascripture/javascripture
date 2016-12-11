@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import WordBlock from '../components/word-details/word-block';
-import { addWord, removeWord, toggleWord } from '../actions'
+import { addWord, removeSearch, removeWord, toggleWord } from '../actions'
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
@@ -12,7 +12,15 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		},
 
 		removeWord: ( lemma ) => {
+			const searchParameters = {
+				clusivity: 'exclusive',
+				language: 'kjv',
+				lemma: lemma,
+				range: 'verse',
+			};
+
 			dispatch( removeWord( lemma ) );
+			dispatch( removeSearch( searchParameters ) );
 		},
 
 		toggleWord: () => {

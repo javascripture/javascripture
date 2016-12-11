@@ -8,16 +8,6 @@ import styles from './styles.scss';
 
 class SearchBlock extends React.Component{
 	renderDetails() {
-		if ( ! this.props.open || ! this.props.results ) {
-			return null;
-		}
-
-		if ( typeof this.props.results === 'string' ) {
-			return ( <li>{ this.props.results }</li> );
-		}
-
-		console.log( this.props.activeReference );
-
 		return this.props.results.map( ( reference, index ) => {
 			return (
 				<SearchLink key={ index } index={ index } activeReference={ this.props.activeReference } reference={ reference } setCurrentVerse={ this.props.setCurrentVerse } />
@@ -26,8 +16,18 @@ class SearchBlock extends React.Component{
 	}
 
 	render() {
-		console.log( 'reder' );
-		console.log( this.props );
+		if ( ! this.props.open ) {
+			return null;
+		}
+
+		if ( ! this.props.results ) {
+			return ( <div>Loading…</div>);
+		}
+
+		if ( this.props.results.length === 0 || typeof this.props.results === 'string' ) {
+			return ( <div>No results.</div>);
+		}
+
 		return (
 			<div>
 				<ol className={ styles.results }>
