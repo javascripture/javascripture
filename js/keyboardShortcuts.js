@@ -46,18 +46,6 @@
 
 			}
 
-			//next / prev buttons in search
-			if ( event.keyCode === 187 || event.keyCode === 61 ) {
-				if($('#currentRef').next().length>0){
-					markReference($('#currentRef').next());
-				}
-			}
-			if ( event.keyCode === 189 || event.keyCode === 173 ) {
-				if( $('#currentRef').prev().length > 0 ) {
-					markReference($('#currentRef').prev());
-				}
-			}
-
 			//if ( event.keyCode === 18 ) {
 				//listenForKeyboardShortcuts = true;
 			//} else {

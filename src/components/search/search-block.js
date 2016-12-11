@@ -16,6 +16,8 @@ class SearchBlock extends React.Component{
 			return ( <li>{ this.props.results }</li> );
 		}
 
+		console.log( this.props.activeReference );
+
 		return this.props.results.map( ( reference, index ) => {
 			return (
 				<SearchLink key={ index } index={ index } activeReference={ this.props.activeReference } reference={ reference } setCurrentVerse={ this.props.setCurrentVerse } />
@@ -24,6 +26,8 @@ class SearchBlock extends React.Component{
 	}
 
 	render() {
+		console.log( 'reder' );
+		console.log( this.props );
 		return (
 			<div>
 				<ol className={ styles.results }>

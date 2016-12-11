@@ -60,68 +60,6 @@ const wordDetails = ( state = [], action ) => {
 		case 'CLEAR_ALL':
 			return [];
 
-		case 'ADD_WORD_RESULTS':
-			const wordResultsPosition = findIndex( state, word => word.strongsNumber === action.terms.lemma ),
-				clonedState = clone( state );
-
-			if ( wordResultsPosition === -1 ) {
-				console.log( 'error - word not found' );
-				return clonedState;
-			}
-
-			clonedState[ wordResultsPosition ] = {
-				morphology: state[ wordResultsPosition ].morphology,
-				open: clonedState[ wordResultsPosition ].open,
-				results: action.results.length > 0 ? action.results : 'No results',
-				strongsNumber: state[ wordResultsPosition ].strongsNumber,
-			};
-
-			return clonedState;
-
-		case 'SET_CURRENT_VERSE':
-			const setCurrentVerseWordPosition = findIndex( state, word => word.strongsNumber === action.terms.lemma );
-
-			newState = state.map( word => {
-				return {
-					open: word.open,
-					results: word.results,
-					strongsNumber: word.strongsNumber,
-				};
-			} );
-
-			if ( setCurrentVerseWordPosition > -1 ) { // This wont' always be the case because of the word details
-				const setCurrentVerseReferencePosition = findIndex( newState[ setCurrentVerseWordPosition ].results, reference => {
-					return reference.book === action.reference.book && reference.chapter === action.reference.chapter && reference.verse === action.reference.verse
-				} );
-
-				newState[ setCurrentVerseWordPosition ].activeReference = setCurrentVerseReferencePosition;
-				return newState;
-			}
-
-			return newState;
-
-		case 'GO_TO_NEXT_CURRENT_VERSE':
-			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
-			newState = [ ...state ];
-			console.log( 'sfsadf' );
-			console.log( getCurrentVersePosition );
-
-			if ( newState[ getCurrentVersePosition ].activeReference < newState[ getCurrentVersePosition ].results.length - 1 ) {
-				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference + 1;
-			}
-
-			return newState;
-
-		case 'GO_TO_PREVIOUS_CURRENT_VERSE':
-			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
-			newState = [ ...state ];
-
-			if ( newState[ getCurrentVersePosition ].activeReference > 0 ) {
-				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference - 1;
-			}
-
-			return newState;
-
 		default:
 			return state;
 	}

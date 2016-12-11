@@ -21,7 +21,7 @@ const searchTerms = ( state = [], action ) => {
 
 			if ( termPosition > -1 ) {
 				newState[ termPosition ] = {
-					open: action.open,
+					open: true,
 					results: searchTerm.results,
 					terms: action.terms,
 				};
@@ -32,30 +32,11 @@ const searchTerms = ( state = [], action ) => {
 			return [
 				...newState,
 				{
-					open: action.open,
+					open: true,
 					results: 'Searching…',
 					terms: action.terms,
 				}
 			];
-
-		case 'ADD_SEARCH_RESULTS':
-			const searchResultsPosition = findIndex( state, searchTerm => {
-					return isEqual( searchTerm.terms, action.terms );
-				} ),
-				clonedState = clone( state );
-
-			if ( searchResultsPosition === -1 ) {
-				console.log( 'error - word not found' );
-				return clonedState;
-			}
-
-			clonedState[ searchResultsPosition ] = {
-				open: clonedState[ searchResultsPosition ].open,
-				results: action.results.length > 0 ? action.results : 'No results',
-				terms: clonedState[ searchResultsPosition ].terms,
-			};
-
-			return clonedState;
 
 		case 'TOGGLE_SEARCH':
 			const toggleWordPosition = findIndex( state, word => isEqual( word.terms, action.terms ) );
@@ -80,48 +61,6 @@ const searchTerms = ( state = [], action ) => {
 
 		case 'CLEAR_ALL_SEARCH':
 			return [];
-
-		case 'SET_CURRENT_VERSE':
-			const setCurrentVerseWordPosition = findIndex( state, word => isEqual( word.terms, action.terms ) );
-
-			newState = state.map( searchTerm => {
-				return {
-					open: searchTerm.open,
-					results: searchTerm.results,
-					terms: searchTerm.terms,
-				};
-			} );
-
-			if ( setCurrentVerseWordPosition > -1 ) { // This wont' always be the case because of the word details
-				const setCurrentVerseReferencePosition = findIndex( newState[ setCurrentVerseWordPosition ].results, reference => {
-					return reference.book === action.reference.book && reference.chapter === action.reference.chapter && reference.verse === action.reference.verse
-				} );
-
-				newState[ setCurrentVerseWordPosition ].activeReference = setCurrentVerseReferencePosition;
-				return newState;
-			}
-
-			return newState;
-
-		case 'GO_TO_NEXT_CURRENT_VERSE':
-			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
-			newState = [ ...state ];
-
-			if ( getCurrentVersePosition > -1 && newState[ getCurrentVersePosition ].activeReference < newState[ getCurrentVersePosition ].results.length - 1 ) {
-				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference + 1;
-			}
-
-			return newState;
-
-		case 'GO_TO_PREVIOUS_CURRENT_VERSE':
-			getCurrentVersePosition = findIndex( state, word => word.hasOwnProperty( 'activeReference' ) );
-			newState = [ ...state ];
-
-			if ( getCurrentVersePosition > -1 && newState[ getCurrentVersePosition ].activeReference > 0 ) {
-				newState[ getCurrentVersePosition ].activeReference = newState[ getCurrentVersePosition ].activeReference - 1;
-			}
-
-			return newState;
 
 		default:
 			return state;

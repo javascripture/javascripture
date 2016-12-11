@@ -86,7 +86,7 @@ export const addWord = ( { strongsNumber, open, morphology } ) => {
 
 	// Send data to our worker.
 	worker.postMessage( {
-		task: 'word',
+		task: 'search',
 		parameters: searchParameters,
 	} );
 

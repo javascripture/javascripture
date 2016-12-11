@@ -22,14 +22,6 @@ class WordBlock extends React.Component {
 		};
 	}
 
-	renderSearch() {
-		return (
-			<div className="referenceList">
-				<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
-			</div>
-		);
-	}
-
 	getKJVDefinitions() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ];
@@ -134,7 +126,7 @@ class WordBlock extends React.Component {
 				<br />
 				<strong>Found in</strong>
 				<div className={ styles.searchResults }>
-					{ this.renderSearch() }
+					<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
 				</div>
 			</div>
 		);
