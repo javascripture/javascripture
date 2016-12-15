@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.8.2 // fixing app cache
+#version: 7.8.3 // fixing app cache
 
 index.html
 css/layout.css
