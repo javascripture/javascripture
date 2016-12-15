@@ -7,8 +7,8 @@ import styles from './styles.scss';
 
 const SearchLink = React.createClass( {
 	setCurrentVerse() {
-		const { reference } = this.props;
-		this.props.setCurrentVerse( reference );
+		const { index } = this.props;
+		this.props.setCurrentVerse( index );
 	},
 
 	render() {

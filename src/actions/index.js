@@ -147,9 +147,9 @@ export const toggleSearch = ( terms ) => {
 	}
 }
 
-export const setCurrentVerse = ( terms, reference ) => {
+export const setCurrentVerse = ( terms, index ) => {
 	return {
-		reference,
+		index,
 		terms,
 		type: 'SET_CURRENT_VERSE'
 	}

@@ -7,7 +7,6 @@ const searchResults = ( state = [], action ) => {
 		getCurrentVersePosition,
 		reference;
 
-console.log( state );
 	switch ( action.type ) {
 		case 'ADD_SEARCH_RESULTS':
 			const searchResultsPosition = findIndex( state, searchTerm => {
@@ -47,11 +46,7 @@ console.log( state );
 			} );
 
 			if ( setCurrentVerseWordPosition > -1 ) { // This wont' always be the case because of the word details
-				const setCurrentVerseReferencePosition = findIndex( newState[ setCurrentVerseWordPosition ].results, reference => {
-					return reference.book === action.reference.book && reference.chapter === action.reference.chapter && reference.verse === action.reference.verse
-				} );
-
-				newState[ setCurrentVerseWordPosition ].activeReference = setCurrentVerseReferencePosition;
+				newState[ setCurrentVerseWordPosition ].activeReference = action.index;
 				return newState;
 			}
 

@@ -32,8 +32,8 @@ const mapStateToProps = ( state, ownProps ) => {
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		setCurrentVerse: ( reference ) => {
-			dispatch( setCurrentVerse( ownProps.terms, reference ) );
+		setCurrentVerse: ( index ) => {
+			dispatch( setCurrentVerse( ownProps.terms, index ) );
 		},
 	}
 };
