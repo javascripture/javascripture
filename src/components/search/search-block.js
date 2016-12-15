@@ -21,11 +21,11 @@ class SearchBlock extends React.Component{
 		}
 
 		if ( ! this.props.results ) {
-			return ( <div>Loading…</div>);
+			return ( <div className={ styles.noResults }>Loading…</div>);
 		}
 
 		if ( this.props.results.length === 0 || typeof this.props.results === 'string' ) {
-			return ( <div>No results.</div>);
+			return ( <div className={ styles.noResults }>No results.</div>);
 		}
 
 		return (
