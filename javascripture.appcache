@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.8.1 // add sevice worker
+#version: 7.8.2 // fixing app cache
 
 index.html
 css/layout.css
@@ -60,5 +60,5 @@ sw.js
 # network
 NETWORK:
 *
-http://javascripture.org/javascripture.appcache
-http://www.google-analytics.com/analytics.js
+https://javascripture.org/javascripture.appcache
+https://www.google-analytics.com/analytics.js
