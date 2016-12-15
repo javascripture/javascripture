@@ -1,9 +1,10 @@
 CACHE MANIFEST
 
-#version: 7.7.0 // make PWA
+#version: 7.8.0 // add search to redux
 
 index.html
 css/layout.css
+manifest.json
 
 #libs
 lib/jquery-2.0.3.min.js
