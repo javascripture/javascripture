@@ -46,7 +46,6 @@ js/morphologyApi.js
 modules/search.js
 js/popup.js
 js/wayPoint.js
-js/keyboardShortcuts.js
 js/crossReferences.js
 js/frequencyAnalysis.js
 js/randomReference.js
