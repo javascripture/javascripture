@@ -20,7 +20,6 @@ javascripture.modules.reference = {
 
 		reference.leftVersion = $('#versionSelectorLeft').val();
 
-
 		if ( reference.leftVersion === 'original' ) {
 //			reference.leftVersion = 'hebrew'; // Backup
 			if ( localStorage.leftVersion ) {
@@ -305,8 +304,6 @@ javascripture.modules.reference = {
 	}
 };
 
-
-
 /*globals javascripture*/
 ;( function ( $ ) {
 	var english = javascripture.data.english;
@@ -360,53 +357,5 @@ javascripture.modules.reference = {
 		}
 		return false;
 	});
-
-	worker.addEventListener('message', function(e) {
-		if( e.data.task === 'reference' ) {
-			var reference = e.data.result.reference;
-
-			var chapterText = '<div class="three-references"';
-
-			if ( e.data.result.prev ) {
-				chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
-			}
-			if ( e.data.result.next ) {
-				chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
-			}
-			chapterText += '>';
-
-			// Load the chapters
-			e.data.result.chapters.forEach( function( chapter ) {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result, chapter );
-			} );
-
-			chapterText += '</div>';
-
-			$('#verse').html( chapterText );
-
-			var title = reference.book;
-			if ( typeof reference.chapter !== 'undefined' ) {
-				title += ' ' + reference.chapter;
-			}
-
-			if ( typeof reference.verse !== 'undefined' ) {
-				title += ':' + reference.verse;
-			}
-
-			$( 'head title' ).text( title );
-
-			if ( $.fn.waypoint ) {
-				$('.reference').waypoint('destroy');
-			}
-			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
-			maintainState( reference );
-		}
-	} );
-
-	worker.addEventListener('message', function(e) {
-		if( e.data.task === 'loading' ) {
-			$( '.loading' ).html( e.data.html );
-		}
-	} );
 
 } )( jQuery );
