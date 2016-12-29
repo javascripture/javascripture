@@ -175,15 +175,6 @@
 
 </div>
 
-<div id="cache-popup" class="popup">
-	<div class="content">
-		<a aria-hidden="true" class="icon-cross close-popup"></a>
-		<div class="content-padding">
-			<h2>New version</h2>
-			<p>A new version of JavaScripture is available. <a href="javascript:window.location.reload();">Reload to install</a></p>
-		</div>
-	</div>
-</div>
 <div class="wordControlPanelTemplate">
 	<div class="content-padding">
 		<style></style>
@@ -328,7 +319,10 @@
 		window.applicationCache.addEventListener('updateready', function(e) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.
-				$( '#cache-popup' ).popup( 'open' );
+				var r = confirm( 'A new version of JavaScripture is available. Press OK to reload and use it.' );
+				if ( r == true ) {
+				    window.location.reload();
+				}
 			}
 		}, false);
 	}, false);

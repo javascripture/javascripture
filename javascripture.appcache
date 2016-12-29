@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.9.3 // appcache fix
+#version: 7.9.4 // change cache reinstall
 
 index.html
 css/layout.css
