@@ -45,7 +45,6 @@ modules/reference.js
 js/morphologyApi.js
 js/wayPoint.js
 js/crossReferences.js
-js/frequencyAnalysis.js
 js/randomReference.js
 
 build/bundle.js
