@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.9.1 // appcache fix
+#version: 7.9.2 // appcache fix
 
 index.html
 css/layout.css
