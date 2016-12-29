@@ -42,7 +42,6 @@ js/functionalScripts.js
 modules/translateLiterally.js
 modules/reference.js
 
-js/morphologyApi.js
 js/wayPoint.js
 js/crossReferences.js
 js/randomReference.js

@@ -6,7 +6,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
-import KJVDef from './kjv-def'
+import KJVDef from './kjv-def';
+import morphology from './morphology';
 import SearchBlock from '../../containers/search-block';
 import styles from './styles.scss';
 
@@ -117,7 +118,7 @@ class WordBlock extends React.Component {
 				</div>
 				<br />
 				<div>
-					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && javascripture.api.morphology.get( this.props.morphology, 'noLinks', strongsNumber ) }<br />
+					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && morphology( this.props.morphology, 'noLinks', strongsNumber ) }<br />
 					<br />
 					<strong>KJV translations</strong><br />{ this.getKJVDefinitions( strongsNumber ) }<br />
 					<br />
