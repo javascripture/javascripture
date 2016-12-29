@@ -43,7 +43,6 @@ modules/translateLiterally.js
 modules/reference.js
 
 js/morphologyApi.js
-modules/search.js
 js/popup.js
 js/wayPoint.js
 js/crossReferences.js
