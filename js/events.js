@@ -47,7 +47,6 @@
 		$('#referencePicker').change( function() {
 			var type = $( this ).val();
 			$( '#dock' ).attr( 'class', type );
-			$( '.popup' ).popup( 'close' );
 			localStorage.referencePicker = type;
 		} );
 

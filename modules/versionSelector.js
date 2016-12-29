@@ -23,9 +23,7 @@ javascripture.modules.versionSelector = {
 		}
 
 		localStorage[ target ] = version;
-		if ( 'undefined' !== typeof $.fn.popup ) { //should be done in a different place
-			$( '.popup' ).popup( 'close' );
-		}
+
 		$this.val( version );
 		if ( 'undefined' !== typeof javascripture.modules.reference ) {
 			javascripture.modules.reference.loadReferenceFromHash();

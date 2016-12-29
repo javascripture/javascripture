@@ -350,7 +350,6 @@ javascripture.modules.reference = {
 		event.preventDefault();
 		var reference = bible.parseReference( $('#goToReference').val() );
 		setHashState( bible.Data.books[reference.bookID - 1][0], reference.chapter, reference.verse );
-		$( this ).closest( '.popup' ).popup( 'close' );
 		$('#goToReference').blur();
 		if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
 			hideDock();

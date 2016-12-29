@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 7.9.4 // change cache reinstall
+#version: 7.9.5 // remove popups
 
 index.html
 css/layout.css
@@ -43,7 +43,6 @@ modules/translateLiterally.js
 modules/reference.js
 
 js/morphologyApi.js
-js/popup.js
 js/wayPoint.js
 js/crossReferences.js
 js/frequencyAnalysis.js

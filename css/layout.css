@@ -467,54 +467,6 @@ note:hover {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px; }
 
-.popup {
-  background: rgba(255, 255, 255, 0.5);
-  display: none;
-  position: fixed;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 9; }
-  .popup .content {
-    background: #fff;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
-    border: 1px solid #ccc;
-    border-top: none;
-    margin: 0 auto;
-    overflow: auto;
-    padding: 1em;
-    position: relative;
-    width: 320px; }
-    .popup .content .content-padding h2, .popup .content .content-padding input, .popup .content .content-padding a {
-      font-family: 'Helvetica Neue';
-      font-weight: 100; }
-    .popup .content .content-padding ul {
-      margin: 0 0 1em 1em; }
-    .popup .content .content-padding .search ul {
-      margin: 0; }
-    .popup .content input[type=submit],
-    .popup .content input[type=text] {
-      text-indent: .5em;
-      width: 100%; }
-    .popup .content .close-popup {
-      color: #ccc;
-      padding: 1em;
-      position: absolute;
-      right: 0;
-      top: 0; }
-    .popup .content .close-popup:hover {
-      color: #000; }
-  .popup .advanced {
-    display: block;
-    margin-top: 1em;
-    text-align: center; }
-    .popup .advanced a {
-      color: #999; }
-
 input, select {
   border: none;
   border-radius: 5px;

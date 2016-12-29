@@ -18,7 +18,6 @@ var loadRandomReference = function() {
 $( '.randomReference' ).click( function( event ) {
 	event.preventDefault();
 	loadRandomReference();
-	$( '.popup' ).popup( 'close' );
 } );
 
 if ( localStorage && 'undefined' != typeof( localStorage.reference ) && '{' === localStorage.reference.substr(0, 1) ) {
