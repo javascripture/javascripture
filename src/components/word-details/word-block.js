@@ -9,6 +9,7 @@ import CancelSvg from '../svg/cancel.js';
 import KJVDef from './kjv-def';
 import morphology from './morphology';
 import SearchBlock from '../../containers/search-block';
+import { getStyle } from '../strongs-color.js';
 import styles from './styles.scss';
 
 const fill = '#fff';
@@ -146,7 +147,7 @@ class WordBlock extends React.Component {
 		if ( wordDetail ) {
 			return (
 				<div>
-					<style>{ javascripture.modules.colors.getStrongsStyle( strongsNumber ) }</style>
+					<style>{ getStyle( strongsNumber ) }</style>
 					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
 						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 						{ javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }

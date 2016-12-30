@@ -1,5 +1,5 @@
 var getStrongsColor = function( lemma ) {
-		var strongsInt = parseInt( lemma.substring( 1, lemma.length ) );
+		var strongsInt = parseInt( lemma );
 		if ( isNaN ( strongsInt ) ) {
 			strongsInt = 0;
 		}
@@ -23,6 +23,24 @@ var getLightness = function( strongsInt ) {
 	return '50%';
 };
 
+var getStrongsStyle = function ( strongsNumber ) {
+	highlightWordsWith
+	var hightlightFamilies = javascripture.state.settings.highlightWordsWith === 'family',
+		className,
+		classInt;
+	if ( hightlightFamilies ) {
+		className = javascripture.api.word.getFamily( strongsNumber ) + '-family';
+		classInt = parseFloat( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+	} else {
+		className = strongsNumber;
+		classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+	}
+
+	var newColor = getStrongsColor( classInt );
+	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important;}';
+};
+
 module.exports = {
-	get: getStrongsColor
+	get: getStrongsColor,
+	getStyle: getStrongsStyle
 };

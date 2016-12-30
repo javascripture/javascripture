@@ -36,7 +36,6 @@ api/word.js
 
 #modules
 modules/hebrew.js
-js/colors.js
 js/events.js
 js/functionalScripts.js
 modules/translateLiterally.js
