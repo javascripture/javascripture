@@ -94,7 +94,6 @@ class TrayList extends React.Component{
 					<div
 						key={ tray.id }
 						className={ tray.visible ? styles.visible : styles.hidden }
-						{ ...tray }
 					>
 						{ getComponent( tray.component ) }
 					</div>
