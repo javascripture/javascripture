@@ -1,7 +1,5 @@
-/*global javascripture*/
-javascripture.modules.hebrew = {
-	stripPointing: function( word ) {
-		return word.replace(/֑/gi,'')
+const stripPointing = ( word ) => {
+	return word.replace(/֑/gi,'')
 		.replace(/֓/gi,'')
 		.replace(/֕/gi,'')
 		.replace(/֖/gi,'')
@@ -65,5 +63,6 @@ javascripture.modules.hebrew = {
 		.replace(/֨/,'')
 		.replace(/֔/,'');
 		//.replace(/\//,'');
-	}
 };
+
+export default stripPointing;

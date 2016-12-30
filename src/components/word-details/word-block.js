@@ -10,6 +10,7 @@ import KJVDef from './kjv-def';
 import morphology from './morphology';
 import SearchBlock from '../../containers/search-block';
 import { getStyle } from '../strongs-color.js';
+import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
 
 const fill = '#fff';
@@ -104,7 +105,7 @@ class WordBlock extends React.Component {
 
 		return (
 			<div className={ className }>
-				{ strongsNumber } | { javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
+				{ strongsNumber } | { stripPointing( wordDetail.lemma ) }
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
 				<br />
