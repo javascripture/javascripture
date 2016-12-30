@@ -151,7 +151,7 @@ class WordBlock extends React.Component {
 					<style>{ getStyle( strongsNumber ) }</style>
 					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
 						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
-						{ javascripture.modules.hebrew.stripPointing( wordDetail.lemma ) }
+						{ stripPointing( wordDetail.lemma ) }
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
 							<CancelSvg fill={ fill } />
 						</a>

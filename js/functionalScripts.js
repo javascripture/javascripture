@@ -2,15 +2,6 @@
 	function setHashState(book,chapter,verse){
 		window.location.hash = javascripture.modules.reference.createReferenceLink( { book: book, chapter: chapter, verse: verse } );
 	}
-	function previousChapter(){
-		if($('select#chapterSelect option:selected').prev().attr('selected', 'selected').change().length > 0) {
-			return true;
-		}
-	}
-	function previousBook(){
-		$('select#bookSelect option:selected').prev().attr('selected', 'selected').change();
-		return true;
-	}
 	function selectOptionDisplay(selectObject) {
         var startDate = new Date();
 		var context = false;
@@ -37,14 +28,6 @@
 		var endDate = new Date();
 		timer(startDate, endDate);
 	}
-
-var hoverIntentConfig = {
-    sensitivity: 1, // number = sensitivity threshold (must be 1 or higher)
-    interval: 250, // number = milliseconds for onMouseOver polling interval
-    over: function(){initializeWordPanel($(this));}, // function = onMouseOver callback (REQUIRED)
-    timeout: 250, // number = milliseconds delay before onMouseOut
-    out: function(){hideWordPanel();} // function = onMouseOut callback (REQUIRED)
-}
 
 /*State Maintainance*/
 function goToReference(book,chapter,verse){
