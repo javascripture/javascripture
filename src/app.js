@@ -7,20 +7,12 @@ import { Router, Route } from 'react-router';
 /**
  * Internal dependencies
  */
-import Reference from './containers/reference';
 import Root from './components/root';
 
 const routes = {
 	path: '/',
 	slug: 'root',
 	component: Root,
-	childRoutes: [
-		{
-			path: '*',
-			component: Reference,
-			slug: 'reference'
-		}
-	]
 };
 
 export default function App( { history } ) {

@@ -39,7 +39,7 @@ const Reference = React.createClass( {
 		return (
 			<div className={ styles.reference }>
 				<ReferenceInput book={ book } chapter={ chapter } renderFromScroll={ false } />
-				{ references.map( ( reference ) => {
+				{ references && references.map( ( reference ) => {
 					const book = reference.getBook(),
 						chapter = reference.chapter,
 						previousReference = bible.getPrevChapter( reference.bookID, reference.chapter ).toObject();

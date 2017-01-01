@@ -3,7 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Internal
-import Footer from './footer'
+import Footer from './footer';
+import Reference from '../containers/reference';
 import Trays from './trays';
 import VisibleTrays from '../containers/visible-trays';
 
@@ -26,7 +27,7 @@ const Root = React.createClass( {
 			    </Trays>
 
 				<div style={{ marginTop: '1.5em' }}>
-					{ this.props.children }
+					<Reference />
 				</div>
 
 				<Footer />

@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const reference = ( state = initialState, action ) => {
-	console.log( action );
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
 			const reference = action.payload.hash.split( '/' );

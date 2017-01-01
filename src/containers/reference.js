@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import Reference from '../components/reference';
 
 const mapStateToProps = ( state, ownProps ) => {
-	return state.references;
+	return state.reference;
 };
 
 const ReferenceContainer = connect(
- 	null
+ 	mapStateToProps
 )( Reference )
 
 export default ReferenceContainer;
