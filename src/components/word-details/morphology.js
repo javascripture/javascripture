@@ -24,9 +24,9 @@ export default function (morph, includeLinks, lemma ) {
 			markup += morphologyDictionary.hebrew[morph];
 		} else {
 			if ( 'hebrew' === language ) {
-				morphParse = new MorphParse();
-				if ( 'undefined' !== typeof morphParse.Parse( morph ) ) {
-					markup += morphParse.Parse( 'H' + morph ); // The morphology API expexts the morph to be prepended with an H
+				const morphParseObject = new MorphParse();
+				if ( 'undefined' !== typeof morphParseObject.Parse( morph ) ) {
+					markup += morphParseObject.Parse( 'H' + morph ); // The morphology API expexts the morph to be prepended with an H
 				}
 			} else {
 

@@ -47,9 +47,9 @@ class WordBlock extends React.Component {
 
 	searchForWord( strongsNumber ) {
 		const open = true,
-			morphology = null;
+			morphologyConst = null;
 
-		this.props.addWord( { strongsNumber, open, morphology } );
+		this.props.addWord( { strongsNumber, open, morphologyConst } );
 	}
 
 	getClassName( rootNumber ) {
