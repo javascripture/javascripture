@@ -48,7 +48,6 @@ build/bundle.js
 
 #workers
 workers/worker.js
-sw.js
 
 # network
 NETWORK:
