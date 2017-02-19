@@ -72,6 +72,9 @@ const searchResults = ( state = [], action ) => {
 
 			return newState;
 
+		case 'CLEAR_ALL':
+			return [];
+
 		default:
 			return state;
 	}
