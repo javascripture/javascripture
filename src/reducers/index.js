@@ -11,10 +11,12 @@ import trays from './trays';
 import wordDetails from './word-details';
 import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
+import currentReference from './current-reference';
 
 const app = combineReducers( {
 	bookmarks,
 	crossReferences,
+	currentReference,
 	reference,
 	scrollChapter,
 	searchResults,

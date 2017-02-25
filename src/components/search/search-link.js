@@ -13,7 +13,7 @@ const SearchLink = React.createClass( {
 
 	render() {
 		const { reference } = this.props,
-			className = this.props.activeReference === this.props.index ? styles.activeReference : null;
+			className = this.props.isActive ? styles.activeReference : null;
 
 		return (
 			<li className={ className }>

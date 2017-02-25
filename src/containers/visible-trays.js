@@ -1,13 +1,17 @@
 import { connect } from 'react-redux'
 import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
 import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse, toggleTray } from '../actions'
+import isEqual from 'lodash/isEqual';
 import TrayList from '../components/trays/tray-list';
 
 function getCurrentReferenceOffset( state, offset ) {
-	let activeTerm = find( state.searchResults, searchResult => searchResult.hasOwnProperty( 'activeReference' ) );
+	const currentSearchResults = find( state.searchResults, searchResult => {
+		return isEqual( searchResult.terms, state.currentReference.terms );
+	} )	;
 
-	if ( activeTerm ) {
-		return activeTerm.results[ activeTerm.activeReference + offset ];
+	if ( currentSearchResults ) {
+		return currentSearchResults.results[ state.currentReference.activeReference + offset ];
 	}
 
 	return null;

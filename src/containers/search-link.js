@@ -4,20 +4,20 @@ import find from 'lodash/find';
 import isEqual from 'lodash/isEqual';
 
 // Internal
-import SearchBlock from '../components/search/search-block';
+import SearchLink from '../components/search/search-link';
 import { setCurrentVerse } from '../actions';
 
-function getSearchResults( searchResults, terms ) {
-	const searchResultsData = searchResults.find( searchResult => isEqual( searchResult.terms, terms ) );
-
-	if ( searchResultsData ) {
-		return searchResultsData.results;
+function isActive( currentReference, ownProps ) {
+	if( ownProps.terms === currentReference.terms && currentReference.activeReference === ownProps.index ) {
+		return true;
 	}
+
+	return false;
 }
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		results: getSearchResults( state.searchResults, ownProps.terms )
+		isActive: isActive( state.currentReference, ownProps )
 	};
 };
 
@@ -29,9 +29,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	}
 };
 
-const SearchBlockContainer = connect(
+const SearchLinkContainer = connect(
  	mapStateToProps,
  	mapDispatchToProps
-)( SearchBlock )
+)( SearchLink )
 
-export default SearchBlockContainer;
+export default SearchLinkContainer;
