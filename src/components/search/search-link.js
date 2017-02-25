@@ -12,13 +12,13 @@ const SearchLink = React.createClass( {
 	},
 
 	render() {
-		const { reference } = this.props,
+		const { reference, index } = this.props,
 			className = this.props.isActive ? styles.activeReference : null;
 
 		return (
 			<li className={ className }>
 				<a href={ '#' + javascripture.modules.reference.createReferenceLink( reference ) } onClick={ () => this.setCurrentVerse( false ) }>
-					{ reference.book } { reference.chapter }:{ reference.verse }
+					{ index + 1 }. { reference.book } { reference.chapter }:{ reference.verse }
 				</a>
 			</li>
 		);

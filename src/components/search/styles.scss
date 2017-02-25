@@ -16,13 +16,14 @@
 
 .results {
 	line-height: 1.4;
-	list-style-position: inside;
+	list-style: none;
 
 	li {
 		padding-left: .5em;
 	}
 	a {
 		color: black;
+		display: inline-block;
 		text-decoration: none;
 	}
 }
