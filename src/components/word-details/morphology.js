@@ -13,6 +13,7 @@ export default function (morph, includeLinks, lemma ) {
 		number,
 		Case,
 		person,
+		Person,
 		case2,
 		mood,
 		voice,
