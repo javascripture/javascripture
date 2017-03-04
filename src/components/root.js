@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Footer from './footer';
 import Reference from '../containers/reference';
 import Trays from './trays';
+import VersionSelector from '../containers/version-selector';
 import VisibleTrays from '../containers/visible-trays';
 
 const Root = React.createClass( {
@@ -25,7 +26,7 @@ const Root = React.createClass( {
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>
-
+				<VersionSelector />
 				<div style={{ marginTop: '1.5em' }}>
 					<Reference />
 				</div>

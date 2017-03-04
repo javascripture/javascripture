@@ -83,13 +83,6 @@ const SettingsTray = React.createClass( {
 										</select>
 									</li>
 									<li className={ styles.settingsLi }>
-										<label>Reference picker:</label>
-										<select value={ this.props.settings.referencePicker } name="referencePicker" onChange={ this.changeSetting } id="referencePicker">
-											<option value="input">Typing</option>
-											<option value="select">Drop down menu</option>
-										</select>
-									</li>
-									<li className={ styles.settingsLi }>
 										<label>Highlight words with:</label>
 										<select value={ this.props.settings.highlightWordsWith } id="highlightWordsWith" name="highlightWordsWith" onChange={ this.changeSetting } >
 											<option value="same">Same Strong's number</option>

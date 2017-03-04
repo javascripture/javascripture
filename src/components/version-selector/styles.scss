@@ -1,0 +1,28 @@
+.version-selector {
+	position: fixed;
+	top: 5px;
+	text-align: center;
+	width: 100%;
+	z-index: 9;
+
+	@media ( min-width: 768px ) {
+		margin-left: 320px;
+		width: calc( 100% - 320px );
+	}
+}
+
+.form-field {
+	background: white;
+}
+
+.input {
+	margin: 0 5px;
+	max-width: 175px;
+}
+
+@media ( max-width: 960px ) {
+	.left-version {
+		background: white;
+		display: none;
+	}
+}

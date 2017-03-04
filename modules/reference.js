@@ -10,22 +10,8 @@ javascripture.modules.reference = {
 			reference.verse = 1;
 		}
 
-		reference.rightVersion = $('#versionSelectorRight').val();
-		if ( reference.rightVersion === 'original' ) {
-//			reference.rightVersion = 'kjv'; // Backup
-			if ( localStorage.rightVersion ) {
-				reference.rightVersion = localStorage.rightVersion;
-			}
-		}
-
-		reference.leftVersion = $('#versionSelectorLeft').val();
-
-		if ( reference.leftVersion === 'original' ) {
-//			reference.leftVersion = 'hebrew'; // Backup
-			if ( localStorage.leftVersion ) {
-				reference.leftVersion = localStorage.leftVersion;
-			}
-		}
+		reference.rightVersion = javascripture.state.version.right
+		reference.leftVersion = javascripture.state.version.left;
 
 		worker.postMessage( {
 			task: 'reference',
@@ -344,17 +330,6 @@ javascripture.modules.reference = {
 				javascripture.modules.reference.load( next );
 			}
 		}
-	});
-
-	$('.goToReference').submit(function (event) {
-		event.preventDefault();
-		var reference = bible.parseReference( $('#goToReference').val() );
-		setHashState( bible.Data.books[reference.bookID - 1][0], reference.chapter, reference.verse );
-		$('#goToReference').blur();
-		if ( $( 'html' ).hasClass( 'reading-mode' ) ) {
-			hideDock();
-		}
-		return false;
 	});
 
 } )( jQuery );

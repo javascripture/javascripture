@@ -167,3 +167,11 @@ export const goToPreviousCurrentVerse = () => {
 	}
 }
 
+export const changeVersion = ( side, version ) => {
+	return {
+		type: 'CHANGE_VERSION',
+		side: side,
+		version: version
+	}
+}
+

@@ -12,6 +12,7 @@ import wordDetails from './word-details';
 import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
 import currentReference from './current-reference';
+import version from './version';
 
 const app = combineReducers( {
 	bookmarks,
@@ -23,6 +24,7 @@ const app = combineReducers( {
 	searchTerms,
 	settings,
 	trays,
+	version,
 	wordDetails,
 	wordHighlight,
 	routing: routerReducer
