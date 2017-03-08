@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 8.2 // move version selector to react
+#version: 8.3 // fix version selector bugs
 
 index.html
 css/layout.css

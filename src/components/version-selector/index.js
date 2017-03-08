@@ -20,7 +20,7 @@ const VersionSelector = React.createClass( {
 
 	render() {
 		return (
-			<form className={ styles.versionSelector } onSubmit={ this.goToReference }>
+			<form className={ styles.versionSelector } onSubmit={ this.goToReference } id="dock">
 				<select name="left" className={ styles.leftVersion } value={ this.props.version.left } onChange={ this.changeVersion }>
 					<option value="original">Original</option>
 					<option value="kjv">KJV</option>

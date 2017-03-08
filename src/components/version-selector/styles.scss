@@ -1,7 +1,8 @@
 .version-selector {
+	height: 50px;
 	position: fixed;
-	top: 5px;
 	text-align: center;
+	top: 5px;
 	width: 100%;
 	z-index: 9;
 
@@ -11,8 +12,9 @@
 	}
 }
 
-.form-field {
+.form-field, .left-version {
 	background: white;
+	width: 100px;
 }
 
 .input {
@@ -22,7 +24,6 @@
 
 @media ( max-width: 960px ) {
 	.left-version {
-		background: white;
 		display: none;
 	}
 }

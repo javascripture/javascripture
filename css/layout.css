@@ -512,56 +512,6 @@ form.search #advanced {
 #currentRef {
   background: #eee; }
 
-#dock {
-  background: none;
-  border: none;
-  font-family: 'Helvetica Neue';
-  font-weight: 100;
-  height: 50px;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 9; }
-  @media (min-width: 768px) {
-    #dock {
-      margin-left: 320px; } }
-  #dock .versionSelector.left {
-    display: none; }
-    @media (min-width: 960px) {
-      #dock .versionSelector.left {
-        display: inline-block; } }
-  @media (max-width: 480px) {
-    #dock .versionSelector.right {
-      width: 100px; } }
-  #dock select {
-    font-family: 'Helvetica Neue';
-    font-weight: 100; }
-  #dock select, #dock input {
-    vertical-align: middle; }
-  #dock .heading-wrapper {
-    font-size: 160%;
-    line-height: 1.8em;
-    text-align: center; }
-    #dock .heading-wrapper #goToReference {
-      max-width: 175px; }
-  #dock.input .lookup {
-    display: none; }
-  #dock.input #goToReference {
-    display: inline; }
-  #dock.select .lookup {
-    display: inline; }
-  #dock.select #goToReference {
-    display: none; }
-  #dock .reading-mode-version {
-    display: inline; }
-  #dock .goToReference {
-    background: transparent;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    display: inline-block;
-    padding: 0 10px; }
-
 .referencePanel .wordControlPanel {
   clear: both; }
   .referencePanel .wordControlPanel .close {
