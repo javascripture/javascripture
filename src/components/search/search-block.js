@@ -16,10 +16,6 @@ class SearchBlock extends React.Component{
 	}
 
 	render() {
-		if ( ! this.props.open ) {
-			return null;
-		}
-
 		if ( ! this.props.results ) {
 			return ( <div className={ styles.noResults }>Loading…</div>);
 		}
@@ -29,7 +25,7 @@ class SearchBlock extends React.Component{
 		}
 
 		return (
-			<div>
+			<div className={ this.props.open ? null : styles.hidden }>
 				<ol className={ styles.results }>
 					{ this.renderDetails() }
 				</ol>
