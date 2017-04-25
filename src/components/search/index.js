@@ -56,6 +56,8 @@ const Search = React.createClass( {
 					</h2>
 
 					<SearchBlock { ...searchTerm } />
+
+					<a className={ styles.clearAll } onClick={ this.props.clearAllSearch }>Clear all</a>
 				</div>
 			);
 		} );

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 
 // Internal
-import { addSearch, removeSearch, toggleSearch } from '../actions'
+import { addSearch, clearAll, removeSearch, toggleSearch } from '../actions'
 import Search from '../components/search';
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -22,6 +22,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 		toggleSearch: ( terms ) => {
 			dispatch( toggleSearch( terms ) );
+		},
+
+		clearAllSearch: () => {
+			dispatch( clearAll() );
 		},
 	}
 };

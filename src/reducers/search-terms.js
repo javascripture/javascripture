@@ -59,7 +59,7 @@ const searchTerms = ( state = [], action ) => {
 				return word.terms !== action.terms;
 			} );
 
-		case 'CLEAR_ALL_SEARCH':
+		case 'CLEAR_ALL':
 			return [];
 
 		default:

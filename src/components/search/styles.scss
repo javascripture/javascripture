@@ -39,3 +39,20 @@
 .active-reference {
 	background: lighten( lightblue, 10 );
 }
+
+$trayWidth: 320px;
+$width: 70px;
+$padding: 10px;
+a.clear-all {
+    background: lightblue;
+    color: #fff;
+    display: block;
+    padding: $padding;
+    position: fixed;
+    bottom: 55px;
+    left: $trayWidth - $width - $padding * 2;
+    cursor: pointer;
+    text-align: right;
+    text-decoration: none;
+    width: $width;
+}
