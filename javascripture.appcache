@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 8.3 // fix version selector bugs
+#version: 8.4 // fix scrollTo bug
 
 index.html
 css/layout.css
@@ -9,7 +9,6 @@ manifest.json
 #libs
 lib/jquery-2.0.3.min.js
 lib/underscore.js
-lib/jquery.scrollTo.js
 lib/jquery.waypoints.js
 lib/MorphCodes.js
 lib/MorphParse.js
