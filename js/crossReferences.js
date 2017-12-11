@@ -1,5 +1,5 @@
 /*global bible, crossReferences, javascripture*/
-$( document ).on('click', '#verse .wrapper li, .bookmarker', function() {
+$( document ).on('click', '.bookmarker', function() {
 	var $reference = $( this ).closest( '.reference' ),
 		book = $reference.data( 'book' ),
 	    bookId = bible.getBookId( book ),

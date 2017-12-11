@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 8.4 // fix scrollTo bug
+#version: 8.5 // remove click event on verse
 
 index.html
 css/layout.css
