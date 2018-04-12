@@ -8,6 +8,7 @@ import Reference from '../containers/reference';
 import Trays from './trays';
 import VersionSelector from '../containers/version-selector';
 import VisibleTrays from '../containers/visible-trays';
+import WordHighlight from '../containers/word-highlight';
 
 const Root = React.createClass( {
 	getBodyStyles() {
@@ -23,6 +24,7 @@ const Root = React.createClass( {
 		return (
 			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
 				<style>{ this.getBodyStyles() }</style>
+				<WordHighlight />
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>

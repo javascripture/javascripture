@@ -130,7 +130,7 @@ body > .wrapper {
   font-family: 'Helvetica Neue', Helvetica, Arial;
   font-weight: 100; }
 
-span, a.word-tree {
+.chapter span, a.word-tree {
   margin: 0 -2px;
   padding: 0 2px;
   position: relative;
@@ -718,7 +718,7 @@ form.search {
   text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue', sans-serif;
   font-weight: 100;
   letter-spacing: .02em;
 }

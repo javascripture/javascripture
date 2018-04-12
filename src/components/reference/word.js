@@ -7,15 +7,21 @@ import WordSingle from '../../containers/word-single.js';
 
 export default React.createClass( {
 	render() {
+		if ( ! this.props.word ) {
+			return null;
+		}
+
 		const word = this.props.word[ 0 ],
-			lemma = this.props.word[ 1 ];
+			lemma = this.props.word[ 1 ],
+			morph = this.props.word[ 2 ];
 
 		let wordString;
 
 		// Handle dvnNm
 		if ( lemma === 'H3068' ) {
 			var wordArray,
-				wordArrayEnd = word.split( '<!dvnNm>' );
+				wordArrayEnd = word.split( '</dvnNm>' );
+
 			if ( wordArrayEnd.length > 1 ) {
 				wordArray = wordArrayEnd[0].split( '<dvnNm>' );
 				if ( wordArrayEnd[ 1 ] ) {
@@ -28,15 +34,17 @@ export default React.createClass( {
 						textTransform = 'uppercase';
 					}
 
-					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } key={ index } />;
+					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } />;
 				}, this );
+			} else {
+				wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } />;
 			}
 		} else {
-			wordString = <WordSingle lemma={ lemma } word={ word } />;
+			wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } />;
 		}
 
 		return (
-			<span>{ wordString } </span>
+			<span key={ lemma }>{ wordString } </span>
 		);
 	}
 } );

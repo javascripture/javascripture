@@ -261,6 +261,7 @@ bible.Reference = function() {
 
 	return {
 		bookID: _bookID,
+		bookName: bible.getBook( _bookID ),
 		chapter: _chapter1,
 		verse: _verse1,
 		chapter1: _chapter1,
@@ -312,7 +313,7 @@ bible.Reference = function() {
 			else {
 				this.chapter1--;
 			}
-			return this;
+			return Object.assign( {}, this );
 		},
 		nextChapter: function() {
 			this.verse1 = 1;
@@ -324,8 +325,7 @@ bible.Reference = function() {
 				this.bookID++;
 				this.chapter1 = 1;
 			}
-
-			return this;
+			return Object.assign( {}, this );
 		}
 		,
 		isFirstChapter: function() {
@@ -336,6 +336,9 @@ bible.Reference = function() {
 
 			return (this.bookID	== bible.Data.books.length &&
 				this.chapter1 == v.length);//  && 	this.verse1 == v[v.length-1]);
+		},
+		getBook: function() {
+			return bible.Data.books[ this.bookID - 1 ][ 0 ];
 		}
 	}
 };
@@ -362,5 +365,5 @@ bible.getBookId = function( textReference ) {
 	return bookID;
 };
 bible.getBook = function( bookId ) {
-	return bible.Data.books[reference.bookID - 1][0];
+	return bible.Data.books[ bookId - 1][0];
 };

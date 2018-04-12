@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { removeWordHighlight, setWordHighlight } from '../actions';
+import { addWord, removeWordHighlight, setWordHighlight, setTrayVisibilityFilter } from '../actions';
 import WordSingle from '../components/reference/word-single';
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -11,11 +11,18 @@ const mapStateToProps = ( state, ownProps ) => {
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		highlightOn: () => {
-			dispatch( setWordHighlight( ownProps.lemma ) )
+			dispatch( setWordHighlight( ownProps.lemma.split('/') ) )
 		},
 		highlightOff: () => {
-			dispatch( removeWordHighlight( ownProps.lemma ) )
-		}
+			dispatch( removeWordHighlight( ownProps.lemma.split( '/' ) ) )
+		},
+		click: () => {
+			dispatch( setTrayVisibilityFilter( 'word' ) );
+
+			ownProps.lemma.split( ' ' ).map( strongsNumber => {
+				dispatch( addWord( { strongsNumber, open: true, morphology: ownProps.morph } ) );
+			} );
+		},
 	}
 };
 

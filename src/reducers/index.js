@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 
 import bookmarks from './bookmarks';
 import reference from './reference';
+import references from './references';
 import scrollChapter from './scroll-chapter';
 import searchResults from './search-results';
 import searchTerms from './search-terms';
@@ -19,6 +20,7 @@ const app = combineReducers( {
 	crossReferences,
 	currentReference,
 	reference,
+	references,
 	scrollChapter,
 	searchResults,
 	searchTerms,

@@ -11,6 +11,7 @@ self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
 self.postMessage( { task: 'loading', html: 'loading Hebrew' } );
 importScripts('../data/hebrew-with-morph5.js');
+importScripts('../data/jonah.js');
 self.postMessage( { task: 'loading', html: 'loading Greek' } );
 importScripts('../data/greek4.js');
 

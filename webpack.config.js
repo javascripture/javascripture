@@ -29,6 +29,7 @@ var config = {
 			{
 				test:   /\.jsx?$/,
 				loader: 'babel-loader',
+				exclude: /node_modules/,
 				include: path.join( __dirname, '/src' )
 			},
 			{
@@ -85,7 +86,8 @@ if ( process.env.NODE_ENV !== 'production' ) {
 	config.module.loaders.unshift( {
 		test:   /\.jsx?$/,
 		loader: 'react-hot',
-		include: path.join( __dirname, '/src' )
+		include: path.join( __dirname, '/src' ),
+		exclude: /node_modules/,
 	} );
 }
 

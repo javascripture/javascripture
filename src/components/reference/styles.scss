@@ -4,9 +4,24 @@
 	}
 }
 
+.single-reference {
+	display: flex;
+	line-height: 140%;
+}
+
 .heading {
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
 	padding: 10px 0;
 	text-align: center;
+}
+
+.verseWrapper {
+	color: #bbb;
+	padding: 0 10px;
+	width: 50%;
+}
+
+.verse {
+	color: black;
 }

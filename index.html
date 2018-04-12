@@ -134,12 +134,12 @@
 <script src="data/strongs-dictionary.js"></script>
 <script src="data/extra-dictionary.js"></script>
 
-<!-- These modules are loaded by the worker
+<!-- These modules are loaded by the worker-->
 <script src="data/kjvdwyer7.js"></script>
 <script src="data/web3.js"></script>
-<script src="data/hebrew6.js"></script>
+<script src="data/hebrew-with-morph5.js"></script>
 <script src="data/jonah.js"></script>
-<script src="data/greek4.js"></script>-->
+<script src="data/greek4.js"></script>
 <script src="data/strongsObjectWithFamilies2.js"></script>
 <script src="data/crossReferences.js"></script>
 <script src="data/morphology.js"></script>
@@ -173,7 +173,7 @@
 			} );
 		}
 
-		if( e.data.task === 'reference' ) {
+		/*if( e.data.task === 'reference' ) {
 			var reference = e.data.result.reference;
 
 			var chapterText = '<div class="three-references"';
@@ -211,7 +211,7 @@
 			}
 			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
 			maintainState( reference );
-		}
+		}*/
 
 		if( e.data.task === 'loading' ) {
 			$( '.loading' ).html( e.data.html );

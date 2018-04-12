@@ -24,8 +24,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( addPreviousChapter( ownProps.reference ) );
 			const newHeight = documentHeight();
 			window.scrollBy( 0, newHeight - oldHeight );
-			dispatch( setScrollChapter( ownProps.previousBook, ownProps.previousChapter ) );
-
+			const currentChapter = bible.parseReference( ownProps.book + ' ' + ownProps.chapter );
+			const prevChapter = currentChapter.prevChapter();
+			dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1 ) );
 		}
 	}
 };

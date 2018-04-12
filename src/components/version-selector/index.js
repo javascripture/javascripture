@@ -18,6 +18,10 @@ const VersionSelector = React.createClass( {
 		this.refs.referenceInput.blur();
 	},
 
+	componentWillReceiveProps( nextProps ) {
+		this.refs.referenceInput.value = nextProps.value;
+	},
+
 	render() {
 		return (
 			<form className={ styles.versionSelector } onSubmit={ this.goToReference } id="dock">
@@ -27,7 +31,7 @@ const VersionSelector = React.createClass( {
 					<option value="web">WEB</option>
 					<option value="lc">Literal Consistent</option>
 				</select>
-				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } />
+				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } />
 				<select name="right" className={ styles.formField } value={ this.props.version.right } onChange={ this.changeVersion }>
 					<option value="original">Original</option>
 					<option value="kjv">KJV</option>

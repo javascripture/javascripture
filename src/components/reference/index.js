@@ -6,7 +6,6 @@ import Waypoint from 'react-waypoint';
 
 // Internal
 import SingleReference from '../../containers/single-reference';
-import ReferenceInput from '../../containers/reference-input';
 import styles from './styles.scss';
 
 // If you make this a stateless component it breaks hot reloading
@@ -15,37 +14,48 @@ const Reference = React.createClass( {
 		this.scrollToCurrentChapter();
 	},
 
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log( nextProps );
+		console.log( this.props );
+		return true;
+	},
+
 	componentDidUpdate( prevProps ) {
 		// Only scroll if chapter or book changes
-		if ( prevProps.book !== this.props.book || prevProps.chapter !== this.props.chapter ) {
+		const references = this.props.references;
+		if ( prevProps.book !== references.book || prevProps.chapter !== references.chapter ) {
 			this.scrollToCurrentChapter();
 		}
 	},
 
 	scrollToCurrentChapter() {
-		// ReactDOM.findDOMNode( this.refs.current ).scrollIntoView();
-		// window.scrollBy( 0, 10 );
+		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
+		if ( currrentChapter ) {
+			currrentChapter.scrollIntoView();
+			window.scrollBy( 0, 1 );
+		}
 	},
 
 	render() {
-		//if ( ! this.props.book ) {
-			return null;
-		//}
+		console.log('render index');
+		const references = this.props.references;
 
-		const book = this.props.book,
-			chapter = this.props.chapter,
-			references = this.props.references;
+		if ( ! references.book ) {
+			return null;
+		}
+
+		const currentBook = references.book,
+			currentChapter = references.chapter,
+			threeReferences = references.references ? references.references : null;
 
 		return (
-			<div className={ styles.reference }>
-				<ReferenceInput book={ book } chapter={ chapter } renderFromScroll={ false } />
-				{ references && references.map( ( reference ) => {
-					const book = reference.getBook(),
-						chapter = reference.chapter,
-						previousReference = bible.getPrevChapter( reference.bookID, reference.chapter ).toObject();
+			<div className={ styles.reference } key={ currentBook + '-' + currentChapter }>
+				{ threeReferences && threeReferences.map( ( reference ) => {
+					const book = bible.getBook( reference.bookID ),
+						chapter = reference.chapter1;
 
 					let ref = null;
-					if ( this.props.book === book && this.props.chapter === chapter ) {
+					if ( reference.bookName === currentBook && reference.chapter1 === currentChapter ) {
 						ref = 'current';
 					}
 
@@ -54,8 +64,6 @@ const Reference = React.createClass( {
 							key={ book + chapter }
 							book={ book }
 							chapter={ chapter }
-							previousBook={ previousReference.book }
-							previousChapter={ previousReference.chapter }
 							reference={ reference }
 							ref={ ref } />
 					);
