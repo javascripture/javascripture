@@ -23,7 +23,7 @@ export default React.createClass( {
 
 	getLemma() {
 		if ( this.props.lemma) {
-			return this.props.lemma.split( ' ' ).filter( function( lemma ) {
+			return this.props.lemma.split( ' ' ).split( '/' ).filter( function( lemma ) {
 				return lemma != 'G3588';
 			} );
 		}
@@ -39,33 +39,40 @@ export default React.createClass( {
 		return wordStyle;
 	},
 
-
-
-	getWord() {
-		const lemmaArray = this.props.lemma.split( '/' ),
-			morphArray = this.props.morph ? this.props.morph.split( '/' ) : undefined;
+	getWord( key ) {
+		const lemmaArray = this.props.lemma.split( '/' )[ key ],
+			morphArray = this.props.morph ? this.props.morph.split( '/' )[ key ] : undefined;
 
 		if ( this.props.version === 'lc' ) {
 			const morph = morphArray ? morphArray[ index ] : undefined;
 			return lemmaArray.map( ( lemma, index ) => ( getByLemmaAndMorph( lemma, morph ) ) );
 		}
 
-		return this.props.word.split('/');
+		return this.props.word.split('/')[ key ];
+	},
+
+	highlightWord() {
+		this.props.highlightWord( this.props.lemma );
 	},
 
 	render() {
+		const words = this.props.lemma.split('/').map( ( lemma, key ) => {
+			return (
+				<span
+					className={ lemma }
+					onMouseOver={ this.highlightWord }
+					onClick={ this.props.click }
+					title={ lemma }
+					style={ this.wordStyle() }
+					key={ lemma }
+					>
+					{ this.getWord( key ) }
+				</span>
+			);
+		} );
+
 		return (
-			<span
-				className={ this.props.lemma }
-				onMouseOver={ this.props.highlightOn }
-				onMouseOut={ this.props.highlightOff }
-				onClick={ this.props.click }
-				title={ this.props.lemma ? this.props.lemma : null }
-				style={ this.wordStyle() }
-				key={ this.props.lemma }
-				>
-				{ this.getWord() }
-			</span>
+			<span>{ words }</span>
 		);
 	}
 

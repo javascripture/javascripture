@@ -11,6 +11,12 @@ import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';
 
 const Root = React.createClass( {
+	getInitialState () {
+		return {
+			highlightedWord: ''
+		};
+	},
+
 	getBodyStyles() {
 		var bodyStyles = 'body { ';
 		bodyStyles += 'font-family: ' + this.props.settings.fontFamily + ';';
@@ -20,17 +26,23 @@ const Root = React.createClass( {
 		return bodyStyles;
 	},
 
+	highlightWord( word ) {
+		this.setState( {
+			highlightedWord: word
+		} );
+	},
+
 	render() {
 		return (
 			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
 				<style>{ this.getBodyStyles() }</style>
-				<WordHighlight />
+				<WordHighlight word={ this.state.highlightedWord } />
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>
 				<VersionSelector />
 				<div style={{ marginTop: '1.5em' }}>
-					<Reference />
+					<Reference highlightWord={ this.highlightWord } />
 				</div>
 
 				<Footer />

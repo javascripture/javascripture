@@ -11,10 +11,10 @@ const mapStateToProps = ( state, ownProps ) => {
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		highlightOn: () => {
-			dispatch( setWordHighlight( ownProps.lemma.split('/') ) )
+			dispatch( setWordHighlight( ownProps.lemma.split(' ') ) )
 		},
 		highlightOff: () => {
-			dispatch( removeWordHighlight( ownProps.lemma.split( '/' ) ) )
+			dispatch( removeWordHighlight( ownProps.lemma.split( ' ' ) ) )
 		},
 		click: () => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );

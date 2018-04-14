@@ -4,7 +4,7 @@ var getStrongsColor = function( lemma ) {
 			strongsInt = 0;
 		}
 		var theSizeOfAColorSegment = 360 / 8000,
-			hue = strongsInt * theSizeOfAColorSegment,
+			hue = Math.floor( strongsInt * theSizeOfAColorSegment ),
 			staturation = '50%',
 			lightness = '50%';
 		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';

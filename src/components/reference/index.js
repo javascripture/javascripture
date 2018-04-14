@@ -65,6 +65,7 @@ const Reference = React.createClass( {
 							book={ book }
 							chapter={ chapter }
 							reference={ reference }
+							highlightWord={ this.props.highlightWord }
 							ref={ ref } />
 					);
 				} ) }

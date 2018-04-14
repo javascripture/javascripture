@@ -34,13 +34,13 @@ export default React.createClass( {
 						textTransform = 'uppercase';
 					}
 
-					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } />;
+					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
 				}, this );
 			} else {
-				wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } />;
+				wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
 			}
 		} else {
-			wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } />;
+			wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
 		}
 
 		return (
