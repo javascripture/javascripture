@@ -39,16 +39,13 @@ export default React.createClass( {
 		return wordStyle;
 	},
 
-	getWord( key ) {
-		const lemmaArray = this.props.lemma.split( '/' )[ key ],
-			morphArray = this.props.morph ? this.props.morph.split( '/' )[ key ] : undefined;
-
-		if ( this.props.version === 'lc' ) {
-			const morph = morphArray ? morphArray[ index ] : undefined;
-			return lemmaArray.map( ( lemma, index ) => ( getByLemmaAndMorph( lemma, morph ) ) );
+	getWord() {
+		const { lemma, morph, version, word } = this.props;
+		if ( version === 'lc' ) {
+			return getByLemmaAndMorph( lemma, morph );
 		}
 
-		return this.props.word.split('/')[ key ];
+		return word;
 	},
 
 	highlightWord() {
@@ -56,7 +53,7 @@ export default React.createClass( {
 	},
 
 	render() {
-		const words = this.props.lemma.split('/').map( ( lemma, key ) => {
+		const { lemma } = this.props;
 			return (
 				<span
 					className={ lemma }
@@ -66,14 +63,10 @@ export default React.createClass( {
 					style={ this.wordStyle() }
 					key={ lemma }
 					>
-					{ this.getWord( key ) }
+					{ this.getWord() }
 				</span>
 			);
-		} );
 
-		return (
-			<span>{ words }</span>
-		);
 	}
 
 } );

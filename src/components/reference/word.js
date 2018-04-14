@@ -18,7 +18,7 @@ export default React.createClass( {
 		let wordString;
 
 		// Handle dvnNm
-		if ( lemma === 'H3068' ) {
+		if ( lemma === 'H3068' && this.props.version === 'kjv' ) {
 			var wordArray,
 				wordArrayEnd = word.split( '</dvnNm>' );
 
@@ -36,15 +36,15 @@ export default React.createClass( {
 
 					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
 				}, this );
-			} else {
-				wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
 			}
 		} else {
-			wordString = <WordSingle lemma={ lemma } word={ word } morph={ morph } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
+			wordString = word.split('/').map( ( wordValue, key ) => (
+				<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } highlightWord={ this.props.highlightWord } />
+			) );
 		}
 
 		return (
-			<span key={ lemma }>{ wordString } </span>
+			<span>{ wordString } </span>
 		);
 	}
 } );
