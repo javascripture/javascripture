@@ -16,7 +16,7 @@ const SingleReference = React.createClass( {
 	handleWaypointEnter( event ) {
 		if ( event.previousPosition === 'above' ) {
 			this.props.setScrollChapterPrevious();
-			this.props.addPreviousChapter();
+			//this.props.addPreviousChapter();
 		}
 	},
 

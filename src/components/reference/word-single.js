@@ -48,6 +48,10 @@ export default React.createClass( {
 		return word;
 	},
 
+	clearHighlightWord() {
+		this.props.highlightWord();
+	},
+
 	highlightWord() {
 		this.props.highlightWord( this.props.lemma );
 	},
@@ -58,6 +62,7 @@ export default React.createClass( {
 				<span
 					className={ lemma }
 					onMouseOver={ this.highlightWord }
+					onMouseOut={ this.clearHighlightWord }
 					onClick={ this.props.click }
 					title={ lemma }
 					style={ this.wordStyle() }

@@ -8,7 +8,7 @@ const WordHighlight = React.createClass( {
 		return (
 			<style>
 				{ this.props.word && this.props.word.split('/').map( word => (
-					'.' + word + ' { background: ' + strongsColor.get( word.slice( 1 ) ) + '; color: white; margin: 0 -3px; padding: 0 3px; }'
+					'span.' + word + ' { background: ' + strongsColor.get( word.slice( 1 ) ) + '; color: white; margin: 0 -2px; padding: 0 2px; }'
 				) ) }
 			</style>
 		);

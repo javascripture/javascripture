@@ -29,7 +29,6 @@ const references = ( state = initialState, action ) => {
 			return { book, chapter, references, loadingPrev };
 
 		case 'ADD_PREVIOUS_CHAPTER':
-			console.log( 'ADD_PREVIOUS_CHAPTER' );
 			var references = state.references.slice(),
 				firstReference = references[ 0 ],
 				currentReference = bible.parseReference( firstReference.bookName + ' ' + firstReference.chapter1 );
@@ -52,7 +51,6 @@ const references = ( state = initialState, action ) => {
 
 
 		case 'ADD_NEXT_CHAPTER':
-			console.log( 'ADD_NEXT_CHAPTER' );
 			var references = state.references.slice(),
 				lastReference = references[ references.length - 1 ],
 				currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
