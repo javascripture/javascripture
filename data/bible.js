@@ -309,8 +309,9 @@ bible.Reference = function() {
 			if (this.chapter1 == 1 && this.bookID > 1) {
 				this.bookID--;
 				this.chapter1 = bible.Data.verses[this.bookID - 1].length;
-			}
-			else {
+			} else if ( this.chapter1 === 1 && this.bookID === 1 ) {
+				return null;
+			} else {
 				this.chapter1--;
 			}
 

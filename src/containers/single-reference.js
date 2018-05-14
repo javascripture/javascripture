@@ -16,7 +16,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		setScrollChapterPrevious: () => {
 			const currentChapter = bible.parseReference( ownProps.book + ' ' + ownProps.chapter );
 			const prevChapter = currentChapter.prevChapter();
-			dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1 ) );
+			if ( prevChapter ) {
+				dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1 ) );
+			}
 		},
 		addPreviousChapter: () => {
 			dispatch( addPreviousChapter( ownProps.reference ) );

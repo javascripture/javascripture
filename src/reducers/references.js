@@ -24,7 +24,7 @@ const references = ( state = initialState, action ) => {
 				prevChapterData = bible.parseReference( book + ' ' + chapter ).prevChapter(),
 				nextChapterData = bible.parseReference( book + ' ' + chapter ).nextChapter();
 
-			if ( prevChapterData.chapter1 > 0 ) {
+			if ( prevChapterData ) {
 				references.push( Object.assign( {}, prevChapterData ) );
 			}
 			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ) ) );
@@ -41,11 +41,11 @@ const references = ( state = initialState, action ) => {
 				currentReference = bible.parseReference( firstReference.bookName + ' ' + firstReference.chapter1 );
 
 			const prevChapter = currentReference.prevChapter(),
-				prevChapterAlreadyLoaded = find( state.references, function ( reference ) {
+				prevChapterAlreadyLoaded = prevChapter && find( state.references, function ( reference ) {
 					return reference.bookID === prevChapter.bookID && reference.chapter1 === prevChapter.chapter1;
 				} );
 
-			if ( ! prevChapterAlreadyLoaded ) {
+			if ( prevChapter && ! prevChapterAlreadyLoaded ) {
 				references.unshift( prevChapter );
 			}
 
