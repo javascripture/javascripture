@@ -1,5 +1,4 @@
 export const goToReference = ( reference ) => {
-	console.log( 'goToReference' );
 	window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
 }
 

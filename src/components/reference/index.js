@@ -8,27 +8,39 @@ import Waypoint from 'react-waypoint';
 import SingleReference from '../../containers/single-reference';
 import styles from './styles.scss';
 
+let oldHeight = 0;
+
+function documentHeight() {
+	const body = document.body;
+	return Math.max( body.scrollHeight, body.offsetHeight );
+}
+
 // If you make this a stateless component it breaks hot reloading
 const Reference = React.createClass( {
 	componentDidMount() {
 		this.scrollToCurrentChapter();
 	},
 
-	shouldComponentUpdate(nextProps, nextState) {
-		console.log( nextProps );
-		console.log( this.props );
-		return true;
+	componentWillUpdate() {
+		oldHeight = documentHeight();
 	},
 
 	componentDidUpdate( prevProps ) {
 		// Only scroll if chapter or book changes
 		const references = this.props.references;
-		if ( prevProps.book !== references.book || prevProps.chapter !== references.chapter ) {
+		const prevReferences = prevProps.references;
+		if ( prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
 			this.scrollToCurrentChapter();
+		} else {
+			if( this.props.references.loadingPrev ) {
+				const newHeight = documentHeight();
+				window.scrollBy( 0, newHeight - oldHeight );
+			}
 		}
 	},
 
 	scrollToCurrentChapter() {
+		console.log( 'scrollToCurrentChapter' );
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
@@ -37,7 +49,6 @@ const Reference = React.createClass( {
 	},
 
 	render() {
-		console.log('render index');
 		const references = this.props.references;
 
 		if ( ! references.book ) {
@@ -46,11 +57,11 @@ const Reference = React.createClass( {
 
 		const currentBook = references.book,
 			currentChapter = references.chapter,
-			threeReferences = references.references ? references.references : null;
+			allReferences = references.references ? references.references : null;
 
 		return (
 			<div className={ styles.reference } key={ currentBook + '-' + currentChapter }>
-				{ threeReferences && threeReferences.map( ( reference ) => {
+				{ allReferences && allReferences.map( ( reference ) => {
 					const book = bible.getBook( reference.bookID ),
 						chapter = reference.chapter1;
 

@@ -18,16 +18,17 @@ const references = ( state = initialState, action ) => {
 			}
 
 			const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
-				chapter = parseInt( reference[ 2 ] );
-			var references = [];
+				chapter = parseInt( reference[ 2 ] ),
+				references = [],
+				loadingPrev = false;
 
 			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ).prevChapter() ) );
 			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ) ) );
 			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ).nextChapter() ) );
 
-			return { book, chapter, references };
+			return { book, chapter, references, loadingPrev };
 
-		/*case 'ADD_PREVIOUS_CHAPTER':
+		case 'ADD_PREVIOUS_CHAPTER':
 			console.log( 'ADD_PREVIOUS_CHAPTER' );
 			var references = state.references.slice(),
 				firstReference = references[ 0 ],
@@ -37,6 +38,7 @@ const references = ( state = initialState, action ) => {
 				prevChapterAlreadyLoaded = find( state.references, function ( reference ) {
 					return reference.bookID === prevChapter.bookID && reference.chapter1 === prevChapter.chapter1;
 				} );
+
 			if ( ! prevChapterAlreadyLoaded ) {
 				references.unshift( prevChapter );
 			}
@@ -44,11 +46,13 @@ const references = ( state = initialState, action ) => {
  			return {
 				book: state.book,
 				chapter: state.chapter,
-				references
+				references,
+				loadingPrev: true,
 			};
 
 
-		/*case 'ADD_NEXT_CHAPTER':
+		case 'ADD_NEXT_CHAPTER':
+			console.log( 'ADD_NEXT_CHAPTER' );
 			var references = state.references.slice(),
 				lastReference = references[ references.length - 1 ],
 				currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
@@ -64,8 +68,9 @@ const references = ( state = initialState, action ) => {
  			return {
 				book: state.book,
 				chapter: state.chapter,
-				references
-			};*/
+				references,
+				loadingPrev: false,
+			};
 
 		default:
 			return state;

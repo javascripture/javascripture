@@ -313,6 +313,8 @@ bible.Reference = function() {
 			else {
 				this.chapter1--;
 			}
+
+			this.bookName = bible.getBook( this.bookID );
 			return Object.assign( {}, this );
 		},
 		nextChapter: function() {
@@ -325,6 +327,8 @@ bible.Reference = function() {
 				this.bookID++;
 				this.chapter1 = 1;
 			}
+
+			this.bookName = bible.getBook( this.bookID );
 			return Object.assign( {}, this );
 		}
 		,

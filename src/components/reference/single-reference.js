@@ -7,16 +7,23 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Chapter from '../../containers/chapter';
 import styles from './styles.scss';
 
+function documentHeight() {
+	const body = document.body;
+	return Math.max( body.scrollHeight, body.offsetHeight );
+}
+
 const SingleReference = React.createClass( {
 	handleWaypointEnter( event ) {
 		if ( event.previousPosition === 'above' ) {
 			this.props.setScrollChapterPrevious();
+			this.props.addPreviousChapter();
 		}
 	},
 
 	handleWaypointLeave( event ) {
 		if ( event.currentPosition === 'above' ) {
 			this.props.setScrollChapterNext();
+			this.props.addNextChapter();
 		}
 	},
 
