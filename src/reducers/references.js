@@ -20,11 +20,18 @@ const references = ( state = initialState, action ) => {
 			const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
 				chapter = parseInt( reference[ 2 ] ),
 				references = [],
-				loadingPrev = false;
+				loadingPrev = false,
+				prevChapterData = bible.parseReference( book + ' ' + chapter ).prevChapter(),
+				nextChapterData = bible.parseReference( book + ' ' + chapter ).nextChapter();
 
-			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ).prevChapter() ) );
+			if ( prevChapterData.chapter1 > 0 ) {
+				references.push( Object.assign( {}, prevChapterData ) );
+			}
 			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ) ) );
-			references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ).nextChapter() ) );
+
+			if ( nextChapterData ) {
+				references.push( Object.assign( {}, nextChapterData ) );
+			}
 
 			return { book, chapter, references, loadingPrev };
 
@@ -56,10 +63,10 @@ const references = ( state = initialState, action ) => {
 				currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
 
 			const nextChapter = currentReference.nextChapter(),
-				nextChapterAlreadyLoaded = find( state.references, function ( reference ) {
+				nextChapterAlreadyLoaded = nextChapter && find( state.references, function ( reference ) {
 					return reference.bookID === nextChapter.bookID && reference.chapter1 === nextChapter.chapter1;
 				} );
-			if ( ! nextChapterAlreadyLoaded ) {
+			if ( nextChapter && ! nextChapterAlreadyLoaded ) {
 				references.push( nextChapter );
 			}
 

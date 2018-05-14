@@ -326,6 +326,8 @@ bible.Reference = function() {
 			} else if (this.bookID < bible.Data.books.length) {
 				this.bookID++;
 				this.chapter1 = 1;
+			} else {
+				return null;
 			}
 
 			this.bookName = bible.getBook( this.bookID );
