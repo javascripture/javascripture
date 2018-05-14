@@ -20,7 +20,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
 			ownProps.lemma.split( ' ' ).map( strongsNumber => {
-				dispatch( addWord( { strongsNumber, open: true, morphology: ownProps.morph } ) );
+				dispatch( addWord( {
+					strongsNumber,
+					open: true,
+					morphology: ownProps.morph,
+					version: ownProps.version,
+				} ) );
 			} );
 		},
 	}

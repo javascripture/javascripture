@@ -1,3 +1,5 @@
+var language;
+
 javascripture.api.search = {
 	language: { //helper object to access different languages
 		kjv: javascripture.data.kjv,
@@ -82,17 +84,16 @@ javascripture.api.search = {
 		});
     },
 	lookForTerm: function () {
-		var self = this,
-			parameters = self.parameters;
-		if ( 'undefined' === typeof parameters.language ) {
-			parameters.language = self.inferLanguage( parameters );
+		var self = this;
+		if ( 'undefined' === typeof language ) {
+			language = self.inferLanguage( self.parameters );
 		}
 
-		var dataSource = this.language[parameters.language]; //work out what language to search in
+		var dataSource = this.language[ language ]; //work out what language to search in
 		self.results.references = [];
 		self.resetMatches();
 
-		var booksToSearch = this.books[ parameters.language ];
+		var booksToSearch = this.books[ language ];
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 		} );
@@ -108,7 +109,7 @@ javascripture.api.search = {
 			var type = self.types[typeKey],
 				termString = parameters[type];
 
-			if ( termString !== undefined && termString !== '') {
+			if ( termString !== undefined && termString !== '' ) {
 				var terms = termString.split(' ');
 				termsLength = termsLength + terms.length;
 			}

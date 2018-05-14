@@ -41,7 +41,6 @@ const getVerseStyle = function( language ) {
 };
 
 const Chapter = function ( { book, chapter, version, highlightWord } ) {
-	console.log( getLanguageFromVersion( book, version.left ) );
 	const leftLanguage = getLanguageFromVersion( book, version.left ),
 		rightLanguage = getLanguageFromVersion( book, version.right ),
 		leftChapterData = javascripture.data[ leftLanguage ][ book ][ chapter - 1 ],
@@ -52,13 +51,13 @@ const Chapter = function ( { book, chapter, version, highlightWord } ) {
 					<div className={ styles.verseWrapper } key={ 'kjv' + index  } style={ getVerseWrapperStyle( leftLanguage ) }>
 						{ index + 1 }.
 						<span  className={ styles.verse } style={ getVerseStyle( leftLanguage ) }>
-							<Verse verse={ verse } index={ index } version={ version.left } highlightWord={ highlightWord } />
+							<Verse verse={ verse } index={ index } version={ leftLanguage } highlightWord={ highlightWord } />
 						</span>
 					</div>
 					<div className={ styles.verseWrapper } key={ 'hebrew' + index } style={ getVerseWrapperStyle( rightLanguage ) }>
 						{ index + 1 }.
 						<span  className={ styles.verse } style={ getVerseStyle( rightLanguage ) }>
-							<Verse className={ styles.verseContainer } verse={ rightChapterData[ index ] } index={ index } version={ version.right } highlightWord={ highlightWord } />
+							<Verse className={ styles.verseContainer } verse={ rightChapterData[ index ] } index={ index } version={ rightLanguage } highlightWord={ highlightWord } />
 						</span>
 					</div>
 				</div>

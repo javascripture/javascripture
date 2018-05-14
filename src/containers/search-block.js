@@ -1,4 +1,4 @@
-// External
+		// External
 import { connect } from 'react-redux';
 import find from 'lodash/find';
 import isEqual from 'lodash/isEqual';

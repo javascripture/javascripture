@@ -19,9 +19,9 @@ class WordBlock extends React.Component {
 	getSearchParameters() {
 		return {
 			clusivity: 'exclusive',
-			language: 'kjv',
+			version: this.props.version,
 			lemma: this.props.strongsNumber,
-			range: 'verse'
+			range: 'verse',
 		};
 	}
 
@@ -133,7 +133,11 @@ class WordBlock extends React.Component {
 	}
 
 	removeWord() {
-		this.props.removeWord( this.props.strongsNumber );
+		this.props.removeWord( this.props.strongsNumber, this.props.version );
+	}
+
+	termTitle( { clusivity, version, lemma, range } ) {
+		return 'strongs number: ' + lemma + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range;
 	}
 
 	render() {
@@ -149,7 +153,11 @@ class WordBlock extends React.Component {
 			return (
 				<div>
 					<style>{ getStyle( strongsNumber ) }</style>
-					<h2 className={ this.getClassName( strongsNumber ) + ' ' + styles.title } onClick={ () => this.toggleDetails( false ) }>
+					<h2
+						className={ this.getClassName( strongsNumber ) + ' ' + styles.title }
+						onClick={ () => this.toggleDetails( false ) }
+						title={ this.termTitle( this.getSearchParameters() ) }
+					>
 						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 						{ stripPointing( wordDetail.lemma ) }
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>

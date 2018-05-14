@@ -11,10 +11,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( addWord( lemma ) );
 		},
 
-		removeWord: ( lemma ) => {
+		removeWord: ( lemma, version ) => {
 			const searchParameters = {
 				clusivity: 'exclusive',
-				language: 'kjv',
+				version: version,
 				lemma: lemma,
 				range: 'verse',
 			};

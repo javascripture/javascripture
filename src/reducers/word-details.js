@@ -13,7 +13,8 @@ const wordDetails = ( state = [], action ) => {
 				return {
 					strongsNumber: word.strongsNumber,
 					open: false,
-					morphology: word.morphology
+					morphology: word.morphology,
+					version: action.version,
 				};
 			} );
 
@@ -21,7 +22,8 @@ const wordDetails = ( state = [], action ) => {
 				newState[ wordPosition ] = {
 					strongsNumber: action.strongsNumber,
 					open: action.open,
-					morphology: action.morphology
+					morphology: action.morphology,
+					version: action.version,
 				};
 
 				return newState;
@@ -32,7 +34,8 @@ const wordDetails = ( state = [], action ) => {
 				{
 					strongsNumber: action.strongsNumber,
 					open: action.open,
-					morphology: action.morphology
+					morphology: action.morphology,
+					version: action.version,
 				}
 			];
 
@@ -44,7 +47,8 @@ const wordDetails = ( state = [], action ) => {
 				newState[ toggleWordPosition ] = {
 					strongsNumber: state[ toggleWordPosition ].strongsNumber,
 					open: ! state[ toggleWordPosition ].open,
-					morphology: state[ toggleWordPosition ].morphology
+					morphology: state[ toggleWordPosition ].morphology,
+					version: state[ toggleWordPosition ].version,
 				};
 
 				return newState;

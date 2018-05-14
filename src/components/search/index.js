@@ -13,7 +13,7 @@ const Search = React.createClass( {
 			word: '',
 			lemma: '',
 			morph: '',
-			language: 'kjv',
+			version: 'kjv',
 			clusivity: 'exclusive',
 			range: 'verse',
 			strict: false
@@ -32,8 +32,8 @@ const Search = React.createClass( {
 		this.props.addSearch( this.state );
 	},
 
-	termTitle( { clusivity, language, lemma, morph, range, strict, word } ) {
-		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nlanguage: ' + language + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
+	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
+		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
 	},
 
 	toggleDetails( terms ) {
