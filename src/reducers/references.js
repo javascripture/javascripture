@@ -10,7 +10,7 @@ const initialState = {
 
 const references = ( state = initialState, action ) => {
 	switch ( action.type ) {
-		case LOCATION_CHANGE:
+		/*case LOCATION_CHANGE:
 			const reference = action.payload.hash.split( '/' );
 
 			if ( ! reference[ 1 ] ) {
@@ -33,7 +33,7 @@ const references = ( state = initialState, action ) => {
 				references.push( Object.assign( {}, nextChapterData ) );
 			}
 
-			return { book, chapter, references, loadingPrev };
+			return { book, chapter, references, loadingPrev };*/
 
 		case 'ADD_PREVIOUS_CHAPTER':
 			var references = state.references.slice(),

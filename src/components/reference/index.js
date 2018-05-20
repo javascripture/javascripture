@@ -8,7 +8,7 @@ import Waypoint from 'react-waypoint';
 import SingleReference from '../../containers/single-reference';
 import styles from './styles.scss';
 
-let oldHeight = 0;
+let oldHeight = 0, scroller = null, isScrolling = false;
 
 function documentHeight() {
 	const body = document.body;
@@ -21,26 +21,145 @@ const Reference = React.createClass( {
 		this.scrollToCurrentChapter();
 	},
 
-	componentWillUpdate() {
-		oldHeight = documentHeight();
+	componentWillMount() {
+		this.setState( {
+			references: this.getReferences( this.props ),
+		} );
+
+		window.addEventListener( 'scroll', this.handleScroll );
 	},
 
-	componentDidUpdate( prevProps ) {
+	componentWillUnmount() {
+		window.removeEventListener( 'scroll', this.handleScroll );
+	},
+
+	getInitialState() {
+		return {
+			references: {},
+		}
+	},
+
+	componentWillReceiveProps( nextProps ) {
+		this.setState( {
+			references: this.getReferences( nextProps ),
+		} );
+	},
+
+	shouldComponentUpdate( nextProps, nextState ) {
+		return ! isScrolling;
+	},
+
+	/*componentWillUpdate() {
+		oldHeight = documentHeight();
+	},*/
+
+	componentDidUpdate( prevProps, prevState ) {
 		// Only scroll if chapter or book changes
-		const references = this.props.references;
-		const prevReferences = prevProps.references;
-		if ( prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
+		const references = this.state.references;
+
+		if ( ! references || ! prevState ) {
+			return;
+		}
+
+		const prevReferences = prevState.references;
+		if ( ! prevReferences || prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
 			this.scrollToCurrentChapter();
 		} else {
-			if( this.props.references.loadingPrev ) {
+			if( this.state.references.loadingPrev ) {
 				const newHeight = documentHeight();
 				window.scrollBy( 0, newHeight - oldHeight );
+				document.body.style.overflow = '';
 			}
 		}
 	},
 
+	handleScroll( event ) {
+		var self = this;
+		if ( ! scroller ) {
+			isScrolling = true;
+		}
+		clearTimeout( scroller );
+		scroller = this.debouncedScroll( () => {
+			isScrolling = false;
+			event.pageY;
+			if ( event.pageY < 500 ) {
+				this.addPreviousChapter();
+			}
+
+			if ( documentHeight() - event.pageY - document.documentElement.clientHeight < 1000 ) {
+				this.addNextChapter();
+			}
+		} );
+	},
+
+	debouncedScroll( callback ) {
+		return setTimeout( callback, 250 );
+	},
+
+	handleWaypointEnter( event, book, chapter ) {
+		if ( event.previousPosition === 'above' ) {
+			this.props.setScrollChapterPrevious( book, chapter );
+		}
+	},
+
+	handleWaypointLeave( event, book, chapter ) {
+		if ( event.currentPosition === 'above' ) {
+			this.props.setScrollChapter( book, chapter );
+		}
+	},
+
+	addNextChapter() {
+		var references = this.state.references.references.slice(),
+			lastReference = references[ references.length - 1 ],
+			currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
+
+		const nextChapter = currentReference.nextChapter(),
+			nextChapterAlreadyLoaded = nextChapter && find( this.state.references.references, function ( reference ) {
+				return reference.bookID === nextChapter.bookID && reference.chapter1 === nextChapter.chapter1;
+			} );
+		if ( nextChapter && ! nextChapterAlreadyLoaded ) {
+			references.push( nextChapter );
+		}
+
+		this.setState( {
+			references: {
+				book: this.state.references.book,
+				chapter: this.state.references.chapter,
+				references,
+				loadingPrev: false,
+			},
+		} );
+	},
+
+	addPreviousChapter() {
+		document.body.style.overflow = 'hidden';
+
+		var references = this.state.references.references.slice(),
+			firstReference = references[ 0 ],
+			currentReference = bible.parseReference( firstReference.bookName + ' ' + firstReference.chapter1 );
+
+		const prevChapter = currentReference.prevChapter(),
+			prevChapterAlreadyLoaded = prevChapter && find( this.state.references.references, function ( reference ) {
+				return reference.bookID === prevChapter.bookID && reference.chapter1 === prevChapter.chapter1;
+			} );
+
+		if ( prevChapter && ! prevChapterAlreadyLoaded ) {
+			references.unshift( prevChapter );
+		}
+
+		oldHeight = documentHeight();
+
+		this.setState( {
+			references: {
+				book: this.state.references.book,
+				chapter: this.state.references.chapter,
+				references,
+				loadingPrev: true,
+			}
+		} );
+	},
+
 	scrollToCurrentChapter() {
-		console.log( 'scrollToCurrentChapter' );
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
@@ -48,10 +167,36 @@ const Reference = React.createClass( {
 		}
 	},
 
-	render() {
-		const references = this.props.references;
+	getReferences( nextProps ) {
+		const reference = nextProps.hash.split('/')
 
-		if ( ! references.book ) {
+		if ( ! reference[ 1 ] ) {
+			return null
+		}
+
+		const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
+			chapter = parseInt( reference[ 2 ] ),
+			references = [],
+			loadingPrev = false,
+			prevChapterData = bible.parseReference( book + ' ' + chapter ).prevChapter(),
+			nextChapterData = bible.parseReference( book + ' ' + chapter ).nextChapter();
+
+		if ( prevChapterData ) {
+			references.push( Object.assign( {}, prevChapterData ) );
+		}
+		references.push( Object.assign( {}, bible.parseReference( book + ' ' + chapter ) ) );
+
+		if ( nextChapterData ) {
+			references.push( Object.assign( {}, nextChapterData ) );
+		}
+
+		return { book, chapter, references, loadingPrev };
+	},
+
+	render() {
+		const references = this.state.references;
+
+		if ( ! references || ! references.book ) {
 			return null;
 		}
 
@@ -71,13 +216,18 @@ const Reference = React.createClass( {
 					}
 
 					return (
-						<SingleReference
-							key={ book + chapter }
-							book={ book }
-							chapter={ chapter }
-							reference={ reference }
-							highlightWord={ this.props.highlightWord }
-							ref={ ref } />
+						<div key={ book + chapter }>
+							<Waypoint
+								onEnter={ ( ( event ) => this.handleWaypointEnter( event, book, chapter ) ) }
+								onLeave={ ( ( event ) => this.handleWaypointLeave( event, book, chapter ) ) }
+							/>
+							<SingleReference
+								book={ book }
+								chapter={ chapter }
+								reference={ reference }
+								highlightWord={ this.props.highlightWord }
+								ref={ ref } />
+						</div>
 					);
 				} ) }
 			</div>

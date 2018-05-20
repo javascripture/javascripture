@@ -41,10 +41,9 @@ const Root = React.createClass( {
 			    	<VisibleTrays />
 			    </Trays>
 				<VersionSelector />
-				<div style={{ marginTop: '1.5em' }}>
-					<Reference highlightWord={ this.highlightWord } />
+				<div>
+					<Reference highlightWord={ this.highlightWord } hash={ this.props.location.hash } />
 				</div>
-
 				<Footer />
 			</div>
 		);
