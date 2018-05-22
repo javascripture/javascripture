@@ -38,7 +38,7 @@ export default React.createClass( {
 				}, this );
 			}
 		} else {
-			wordString = word.split('/').map( ( wordValue, key ) => (
+			wordString = word && word.split('/').map( ( wordValue, key ) => (
 				<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } highlightWord={ this.props.highlightWord } />
 			) );
 		}

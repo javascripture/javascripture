@@ -17,7 +17,12 @@ const SingleReference = React.createClass( {
 			<div>
 				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>{ this.props.book } { this.props.chapter }</h1>
 				<div className="chapter">
-					<Chapter book={ this.props.book } chapter={ this.props.chapter } highlightWord={ this.props.highlightWord } />
+					<Chapter
+						book={ this.props.book }
+						chapter={ this.props.chapter }
+						highlightWord={ this.props.highlightWord }
+						hash={ this.props.hash }
+					/>
 				</div>
 			</div>
 		);

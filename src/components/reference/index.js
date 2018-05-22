@@ -17,10 +17,6 @@ function documentHeight() {
 
 // If you make this a stateless component it breaks hot reloading
 const Reference = React.createClass( {
-	componentDidMount() {
-		this.scrollToCurrentChapter();
-	},
-
 	componentWillMount() {
 		this.setState( {
 			references: this.getReferences( this.props ),
@@ -63,7 +59,7 @@ const Reference = React.createClass( {
 
 		const prevReferences = prevState.references;
 		if ( ! prevReferences || prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
-			this.scrollToCurrentChapter();
+			// do nothing
 		} else {
 			if( this.state.references.loadingPrev ) {
 				const newHeight = documentHeight();
@@ -159,14 +155,6 @@ const Reference = React.createClass( {
 		} );
 	},
 
-	scrollToCurrentChapter() {
-		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
-		if ( currrentChapter ) {
-			currrentChapter.scrollIntoView();
-			window.scrollBy( 0, 1 );
-		}
-	},
-
 	getReferences( nextProps ) {
 		const reference = nextProps.hash.split('/')
 
@@ -224,6 +212,7 @@ const Reference = React.createClass( {
 							<SingleReference
 								book={ book }
 								chapter={ chapter }
+								hash={ this.props.hash }
 								reference={ reference }
 								highlightWord={ this.props.highlightWord }
 								ref={ ref } />
