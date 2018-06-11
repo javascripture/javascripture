@@ -7,8 +7,13 @@ import { addWord, removeSearch, removeWord, toggleWord } from '../actions'
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		addWord: ( lemma ) => {
-			dispatch( addWord( lemma ) );
+		addWord: ( strongsNumber ) => {
+			dispatch( addWord( {
+				strongsNumber: strongsNumber,
+				open: true,
+				morphology: null,
+				version: ownProps.version,
+			} ) );
 		},
 
 		removeWord: ( lemma, version ) => {

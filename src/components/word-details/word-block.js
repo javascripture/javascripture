@@ -46,14 +46,11 @@ class WordBlock extends React.Component {
 	}
 
 	searchForWord( strongsNumber ) {
-		const open = true,
-			morphologyConst = null;
-
-		this.props.addWord( { strongsNumber, open, morphologyConst } );
+		this.props.addWord( strongsNumber );
 	}
 
 	getClassName( rootNumber ) {
-		return javascripture.api.word.getFamily( rootNumber ) + '-family ' + rootNumber;
+		return javascripture.api.word.getFamily( rootNumber ) + '-family ' + rootNumber + ' word-tree';
 	}
 
 	getRoots() {
@@ -65,9 +62,9 @@ class WordBlock extends React.Component {
 		if( rootsData ) {
 	        return rootsData.map( ( rootNumber, index ) => {
 				return (
-					<span key={ index }><span className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) }>
+					<span key={ index }><a className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) }>
 						{ rootNumber }
-					</span> </span>
+					</a> </span>
 				);
 			} );
 		}
@@ -80,9 +77,9 @@ class WordBlock extends React.Component {
 			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( this.props.strongsNumber ) > -1 ) {
 				return (
 					<span key={ strongsObjectNumber }>
-						<span onClick={ this.searchForWord.bind( this, strongsObjectNumber ) } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
+						<a onClick={ this.searchForWord.bind( this, strongsObjectNumber ) } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
 							{ strongsObjectNumber }
-					</span> </span>
+					</a> </span>
 				);
 			}
 		} );
