@@ -20,6 +20,10 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
 			ownProps.lemma.split( ' ' ).map( strongsNumber => {
+				if ( strongsNumber === "G3588" ) {
+					return;
+				}
+
 				dispatch( addWord( {
 					strongsNumber,
 					open: true,

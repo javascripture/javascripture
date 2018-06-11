@@ -26,7 +26,7 @@ javascripture.api.search = {
 		var self = this;
 		self.parameters = parameters;
 		this.lookForTerm();
-		this.addSnippets();
+		//this.addSnippets();
 		return self.results.references;
 	},
 	addSnippets: function() {
@@ -85,15 +85,15 @@ javascripture.api.search = {
     },
 	lookForTerm: function () {
 		var self = this;
-		if ( 'undefined' === typeof language ) {
-			language = self.inferLanguage( self.parameters );
-		}
+		//if ( 'undefined' === typeof language ) {
+		//	language = self.inferLanguage( self.parameters );
+		//}
 
-		var dataSource = this.language[ language ]; //work out what language to search in
+		var dataSource = this.language[ self.parameters.version ];
 		self.results.references = [];
 		self.resetMatches();
 
-		var booksToSearch = this.books[ language ];
+		var booksToSearch = this.books[ self.parameters.version ];
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 		} );

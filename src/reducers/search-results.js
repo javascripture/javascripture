@@ -12,12 +12,12 @@ const searchResults = ( state = [], action ) => {
 					return isEqual( searchTerm.terms, action.terms );
 				} );
 			newState = [ ...state ];
-
 			if ( searchResultsPosition > -1 ) {
 				newState[ searchResultsPosition ] = {
 					results: action.results.length > 0 ? action.results : 'No results',
 					terms: newState[ searchResultsPosition ].terms,
 				};
+
 				return newState;
 			}
 

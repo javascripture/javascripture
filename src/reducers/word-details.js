@@ -14,7 +14,7 @@ const wordDetails = ( state = [], action ) => {
 					strongsNumber: word.strongsNumber,
 					open: false,
 					morphology: word.morphology,
-					version: action.version,
+					version: word.version,
 				};
 			} );
 

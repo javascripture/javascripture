@@ -21,7 +21,11 @@ class SearchBlock extends React.Component{
 		}
 
 		if ( this.props.results.length === 0 || typeof this.props.results === 'string' ) {
-			return ( <div className={ styles.noResults }>No results.</div>);
+			return (
+				<div className={ this.props.open ? styles.noResults : styles.hidden }>
+					No results.
+				</div>
+			);
 		}
 
 		return (
