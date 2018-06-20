@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Internal
 import Footer from './footer';
 import Reference from '../containers/reference';
+import KeyboardShortcuts from '../containers/keyboard-shortcuts';
 import Trays from './trays';
 import VersionSelector from '../containers/version-selector';
 import VisibleTrays from '../containers/visible-trays';
@@ -36,6 +37,7 @@ const Root = React.createClass( {
 		return (
 			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
 				<style>{ this.getBodyStyles() }</style>
+				<KeyboardShortcuts />
 				<WordHighlight word={ this.state.highlightedWord } />
 				<Trays>
 			    	<VisibleTrays />

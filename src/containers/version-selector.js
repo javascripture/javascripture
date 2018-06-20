@@ -1,9 +1,11 @@
 // External
 import { connect } from 'react-redux';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 
 // Internal
 import VersionSelector from '../components/version-selector';
-import { changeVersion } from '../actions';
+import { changeVersion } from '../actions'
 
 const getReferenceValue = ( state ) => {
 	const chapter = state.scrollChapter.chapter ? state.scrollChapter.chapter : state.reference.chapter;
@@ -15,7 +17,7 @@ const getReferenceValue = ( state ) => {
 const mapStateToProps = ( state, ownProps ) => {
 	return {
 		version: state.version,
-		value: getReferenceValue( state )
+		value: getReferenceValue( state ),
 	}
 };
 
@@ -24,7 +26,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		changeVersion: ( side, version ) => {
 			dispatch( changeVersion( side, version ) );
 			javascripture.modules.reference.loadReferenceFromHash();
-		}
+		},
 	}
 };
 
