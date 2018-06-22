@@ -7,6 +7,12 @@
 .single-reference {
 	display: flex;
 	line-height: 140%;
+
+	&:hover {
+		.bookmarker {
+			visibility: visible;
+		}
+	}
 }
 
 .heading {
@@ -24,4 +30,9 @@
 
 .verse {
 	color: black;
+}
+
+.bookmarker {
+
+	visibility: hidden;
 }

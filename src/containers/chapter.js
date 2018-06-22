@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import Chapter from '../components/reference/chapter';
 
 const mapStateToProps = ( state, ownProps ) => {

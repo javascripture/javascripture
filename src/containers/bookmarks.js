@@ -1,8 +1,6 @@
-import { connect } from 'react-redux'
-import some from 'lodash/some';
-
-import { addBookmark, removeBookmark } from '../actions'
-import BookMarks from '../components/bookmarks'
+import { connect } from 'react-redux';
+import { removeBookmark } from '../actions';
+import BookMarks from '../components/bookmarks';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
@@ -11,14 +9,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	// Delete later
-	javascripture.reactHelpers.addBookmark = addBookmark;
-
 	return {
-		addBookmark: () => {
-			dispatch( addBookmark( ownProps ) )
-		},
-
 		removeBookmark: ( reference ) => {
 			dispatch( removeBookmark( reference ) )
 		}

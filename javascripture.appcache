@@ -30,8 +30,6 @@ data/literalConsistent.js
 data/literalConsistentExtra.js
 
 #apis
-api/reference.js
-api/searchApi.js
 api/word.js
 
 #modules
@@ -41,7 +39,6 @@ modules/translateLiterally.js
 modules/reference.js
 
 js/wayPoint.js
-js/crossReferences.js
 js/randomReference.js
 
 build/bundle.js

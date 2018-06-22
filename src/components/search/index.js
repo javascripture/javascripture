@@ -19,29 +19,29 @@ class Search extends React.Component{
 		strict: false
 	};
 
-	change( event ) {
+	change = ( event ) => {
 		let newState = {};
 		newState[ event.target.name ] = event.target.value.trim();
 		this.setState( newState );
-	}
+	};
 
-	submit( event ) {
+	submit = ( event ) => {
 		event.preventDefault();
 
 		this.props.addSearch( this.state );
-	}
+	};
 
 	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
 		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
 	}
 
-	toggleDetails( terms ) {
+	toggleDetails = ( terms ) => {
 		this.props.toggleSearch( terms );
-	}
+	};
 
-	removeWord( terms ) {
+	removeWord = ( terms ) => {
 		this.props.removeSearch( terms );
-	}
+	};
 
 	results() {
 		return this.props.searchTerms.map( ( searchTerm, index ) => {

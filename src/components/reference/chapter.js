@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
+import Bookmarker from '../../containers/bookmarker';
 import Verse from './verse';
 import styles from './styles.scss';
 
@@ -104,6 +105,7 @@ class Chapter extends React.Component{
 								<Verse verse={ verse } index={ index } version={ leftLanguage } highlightWord={ highlightWord } />
 							</span>
 						</div>
+						<Bookmarker book={ book } chapter={ chapter } verse={ index + 1 } />
 						<div className={ styles.verseWrapper } key={ 'hebrew' + index } style={ getVerseWrapperStyle( rightLanguage ) }>
 							{ index + 1 }.
 							<span  className={ styles.verse } style={ getVerseStyle( rightLanguage ) }>

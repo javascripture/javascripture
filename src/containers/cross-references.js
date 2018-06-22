@@ -11,12 +11,9 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	// Delete later
-	javascripture.reactHelpers.showCrossReferences = showCrossReferences;
-
 	return {
 		showCrossReferences: ( reference ) => {
-			dispatch( showCrossReferences( reference ) )
+			dispatch( showCrossReferences( reference ) );
 		}
 	}
 };

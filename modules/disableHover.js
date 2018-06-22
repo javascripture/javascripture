@@ -1,4 +1,4 @@
-var body = document.body,
+/*var body = document.body,
     timer2;
 
 window.addEventListener('scroll', function() {
@@ -10,4 +10,4 @@ window.addEventListener('scroll', function() {
   timer2 = setTimeout(function(){
     body.classList.remove('disable-hover');
   },500);
-}, false);
+}, false);*/

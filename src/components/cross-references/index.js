@@ -5,6 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
+import { createReferenceLink } from '../../lib/reference.js';
 
 class CrossReferences extends React.Component{
 	getCrossReferences() {
@@ -24,7 +25,7 @@ console.log( referenceString );
 			return (
 				<div>
 					<p>Cross references for&nbsp;
-						<a href={ '#' + javascripture.modules.reference.createReferenceLink( this.props.reference ) }>
+						<a href={ '#' + createReferenceLink( this.props.reference ) }>
 							{ this.props.reference.book + ' ' + this.props.reference.chapter + ':' + this.props.reference.verse }
 						</a>:
 					</p>
@@ -35,7 +36,7 @@ console.log( referenceString );
 
 		return (
 			<p>No cross references for&nbsp;
-				<a href={ '#' + javascripture.modules.reference.createReferenceLink( this.props.reference ) }>
+				<a href={ '#' + createReferenceLink( this.props.reference ) }>
 					{ this.props.reference.book + ' ' + this.props.reference.chapter + ':' + this.props.reference.verse }
 				</a>
 			</p>
@@ -56,7 +57,7 @@ console.log( referenceString );
 
 					return (
 						<li key={ reference }>
-							<a href={ '#' + javascripture.modules.reference.createReferenceLink( referenceObject ) }>
+							<a href={ '#' + createReferenceLink( referenceObject ) }>
 								{ reference }
 							</a>
 						</li>
