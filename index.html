@@ -72,7 +72,7 @@
 		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
 		<div class="verse">
 			<div id="verse">
-				<div class="loading">Loading...</div>
+				<div id="loading">Loading...</div>
 			</div>
 		</div>
 	</div>
@@ -121,9 +121,6 @@
 </script>
 
 <!-- libs -->
-<script src="lib/jquery-2.0.3.min.js"></script>
-<script src="lib/underscore.js"></script>
-<script src="lib/jquery.waypoints.js"></script>
 <script src="lib/MorphCodes.js"></script>
 <script src="lib/MorphParse.js"></script>
 <!--<script src="lib/raphael-min.js"></script>
@@ -146,20 +143,15 @@
 <script src="data/literalConsistent.js"></script>
 <script src="data/literalConsistentExtra.js"></script>
 
-<!-- apis
-<script src="api/search.js"></script>-->
+<!-- apis -->
 <script src="api/word.js"></script>
 
 <script src="build/bundle.js"></script>
 
 <!--modules -->
-<script src="js/events.js"></script>
 <script src="js/functionalScripts.js"></script>
 <script src="modules/translateLiterally.js"></script>
 <script src="modules/reference.js"></script>
-
-<script src="js/wayPoint.js"></script>
-<script src="js/randomReference.js"></script>
 
 <script>
 	// Attach web workers
@@ -213,7 +205,7 @@
 		}*/
 
 		if( e.data.task === 'loading' ) {
-			$( '.loading' ).html( e.data.html );
+			document.getElementById( 'loading' ).innerHTML = e.data.html;
 		}
 	}, false );
 

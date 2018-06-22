@@ -7,9 +7,6 @@ css/layout.css
 manifest.json
 
 #libs
-lib/jquery-2.0.3.min.js
-lib/underscore.js
-lib/jquery.waypoints.js
 lib/MorphCodes.js
 lib/MorphParse.js
 
@@ -33,13 +30,9 @@ data/literalConsistentExtra.js
 api/word.js
 
 #modules
-js/events.js
 js/functionalScripts.js
 modules/translateLiterally.js
 modules/reference.js
-
-js/wayPoint.js
-js/randomReference.js
 
 build/bundle.js
 

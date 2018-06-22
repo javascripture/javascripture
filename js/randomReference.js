@@ -1,4 +1,4 @@
-/*global bible javascripture*/
+/*global bible javascripture
 var getRandomReference = function() {
 	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
 		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
