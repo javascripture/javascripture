@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default React.createClass( {
+class Search extends React.Component{
 	handleClick: function() {
 		this.props.onChangeDisplayState( this.props.target );
 	},
@@ -14,4 +14,6 @@ export default React.createClass( {
 			</button>
 		);
 	}
-} );
+}
+
+export default Search;

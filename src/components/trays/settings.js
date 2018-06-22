@@ -1,16 +1,17 @@
 // External dependencies
 import { connect } from 'react-redux';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { settingsChange } from '../../actions';
 import styles from './styles.scss';
 
-const SettingsTray = React.createClass( {
+class SettingsTray extends React.Component{
 	changeSetting( event ) {
 		this.props.settingsChange( event.target.name, event.target.value );
-	},
+	}
 
 	render() {
 		return (
@@ -100,7 +101,7 @@ const SettingsTray = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 SettingsTray.propTypes = {};
 

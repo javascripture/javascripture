@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+//import { routerReducer } from 'react-router-redux'
 
 import bookmarks from './bookmarks';
 import reference from './reference';
@@ -15,7 +14,7 @@ import crossReferences from './cross-references';
 import currentReference from './current-reference';
 import version from './version';
 
-const app = combineReducers( {
+const app = {
 	bookmarks,
 	crossReferences,
 	currentReference,
@@ -29,7 +28,7 @@ const app = combineReducers( {
 	version,
 	wordDetails,
 	wordHighlight,
-	routing: routerReducer
-} );
+	//routing: routerReducer
+};
 
 export default app;

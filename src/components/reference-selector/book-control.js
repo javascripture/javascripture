@@ -6,13 +6,12 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal
 import styles from './styles.scss';
 
-const BookControl = React.createClass( {
-	getInitialState: function() {
-		return {
-			chapter: 1
-		};
-	},
-	goToReference: function() {
+class BookControl extends React.Component{
+	state = {
+		chapter: 1
+	};
+
+	goToReference = () => {
 		// hide the trays
 		//if ( window.innerWidth < 900 ) {
 			//this.props.onChangeDisplayState();
@@ -21,31 +20,36 @@ const BookControl = React.createClass( {
 		// load the reference
 		window.location.hash = '/' + this.props.name + '/' + this.state.chapter + '/1/'
 		//browserHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
-	},
-	handleMouseMove: function( event ) {
+	};
+
+	handleMouseMove = ( event ) => {
 		this.setChapter( event.clientX );
-	},
-	handleTouchMove: function( event ) {
+	};
+
+	handleTouchMove = ( event ) => {
 		if ( event.touches ) {
 			this.setState( {
 				touchChapter: true
 			} );
 			this.setChapter( event.touches[ 0 ].clientX );
 		}
-	},
-	handleTouchStart: function() {
+	};
+
+	handleTouchStart = () => {
 		this.setState( {
 			touched: true
 		} );
-	},
-	handleTouchEnd: function( event ) {
+	};
+
+	handleTouchEnd = ( event ) => {
 		this.setState( {
 			touchChapter: false
 		} );
 
 		this.goToReference()
-	},
-	setChapter: function( clientX ) {
+	};
+
+	setChapter( clientX ) {
 		var width = this.referenceSelector.offsetWidth - 40,
 			spacing = width / this.props.chapters,
 			chapter = Math.ceil( clientX / spacing );
@@ -61,8 +65,9 @@ const BookControl = React.createClass( {
 		this.setState( {
 			chapter: chapter
 		} );
-	},
-	render: function() {
+	}
+
+	render() {
 		var buttonText = this.state.touchChapter ? this.state.chapter : '';
 
 		return (
@@ -81,6 +86,6 @@ const BookControl = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 export default withStyles( styles )( BookControl );

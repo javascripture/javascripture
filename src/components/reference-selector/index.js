@@ -6,26 +6,24 @@ import React from 'react';
 // Internal
 import BookControl from './book-control';
 
-const ReferenceSelector = React.createClass( {
-	getInitialState: function() {
-		return {
-			'active': -1
-		};
-	},
+class ReferenceSelector extends React.Component{
+	state = {
+		'active': -1
+	};
 
-	handleChange: function( event ) {
+	handleChange( event ) {
 		this.setState( {
 			'reference': event.target.value
 		} );
-	},
+	}
 
-	setActiveBook: function( book ) {
+	setActiveBook( book ) {
 		this.setState( {
 			'active': book
 		} );
-	},
+	}
 
-	render: function() {
+	render() {
 		var books = bible.Data.books.map( function( bookArray, index ) {
 			var chapters = parseInt( bible.Data.verses[ index ].length ),
 				active = ( this.state.active === index );
@@ -45,6 +43,6 @@ const ReferenceSelector = React.createClass( {
 			<div className="reference-selector">{ books }</div>
 		);
 	}
-} );
+}
 
 export default ReferenceSelector;

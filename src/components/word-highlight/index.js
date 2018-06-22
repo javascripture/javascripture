@@ -1,9 +1,10 @@
 // External dependencies
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import strongsColor from '../strongs-color.js';
 
-const WordHighlight = React.createClass( {
+class WordHighlight extends React.Component{
 	render() {
 		return (
 			<style>
@@ -13,7 +14,7 @@ const WordHighlight = React.createClass( {
 			</style>
 		);
 	}
-} );
+}
 
 WordHighlight.propTypes = {};
 

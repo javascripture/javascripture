@@ -1,12 +1,13 @@
 // External dependencies
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
 import WordBlock from '../../containers/word-block';
 
-const WordDetails = React.createClass( {
+class WordDetails extends React.Component{
 	render() {
 		if ( this.props.words.length ) {
 			return (
@@ -23,7 +24,7 @@ const WordDetails = React.createClass( {
 
 		return ( <div className={ styles.wordBlock }>Select a word to show more details about it here.</div> );
 	}
-} );
+}
 
 WordDetails.propTypes = {};
 

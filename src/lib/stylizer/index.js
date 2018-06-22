@@ -1,4 +1,5 @@
-import { Children, Component, PropTypes } from 'react';
+import { Children, Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Stylizer extends Component {
 	static propTypes = {

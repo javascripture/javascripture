@@ -8,7 +8,7 @@ import keyboardShortcut from 'keyboard-shortcut';
 // Internal
 import styles from './style.scss';
 
-const ReferenceInput = React.createClass( {
+class ReferenceInput extends React.Component{
 	getInitialState() {
 		const { book, chapter } = this.props;
 		return {
@@ -70,6 +70,6 @@ const ReferenceInput = React.createClass( {
 			</form>
 		);
 	}
-} );
+}
 
 export default withStyles( styles )( ReferenceInput );

@@ -14,12 +14,10 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 	return 'todo';
 };
 
-export default React.createClass( {
-	getInitialState() {
-		return {
-			style: {}
-		};
-	},
+class WordSingle extends React.Component {
+	state = {
+		style: {},
+	}
 
 	getLemma() {
 		if ( this.props.lemma) {
@@ -29,7 +27,7 @@ export default React.createClass( {
 		}
 
 		return [];
-	},
+	}
 
 	wordStyle() {
 		let wordStyle = {};
@@ -37,7 +35,7 @@ export default React.createClass( {
 			wordStyle.textTransform = this.props.textTransform;
 		}
 		return wordStyle;
-	},
+	}
 
 	getWord() {
 		const { lemma, morph, version, word } = this.props;
@@ -46,15 +44,15 @@ export default React.createClass( {
 		}
 
 		return word;
-	},
+	}
 
-	clearHighlightWord() {
+	clearHighlightWord = () => {
 		this.props.highlightWord();
-	},
+	};
 
-	highlightWord() {
+	highlightWord = () => {
 		this.props.highlightWord( this.props.lemma );
-	},
+	};
 
 	render() {
 		const { lemma } = this.props;
@@ -73,5 +71,6 @@ export default React.createClass( {
 			);
 
 	}
+}
 
-} );
+export default WordSingle;

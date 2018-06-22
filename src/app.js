@@ -2,7 +2,7 @@
  * External dependencies
  */
 import React from 'react';
-import { Router, Route } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -17,6 +17,6 @@ const routes = {
 
 export default function App( { history } ) {
 	return (
-		<Router history={ history } routes={ routes } />
+		<BrowserRouter><Route path="/" component={ Root } /></BrowserRouter>
 	);
 }

@@ -1,4 +1,4 @@
-import { REHYDRATE } from 'redux-persist/constants'
+import { REHYDRATE } from 'redux-persist/lib/constants'
 
 const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
 	let returnState;
@@ -10,7 +10,7 @@ const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
 			returnState = Object.assign( {}, state, newVersion );
 			break;
 
-		case REHYDRATE:
+		/*case REHYDRATE:
 			returnState = state;
 			if ( action.payload.version ) {
 				javascripture.state.version = action.payload.version;
@@ -20,7 +20,7 @@ const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
 				}
 			}
 
-			break;
+			break;*/
 
 		default:
 			returnState = state;

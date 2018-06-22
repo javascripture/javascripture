@@ -11,7 +11,7 @@ function documentHeight() {
 	return Math.max( body.scrollHeight, body.offsetHeight );
 }
 
-const SingleReference = React.createClass( {
+class SingleReference extends React.Component{
 	render() {
 		return (
 			<div>
@@ -27,6 +27,6 @@ const SingleReference = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 export default withStyles( styles )( SingleReference );

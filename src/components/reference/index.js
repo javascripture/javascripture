@@ -16,34 +16,32 @@ function documentHeight() {
 }
 
 // If you make this a stateless component it breaks hot reloading
-const Reference = React.createClass( {
+class Reference extends React.Component{
 	componentWillMount() {
 		this.setState( {
 			references: this.getReferences( this.props ),
 		} );
 
 		window.addEventListener( 'scroll', this.handleScroll );
-	},
+	}
 
 	componentWillUnmount() {
 		window.removeEventListener( 'scroll', this.handleScroll );
-	},
+	}
 
-	getInitialState() {
-		return {
-			references: {},
-		}
-	},
+	state = {
+		references: {},
+	};
 
 	componentWillReceiveProps( nextProps ) {
 		this.setState( {
 			references: this.getReferences( nextProps ),
 		} );
-	},
+	}
 
 	shouldComponentUpdate( nextProps, nextState ) {
 		return ! isScrolling;
-	},
+	}
 
 	/*componentWillUpdate() {
 		oldHeight = documentHeight();
@@ -67,15 +65,18 @@ const Reference = React.createClass( {
 				document.body.style.overflow = '';
 			}
 		}
-	},
+	}
 
-	handleScroll( event ) {
-		var self = this;
+	handleScroll = ( event ) => {
+		const debouncedScroll = ( callback ) => {
+			return setTimeout( callback, 250 );
+		};
+
 		if ( ! scroller ) {
 			isScrolling = true;
 		}
 		clearTimeout( scroller );
-		scroller = this.debouncedScroll( () => {
+		scroller = debouncedScroll( () => {
 			isScrolling = false;
 			event.pageY;
 			if ( event.pageY < 500 ) {
@@ -86,25 +87,21 @@ const Reference = React.createClass( {
 				this.addNextChapter();
 			}
 		} );
-	},
-
-	debouncedScroll( callback ) {
-		return setTimeout( callback, 250 );
-	},
+	};
 
 	handleWaypointEnter( event, book, chapter ) {
 		if ( event.previousPosition === 'above' ) {
 			this.props.setScrollChapterPrevious( book, chapter );
 		}
-	},
+	}
 
 	handleWaypointLeave( event, book, chapter ) {
 		if ( event.currentPosition === 'above' ) {
 			this.props.setScrollChapter( book, chapter );
 		}
-	},
+	}
 
-	addNextChapter() {
+	addNextChapter = () => {
 		var references = this.state.references.references.slice(),
 			lastReference = references[ references.length - 1 ],
 			currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
@@ -125,9 +122,9 @@ const Reference = React.createClass( {
 				loadingPrev: false,
 			},
 		} );
-	},
+	};
 
-	addPreviousChapter() {
+	addPreviousChapter = () => {
 		document.body.style.overflow = 'hidden';
 
 		var references = this.state.references.references.slice(),
@@ -153,7 +150,7 @@ const Reference = React.createClass( {
 				loadingPrev: true,
 			}
 		} );
-	},
+	};
 
 	getReferences( nextProps ) {
 		const reference = nextProps.hash.split('/')
@@ -179,7 +176,7 @@ const Reference = React.createClass( {
 		}
 
 		return { book, chapter, references, loadingPrev };
-	},
+	}
 
 	render() {
 		const references = this.state.references;
@@ -222,6 +219,6 @@ const Reference = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 export default withStyles( styles )( Reference );

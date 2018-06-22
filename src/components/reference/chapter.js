@@ -49,10 +49,10 @@ const getReferenceFromHash = ( hash ) => {
 	return { book, chapter, verse };
 };
 
-const Chapter = React.createClass( {
+class Chapter extends React.Component{
 	componentDidMount() {
 		this.scrollToCurrentChapter();
-	},
+	}
 
 	componentDidUpdate( prevProps, prevState ) {
 		this.scrollToCurrentChapter();
@@ -73,15 +73,16 @@ const Chapter = React.createClass( {
 				document.body.style.overflow = '';
 			}
 		}*/
-	},
+	}
 
-scrollToCurrentChapter() {
+	scrollToCurrentChapter() {
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
 			window.scrollBy( 0, -50 );
 		}
-	},
+	}
+
 	render() {
 		const { book, chapter, version, highlightWord, hash } = this.props;
 		const currentReference = getReferenceFromHash( hash ),
@@ -119,6 +120,6 @@ scrollToCurrentChapter() {
 			</div>
 		);
 	}
-} );
+}
 
 export default withStyles( styles )( Chapter );

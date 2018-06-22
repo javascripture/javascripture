@@ -1,5 +1,6 @@
 // External dependencies
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -7,42 +8,40 @@ import CancelSvg from '../svg/cancel.js';
 import SearchBlock from '../../containers/search-block';
 import styles from './styles.scss';
 
-const Search = React.createClass( {
-	getInitialState() {
-		return {
-			word: '',
-			lemma: '',
-			morph: '',
-			version: 'kjv',
-			clusivity: 'exclusive',
-			range: 'verse',
-			strict: false
-		};
-	},
+class Search extends React.Component{
+	state = {
+		word: '',
+		lemma: '',
+		morph: '',
+		version: 'kjv',
+		clusivity: 'exclusive',
+		range: 'verse',
+		strict: false
+	};
 
 	change( event ) {
 		let newState = {};
 		newState[ event.target.name ] = event.target.value.trim();
 		this.setState( newState );
-	},
+	}
 
 	submit( event ) {
 		event.preventDefault();
 
 		this.props.addSearch( this.state );
-	},
+	}
 
 	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
 		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
-	},
+	}
 
 	toggleDetails( terms ) {
 		this.props.toggleSearch( terms );
-	},
+	}
 
 	removeWord( terms ) {
 		this.props.removeSearch( terms );
-	},
+	}
 
 	results() {
 		return this.props.searchTerms.map( ( searchTerm, index ) => {
@@ -61,7 +60,7 @@ const Search = React.createClass( {
 				</div>
 			);
 		} );
-	},
+	}
 
 	render() {
 		return (
@@ -115,7 +114,7 @@ const Search = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 Search.propTypes = {};
 

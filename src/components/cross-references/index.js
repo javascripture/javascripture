@@ -1,17 +1,18 @@
 // External dependencies
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
 
-const CrossReferences = React.createClass( {
+class CrossReferences extends React.Component{
 	getCrossReferences() {
     	const bookId = bible.getBookId( this.props.reference.book ),
 			referenceString = bible.Data.books[ bookId - 1 ][ 1 ] + '.' + this.props.reference.chapter + '.' + this.props.reference.verse;
 console.log( referenceString );
 		return crossReferences[ referenceString ];
-	},
+	}
 
 	crossReferences() {
 		if ( ! this.props.reference ) {
@@ -39,7 +40,7 @@ console.log( referenceString );
 				</a>
 			</p>
 		);
-	},
+	}
 
 	showReferences() {
 		return (
@@ -63,7 +64,7 @@ console.log( referenceString );
 				} ) }
 			</ul>
 		);
-	},
+	}
 
 	render() {
 		return (
@@ -74,7 +75,7 @@ console.log( referenceString );
 			</div>
 		);
 	}
-} );
+}
 
 CrossReferences.propTypes = {};
 

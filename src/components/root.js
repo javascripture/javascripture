@@ -11,12 +11,10 @@ import VersionSelector from '../containers/version-selector';
 import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';
 
-const Root = React.createClass( {
-	getInitialState () {
-		return {
-			highlightedWord: ''
-		};
-	},
+class Root extends React.Component{
+	state = {
+		highlightedWord: ''
+	};
 
 	getBodyStyles() {
 		var bodyStyles = 'body { ';
@@ -25,13 +23,13 @@ const Root = React.createClass( {
 		bodyStyles += '}';
 
 		return bodyStyles;
-	},
+	}
 
-	highlightWord( word ) {
+	highlightWord = ( word ) => {
 		this.setState( {
 			highlightedWord: word
 		} );
-	},
+	};
 
 	render() {
 		return (
@@ -50,7 +48,7 @@ const Root = React.createClass( {
 			</div>
 		);
 	}
-} );
+}
 
 //const SettingsTrayWithStyles = withStyles( styles )( SettingsTray );
 
@@ -64,7 +62,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 	}
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps

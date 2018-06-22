@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 import merge from 'lodash/merge';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 const initialState = {
 	book: null,

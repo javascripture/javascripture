@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 const initialState = {
 	book: null,
@@ -9,7 +9,7 @@ const initialState = {
 const reference = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
-			const reference = action.payload.hash.split( '/' );
+			const reference = action.payload.location.hash.split( '/' );
 			if ( ! reference[ 1 ] ) {
 				return state;
 			}

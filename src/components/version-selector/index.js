@@ -1,5 +1,6 @@
 // External dependencies
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -9,38 +10,37 @@ let lastTimeStamp = 0;
 // Internal dependencies
 import styles from './styles.scss';
 
-const VersionSelector = React.createClass( {
+class VersionSelector extends React.Component{
 	changeVersion( event ) {
 		this.props.changeVersion( event.target.name, event.target.value );
-	},
+	}
 
-	goToReference( event ) {
+	goToReference = ( event ) => {
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.referenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
 		console.log( javascripture.modules.reference.createReferenceLink( reference ) );
 		window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
 		this.refs.referenceInput.blur();
-	},
+	};
 
 	componentWillReceiveProps( nextProps ) {
 		this.refs.referenceInput.value = nextProps.value;
-	},
+	}
 
-	goToReferenceField( event ) {
+	goToReferenceField = ( event ) => {
 		this.refs.referenceInput.focus();
 		this.refs.referenceInput.selectionStart = this.refs.referenceInput.selectionEnd = 0;
 		this.refs.referenceInput.value = event.key;
-
-	},
+	}
 
 	componentDidMount() {
 		mousetrap.bind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
-	},
+	}
 
 	componentWillUnmount() {
 		mousetrap.unbind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
-	},
+	}
 
 	render() {
 		return (
@@ -61,7 +61,7 @@ const VersionSelector = React.createClass( {
 			</form>
 		);
 	}
-} );
+}
 
 VersionSelector.propTypes = {};
 

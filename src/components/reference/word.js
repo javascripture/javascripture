@@ -5,7 +5,7 @@ import React from 'react';
 import strongsColor from '../strongs-color.js';
 import WordSingle from '../../containers/word-single.js';
 
-export default React.createClass( {
+class Word extends React.Component{
 	render() {
 		if ( ! this.props.word ) {
 			return null;
@@ -47,4 +47,6 @@ export default React.createClass( {
 			<span>{ wordString } </span>
 		);
 	}
-} );
+}
+
+export default Word;

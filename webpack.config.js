@@ -7,6 +7,7 @@ var webpack = require( 'webpack' ),
 	path = require( 'path' );
 
 var config = {
+	mode: NODE_ENV,
 	entry: {
 		'bundle' : [
 			'./src'
@@ -20,12 +21,8 @@ var config = {
 		devtoolModuleFilenameTemplate: 'app:///[resource-path]'
 	},
 
-	postcss() {
-		return [ autoprefixer ];
-	},
-
 	module: {
-		loaders: [
+		rules: [
 			{
 				test:   /\.jsx?$/,
 				loader: 'babel-loader',
@@ -39,16 +36,16 @@ var config = {
 			{
 				test: /\.scss$/,
 				loaders: [
-					'isomorphic-style',
-					'css?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
-					'postcss',
-					'sass?sourceMap'
+					'isomorphic-style-loader',
+					'css-loader?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+					'postcss-loader',
+					'sass-loader?sourceMap'
 				]
 			}
 		],
 	},
 	resolve: {
-		extensions: [ '', '.json', '.js', '.jsx' ]
+		extensions: [ '.json', '.js', '.jsx' ]
 	},
 	node: {
 		console: false,
@@ -72,7 +69,7 @@ var config = {
 if ( process.env.NODE_ENV !== 'production' ) {
 	// Switches loaders to debug mode. This is required to make CSS hot reloading works correctly (see
 	// http://bit.ly/1VTOHrK for more information).
-	config.debug = true;
+	//config.debug = true;
 
 	// Enables source maps
 	config.devtool = 'eval';
@@ -83,12 +80,12 @@ if ( process.env.NODE_ENV !== 'production' ) {
 		historyApiFallback: true
 	};
 
-	config.module.loaders.unshift( {
+	/*config.module.rules.unshift( {
 		test:   /\.jsx?$/,
-		loader: 'react-hot',
+		loader: 'react-hot-loader/webpack',
 		include: path.join( __dirname, '/src' ),
 		exclude: /node_modules/,
-	} );
+	} );*/
 }
 
 if ( NODE_ENV === 'production' ) {
