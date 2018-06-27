@@ -11,15 +11,14 @@ let lastTimeStamp = 0;
 import styles from './styles.scss';
 
 class VersionSelector extends React.Component{
-	changeVersion( event ) {
+	changeVersion =( event ) => {
 		this.props.changeVersion( event.target.name, event.target.value );
-	}
+	};
 
 	goToReference = ( event ) => {
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.referenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
-		console.log( javascripture.modules.reference.createReferenceLink( reference ) );
 		window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
 		this.refs.referenceInput.blur();
 	};

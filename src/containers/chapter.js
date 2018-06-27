@@ -4,7 +4,8 @@ import Chapter from '../components/reference/chapter';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		version: state.version
+		reference: state.reference,
+		version: state.version,
 	}
 };
 

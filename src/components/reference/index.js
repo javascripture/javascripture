@@ -19,7 +19,7 @@ function documentHeight() {
 class Reference extends React.Component{
 	componentWillMount() {
 		this.setState( {
-			references: this.getReferences( this.props ),
+			references: this.getReferences(),
 		} );
 
 		window.addEventListener( 'scroll', this.handleScroll );
@@ -51,12 +51,12 @@ class Reference extends React.Component{
 		// Only scroll if chapter or book changes
 		const references = this.state.references;
 
-		if ( ! references || ! prevState ) {
+		if ( ! references || ! prevProps ) {
 			return;
 		}
 
-		const prevReferences = prevState.references;
-		if ( ! prevReferences || prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
+		const prevReference = prevProps.reference;
+		if ( ! prevReference || prevReference.book !== references.book || prevReference.chapter !== references.chapter ) {
 			// do nothing
 		} else {
 			if( this.state.references.loadingPrev ) {
@@ -152,15 +152,42 @@ class Reference extends React.Component{
 		} );
 	};
 
-	getReferences( nextProps ) {
-		const reference = nextProps.hash.split('/')
+/*
+const getRandomReference = function() {
+	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
+		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
+		numberOfVerses = bible.Data.verses[bookNumber][chapterNumber],
+		verseNumber = Math.floor(Math.random() * numberOfVerses),
+		referenceObject = {};
+	referenceObject.book = bible.Data.books[bookNumber][0];
+	referenceObject.chapter = chapterNumber + 1;
+	referenceObject.verse = verseNumber + 1;
+	return referenceObject;
+};
+var loadRandomReference = function() {
+	var randomReference = getRandomReference();
+	window.location.hash = javascripture.modules.reference.createReferenceLink( randomReference );
+};
 
-		if ( ! reference[ 1 ] ) {
+if ( localStorage && 'undefined' != typeof( localStorage.reference ) && '{' === localStorage.reference.substr(0, 1) ) {
+	var localReference = $.parseJSON( localStorage.reference );
+}
+if ( window.location.hash !== '' ) {
+	var hash = window.location.hash;
+	window.location.hash = '';
+	window.location.hash = hash;
+} else if ( typeof( localReference ) != 'undefined' && localReference !== '' && localReference.book ) {
+	window.location.hash = javascripture.modules.reference.createReferenceLink( localReference );
+} else {
+	loadRandomReference();
+}*/
+	getReferences( nextProps ) {
+		if ( ! nextProps ) {
 			return null
 		}
 
-		const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
-			chapter = parseInt( reference[ 2 ] ),
+		const book = nextProps.reference.book,
+			chapter = nextProps.reference.chapter,
 			references = [],
 			loadingPrev = false,
 			prevChapterData = bible.parseReference( book + ' ' + chapter ).prevChapter(),

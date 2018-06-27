@@ -14,7 +14,7 @@ const reference = ( state = initialState, action ) => {
 				return state;
 			}
 
-			const book = reference[ 1 ],
+			const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
 				chapter = parseInt( reference[ 2 ] ),
 				verse = reference[ 3 ] ? parseInt( reference[ 3 ] ) : 1;
 

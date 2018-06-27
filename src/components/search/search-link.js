@@ -20,9 +20,9 @@ class SearchLink extends React.Component{
 
 		return (
 			<li className={ className }>
-				<a href={ '#' + createReferenceLink( reference ) } onClick={ () => this.setCurrentVerse( false ) }>
+				<Link to={ createReferenceLink( reference ) } onClick={ () => this.setCurrentVerse( false ) }>
 					{ index + 1 }. { reference.book } { reference.chapter }:{ reference.verse }
-				</a>
+				</Link>
 			</li>
 		);
 	}

@@ -101,7 +101,6 @@ javascripture.modules.reference = {
 		var hash = decodeURIComponent( window.location.hash );
 
 		if ( ! hash ) {
-			console.log( localStorage.reference );
 			referenceObject
 		}
 		if( hash.indexOf( 'search' ) > -1 ) {

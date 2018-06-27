@@ -9,14 +9,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Bookmarker from '../../containers/bookmarker';
 import Verse from './verse';
 import styles from './styles.scss';
-
-const getLanguageFromVersion = function( book, version ) {
-	if ( version === 'original' || version === 'lc' ) {
-		return bible.Data.otBooks.indexOf( book ) > -1 ? 'hebrew' : 'greek';
-	}
-
-	return version;
-};
+import { getLanguageFromVersion } from '../../lib/reference';
 
 const getVerseWrapperStyle = function( language ) {
 	if ( language === 'hebrew' ) {
@@ -78,6 +71,7 @@ class Chapter extends React.Component{
 
 	scrollToCurrentChapter() {
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
+		console.log( currrentChapter );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
 			window.scrollBy( 0, -50 );
@@ -86,14 +80,14 @@ class Chapter extends React.Component{
 
 	render() {
 		const { book, chapter, version, highlightWord, hash } = this.props;
-		const currentReference = getReferenceFromHash( hash ),
+		const currentReference = this.props.reference,
 			leftLanguage = getLanguageFromVersion( book, version.left ),
 			rightLanguage = getLanguageFromVersion( book, version.right ),
 			leftChapterData = javascripture.data[ leftLanguage ][ book ][ chapter - 1 ],
 			rightChapterData = javascripture.data[ rightLanguage ][ book ][ chapter - 1 ],
 			verses = leftChapterData.map( ( verse, index ) => {
 				let ref = null;
-				if ( currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( index + 1 ) ) {
+				if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( index + 1 ) ) {
 					ref = 'current';
 				}
 
@@ -102,14 +96,14 @@ class Chapter extends React.Component{
 						<div className={ styles.verseWrapper } key={ 'kjv' + index  } style={ getVerseWrapperStyle( leftLanguage ) }>
 							{ index + 1 }.
 							<span  className={ styles.verse } style={ getVerseStyle( leftLanguage ) }>
-								<Verse verse={ verse } index={ index } version={ leftLanguage } highlightWord={ highlightWord } />
+								<Verse verse={ verse } index={ index } version={ version.left } language={ leftLanguage } highlightWord={ highlightWord } />
 							</span>
 						</div>
 						<Bookmarker book={ book } chapter={ chapter } verse={ index + 1 } />
 						<div className={ styles.verseWrapper } key={ 'hebrew' + index } style={ getVerseWrapperStyle( rightLanguage ) }>
 							{ index + 1 }.
 							<span  className={ styles.verse } style={ getVerseStyle( rightLanguage ) }>
-								<Verse className={ styles.verseContainer } verse={ rightChapterData[ index ] } index={ index } version={ rightLanguage } highlightWord={ highlightWord } />
+								<Verse className={ styles.verseContainer } verse={ rightChapterData[ index ] } index={ index } version={ version.right } language={ rightLanguage } highlightWord={ highlightWord } />
 							</span>
 						</div>
 					</div>

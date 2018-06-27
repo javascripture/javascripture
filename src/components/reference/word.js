@@ -18,7 +18,7 @@ class Word extends React.Component{
 		let wordString;
 
 		// Handle dvnNm
-		if ( lemma === 'H3068' && this.props.version === 'kjv' ) {
+		if ( ( lemma === 'H3068' || lemma === 'H3069' || lemma === 'H3050' ) && this.props.version === 'kjv' ) {
 			var wordArray,
 				wordArrayEnd = word.split( '</dvnNm>' );
 
@@ -34,12 +34,12 @@ class Word extends React.Component{
 						textTransform = 'uppercase';
 					}
 
-					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } highlightWord={ this.props.highlightWord } />;
+					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } language={ this.props.language } highlightWord={ this.props.highlightWord } />;
 				}, this );
 			}
 		} else {
 			wordString = word && word.split('/').map( ( wordValue, key ) => (
-				<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } highlightWord={ this.props.highlightWord } />
+				<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } language={ this.props.language } highlightWord={ this.props.highlightWord } />
 			) );
 		}
 

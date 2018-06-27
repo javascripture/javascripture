@@ -23,6 +23,7 @@ self.postMessage( { task: 'loading', html: 'loading API' } );
 importScripts('../api/word.js');
 importScripts('../api/searchApi.js');
 importScripts('../api/reference.js');
+self.postMessage( { task: 'loading', html: 'loading complete!' } );
 self.addEventListener('message', function( e ) {
 	var result;
 

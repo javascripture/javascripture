@@ -2,6 +2,12 @@ import { connect } from 'react-redux';
 import { setScrollChapter } from '../actions';
 import Reference from '../components/reference';
 
+const mapStateToProps = ( { reference }, ownProps ) => {
+	return {
+		reference: reference
+	}
+};
+
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		setScrollChapter: ( book, chapter ) => {
@@ -18,7 +24,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const ReferenceContainer = connect(
- 	null,
+ 	mapStateToProps,
  	mapDispatchToProps
 )( Reference )
 

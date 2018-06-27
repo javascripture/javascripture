@@ -25,7 +25,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		changeVersion: ( side, version ) => {
 			dispatch( changeVersion( side, version ) );
-			javascripture.modules.reference.loadReferenceFromHash();
 		},
 	}
 };
