@@ -38,7 +38,7 @@ class WordSingle extends React.Component {
 	}
 
 	getWord() {
-		const { lemma, morph, version, language, word } = this.props;
+		const { lemma, morph, version, word } = this.props;
 		if ( version === 'lc' ) {
 			return getByLemmaAndMorph( lemma, morph );
 		}
@@ -54,22 +54,26 @@ class WordSingle extends React.Component {
 		this.props.highlightWord( this.props.lemma );
 	};
 
+	getTitle = () => {
+		const { lemma, morph } = this.props;
+		return morph ? lemma + ' ' + morph : lemma;
+	};
+
 	render() {
 		const { lemma } = this.props;
-			return (
-				<span
-					className={ lemma }
-					onMouseOver={ this.highlightWord }
-					onMouseOut={ this.clearHighlightWord }
-					onClick={ this.props.click }
-					title={ lemma }
-					style={ this.wordStyle() }
-					key={ lemma }
-					>
-					{ this.getWord() }
-				</span>
-			);
-
+		return (
+			<span
+				className={ lemma }
+				onMouseOver={ this.highlightWord }
+				onMouseOut={ this.clearHighlightWord }
+				onClick={ this.props.click }
+				title={ this.getTitle() }
+				style={ this.wordStyle() }
+				key={ lemma }
+				>
+				{ this.getWord() }
+			</span>
+		);
 	}
 }
 
