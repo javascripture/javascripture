@@ -21,7 +21,6 @@ class Root extends React.Component{
 		bodyStyles += 'font-family: ' + this.props.settings.fontFamily + ';';
 		bodyStyles += 'font-size: ' + this.props.settings.fontSize + ';';
 		bodyStyles += '}';
-
 		return bodyStyles;
 	}
 
@@ -33,7 +32,7 @@ class Root extends React.Component{
 
 	render() {
 		return (
-			<div style={{ fontFamily: 'Helvetica, Arial, sans-seif' }}>
+			<div>
 				<style>{ this.getBodyStyles() }</style>
 				<KeyboardShortcuts />
 				<WordHighlight word={ this.state.highlightedWord } />

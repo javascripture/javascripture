@@ -3,7 +3,8 @@ import WordHighlight from '../components/word-highlight';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		wordHighlight: state.wordHighlight
+		wordHighlight: state.wordHighlight,
+		settings: state.settings,
 	}
 };
 

@@ -65,7 +65,7 @@ body {
 a {
   text-decoration: none; }
 
-.trans-change.added {
+.added {
   font-style: italic; }
 
 .current {
@@ -117,7 +117,7 @@ body > .wrapper {
   color: #000;
   font-style: normal; }
 
-.verse .web span, .verse span.added, transchange {
+.added {
   color: #aaa;
   font-style: italic; }
 
@@ -142,7 +142,7 @@ body > .wrapper {
 .reference span.word:hover {
   background: #eff; }
 
-.reference span.word.added:hover {
+.added:hover {
   background: none; }
 
 /*#verse.isolate {

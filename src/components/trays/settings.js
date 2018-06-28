@@ -76,18 +76,11 @@ class SettingsTray extends React.Component{
 									<li className={ styles.settingsLi }>
 										<label>Colours:</label>
 										<select value={ this.props.settings.subdue } name="subdue" onChange={ this.changeSetting }>
-											<option value=".9">Very Bright</option>
-											<option value=".75">Bright</option>
-											<option value=".5">Normal</option>
-											<option value=".3">Dark</option>
-											<option value=".2">Very Dark</option>
-										</select>
-									</li>
-									<li className={ styles.settingsLi }>
-										<label>Highlight words with:</label>
-										<select value={ this.props.settings.highlightWordsWith } id="highlightWordsWith" name="highlightWordsWith" onChange={ this.changeSetting } >
-											<option value="same">Same Strong's number</option>
-											<option value="family">Same family</option>
+											<option value="90%">Very Bright</option>
+											<option value="75%">Bright</option>
+											<option value="50%">Normal</option>
+											<option value="30%">Dark</option>
+											<option value="20%">Very Dark</option>
 										</select>
 									</li>
 								</ul>
@@ -102,6 +95,16 @@ class SettingsTray extends React.Component{
 		);
 	}
 }
+
+/*
+<li className={ styles.settingsLi }>
+	<label>Highlight words with:</label>
+	<select value={ this.props.settings.highlightWordsWith } id="highlightWordsWith" name="highlightWordsWith" onChange={ this.changeSetting } >
+		<option value="same">Same Strong's number</option>
+		<option value="family">Same family</option>
+	</select>
+</li>
+*/
 
 SettingsTray.propTypes = {};
 

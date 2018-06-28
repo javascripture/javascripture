@@ -1,12 +1,11 @@
-var getStrongsColor = function( lemma ) {
+var getStrongsColor = function( lemma, lightness ) {
 		var strongsInt = parseInt( lemma );
 		if ( isNaN ( strongsInt ) ) {
 			strongsInt = 0;
 		}
 		var theSizeOfAColorSegment = 360 / 8000,
 			hue = Math.floor( strongsInt * theSizeOfAColorSegment ),
-			staturation = '50%',
-			lightness = '50%';
+			staturation = '50%';
 		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 };
 

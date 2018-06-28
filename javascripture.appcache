@@ -31,7 +31,6 @@ api/word.js
 
 #modules
 js/functionalScripts.js
-modules/translateLiterally.js
 modules/reference.js
 
 build/bundle.js

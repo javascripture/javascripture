@@ -7,7 +7,7 @@ import { HashRouter, Route } from 'react-router-dom';
 /**
  * Internal dependencies
  */
-import Root from './components/root';
+import Root from './containers/root';
 
 const routes = {
 	path: '/',
