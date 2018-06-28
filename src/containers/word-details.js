@@ -12,9 +12,6 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	javascripture.reactHelpers.addWord = addWord;
-	javascripture.reactHelpers.removeWord = removeWord;
-
 	return {
 		addWord: ( lemma, open, morphology, version ) => {
 			dispatch( addWord( { lemma, open, morphology, version } ) );

@@ -12,6 +12,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
+	javascripture.reactHelpers.dispatch = dispatch;
 	return {
 		addSearch: ( terms ) => {
 			dispatch( addSearch( terms, 'search' ) );

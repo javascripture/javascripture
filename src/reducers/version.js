@@ -1,5 +1,3 @@
-import { REHYDRATE } from 'redux-persist/lib/constants'
-
 const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
 	let returnState;
 	switch ( action.type ) {
@@ -9,18 +7,6 @@ const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
 
 			returnState = Object.assign( {}, state, newVersion );
 			break;
-
-		/*case REHYDRATE:
-			returnState = state;
-			if ( action.payload.version ) {
-				javascripture.state.version = action.payload.version;
-				returnState = action.payload.version;
-				if ( javascripture.modules.reference ) {
-					javascripture.modules.reference.loadReferenceFromHash();
-				}
-			}
-
-			break;*/
 
 		default:
 			returnState = state;

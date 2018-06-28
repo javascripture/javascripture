@@ -5,6 +5,12 @@ import { connect } from 'react-redux';
 import WordBlock from '../components/word-details/word-block';
 import { addWord, removeSearch, removeWord, toggleWord } from '../actions'
 
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		settings: state.settings,
+	};
+};
+
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addWord: ( strongsNumber ) => {
@@ -35,8 +41,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const WordBlockContainer = connect(
- 	null,
- 	mapDispatchToProps
+ 	mapStateToProps,
+ 	mapDispatchToProps,
 )( WordBlock )
 
 export default WordBlockContainer;

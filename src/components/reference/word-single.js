@@ -38,7 +38,7 @@ class WordSingle extends React.Component {
 	}
 
 	getWord() {
-		const { lemma, morph, version, word } = this.props;
+		const { lemma, morph, version, language, word } = this.props;
 		if ( version === 'lc' ) {
 			return getByLemmaAndMorph( lemma, morph );
 		}

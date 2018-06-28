@@ -22,7 +22,7 @@ javascripture.api.search = {
 		references: [], //used to create an array of references
 		matches: {} //used to keep track of which word has been matched when searching - for when you need to match more than one word
 	},
-	getReferences: function (parameters) {
+	getReferences: function ( parameters ) {
 		var self = this;
 		self.parameters = parameters;
 		this.lookForTerm();

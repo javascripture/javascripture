@@ -1,5 +1,7 @@
+import { createReferenceLink } from '../lib/reference.js';
+
 export const goToReference = ( reference ) => {
-	window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
+	window.location.hash = createReferenceLink( reference );
 }
 
 export const setTrayVisibilityFilter = ( filter ) => {

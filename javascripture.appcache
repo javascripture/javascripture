@@ -5,6 +5,7 @@ CACHE MANIFEST
 index.html
 css/layout.css
 manifest.json
+assets/javascripture.svg
 
 #libs
 lib/MorphCodes.js
@@ -26,12 +27,8 @@ data/morphology.js
 data/literalConsistent.js
 data/literalConsistentExtra.js
 
-#apis
-api/word.js
-
 #modules
 js/functionalScripts.js
-modules/reference.js
 
 build/bundle.js
 

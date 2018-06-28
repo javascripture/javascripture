@@ -1,3 +1,5 @@
+import { getFamily } from '../lib/word';
+
 var getStrongsColor = function( lemma, lightness ) {
 		var strongsInt = parseInt( lemma );
 		if ( isNaN ( strongsInt ) ) {
@@ -14,28 +16,19 @@ var getHue = function( strongsInt ) {
 	return strongsInt * theSizeOfAColorSegment;
 };
 
-var getSaturation = function( strongsInt ) {
-	return '50%';
-};
-
-var getLightness = function( strongsInt ) {
-	return '50%';
-};
-
-var getStrongsStyle = function ( strongsNumber ) {
-	highlightWordsWith
-	var hightlightFamilies = javascripture.state.settings.highlightWordsWith === 'family',
+var getStrongsStyle = function ( strongsNumber, lightness, highlightWordsWith ) {
+	var hightlightFamilies = highlightWordsWith === 'family',
 		className,
 		classInt;
 	if ( hightlightFamilies ) {
-		className = javascripture.api.word.getFamily( strongsNumber ) + '-family';
+		className = getFamily( strongsNumber ) + '-family';
 		classInt = parseFloat( strongsNumber.substring( 1, strongsNumber.length ), 10 );
 	} else {
 		className = strongsNumber;
 		classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
 	}
 
-	var newColor = getStrongsColor( classInt );
+	var newColor = getStrongsColor( classInt, lightness );
 	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important;}';
 };
 

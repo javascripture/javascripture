@@ -19,7 +19,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		click: () => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
-			ownProps.lemma.split( ' ' ).map( strongsNumber => {
+			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
 				if ( strongsNumber === "G3588" ) {
 					return;
 				}
@@ -28,7 +28,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 					strongsNumber,
 					open: true,
 					morphology: ownProps.morph,
-					version: ownProps.version,
+					version: ownProps.language,
 				} ) );
 			} );
 		},

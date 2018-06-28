@@ -13,6 +13,7 @@ import SearchBlock from '../../containers/search-block';
 import { getStyle } from '../strongs-color.js';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
+import { getFamily } from '../../lib/word';
 
 const fill = '#fff';
 
@@ -51,7 +52,7 @@ class WordBlock extends React.Component {
 	}
 
 	getClassName( rootNumber ) {
-		return javascripture.api.word.getFamily( rootNumber ) + '-family ' + rootNumber + ' word-tree';
+		return getFamily( rootNumber ) + '-family ' + rootNumber + ' word-tree';
 	}
 
 	getRoots() {
@@ -98,7 +99,7 @@ class WordBlock extends React.Component {
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ],
-			wordFamily = javascripture.api.word.getFamily( strongsNumber ),
+			wordFamily = getFamily( strongsNumber ),
 			className = classnames( styles.wordBlock, this.props.open ? styles.visible : styles.hidden );
 
 		return (
@@ -141,7 +142,7 @@ class WordBlock extends React.Component {
 	render() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ],
-			wordFamily = javascripture.api.word.getFamily( strongsNumber );
+			wordFamily = getFamily( strongsNumber );
 
 		if ( strongsNumber === 'G3588' ) {
 			return null;
@@ -150,7 +151,7 @@ class WordBlock extends React.Component {
 		if ( wordDetail ) {
 			return (
 				<div>
-					<style>{ getStyle( strongsNumber ) }</style>
+					<style>{ getStyle( strongsNumber, this.props.settings.subdue, this.props.settings.highlightWordsWith ) }</style>
 					<h2
 						className={ this.getClassName( strongsNumber ) + ' ' + styles.title }
 						onClick={ () => this.toggleDetails( false ) }

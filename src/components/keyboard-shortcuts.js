@@ -3,6 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
 
+// Internal
+import { createReferenceLink } from '../lib/reference.js';
+
 // Component variables
 let lastTimeStamp = 0;
 
@@ -35,7 +38,7 @@ class KeyboardShortcuts extends React.Component{
 		if ( bible.Data.verses[bookId - 1][ chapterToGoTo - 1] ) {
 			var newReference = currentReference;
 			newReference.chapter = chapterToGoTo;
-			window.location.hash = javascripture.modules.reference.createReferenceLink( newReference );
+			window.location.hash = createReferenceLink( newReference );
 		}
 
 		lastTimeStamp = currentTimeStamp;

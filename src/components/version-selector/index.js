@@ -2,7 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
+
+// Internal dependencies
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { createReferenceLink } from '../../lib/reference.js';
 
 // Component variables
 let lastTimeStamp = 0;
@@ -19,7 +22,7 @@ class VersionSelector extends React.Component{
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.referenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
-		window.location.hash = javascripture.modules.reference.createReferenceLink( reference );
+		window.location.hash = createReferenceLink( reference );
 		this.refs.referenceInput.blur();
 	};
 

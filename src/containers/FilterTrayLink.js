@@ -13,10 +13,6 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
-	// Delete later
-	javascripture.reactHelpers.dispatch = dispatch;
-	javascripture.reactHelpers.setTrayVisibilityFilter = setTrayVisibilityFilter;
-
 	return {
 		activate: () => {
 			dispatch( setTrayVisibilityFilter( ownProps.filter ) )

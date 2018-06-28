@@ -112,10 +112,8 @@
 
 <script>
 	var javascripture = {
-		api: {},
 		data: {},
-		modules: {},
-		reactHelpers: {}
+		reactHelpers: {},
 	};
 	var worker = new Worker('workers/worker.js');
 </script>
@@ -142,16 +140,10 @@
 <script src="data/morphology.js"></script>
 <script src="data/literalConsistent.js"></script>
 <script src="data/literalConsistentExtra.js"></script>
-
-<!-- apis -->
-<script src="api/word.js"></script>
-
 <script src="build/bundle.js"></script>
 
 <!--modules -->
 <script src="js/functionalScripts.js"></script>
-<script src="modules/translateLiterally.js"></script>
-<script src="modules/reference.js"></script>
 
 <script>
 	// Attach web workers

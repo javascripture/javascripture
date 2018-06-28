@@ -3,7 +3,7 @@ const initialState = {
 	fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
 	highlightWordsWith: "same",
 	referencePicker: "select",
-	subdue: ".5",
+	subdue: "50%",
 	type: "SETTINGS_CHANGE"
 }
 
