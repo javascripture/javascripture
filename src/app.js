@@ -2,12 +2,41 @@
  * External dependencies
  */
 import React from 'react';
+import { render } from 'react-dom';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { createBrowserHistory } from 'history';
+import { connectRouter, ConnectedRouter, routerMiddleware } from 'connected-react-router'
+import thunk from 'redux-thunk';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { HashRouter, Route } from 'react-router-dom';
 
 /**
  * Internal dependencies
  */
+import reducers from './reducers';
+import Stylizer, { insertCss } from './lib/stylizer';
 import Root from './containers/root';
+
+const config = {
+	key: 'primary',
+	storage
+}
+
+const history = createBrowserHistory()
+
+let reducer = persistCombineReducers(config, reducers);
+
+const store = createStore(
+	connectRouter( history )( reducer ),
+	window.devToolsExtension ? window.devToolsExtension() : f => f,
+	compose(
+		applyMiddleware( routerMiddleware( history ), thunk )
+    )
+);
+
+persistStore( store );
 
 const routes = {
 	path: '/',
@@ -15,8 +44,16 @@ const routes = {
 	component: Root,
 };
 
-export default function App( { history } ) {
+const App = () => {
 	return (
-		<HashRouter><Route path="/" component={ Root } /></HashRouter>
+		<Provider store={ store }>
+			<ConnectedRouter history={ history }>
+				<Stylizer onInsertCss={ insertCss }>
+					<HashRouter><Route path="/" component={ Root } /></HashRouter>
+				</Stylizer>
+			</ConnectedRouter>
+		</Provider>
 	);
-}
+};
+
+export default App;
