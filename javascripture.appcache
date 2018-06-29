@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 8.5 // remove click event on verse
+#version: 9.1 // reduxify
 
 index.html
 css/layout.css
