@@ -7,17 +7,19 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 
 class KJVDef extends React.Component{
-	searchWord() {
+	searchWord = () => {
 		const searchParameters = {
 			clusivity: 'exclusive',
 			language: 'kjv',
+			version: 'kjv',
 			lemma: this.props.strongsNumber,
 			range: 'verse',
-			word: this.props.word
+			word: this.props.word,
+			morph: '',
 		};
 
-		searchHelperFunction( searchParameters, 'search' );
-	}
+		this.props.addSearch( searchParameters, 'search' );
+	};
 
 	render() {
 		return <span className={ styles.fakeLink } onClick={ this.searchWord }>{ this.props.word }</span>;

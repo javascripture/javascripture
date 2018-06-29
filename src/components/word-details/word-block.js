@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
-import KJVDef from './kjv-def';
+import KJVDef from '../../containers/kjv-def';
 import morphology from './morphology';
 import SearchBlock from '../../containers/search-block';
 import { getStyle } from '../strongs-color.js';
