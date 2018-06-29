@@ -8,7 +8,6 @@ import KeyboardShortcuts from '../components/keyboard-shortcuts';
 import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse } from '../actions'
 
 function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
-	console.log( 'getCurrentReferenceOffset2' );
 	const currentSearchResults = find( searchResults, searchResult => {
 		return isEqual( searchResult.terms, currentReference.terms );
 	} )	;
@@ -20,10 +19,11 @@ function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
 	return null;
 };
 
-const mapStateToProps = ( { searchResults, currentReference } ) => {
+const mapStateToProps = ( { searchResults, currentReference, reference } ) => {
 	return {
 		nextReference: getCurrentReferenceOffset( searchResults, currentReference, 1 ),
 		previousReference: getCurrentReferenceOffset( searchResults, currentReference, -1 ),
+		reference: reference,
 	}
 };
 

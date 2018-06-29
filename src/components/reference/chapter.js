@@ -25,7 +25,7 @@ const getVerseWrapperStyle = function( language ) {
 const getVerseStyle = function( language ) {
 	if ( language === 'hebrew' ) {
 		return {
-			fontFamily: 'Times, serif',
+			fontFamily: 'Times New Roman, Times, serif',
 			fontSize: '140%',
 			lineHeight: '1em',
 			verticalAlign: 'middle'
@@ -50,28 +50,10 @@ class Chapter extends React.Component{
 
 	componentDidUpdate( prevProps, prevState ) {
 		this.scrollToCurrentChapter();
-		// Only scroll if chapter or book changes
-		/*const references = this.state.references;
-
-		if ( ! references || ! prevState ) {
-			return;
-		}
-
-		const prevReferences = prevState.references;
-		if ( ! prevReferences || prevReferences.book !== references.book || prevReferences.chapter !== references.chapter ) {
-			this.scrollToCurrentChapter();
-		} else {
-			if( this.state.references.loadingPrev ) {
-				const newHeight = documentHeight();
-				window.scrollBy( 0, newHeight - oldHeight );
-				document.body.style.overflow = '';
-			}
-		}*/
 	}
 
 	scrollToCurrentChapter() {
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
-		console.log( currrentChapter );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
 			window.scrollBy( 0, -50 );

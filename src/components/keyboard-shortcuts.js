@@ -7,7 +7,8 @@ import mousetrap from 'mousetrap';
 import { createReferenceLink } from '../lib/reference.js';
 
 // Component variables
-let lastTimeStamp = 0;
+let lastTimeStamp = 0,
+	waiter;
 
 class KeyboardShortcuts extends React.Component{
 	goToNextCurrentVerse() {
@@ -27,18 +28,23 @@ class KeyboardShortcuts extends React.Component{
 
 	goToChapter( event, combo ) {
 		const currentTimeStamp = Math.floor( event.timeStamp ),
-			currentReference = javascripture.modules.reference.getReferenceFromHash(),
-			bookId = bible.getBookId( currentReference.book );
+			bookId = bible.getBookId( this.props.reference.book );
 
 		let chapterToGoTo = combo;
-		if ( currentTimeStamp - lastTimeStamp < 750) {
-			chapterToGoTo = currentReference.chapter + combo;
+		if ( currentTimeStamp - lastTimeStamp < 500) {
+			chapterToGoTo = this.props.reference.chapter + combo;
 		}
 
 		if ( bible.Data.verses[bookId - 1][ chapterToGoTo - 1] ) {
-			var newReference = currentReference;
+			var newReference = this.props.reference;
 			newReference.chapter = chapterToGoTo;
-			window.location.hash = createReferenceLink( newReference );
+			newReference.verse = 1;
+
+			clearTimeout( waiter );
+			waiter = setTimeout( () => {
+				window.location.hash = createReferenceLink( newReference );
+			}, 500 );
+
 		}
 
 		lastTimeStamp = currentTimeStamp;
@@ -47,13 +53,13 @@ class KeyboardShortcuts extends React.Component{
 	componentDidMount() {
 		mousetrap.bind( [ '=' ], () => this.goToNextCurrentVerse( false ) );
 		mousetrap.bind( [ '-' ], () => this.goToPreviousCurrentVerse( false ) );
-		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], this.goToChapter );
+		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => this.goToChapter( event, combo ) );
 	}
 
 	componentWillUnmount() {
 		mousetrap.unbind( [ '=' ], () => this.goToNextCurrentVerse( false ) );
 		mousetrap.unbind( [ '-' ], () => this.goToPreviousCurrentVerse( false ) );
-		mousetrap.unbind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], this.goToChapter );
+		mousetrap.unbind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => this.goToChapter( event, combo ) );
 	}
 
 	render() {
