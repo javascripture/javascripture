@@ -199,7 +199,7 @@ class Reference extends React.Component{
 					}
 
 					return (
-						<div key={ book + chapter }>
+						<div className={ styles.referenceInner } key={ book + chapter }>
 							<Waypoint
 								onEnter={ ( ( event ) => this.handleWaypointEnter( event, book, chapter ) ) }
 								onLeave={ ( ( event ) => this.handleWaypointLeave( event, book, chapter ) ) }
