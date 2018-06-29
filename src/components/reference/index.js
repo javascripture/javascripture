@@ -61,8 +61,11 @@ class Reference extends React.Component{
 		} else {
 			if( this.state.references.loadingPrev ) {
 				const newHeight = documentHeight();
-				window.scrollBy( 0, newHeight - oldHeight );
 				document.body.style.overflow = '';
+				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+				if ( ! isChrome || ( isChrome && window.scrollY === 0 ) ) {
+					window.scrollBy( 0, newHeight - oldHeight );
+				}
 			}
 		}
 	}
@@ -78,12 +81,11 @@ class Reference extends React.Component{
 		clearTimeout( scroller );
 		scroller = debouncedScroll( () => {
 			isScrolling = false;
-			event.pageY;
-			if ( event.pageY < 500 ) {
+			if ( window.scrollY < 500 ) {
 				this.addPreviousChapter();
 			}
 
-			if ( documentHeight() - event.pageY - document.documentElement.clientHeight < 1000 ) {
+			if ( documentHeight() - window.scrollY - document.documentElement.clientHeight < 1000 ) {
 				this.addNextChapter();
 			}
 		} );
