@@ -6,6 +6,8 @@ var webpack = require( 'webpack' ),
 	NODE_ENV = process.env.NODE_ENV || 'development',
 	path = require( 'path' );
 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 var config = {
 	mode: NODE_ENV,
 	entry: {
@@ -89,7 +91,11 @@ if ( process.env.NODE_ENV !== 'production' ) {
 }
 
 if ( NODE_ENV === 'production' ) {
-	config.plugins.push(
+	config.optimization = {};
+	config.optimization.minimizer = [
+		new UglifyJsPlugin()
+	];
+	/*config.plugins.push(
 		new webpack.optimize.UglifyJsPlugin( {
 			output: {
 				comments: false
@@ -98,7 +104,7 @@ if ( NODE_ENV === 'production' ) {
 				warnings: false
 			}
 		} )
-	);
+	);*/
 }
 
 module.exports = config;
