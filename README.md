@@ -1,5 +1,5 @@
 # Javascripture
-Javascript bible
+Javascript bible, written in React and Redux
 
 Make sure you have git, node and npm installed
 Clone this repository locally with git@github.com:scruffian/Javascripture.git

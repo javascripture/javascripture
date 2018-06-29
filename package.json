@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "production": "NODE_ENV=production node_modules/.bin/webpack -p",
-    "start": "NODE_ENV=production npm install && webpack-dev-server -p --inline --hot --port 7777",
+    "start": "npm install && webpack-dev-server --inline --hot --port 7777",
     "test": "test"
   },
   "repository": {

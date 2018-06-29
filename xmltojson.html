@@ -11,7 +11,7 @@
 	</head>
 	<body>
 
-<script src="lib/jquery-2.0.3.min.js"></script>
+<script src="create-hebrew-json/jquery-3.3.1.min.js"></script>
 
 <script>
 var javascripture = {
@@ -21,8 +21,73 @@ var javascripture = {
 	modules: {}
 };
 
+stripPointing = ( word ) => {
+	return word.replace(/֑/gi,'')
+		.replace(/֓/gi,'')
+		.replace(/֕/gi,'')
+		.replace(/֖/gi,'')
+		.replace(/֘/gi,'')
+		.replace(/֙/gi,'')
+		.replace(/֚/gi,'')
+		.replace(/֛/gi,'')
+		.replace(/֜/gi,'')
+		.replace(/֝/gi,'')
+		.replace(/֞/gi,'')
+		.replace(/֟/gi,'')
+		.replace(/֠/gi,'')
+		.replace(/֡/gi,'')
+		.replace(/֢/gi,'')
+		.replace(/֣/gi,'')
+		.replace(/֤/gi,'')
+		.replace(/֥/gi,'')
+		.replace(/֦/gi,'')
+		.replace(/֧/gi,'')
+		.replace(/֩/gi,'')
+		.replace(/֪/gi,'')
+		.replace(/֫/gi,'')
+		.replace(/֬/gi,'')
+		.replace(/֭/gi,'')
+		.replace(/֮/gi,'')
+		.replace(/֯/gi,'')
+		.replace(/ֱ/gi,'')
+		.replace(/ֲ/gi,'')
+		.replace(/ֳ/gi,'')
+		.replace(/ֵ/gi,'')
+		.replace(/ֶ/gi,'')
+		.replace(/ַ/gi,'')
+		.replace(/ָ/gi,'')
+		.replace(/ֹ/gi,'')
+		.replace(/ֺ/gi,'')
+		.replace(/ֻ/gi,'')
+		.replace(/ּ/gi,'')
+		.replace(/ֽ/gi,'')
+		.replace(/־/gi,'')
+		.replace(/׀/gi,'')
+		.replace(/ׂ/gi,'')
+		.replace(/׃/gi,'')
+		.replace(/ׄ/gi,'')
+		.replace(/ׇ/gi,'')
+		.replace(/ׁ/gi,'')
+		.replace(/ִ/gi,'')
+		.replace(/ְ/,'')
+		//new ones
+		.replace(/ְ/,'')
+		.replace(/ְ/,'')
+		.replace(/ְ/,'')
+		.replace(/֗/,'')
+		.replace(/ְ/,'')
+		.replace(/ְ/,'')
+		.replace(/֔/,'')
+		.replace(/ְ/,'')
+		.replace(/ְ/,'')
+		.replace(/֨/,'')
+		.replace(/֑/,'')
+		.replace(/֗/,'')
+		.replace(/֨/,'')
+		.replace(/֔/,'');
+		//.replace(/\//,'');
+};
 </script>
-<script src="modules/hebrew.js"></script>
 
 <div id="result"></div>
 
@@ -99,7 +164,7 @@ function createChapterArray( chapterElement ) {
 			var text =  wordElement['#text'];
 			var word;
 			if ( 'undefined' !== typeof text.replace ) {
-				word = javascripture.modules.hebrew.stripPointing( text );
+				word = stripPointing( text );
 			}
 
 			var lemma = wordElement['@attributes'].lemma;
@@ -135,7 +200,7 @@ function createChapterArray( chapterElement ) {
 	hebrew = {};
 	hebrewReordered = {};
 	var books = [
-		/*{ bookName: 'Genesis', bookFile: 'Gen' },
+		{ bookName: 'Genesis', bookFile: 'Gen' },
 		{ bookName: 'Exodus', bookFile: 'Exod'},
 		{ bookName: 'Leviticus', bookFile: 'Lev'},
 		{ bookName: 'Numbers', bookFile: 'Num'},
@@ -153,7 +218,7 @@ function createChapterArray( chapterElement ) {
 		{ bookName: 'Nehemiah', bookFile: 'Neh'},
 		{ bookName: 'Esther', bookFile: 'Esth'},
 		{ bookName: 'Job', bookFile: 'Job'},
-		{ bookName: 'Psalm', bookFile: 'Ps'},*
+		{ bookName: 'Psalm', bookFile: 'Ps'},
 		{ bookName: 'Proverbs', bookFile: 'Prov'},
 		{ bookName: 'Ecclesiastes', bookFile: 'Eccl'},
 		{ bookName: 'Song of Songs', bookFile: 'Song'},
@@ -172,8 +237,8 @@ function createChapterArray( chapterElement ) {
 		{ bookName: 'Habakkuk', bookFile: 'Hab'},
 		{ bookName: 'Zephaniah', bookFile: 'Zeph'},
 		{ bookName: 'Haggai', bookFile: 'Hag'},
-		{ bookName: 'Zechariah', bookFile: 'Zech'},*/
-		{ bookName: 'Malachi', bookFile: 'Mal' }
+		{ bookName: 'Zechariah', bookFile: 'Zech'},
+		{ bookName: 'Malachi', bookFile: 'Mal' },
 	];
 
 
@@ -186,7 +251,7 @@ function rotator(arr) {
 				books.forEach(function( book ) {
 					hebrewReordered[ book.bookName ].forEach( function( chapter, chapterIndex ) {
 						hebrewReordered[ book.bookName ][ chapterIndex ] = chapter.filter( function( verse ) {
-							return verse.length > 0;
+							return verse && verse.length > 0;
 						} );
 					} );
 				} );
