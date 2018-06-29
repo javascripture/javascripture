@@ -2,6 +2,9 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+//import { createBrowserHistory } from 'history';
+
+//const history = createBrowserHistory();
 
 // Internal
 import styles from './styles.scss';
@@ -12,14 +15,7 @@ class BookControl extends React.Component{
 	};
 
 	goToReference = () => {
-		// hide the trays
-		//if ( window.innerWidth < 900 ) {
-			//this.props.onChangeDisplayState();
-		//}
-
-		// load the reference
-		window.location.hash = '/' + this.props.name + '/' + this.state.chapter + '/1/'
-		//browserHistory.push( '/' + this.props.name + '/' + this.state.chapter + '/' );
+		this.props.goToReference( '/#/' + this.props.name + '/' + this.state.chapter + '/1/' );
 	};
 
 	handleMouseMove = ( event ) => {

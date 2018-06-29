@@ -4,7 +4,7 @@
 import React from 'react';
 
 // Internal
-import BookControl from './book-control';
+import BookControl from '../../containers/book-control';
 
 class ReferenceSelector extends React.Component{
 	state = {
