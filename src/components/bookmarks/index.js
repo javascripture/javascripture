@@ -1,13 +1,14 @@
 // External dependencies
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Cancel from '../svg/cancel';
 import styles from './styles.scss';
+import { createReferenceLink } from '../../lib/reference';
 
-//The right way to do a link <Link to={ '/#/' + bookmark.book + '/' + bookmark.chapter + '/' + bookmark.verse }>{ bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse }</Link>
+//The right way to do a link
 class BookMark extends React.Component{
 	removeBookmark = () => {
 		this.props.removeBookmark( this.props.bookmark );
@@ -15,9 +16,10 @@ class BookMark extends React.Component{
 
 	render() {
 		const bookmark = this.props.bookmark;
+		const bookmarkText = bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse;
 		return (
 			<li>
-			 	<a href={ '/#/' + bookmark.book + '/' + bookmark.chapter + '/' + bookmark.verse }>{ bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse }</a>
+				<Link to={ createReferenceLink( bookmark ) }>{ bookmarkText }</Link>
 			 	<a onClick={ this.removeBookmark }><Cancel fill="#000000" /></a>
 			</li>
 		);
