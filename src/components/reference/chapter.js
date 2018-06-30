@@ -11,8 +11,8 @@ import Verse from './verse';
 import styles from './styles.scss';
 import { getLanguageFromVersion } from '../../lib/reference';
 
-const getVerseWrapperStyle = function( language ) {
-	if ( language === 'hebrew' ) {
+const getVerseWrapperStyle = function( language, version ) {
+	if ( language === 'hebrew' && version === 'original' ) {
 		return {
 			direction: 'rtl'
 		};
@@ -21,9 +21,8 @@ const getVerseWrapperStyle = function( language ) {
 	return {};
 };
 
-
-const getVerseStyle = function( language ) {
-	if ( language === 'hebrew' ) {
+const getVerseStyle = function( language, version ) {
+	if ( language === 'hebrew' && version === 'original' ) {
 		return {
 			fontFamily: 'Times New Roman, Times, serif',
 			fontSize: '140%',
@@ -75,16 +74,16 @@ class Chapter extends React.Component{
 
 				return (
 					<div className={ styles.singleReference } key={ index } ref={ ref } id={ ref }>
-						<div className={ styles.verseWrapper } key={ 'kjv' + index  } style={ getVerseWrapperStyle( leftLanguage ) }>
+						<div className={ styles.verseWrapper } key={ 'kjv' + index  } style={ getVerseWrapperStyle( leftLanguage, version.left ) }>
 							{ index + 1 }.
-							<span  className={ styles.verse } style={ getVerseStyle( leftLanguage ) }>
+							<span  className={ styles.verse } style={ getVerseStyle( leftLanguage, version.left ) }>
 								<Verse verse={ verse } index={ index } version={ version.left } language={ leftLanguage } highlightWord={ highlightWord } />
 							</span>
 						</div>
 						<Bookmarker book={ book } chapter={ chapter } verse={ index + 1 } />
-						<div className={ styles.verseWrapper } key={ 'hebrew' + index } style={ getVerseWrapperStyle( rightLanguage ) }>
+						<div className={ styles.verseWrapper } key={ 'hebrew' + index } style={ getVerseWrapperStyle( rightLanguage, version.right ) }>
 							{ index + 1 }.
-							<span  className={ styles.verse } style={ getVerseStyle( rightLanguage ) }>
+							<span  className={ styles.verse } style={ getVerseStyle( rightLanguage, version.right ) }>
 								<Verse className={ styles.verseContainer } verse={ rightChapterData[ index ] } index={ index } version={ version.right } language={ rightLanguage } highlightWord={ highlightWord } />
 							</span>
 						</div>

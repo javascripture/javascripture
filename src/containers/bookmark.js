@@ -9,7 +9,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( removeBookmark( reference ) )
 		},
 		showCrossReferences: () => {
-			console.log( ownProps );
 			dispatch( showCrossReferences( ownProps.bookmark ) );
 		}
 	}
