@@ -1,8 +1,8 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import some from 'lodash/some';
 
-import { showCrossReferences } from '../actions'
-import CrossReferences from '../components/cross-references'
+import { showCrossReferences } from '../actions';
+import CrossReferences from '../components/cross-references';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {

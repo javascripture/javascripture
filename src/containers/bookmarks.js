@@ -8,17 +8,8 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		removeBookmark: ( reference ) => {
-			dispatch( removeBookmark( reference ) )
-		}
-	}
-};
-
 const BookMarksContainer = connect(
  	mapStateToProps,
- 	mapDispatchToProps
 )( BookMarks )
 
 export default BookMarksContainer;
