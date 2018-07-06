@@ -6,11 +6,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Chapter from '../../containers/chapter';
 import styles from './styles.scss';
 
-function documentHeight() {
-	const body = document.body;
-	return Math.max( body.scrollHeight, body.offsetHeight );
-}
-
 class SingleReference extends React.Component{
 	render() {
 		return (
@@ -21,7 +16,6 @@ class SingleReference extends React.Component{
 						book={ this.props.book }
 						chapter={ this.props.chapter }
 						highlightWord={ this.props.highlightWord }
-						hash={ this.props.hash }
 					/>
 				</div>
 			</div>

@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Internal
+import Dock from './dock';
 import Footer from './footer';
+import ReferenceWrapper from './reference-wrapper';
 import Reference from '../containers/reference';
+import SecondaryReference from '../containers/secondary-reference';
 import KeyboardShortcuts from '../containers/keyboard-shortcuts';
 import Trays from './trays';
-import VersionSelector from '../containers/version-selector';
 import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';
 
@@ -39,17 +41,13 @@ class Root extends React.Component{
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>
-				<VersionSelector />
-				<div>
-					<Reference highlightWord={ this.highlightWord } hash={ this.props.location.hash } />
-				</div>
+			    <Dock />
+			    <ReferenceWrapper highlightWord={ this.highlightWord } />
 				<Footer />
 			</div>
 		);
 	}
 }
-
-//const SettingsTrayWithStyles = withStyles( styles )( SettingsTray );
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
@@ -57,11 +55,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-	}
-};
+
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )( Root );

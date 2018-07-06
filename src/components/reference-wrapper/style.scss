@@ -1,0 +1,7 @@
+.reference-wrapper {
+	display: flex;
+
+	@media ( min-width: 600px ) {
+		margin-left: 320px;
+	}
+}

@@ -4,7 +4,8 @@ const initialState = {
 	highlightWordsWith: "same",
 	referencePicker: "select",
 	subdue: "50%",
-	type: "SETTINGS_CHANGE"
+	inSync: 'sync',
+	type: "SETTINGS_CHANGE",
 }
 
 export default ( state = initialState, action ) => {

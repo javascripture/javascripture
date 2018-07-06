@@ -44,6 +44,8 @@ const routes = {
 	component: Root,
 };
 
+document.getElementById( 'reference' ).style.display = 'none';
+
 const App = () => {
 	return (
 		<Provider store={ store }>

@@ -90,6 +90,13 @@ class SettingsTray extends React.Component{
 											<option value="family">Same family</option>
 										</select>
 									</li>
+									<li className={ styles.settingsLi }>
+										<label>Keep references in sync:</label>
+										<select value={ this.props.settings.inSync } name="inSync" onChange={ this.changeSetting } >
+											<option value="sync">Sync left and right</option>
+											<option value="different">Different references left and right</option>
+										</select>
+									</li>
 								</ul>
 							</form>
 						</div>

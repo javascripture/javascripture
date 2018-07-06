@@ -33,6 +33,14 @@ export const setScrollChapter = ( book, chapter ) => {
 	}
 }
 
+export const setSecondaryScrollChapter = ( book, chapter ) => {
+	return {
+		book,
+		chapter,
+		type: 'SET_SECONDARY_SCROLL_CHAPTER'
+	}
+}
+
 export const addNextChapter = ( reference ) => {
 	return {
 		reference,
@@ -177,3 +185,9 @@ export const changeVersion = ( side, version ) => {
 	}
 }
 
+export const secondaryReference = ( reference ) => {
+	return {
+		reference,
+		type: 'SECONDARY_REFERENCE'
+	}
+}

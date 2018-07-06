@@ -1,0 +1,15 @@
+.dock {
+	display: flex;
+	justify-content: center;
+	height: 50px;
+	position: fixed;
+	text-align: center;
+	top: 5px;
+	width: 100%;
+	z-index: 9;
+
+	@media ( min-width: 768px ) {
+		margin-left: 320px;
+		width: calc( 100% - 320px );
+	}
+}

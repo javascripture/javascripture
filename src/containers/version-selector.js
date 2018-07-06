@@ -16,6 +16,7 @@ const getReferenceValue = ( state ) => {
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
+		inSync: state.settings.inSync,
 		version: state.version,
 		value: getReferenceValue( state ),
 	}

@@ -46,7 +46,7 @@ class VersionSelector extends React.Component{
 
 	render() {
 		return (
-			<form className={ styles.versionSelector } onSubmit={ this.goToReference } id="dock">
+			<form onSubmit={ this.goToReference } id="dock">
 				<select name="left" className={ styles.leftVersion } value={ this.props.version.left } onChange={ this.changeVersion }>
 					<option value="original">Original</option>
 					<option value="kjv">KJV</option>
@@ -54,12 +54,12 @@ class VersionSelector extends React.Component{
 					<option value="lc">Literal Consistent</option>
 				</select>
 				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } />
-				<select name="right" className={ styles.formField } value={ this.props.version.right } onChange={ this.changeVersion }>
+				{ ( this.props.inSync !== 'different' ) && <select name="right" className={ styles.formField } value={ this.props.version.right } onChange={ this.changeVersion }>
 					<option value="original">Original</option>
 					<option value="kjv">KJV</option>
 					<option value="web">WEB</option>
 					<option value="lc">Literal Consistent</option>
-				</select>
+				</select> }
 			</form>
 		);
 	}

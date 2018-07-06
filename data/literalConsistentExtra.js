@@ -238,3 +238,5 @@ javascripture.data.literalConsistent['G1388']['N-DSM'] = 'deceit';
 javascripture.data.literalConsistent['G5613']['ADV'] = 'like';
 javascripture.data.literalConsistent['G299']['A-APM'] = 'without blemish';
 javascripture.data.literalConsistent['G3778']['D-APN'] = 'these';
+javascripture.data.literalConsistent['G3708']['V-2AAI-1S'] = 'I saw';
+javascripture.data.literalConsistent['G2885']['V-RPP-NPM '] = 'adorned';

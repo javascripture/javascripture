@@ -19,14 +19,14 @@ function documentHeight() {
 class Reference extends React.Component{
 	componentWillMount() {
 		this.setState( {
-			references: this.getReferences(),
+			references: this.getReferences( this.props ),
 		} );
 
-		window.addEventListener( 'scroll', this.handleScroll );
+		//window.addEventListener( 'scroll', this.handleScroll );
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener( 'scroll', this.handleScroll );
+		//window.removeEventListener( 'scroll', this.handleScroll );
 	}
 
 	state = {
@@ -43,10 +43,6 @@ class Reference extends React.Component{
 		return ! isScrolling;
 	}
 
-	/*componentWillUpdate() {
-		oldHeight = documentHeight();
-	},*/
-
 	componentDidUpdate( prevProps, prevState ) {
 		// Only scroll if chapter or book changes
 		const references = this.state.references;
@@ -60,11 +56,11 @@ class Reference extends React.Component{
 			// do nothing
 		} else {
 			if( this.state.references.loadingPrev ) {
-				const newHeight = documentHeight();
+				const newHeight = this.reference.scrollHeight;
 				document.body.style.overflow = '';
 				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-				if ( ! isChrome || ( isChrome && window.scrollY === 0 ) ) {
-					window.scrollBy( 0, newHeight - oldHeight );
+				if ( ! isChrome || ( isChrome && this.reference.scrollTop === 0 ) ) {
+					this.reference.scrollBy( 0, newHeight - oldHeight );
 				}
 			}
 		}
@@ -81,11 +77,11 @@ class Reference extends React.Component{
 		clearTimeout( scroller );
 		scroller = debouncedScroll( () => {
 			isScrolling = false;
-			if ( window.scrollY < 500 ) {
+			if ( this.reference.scrollTop < 500 ) {
 				this.addPreviousChapter();
 			}
 
-			if ( documentHeight() - window.scrollY - document.documentElement.clientHeight < 1000 ) {
+			if ( this.reference.scrollHeight - this.reference.scrollTop - document.documentElement.clientHeight < 1000 ) {
 				this.addNextChapter();
 			}
 		} );
@@ -142,7 +138,7 @@ class Reference extends React.Component{
 			references.unshift( prevChapter );
 		}
 
-		oldHeight = documentHeight();
+		oldHeight = this.reference.scrollHeight;
 
 		this.setState( {
 			references: {
@@ -186,25 +182,20 @@ class Reference extends React.Component{
 		}
 
 		const currentBook = references.book,
-			currentChapter = references.chapter,
-			allReferences = references.references ? references.references : null;
+			currentChapter = references.chapter;
 
 		return (
-			<div className={ styles.reference } key={ currentBook + '-' + currentChapter }>
-				{ allReferences && allReferences.map( ( reference ) => {
+			<div id="referenceWindow" className={ styles.reference } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
+				{ references.references && references.references.map( ( reference ) => {
 					const book = bible.getBook( reference.bookID ),
 						chapter = reference.chapter1;
-
-					let ref = null;
-					if ( reference.bookName === currentBook && reference.chapter1 === currentChapter ) {
-						ref = 'current';
-					}
 
 					return (
 						<div className={ styles.referenceInner } key={ book + chapter }>
 							<Waypoint
 								onEnter={ ( ( event ) => this.handleWaypointEnter( event, book, chapter ) ) }
 								onLeave={ ( ( event ) => this.handleWaypointLeave( event, book, chapter ) ) }
+								topOffset={ 1 }
 							/>
 							<SingleReference
 								book={ book }
@@ -212,7 +203,7 @@ class Reference extends React.Component{
 								hash={ this.props.hash }
 								reference={ reference }
 								highlightWord={ this.props.highlightWord }
-								ref={ ref } />
+							/>
 						</div>
 					);
 				} ) }

@@ -3,10 +3,10 @@
 	max-width: 960px;
 }
 
-@media ( min-width: 600px ) {
-	.reference {
-		margin-left: 320px;
-	}
+.reference {
+	height: calc( 100vh - 56px );
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 .single-reference {
@@ -30,7 +30,8 @@
 .verseWrapper {
 	color: #bbb;
 	padding: 0 10px;
-	width: 50%;
+	flex-basis: 50%;
+	flex-grow: 2;
 }
 
 .verse {
