@@ -1,5 +1,6 @@
 .reference-wrapper {
 	display: flex;
+	justify-content: center;
 
 	@media ( min-width: 600px ) {
 		margin-left: 320px;
