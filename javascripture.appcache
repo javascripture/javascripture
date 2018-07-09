@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 9.1 // reduxify
+#version: 9.5 // add some support for different references left and right
 
 index.html
 css/layout.css
