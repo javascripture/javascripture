@@ -41,20 +41,6 @@ export const setSecondaryScrollChapter = ( book, chapter ) => {
 	}
 }
 
-export const addNextChapter = ( reference ) => {
-	return {
-		reference,
-		type: 'ADD_NEXT_CHAPTER'
-	}
-}
-
-export const addPreviousChapter = ( reference ) => {
-	return {
-		reference,
-		type: 'ADD_PREVIOUS_CHAPTER'
-	}
-}
-
 export const addBookmark = ( reference ) => {
 	return {
 		reference,

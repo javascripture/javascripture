@@ -19,19 +19,28 @@ const getRandomReference = function() {
 	return referenceObject;
 };
 
+const getReferenceFromHash = function( hash ) {
+	const reference = hash.split( '/' );
+	if ( ! reference[ 1 ] ) {
+		return false;
+	}
+
+	const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
+		chapter = parseInt( reference[ 2 ] ),
+		verse = reference[ 3 ] ? parseInt( reference[ 3 ] ) : 1;
+
+	return { book, chapter, verse };
+};
+
 const reference = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
-			const reference = action.payload.location.hash.split( '/' );
-			if ( ! reference[ 1 ] ) {
+			const reference = getReferenceFromHash( action.payload.location.hash );
+			if ( ! reference ) {
 				return state;
 			}
 
-			const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
-				chapter = parseInt( reference[ 2 ] ),
-				verse = reference[ 3 ] ? parseInt( reference[ 3 ] ) : 1;
-
-			return { book, chapter, verse };
+			return reference;
 
 		case REHYDRATE:
 			if ( typeof( action.payload ) === 'undefined' ) {
