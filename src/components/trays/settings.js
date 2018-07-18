@@ -103,7 +103,7 @@ class SettingsTray extends React.Component{
 					</div>
 					<br />
 					<br />
-					<p>Built in Chrome. Tested in Firefox.</p>
+					<p>Built in Firefox. Tested in Chrome.</p>
 				</div>
 			</div>
 		);
