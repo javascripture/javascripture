@@ -25,10 +25,11 @@ export const removeWordHighlight = ( word ) => {
 	}
 }
 
-export const setScrollChapter = ( book, chapter ) => {
+export const setScrollChapter = ( book, chapter, index ) => {
 	return {
 		book,
 		chapter,
+		index,
 		type: 'SET_SCROLL_CHAPTER'
 	}
 }

@@ -7,9 +7,9 @@ import isEqual from 'lodash/isEqual';
 import VersionSelector from '../components/version-selector';
 import { changeVersion } from '../actions'
 
-const getReferenceValue = ( state ) => {
-	const chapter = state.scrollChapter.chapter ? state.scrollChapter.chapter : state.reference.chapter;
-	const book = state.scrollChapter.book ? state.scrollChapter.book : state.reference.book;
+const getReferenceValue = ( state, index ) => {
+	const chapter = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].chapter ) ? state.scrollChapter[ index ].chapter : state.reference[ index ].chapter;
+	const book = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].book ) ? state.scrollChapter[ index ].book : state.reference[ index ].book;
 
 	return book + ' ' + chapter;
 };
@@ -18,7 +18,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		inSync: state.settings.inSync,
 		version: state.version,
-		value: getReferenceValue( state ),
+		value: getReferenceValue( state, ownProps.index ),
 	}
 };
 

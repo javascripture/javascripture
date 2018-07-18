@@ -1,11 +1,12 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { isMatch } from 'lodash';
-const initialState = {
+const initialState = [ {
 	book: null,
 	chapter: null,
 	verse: null,
-};
+	version: null,
+} ];
 
 const getRandomReference = function() {
 	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
@@ -16,6 +17,7 @@ const getRandomReference = function() {
 	referenceObject.book = bible.Data.books[bookNumber][0];
 	referenceObject.chapter = chapterNumber + 1;
 	referenceObject.verse = verseNumber + 1;
+	referenceObject.version = 'kjv';
 	return referenceObject;
 };
 
@@ -27,9 +29,10 @@ const getReferenceFromHash = function( hash ) {
 
 	const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
 		chapter = parseInt( reference[ 2 ] ),
-		verse = reference[ 3 ] ? parseInt( reference[ 3 ] ) : 1;
+		verse = reference[ 3 ] ? parseInt( reference[ 3 ] ) : 1,
+		version = 'original';
 
-	return { book, chapter, verse };
+	return { book, chapter, verse, version };
 };
 
 const reference = ( state = initialState, action ) => {
@@ -40,11 +43,11 @@ const reference = ( state = initialState, action ) => {
 				return state;
 			}
 
-			return reference;
+			return [ reference, getRandomReference() ];
 
 		case REHYDRATE:
 			if ( typeof( action.payload ) === 'undefined' ) {
-				return getRandomReference();
+				return [ getRandomReference(), getRandomReference() ];
 			}
 			return state;
 

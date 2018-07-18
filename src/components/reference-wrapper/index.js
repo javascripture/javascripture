@@ -4,33 +4,26 @@ import { connect } from 'react-redux';
 
 // Internal
 import Reference from '../../containers/reference';
-import SecondaryReference from '../../containers/secondary-reference';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class ReferenceWrapper extends React.Component{
 	render() {
 		const inSync = this.props.inSync === 'sync';
+		let references = this.props.references.map( ( reference, index ) => {
+			return ( <Reference highlightWord={ this.props.highlightWord } reference={ reference } key={ index } index={ index } /> );
+		} );
+
+		if ( inSync ) {
+			references = <Reference highlightWord={ this.props.highlightWord } reference={ this.props.references[ 0 ] }  index={ 0 } />
+		}
+
 		return (
 			<div className={ styles.referenceWrapper }>
-				<div className={ styles.referenceLeft }>
-					<Reference highlightWord={ this.props.highlightWord } />
-				</div>
-				<div className={ styles.referenceRight }>
-					{ ! inSync && ( <SecondaryReference highlightWord={ this.props.highlightWord } /> ) }
-				</div>
+				{ references }
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		inSync: state.settings.inSync,
-	};
-};
-
-
-export default connect(
-  mapStateToProps
-)( withStyles( styles )( ReferenceWrapper ) );
+export default withStyles( styles )( ReferenceWrapper );

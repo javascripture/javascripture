@@ -10,23 +10,12 @@ import styles from './styles.scss';
 
 let oldHeight = 0, scroller = null, isScrolling = false;
 
-function documentHeight() {
-	const body = document.body;
-	return Math.max( body.scrollHeight, body.offsetHeight );
-}
-
 // If you make this a stateless component it breaks hot reloading
 class Reference extends React.Component{
 	componentWillMount() {
 		this.setState( {
 			references: this.getReferences( this.props ),
 		} );
-
-		//window.addEventListener( 'scroll', this.handleScroll );
-	}
-
-	componentWillUnmount() {
-		//window.removeEventListener( 'scroll', this.handleScroll );
 	}
 
 	state = {
@@ -89,13 +78,13 @@ class Reference extends React.Component{
 
 	handleWaypointEnter( event, book, chapter ) {
 		if ( event.previousPosition === 'above' ) {
-			this.props.setScrollChapterPrevious( book, chapter );
+			this.props.setScrollChapterPrevious( book, chapter, this.props.index );
 		}
 	}
 
 	handleWaypointLeave( event, book, chapter ) {
 		if ( event.currentPosition === 'above' ) {
-			this.props.setScrollChapter( book, chapter );
+			this.props.setScrollChapter( book, chapter, this.props.index );
 		}
 	}
 
@@ -151,7 +140,7 @@ class Reference extends React.Component{
 	};
 
 	getReferences( nextProps ) {
-		if ( ! nextProps ) {
+		if ( ! nextProps.reference || ! nextProps.reference.book ) {
 			return null
 		}
 
@@ -200,9 +189,9 @@ class Reference extends React.Component{
 							<SingleReference
 								book={ book }
 								chapter={ chapter }
-								hash={ this.props.hash }
 								reference={ reference }
 								highlightWord={ this.props.highlightWord }
+								index={ this.props.index }
 							/>
 						</div>
 					);

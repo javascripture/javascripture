@@ -44,6 +44,7 @@ class Chapter extends React.Component{
 	}
 
 	scrollToCurrentChapter() {
+		console.log( 'scrollToCurrentChapter' );
 		const currrentChapter = ReactDOM.findDOMNode( this.refs.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
@@ -52,8 +53,8 @@ class Chapter extends React.Component{
 	}
 
 	getVerses() {
-		const { book, chapter, version, highlightWord } = this.props;
-		const currentReference = this.props.reference,
+		const { book, chapter, version, highlightWord, index } = this.props;
+		const currentReference = this.props.reference[ index ],
 			leftLanguage = getLanguageFromVersion( book, version.left ),
 			rightLanguage = getLanguageFromVersion( book, version.right ),
 			leftChapterData = javascripture.data[ leftLanguage ][ book ][ chapter - 1 ],

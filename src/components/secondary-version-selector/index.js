@@ -18,7 +18,6 @@ class SecondaryVersionSelector extends React.Component{
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.secondaryReferenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
-		console.log(reference)
 		this.props.setSecondaryReference( reference );
 		this.refs.secondaryReferenceInput.blur();
 	};

@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 // Internal
 import Dock from './dock';
 import Footer from './footer';
-import ReferenceWrapper from './reference-wrapper';
-import Reference from '../containers/reference';
-import SecondaryReference from '../containers/secondary-reference';
+import ReferenceWrapper from '../containers/reference-wrapper';
 import KeyboardShortcuts from '../containers/keyboard-shortcuts';
 import Trays from './trays';
 import VisibleTrays from '../containers/visible-trays';
@@ -41,7 +39,7 @@ class Root extends React.Component{
 				<Trays>
 			    	<VisibleTrays />
 			    </Trays>
-			    <Dock />
+				<Dock />
 			    <ReferenceWrapper highlightWord={ this.highlightWord } />
 				<Footer />
 			</div>
