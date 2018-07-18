@@ -20,7 +20,9 @@ class ReferenceWrapper extends React.Component{
 
 		return (
 			<div className={ styles.referenceWrapper }>
-				{ references }
+				<div className={ styles.referenceWrapperInner }>
+					{ references }
+				</div>
 			</div>
 		);
 	}

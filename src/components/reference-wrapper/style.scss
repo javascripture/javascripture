@@ -1,8 +1,13 @@
 .reference-wrapper {
-	display: flex;
-	justify-content: center;
-
 	@media ( min-width: 600px ) {
 		margin-left: 320px;
 	}
+}
+
+.reference-wrapper-inner {
+	display: flex;
+	justify-content: center;
+
+	margin: 0 auto;
+	max-width: 960px;
 }
