@@ -207,6 +207,7 @@
 		window.applicationCache.addEventListener('updateready', function(e) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.
+				localStorage.clear();
 				var r = confirm( 'A new version of JavaScripture is available. Press OK to reload and use it.' );
 				if ( r == true ) {
 				    window.location.reload();

@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.0 // add support for different references left and right
+#version: 10.1 // add support for different references left and right
 
 index.html
 css/layout.css
