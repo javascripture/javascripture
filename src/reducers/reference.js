@@ -64,7 +64,6 @@ const reference = ( state = initialState, action ) => {
 		case 'SET_REFERENCE':
 			const setReferenceState = [ ...state ];
 			setReferenceState[ action.index ] = getReferenceFromAction( action.reference, setReferenceState[ action.index ].version );
-			console.log( setReferenceState );
 			return setReferenceState;
 
 		case REHYDRATE:

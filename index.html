@@ -156,46 +156,6 @@
 			} );
 		}
 
-		/*if( e.data.task === 'reference' ) {
-			var reference = e.data.result.reference;
-
-			var chapterText = '<div class="three-references"';
-
-			if ( e.data.result.prev ) {
-				chapterText += ' data-prev=\'' + JSON.stringify( e.data.result.prev ) + '\'';
-			}
-			if ( e.data.result.next ) {
-				chapterText += ' data-next=\'' + JSON.stringify( e.data.result.next ) + '\'';
-			}
-			chapterText += '>';
-
-			// Load the chapters
-			e.data.result.chapters.forEach( function( chapter ) {
-				chapterText += javascripture.modules.reference.getChapterText( e.data.result, chapter );
-			} );
-
-			chapterText += '</div>';
-
-			$('#verse').html( chapterText );
-
-			var title = reference.book;
-			if ( typeof reference.chapter !== 'undefined' ) {
-				title += ' ' + reference.chapter;
-			}
-
-			if ( typeof reference.verse !== 'undefined' ) {
-				title += ':' + reference.verse;
-			}
-
-			$( 'head title' ).text( title );
-
-			if ( $.fn.waypoint ) {
-				$('.reference').waypoint('destroy');
-			}
-			javascripture.modules.reference.anchorReference( e.data.parameters.anchoringData );
-			maintainState( reference );
-		}*/
-
 		if( e.data.task === 'loading' ) {
 			document.getElementById( 'loading' ).innerHTML = e.data.html;
 		}
@@ -208,6 +168,7 @@
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.
 				localStorage.clear();
+				console.log(localStorage);
 				var r = confirm( 'A new version of JavaScripture is available. Press OK to reload and use it.' );
 				if ( r == true ) {
 				    window.location.reload();
