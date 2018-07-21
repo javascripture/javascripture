@@ -12,7 +12,6 @@ let lastTimeStamp = 0,
 
 class KeyboardShortcuts extends React.Component{
 	goToNextCurrentVerse() {
-		console.log( this.props );
 		if ( this.props.nextReference ) {
 			this.props.goToReference( this.props.nextReference );
 			this.props.markNextCurrentReference();

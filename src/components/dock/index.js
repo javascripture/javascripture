@@ -9,7 +9,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class Dock extends React.Component{
 	render() {
-		let scrollChapter = null;
+		/*let scrollChapter = null;
 
 		if ( this.props.scrollChapter ) {
 			scrollChapter = this.props.scrollChapter.map( ( reference, index ) => {
@@ -20,19 +20,21 @@ class Dock extends React.Component{
 		if ( this.props.inSync !== 'different' ) {
 			scrollChapter = <VersionSelector reference={ reference[ 0 ] } index={ 0 } />
 		}
-
+*/
 		return (
 			<div className={ styles.dock }>
-				{ scrollChapter }
+				{ this.props.references.map( ( reference, index ) => {
+					return <VersionSelector reference={ reference } key={ index } index={ index } />
+				} ) }
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = ( { settings, scrollChapter }, ownProps ) => {
+const mapStateToProps = ( { reference, settings }, ownProps ) => {
 	return {
 		inSync: settings.inSync,
-		scrollChapter: scrollChapter
+		references: reference,
 	};
 };
 

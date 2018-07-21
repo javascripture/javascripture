@@ -22,12 +22,18 @@ class VersionSelector extends React.Component{
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.referenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
-		window.location.hash = createReferenceLink( reference );
+		if ( this.props.index === 0 ) {
+			window.location.hash = createReferenceLink( reference );
+		} else {
+			this.props.setReference( reference, this.props.index );
+		}
 		this.refs.referenceInput.blur();
 	};
 
 	componentWillReceiveProps( nextProps ) {
-		this.refs.referenceInput.value = nextProps.value;
+		if ( this.refs.referenceInput ) {
+			this.refs.referenceInput.value = nextProps.value;
+		}
 	}
 
 	goToReferenceField = ( event ) => {
@@ -37,29 +43,28 @@ class VersionSelector extends React.Component{
 	}
 
 	componentDidMount() {
-		mousetrap.bind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
+		if ( this.props.index === 0 ) {
+			mousetrap.bind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
+		}
 	}
 
 	componentWillUnmount() {
-		mousetrap.unbind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
+		if ( this.props.index === 0 ) {
+			mousetrap.unbind( [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ], this.goToReferenceField );
+		}
 	}
 
 	render() {
+		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
 		return (
 			<form onSubmit={ this.goToReference } id="dock">
-				<select name="left" className={ styles.leftVersion } value={ this.props.version.left } onChange={ this.changeVersion }>
+				<select name={ this.props.index } className={ styles.leftVersion } defaultValue={ value } onChange={ this.changeVersion }>
 					<option value="original">Original</option>
 					<option value="kjv">KJV</option>
 					<option value="web">WEB</option>
 					<option value="lc">Literal Consistent</option>
 				</select>
-				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } />
-				{ ( this.props.inSync !== 'different' ) && <select name="right" className={ styles.formField } value={ this.props.version.right } onChange={ this.changeVersion }>
-					<option value="original">Original</option>
-					<option value="kjv">KJV</option>
-					<option value="web">WEB</option>
-					<option value="lc">Literal Consistent</option>
-				</select> }
+				{ ( this.props.index === 0 || this.props.inSync === 'different' ) && <input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } /> }
 			</form>
 		);
 	}

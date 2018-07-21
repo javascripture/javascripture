@@ -4,6 +4,13 @@
 	overflow-y: scroll;
 }
 
+.reference-is-different {
+	flex-basis: 50%;
+	height: calc( 100vh - 56px );
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
 .single-reference {
 	display: flex;
 	line-height: 140%;

@@ -25,8 +25,6 @@ const searchTerms = ( state = [], action ) => {
 					results: searchTerm.results,
 					terms: action.terms,
 				};
-
-				return newState;
 			}
 
 			return [

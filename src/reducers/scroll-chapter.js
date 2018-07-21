@@ -17,14 +17,14 @@ const getReferenceFromHash = function( hash ) {
 const scrollChapter = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
-			const locationState = state,
+			const locationState = [ ...state ],
 				reference = getReferenceFromHash( action.payload.location.hash );
 			locationState[ 0 ] = reference;
 
 			return locationState;
 
 		case 'SET_SCROLL_CHAPTER':
-			const newState = state,
+			const newState = [ ...state],
 				book = action.book,
 				chapter = action.chapter,
 				index = action.index;
@@ -32,6 +32,7 @@ const scrollChapter = ( state = initialState, action ) => {
 			newState[ index ] = { book, chapter };
 
     		return newState;
+
 		default:
 			return state;
 	}

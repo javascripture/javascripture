@@ -164,10 +164,10 @@ export const goToPreviousCurrentVerse = () => {
 	}
 }
 
-export const changeVersion = ( side, version ) => {
+export const changeVersion = ( index, version ) => {
 	return {
 		type: 'CHANGE_VERSION',
-		side: side,
+		index: parseInt( index ),
 		version: version
 	}
 }
@@ -176,5 +176,13 @@ export const secondaryReference = ( reference ) => {
 	return {
 		reference,
 		type: 'SECONDARY_REFERENCE'
+	}
+}
+
+export const setReference = ( reference, index ) => {
+	return {
+		reference,
+		index,
+		type: 'SET_REFERENCE'
 	}
 }
