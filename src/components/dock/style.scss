@@ -1,7 +1,4 @@
 .dock {
-	display: flex;
-	justify-content: center;
-	height: 50px;
 	position: fixed;
 	text-align: center;
 	top: 5px;
@@ -12,4 +9,9 @@
 		margin-left: 320px;
 		width: calc( 100% - 320px );
 	}
+}
+
+.dock-version-selectors {
+	display: flex;
+	justify-content: center;
 }

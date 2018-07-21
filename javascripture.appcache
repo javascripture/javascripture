@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.5 // bug fixes
+#version: 10.6 // surface different references
 
 index.html
 css/layout.css

@@ -4,7 +4,7 @@ const initialState = {
 	highlightWordsWith: "same",
 	referencePicker: "select",
 	subdue: "50%",
-	inSync: 'sync',
+	inSync: true,
 	type: "SETTINGS_CHANGE",
 }
 

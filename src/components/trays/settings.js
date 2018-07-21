@@ -11,6 +11,12 @@ import styles from './styles.scss';
 class SettingsTray extends React.Component{
 	changeSetting = ( event ) => {
 		this.props.settingsChange( event.target.name, event.target.value );
+		console.log(event.target.checked);
+		event.target.blur();
+	};
+
+	changeCheckboxSetting = ( event ) => {
+		this.props.settingsChange( event.target.name, event.target.checked );
 		event.target.blur();
 	};
 
@@ -92,11 +98,9 @@ class SettingsTray extends React.Component{
 										</select>
 									</li>
 									<li className={ styles.settingsLi }>
-										<label>Keep references in sync:</label>
-										<select value={ this.props.settings.inSync } name="inSync" onChange={ this.changeSetting } >
-											<option value="sync">Sync left and right</option>
-											<option value="different">Different references left and right</option>
-										</select>
+										<label>
+											<input type="checkbox" name="inSync" checked={ this.props.settings.inSync } onChange={ this.changeCheckboxSetting } /> Keep references in sync
+										</label>
 									</li>
 								</ul>
 							</form>

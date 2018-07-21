@@ -65,7 +65,7 @@ class VersionSelector extends React.Component{
 					<option value="web">WEB</option>
 					<option value="lc">Literal Consistent</option>
 				</select>
-				{ ( this.props.index === 0 || this.props.inSync === 'different' ) && <input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } /> }
+				{ ( this.props.index === 0 || ! this.props.inSync ) && <input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } /> }
 			</form>
 		);
 	}
