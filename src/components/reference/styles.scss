@@ -2,18 +2,13 @@
 	height: calc( 100vh - 56px );
 	overflow-x: hidden;
 	overflow-y: scroll;
-}
-
-.reference-is-different {
-	flex-basis: 50%;
-	height: calc( 100vh - 56px );
-	overflow-x: hidden;
-	overflow-y: scroll;
+	width: 100%;
 }
 
 .single-reference {
 	display: flex;
 	line-height: 140%;
+	justify-content: center;
 
 	&:hover {
 		.bookmarker {
@@ -34,6 +29,7 @@
 	padding: 0 10px;
 	flex-basis: 50%;
 	flex-grow: 2;
+	max-width: 480px;
 }
 
 .verse {
@@ -41,6 +37,8 @@
 }
 
 .bookmarker {
-
 	visibility: hidden;
 }
+
+.chapter {
+	margin: 0 auto;}

@@ -37,6 +37,7 @@ class VersionSelector extends React.Component{
 	}
 
 	goToReferenceField = ( event ) => {
+		event.preventDefault();
 		this.refs.referenceInput.focus();
 		this.refs.referenceInput.selectionStart = this.refs.referenceInput.selectionEnd = 0;
 		this.refs.referenceInput.value = event.key;

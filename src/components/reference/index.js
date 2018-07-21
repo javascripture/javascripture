@@ -172,14 +172,9 @@ class Reference extends React.Component{
 
 		const currentBook = references.book,
 			currentChapter = references.chapter;
-		let classname = styles.reference;
-
-		if ( this.props.inSync === 'different' ) {
-			classname = styles.referenceIsDifferent;
-		}
 
 		return (
-			<div id={ 'referenceWindow' + this.props.index } className={ classname } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
+			<div id={ 'referenceWindow' + this.props.index } className={ styles.reference } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
 				{ references.references && references.references.map( ( reference ) => {
 					const book = bible.getBook( reference.bookID ),
 						chapter = reference.chapter1;
