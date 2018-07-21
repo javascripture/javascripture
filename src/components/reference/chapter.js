@@ -8,6 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal
 import Bookmarker from '../../containers/bookmarker';
 import Verse from './verse';
+import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import { getLanguageFromVersion } from '../../lib/reference';
 
@@ -69,13 +70,13 @@ class Chapter extends React.Component{
 			return (
 				<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 					<div className={ styles.verseWrapper } key={ 'one-' + verseNumber  } style={ getVerseWrapperStyle( leftLanguage, this.props.reference[0].version ) }>
-						{ verseNumber + 1 }. <span  className={ styles.verse } style={ getVerseStyle( leftLanguage, this.props.reference[0].version ) }>
+						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span  className={ styles.verse } style={ getVerseStyle( leftLanguage, this.props.reference[0].version ) }>
 							<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[0].version } language={ leftLanguage } highlightWord={ highlightWord } />
 						</span>
 					</div>
 					<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 					<div className={ styles.verseWrapper } key={ 'two-' + verseNumber } style={ getVerseWrapperStyle( rightLanguage, this.props.reference[1].version ) }>
-						{ verseNumber + 1 }. <span  className={ styles.verse } style={ getVerseStyle( rightLanguage, this.props.reference[1].version ) }>
+						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span  className={ styles.verse } style={ getVerseStyle( rightLanguage, this.props.reference[1].version ) }>
 							<Verse className={ styles.verseContainer } verse={ rightChapterData[ verseNumber ] } index={ verseNumber } version={ this.props.reference[ 1 ].version } language={ rightLanguage } highlightWord={ highlightWord } />
 						</span>
 					</div>
@@ -100,7 +101,7 @@ class Chapter extends React.Component{
 			return (
 				<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 					<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, this.props.reference[ index ].version ) }>
-						{ verseNumber + 1 }. <span  className={ styles.verse } style={ getVerseStyle( language, this.props.reference[ index ].version ) }>
+						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span  className={ styles.verse } style={ getVerseStyle( language, this.props.reference[ index ].version ) }>
 							<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[ index ].version } language={ language } highlightWord={ highlightWord } />
 						</span>
 					</div>

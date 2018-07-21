@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.6 // surface different references
+#version: 10.7 // verse number links to cross reference
 
 index.html
 css/layout.css
