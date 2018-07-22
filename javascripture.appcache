@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.8 // fit boot
+#version: 10.8.1 // trying again
 
 index.html
 css/layout.css
