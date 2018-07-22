@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.7 // verse number links to cross reference
+#version: 10.8 // fit boot
 
 index.html
 css/layout.css
