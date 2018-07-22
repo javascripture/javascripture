@@ -18,7 +18,7 @@ class VerseNumber extends React.Component{
 
 	render() {
 		return (
-			<span onClick={ this.showCrossReferences } className={ styles.verseNumber }>{ this.props.verse + 1 }. </span>
+			<span onClick={ this.showCrossReferences } className={ styles.verseNumber }>{ this.props.verse }. </span>
 		);
 	}
 }

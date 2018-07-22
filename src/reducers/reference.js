@@ -8,19 +8,6 @@ const initialState = [ {
 	version: null,
 } ];
 
-const getRandomReference = function( version ) {
-	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
-		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
-		numberOfVerses = bible.Data.verses[bookNumber][chapterNumber],
-		verseNumber = Math.floor(Math.random() * numberOfVerses),
-		referenceObject = {};
-	referenceObject.book = bible.Data.books[bookNumber][0];
-	referenceObject.chapter = chapterNumber + 1;
-	referenceObject.verse = verseNumber + 1;
-	referenceObject.version = version;
-	return referenceObject;
-};
-
 const getReferenceFromHash = function( hash, version ) {
 	const reference = hash.split( '/' );
 	if ( ! reference[ 1 ] ) {
@@ -44,13 +31,13 @@ const getReferenceFromAction = ( reference, version ) => {
 
 
 const reference = ( state = initialState, action ) => {
+	console.log( action );
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
 			const reference = getReferenceFromHash( action.payload.location.hash, state[ 0 ].version );
 			if ( ! reference ) {
 				return state;
 			}
-
 			return [ reference, state[ 1 ] ];
 
 		case 'CHANGE_VERSION':
@@ -60,15 +47,14 @@ const reference = ( state = initialState, action ) => {
 			newState[ action.index ] = newReference;
 			return newState;
 
-
 		case 'SET_REFERENCE':
 			const setReferenceState = [ ...state ];
 			setReferenceState[ action.index ] = getReferenceFromAction( action.reference, setReferenceState[ action.index ].version );
 			return setReferenceState;
 
 		case REHYDRATE:
-			if ( typeof( action.payload ) === 'undefined' ) {
-				return [ getRandomReference( 'original' ), getRandomReference( 'kjv' ) ];
+			if( window.location.hash.length > 2 ) {
+				return [ getReferenceFromHash( window.location.hash, 'original' ), getReferenceFromHash( window.location.hash, 'kjv' ) ];
 			}
 			return state;
 
