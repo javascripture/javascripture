@@ -27,15 +27,15 @@ class KeyboardShortcuts extends React.Component{
 
 	goToChapter( event, combo ) {
 		const currentTimeStamp = Math.floor( event.timeStamp ),
-			bookId = bible.getBookId( this.props.reference.book );
+			bookId = bible.getBookId( this.props.reference[ 0 ].book );
 
 		let chapterToGoTo = combo;
 		if ( currentTimeStamp - lastTimeStamp < 500) {
-			chapterToGoTo = this.props.reference.chapter + combo;
+			chapterToGoTo = this.props.reference[ 0 ].chapter + combo;
 		}
 
 		if ( bible.Data.verses[bookId - 1][ chapterToGoTo - 1] ) {
-			var newReference = this.props.reference;
+			var newReference = this.props.reference[ 0 ];
 			newReference.chapter = chapterToGoTo;
 			newReference.verse = 1;
 

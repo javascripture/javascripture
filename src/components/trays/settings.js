@@ -11,7 +11,6 @@ import styles from './styles.scss';
 class SettingsTray extends React.Component{
 	changeSetting = ( event ) => {
 		this.props.settingsChange( event.target.name, event.target.value );
-		console.log(event.target.checked);
 		event.target.blur();
 	};
 

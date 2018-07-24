@@ -16,7 +16,7 @@ var getHue = function( strongsInt ) {
 	return strongsInt * theSizeOfAColorSegment;
 };
 
-var getStrongsStyle = function ( strongsNumber, lightness, highlightWordsWith ) {
+var getStyle = function ( strongsNumber, lightness, highlightWordsWith ) {
 	var hightlightFamilies = highlightWordsWith === 'family',
 		className,
 		classInt;
@@ -29,10 +29,10 @@ var getStrongsStyle = function ( strongsNumber, lightness, highlightWordsWith ) 
 	}
 
 	var newColor = getStrongsColor( classInt, lightness );
-	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important;}';
+	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important; margin: 0 -1px; padding: 0 1px;}';
 };
 
 module.exports = {
 	get: getStrongsColor,
-	getStyle: getStrongsStyle
+	getStyle: getStyle
 };

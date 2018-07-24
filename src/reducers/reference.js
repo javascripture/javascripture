@@ -31,7 +31,6 @@ const getReferenceFromAction = ( reference, version ) => {
 
 
 const reference = ( state = initialState, action ) => {
-	console.log( action );
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
 			const reference = getReferenceFromHash( action.payload.location.hash, state[ 0 ].version );
