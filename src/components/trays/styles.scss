@@ -1,6 +1,6 @@
 .tray {
 	background: rgba( 255, 255, 255, .9 );
-	border-right: 1px solid #333;
+	box-shadow: 0 0 5px 0 rgba( 0, 0, 0 , .5 );
 	overflow: scroll;
 	position: fixed;
 		bottom: 3.5em;
@@ -34,13 +34,13 @@
 	width: 20%;
 
 	&:hover {
-		background: rgba( 150, 230, 255, 0.3 );
+		background: rgba( 150, 230, 230, 0.2 );
 	}
 }
 
 .active {
 	composes: trayFilter;
-	background: rgba( 150, 230, 255, 0.4 );
+	background: rgba( 150, 230, 230, 0.3 );
 }
 
 .help-panel {

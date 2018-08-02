@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 10.9 // small bug fixes
+#version: 10.10 // layout tweaks
 
 index.html
 css/layout.css
