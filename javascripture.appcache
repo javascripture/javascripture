@@ -27,8 +27,6 @@ data/literalConsistent.js
 data/literalConsistentExtra.js
 
 #modules
-js/functionalScripts.js
-
 build/bundle.js
 
 #workers
