@@ -80,8 +80,8 @@ class Search extends React.Component{
 							<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
 						</li>
 						<li className="advanced">
-							<label htmlFor="language">Language:</label>
-							<select name="language" id="language" onChange={ this.change } defaultValue="kjv">
+							<label htmlFor="version">Language:</label>
+							<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
 								<option>kjv</option>
 								<option>hebrew</option>
 								<option>greek</option>
