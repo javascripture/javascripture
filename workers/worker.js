@@ -10,8 +10,7 @@ importScripts('../data/kjvdwyer7.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
 self.postMessage( { task: 'loading', html: 'loading Hebrew' } );
-importScripts('../data/hebrew-with-morph5.js');
-importScripts('../data/jonah.js');
+importScripts('../data/hebrew.js');
 self.postMessage( { task: 'loading', html: 'loading Greek' } );
 importScripts('../data/greek4.js');
 
@@ -21,16 +20,12 @@ importScripts('../data/strongsObjectWithFamilies2.js');
 
 self.postMessage( { task: 'loading', html: 'loading API' } );
 importScripts('../api/searchApi.js');
-importScripts('../api/reference.js');
 self.postMessage( { task: 'loading', html: 'loading complete!' } );
 self.addEventListener('message', function( e ) {
 	var result;
 
 	if ( e.data.task === 'search' || e.data.task === 'word' ) {
 		result = javascripture.api.search.getReferences( e.data.parameters );
-	}
-	if ( e.data.task === 'reference' ) {
-		result = javascripture.api.reference.getThreeChapters( e.data.parameters );
 	}
 
 	if ( result ) {

@@ -5,7 +5,7 @@ CACHE MANIFEST
 index.html
 css/layout.css
 manifest.json
-assets/javascripture.svg
+javascripture.svg
 
 #libs
 lib/MorphCodes.js
@@ -25,6 +25,9 @@ data/crossReferences.js
 data/morphology.js
 data/literalConsistent.js
 data/literalConsistentExtra.js
+
+#api - so that search works offline?
+api/searchApi.js
 
 #modules
 build/bundle.js
