@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="/javascripture.appcache">
+<html>
 	<head>
 		<script type="text/javascript">
 			var host = "javascripture.org";
@@ -91,21 +91,14 @@
 		data: {},
 		reactHelpers: {},
 	};
-	var worker = new Worker('workers/worker.js');
 </script>
 
 <!-- libs -->
 <script src="lib/MorphCodes.js"></script>
 <script src="lib/MorphParse.js"></script>
-<!--<script src="lib/raphael-min.js"></script>
-<script src="lib/raphael.pie.js"></script>-->
-
-<!-- data -->
 <script src="data/bible.js"></script>
 <script src="data/strongs-dictionary.js"></script>
 <script src="data/extra-dictionary.js"></script>
-
-<!-- These modules are loaded by the worker-->
 <script src="data/kjvdwyer7.js"></script>
 <script src="data/web3.js"></script>
 <script src="data/hebrew.js"></script>
@@ -118,8 +111,16 @@
 <script src="build/bundle.js"></script>
 
 <script>
+
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker
+			.register('/sw.js')
+			.then(function( reg ) { console.log("Service Worker Registered", reg); });
+	}
+	console.log( navigator.serviceWorker );
+
 	// Attach web workers
-	worker.addEventListener( 'message', function( e ) {
+	navigator.serviceWorker.addEventListener( 'message', function( e ) {
 		if( e.data.task === 'search' ) {
 			javascripture.reactHelpers.dispatch( {
 				terms: e.data.parameters,
@@ -134,7 +135,7 @@
 	}, false );
 
 	// Check if a new cache is available on page load.
-	window.addEventListener('load', function(e) {
+	/*window.addEventListener('load', function(e) {
 		window.applicationCache.addEventListener('updateready', function(e) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.
@@ -145,7 +146,7 @@
 				}
 			}
 		}, false);
-	}, false);
+	}, false);*/
 </script>
 
 <script>

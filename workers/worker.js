@@ -1,4 +1,4 @@
-var javascripture = {};
+/*var javascripture = {};
 javascripture.data = {};
 javascripture.data.kjv = {};
 javascripture.data.web = {};
@@ -37,3 +37,4 @@ self.addEventListener('message', function( e ) {
 	}
 
 }, false);
+*/
