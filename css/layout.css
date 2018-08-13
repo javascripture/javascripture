@@ -23,7 +23,7 @@ input, select, button {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
-  height: 2em;
+  height: 40px;
   line-height: 1em;
   padding: 0;
 }
@@ -31,7 +31,6 @@ input, select, button {
 @media ( min-width: 768px ) {
   input, select, button {
     font-size: 20px;
-    height: 2em;
   }
 }
 input {

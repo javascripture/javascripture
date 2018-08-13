@@ -28,13 +28,13 @@
 	font-size: 14px;;
 	text-align: left;
 	position: fixed;
-	top: 28px;
+	top: 40px;
 	left: calc( 50% - 320px / 2 );
 	width: 320px;
 	z-index: 1;
 
 	@media ( min-width: 375px ) {
-		top: 33px;
+		top: 45px;
 	}
 
 	@media ( min-width: 768px ) {
