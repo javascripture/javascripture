@@ -24,7 +24,7 @@
 .chapterSelector {
 	background: white;
 	border-bottom: 1px solid rgba( 0, 0, 0, .3 );
-	box-shadow: 0 0 10px 0 rgba( 0, 0, 0, .3 );
+	box-shadow: 0 3px 6px 0 rgba( 0, 0, 0, .3 );
 	font-size: 14px;;
 	text-align: left;
 	position: fixed;
@@ -69,6 +69,7 @@
 
 .book-list {
 	display: flex;
+	justify-content: space-between;
 }
 
 .book-column {

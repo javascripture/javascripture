@@ -22,6 +22,8 @@ class ReferenceSelectorMobile extends React.Component{
 	toggleList = () => {
 		this.setState( {
 			open: ! this.state.open,
+			bookIndex: null,
+			bookName: null,
 		} );
 	};
 
