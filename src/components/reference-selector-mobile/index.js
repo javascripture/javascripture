@@ -6,36 +6,22 @@ import { Link } from 'react-router-dom';
 // Internal
 import BookSVG from '../svg/book.js';
 import { createReferenceLink } from '../../lib/reference.js';
-import { setReference, setScrollChapter } from '../../actions'
+import { toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-const initialState = {
-	open: false,
-	bookIndex: null,
-	bookName: null,
-};
 
 class ReferenceSelectorMobile extends React.Component{
-	state = initialState;
-
 	toggleList = () => {
-		this.setState( {
-			open: ! this.state.open,
-			bookIndex: null,
-			bookName: null,
-		} );
+		this.props.toggleReferenceSelectorMobile( this.props.index );
 	};
 
-	openBook = ( book, index ) => {
-		this.setState( {
-			bookName: book,
-			bookIndex: index,
-		} );
+	openBook = ( bookName, bookIndex ) => {
+		this.props.referenceSelectorMobileSetBook( bookName, bookIndex, this.props.index );
 	};
 
 	close = () => {
-		this.setState( initialState );
+		this.props.toggleReferenceSelectorMobile( this.props.index );
 	};
 
 	goToReference = ( reference ) => {
@@ -64,13 +50,13 @@ class ReferenceSelectorMobile extends React.Component{
 	}
 
 	renderChapterList() {
-		const chapters = bible.Data.verses[ this.state.bookIndex ];
+		const chapters = bible.Data.verses[ this.props.bookIndex ];
 		return (
 			<div className={ styles.chapterList }>
-				<div className={ styles.chapterName }>{ this.state.bookName }</div>
+				<div className={ styles.chapterName }>{ this.props.bookName }</div>
 				<div className={ styles.chapterBlocks }>
 					{ chapters.map( ( numberOfVerses, chapterNumber ) => {
-						return this.renderReferenceLink( this.state.bookName, chapterNumber + 1, chapterNumber + 1 );
+						return this.renderReferenceLink( this.props.bookName, chapterNumber + 1, chapterNumber + 1 );
 					} ) }
 				</div>
 			</div>
@@ -118,20 +104,23 @@ class ReferenceSelectorMobile extends React.Component{
 	render() {
 		return (
 			<span className={ styles.referenceSelectorMobile }>
-				<button className={ this.state.open ? styles.openButton : styles.button } onClick={ this.toggleList }><BookSVG /></button>
-				{ this.state.open && <div className={ styles.chapterSelector }>
-					{ ! this.state.bookName && this.renderBookList() }
-					{ this.state.bookName && this.renderChapterList() }
+				<button className={ this.props.open ? styles.openButton : styles.button } onClick={ this.toggleList }><BookSVG /></button>
+				{ this.props.open && <div className={ styles.chapterSelector }>
+					{ ! this.props.bookName && this.renderBookList() }
+					{ this.props.bookName && this.renderChapterList() }
 				</div> }
 			</span>
 		);
 	}
 }
 
-const mapStateToProps = ( { reference, settings }, ownProps ) => {
+const mapStateToProps = ( { reference, settings, referenceSelectorMobile }, ownProps ) => {
 	return {
 		inSync: settings.inSync,
 		references: reference,
+		open: referenceSelectorMobile[ ownProps.index ].open,
+		bookIndex: referenceSelectorMobile[ ownProps.index ].bookIndex,
+		bookName: referenceSelectorMobile[ ownProps.index ].bookName,
 	};
 };
 
@@ -140,6 +129,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		setReference: ( reference, index ) => {
 			dispatch( setReference( reference, index ) );
 			dispatch( setScrollChapter( reference.book, reference.chapter, index ) );
+		},
+		toggleReferenceSelectorMobile: ( index ) => {
+			dispatch( toggleReferenceSelectorMobile( index ) );
+		},
+		referenceSelectorMobileSetBook: ( bookName, bookIndex, index ) => {
+			dispatch( referenceSelectorMobileSetBook( bookName, bookIndex, index ) );
 		},
 	}
 };

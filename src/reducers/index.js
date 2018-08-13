@@ -1,5 +1,6 @@
 import bookmarks from './bookmarks';
 import reference from './reference';
+import referenceSelectorMobile from './reference-selector-mobile';
 import scrollChapter from './scroll-chapter';
 import secondaryScrollChapter from './secondary-scroll-chapter';
 import searchResults from './search-results';
@@ -18,6 +19,7 @@ const app = {
 	crossReferences,
 	currentReference,
 	reference,
+	referenceSelectorMobile,
 	scrollChapter,
 	secondaryScrollChapter,
 	searchResults,

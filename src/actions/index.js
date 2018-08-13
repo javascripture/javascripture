@@ -186,3 +186,19 @@ export const setReference = ( reference, index ) => {
 		type: 'SET_REFERENCE'
 	}
 }
+
+export const referenceSelectorMobileSetBook = ( bookName, bookIndex, index ) => {
+	return {
+		bookName,
+		bookIndex,
+		index,
+		type: 'REFERENCE_SELECTOR_MOBILE_SET_BOOK',
+	}
+}
+
+export const toggleReferenceSelectorMobile = ( index ) => {
+	return {
+		index,
+		type: 'TOGGLE_REFERENCE_SELECTOR_MOBILE',
+	}
+}
