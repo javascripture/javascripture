@@ -33,9 +33,12 @@ input, select, button {
     font-size: 20px;
   }
 }
-input {
+input, select {
   text-indent: .3em;
-  width: 100%; }
+}
+input {
+  width: 100%;
+}
 
 input[type=checkbox] {
   box-shadow: none; }
@@ -47,6 +50,7 @@ select {
   appearance: none;
 
   /* Positions background arrow image */
+  background-color: #fff;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
   background-repeat: no-repeat;
   background-position: right center;

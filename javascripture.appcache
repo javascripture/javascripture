@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version: 11.0 // new mobile picker and navigation layout
+#version: 11.1 // select layout fix
 
 index.html
 css/layout.css
