@@ -65,50 +65,48 @@ class Search extends React.Component{
 	render() {
 		return (
 			<div>
-				<form className="search" onSubmit={ this.submit }>
-					<ul>
-						<li>
-							<label htmlFor="word" className="has-placeholder">Word</label>
-							<input type="text" name="word" id="word" placeholder="Word" onChange={ this.change } />
-						</li>
-						<li className="advanced">
-							<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
-							<input type="text" name="lemma" id="lemma" placeholder="Strongs number" onChange={ this.change } />
-						</li>
-						<li className="advanced">
-							<label htmlFor="morph" className="has-placeholder">Morphology</label>
-							<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
-						</li>
-						<li className="advanced">
-							<label htmlFor="version">Language:</label>
-							<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
-								<option>kjv</option>
-								<option>hebrew</option>
-								<option>greek</option>
-								<option>web</option>
-							</select>
-						</li>
-						<li className="advanced sentence">
-							<label htmlFor="clusivity">Look for</label>
-							<select name="clusivity" id="clusivity" onChange={ this.change } defaultValue="exclusive">
-								<option value="exclusive">All</option>
-								<option value="inclusive">Any</option>
-							</select>
-							<label htmlFor="range">terms in a</label>
-							<select name="range" id="range" onChange={ this.change } defaultValue="verse">
-								<option>word</option>
-								<option>verse</option>
-								<option>chapter</option>
-							</select>
-						</li>
-						<li className="advanced">
-							<label>Strict search</label>
-							<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
-						</li>
-						<li className="advanced">
-							<input type="submit" value="Search" />
-						</li>
-					</ul>
+				<form className={ styles.search } onSubmit={ this.submit }>
+					<fieldset>
+						<label htmlFor="word" className="has-placeholder">Word</label>
+						<input type="text" name="word" id="word" placeholder="Word" onChange={ this.change } />
+					</fieldset>
+					<fieldset>
+						<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
+						<input type="text" name="lemma" id="lemma" placeholder="Strongs number" onChange={ this.change } />
+					</fieldset>
+					<fieldset>
+						<label htmlFor="morph" className="has-placeholder">Morphology</label>
+						<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
+					</fieldset>
+					<fieldset>
+						<label htmlFor="version">Language:</label>
+						<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
+							<option>kjv</option>
+							<option>hebrew</option>
+							<option>greek</option>
+							<option>web</option>
+						</select>
+					</fieldset>
+					<fieldset>
+						<label htmlFor="clusivity">Look for</label>
+						<select name="clusivity" id="clusivity" onChange={ this.change } defaultValue="exclusive">
+							<option value="exclusive">All</option>
+							<option value="inclusive">Any</option>
+						</select>
+						<label htmlFor="range">terms in a</label>
+						<select name="range" id="range" onChange={ this.change } defaultValue="verse">
+							<option>word</option>
+							<option>verse</option>
+							<option>chapter</option>
+						</select>
+					</fieldset>
+					<fieldset>
+						<label>Strict search</label>
+						<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
+					</fieldset>
+					<fieldset>
+						<input type="submit" value="Search" />
+					</fieldset>
 				</form>
 				{ this.results() }
 			</div>

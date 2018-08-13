@@ -7,4 +7,4 @@ const Book = ( { fill }) => (
 	</svg>
 );
 
-export default Book
+export default Book;

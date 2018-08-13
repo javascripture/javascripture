@@ -1,9 +1,11 @@
 .dock {
 	position: fixed;
-	text-align: center;
-	top: 5px;
 	width: 100%;
-	z-index: 9;
+	z-index: 12;
+
+	@media ( min-width: 400px ) {
+		top: 5px;
+	}
 
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
@@ -14,10 +16,4 @@
 .dock-version-selectors {
 	display: flex;
 	justify-content: center;
-}
-
-.sync-button {
-	position: absolute;
-	right: 10px;
-	top: 0;
 }

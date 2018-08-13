@@ -1,3 +1,15 @@
+.search {
+	fieldset {
+		margin: 5px;
+	}
+
+	select {
+		height: 1em;
+ 		line-height: 1em;
+		padding: 0;
+	}
+}
+
 .header {
 	background: darken( grey, 20);
 	border-bottom: 1px solid white;

@@ -1,5 +1,12 @@
-.sync-button {
+.sync-button button {
 	cursor: pointer;
-	display: inline-block;
-	margin-top: 10px;
+}
+
+.sync-button {
+	border-radius: 0;
+	border-right: 0;
+
+	@media ( max-width: 399px ) {
+		border-top: 0;
+	}
 }

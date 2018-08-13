@@ -1,0 +1,85 @@
+@import '../_colors.scss';
+
+.reference-selector-mobile {
+	position: relative;
+}
+
+.button {
+	border-radius: 0;
+	border-right: 0;
+	cursor: pointer;
+	padding: 4px;
+
+	@media ( max-width: 399px ) {
+		border-top: 0;
+	}
+}
+
+
+.open-button {
+	@extend .button;
+	 background: $active;
+}
+
+.chapterSelector {
+	background: white;
+	border-bottom: 1px solid rgba( 0, 0, 0, .3 );
+	box-shadow: 0 0 10px 0 rgba( 0, 0, 0, .3 );
+	font-size: 14px;;
+	text-align: left;
+	position: fixed;
+	top: 28px;
+	left: calc( 50% - 320px / 2 );
+	width: 320px;
+	z-index: 1;
+
+	@media ( min-width: 375px ) {
+		top: 33px;
+	}
+
+	@media ( min-width: 768px ) {
+		position: absolute;
+		top: 40px;
+	}
+}
+
+.chapter-name {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 32px;
+	font-weight: 100;
+}
+
+.chapterList {
+	text-align: center;
+}
+
+.chapterBlocks {
+	a {
+		cursor: pointer;
+		display: inline-block;
+		height: 32px;
+		line-height: 32px;
+		width: 32px;
+
+		&:hover {
+			background: $hover;
+		}
+	}
+}
+
+.book-list {
+	display: flex;
+}
+
+.book-column {
+
+}
+
+.bookLink {
+	cursor: pointer;
+	padding: 0 5px;
+
+	&:hover {
+		background: $hover;
+	}
+}

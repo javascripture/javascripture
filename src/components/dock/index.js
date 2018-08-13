@@ -9,16 +9,22 @@ import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 class Dock extends React.Component{
+	getVersionSelectors() {
+		return this.props.references.map( ( reference, index ) => {
+			return (
+				<VersionSelector key={ index } reference={ reference } index={ index } />
+			);
+		} );
+	}
+
 	render() {
+		const versionSelectors = this.getVersionSelectors();
 		return (
 			<div className={ styles.dock }>
 				<div className={ styles.dockVersionSelectors }>
-					{ this.props.references.map( ( reference, index ) => {
-						return <VersionSelector reference={ reference } key={ index } index={ index } />
-					} ) }
-				</div>
-				<div className={ styles.syncButton }>
+					{ versionSelectors[ 0 ] }
 					<SyncButton />
+					{ versionSelectors[ 1 ] }
 				</div>
 			</div>
 		);

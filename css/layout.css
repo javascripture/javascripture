@@ -10,27 +10,30 @@ body {
   font-size: 100%; }
 
 a {
-  text-decoration: none; }
+  color: #000;
+  text-decoration: none;
+}
 
 .added {
   color: #aaa; font-style: italic; }
 
-form ul li {
-  list-style: none; }
-
-
-input, select {
-  border: none;
+input, select, button {
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  box-shadow: inset 0 0 1px black, inset 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -1px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 14px;
+  height: 2em;
   line-height: 1em;
-  height: 2em; }
+  padding: 0;
+}
 
-select {
-  padding: .3em 0; }
-
+@media ( min-width: 768px ) {
+  input, select, button {
+    font-size: 20px;
+    height: 2em;
+  }
+}
 input {
   text-indent: .3em;
   width: 100%; }
@@ -38,19 +41,29 @@ input {
 input[type=checkbox] {
   box-shadow: none; }
 
+select {
+  /* Removes the default <select> styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Positions background arrow image */
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-position: right center;
+}
 label.has-placeholder {
   display: none; }
 
 button, input[type=button], input[type=submit] {
-  border: none;
+  background: #eee;
+  border: 1px solid rgba( 0, 0, 0, .2 );
   box-shadow: none;
-  background: #999;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  color: #fff;
-  font-family: 'Helvetica Neue', Helvetica, Arial;
-  font-weight: 100; }
+  color: #000;
+}
 
 form input[type=checkbox] {
   height: 20px;
@@ -60,17 +73,6 @@ form.search li {
   line-height: 3em; }
 form.search #advanced {
   display: none; }
-
-form.search {
-  padding: .1em .5em; }
-  form.search li {
-    line-height: 2em; }
-    form.search li input {
-      margin: 6px 0; }
-    form.search li select {
-      height: 1em;
-      line-height: 1em;
-      padding: 0; }
 
 
 h1, h2, h3, h4, h5, h6 {
