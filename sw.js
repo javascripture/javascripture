@@ -1,4 +1,4 @@
-var cache = 'javascripture.11.1'; // service worker!
+var cache = 'javascripture.13.0'; // new version with bug fixes
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) { // layout tweaks
