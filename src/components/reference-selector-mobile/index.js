@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 // Internal
 import BookSVG from '../svg/book.js';
 import { createReferenceLink } from '../../lib/reference.js';
-import { toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
+import { closeReferenceSelectorMobile, toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 
 class ReferenceSelectorMobile extends React.Component{
-	toggleList = () => {
+	toggleList = ( event ) => {
 		this.props.toggleReferenceSelectorMobile( this.props.index );
 	};
 
@@ -21,7 +21,7 @@ class ReferenceSelectorMobile extends React.Component{
 	};
 
 	close = () => {
-		this.props.toggleReferenceSelectorMobile( this.props.index );
+		this.props.closeReferenceSelectorMobile( this.props.index );
 	};
 
 	goToReference = ( reference ) => {
@@ -104,7 +104,7 @@ class ReferenceSelectorMobile extends React.Component{
 	render() {
 		return (
 			<span className={ styles.referenceSelectorMobile }>
-				<button className={ this.props.open ? styles.openButton : styles.button } onClick={ this.toggleList }><BookSVG /></button>
+				<button type="button" className={ this.props.open ? styles.openButton : styles.button } onClick={ this.toggleList }><BookSVG /></button>
 				{ this.props.open && <div className={ styles.chapterSelector }>
 					{ ! this.props.bookName && this.renderBookList() }
 					{ this.props.bookName && this.renderChapterList() }
@@ -129,6 +129,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		setReference: ( reference, index ) => {
 			dispatch( setReference( reference, index ) );
 			dispatch( setScrollChapter( reference.book, reference.chapter, index ) );
+		},
+		closeReferenceSelectorMobile: ( index ) => {
+			dispatch( closeReferenceSelectorMobile( index ) );
 		},
 		toggleReferenceSelectorMobile: ( index ) => {
 			dispatch( toggleReferenceSelectorMobile( index ) );

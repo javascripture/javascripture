@@ -16,7 +16,8 @@ class Search extends React.Component{
 		version: 'kjv',
 		clusivity: 'exclusive',
 		range: 'verse',
-		strict: false
+		strict: false,
+		advanced: false,
 	};
 
 	change = ( event ) => {
@@ -30,6 +31,12 @@ class Search extends React.Component{
 
 		this.props.addSearch( this.state );
 	};
+
+	showAdvanced = () => {
+		this.setState( {
+			advanced: true
+		} );
+	}
 
 	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
 		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
@@ -70,40 +77,41 @@ class Search extends React.Component{
 						<label htmlFor="word" className="has-placeholder">Word</label>
 						<input type="text" name="word" id="word" placeholder="Word" onChange={ this.change } />
 					</fieldset>
-					<fieldset>
-						<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
-						<input type="text" name="lemma" id="lemma" placeholder="Strongs number" onChange={ this.change } />
-					</fieldset>
-					<fieldset>
-						<label htmlFor="morph" className="has-placeholder">Morphology</label>
-						<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
-					</fieldset>
-					<fieldset>
-						<label htmlFor="version">Language:</label>
-						<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
-							<option>kjv</option>
-							<option>hebrew</option>
-							<option>greek</option>
-							<option>web</option>
-						</select>
-					</fieldset>
-					<fieldset>
-						<label htmlFor="clusivity">Look for</label>
-						<select name="clusivity" id="clusivity" onChange={ this.change } defaultValue="exclusive">
-							<option value="exclusive">All</option>
-							<option value="inclusive">Any</option>
-						</select>
-						<label htmlFor="range">terms in a</label>
-						<select name="range" id="range" onChange={ this.change } defaultValue="verse">
-							<option>word</option>
-							<option>verse</option>
-							<option>chapter</option>
-						</select>
-					</fieldset>
-					<fieldset>
-						<label>Strict search</label>
-						<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
-					</fieldset>
+					{ this.state.advanced ? (
+						<div>
+							<fieldset>
+								<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
+								<input type="text" name="lemma" id="lemma" placeholder="Strongs number" onChange={ this.change } />
+							</fieldset>
+							<fieldset>
+								<label htmlFor="morph" className="has-placeholder">Morphology</label>
+								<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
+							</fieldset>
+							<fieldset>
+								<label htmlFor="version">Language:</label>
+								<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
+									<option>kjv</option>
+									<option>hebrew</option>
+									<option>greek</option>
+									<option>web</option>
+								</select>
+							</fieldset>
+							<fieldset>
+								<label htmlFor="clusivity">Look for</label> <select name="clusivity" id="clusivity" onChange={ this.change } defaultValue="exclusive">
+									<option value="exclusive">all</option>
+									<option value="inclusive">any</option>
+								</select> <label htmlFor="range">terms in a</label> <select name="range" id="range" onChange={ this.change } defaultValue="verse">
+									<option>word</option>
+									<option>verse</option>
+									<option>chapter</option>
+								</select>
+							</fieldset>
+							<fieldset>
+								<label>Strict search</label>
+								<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
+							</fieldset>
+						</div>
+					) : ( <fieldset className={ styles.advanced }><a onClick={ this.showAdvanced }>Advanced</a></fieldset> ) }
 					<fieldset>
 						<input type="submit" value="Search" />
 					</fieldset>

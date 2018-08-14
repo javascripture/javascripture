@@ -16,6 +16,17 @@ const openState = {
 
 const referenceSelectorMobile = ( state = initialState, action ) => {
 	switch ( action.type ) {
+		case 'CLOSE_REFERENCE_SELECTOR_MOBILE':
+			return [ {
+				open: false,
+				bookIndex: null,
+				bookName: null,
+			}, {
+				open: false,
+				bookIndex: null,
+				bookName: null,
+			} ];
+
 		case 'TOGGLE_REFERENCE_SELECTOR_MOBILE':
 			const newState = [ {
 				open: false,

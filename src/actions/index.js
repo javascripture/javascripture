@@ -196,6 +196,13 @@ export const referenceSelectorMobileSetBook = ( bookName, bookIndex, index ) => 
 	}
 }
 
+export const closeReferenceSelectorMobile = ( index ) => {
+	return {
+		index,
+		type: 'CLOSE_REFERENCE_SELECTOR_MOBILE',
+	}
+}
+
 export const toggleReferenceSelectorMobile = ( index ) => {
 	return {
 		index,

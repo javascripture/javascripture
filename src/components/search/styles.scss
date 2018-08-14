@@ -6,7 +6,6 @@
 	select {
 		height: 1em;
  		line-height: 1em;
-		padding: 0;
 	}
 }
 
@@ -67,4 +66,12 @@ a.clear-all {
     text-align: right;
     text-decoration: none;
     width: $width;
+}
+
+.advanced {
+	cursor: pointer;
+	text-align: right;
+	a {
+		color: #aaa;
+	}
 }

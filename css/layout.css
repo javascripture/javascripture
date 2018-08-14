@@ -54,6 +54,8 @@ select {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
   background-repeat: no-repeat;
   background-position: right center;
+
+  padding-right: 17px;
 }
 label.has-placeholder {
   display: none; }
@@ -68,15 +70,14 @@ button, input[type=button], input[type=submit] {
   color: #000;
 }
 
+button:hover {
+  background: rgba( 235, 255, 255, 1 );
+}
+
 form input[type=checkbox] {
   height: 20px;
-  width: 20px; }
-
-form.search li {
-  line-height: 3em; }
-form.search #advanced {
-  display: none; }
-
+  width: 20px;
+}
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Helvetica Neue', sans-serif;
@@ -123,7 +124,6 @@ h1, h2, h3, h4, h5, h6 {
       .full-page .content .button button {
         background: #333;
         cursor: pointer;
-        font-size: 3rem;
         padding: .5rem 1rem; }
         .full-page .content .button button[disabled] {
           background: #ccc; }
