@@ -91,6 +91,7 @@
 		data: {},
 		reactHelpers: {},
 	};
+	var worker = new Worker('workers/worker.js');
 </script>
 
 <!-- libs -->
@@ -117,10 +118,9 @@
 			.register('/sw.js')
 			.then(function( reg ) { console.log("Service Worker Registered", reg); });
 	}
-	console.log( navigator.serviceWorker );
 
 	// Attach web workers
-	navigator.serviceWorker.addEventListener( 'message', function( e ) {
+	worker.addEventListener( 'message', function( e ) {
 		if( e.data.task === 'search' ) {
 			javascripture.reactHelpers.dispatch( {
 				terms: e.data.parameters,
@@ -135,7 +135,7 @@
 	}, false );
 
 	// Check if a new cache is available on page load.
-	/*window.addEventListener('load', function(e) {
+	/*worker.addEventListener('load', function(e) {
 		window.applicationCache.addEventListener('updateready', function(e) {
 			if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 				// Browser downloaded a new app cache.

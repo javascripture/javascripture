@@ -48,7 +48,6 @@ self.addEventListener('fetch', function(event) {
 	);
 });
 
-
 // Delete unused cache
 self.addEventListener('activate', function(event) {
   var cacheWhitelist = [ cache ];
@@ -61,20 +60,4 @@ self.addEventListener('activate', function(event) {
       }));
     })
   );
-});
-
-self.addEventListener('message', function( event ) {
-	var result;
-	if ( event.data.task === 'search' || event.data.task === 'word' ) {
-		result = javascripture.api.search.getReferences( event.data.parameters );
-	}
-
-	if ( result ) {
-		self.postMessage( {
-			task: event.data.task,
-			parameters: event.data.parameters,
-			result: result
-		} );
-	}
-
 });

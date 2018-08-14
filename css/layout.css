@@ -33,7 +33,7 @@ input, select, button {
     font-size: 20px;
   }
 }
-input, select {
+input {
   text-indent: .3em;
 }
 input {

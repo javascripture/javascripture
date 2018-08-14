@@ -81,8 +81,7 @@ export const addWord = ( { strongsNumber, open, morphology, version } ) => {
 	};
 
 	// Send data to our worker.
-	console.log(navigator);
-	 navigator.serviceWorker.controller.postMessage( {
+	worker.postMessage( {
 		task: 'search',
 		parameters: searchParameters,
 	} );
@@ -118,7 +117,7 @@ export const toggleWord = ( strongsNumber ) => {
 
 export const addSearch = ( terms, target ) => {
 	// Send data to our worker.
-	 navigator.serviceWorker.controller.postMessage( {
+	 worker.postMessage( {
 		task: target,
 		parameters: terms
 	} );
