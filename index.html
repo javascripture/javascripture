@@ -36,51 +36,38 @@
 		<style id="bodyFontSize"></style>
 	</head>
 	<body>
+
 	<div id="content">
 		<div class="full-page">
 			<div id="holder" class="content">
 				<div class="logo">
-					<img src="/javascripture.svg" width="300" height="300">
+					<img src="/javascripture.svg" width="179" height="186">
 					<div class="intro">
 						<h1>Javascripture</h1>
 						<p>JavaScripture is a tool to help you understand the bible better.</p>
+						<script>
+							if ( localStorage ) {
+								document.write( '<p class="installation-info">Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
+							}
+						</script>
 					</div>
 				</div>
-				<div class="button">
-					<button id="loadingJavascripture" disabled>Loading</button>
-					<script>
-						if ( localStorage ) {
-							document.write( '<p class="installation-info">Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
-						}
-					</script>
+				<div class="loading">
+					<div class="loading-bar" id="loadingJavascripture">
+						Loading
+					</div>
 				</div>
 				<div class="features">
-					<p>Features:<p/>
-					<ul>
-						<li>Interlinear English and Hebrew/Greek</li>
-						<li>Search for English, Hebrew or Greek words, Strong's numbers and morphological data (Greek only)</li>
-						<li>Additional word information, including Strong's roots and branches</li>
-						<li>Cross references</li>
-					</ul>
-					Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a> or <a href="/clear.html">Clear settings and start over</a></p>
+					<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a> or <a href="/clear.html">Clear settings and start over</a></p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class="referencePanel" id="reference">
-		<span id="showGoToReference" class="reading-mode-switch icon-book"></span>
-		<div class="verse">
-			<div id="verse">
-				<div id="loading" class="loading">Loading...</div>
-				<p>Having problems? <a href="/clear.html">Clear settings and start over</a></p>
-			</div>
-		</div>
-	</div>
-
 </div>
 
-<div class="wordControlPanelTemplate">
+<div class="referencePanel" id="reference">
+	<div id="loading" class="loading">Loading...</div>
+
 	<p>Having problems? <a href="/clear.html">Clear settings and start over</a></p>
 </div>
 
@@ -92,25 +79,40 @@
 		reactHelpers: {},
 	};
 	var worker = new Worker('workers/worker.js');
+
+	var loadingDiv = document.getElementById( 'loadingJavascripture' );
+	var loadingStatus = function( resource, percentage ) {
+		loadingDiv.innerHTML = 'Loading ' + resource;
+		loadingDiv.style.width = percentage + '%';
+	};
 </script>
 
 <!-- libs -->
+<script>loadingStatus( 'Libraries', 10 );</script>
 <script src="lib/MorphCodes.js"></script>
 <script src="lib/MorphParse.js"></script>
+<script>loadingStatus( 'data', 20 );</script>
 <script src="data/bible.js"></script>
 <script src="data/strongs-dictionary.js"></script>
 <script src="data/extra-dictionary.js"></script>
+<script>loadingStatus( 'KJV', 30 );</script>
 <script src="data/kjvdwyer7.js"></script>
+<script>loadingStatus( 'WEB', 40 );</script>
 <script src="data/web3.js"></script>
+<script>loadingStatus( 'Hebrew', 50 );</script>
 <script src="data/hebrew.js"></script>
+<script>loadingStatus( 'Greek', 60 );</script>
 <script src="data/greek4.js"></script>
+<script>loadingStatus( 'Strongs', 70 );</script>
 <script src="data/strongsObjectWithFamilies2.js"></script>
+<script>loadingStatus( 'cross references', 80 );</script>
 <script src="data/crossReferences.js"></script>
 <script src="data/morphology.js"></script>
+<script>loadingStatus( 'Literal Consistent', 90 );</script>
 <script src="data/literalConsistent.js"></script>
 <script src="data/literalConsistentExtra.js"></script>
+<script>loadingStatus( 'interface', 95 );</script>
 <script src="build/bundle.js"></script>
-
 <script>
 
 	if('serviceWorker' in navigator) {

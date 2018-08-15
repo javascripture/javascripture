@@ -11,7 +11,6 @@ body {
 
 a {
   color: #000;
-  text-decoration: none;
 }
 
 .added {
@@ -88,11 +87,12 @@ h1, h2, h3, h4, h5, h6 {
 .full-page {
   background: white;
   padding-top: 1em;
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  position: fixed;
+  padding: 1em;
   text-align: center;
   z-index: 10; }
   .full-page .content {
@@ -101,7 +101,10 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     text-align: left;
     width: 100%;
-    max-width: 600px; }
+    max-width: 320px; }
+.full-page .content p {
+  text-align: left;
+}
     .full-page .content .logo {
       overflow: auto;
       position: relative;
@@ -113,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 1em; }
       .full-page .content .features ul {
         list-style: disc;
-        margin: 0 0 0 1em; }
+        margin: 0 0 1em 1em; }
       .full-page .content .features p {
         margin-bottom: 1rem; }
     .full-page .content .button {
@@ -127,3 +130,16 @@ h1, h2, h3, h4, h5, h6 {
         padding: .5rem 1rem; }
         .full-page .content .button button[disabled] {
           background: #ccc; }
+.full-page .loading {
+  background: darkgray;
+  color: #fff;
+  line-height: 2em;
+  margin-top: 1em;
+  text-indent: .5em;
+}
+
+.full-page .loading-bar {
+  background: gray;
+  white-space: nowrap;
+  width: 5%;
+}
