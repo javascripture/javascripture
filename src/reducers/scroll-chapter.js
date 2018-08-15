@@ -9,7 +9,8 @@ const getReferenceFromHash = function( hash ) {
 	}
 
 	const book = reference[ 1 ].replace( /\%20/gi, ' ' ),
-		chapter = parseInt( reference[ 2 ] );
+		chapter = parseInt( reference[ 2 ] ),
+		verse = 1;
 
 	return { book, chapter, verse };
 }

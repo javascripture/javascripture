@@ -1,4 +1,4 @@
-var cache = 'javascripture.14.0'; // new loading screen
+var cache = 'javascripture.14.1'; // verse bug fix
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) { // layout tweaks
