@@ -11,13 +11,13 @@ const currentReference = ( state = {}, action ) => {
 
 		case 'GO_TO_NEXT_CURRENT_VERSE':
 			return Object.assign( {}, state, {
-        		activeReference: state.activeReference + 1
-      		} );
+				activeReference: state.activeReference + 1
+			} );
 
 		case 'GO_TO_PREVIOUS_CURRENT_VERSE':
 			return Object.assign( {}, state, {
-        		activeReference: state.activeReference - 1
-      		} );
+				activeReference: state.activeReference - 1
+			} );
 
 		case 'CLEAR_ALL':
 			return [];
