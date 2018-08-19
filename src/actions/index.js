@@ -117,7 +117,7 @@ export const toggleWord = ( strongsNumber ) => {
 
 export const addSearch = ( terms, target ) => {
 	// Send data to our worker.
-	 worker.postMessage( {
+	worker.postMessage( {
 		task: target,
 		parameters: terms
 	} );

@@ -26,6 +26,12 @@ class Search extends React.Component{
 		this.setState( newState );
 	};
 
+	toggle = ( event ) => {
+		let newState = {};
+		newState[ event.target.name ] = event.target.checked;
+		this.setState( newState );
+	};
+
 	submit = ( event ) => {
 		event.preventDefault();
 
@@ -108,7 +114,7 @@ class Search extends React.Component{
 							</fieldset>
 							<fieldset title="Strict search will only match the whole word, otherwise we also match substrings">
 								<label>Strict search</label>
-								<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
+								<input type="checkbox" name="strict" id="strict" onChange={ this.toggle } />
 							</fieldset>
 						</div>
 					) : ( <fieldset className={ styles.advanced }><a onClick={ this.showAdvanced }>Advanced</a></fieldset> ) }
