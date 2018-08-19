@@ -1,20 +1,17 @@
 // todo
+- add and remove colums
+- improve mobile ui
 - browser cache
 - simplify word/word-single
 - hos 14:10?
 - gaps between words like there in
-
-
-- hash history
-
-// todo - sept 2014
-- remove H from morph
-
+- update morph data
 - fixing versification issues
+
+
+
 - creating a new literal consistent translation
 - remove + from lemma
-
-- pushstate?
 - strip accents from greek?
 - fix greek roots
 - move word details to right

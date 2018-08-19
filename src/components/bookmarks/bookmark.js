@@ -16,12 +16,12 @@ class BookMark extends React.Component{
 
 	render() {
 		const bookmark = this.props.bookmark;
-		const bookmarkText = bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse;
+		const bookmarkText = ( this.props.number + 1 ) + '. ' + bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse;
 		return (
-			<li>
-				<Link to={ createReferenceLink( bookmark ) } onClick={ this.props.showCrossReferences }>{ bookmarkText }</Link>
-			 	<a onClick={ this.removeBookmark }><Cancel fill="#000000" /></a>
-			</li>
+			<div className={ styles.bookmark }>
+				<Link to={ createReferenceLink( bookmark ) }>{ bookmarkText }</Link>
+				<a onClick={ this.removeBookmark } className={ styles.cancel }><Cancel fill="#000000" /></a>
+			</div>
 		);
 	}
 }

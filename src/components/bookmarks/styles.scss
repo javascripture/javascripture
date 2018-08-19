@@ -1,27 +1,45 @@
-.bookmarks {
-	padding: 1em;
+.bookmarks p {
+	line-height: 2em;
+	padding: 0 20px;
 }
 
 .title {
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
 	letter-spacing: .02em;
+	padding: 20px 20px 0 20px;
 }
 
 .bookmarksList {
-	line-height: 1.2em;
-	list-style: decimal;
-	list-style-position: inside;
+	svg {
+		vertical-align: middle;
+	}
+
+	a {
+		display: block;
+		line-height: 2em;
+		padding: 0 20px;
+		text-decoration: none;
+
+		&:hover {
+			background: lightblue;
+		}
+	}
+}
+
+.bookmark {
+	position: relative;
+}
+
+.cancel {
+	position: absolute;
+	right: 0;
+	top: 0;
 
 	svg {
 		cursor: pointer;
 		height: 15px;
-		margin-left: .5em;
-		vertical-align: top;
+		vertical-align: middle;
 		width: 15px;
-	}
-
-	a {
-		color: black;
 	}
 }

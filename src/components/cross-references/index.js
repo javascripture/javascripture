@@ -9,17 +9,12 @@ import { createReferenceLink } from '../../lib/reference.js';
 
 class CrossReferences extends React.Component{
 	getCrossReferences() {
-    	const bookId = bible.getBookId( this.props.reference.book ),
+		const bookId = bible.getBookId( this.props.reference.book ),
 			referenceString = bible.Data.books[ bookId - 1 ][ 1 ] + '.' + this.props.reference.chapter + '.' + this.props.reference.verse;
 		return crossReferences[ referenceString ];
 	}
 
 	crossReferences() {
-		if ( ! this.props.reference ) {
-			return;
-		}
-
-
 		if ( this.getCrossReferences() ) {
 			return (
 				<div>
@@ -47,12 +42,12 @@ class CrossReferences extends React.Component{
 			<ul className={ styles.crossReferencesList }>
 				{ this.getCrossReferences().map( reference => {
 					const referenceArray = reference.split('.'),
-		    			bookId = bible.getBookId( referenceArray[0] ),
-		    			referenceObject = {
-			    			book: bible.Data.books[bookId - 1][0],
-			    			chapter: referenceArray[1],
-			    			verse: referenceArray[2]
-		    			};
+						bookId = bible.getBookId( referenceArray[0] ),
+						referenceObject = {
+							book: bible.Data.books[bookId - 1][0],
+							chapter: referenceArray[1],
+							verse: referenceArray[2]
+						};
 
 					return (
 						<li key={ reference }>
@@ -66,12 +61,18 @@ class CrossReferences extends React.Component{
 		);
 	}
 
+	helpText() {
+		return (
+			<p>Click a verse number to show cross references here.</p>
+		);
+	}
+
 	render() {
 		return (
 			<div className={ styles.crossReferences }>
 				<h2 className={ styles.title }>Cross references</h2>
-
-				{ this.crossReferences() }
+				{ ! this.props.reference && this.helpText() }
+				{ this.props.reference && this.crossReferences() }
 			</div>
 		);
 	}

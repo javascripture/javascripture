@@ -15,8 +15,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const BookMarkContainer = connect(
- 	null,
- 	mapDispatchToProps
+	null,
+	mapDispatchToProps
 )( BookMark )
 
 export default BookMarkContainer;
