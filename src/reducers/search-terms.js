@@ -20,11 +20,8 @@ const searchTerms = ( state = [], action ) => {
 			} );
 
 			if ( termPosition > -1 ) {
-				newState[ termPosition ] = {
-					open: true,
-					results: searchTerm.results,
-					terms: action.terms,
-				};
+				newState[ termPosition ].open = true;
+				return [ ...newState ];
 			}
 
 			return [

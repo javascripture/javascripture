@@ -106,7 +106,7 @@ class Search extends React.Component{
 									<option>chapter</option>
 								</select>
 							</fieldset>
-							<fieldset>
+							<fieldset title="Strict search will only match the whole word, otherwise we also match substrings">
 								<label>Strict search</label>
 								<input type="checkbox" name="strict" id="strict" onChange={ this.change } />
 							</fieldset>
