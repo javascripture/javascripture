@@ -93,7 +93,10 @@
 <script src="lib/MorphParse.js"></script>
 <script>loadingStatus( 'data', 20 );</script>
 <script src="data/bible.js"></script>
+<script>loadingStatus( 'Dictonary', 23 );</script>
 <script src="data/strongs-dictionary.js"></script>
+<script>loadingStatus( 'Greek dictonary', 26 );</script>
+<script src="data/strongs-greek-dictionary.js"></script>
 <script src="data/extra-dictionary.js"></script>
 <script>loadingStatus( 'KJV', 30 );</script>
 <script src="data/kjvdwyer7.js"></script>
@@ -117,7 +120,7 @@
 
 	if('serviceWorker' in navigator) {
 		navigator.serviceWorker
-			.register('/sw.js?14.1')
+			.register('/sw.js?15.0')
 			.then(function( reg ) { console.log("Service Worker Registered", reg); });
 	}
 

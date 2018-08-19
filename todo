@@ -1,4 +1,5 @@
 // todo
+- browser cache
 - simplify word/word-single
 - hos 14:10?
 - gaps between words like there in
@@ -29,7 +30,6 @@ ________________________________________
 
 
 number of refs found when searching
-scrolling load ref
 keyboard shortcuts
 
 

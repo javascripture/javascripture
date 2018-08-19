@@ -1,4 +1,4 @@
-var cache = 'javascripture.14.1'; // verse bug fix
+var cache = 'javascripture.16.0'; // add greek transliteration
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) { // layout tweaks
@@ -16,6 +16,7 @@ self.addEventListener('install', function(e) {
 		'data/bible.js',
 		'data/extra-dictionary.js',
 		'data/strongs-dictionary.js',
+		'data/strongs-dictionary-greek.js',
 		'data/kjvdwyer7.js',
 		'data/web3.js',
 		'data/strongsObjectWithFamilies2.js',

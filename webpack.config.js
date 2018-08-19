@@ -6,6 +6,8 @@ var webpack = require( 'webpack' ),
 	NODE_ENV = process.env.NODE_ENV || 'development',
 	path = require( 'path' );
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 var config = {
@@ -64,7 +66,7 @@ var config = {
 				NODE_ENV: JSON.stringify( NODE_ENV ),
 				BROWSER: JSON.stringify( true )
 			}
-		} )
+		} ),
 	]
 };
 
