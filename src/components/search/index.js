@@ -102,8 +102,7 @@ class Search extends React.Component{
 								<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
 							</fieldset>
 							<fieldset>
-								<label htmlFor="version">Language:</label>
-								<select name="version" id="version" onChange={ this.change } defaultValue="kjv">
+								<label htmlFor="version">Language:</label> <select name="version" id="version" onChange={ this.change } defaultValue="kjv">
 									<option>kjv</option>
 									<option>hebrew</option>
 									<option>greek</option>
