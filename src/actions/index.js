@@ -115,6 +115,18 @@ export const toggleWord = ( strongsNumber ) => {
 	}
 }
 
+export const openAdvancedSearch = () => {
+		return {
+		type: 'OPEN_ADVANCED_SEARCH'
+	}
+};
+
+export const closeAdvancedSearch = () => {
+		return {
+		type: 'CLOSE_ADVANCED_SEARCH'
+	}
+};
+
 export const addSearch = ( terms, target ) => {
 	// Send data to our worker.
 	worker.postMessage( {

@@ -2,12 +2,13 @@
 import { connect } from 'react-redux';
 
 // Internal
-import { addSearch, clearAll, removeSearch, toggleSearch } from '../actions'
+import { addSearch, clearAll, removeSearch, toggleSearch, closeAdvancedSearch, openAdvancedSearch } from '../actions'
 import Search from '../components/search';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		searchTerms: state.searchTerms
+		searchAdvanced: state.searchAdvanced,
+		searchTerms: state.searchTerms,
 	};
 };
 
@@ -28,12 +29,20 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		clearAllSearch: () => {
 			dispatch( clearAll() );
 		},
+
+		openAdvancedSearch: () => {
+			dispatch( openAdvancedSearch() );
+		},
+
+		closeAdvancedSearch: () => {
+			dispatch( closeAdvancedSearch() );
+		},
 	}
 };
 
 const SearchContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( Search )
 
 export default SearchContainer;

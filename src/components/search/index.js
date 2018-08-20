@@ -17,7 +17,6 @@ class Search extends React.Component{
 		clusivity: 'exclusive',
 		range: 'verse',
 		strict: false,
-		advanced: false,
 	};
 
 	change = ( event ) => {
@@ -39,9 +38,11 @@ class Search extends React.Component{
 	};
 
 	showAdvanced = () => {
-		this.setState( {
-			advanced: true
-		} );
+		if ( this.props.searchAdvanced ) {
+			this.props.closeAdvancedSearch();
+		} else {
+			this.props.openAdvancedSearch();
+		}
 	}
 
 	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
@@ -75,6 +76,13 @@ class Search extends React.Component{
 		} );
 	}
 
+	renderAdvanced() {
+		const text = this.props.searchAdvanced ? 'Hide advanced' : 'Show advanced';
+		return (
+			<fieldset className={ styles.advanced }><a onClick={ this.showAdvanced }>{ text }</a></fieldset>
+		);
+	}
+
 	render() {
 		return (
 			<div>
@@ -83,7 +91,7 @@ class Search extends React.Component{
 						<label htmlFor="word" className="has-placeholder">Word</label>
 						<input type="text" name="word" id="word" placeholder="Word" onChange={ this.change } />
 					</fieldset>
-					{ this.state.advanced ? (
+					{ this.props.searchAdvanced && (
 						<div>
 							<fieldset>
 								<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
@@ -117,7 +125,8 @@ class Search extends React.Component{
 								<input type="checkbox" name="strict" id="strict" onChange={ this.toggle } />
 							</fieldset>
 						</div>
-					) : ( <fieldset className={ styles.advanced }><a onClick={ this.showAdvanced }>Advanced</a></fieldset> ) }
+					) }
+					{ this.renderAdvanced() }
 					<fieldset>
 						<input type="submit" value="Search" />
 					</fieldset>
