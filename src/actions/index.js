@@ -34,14 +34,6 @@ export const setScrollChapter = ( book, chapter, index ) => {
 	}
 }
 
-export const setSecondaryScrollChapter = ( book, chapter ) => {
-	return {
-		book,
-		chapter,
-		type: 'SET_SECONDARY_SCROLL_CHAPTER'
-	}
-}
-
 export const addBookmark = ( reference ) => {
 	return {
 		reference,
@@ -184,13 +176,6 @@ export const changeVersion = ( index, version ) => {
 	}
 }
 
-export const secondaryReference = ( reference ) => {
-	return {
-		reference,
-		type: 'SECONDARY_REFERENCE'
-	}
-}
-
 export const setReference = ( reference, index ) => {
 	return {
 		reference,
@@ -219,5 +204,17 @@ export const toggleReferenceSelectorMobile = ( index ) => {
 	return {
 		index,
 		type: 'TOGGLE_REFERENCE_SELECTOR_MOBILE',
+	}
+}
+
+export const addColumn = () => {
+	return {
+		type: 'ADD_COLUMN'
+	}
+}
+
+export const removeColumn = () => {
+	return {
+		type: 'REMOVE_COLUMN'
 	}
 }

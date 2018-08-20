@@ -68,13 +68,8 @@ class VersionSelector extends React.Component{
 
 	renderSelect() {
 		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
-		let className = styles.leftVersion;
-		if ( this.props.index > 0 ) {
-			className = styles.rightVersion;
-		}
-
 		return (
-			<select name={ this.props.index } className={ className } defaultValue={ value } onChange={ this.changeVersion }>
+			<select name={ this.props.index } className={ styles.rightVersion } defaultValue={ value } onChange={ this.changeVersion }>
 				<option value="original">Original</option>
 				<option value="kjv">KJV</option>
 				<option value="web">WEB</option>
@@ -86,9 +81,8 @@ class VersionSelector extends React.Component{
 	render() {
 		return (
 			<form onSubmit={ this.goToReference } className={ ( this.props.index === 0 || ! this.props.inSync ) ? styles.versionSelectorFlexible : styles.versionSelector }>
-				{ this.props.index === 0 && this.renderSelect() }
 				{ ( this.props.index === 0 || ! this.props.inSync ) && this.renderInput() }
-				{ this.props.index > 0 && this.renderSelect() }
+				{ this.renderSelect() }
 			</form>
 		);
 	}

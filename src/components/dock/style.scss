@@ -11,6 +11,17 @@
 		margin-left: 320px;
 		width: calc( 100% - 320px );
 	}
+
+	button {
+		cursor: pointer;
+		border-radius: 0;
+		border-right: 0;
+
+		@media ( max-width: 399px ) {
+			border-top: 0;
+		}
+	}
+
 }
 
 .dock-version-selectors {

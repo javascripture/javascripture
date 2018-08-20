@@ -55,13 +55,10 @@ class Chapter extends React.Component{
 	getSyncVerses() {
 		const { book, chapter, highlightWord, index } = this.props;
 		const currentReference = this.props.reference[ index ],
-			leftLanguage = getLanguageFromVersion( book, this.props.reference[0].version ),
-			rightLanguage = getLanguageFromVersion( book, this.props.reference[1].version ),
-			leftChapterData = javascripture.data[ leftLanguage ][ book ][ chapter - 1 ],
-			rightChapterData = javascripture.data[ rightLanguage ][ book ][ chapter - 1 ];
+			kjvData = javascripture.data[ 'kjv' ][ book ][ chapter - 1 ];
 
 		this.currentRef = React.createRef();
-		return leftChapterData.map( ( verse, verseNumber ) => {
+		return kjvData.map( ( verse, verseNumber ) => {
 			let ref = null;
 			if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
 				ref = this.currentRef;
@@ -69,17 +66,18 @@ class Chapter extends React.Component{
 
 			return (
 				<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
-					<div className={ styles.verseWrapper } key={ 'one-' + verseNumber  } style={ getVerseWrapperStyle( leftLanguage, this.props.reference[0].version ) }>
-						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span  className={ styles.verse } style={ getVerseStyle( leftLanguage, this.props.reference[0].version ) }>
-							<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[0].version } language={ leftLanguage } highlightWord={ highlightWord } />
-						</span>
-					</div>
+					{ this.props.reference.map( ( reference, index ) => {
+						const language = getLanguageFromVersion( book, reference.version );
+						const verseData = javascripture.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
+						return (
+							<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( language, reference.version ) }>
+								<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ styles.verse } style={ getVerseStyle( language, reference.version ) }>
+									<Verse verse={ verseData } index={ verseNumber } version={ reference.version } language={ language } highlightWord={ highlightWord } />
+								</span>
+							</div>
+						);
+					} ) }
 					<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
-					<div className={ styles.verseWrapper } key={ 'two-' + verseNumber } style={ getVerseWrapperStyle( rightLanguage, this.props.reference[1].version ) }>
-						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span  className={ styles.verse } style={ getVerseStyle( rightLanguage, this.props.reference[1].version ) }>
-							<Verse className={ styles.verseContainer } verse={ rightChapterData[ verseNumber ] } index={ verseNumber } version={ this.props.reference[ 1 ].version } language={ rightLanguage } highlightWord={ highlightWord } />
-						</span>
-					</div>
 				</div>
 			);
 		} );
