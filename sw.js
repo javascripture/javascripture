@@ -1,4 +1,4 @@
-var cache = 'javascripture.16.0'; // add greek transliteration
+var cache = 'javascripture.17.0'; // add flexible column numbers
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) { // layout tweaks

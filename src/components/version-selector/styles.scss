@@ -1,3 +1,5 @@
+@import '../_dimensions.scss';
+
 .version-selector {
 	display: flex;
 }
@@ -7,7 +9,7 @@
 	flex-basis: 0;
 	flex-grow: 1;
 	margin-right: -1px;
-	max-width: 520px;
+	max-width: $total-column-width;
 }
 
 .form-field, .left-version, .right-version {

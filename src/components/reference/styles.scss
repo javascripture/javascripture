@@ -1,3 +1,5 @@
+@import '../_dimensions.scss';
+
 .reference {
 	height: calc( 100vh - 56px );
 	overflow-x: hidden;
@@ -5,7 +7,7 @@
 	width: 100%;
 
 	&.is-not-sync {
-		max-width: 520px;
+		max-width: $total-column-width;
 	}
 }
 
@@ -26,17 +28,17 @@
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
 	margin: 0 auto;
-	max-width: 480px;
+	max-width: $column-width;
 	padding: 10px 0;
 	text-align: center;
 }
 
 .verseWrapper {
 	color: #bbb;
-	padding: 0 20px;
-	flex-basis: 50%;
-	flex-grow: 2;
-	max-width: 480px;
+	padding: 0 $column-padding;
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: $column-width;
 }
 
 .verse {
