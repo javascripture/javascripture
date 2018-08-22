@@ -16,7 +16,7 @@ self.addEventListener('install', function(e) {
 		'data/bible.js',
 		'data/extra-dictionary.js',
 		'data/strongs-dictionary.js',
-		'data/strongs-dictionary-greek.js',
+		'data/strongs-greek-dictionary.js',
 		'data/kjvdwyer7.js',
 		'data/web3.js',
 		'data/strongsObjectWithFamilies2.js',
