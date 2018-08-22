@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
 
 // Internal dependencies
+import AddColumnButton from '../add-column-button';
 import ReferenceSelectorMobile from '../reference-selector-mobile';
+import RemoveColumnButton from '../remove-column-button';
+import SyncButton from '../sync-button';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { createReferenceLink } from '../../lib/reference.js';
 
@@ -15,9 +18,19 @@ let lastTimeStamp = 0;
 import styles from './styles.scss';
 
 class VersionSelector extends React.Component{
+	state = {
+		reference: this.props.value,
+	};
+
 	changeVersion = ( event ) => {
 		this.props.changeVersion( event.target.name, event.target.value );
 		event.target.blur();
+	};
+
+	change = ( event ) => {
+		this.setState( {
+			reference: event.target.value,
+		} );
 	};
 
 	goToReference = ( event ) => {
@@ -34,7 +47,10 @@ class VersionSelector extends React.Component{
 
 	componentWillReceiveProps( nextProps ) {
 		if ( this.refs.referenceInput ) {
-			this.refs.referenceInput.value = nextProps.value;
+			//this.refs.referenceInput.value = nextProps.value;
+			this.setState( {
+				reference: nextProps.value,
+			} );
 		}
 	}
 
@@ -42,7 +58,10 @@ class VersionSelector extends React.Component{
 		event.preventDefault();
 		this.refs.referenceInput.focus();
 		this.refs.referenceInput.selectionStart = this.refs.referenceInput.selectionEnd = 0;
-		this.refs.referenceInput.value = event.key;
+		//this.refs.referenceInput.value = event.key;
+		this.setState( {
+			reference: event.key,
+		} );
 	}
 
 	componentDidMount() {
@@ -61,7 +80,7 @@ class VersionSelector extends React.Component{
 		return (
 			<span className={ styles.inputWrapper }>
 				<ReferenceSelectorMobile index={ this.props.index } />
-				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } defaultValue={ this.props.value } />
+				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } value={ this.state.reference } onChange={ this.change } />
 			</span>
 		);
 	}
@@ -69,20 +88,23 @@ class VersionSelector extends React.Component{
 	renderSelect() {
 		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
 		return (
-			<select name={ this.props.index } className={ styles.rightVersion } defaultValue={ value } onChange={ this.changeVersion }>
+			<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
 				<option value="original">Original</option>
 				<option value="kjv">KJV</option>
 				<option value="web">WEB</option>
-				<option value="lc">Literal Consistent</option>
+				<option value="lc">Literal</option>
 			</select>
 		);
 	}
 
 	render() {
 		return (
-			<form onSubmit={ this.goToReference } className={ ( this.props.index === 0 || ! this.props.inSync ) ? styles.versionSelectorFlexible : styles.versionSelector }>
+			<form onSubmit={ this.goToReference } className={ styles.versionSelectorFlexible }>
 				{ ( this.props.index === 0 || ! this.props.inSync ) && this.renderInput() }
 				{ this.renderSelect() }
+				{ this.props.index === 0 ? <SyncButton /> : <RemoveColumnButton index={ this.props.index } /> }
+				{ this.props.last && <AddColumnButton /> }
+
 			</form>
 		);
 	}

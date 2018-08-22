@@ -4,33 +4,20 @@
 
 .version-selector-flexible {
 	display: flex;
+	flex-basis: 0;
 	flex-grow: 1;
-	max-width: 300px;
+	margin-right: -1px;
+	max-width: 520px;
 }
 
 .form-field, .left-version, .right-version {
 	box-sizing: border-box;
 	flex-grow: 1;
-	width: 65px;
-}
 
-.left-version {
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border-right: 0;
-
-	@media ( max-width: 399px ) {
-		border-left: 0;
-	}
 }
 
 .right-version {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-
-	@media ( max-width: 399px ) {
-		border-right: 0;
-	}
+	border-radius: 0;
 }
 
 .inputWrapper {
@@ -44,7 +31,6 @@
 	border-radius: 0;
 	border-right: 0;
 	flex-grow: 1;
-	width: 50px;
 }
 
 .left-version, .right-version, .input {

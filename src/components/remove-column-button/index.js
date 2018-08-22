@@ -13,7 +13,7 @@ const fill = '#333333';
 class RemoveColumnButton extends React.Component{
 	render() {
 		return (
-			<button onClick={ this.props.removeColumn }>
+			<button type="button" onClick={ this.props.removeColumn }>
 				<RemoveSvg fill={ fill } />
 			</button>
 		);
@@ -23,7 +23,7 @@ class RemoveColumnButton extends React.Component{
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		removeColumn: () => {
-			dispatch( removeColumn() )
+			dispatch( removeColumn( ownProps.index ) )
 		}
 	};
 };

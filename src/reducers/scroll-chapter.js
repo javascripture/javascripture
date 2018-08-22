@@ -31,8 +31,12 @@ const scrollChapter = ( state = initialState, action ) => {
 				index = action.index;
 
 			newState[ index ] = { book, chapter };
+			return newState;
 
-    		return newState;
+		case 'REMOVE_COLUMN':
+			const removedState = [ ...state ];
+			removedState.splice( action.index, 1 );
+			return removedState;
 
 		default:
 			return state;

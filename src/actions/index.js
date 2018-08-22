@@ -213,8 +213,9 @@ export const addColumn = () => {
 	}
 }
 
-export const removeColumn = () => {
+export const removeColumn = ( index ) => {
 	return {
+		index,
 		type: 'REMOVE_COLUMN'
 	}
 }

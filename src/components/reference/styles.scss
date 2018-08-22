@@ -3,6 +3,10 @@
 	overflow-x: hidden;
 	overflow-y: scroll;
 	width: 100%;
+
+	&.is-not-sync {
+		max-width: 520px;
+	}
 }
 
 .single-reference {
@@ -21,6 +25,8 @@
 .heading {
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
+	margin: 0 auto;
+	max-width: 480px;
 	padding: 10px 0;
 	text-align: center;
 }

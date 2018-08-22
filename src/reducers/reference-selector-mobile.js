@@ -55,7 +55,7 @@ const referenceSelectorMobile = ( state = initialState, action ) => {
 
 		case 'REMOVE_COLUMN':
 			const removedState = [ ...state ];
-			removedState.pop();
+			removedState.splice( action.index, 1 );
 			return removedState;
 
 		default:

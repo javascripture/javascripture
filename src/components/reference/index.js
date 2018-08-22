@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Waypoint from 'react-waypoint';
+import classnames from 'classnames';
 
 // Internal
 import SingleReference from '../../containers/single-reference';
@@ -171,10 +172,11 @@ class Reference extends React.Component{
 		}
 
 		const currentBook = references.book,
-			currentChapter = references.chapter;
+			currentChapter = references.chapter,
+			classname = classnames( styles.reference, this.props.inSync ? null : styles.isNotSync );
 
 		return (
-			<div id={ 'referenceWindow' + this.props.index } className={ styles.reference } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
+			<div id={ 'referenceWindow' + this.props.index } className={ classname } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
 				{ references.references && references.references.map( ( reference ) => {
 					const book = bible.getBook( reference.bookID ),
 						chapter = reference.chapter1;

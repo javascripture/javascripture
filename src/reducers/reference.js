@@ -56,13 +56,10 @@ const reference = ( state = getInitialState(), action ) => {
 			return locationState;
 
 		case 'CHANGE_VERSION':
-			console.log( action );
 			const newState = [ ...state ];
-			console.log( newState );
 			const newReference = newState[ action.index ];
 			newReference.version = action.version;
 			newState[ action.index ] = newReference;
-			console.log( newState );
 			return newState;
 
 		case 'SET_REFERENCE':
@@ -72,13 +69,14 @@ const reference = ( state = getInitialState(), action ) => {
 
 		case 'ADD_COLUMN':
 			const addedState = [ ...state ];
-			const addedColumn = Object.assign( {}, state[ 0 ] );
+			const numberOfColumns = state.length;
+			const addedColumn = Object.assign( {}, state[ state.length - 1 ] );
 			addedState.push( addedColumn );
 			return addedState;
 
 		case 'REMOVE_COLUMN':
 			const removedState = [ ...state ];
-			removedState.pop();
+			removedState.splice( action.index, 1 );
 			return removedState;
 
 		default:

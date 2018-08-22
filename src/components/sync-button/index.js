@@ -18,7 +18,7 @@ class SyncButton extends React.Component{
 
 	render() {
 		return (
-			<button className={ styles.syncButton } onClick={ this.changeSync }>
+			<button type="button" className={ styles.syncButton } onClick={ this.changeSync }>
 				{ this.props.inSync ?  <SyncSvg fill={ fill } /> : <SyncDisabledSvg fill={ fill } /> }
 			</button>
 		);

@@ -13,7 +13,7 @@ const fill = '#333333';
 class AddColumnButton extends React.Component{
 	render() {
 		return (
-			<button onClick={ this.props.addColumn }>
+			<button type="button" onClick={ this.props.addColumn }>
 				<AddSvg fill={ fill } />
 			</button>
 		);

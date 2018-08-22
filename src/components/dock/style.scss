@@ -3,10 +3,6 @@
 	width: 100%;
 	z-index: 9;
 
-	@media ( min-width: 400px ) {
-		top: 5px;
-	}
-
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
 		width: calc( 100% - 320px );
@@ -15,11 +11,16 @@
 	button {
 		cursor: pointer;
 		border-radius: 0;
-		border-right: 0;
+		border-left: 0;
+	}
 
-		@media ( max-width: 399px ) {
-			border-top: 0;
-		}
+	button:first-child {
+		border-left: 1px solid rgba(0, 0, 0, 0.3);
+	}
+
+	input {
+		flez-grow: 1;
+		width: 10px;
 	}
 
 }
