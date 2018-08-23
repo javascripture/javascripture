@@ -6,6 +6,7 @@
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
 		width: calc( 100% - 320px );
+		z-index: 10;
 	}
 
 	button {

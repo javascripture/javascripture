@@ -1,3 +1,5 @@
+@import '../colors.scss';
+
 .bookmarks p {
 	line-height: 2em;
 	padding: 0 20px;
@@ -22,7 +24,7 @@
 		text-decoration: none;
 
 		&:hover {
-			background: lightblue;
+			background: $hover;
 		}
 	}
 }

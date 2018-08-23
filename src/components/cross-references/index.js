@@ -37,22 +37,31 @@ class CrossReferences extends React.Component{
 		);
 	}
 
+	referenceText( referenceObject ) {
+		return referenceObject.book + ' ' + referenceObject.chapter + ':' + referenceObject.verse;
+	}
+
 	showReferences() {
 		return (
 			<ul className={ styles.crossReferencesList }>
 				{ this.getCrossReferences().map( reference => {
-					const referenceArray = reference.split('.'),
+					const referenceSections = reference.split('-');
+					const referenceArrays = referenceSections.map( referenceSection => {
+						const referenceArray = referenceSection.split('.'),
 						bookId = bible.getBookId( referenceArray[0] ),
 						referenceObject = {
 							book: bible.Data.books[bookId - 1][0],
 							chapter: referenceArray[1],
 							verse: referenceArray[2]
 						};
+						return referenceObject;
+					} );
 
 					return (
 						<li key={ reference }>
-							<a href={ '#' + createReferenceLink( referenceObject ) }>
-								{ reference }
+							<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
+								{ this.referenceText( referenceArrays[ 0 ] ) }
+								{ referenceArrays[ 1 ] && ' - ' + this.referenceText( referenceArrays[ 1 ] ) }
 							</a>
 						</li>
 					);

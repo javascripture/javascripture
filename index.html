@@ -120,8 +120,16 @@
 
 	if('serviceWorker' in navigator) {
 		navigator.serviceWorker
-			.register('/sw.js?17.0')
-			.then(function( reg ) { console.log("Service Worker Registered", reg); });
+			.register('/sw.js', { updateViaCache: 'imports' } )
+			.then(function( reg ) {
+				console.log("Service Worker Registered", reg);
+
+				// Handler for messages coming from the service worker
+				const channel = new BroadcastChannel('sw-messages');
+				channel.addEventListener('message', event => {
+					console.log( event.data );
+				});
+			});
 	}
 
 	// Attach web workers
@@ -147,7 +155,7 @@
 				localStorage.clear();
 				var r = confirm( 'A new version of JavaScripture is available. Press OK to reload and use it.' );
 				if ( r == true ) {
-				    window.location.reload();
+					window.location.reload();
 				}
 			}
 		}, false);

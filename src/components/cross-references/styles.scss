@@ -1,10 +1,15 @@
+@import '../colors.scss';
+
 .cross-references {
 	border-top: 1px solid #ccc;
-	padding: 1em;
 
 	a {
 		color: black;
 		text-decoration: underline;
+	}
+
+	p {
+		padding: 0 20px;
 	}
 }
 
@@ -12,19 +17,19 @@
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
 	letter-spacing: .02em;
+	padding: 20px 20px 0 20px;
 }
 
 .cross-references-list {
-	list-style-position: outside;
-	margin-left: 1em;
-	padding: 0;
-
-	li {
-		margin: 0;
-		padding: 0;
-	}
+	list-style: none;
 
 	a {
+		display: block;
+		line-height: 1.4;
+		padding: 0 20px;
 		text-decoration: none;
+		&:hover {
+			background: $hover;
+		}
 	}
 }
