@@ -2,13 +2,14 @@
 import { connect } from 'react-redux';
 
 // Internal
-import { addSearch, clearAll, removeSearch, toggleSearch, closeAdvancedSearch, openAdvancedSearch } from '../actions'
+import { addSearch, clearAll, removeSearch, toggleSearch, closeAdvancedSearch, openAdvancedSearch, settingsChange } from '../actions'
 import Search from '../components/search';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
 		searchAdvanced: state.searchAdvanced,
 		searchTerms: state.searchTerms,
+		settings: state.settings,
 	};
 };
 
@@ -36,6 +37,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 		closeAdvancedSearch: () => {
 			dispatch( closeAdvancedSearch() );
+		},
+		expandSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', true ) );
+		},
+		collapseSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', false ) );
 		},
 	}
 };

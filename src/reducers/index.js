@@ -2,7 +2,6 @@ import bookmarks from './bookmarks';
 import reference from './reference';
 import referenceSelectorMobile from './reference-selector-mobile';
 import scrollChapter from './scroll-chapter';
-import secondaryScrollChapter from './secondary-scroll-chapter';
 import searchAdvanced from './search-advanced';
 import searchResults from './search-results';
 import searchTerms from './search-terms';
@@ -12,7 +11,6 @@ import wordDetails from './word-details';
 import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
 import currentReference from './current-reference';
-import secondaryReference from './secondary-reference';
 import version from './version';
 
 const app = {
@@ -22,7 +20,6 @@ const app = {
 	reference,
 	referenceSelectorMobile,
 	scrollChapter,
-	secondaryScrollChapter,
 	searchAdvanced,
 	searchResults,
 	searchTerms,
@@ -31,7 +28,6 @@ const app = {
 	version,
 	wordDetails,
 	wordHighlight,
-	secondaryReference,
 };
 
 export default app;

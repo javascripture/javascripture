@@ -127,7 +127,7 @@ class WordBlock extends React.Component {
 					<strong>Strongs' Derivation</strong><br />{ wordDetail.derivation }<br />
 				</div>
 				<br />
-				<strong>Found in</strong>
+				<strong>Found in</strong> { this.props.settings.expandedSearchResults ? ( <a className={ styles.foundInExtra } onClick={ this.props.collapseSearchResults }>collapse</a> ) : ( <a className={ styles.foundInExtra } onClick={ this.props.expandSearchResults }>expand</a> ) }
 			</div>
 		);
 	}

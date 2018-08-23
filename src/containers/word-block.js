@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import WordBlock from '../components/word-details/word-block';
-import { addWord, removeSearch, removeWord, toggleWord } from '../actions'
+import { addWord, removeSearch, removeWord, settingsChange, toggleWord } from '../actions'
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
@@ -36,13 +36,22 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 		toggleWord: () => {
 			dispatch( toggleWord( ownProps.strongsNumber ) );
-		}
+		},
+
+		expandSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', true ) );
+		},
+
+		collapseSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', false ) );
+		},
+
 	}
 };
 
 const WordBlockContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps,
+	mapStateToProps,
+	mapDispatchToProps,
 )( WordBlock )
 
 export default WordBlockContainer;

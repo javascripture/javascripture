@@ -5,7 +5,7 @@
 
 	select {
 		height: 1em;
- 		line-height: 1em;
+		line-height: 1em;
 	}
 }
 
@@ -55,17 +55,17 @@ $trayWidth: 320px;
 $width: 70px;
 $padding: 10px;
 a.clear-all {
-    background: lightblue;
-    color: #fff;
-    display: block;
-    padding: $padding;
-    position: fixed;
-    bottom: 55px;
-    left: $trayWidth - $width - $padding * 2;
-    cursor: pointer;
-    text-align: right;
-    text-decoration: none;
-    width: $width;
+	background: lightblue;
+	color: #fff;
+	display: block;
+	padding: $padding;
+	position: fixed;
+	bottom: 55px;
+	left: $trayWidth - $width - $padding * 2;
+	cursor: pointer;
+	text-align: right;
+	text-decoration: none;
+	width: $width;
 }
 
 .advanced {
@@ -74,4 +74,8 @@ a.clear-all {
 	a {
 		color: #aaa;
 	}
+}
+
+.verse {
+	color: #999;
 }

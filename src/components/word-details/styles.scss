@@ -31,17 +31,17 @@ $trayWidth: 320px;
 $width: 70px;
 $padding: 10px;
 a.clear-all {
-    background: lightblue;
-    color: #fff;
-    display: block;
-    padding: $padding;
-    position: fixed;
-    bottom: 55px;
-    left: $trayWidth - $width - $padding * 2;
-    cursor: pointer;
-    text-align: right;
-    text-decoration: none;
-    width: $width;
+	background: lightblue;
+	color: #fff;
+	display: block;
+	padding: $padding;
+	position: fixed;
+	bottom: 55px;
+	left: $trayWidth - $width - $padding * 2;
+	cursor: pointer;
+	text-align: right;
+	text-decoration: none;
+	width: $width;
 }
 
 .word-block {
@@ -51,4 +51,11 @@ a.clear-all {
 .strongs-number-title {
 	display: inline-block;
 	width: 85px;
+}
+
+.found-in-extra {
+	color: #999;
+	cursor: pointer;
+	float: right;
+	text-decoration: none;
 }

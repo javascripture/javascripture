@@ -17,7 +17,8 @@ function isActive( currentReference, ownProps ) {
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		isActive: isActive( state.currentReference, ownProps )
+		isActive: isActive( state.currentReference, ownProps ),
+		expandedSearchResults: state.settings.expandedSearchResults,
 	};
 };
 
@@ -30,8 +31,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const SearchLinkContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( SearchLink )
 
 export default SearchLinkContainer;

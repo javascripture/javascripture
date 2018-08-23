@@ -101,6 +101,11 @@ class SettingsTray extends React.Component{
 											<input type="checkbox" name="inSync" checked={ this.props.settings.inSync } onChange={ this.changeCheckboxSetting } /> Keep references in sync
 										</label>
 									</li>
+									<li className={ styles.settingsLi }>
+										<label>
+											<input type="checkbox" name="expandedSearchResults" checked={ this.props.settings.expandedSearchResults } onChange={ this.changeCheckboxSetting } /> Show expanded search results
+										</label>
+									</li>
 								</ul>
 							</form>
 						</div>

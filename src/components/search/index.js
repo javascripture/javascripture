@@ -43,7 +43,15 @@ class Search extends React.Component{
 		} else {
 			this.props.openAdvancedSearch();
 		}
-	}
+	};
+
+	changeExpandedResultsSetting = () => {
+		if ( this.props.settings.expandedSearchResults ) {
+			this.props.collapseSearchResults();
+		} else {
+			this.props.expandSearchResults();
+		}
+	};
 
 	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
 		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
@@ -120,9 +128,12 @@ class Search extends React.Component{
 								</select>
 							</fieldset>
 							<fieldset title="Strict search will only match the whole word, otherwise we also match substrings">
-								<label>Strict search</label>
-								<input type="checkbox" name="strict" id="strict" onChange={ this.toggle } />
+								<label>Strict search:</label> <input type="checkbox" name="strict" id="strict" onChange={ this.toggle } />
 							</fieldset>
+							<fieldset>
+								<label>Show the verse for context:</label> <input type="checkbox" name="expandedSearchResults" checked={ this.props.settings.expandedSearchResults } onChange={ this.changeExpandedResultsSetting } />
+							</fieldset>
+
 						</div>
 					) }
 					{ this.renderAdvanced() }

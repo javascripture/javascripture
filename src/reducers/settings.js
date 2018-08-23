@@ -5,6 +5,7 @@ const initialState = {
 	referencePicker: "select",
 	subdue: "50%",
 	inSync: true,
+	expandedSearchResults: false,
 	type: "SETTINGS_CHANGE",
 }
 

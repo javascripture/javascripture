@@ -1,4 +1,4 @@
-var cache = 'javascripture.17.5'; // add service worker caching changes
+var cache = 'javascripture.18'; // show context for verses in search
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
