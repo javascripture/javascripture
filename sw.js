@@ -1,4 +1,4 @@
-var cache = 'javascripture.18'; // show context for verses in search
+var cache = 'javascripture.19'; // search term picker
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
