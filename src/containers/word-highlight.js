@@ -5,6 +5,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		wordHighlight: state.wordHighlight,
 		settings: state.settings,
+		searchSelect: state.searchSelect,
 	}
 };
 

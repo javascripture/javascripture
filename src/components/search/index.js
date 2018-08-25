@@ -5,36 +5,27 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
+import PickerSvg from '../svg/picker.js';
 import SearchBlock from '../../containers/search-block';
 import styles from './styles.scss';
 
 class Search extends React.Component{
-	state = {
-		word: '',
-		lemma: '',
-		morph: '',
-		version: 'kjv',
-		clusivity: 'exclusive',
-		range: 'verse',
-		strict: false,
-	};
-
 	change = ( event ) => {
-		let newState = {};
-		newState[ event.target.name ] = event.target.value.trim();
-		this.setState( newState );
+		this.props.updateSearchForm( event.target.name, event.target.value );
 	};
 
 	toggle = ( event ) => {
-		let newState = {};
-		newState[ event.target.name ] = event.target.checked;
-		this.setState( newState );
+		this.props.updateSearchForm( event.target.name, event.target.checked );
+	};
+
+	reset = ( event ) => {
+		event.preventDefault();
+		this.props.clearSearchForm();
 	};
 
 	submit = ( event ) => {
 		event.preventDefault();
-
-		this.props.addSearch( this.state );
+		this.props.addSearch( this.props.searchForm );
 	};
 
 	showAdvanced = () => {
@@ -64,6 +55,17 @@ class Search extends React.Component{
 	removeWord = ( terms ) => {
 		this.props.removeSearch( terms );
 	};
+
+	pickerButton( field ) {
+		return (
+			<button
+				className={ styles.pickerButton }
+				type="button" onClick={ this.props.activateSearchSelect.bind( this, field ) }
+				title="Use this to select the term you want to search for.">
+				<PickerSvg />
+			</button>
+		);
+	}
 
 	results() {
 		return this.props.searchTerms.map( ( searchTerm, index ) => {
@@ -97,20 +99,23 @@ class Search extends React.Component{
 				<form className={ styles.search } onSubmit={ this.submit }>
 					<fieldset>
 						<label htmlFor="word" className="has-placeholder">Word</label>
-						<input type="text" name="word" id="word" placeholder="Word" onChange={ this.change } />
+						<input type="text" name="word" placeholder="Word" onChange={ this.change } value={ this.props.searchForm.word } />
+						{ this.pickerButton( 'word' ) }
 					</fieldset>
 					{ this.props.searchAdvanced && (
 						<div>
 							<fieldset>
 								<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
-								<input type="text" name="lemma" id="lemma" placeholder="Strongs number" onChange={ this.change } />
+								<input type="text" name="lemma" placeholder="Strongs number" onChange={ this.change } value={ this.props.searchForm.lemma } />
+								{ this.pickerButton( 'lemma' ) }
 							</fieldset>
 							<fieldset>
 								<label htmlFor="morph" className="has-placeholder">Morphology</label>
-								<input type="text" name="morph" id="morph" placeholder="Morphology" onChange={ this.change } />
+								<input type="text" name="morph" placeholder="Morphology" onChange={ this.change } value={ this.props.searchForm.morph } />
+								{ this.pickerButton( 'morph' ) }
 							</fieldset>
 							<fieldset>
-								<label htmlFor="version">Language:</label> <select name="version" id="version" onChange={ this.change } defaultValue="kjv">
+								<label htmlFor="version">Language:</label> <select name="version" onChange={ this.change } value={ this.props.searchForm.version }>
 									<option>kjv</option>
 									<option>hebrew</option>
 									<option>greek</option>
@@ -118,27 +123,27 @@ class Search extends React.Component{
 								</select>
 							</fieldset>
 							<fieldset>
-								<label htmlFor="clusivity">Look for</label> <select name="clusivity" id="clusivity" onChange={ this.change } defaultValue="exclusive">
+								<label htmlFor="clusivity">Look for</label> <select name="clusivity" onChange={ this.change } value={ this.props.searchForm.clusivity }>
 									<option value="exclusive">all</option>
 									<option value="inclusive">any</option>
-								</select> <label htmlFor="range">terms in a</label> <select name="range" id="range" onChange={ this.change } defaultValue="verse">
+								</select> <label htmlFor="range">terms in a</label> <select name="range" onChange={ this.change } value={ this.props.searchForm.range }>
 									<option>word</option>
 									<option>verse</option>
 									<option>chapter</option>
 								</select>
 							</fieldset>
-							<fieldset title="Strict search will only match the whole word, otherwise we also match substrings">
-								<label>Strict search:</label> <input type="checkbox" name="strict" id="strict" onChange={ this.toggle } />
+							<fieldset>
+								<label>Match whole word?</label> <input type="checkbox" name="strict" onChange={ this.toggle } value={ this.props.searchForm.strict } />
 							</fieldset>
 							<fieldset>
 								<label>Show the verse for context:</label> <input type="checkbox" name="expandedSearchResults" checked={ this.props.settings.expandedSearchResults } onChange={ this.changeExpandedResultsSetting } />
 							</fieldset>
-
 						</div>
 					) }
 					{ this.renderAdvanced() }
 					<fieldset>
 						<input type="submit" value="Search" />
+						<input type="reset" value="Reset" onClick={ this.reset } />
 					</fieldset>
 				</form>
 				{ this.results() }

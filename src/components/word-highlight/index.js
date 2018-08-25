@@ -2,14 +2,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { getStyle } from '../strongs-color.js';
+import { getHighlight, getHighlightBorder } from '../strongs-color.js';
 
 class WordHighlight extends React.Component{
 	render() {
 		return (
 			<style>
 				{ this.props.word && this.props.word.split(/[/, ]/).map( word => {
-					return ( word === 'added' ) ? null : getStyle( word, this.props.settings.subdue, this.props.settings.highlightWordsWith );
+					if ( word === 'added' ) {
+						return;
+					}
+
+					if ( this.props.searchSelect ) {
+						return getHighlightBorder( word, this.props.settings.subdue, this.props.settings.highlightWordsWith );
+					}
+
+					return getHighlight( word, this.props.settings.subdue, this.props.settings.highlightWordsWith );
 				} ) }
 			</style>
 		);

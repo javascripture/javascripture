@@ -3,7 +3,9 @@ import reference from './reference';
 import referenceSelectorMobile from './reference-selector-mobile';
 import scrollChapter from './scroll-chapter';
 import searchAdvanced from './search-advanced';
+import searchForm from './search-form';
 import searchResults from './search-results';
+import searchSelect from './search-select';
 import searchTerms from './search-terms';
 import settings from './settings';
 import trays from './trays';
@@ -21,7 +23,9 @@ const app = {
 	referenceSelectorMobile,
 	scrollChapter,
 	searchAdvanced,
+	searchForm,
 	searchResults,
+	searchSelect,
 	searchTerms,
 	settings,
 	trays,

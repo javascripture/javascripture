@@ -1,10 +1,19 @@
 import { connect } from 'react-redux';
-import { addWord, removeWordHighlight, setWordHighlight, setTrayVisibilityFilter } from '../actions';
+import {
+	addWord,
+	deactivateSearchSelect,
+	removeWordHighlight,
+	setWordHighlight,
+	setTrayVisibilityFilter,
+	updateSearchForm,
+	appendToSearchForm
+} from '../actions';
 import WordSingle from '../components/reference/word-single';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		highlighted: state.wordHighlight
+		highlighted: state.wordHighlight,
+		searchSelect: state.searchSelect,
 	}
 };
 
@@ -16,7 +25,12 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		highlightOff: () => {
 			dispatch( removeWordHighlight( ownProps.lemma.split( ' ' ) ) )
 		},
-		click: () => {
+		selectSearchTerm: ( name, value ) => {
+			dispatch( appendToSearchForm( name, value ) );
+			dispatch( updateSearchForm( 'version', ownProps.language ) );
+			dispatch( deactivateSearchSelect() );
+		},
+		addWord: () => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
 			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
@@ -36,8 +50,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const WordSingleContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( WordSingle )
 
 export default WordSingleContainer;

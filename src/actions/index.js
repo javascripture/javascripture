@@ -219,3 +219,38 @@ export const removeColumn = ( index ) => {
 		type: 'REMOVE_COLUMN'
 	}
 }
+
+export const activateSearchSelect = ( target ) => {
+	return {
+		target,
+		type: 'ACTIVATE_SEARCH_SELECT',
+	}
+}
+
+export const deactivateSearchSelect = () => {
+	return {
+		type: 'DEACTIVATE_SEARCH_SELECT',
+	}
+}
+
+export const updateSearchForm = ( name, value ) => {
+	return {
+		name,
+		value,
+		type: 'UPDATE_SEARCH_FORM',
+	}
+}
+
+export const appendToSearchForm = ( name, value ) => {
+	return {
+		name,
+		value,
+		type: 'APPEND_TO_SEARCH_FORM',
+	}
+}
+
+export const clearSearchForm = () => {
+	return {
+		type: 'CLEAR_SEARCH_FORM',
+	}
+}

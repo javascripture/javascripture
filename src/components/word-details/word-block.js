@@ -10,7 +10,7 @@ import CancelSvg from '../svg/cancel.js';
 import KJVDef from '../../containers/kjv-def';
 import morphology from './morphology';
 import SearchBlock from '../../containers/search-block';
-import { getStyle } from '../strongs-color.js';
+import { getHighlight } from '../strongs-color.js';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
 import { getFamily } from '../../lib/word';
@@ -152,7 +152,7 @@ class WordBlock extends React.Component {
 		if ( wordDetail ) {
 			return (
 				<div>
-					<style>{ getStyle( strongsNumber, this.props.settings.subdue, this.props.settings.highlightWordsWith ) }</style>
+					<style>{ getHighlight( strongsNumber, this.props.settings.subdue, this.props.settings.highlightWordsWith ) }</style>
 					<h2
 						className={ this.getClassName( strongsNumber ) + ' ' + styles.title }
 						onClick={ () => this.toggleDetails( false ) }

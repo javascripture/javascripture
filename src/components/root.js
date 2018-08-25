@@ -37,10 +37,10 @@ class Root extends React.Component{
 				<KeyboardShortcuts />
 				<WordHighlight word={ this.state.highlightedWord } />
 				<Trays>
-			    	<VisibleTrays />
-			    </Trays>
+					<VisibleTrays />
+				</Trays>
 				<Dock />
-			    <ReferenceWrapper highlightWord={ this.highlightWord } />
+				<ReferenceWrapper highlightWord={ this.highlightWord } />
 				<Footer />
 			</div>
 		);

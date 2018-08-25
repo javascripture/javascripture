@@ -15,19 +15,28 @@ class SearchLink extends React.Component{
 		this.props.setCurrentVerse( index );
 	}
 
+	expandedSearchResults( reference ) {
+		if ( ! javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ] || ! javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
+			console.log( 'found a non-existent verse', reference );
+			return null;
+		}
+
+		const verseData = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+		return ( <div className={ styles.verse }>
+			<Verse verse={ verseData } index={ null } version={ 'kjv' } />
+		</div> );
+	}
+
 	render() {
 		const { reference, index } = this.props,
-			className = this.props.isActive ? styles.activeReference : null,
-			verseData = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+			className = this.props.isActive ? styles.activeReference : null;
 
 		return (
 			<li className={ className }>
 				<Link to={ createReferenceLink( reference ) } onClick={ () => this.setCurrentVerse( false ) }>
 					{ index + 1 }. { reference.book } { reference.chapter }:{ reference.verse }
 				</Link>
-				{ this.props.expandedSearchResults && ( <div className={ styles.verse }>
-					<Verse verse={ verseData } index={ null } version={ 'kjv' } />
-				</div> ) }
+				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>
 		);
 	}

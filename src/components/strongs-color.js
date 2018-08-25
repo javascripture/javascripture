@@ -11,28 +11,45 @@ var getStrongsColor = function( lemma, lightness ) {
 		return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 };
 
+var getStrongsColorWithSettings = function( strongsNumber, lightness, highlightWordsWith ) {
+	var hightlightFamilies = highlightWordsWith === 'family',
+		classInt;
+	if ( hightlightFamilies ) {
+		classInt = parseFloat( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+	} else {
+		classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+	}
+
+	return getStrongsColor( classInt, lightness );
+};
+
+var getClassNameWithSettings = function( strongsNumber, lightness, highlightWordsWith ) {
+	if ( highlightWordsWith === 'family' ) {
+		return getFamily( strongsNumber ) + '-family';
+	} else {
+		return strongsNumber;
+	}
+};
+
 var getHue = function( strongsInt ) {
 	var theSizeOfAColorSegment = 360 / 8000; //8000 different words
 	return strongsInt * theSizeOfAColorSegment;
 };
 
-var getStyle = function ( strongsNumber, lightness, highlightWordsWith ) {
-	var hightlightFamilies = highlightWordsWith === 'family',
-		className,
-		classInt;
-	if ( hightlightFamilies ) {
-		className = getFamily( strongsNumber ) + '-family';
-		classInt = parseFloat( strongsNumber.substring( 1, strongsNumber.length ), 10 );
-	} else {
-		className = strongsNumber;
-		classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
-	}
-
-	var newColor = getStrongsColor( classInt, lightness );
+var getHighlight = function ( strongsNumber, lightness, highlightWordsWith ) {
+	var newColor = getStrongsColorWithSettings( strongsNumber, lightness, highlightWordsWith );
+	var className = getClassNameWithSettings( strongsNumber, lightness, highlightWordsWith );
 	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important; margin: 0 -1px; padding: 0 1px;}';
+};
+
+var getHighlightBorder = function ( strongsNumber, lightness, highlightWordsWith ) {
+	var newColor = getStrongsColorWithSettings( strongsNumber, lightness, highlightWordsWith );
+	var className = getClassNameWithSettings( strongsNumber, lightness, highlightWordsWith );
+	return '.' + className + ' {outline: 3px solid ' + newColor + ' !important; margin: 0 -1px; padding: 0 1px;}';
 };
 
 module.exports = {
 	get: getStrongsColor,
-	getStyle: getStyle
+	getHighlight: getHighlight,
+	getHighlightBorder: getHighlightBorder,
 };

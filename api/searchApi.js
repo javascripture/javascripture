@@ -71,7 +71,7 @@ javascripture.api.search = {
 				return true;
 			}
 		}
-        return false;
+		return false;
     },
     resetMatches: function () {
         this.results.matches = {};

@@ -1,5 +1,10 @@
 // External
 import React from 'react';
+import classnames from 'classnames';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+
+// Internal
+import styles from './styles.scss';
 
 const getByLemmaAndMorph = function( lemma, morph ) {
 	if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ] ) {
@@ -59,19 +64,41 @@ class WordSingle extends React.Component {
 		}
 	};
 
+	selectWord = () => {
+		if( this.props.searchSelect ) {
+			this.props.selectSearchTerm( this.props.searchSelect, this.props[ this.props.searchSelect ] );
+			return;
+		}
+
+		this.props.addWord();
+	};
+
 	getTitle = () => {
 		const { lemma, morph } = this.props;
 		return morph ? lemma + ' ' + morph : lemma;
 	};
 
+	getClassName = () {
+		if ( lemma === 'added' ) {
+			return classnames( lemma );
+		}
+
+		if( this.props.searchSelect ) {
+			return classnames( lemma, styles.selectSingle );
+		}
+
+		return classnames( lemma, styles.single );
+	};
+
 	render() {
 		const { lemma } = this.props;
+
 		return (
 			<span
-				className={ lemma }
+				className={ this.getClassName() }
 				onMouseOver={ this.highlightWord }
 				onMouseOut={ this.clearHighlightWord }
-				onClick={ this.props.click }
+				onClick={ this.selectWord }
 				title={ this.getTitle() }
 				style={ this.wordStyle() }
 				key={ lemma }
@@ -82,4 +109,4 @@ class WordSingle extends React.Component {
 	}
 }
 
-export default WordSingle;
+export default withStyles( styles )( WordSingle );
