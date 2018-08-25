@@ -1,4 +1,4 @@
-var cache = 'javascripture.19'; // search term picker
+var cache = 'javascripture.19.0'; // search term picker - bug fix
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {

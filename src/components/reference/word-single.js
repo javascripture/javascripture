@@ -79,6 +79,7 @@ class WordSingle extends React.Component {
 	};
 
 	getClassName = () => {
+		const { lemma } = this.props;
 		if ( lemma === 'added' ) {
 			return classnames( lemma );
 		}
@@ -91,8 +92,6 @@ class WordSingle extends React.Component {
 	};
 
 	render() {
-		const { lemma } = this.props;
-
 		return (
 			<span
 				className={ this.getClassName() }
