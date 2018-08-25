@@ -92,6 +92,7 @@ class WordSingle extends React.Component {
 	};
 
 	render() {
+		const { lemma } = this.props;
 		return (
 			<span
 				className={ this.getClassName() }
