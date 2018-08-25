@@ -41,7 +41,6 @@ self.addEventListener('install', function(e) {
 });
 
 self.addEventListener('fetch', function(event) {
-	console.log( 'fetch' );
 	event.respondWith(
 		caches.match(event.request).then(function(response) {
 			return response || fetch(event.request);
@@ -51,7 +50,6 @@ self.addEventListener('fetch', function(event) {
 
 // Delete unused cache
 self.addEventListener('activate', function( event ) {
-	console.log( 'activate' );
 	const channel = new BroadcastChannel('sw-messages');
 	channel.addEventListener('message', event => {
 		channel.postMessage( { versionNumber: cache } );
