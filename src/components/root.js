@@ -12,10 +12,6 @@ import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';
 
 class Root extends React.Component{
-	state = {
-		highlightedWord: ''
-	};
-
 	getBodyStyles() {
 		var bodyStyles = 'body { ';
 		bodyStyles += 'font-family: ' + this.props.settings.fontFamily + ';';
@@ -24,23 +20,17 @@ class Root extends React.Component{
 		return bodyStyles;
 	}
 
-	highlightWord = ( word ) => {
-		this.setState( {
-			highlightedWord: word
-		} );
-	};
-
 	render() {
 		return (
 			<div className="javascripture-wrapper">
 				<style>{ this.getBodyStyles() }</style>
 				<KeyboardShortcuts />
-				<WordHighlight word={ this.state.highlightedWord } />
+				<WordHighlight word={ this.props.highlightedWord } />
 				<Trays>
 					<VisibleTrays />
 				</Trays>
 				<Dock />
-				<ReferenceWrapper highlightWord={ this.highlightWord } />
+				<ReferenceWrapper />
 				<Footer />
 			</div>
 		);

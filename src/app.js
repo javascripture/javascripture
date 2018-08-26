@@ -46,16 +46,24 @@ const routes = {
 
 //document.getElementById( 'reference' ).style.display = 'none';
 
-const App = () => {
-	return (
-		<Provider store={ store }>
-			<ConnectedRouter history={ history }>
-				<Stylizer onInsertCss={ insertCss }>
-					<HashRouter><Route path="/" component={ Root } /></HashRouter>
-				</Stylizer>
-			</ConnectedRouter>
-		</Provider>
-	);
-};
+class App extends React.Component{
+	constructor(props) {
+		super(props);
+		this.state = {
+			highlightedWord: ''
+		};
+	}
+	render() {
+			return (
+			<Provider store={ store }>
+				<ConnectedRouter history={ history }>
+					<Stylizer onInsertCss={ insertCss }>
+						<HashRouter><Route path="/" render={ () => <Root highlightedWord={ this.state.highlightedWord } /> } /></HashRouter>
+					</Stylizer>
+				</ConnectedRouter>
+			</Provider>
+		);
+	}
+}
 
 export default App;

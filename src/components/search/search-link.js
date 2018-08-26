@@ -23,7 +23,7 @@ class SearchLink extends React.Component{
 
 		const verseData = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
 		return ( <div className={ styles.verse }>
-			<Verse verse={ verseData } index={ null } version={ 'kjv' } />
+			<Verse verse={ verseData } index={ null } version="kjv" language="kjv" />
 		</div> );
 	}
 

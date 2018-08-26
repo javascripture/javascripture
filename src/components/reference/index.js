@@ -192,7 +192,6 @@ class Reference extends React.Component{
 								book={ book }
 								chapter={ chapter }
 								reference={ reference }
-								highlightWord={ this.props.highlightWord }
 								index={ this.props.index }
 							/>
 						</div>

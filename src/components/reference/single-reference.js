@@ -15,7 +15,6 @@ class SingleReference extends React.Component{
 					<Chapter
 						book={ this.props.book }
 						chapter={ this.props.chapter }
-						highlightWord={ this.props.highlightWord }
 						index={ this.props.index }
 					/>
 				</div>

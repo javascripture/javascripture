@@ -53,16 +53,11 @@ class WordSingle extends React.Component {
 	}
 
 	clearHighlightWord = () => {
-		if ( this.props.highlightWord ) {
-			this.props.highlightWord();
-		}
-
+		window.updateAppComponent( 'highlightedWord', '' );
 	};
 
 	highlightWord = () => {
-		if ( this.props.highlightWord ) {
-			this.props.highlightWord( this.props.lemma );
-		}
+		window.updateAppComponent( 'highlightedWord', this.props.lemma );
 	};
 
 	selectWord = () => {

@@ -10,11 +10,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 class ReferenceWrapper extends React.Component{
 	render() {
 		let references = this.props.references.map( ( reference, index ) => {
-			return ( <Reference highlightWord={ this.props.highlightWord } reference={ reference } key={ index } index={ index } /> );
+			return ( <Reference reference={ reference } key={ index } index={ index } /> );
 		} );
 
 		if ( this.props.inSync ) {
-			references = <Reference highlightWord={ this.props.highlightWord } reference={ this.props.references[ 0 ] }  index={ 0 } />
+			references = <Reference reference={ this.props.references[ 0 ] }  index={ 0 } />
 		}
 
 		return (
