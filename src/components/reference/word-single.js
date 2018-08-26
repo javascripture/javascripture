@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
+import morphology from '../../lib/morphology';
 import styles from './styles.scss';
 
 const getByLemmaAndMorph = function( lemma, morph ) {
@@ -75,7 +76,10 @@ class WordSingle extends React.Component {
 
 	getTitle = () => {
 		const { lemma, morph } = this.props;
-		return morph ? lemma + ' ' + morph : lemma;
+		if ( ! lemma ) {
+			return null;
+		}
+		return morph ? lemma + ' ' + morphology( morph, 'noLinks', lemma ) : lemma;
 	};
 
 	getClassName = () => {

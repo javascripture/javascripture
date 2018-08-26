@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
 import KJVDef from '../../containers/kjv-def';
-import morphology from './morphology';
+import morphology from '../../lib/morphology';
 import SearchBlock from '../../containers/search-block';
 import { getHighlight } from '../strongs-color.js';
 import stripPointing from '../../lib/strip-pointing.js';
