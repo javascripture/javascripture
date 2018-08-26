@@ -32,7 +32,7 @@ class Root extends React.Component{
 
 	render() {
 		return (
-			<div>
+			<div className="javascripture-wrapper">
 				<style>{ this.getBodyStyles() }</style>
 				<KeyboardShortcuts />
 				<WordHighlight word={ this.state.highlightedWord } />
@@ -55,5 +55,5 @@ const mapStateToProps = ( state, ownProps ) => {
 
 
 export default connect(
-  mapStateToProps
+	mapStateToProps,
 )( Root );

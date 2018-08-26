@@ -30,7 +30,7 @@ input, select, button {
 
 @media ( min-width: 768px ) {
   input, select, button {
-    font-size: 20px;
+	font-size: 20px;
   }
 }
 input {
@@ -106,40 +106,40 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   z-index: 10; }
   .full-page .content {
-    font-weight: 300;
-    margin: 0 auto;
-    position: relative;
-    text-align: left;
-    width: 100%;
-    max-width: 320px; }
+	font-weight: 300;
+	margin: 0 auto;
+	position: relative;
+	text-align: left;
+	width: 100%;
+	max-width: 320px; }
 .full-page .content p {
   text-align: left;
 }
-    .full-page .content .logo {
-      overflow: auto;
-      position: relative;
-      text-align: center; }
-      .full-page .content .logo h1 {
-        font-size: 3rem;
-        font-weight: 100; }
-    .full-page .content .features {
-      margin-top: 1em; }
-      .full-page .content .features ul {
-        list-style: disc;
-        margin: 0 0 1em 1em; }
-      .full-page .content .features p {
-        margin-bottom: 1rem; }
-    .full-page .content .button {
-      margin: 1em 0;
-      text-align: center; }
-      .full-page .content .button .installation-info {
-        margin-top: 1rem; }
-      .full-page .content .button button {
-        background: #333;
-        cursor: pointer;
-        padding: .5rem 1rem; }
-        .full-page .content .button button[disabled] {
-          background: #ccc; }
+	.full-page .content .logo {
+	  overflow: auto;
+	  position: relative;
+	  text-align: center; }
+	  .full-page .content .logo h1 {
+		font-size: 3rem;
+		font-weight: 100; }
+	.full-page .content .features {
+	  margin-top: 1em; }
+	  .full-page .content .features ul {
+		list-style: disc;
+		margin: 0 0 1em 1em; }
+	  .full-page .content .features p {
+		margin-bottom: 1rem; }
+	.full-page .content .button {
+	  margin: 1em 0;
+	  text-align: center; }
+	  .full-page .content .button .installation-info {
+		margin-top: 1rem; }
+	  .full-page .content .button button {
+		background: #333;
+		cursor: pointer;
+		padding: .5rem 1rem; }
+		.full-page .content .button button[disabled] {
+		  background: #ccc; }
 .full-page .loading {
   background: darkgray;
   color: #fff;
@@ -152,4 +152,17 @@ h1, h2, h3, h4, h5, h6 {
   background: gray;
   white-space: nowrap;
   width: 5%;
+}
+
+.errors {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  right: 1em;
+  text-align: center;
+}
+
+.javascripture-wrapper {
+	background: white;
+	position: relative;
 }

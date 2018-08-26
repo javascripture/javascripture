@@ -33,7 +33,7 @@ const store = createStore(
 	window.devToolsExtension ? window.devToolsExtension() : f => f,
 	compose(
 		applyMiddleware( routerMiddleware( history ), thunk )
-    )
+	)
 );
 
 persistStore( store );
@@ -44,7 +44,7 @@ const routes = {
 	component: Root,
 };
 
-document.getElementById( 'reference' ).style.display = 'none';
+//document.getElementById( 'reference' ).style.display = 'none';
 
 const App = () => {
 	return (
