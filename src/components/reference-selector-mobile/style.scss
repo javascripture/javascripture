@@ -19,7 +19,7 @@
 
 .open-button {
 	@extend .button;
-	 background: $active;
+	background: $active;
 }
 
 .chapterSelector {
@@ -34,13 +34,8 @@
 	width: 320px;
 	z-index: 1;
 
-	@media ( min-width: 375px ) {
-		top: 45px;
-	}
-
 	@media ( min-width: 768px ) {
 		position: absolute;
-		top: 40px;
 	}
 }
 

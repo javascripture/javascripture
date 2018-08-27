@@ -48,7 +48,7 @@ class Chapter extends React.Component{
 		const currrentChapter = ReactDOM.findDOMNode( this.currentRef.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
-			document.getElementById( 'referenceWindow' + this.props.index ).scrollBy( 0, -50 );
+			document.getElementById( 'referenceWindow' + this.props.index ).scrollBy( 0, -40 );
 		}
 	}
 
