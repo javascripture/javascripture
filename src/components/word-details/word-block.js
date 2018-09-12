@@ -16,6 +16,7 @@ import styles from './styles.scss';
 import { getFamily } from '../../lib/word';
 
 const fill = '#fff';
+const strongs = javascripture.data.strongsDictionary;
 
 class WordBlock extends React.Component {
 	getSearchParameters() {
@@ -29,7 +30,7 @@ class WordBlock extends React.Component {
 
 	getKJVDefinitions() {
 		const strongsNumber = this.props.strongsNumber,
-			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ];
+			wordDetail = strongs[ strongsNumber ];
 
 		return wordDetail.kjv_def.split( ',' ).map( ( word, index ) => {
 			const wordString = word.trim().replace( /\./g, '' );
@@ -98,7 +99,7 @@ class WordBlock extends React.Component {
 
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
-			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ],
+			wordDetail = strongs[ strongsNumber ],
 			wordFamily = getFamily( strongsNumber ),
 			className = classnames( styles.wordBlock, this.props.open ? styles.visible : styles.hidden );
 
@@ -142,7 +143,7 @@ class WordBlock extends React.Component {
 
 	render() {
 		const strongsNumber = this.props.strongsNumber,
-			wordDetail = javascripture.data.strongsDictionary[ strongsNumber ],
+			wordDetail = strongs[ strongsNumber ],
 			wordFamily = getFamily( strongsNumber );
 
 		if ( strongsNumber === 'G3588' ) {

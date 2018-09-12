@@ -127,53 +127,53 @@ javascripture.api.search = {
 					self.resetMatches();
 				}
 
-				verse.forEach( function ( word ) {
-					if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
-						self.resetMatches();
-					}
+				if ( verse ) {
+					verse.forEach( function ( word ) {
+						if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
+							self.resetMatches();
+						}
 
-					var matchesLength, termString;
+						var matchesLength, termString;
 
-					//now loop through types
-					self.types.forEach( function ( type, typeKey ) {
-//							var type = self.types[typeKey];
-							termString = parameters[type];
+						//now loop through types
+						self.types.forEach( function ( type, typeKey ) {
+	//							var type = self.types[typeKey];
+								termString = parameters[type];
 
-						if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
-							if ( word[typeKey] ) {
-								var terms = termString.split(' '),
-									wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
-								wordTypes.forEach( function( wordType ) {
-									terms.forEach( function( term ) {
-										if ( self.doesDataMatchTerm( type, wordType, term ) ) {
-											if ( parameters.clusivity === 'exclusive' ) {
-												self.results.matches[ term ] = true;
-											} else {
-												self.addReference( bookName, chapterNumber, verseNumber );
+							if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
+								if ( word[typeKey] ) {
+									var terms = termString.split(' '),
+										wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
+									wordTypes.forEach( function( wordType ) {
+										terms.forEach( function( term ) {
+											if ( self.doesDataMatchTerm( type, wordType, term ) ) {
+												if ( parameters.clusivity === 'exclusive' ) {
+													self.results.matches[ term ] = true;
+												} else {
+													self.addReference( bookName, chapterNumber, verseNumber );
+												}
 											}
-										}
+										} );
 									} );
-								} );
+								}
+							}
+						} );
+						//terms are combined for exclusive searches here
+						if (parameters.clusivity === 'exclusive' ) {
+							matchesLength = 0;
+
+	//						$.each(self.results.matches, function () {
+	//							matchesLength++;
+	//						});
+							matchesLength = Object.keys( self.results.matches ).length;
+
+							if ( matchesLength > 0 && matchesLength >= termsLength) {
+								self.addReference(bookName, chapterNumber, verseNumber );
+								self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
 							}
 						}
 					} );
-					//terms are combined for exclusive searches here
-					if (parameters.clusivity === 'exclusive' ) {
-						matchesLength = 0;
-
-//						$.each(self.results.matches, function () {
-//							matchesLength++;
-//						});
-						matchesLength = Object.keys( self.results.matches ).length;
-
-						if ( matchesLength > 0 && matchesLength >= termsLength) {
-							self.addReference(bookName, chapterNumber, verseNumber );
-							self.resetMatches(); //not sure if resetting is the right thing to do here - need to work out how to count matches in the same verse mulipule times
-						}
-					}
-
-
-				} );
+				}
 			} );
 		} );
 		if (bookNumber === booksToSearch.length - 1 ) {
