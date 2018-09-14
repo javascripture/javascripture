@@ -5,11 +5,7 @@
 - improve mobile ui
 - browser cache
 - simplify word/word-single
-- hos 14:10?
 - gaps between words like there in
-- update morph data
-- fixing versification issues
-	- joel 4, numbers 17:16,23
 
 
 
@@ -19,6 +15,17 @@
 - fix greek roots
 - move word details to right
 - show the verse text with the search results
+
+data
+_____
+
+- generate the strongs hebrew dictionary
+- generate kjv and put it in the repo
+- generate the greek and put it in the repo
+- look at getting ESV and NET
+- put strongs roots and families in repo
+- put WEB in repo?
+- cross references in repo
 
 
 
