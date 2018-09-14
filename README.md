@@ -24,4 +24,4 @@ The primary data points are:
 
 ## Get involed
 
-To find out how to get involved with the project read the [CONTRIBUTING](./.github/CONTRIBUTING.md) document.
+To find out how to get involved with the project read the [CONTRIBUTING](./CONTRIBUTING.md) document.
