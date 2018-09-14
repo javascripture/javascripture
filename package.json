@@ -47,7 +47,7 @@
     "json-loader": "^0.5.7",
     "keyboard-shortcut": "^1.2.0",
     "mousetrap": "^1.6.2",
-    "node-sass": "4.9.0",
+    "node-sass": "^4.9.3",
     "postcss-loader": "^2.1.5",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
