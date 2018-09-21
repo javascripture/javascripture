@@ -1,8 +1,11 @@
 // todo
-- move to new repo using the fork
+- make word colouring stick
+- fix strict search
+- fix undefined parsing errors
+
 - fixing caching
 - make errors work better
-- set up a stable alternative site
+
 - improve mobile ui
 - browser cache
 - simplify word/word-single
