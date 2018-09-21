@@ -12,6 +12,7 @@ const wordDetails = ( state = [], action ) => {
 			newState = state.map( word => {
 				return {
 					strongsNumber: word.strongsNumber,
+					subdue: word.subdue,
 					open: false,
 					morphology: word.morphology,
 					version: word.version,
@@ -21,6 +22,7 @@ const wordDetails = ( state = [], action ) => {
 			if ( wordPosition > -1 ) {
 				newState[ wordPosition ] = {
 					strongsNumber: action.strongsNumber,
+					subdue: action.subdue,
 					open: action.open,
 					morphology: action.morphology,
 					version: action.version,
@@ -33,6 +35,7 @@ const wordDetails = ( state = [], action ) => {
 				...newState,
 				{
 					strongsNumber: action.strongsNumber,
+					subdue: action.subdue,
 					open: action.open,
 					morphology: action.morphology,
 					version: action.version,
@@ -46,6 +49,7 @@ const wordDetails = ( state = [], action ) => {
 
 				newState[ toggleWordPosition ] = {
 					strongsNumber: state[ toggleWordPosition ].strongsNumber,
+					subdue: state[ toggleWordPosition ].subdue,
 					open: ! state[ toggleWordPosition ].open,
 					morphology: state[ toggleWordPosition ].morphology,
 					version: state[ toggleWordPosition ].version,

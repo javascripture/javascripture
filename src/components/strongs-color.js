@@ -25,7 +25,7 @@ var getStrongsColorWithSettings = function( strongsNumber, lightness, highlightW
 
 var getClassNameWithSettings = function( strongsNumber, lightness, highlightWordsWith ) {
 	if ( highlightWordsWith === 'family' ) {
-		return getFamily( strongsNumber ) + '-family';
+		return getFamily( strongsNumber );
 	} else {
 		return strongsNumber;
 	}

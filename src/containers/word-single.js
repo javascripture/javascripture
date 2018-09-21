@@ -14,6 +14,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		highlighted: state.wordHighlight,
 		searchSelect: state.searchSelect,
+		settings: state.settings,
 	}
 };
 
@@ -30,7 +31,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( updateSearchForm( 'version', ownProps.language ) );
 			dispatch( deactivateSearchSelect() );
 		},
-		addWord: () => {
+		addWord: ( subdue ) => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
 			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
@@ -40,6 +41,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 				dispatch( addWord( {
 					strongsNumber,
+					subdue,
 					open: true,
 					morphology: ownProps.morph,
 					version: ownProps.language,

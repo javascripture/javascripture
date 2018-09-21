@@ -13,9 +13,10 @@ const mapStateToProps = ( state, ownProps ) => {
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		addWord: ( strongsNumber ) => {
+		addWord: ( strongsNumber, subdue ) => {
 			dispatch( addWord( {
 				strongsNumber: strongsNumber,
+				subdue,
 				open: true,
 				morphology: null,
 				version: ownProps.version,

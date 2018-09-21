@@ -64,7 +64,7 @@ export const showCrossReferences = ( reference ) => {
 	}
 }
 
-export const addWord = ( { strongsNumber, open, morphology, version } ) => {
+export const addWord = ( { strongsNumber, subdue, open, morphology, version } ) => {
 	const searchParameters = {
 		clusivity: 'exclusive',
 		version: version,
@@ -80,6 +80,7 @@ export const addWord = ( { strongsNumber, open, morphology, version } ) => {
 
 	return {
 		strongsNumber,
+		subdue,
 		open,
 		morphology,
 		version,

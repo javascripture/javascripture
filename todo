@@ -2,6 +2,7 @@
 - make word colouring stick
 - fix strict search
 - fix undefined parsing errors
+- highlighting families
 
 - fixing caching
 - make errors work better
@@ -10,6 +11,8 @@
 - browser cache
 - simplify word/word-single
 - gaps between words like there in
+
+- update the page title with references
 
 
 

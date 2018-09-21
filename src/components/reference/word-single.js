@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
+import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
 import styles from './styles.scss';
 
@@ -57,7 +58,12 @@ class WordSingle extends React.Component {
 	};
 
 	highlightWord = () => {
-		window.updateAppComponent( 'highlightedWord', this.props.lemma );
+		let strongsNumber = this.props.lemma;
+		if ( this.props.settings.highlightWordsWith === 'family' ) {
+			strongsNumber = getFamily( this.props.lemma );
+		}
+
+		window.updateAppComponent( 'highlightedWord', strongsNumber );
 	};
 
 	selectWord = () => {
@@ -66,7 +72,7 @@ class WordSingle extends React.Component {
 			return;
 		}
 
-		this.props.addWord();
+		this.props.addWord( this.props.settings.subdue );
 	};
 
 	getTitle = () => {
@@ -79,15 +85,20 @@ class WordSingle extends React.Component {
 
 	getClassName = () => {
 		const { lemma } = this.props;
+		let family = null;
+		if ( this.props.settings.highlightWordsWith === 'family' ) {
+			family = getFamily( lemma );
+		}
+
 		if ( lemma === 'added' ) {
 			return classnames( lemma );
 		}
 
 		if( this.props.searchSelect ) {
-			return classnames( lemma, styles.selectSingle );
+			return classnames( lemma, family, styles.selectSingle );
 		}
 
-		return classnames( lemma, styles.single );
+		return classnames( lemma, family, styles.single );
 	};
 
 	render() {
