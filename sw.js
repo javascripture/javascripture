@@ -1,4 +1,4 @@
-var cache = 'javascripture.20'; // search summary highlighting
+var cache = 'javascripture.21'; // search summary highlighting
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
