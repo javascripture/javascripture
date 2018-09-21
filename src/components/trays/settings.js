@@ -26,7 +26,7 @@ class SettingsTray extends React.Component{
 					<div className="content">
 						<div className="content-padding">
 							<h2>Help</h2>
-							<p><a href="http://scruffian.wordpress.com/contact/">Having problems? Email for help!</a></p>
+							<p><a href="/help">Get help here</a></p>
 							<br />
 							<ul>
 								<li>To find out about a word, click on it</li>
