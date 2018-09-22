@@ -26,15 +26,7 @@ javascripture.api.search = {
 		var self = this;
 		self.parameters = parameters;
 		this.lookForTerm();
-		//this.addSnippets();
 		return self.results.references;
-	},
-	addSnippets: function() {
-		this.results.references.forEach( function( reference ) {
-			if( javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ] && javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
-				reference.snippet = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
-			}
-		} );
 	},
 	doesDataMatchTerm: function( type, data, term ) {
 		var self = this;
@@ -84,6 +76,8 @@ javascripture.api.search = {
 		});
     },
 	lookForTerm: function () {
+		console.log( 'lookForTerm' );
+		console.log( this.parameters );
 		var self = this;
 		//if ( 'undefined' === typeof language ) {
 		//	language = self.inferLanguage( self.parameters );
@@ -114,8 +108,6 @@ javascripture.api.search = {
 				termsLength = termsLength + terms.length;
 			}
 		}
-
-//		$( document ).trigger( 'loading', 'searching ' + bookName );
 
 		book.forEach( function ( chapter, chapterNumber ) {
 

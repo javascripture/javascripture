@@ -1,8 +1,10 @@
 // todo
-- make word colouring stick
 - fix strict search
 - fix undefined parsing errors
-- highlighting families
+
+
+- add greek and hebrew version info
+- explanation of literal
 
 - fixing caching
 - make errors work better

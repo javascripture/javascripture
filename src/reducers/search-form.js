@@ -12,7 +12,8 @@ const searchForm = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'UPDATE_SEARCH_FORM':
 			const updatedSearchForm = { ...state };
-			updatedSearchForm[ action.name ] = action.value.trimStart();
+			const trimmedValue = action.value.trimStart ? action.value.trimStart() : action.value;
+			updatedSearchForm[ action.name ] = trimmedValue;
 			return updatedSearchForm;
 
 		case 'APPEND_TO_SEARCH_FORM':
