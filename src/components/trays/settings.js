@@ -113,6 +113,11 @@ class SettingsTray extends React.Component{
 					<br />
 					<br />
 					<p>Built in Firefox. Tested in Chrome.</p>
+					<p>
+						Greek text: Tischendorf<br />
+						Hebrew text source: https://github.com/openscriptures/morphhb<br />
+						Literal: A work in progress, source here: https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js
+					</p>
 				</div>
 			</div>
 		);
