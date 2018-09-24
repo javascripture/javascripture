@@ -1,4 +1,4 @@
-var cache = 'javascripture.21.1'; // fix strong number highlighting
+var cache = 'javascripture.22'; // add ESV
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
