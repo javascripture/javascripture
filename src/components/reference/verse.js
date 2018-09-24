@@ -7,8 +7,11 @@ import React from 'react';
 import Word from './word';
 
 const Verse = ( { verse, index, language, version } ) => {
+	let lastWord = null;
 	const words = verse && verse.map( ( word, index2 ) => {
-			return ( <Word word={ word } key={ index2 } language={ language } version={ version } /> );
+			const wordComponent = <Word word={ word } key={ index2 } language={ language } version={ version } lastWord={ lastWord }/>;
+			lastWord = word;
+			return wordComponent;
 		} );
 
 	return (

@@ -1,12 +1,15 @@
 var javascripture = {};
 javascripture.data = {};
 javascripture.data.kjv = {};
+javascripture.data.esv = {};
 javascripture.data.web = {};
 javascripture.data.greek = {};
 javascripture.data.hebrew = {};
 javascripture.api = {};
 self.postMessage( { task: 'loading', html: 'loading KJV' } );
 importScripts('../data/kjvdwyer7.js');
+self.postMessage( { task: 'loading', html: 'loading ESV' } );
+importScripts('../data/esv.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
 importScripts('../data/web3.js');
 self.postMessage( { task: 'loading', html: 'loading Hebrew' } );

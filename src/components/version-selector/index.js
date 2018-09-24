@@ -92,6 +92,7 @@ class VersionSelector extends React.Component{
 				<option value="original">Original</option>
 				<option value="kjv">KJV</option>
 				<option value="web">WEB</option>
+				<option value="esv">ESV</option>
 				<option value="lc">Literal</option>
 			</select>
 		);
