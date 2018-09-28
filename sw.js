@@ -26,6 +26,7 @@ self.addEventListener('install', function(e) {
 			'data/morphology.js',
 			'data/literalConsistent.js',
 			'data/literalConsistentExtra.js',
+			'data/esv.js',
 
 			//api - so that search works offline?
 			'api/searchApi.js',
