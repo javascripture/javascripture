@@ -6,6 +6,7 @@ const initialState = {
 	subdue: "50%",
 	inSync: true,
 	expandedSearchResults: false,
+	highlightSearchResults: false,
 	type: "SETTINGS_CHANGE",
 }
 

@@ -61,6 +61,11 @@
 	cursor: pointer;
 }
 
+.single, .select-single {
+	margin: 0 -1px;
+	padding: 0 1px;
+}
+
 .single:hover {
 	cursor: pointer;
 }

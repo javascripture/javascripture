@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // Internal dependencies
 import Verse from '../reference/verse';
 import styles from './styles.scss';
-import { createReferenceLink } from '../../lib/reference.js';
+import { createReferenceLink, getVerseData } from '../../lib/reference.js';
 
 class SearchLink extends React.Component{
 	setCurrentVerse() {
@@ -15,17 +15,41 @@ class SearchLink extends React.Component{
 		this.props.setCurrentVerse( index );
 	}
 
-	expandedSearchResults( reference ) {
-		if ( ! javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ] || ! javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
+	expandedSearchResults = ( reference ) => {
+		if ( ! javascripture.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ] || ! javascripture.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
 			console.log( 'found a non-existent verse', reference );
 			return null;
 		}
+		const verseData = getVerseData( reference, this.props.terms.version );
 
-		const verseData = javascripture.data.kjv[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
-		return ( <div className={ styles.verse }>
-			<Verse verse={ verseData } index={ null } version="kjv" language="kjv" />
-		</div> );
-	}
+		return (
+			<div className={ styles.verse }>
+				<Verse verse={ verseData } index={ null } version="kjv" language="kjv" />
+			</div>
+		);
+	};
+
+	highlightWords = () => {
+		if( ! this.props.highlightSearchResults ) {
+			return;
+		}
+
+		const { reference, terms } = this.props,
+			verseData = getVerseData( reference, terms.version ),
+			strongsNumbers = verseData.map( ( word ) => {
+				return word[ 1 ]
+			} );
+
+		window.updateAppComponent( 'highlightedWord', strongsNumbers.join( ' ' ) );
+	};
+
+	unHighlighWords = () => {
+		if( ! this.props.highlightSearchResults ) {
+			return;
+		}
+
+		window.updateAppComponent( 'highlightedWord', null );
+	};
 
 	render() {
 		const { reference, index } = this.props,
@@ -33,7 +57,12 @@ class SearchLink extends React.Component{
 
 		return (
 			<li className={ className }>
-				<Link to={ createReferenceLink( reference ) } onClick={ () => this.setCurrentVerse( false ) }>
+				<Link to={ createReferenceLink( reference ) }
+					className={ styles.searchLink }
+					onClick={ () => this.setCurrentVerse( false ) }
+					onMouseOver={ this.highlightWords }
+					onMouseOut={ this.unHighlighWords }
+				>
 					{ index + 1 }. { reference.book } { reference.chapter }:{ reference.verse }
 				</Link>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }

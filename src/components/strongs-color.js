@@ -39,13 +39,13 @@ var getHue = function( strongsInt ) {
 var getHighlight = function ( strongsNumber, lightness, highlightWordsWith ) {
 	var newColor = getStrongsColorWithSettings( strongsNumber, lightness, highlightWordsWith );
 	var className = getClassNameWithSettings( strongsNumber, lightness, highlightWordsWith );
-	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important; margin: 0 -1px; padding: 0 1px;}';
+	return '.' + className + ' {color:#fff !important;background:' + newColor + ' !important;}';
 };
 
 var getHighlightBorder = function ( strongsNumber, lightness, highlightWordsWith ) {
 	var newColor = getStrongsColorWithSettings( strongsNumber, lightness, highlightWordsWith );
 	var className = getClassNameWithSettings( strongsNumber, lightness, highlightWordsWith );
-	return '.' + className + ' {outline: 3px solid ' + newColor + ' !important; margin: 0 -1px; padding: 0 1px;}';
+	return '.' + className + ' {outline: 3px solid ' + newColor + ' !important;}';
 };
 
 module.exports = {

@@ -19,6 +19,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		isActive: isActive( state.currentReference, ownProps ),
 		expandedSearchResults: state.settings.expandedSearchResults,
+		highlightSearchResults: state.settings.highlightSearchResults,
 	};
 };
 

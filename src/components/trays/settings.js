@@ -106,6 +106,12 @@ class SettingsTray extends React.Component{
 											<input type="checkbox" name="expandedSearchResults" checked={ this.props.settings.expandedSearchResults } onChange={ this.changeCheckboxSetting } /> Show expanded search results
 										</label>
 									</li>
+									<li className={ styles.settingsLi }>
+										<label>
+											<input type="checkbox" name="highlightSearchResults" checked={ this.props.settings.highlightSearchResults } onChange={ this.changeCheckboxSetting } /> Highlight all words in a verse when hovering the search results
+										</label>
+									</li>
+
 								</ul>
 							</form>
 						</div>
