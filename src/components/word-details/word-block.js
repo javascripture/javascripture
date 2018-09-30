@@ -53,7 +53,15 @@ class WordBlock extends React.Component {
 	}
 
 	getClassName( rootNumber ) {
-		return rootNumber + ' word-tree';
+		return classnames( rootNumber, styles.wordTree )
+	}
+
+	highlight( strongsNumber ) {
+		window.updateAppComponent( 'highlightedWord', strongsNumber );
+	}
+
+	unHighlight() {
+		window.updateAppComponent( 'highlightedWord', null );
 	}
 
 	getRoots() {
@@ -65,8 +73,12 @@ class WordBlock extends React.Component {
 		if( rootsData ) {
 			return rootsData.map( ( rootNumber, index ) => {
 				return (
-					<span key={ index }><a className={ this.getClassName( rootNumber ) + ' ' + styles.fakeLink } onClick={ this.searchForWord.bind( this, rootNumber ) }>
-						{ rootNumber }
+					<span key={ index }>
+						<a className={ this.getClassName( rootNumber ) }
+							onClick={ this.searchForWord.bind( this, rootNumber ) }
+							onMouseOver={ this.highlight.bind( this, rootNumber ) }
+							onMouseOut={ this.unHighlight }>
+							{ rootNumber }
 					</a> </span>
 				);
 			} );
@@ -80,7 +92,10 @@ class WordBlock extends React.Component {
 			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( this.props.strongsNumber ) > -1 ) {
 				return (
 					<span key={ strongsObjectNumber }>
-						<a onClick={ this.searchForWord.bind( this, strongsObjectNumber ) } className={ this.getClassName( strongsObjectNumber ) + ' ' + styles.fakeLink }>
+						<a className={ this.getClassName( strongsObjectNumber ) }
+							onClick={ this.searchForWord.bind( this, strongsObjectNumber ) }
+							onMouseOver={ this.highlight.bind( this, strongsObjectNumber ) }
+							onMouseOut={ this.unHighlight }>
 							{ strongsObjectNumber }
 					</a> </span>
 				);
