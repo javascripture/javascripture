@@ -32,8 +32,6 @@
 		<link rel="manifest" href="/manifest.json">
 		<title>Javascripture</title>
 		<link rel="stylesheet" href="css/layout.css" />
-		<style id="bodyFontFamily"></style>
-		<style id="bodyFontSize"></style>
 	</head>
 	<body>
 		<div class="errors">
@@ -41,36 +39,33 @@
 			<br /><br />
 			<p>If you can see this, something probably went wrong. <a href="/clear.html">Clear settings and start over</a>, <a href="https://ben.blog/contact/">Email me</a> or use <a href="https://javascripture.xyz">an older stable version</a>.</p>
 		</div>
-
-
-	<div id="content">
-		<div class="full-page">
-			<div id="holder" class="content">
-				<div class="logo">
-					<img src="/javascripture.svg" width="179" height="186">
-					<div class="intro">
-						<h1>Javascripture</h1>
-						<p>JavaScripture is a tool to help you understand the bible better.</p>
-						<script>
-							if ( localStorage ) {
-								document.write( '<p class="installation-info">Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
-							}
-						</script>
+		<div id="content">
+			<div class="full-page">
+				<div id="holder" class="content">
+					<div class="logo">
+						<img src="/javascripture.svg" width="179" height="186">
+						<div class="intro">
+							<h1>Javascripture</h1>
+							<p>JavaScripture is a tool to help you understand the bible better.</p>
+							<script>
+								if ( localStorage ) {
+									document.write( '<p class="installation-info">Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
+								}
+							</script>
+						</div>
 					</div>
-				</div>
-				<div class="loading">
-					<div class="loading-bar" id="loadingJavascripture">
-						Loading
+					<div class="loading">
+						<div class="loading-bar" id="loadingJavascripture">
+							Loading
+						</div>
 					</div>
-				</div>
-				<div class="features">
-					<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a>, <a href="/clear.html">Clear settings and start over</a> or use <a href="https://javascripture.xyz">an older stable version</a>.</p>
+					<div class="features">
+						<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a>, <a href="/clear.html">Clear settings and start over</a> or use <a href="https://javascripture.xyz">an older stable version</a>.</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
 </body>
 
 <script>
