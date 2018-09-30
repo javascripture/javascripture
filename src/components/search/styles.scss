@@ -64,14 +64,14 @@
 }
 
 .active-reference {
-	background: lighten( lightblue, 10 );
+	background: $active;
 }
 
 $trayWidth: 320px;
 $width: 70px;
 $padding: 10px;
 a.clear-all {
-	background: lightblue;
+	background: $hover;
 	color: #fff;
 	display: block;
 	padding: $padding;

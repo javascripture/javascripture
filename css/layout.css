@@ -79,10 +79,6 @@ button, input[type=button], input[type=submit] {
   color: #000;
 }
 
-button:hover {
-  background: rgba( 235, 255, 255, 1 );
-}
-
 form input[type=checkbox] {
   height: 20px;
   width: 20px;
@@ -160,11 +156,6 @@ h1, h2, h3, h4, h5, h6 {
   left: 1em;
   right: 1em;
   text-align: center;
-}
-
-.javascripture-wrapper {
-	background: white;
-	position: relative;
 }
 
 .H3068 {

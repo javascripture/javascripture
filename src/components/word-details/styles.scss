@@ -1,3 +1,5 @@
+@import '../colors.scss';
+
 .title {
 	cursor: pointer;
 	font-weight: 100;
@@ -31,8 +33,8 @@ $trayWidth: 320px;
 $width: 70px;
 $padding: 10px;
 a.clear-all {
-	background: lightblue;
-	color: #fff;
+	background: $hover;
+	color: #666;
 	display: block;
 	padding: $padding;
 	position: fixed;

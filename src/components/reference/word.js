@@ -57,17 +57,6 @@ class Word extends React.Component{
 			) );
 		}
 
-		/*if ( this.props.version === 'esv' ) {
-			if ( this.props.lastWord && this.props.lastWord[1] !== '' && lemma ) {
-				return (
-					<span> { wordString }</span>
-				);
-			} else {
-				return (
-					<span>{ wordString }</span>
-				);
-			}
-		}*/
 		if ( endsWithPunctuation( word ) || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
 			return (
 				<span>{ wordString }</span>

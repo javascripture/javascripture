@@ -1,6 +1,7 @@
 // External
 import React from 'react';
 import { connect } from 'react-redux';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
 import Dock from './dock';
@@ -10,6 +11,7 @@ import KeyboardShortcuts from '../containers/keyboard-shortcuts';
 import Trays from './trays';
 import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';
+import styles from './root.scss';
 
 class Root extends React.Component{
 	getBodyStyles() {
@@ -22,7 +24,7 @@ class Root extends React.Component{
 
 	render() {
 		return (
-			<div className="javascripture-wrapper">
+			<div className={ styles.root }>
 				<style>{ this.getBodyStyles() }</style>
 				<KeyboardShortcuts />
 				<WordHighlight word={ this.props.highlightedWord } />
@@ -43,7 +45,6 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 };
 
-
 export default connect(
 	mapStateToProps,
-)( Root );
+)( withStyles( styles )( Root ) );

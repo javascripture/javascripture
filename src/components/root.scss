@@ -1,0 +1,13 @@
+@import './colors.scss';
+
+.root {
+	background: white;
+	position: relative;
+
+	input[type=submit],
+	button {
+		&:hover {
+			background: $hover;
+		}
+	}
+}

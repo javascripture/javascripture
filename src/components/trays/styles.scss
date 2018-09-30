@@ -1,3 +1,5 @@
+@import '../colors.scss';
+
 .tray {
 	background: rgba( 255, 255, 255, .9 );
 	box-shadow: 0 0 5px 0 rgba( 0, 0, 0 , .5 );
@@ -27,13 +29,13 @@
 	width: 20%;
 
 	&:hover {
-		background: rgba( 150, 230, 230, 0.2 );
+		background: $hover;
 	}
 }
 
 .active {
 	composes: trayFilter;
-	background: rgba( 150, 230, 230, 0.3 );
+	background: $active;
 }
 
 .help-panel {
