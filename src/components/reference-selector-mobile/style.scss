@@ -75,6 +75,7 @@
 .bookLink {
 	cursor: pointer;
 	padding: 0 5px;
+	white-space: nowrap;
 
 	&:hover {
 		background: $hover;
