@@ -120,17 +120,18 @@
 <script src="build/bundle.js"></script>
 <script>
 
+
+	// Handler for messages coming from the service worker
+	const channel = new BroadcastChannel('sw-messages');
+	channel.addEventListener('message', event => {
+		javascripture.sw = event.data;
+	});
+
 	if('serviceWorker' in navigator) {
 		navigator.serviceWorker
 			.register('/sw.js', { updateViaCache: 'imports' } )
-			.then(function( reg ) {
+			.then( function( reg ) {
 				console.log("Service Worker Registered", reg);
-
-				// Handler for messages coming from the service worker
-				const channel = new BroadcastChannel('sw-messages');
-				channel.addEventListener('message', event => {
-					console.log( event.data );
-				});
 			});
 	}
 

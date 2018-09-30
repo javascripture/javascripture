@@ -5,6 +5,20 @@ import React from 'react';
 import strongsColor from '../strongs-color.js';
 import WordSingle from '../../containers/word-single.js';
 
+function startsWithPunctuation( word ) {
+	return word.indexOf( '(' ) === 0;
+}
+
+function endsWithPunctuation( word ) {
+	return word.indexOf( '\.' ) === 0 ||
+		word.indexOf( ')' ) === 0 ||
+		word.indexOf( '?' ) === 0 ||
+		word.indexOf( '!' ) === 0 ||
+		word.indexOf( ':' ) === 0 ||
+		word.indexOf( ';' ) === 0 ||
+		word.indexOf( ',' ) === 0;
+}
+
 class Word extends React.Component{
 	render() {
 		if ( ! this.props.word ) {
@@ -43,7 +57,7 @@ class Word extends React.Component{
 			) );
 		}
 
-		if ( this.props.version === 'esv' ) {
+		/*if ( this.props.version === 'esv' ) {
 			if ( this.props.lastWord && this.props.lastWord[1] !== '' && lemma ) {
 				return (
 					<span> { wordString }</span>
@@ -53,10 +67,15 @@ class Word extends React.Component{
 					<span>{ wordString }</span>
 				);
 			}
+		}*/
+		if ( endsWithPunctuation( word ) || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
+			return (
+				<span>{ wordString }</span>
+			);
 		}
 
 		return (
-			<span>{ wordString } </span>
+			<span> { wordString }</span>
 		);
 	}
 }

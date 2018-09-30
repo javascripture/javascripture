@@ -117,8 +117,9 @@ class SettingsTray extends React.Component{
 						Greek text: Tischendorf<br />
 						<a href="https://github.com/openscriptures/morphhb">Hebrew text source</a><br />
 						<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">Literal: A work in progress</a><br />
-						ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.
+						ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
 					</p>
+					<p><br />Version: { javascripture.sw.versionNumber }</p>
 				</div>
 			</div>
 		);

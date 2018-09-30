@@ -1,16 +1,11 @@
 // todo
-- fix strict search
 - fix undefined parsing errors
-
-
-- add greek and hebrew version info
-- explanation of literal
-
+- add titles to psalms in ESV
 - fixing caching
 - make errors work better
 
 - improve mobile ui
-- browser cache
+- make it possible to reload service worker - browser cache
 - simplify word/word-single
 - gaps between words like there in
 
@@ -23,7 +18,6 @@
 - strip accents from greek?
 - fix greek roots
 - move word details to right
-- show the verse text with the search results
 
 data
 _____

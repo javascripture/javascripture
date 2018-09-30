@@ -47,7 +47,7 @@
 	],
 	"app": {
 		"urls": [
-			"https://javascripture.org/",
+			"https://javascripture.org/"
 		],
 		"launch": {
 			"web_url": "https://javascripture.org/"

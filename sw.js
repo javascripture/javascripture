@@ -41,21 +41,19 @@ self.addEventListener('install', function(e) {
 	}));
 });
 
+const channel = new BroadcastChannel('sw-messages');
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		caches.match(event.request).then(function(response) {
 			return response || fetch(event.request);
 		})
 	);
+
+	channel.postMessage( { versionNumber: cache } );
 });
 
 // Delete unused cache
 self.addEventListener('activate', function( event ) {
-	const channel = new BroadcastChannel('sw-messages');
-	channel.addEventListener('message', event => {
-		channel.postMessage( { versionNumber: cache } );
-	});
-
 	var cacheWhitelist = [ cache ];
 	event.waitUntil(
 		caches.keys().then(function( keyList ) {
