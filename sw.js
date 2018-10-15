@@ -1,4 +1,4 @@
-var cache = 'javascripture.22'; // add ESV
+var cache = 'javascripture.22.0.1538880909';
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
@@ -54,7 +54,7 @@ self.addEventListener('fetch', function(event) {
 
 // Delete unused cache
 self.addEventListener('activate', function( event ) {
-	var cacheWhitelist = [ cache ];
+	var cachgWhitelist = [ cache ];
 	event.waitUntil(
 		caches.keys().then(function( keyList ) {
 			return Promise.all(keyList.map(function( key ) {
