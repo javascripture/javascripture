@@ -4,7 +4,7 @@
   "description": "Webpack mongrel",
   "main": "index.js",
   "scripts": {
-    "production": "NODE_ENV=production node_modules/.bin/webpack -p",
+    "production": "./update-version-number.sh && NODE_ENV=production node_modules/.bin/webpack -p",
     "start": "npm install && webpack-dev-server --inline --hot --port 7777",
     "test": "test"
   },
