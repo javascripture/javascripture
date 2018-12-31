@@ -50,7 +50,7 @@ bible.Data.books = [
 ['II Corinthians','2Cor','2 Corinthians','2 Cor','2 Co','2Co','II Cor','II Co'],
 ['Galatians','Gal','Ga'],
 ['Ephesians','Eph','Ep'],
-['Philippians','Phi','Phil'],
+['Philippians','Phil','Phi'],
 ['Colossians','Col','Co'],
 ['I Thessalonians','1Thess','1 Thessalonians','1 Thess','1 Thes','1Thes','1 The','1The','1 Th','1Th','I Thess','I The','I Th'],
 ['II Thessalonians','2Thess','2 Thessalonians','2 Thess','2 Thes','2Thes','2 The','2The','2 Th','2Th','II Thess','II The','II Th'],

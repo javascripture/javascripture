@@ -31,31 +31,10 @@ class Word extends React.Component{
 
 		let wordString;
 
-		// Handle dvnNm
-		if ( ( lemma === 'H3068' || lemma === 'H3069' || lemma === 'H3050' ) && this.props.version === 'kjv' ) {
-			var wordArray,
-				wordArrayEnd = word.split( '</dvnNm>' );
 
-			if ( wordArrayEnd.length > 1 ) {
-				wordArray = wordArrayEnd[0].split( '<dvnNm>' );
-				if ( wordArrayEnd[ 1 ] ) {
-					wordArray.push( wordArrayEnd[ 1 ] );
-				}
-
-				wordString = wordArray.map( ( word, index ) => {
-					var textTransform;
-					if ( index === 1 ) {
-						textTransform = 'uppercase';
-					}
-
-					return <WordSingle lemma={ lemma } textTransform={ textTransform } word={ word } morph={ morph } key={ index } version={ this.props.version } language={ this.props.language } />;
-				}, this );
-			}
-		} else {
-			wordString = word && word.split('/').map( ( wordValue, key ) => (
-				<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } language={ this.props.language } />
-			) );
-		}
+		wordString = word && word.split('/').map( ( wordValue, key ) => (
+			<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } language={ this.props.language } />
+		) );
 
 		if ( endsWithPunctuation( word ) || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
 			return (

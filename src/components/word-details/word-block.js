@@ -112,6 +112,12 @@ class WordBlock extends React.Component {
 		return 'None';
 	}
 
+	getMorphology = ( strongsNumber ) => {
+		return this.props.morphology.split( ' ' ).map( ( morph, index ) => {
+			return ( index !== 0 ? ' - ' : '' ) + morphology( morph, 'noLinks', strongsNumber );
+		} );
+	};
+
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = strongs[ strongsNumber ],
@@ -136,7 +142,7 @@ class WordBlock extends React.Component {
 				</div>
 				<br />
 				<div>
-					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && morphology( this.props.morphology, 'noLinks', strongsNumber ) }<br />
+					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && this.getMorphology( strongsNumber ) }<br />
 					<br />
 					<strong>KJV translations</strong><br />{ this.getKJVDefinitions( strongsNumber ) }<br />
 					<br />

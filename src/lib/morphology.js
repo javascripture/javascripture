@@ -30,7 +30,6 @@ export default function (morph, includeLinks, lemma ) {
 					markup += morphParseObject.Parse( 'H' + morph ); // The morphology API expexts the morph to be prepended with an H
 				}
 			} else {
-
 				//greek
 				morphArray = morph.split('-');
 				partOfSpeech = morphArray[0];

@@ -120,6 +120,7 @@ class Search extends React.Component{
 									<option>hebrew</option>
 									<option>greek</option>
 									<option>web</option>
+									<option>esv</option>
 								</select>
 							</fieldset>
 							<fieldset>

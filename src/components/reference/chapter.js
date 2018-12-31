@@ -108,7 +108,7 @@ class Chapter extends React.Component{
 			return (
 				<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 					<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, this.props.reference[ index ].version ) }>
-						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, reference.version ) }>
+						<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, this.props.reference[ index ].version ) }>
 							<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[ index ].version } language={ language } />
 						</span>
 					</div>
