@@ -7,7 +7,7 @@ importScripts('../data/KJV.js');
 self.postMessage( { task: 'loading', html: 'loading ESV' } );
 importScripts('../data/ESV.js');
 self.postMessage( { task: 'loading', html: 'loading WEB' } );
-importScripts('../data/web.js');
+importScripts('../data/WEB.js');
 self.postMessage( { task: 'loading', html: 'loading Hebrew' } );
 importScripts('../data/morphhb.js');
 self.postMessage( { task: 'loading', html: 'loading Greek' } );
