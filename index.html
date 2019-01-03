@@ -73,6 +73,8 @@
 		data: {},
 		reactHelpers: {},
 	};
+	// so we can import npm modules directly
+	var module = {};
 	var worker = new Worker('workers/worker.js');
 
 	var loadingDiv = document.getElementById( 'loadingJavascripture' );
@@ -94,15 +96,20 @@
 <script src="data/strongs-greek-dictionary.js"></script>
 <script src="data/extra-dictionary.js"></script>
 <script>loadingStatus( 'KJV', 30 );</script>
-<script src="data/kjvdwyer7.js"></script>
+<script src="data/KJV.js"></script>
+<script>javascripture.data.kjv=KJV.books</script>
 <script>loadingStatus( 'WEB', 40 );</script>
-<script src="data/web3.js"></script>
+<script src="data/web.js"></script>
+<script>javascripture.data.web=WEB.books</script>
 <script>loadingStatus( 'Hebrew', 50 );</script>
-<script src="data/hebrew.js"></script>
+<script src="data/morphhb.js"></script>
+<script>javascripture.data.hebrew=morphhb</script>
 <script>loadingStatus( 'Greek', 60 );</script>
-<script src="data/greek4.js"></script>
+<script src="data/tischendorf.js"></script>
+<script>javascripture.data.greek=tischendorf</script>
 <script>loadingStatus( 'ESV', 60 );</script>
-<script src="data/esv.js"></script>
+<script src="data/ESV.js"></script>
+<script>javascripture.data.esv=ESV.books</script>
 <script>loadingStatus( 'Strongs', 70 );</script>
 <script src="data/strongsObjectWithFamilies2.js"></script>
 <script>loadingStatus( 'cross references', 80 );</script>

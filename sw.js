@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1546263759';
+var cache = 'javascripture.22.0.1546515916';
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
@@ -17,16 +17,16 @@ self.addEventListener('install', function(e) {
 			'data/extra-dictionary.js',
 			'data/strongs-dictionary.js',
 			'data/strongs-greek-dictionary.js',
-			'data/kjvdwyer7.js',
-			'data/web3.js',
+			'data/KJV.js',
+			'data/WEB.js',
+			'data/ESV.js',
 			'data/strongsObjectWithFamilies2.js',
-			'data/hebrew.js',
-			'data/greek4.js',
+			'data/morphhb.js',
+			'data/tischendorf.js',
 			'data/crossReferences.js',
 			'data/morphology.js',
 			'data/literalConsistent.js',
 			'data/literalConsistentExtra.js',
-			'data/esv.js',
 
 			//api - so that search works offline?
 			'api/searchApi.js',
