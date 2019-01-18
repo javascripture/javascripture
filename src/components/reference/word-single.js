@@ -13,7 +13,13 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 		if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ][ morph ] ) {
 			return javascripture.data.literalConsistent[ lemma ][ morph ];
 		}
-		return javascripture.data.literalConsistent[ lemma ]['no-morph'];
+
+		if( javascripture.data.literalConsistent[ lemma ]['no-morph'] ) {
+			return javascripture.data.literalConsistent[ lemma ]['no-morph'];
+		}
+
+		var firstKey = Object.keys(javascripture.data.literalConsistent[ lemma ])[0];
+		return javascripture.data.literalConsistent[ lemma ][ firstKey ];
 	}
 	if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ morph ] ) {
 		return javascripture.data.literalConsistent[ morph ];

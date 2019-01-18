@@ -32,7 +32,7 @@ class WordBlock extends React.Component {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = strongs[ strongsNumber ];
 
-		return wordDetail.kjv_def.split( ',' ).map( ( word, index ) => {
+		return wordDetail.kjv_def && wordDetail.kjv_def.split( ',' ).map( ( word, index ) => {
 			const wordString = word.trim().replace( /\./g, '' );
 
 			return (
