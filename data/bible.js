@@ -29,7 +29,7 @@ bible.Data.books = [
 ['Ezekiel','Ezek','Eze'],
 ['Daniel','Dan','Da'],
 ['Hosea','Hos','Ho'],
-['Joel'],
+['Joel','Joel'],
 ['Amos'],
 ['Obadiah','Oba','Ob'],
 ['Jonah','Jon'],
