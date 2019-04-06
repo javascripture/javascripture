@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1554550574';
+var cache = 'javascripture.22.0.1554556964';
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
@@ -42,14 +42,14 @@ self.addEventListener('install', function(e) {
 });
 
 const channel = new BroadcastChannel('sw-messages');
+channel.postMessage( { versionNumber: cache } );
+
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		caches.match(event.request).then(function(response) {
 			return response || fetch(event.request);
 		})
 	);
-
-	channel.postMessage( { versionNumber: cache } );
 });
 
 // Delete unused cache

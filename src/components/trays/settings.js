@@ -125,12 +125,15 @@ class SettingsTray extends React.Component{
 						<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">Literal: A work in progress</a><br />
 						ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
 					</p>
-					<p><br />Version: { javascripture.sw && javascripture.sw.versionNumber }</p>
+					<p><br />Version: { typeof( javascripture.sw ) !== 'undefined' ? javascripture.sw.versionNumber : null }</p>
 				</div>
 			</div>
 		);
 	}
 }
+
+
+
 
 SettingsTray.propTypes = {};
 

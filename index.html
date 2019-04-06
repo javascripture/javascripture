@@ -129,7 +129,7 @@
 		javascripture.sw = event.data;
 	});
 
-	if('serviceWorker' in navigator) {
+	if( 'serviceWorker' in navigator) {
 		navigator.serviceWorker
 			.register('/sw.js', { updateViaCache: 'imports' } )
 			.then( function( reg ) {
