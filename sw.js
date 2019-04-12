@@ -1,13 +1,12 @@
-var cache = 'javascripture.22.0.1554556964';
+var cache = 'javascripture.22.0.1555063318';
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
 		return cache.addAll([
-			'/',
-			'/index.html',
-			'/css/layout.css',
-			'/manifest.json',
-			'/javascripture.svg',
+			'index.html',
+			'css/layout.css',
+			'manifest.json',
+			'javascripture.svg',
 			//libs
 			'lib/MorphCodes.js',
 			'lib/MorphParse.js',
@@ -41,10 +40,34 @@ self.addEventListener('install', function(e) {
 	}));
 });
 
-const channel = new BroadcastChannel('sw-messages');
-channel.postMessage( { versionNumber: cache } );
+
+function send_message_to_client(client, msg){
+	return new Promise(function(resolve, reject){
+		var msg_chan = new MessageChannel();
+
+		msg_chan.port1.onmessage = function(event){
+			if(event.data.error){
+				reject(event.data.error);
+			}else{
+				resolve(event.data);
+			}
+		};
+
+		client.postMessage( msg, [msg_chan.port2] );
+	});
+}
+
+function send_message_to_all_clients(msg){
+	clients.matchAll().then(clients => {
+		clients.forEach(client => {
+			send_message_to_client(client, msg).then(m => console.log("SW Received Message: "+m));
+		})
+	})
+}
+
 
 self.addEventListener('fetch', function(event) {
+	send_message_to_all_clients( cache );
 	event.respondWith(
 		caches.match(event.request).then(function(response) {
 			return response || fetch(event.request);
@@ -54,7 +77,8 @@ self.addEventListener('fetch', function(event) {
 
 // Delete unused cache
 self.addEventListener('activate', function( event ) {
-	var cachgWhitelist = [ cache ];
+	send_message_to_all_clients( cache );
+	var cacheWhitelist = [ cache ];
 	event.waitUntil(
 		caches.keys().then(function( keyList ) {
 			return Promise.all(keyList.map(function( key ) {
