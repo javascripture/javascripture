@@ -4,6 +4,8 @@ const initialVersions = [
 	[ 'web', 'WEB' ],
 	[ 'esv', 'ESV' ],
 	[ 'lc', 'Literal' ],
+	[ 'faropv', 'ترجمه-ی قدام' ],
+	[ 'fartpv', 'مژده برای اسرع جدید' ],
 ];
 
 const versions = ( state = initialVersions , action ) => {

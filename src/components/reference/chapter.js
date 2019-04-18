@@ -12,7 +12,7 @@ import styles from './styles.scss';
 import { getLanguageFromVersion } from '../../lib/reference';
 
 const getVerseWrapperStyle = function( language, version ) {
-	if ( language === 'hebrew' && version === 'original' ) {
+	if ( ( language === 'hebrew' && version === 'original' ) || version === 'faropv' || version === 'fartpv' ) {
 		return {
 			direction: 'rtl'
 		};

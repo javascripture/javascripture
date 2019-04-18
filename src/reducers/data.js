@@ -4,6 +4,8 @@ const initialState = {
 	kjv: javascripture.data.kjv,
 	esv: javascripture.data.esv,
 	web: javascripture.data.web,
+	faropv: javascripture.data.faropv,
+	fartpv: javascripture.data.fartpv,
 };
 
 const data = ( state = initialState, action ) => {
