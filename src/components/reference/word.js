@@ -36,7 +36,7 @@ class Word extends React.Component{
 			<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } language={ this.props.language } />
 		) );
 
-		if ( endsWithPunctuation( word ) || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
+		if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
 			return (
 				<span>{ wordString }</span>
 			);
