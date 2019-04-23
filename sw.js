@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1563486946';
+var cache = 'javascripture.22.0.1556023231';
 
 self.addEventListener('install', function(e) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
@@ -9,7 +9,7 @@ self.addEventListener('install', function(e) {
 			'manifest.json',
 			'javascripture.svg',
 			'android-icon-512x512.png',
-			
+
 			//libs
 			'lib/MorphCodes.js',
 			'lib/MorphParse.js',
