@@ -45,7 +45,7 @@ class VersionSelector extends React.Component{
 		event.preventDefault();
 		const reference = bible.parseReference( this.refs.referenceInput.value );
 		reference.book = bible.Data.books[reference.bookID - 1][0];
-		if ( this.props.index === 0 ) {
+		if ( this.props.index === 0 || this.props.inSync ) {
 			window.location.hash = createReferenceLink( reference );
 		} else {
 			this.props.setReference( reference, this.props.index );
@@ -87,7 +87,7 @@ class VersionSelector extends React.Component{
 	renderInput() {
 		return (
 			<span className={ styles.inputWrapper }>
-				<ReferenceSelectorMobile index={ this.props.index } />
+				<ReferenceSelectorMobile index={ this.props.index } version={ this.props.reference.version } inSync={ this.props.inSync } />
 				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } value={ this.state.reference } onChange={ this.change } />
 			</span>
 		);
@@ -109,7 +109,7 @@ class VersionSelector extends React.Component{
 	render() {
 		return (
 			<form onSubmit={ this.goToReference } className={ styles.versionSelectorFlexible }>
-				{ ( this.props.index === 0 || ! this.props.inSync ) && this.renderInput() }
+				{ this.renderInput() }
 				{ this.renderSelect() }
 				{ this.props.index === 0 ? <SyncButton /> : <RemoveColumnButton index={ this.props.index } /> }
 				{ this.props.last && <AddColumnButton /> }

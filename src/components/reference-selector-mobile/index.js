@@ -26,7 +26,7 @@ class ReferenceSelectorMobile extends React.Component{
 
 	goToReference = ( reference ) => {
 		this.close();
-		if ( this.props.index === 0 ) {
+		if ( this.props.index === 0 || this.props.inSync ) {
 			window.location.hash = createReferenceLink( reference );
 		} else {
 			this.props.setReference( reference, this.props.index );
@@ -87,11 +87,12 @@ class ReferenceSelectorMobile extends React.Component{
 
 	renderBookLink( book, index ) {
 		const chapters = bible.Data.verses[ index ];
+		const tranlatedBook = bible.getTranslatedBookName( book, this.props.version );
 		let bookLink = null;
 
-		bookLink = <div onClick={ () => this.openBook( book, index ) }> { book }</div>;
+		bookLink = <div onClick={ () => this.openBook( book, index ) }> { tranlatedBook }</div>;
 		if ( chapters.length === 1 ) {
-			bookLink = this.renderReferenceLink( book, 1, book );
+			bookLink = this.renderReferenceLink( book, 1, tranlatedBook );
 		}
 
 		return (
