@@ -22,6 +22,8 @@ self.addEventListener('install', function(e) {
 			'data/KJV.js',
 			'data/WEB.js',
 			'data/ESV.js',
+			'data/FarOPV.js',
+			'data/FarTPV.js',
 			'data/strongsObjectWithFamilies2.js',
 			'data/morphhb.js',
 			'data/tischendorf.js',
