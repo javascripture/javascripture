@@ -7,6 +7,8 @@ self.addEventListener('install', function(e) {
 			'css/layout.css',
 			'manifest.json',
 			'javascripture.svg',
+			'android-icon-515x512.png',
+			
 			//libs
 			'lib/MorphCodes.js',
 			'lib/MorphParse.js',
