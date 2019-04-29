@@ -1,11 +1,9 @@
 {
-	// Required
 	"manifest_version": 20,
 	"name": "javascripture",
 	"short_name": "javascripture",
 	"version": "20",
 
-	// Recommended
 	"description": "A JavaScript bible exploration app",
 	"icons": [
 		{
@@ -59,7 +57,6 @@
 	"background_color": "#ffffff",
 	"theme_color": "#ffffff",
 
-	// Optional
 	"author": "scruffian",
 	"permissions": {
 		"unlimitedStorage": true
