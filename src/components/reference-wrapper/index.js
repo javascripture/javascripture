@@ -14,7 +14,7 @@ class ReferenceWrapper extends React.Component{
 		} );
 
 		if ( this.props.inSync ) {
-			references = <Reference reference={ this.props.references[ 0 ] }  index={ 0 } />
+			references = <Reference reference={ this.props.references[ 0 ] } index={ 0 } />
 		}
 
 		return (

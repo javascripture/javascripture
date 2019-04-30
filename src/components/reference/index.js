@@ -191,7 +191,6 @@ class Reference extends React.Component{
 							<SingleReference
 								book={ book }
 								chapter={ chapter }
-								reference={ reference }
 								index={ this.props.index }
 							/>
 						</div>

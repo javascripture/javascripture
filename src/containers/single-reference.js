@@ -4,7 +4,8 @@ import SingleReference from '../components/reference/single-reference';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		scrollChapter: state.scrollChapter
+		scrollChapter: state.scrollChapter,
+		reference: state.reference,
 	}
 };
 

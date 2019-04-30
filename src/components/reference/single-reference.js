@@ -8,9 +8,11 @@ import styles from './styles.scss';
 
 class SingleReference extends React.Component{
 	render() {
+		const tranlatedBook = bible.getTranslatedBookName( this.props.book, this.props.reference[ this.props.index ].version );
+
 		return (
 			<div>
-				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>{ this.props.book } { this.props.chapter }</h1>
+				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>{ tranlatedBook } { this.props.chapter }</h1>
 				<div className={ styles.chapter }>
 					<Chapter
 						book={ this.props.book }

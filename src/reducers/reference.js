@@ -41,7 +41,7 @@ const getReferenceFromAction = ( reference, version ) => {
 }
 
 const getInitialState = () => {
-	return [ getReferenceFromHash( window.location.hash, 'original' ), getReferenceFromHash( window.location.hash, 'kjv' ) ];
+	return [ getReferenceFromHash( window.location.hash, 'kjv' ), getReferenceFromHash( window.location.hash, 'original' ) ];
 }
 
 const reference = ( state = getInitialState(), action ) => {
