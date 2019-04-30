@@ -12,7 +12,6 @@ class SingleReference extends React.Component{
 
 		return (
 			<div>
-				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>{ tranlatedBook } { this.props.chapter }</h1>
 				<div className={ styles.chapter }>
 					<Chapter
 						book={ this.props.book }
