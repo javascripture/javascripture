@@ -21,12 +21,11 @@
 }
 
 .trayFilter {
-	display: inline-block;
 	cursor: pointer;
+	flex-grow: 1;
 	margin: 0;
 	padding: 1em 0;
 	text-align: center;
-	width: 20%;
 
 	&:hover {
 		background: $hover;

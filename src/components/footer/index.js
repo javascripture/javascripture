@@ -3,7 +3,6 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import BookSvg from '../svg/book.js';
 import BookmarkSvg from '../svg/bookmark.js';
 import CogSvg from '../svg/cog.js';
 import EyeSvg from '../svg/eye.js';
@@ -15,9 +14,6 @@ const fill = '#333333';
 
 const Footer = () => (
 	<div className={ styles.footer }>
-		<FilterTrayLink filter="goto">
-			<BookSvg fill={ fill } />
-		</FilterTrayLink>
 		<FilterTrayLink filter="word">
 			<EyeSvg fill={ fill } />
 		</FilterTrayLink>
