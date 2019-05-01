@@ -74,7 +74,7 @@ class Chapter extends React.Component{
 
 					return (
 						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>
-							{ tranlatedBook + ' ' + this.props.reference[ 0 ].chapter }
+							{ tranlatedBook + ' ' + this.props.chapter }
 						</h1>
 					);
 				} ) }
