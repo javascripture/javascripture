@@ -17,14 +17,6 @@ let lastTimeStamp = 0;
 // Internal dependencies
 import styles from './styles.scss';
 
-const versions = [
-	[ 'original', 'Original' ],
-	[ 'kjv', 'KJV' ],
-	[ 'web', 'WEB' ],
-	[ 'esv', 'ESV' ],
-	[ 'lc', 'Literal' ],
-];
-
 class VersionSelector extends React.Component{
 	state = {
 		reference: this.props.value,
@@ -98,7 +90,7 @@ class VersionSelector extends React.Component{
 		return (
 			<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
 				{
-					versions.map( ( version, index ) => (
+					this.props.versions.map( ( version, index ) => (
 						<option value={ version[ 0 ] } key={ index }>{ version[ 1 ] }</option>
 					) )
 				}

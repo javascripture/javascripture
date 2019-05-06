@@ -14,6 +14,7 @@ import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
 import currentReference from './current-reference';
 import version from './version';
+import versions from './versions';
 
 const app = {
 	bookmarks,
@@ -30,6 +31,7 @@ const app = {
 	settings,
 	trays,
 	version,
+	versions,
 	wordDetails,
 	wordHighlight,
 };

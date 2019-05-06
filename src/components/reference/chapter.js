@@ -73,7 +73,7 @@ class Chapter extends React.Component{
 					const tranlatedBook = bible.getTranslatedBookName( this.props.reference[ 0 ].book, reference.version );
 
 					return (
-						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>
+						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index }>
 							{ tranlatedBook + ' ' + this.props.chapter }
 						</h1>
 					);
@@ -120,7 +120,9 @@ class Chapter extends React.Component{
 		this.currentRef = React.createRef();
 		return (
 			<div>
-				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>fdsd</h1>
+				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>
+					{ this.props.book + ' ' + this.props.chapter }
+				</h1>
 				{ chapterData.map( ( verse, verseNumber ) => {
 					let ref = null;
 					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
