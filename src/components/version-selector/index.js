@@ -2,13 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import AddColumnButton from '../add-column-button';
 import ReferenceSelectorMobile from '../reference-selector-mobile';
 import RemoveColumnButton from '../remove-column-button';
 import SyncButton from '../sync-button';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { createReferenceLink } from '../../lib/reference.js';
 
 // Component variables

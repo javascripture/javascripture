@@ -34,10 +34,6 @@ var config = {
 				include: path.join( __dirname, '/src' )
 			},
 			{
-				test: /\.json$/,
-				loader: 'json-loader'
-			},
-			{
 				test: /\.scss$/,
 				loaders: [
 					'isomorphic-style-loader',
