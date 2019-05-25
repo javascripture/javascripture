@@ -42,7 +42,19 @@ class Chapter extends React.Component{
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
-		this.scrollToCurrentChapter();
+		if( this.referenceHasChanged( prevProps ) ) {
+			this.scrollToCurrentChapter();
+		}
+	}
+
+	referenceHasChanged( prevProps ) {
+		let referenceHasChanged = false;
+		this.props.reference.forEach( ( reference, index ) => {
+			if ( ! ( reference.book === prevProps.reference[ index ].book && reference.chapter === prevProps.reference[ index ].chapter && reference.verse === prevProps.reference[ index ].verse ) ) {
+				referenceHasChanged = true;
+			}
+		} );
+		return referenceHasChanged;
 	}
 
 	scrollToCurrentChapter() {
