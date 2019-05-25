@@ -25,6 +25,7 @@ class WordBlock extends React.Component {
 			version: this.props.version,
 			lemma: this.props.strongsNumber,
 			range: 'verse',
+			word: this.props.word,
 		};
 	}
 
@@ -158,8 +159,8 @@ class WordBlock extends React.Component {
 		this.props.removeWord( this.props.strongsNumber, this.props.version );
 	}
 
-	termTitle( { clusivity, version, lemma, range } ) {
-		return 'strongs number: ' + lemma + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range;
+	termTitle( { clusivity, version, lemma, range, word } ) {
+		return 'strongs number: ' + lemma + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nclicked word: ' + word;
 	}
 
 	render() {

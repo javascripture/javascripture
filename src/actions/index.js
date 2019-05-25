@@ -64,12 +64,13 @@ export const showCrossReferences = ( reference ) => {
 	}
 }
 
-export const addWord = ( { strongsNumber, subdue, open, morphology, version } ) => {
+export const addWord = ( { strongsNumber, subdue, open, morphology, version, word } ) => {
 	const searchParameters = {
 		clusivity: 'exclusive',
 		version: version,
 		lemma: strongsNumber,
 		range: 'verse',
+		word: word,
 	};
 
 	// Send data to our worker.
@@ -84,6 +85,7 @@ export const addWord = ( { strongsNumber, subdue, open, morphology, version } ) 
 		open,
 		morphology,
 		version,
+		word,
 		type: 'ADD_WORD',
 	}
 }

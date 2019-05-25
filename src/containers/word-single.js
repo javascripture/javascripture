@@ -45,6 +45,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 					open: true,
 					morphology: ownProps.morph,
 					version: ownProps.language,
+					word: ownProps.word,
 				} ) );
 			} );
 		},

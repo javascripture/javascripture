@@ -5,12 +5,12 @@ const searchResults = ( state = [], action ) => {
 	let newState,
 		getCurrentVersePosition,
 		reference;
-
 	switch ( action.type ) {
 		case 'ADD_SEARCH_RESULTS':
 			const searchResultsPosition = findIndex( state, searchTerm => {
 					return isEqual( searchTerm.terms, action.terms );
 				} );
+
 			newState = [ ...state ];
 			if ( searchResultsPosition > -1 ) {
 				newState[ searchResultsPosition ] = {
