@@ -16,7 +16,7 @@ const wordDetails = ( state = [], action ) => {
 					open: false,
 					morphology: word.morphology,
 					version: word.version,
-					word: word.word,
+					clickedWord: word.clickedWord,
 				};
 			} );
 
@@ -27,7 +27,7 @@ const wordDetails = ( state = [], action ) => {
 					open: action.open,
 					morphology: action.morphology,
 					version: action.version,
-					word: action.word
+					clickedWord: action.clickedWord,
 				};
 
 				return newState;
@@ -41,7 +41,7 @@ const wordDetails = ( state = [], action ) => {
 					open: action.open,
 					morphology: action.morphology,
 					version: action.version,
-					word: action.word,
+					clickedWord: action.clickedWord,
 				}
 			];
 
@@ -56,7 +56,7 @@ const wordDetails = ( state = [], action ) => {
 					open: ! state[ toggleWordPosition ].open,
 					morphology: state[ toggleWordPosition ].morphology,
 					version: state[ toggleWordPosition ].version,
-					word: state[ toggleWordPosition ].word,
+					clickedWord: state[ toggleWordPosition ].clickedWord,
 				};
 
 				return newState;
