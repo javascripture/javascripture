@@ -80,7 +80,7 @@ class Chapter extends React.Component{
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
-					const tranlatedBook = bible.getTranslatedBookName( this.props.reference[ 0 ].book, reference.version );
+					const tranlatedBook = bible.getTranslatedBookName( this.props.book, reference.version );
 
 					return (
 						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index }>
