@@ -21,7 +21,8 @@ import Root from './containers/root';
 
 const config = {
 	key: 'primary',
-	storage
+	storage,
+	blacklist: [ 'data' ],
 }
 
 const history = createBrowserHistory()

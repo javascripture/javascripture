@@ -6,6 +6,7 @@ const mapStateToProps = ( state, ownProps ) => {
 	return {
 		reference: state.reference,
 		inSync: state.settings.inSync,
+		data: state.data,
 	}
 };
 

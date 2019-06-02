@@ -16,7 +16,7 @@ class SearchLink extends React.Component{
 	}
 
 	expandedSearchResults = ( reference ) => {
-		if ( ! javascripture.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ] || ! javascripture.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
+		if ( ! this.props.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ] || ! this.props.data[ this.props.terms.version ][ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
 			console.log( 'found a non-existent verse', reference );
 			return null;
 		}

@@ -20,6 +20,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		isActive: isActive( state.currentReference, ownProps ),
 		expandedSearchResults: state.settings.expandedSearchResults,
 		highlightSearchResults: state.settings.highlightSearchResults,
+		data: state.data,
 	};
 };
 

@@ -1,5 +1,3 @@
-/*global javascripture*/
-
 // External
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -76,7 +74,7 @@ class Chapter extends React.Component{
 	getSyncVerses() {
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ],
-			kjvData = javascripture.data[ 'kjv' ][ book ][ chapter - 1 ];
+			kjvData = this.props.data[ 'kjv' ][ book ][ chapter - 1 ];
 
 		this.currentRef = React.createRef();
 		const title = (
@@ -106,7 +104,7 @@ class Chapter extends React.Component{
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
 								const language = getLanguageFromVersion( book, reference.version );
-								const verseData = javascripture.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
+								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
 									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( language, reference.version ) }>
 										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, reference.version ) }>
@@ -127,7 +125,7 @@ class Chapter extends React.Component{
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ],
 			language = getLanguageFromVersion( book, this.props.reference[ index ].version ),
-			chapterData = javascripture.data[ language ][ book ][ chapter - 1 ];
+			chapterData = this.props.data[ language ][ book ][ chapter - 1 ];
 
 		this.currentRef = React.createRef();
 		return (

@@ -1,4 +1,5 @@
 import bookmarks from './bookmarks';
+import data from './data';
 import reference from './reference';
 import referenceSelectorMobile from './reference-selector-mobile';
 import scrollChapter from './scroll-chapter';
@@ -20,6 +21,7 @@ const app = {
 	bookmarks,
 	crossReferences,
 	currentReference,
+	data,
 	reference,
 	referenceSelectorMobile,
 	scrollChapter,
