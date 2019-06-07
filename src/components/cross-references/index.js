@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import { createReferenceLink, getReferenceText } from '../../lib/reference.js';
 import ReferenceText from '../reference-text';
+import ReferenceLink from '../reference-link';
 
 class CrossReferences extends React.Component{
 	getCrossReferences() {
@@ -41,7 +42,7 @@ class CrossReferences extends React.Component{
 	showReferences() {
 		return (
 			<ul className={ styles.crossReferencesList }>
-				{ this.getCrossReferences().map( reference => {
+				{ this.getCrossReferences().map( ( reference, index ) => {
 					const referenceSections = reference.split('-');
 					const referenceArrays = referenceSections.map( referenceSection => {
 						const referenceArray = referenceSection.split('.'),
@@ -57,7 +58,7 @@ class CrossReferences extends React.Component{
 					return (
 						<li key={ reference }>
 							<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
-								<ReferenceText reference={ referenceArrays[ 0 ] } />
+								{ index + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
 								{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
 							</a>
 						</li>
