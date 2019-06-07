@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Verse from '../reference/verse';
 import styles from './styles.scss';
 import { createReferenceLink, getReferenceText, getVerseData } from '../../lib/reference.js';
+import ReferenceText from '../reference-text';
 
 class SearchLink extends React.Component{
 	setCurrentVerse() {
@@ -63,7 +64,7 @@ class SearchLink extends React.Component{
 					onMouseOver={ this.highlightWords }
 					onMouseOut={ this.unHighlighWords }
 				>
-					{ index + 1 }. { getReferenceText( reference ) }
+					{ index + 1 }. <ReferenceText reference={ reference } />
 				</Link>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>

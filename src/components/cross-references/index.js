@@ -7,7 +7,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import { createReferenceLink, getReferenceText } from '../../lib/reference.js';
 import ReferenceText from '../reference-text';
-console.log(ReferenceText);
 
 class CrossReferences extends React.Component{
 	getCrossReferences() {
