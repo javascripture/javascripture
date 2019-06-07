@@ -25,7 +25,6 @@ self.addEventListener('install', function(e) {
 			'data/morphhb.js',
 			'data/tischendorf.js',
 			'data/crossReferences.js',
-			'data/morphology.js',
 			'data/literalConsistent.js',
 			'data/literalConsistentExtra.js',
 
