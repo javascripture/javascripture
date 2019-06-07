@@ -6,11 +6,11 @@ import { render } from 'react-dom';
 
 import App from './app';
 
-let ContentRoot = render( <App />, document.getElementById('content') );
+let ContentRoot = render( <App />, document.getElementById( 'content' ) );
 
-if (module.hot) {
+if ( module.hot ) {
 	module.hot.accept( './app', () => {
-		const NextRootContainer = require('./app').default;
+		const NextRootContainer = require( './app' ).default;
 		ContentRoot = render( <NextRootContainer />, document.getElementById('content') );
 	} );
 };
