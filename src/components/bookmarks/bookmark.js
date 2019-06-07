@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import Cancel from '../svg/cancel';
 import { createReferenceLink } from '../../lib/reference';
+import ReferenceText from '../reference-text';
 
 //The right way to do a link
 class BookMark extends React.Component{
@@ -16,10 +17,11 @@ class BookMark extends React.Component{
 
 	render() {
 		const bookmark = this.props.bookmark;
-		const bookmarkText = ( this.props.number + 1 ) + '. ' + bookmark.book + ' ' + bookmark.chapter + ':' + bookmark.verse;
 		return (
 			<div className={ styles.bookmark }>
-				<Link to={ createReferenceLink( bookmark ) }>{ bookmarkText }</Link>
+				<Link to={ createReferenceLink( bookmark ) }>
+					{ ( this.props.number + 1 ) }. <ReferenceText reference={ bookmark } />
+				</Link>
 				<a onClick={ this.removeBookmark } className={ styles.cancel }><Cancel fill="#000000" /></a>
 			</div>
 		);
