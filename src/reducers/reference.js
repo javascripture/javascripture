@@ -53,6 +53,7 @@ const reference = ( state = getInitialState(), action ) => {
 			}
 			const locationState = [ ...state ];
 			locationState[ 0 ] = reference;
+			document.title = reference.book + ' ' + reference.chapter + ':' + reference.verse + ' | Javascripture ';
 			return locationState;
 
 		case 'CHANGE_VERSION':
