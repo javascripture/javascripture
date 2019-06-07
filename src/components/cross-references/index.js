@@ -20,7 +20,7 @@ class CrossReferences extends React.Component{
 				<div>
 					<p>Cross references for&nbsp;
 						<a href={ '#' + createReferenceLink( this.props.reference ) }>
-							{ this.props.reference.book + ' ' + this.props.reference.chapter + ':' + this.props.reference.verse }
+							{ this.referenceText( this.props.reference ) }
 						</a>:
 					</p>
 					{ this.showReferences() }
@@ -31,7 +31,7 @@ class CrossReferences extends React.Component{
 		return (
 			<p>No cross references for&nbsp;
 				<a href={ '#' + createReferenceLink( this.props.reference ) }>
-					{ this.props.reference.book + ' ' + this.props.reference.chapter + ':' + this.props.reference.verse }
+					{ this.referenceText( this.props.reference ) }
 				</a>
 			</p>
 		);
