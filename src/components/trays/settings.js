@@ -115,6 +115,7 @@ class SettingsTray extends React.Component{
 										<label>Interface language:</label>
 										<select value={ this.props.settings.interfaceLanguage } name="interfaceLanguage" onChange={ this.changeSetting } >
 											<option value="en">English</option>
+											<option value="fa">Farsi</option>
 											<option value="original">Original</option>
 										</select>
 									</li>
