@@ -4,7 +4,7 @@ import { isMatch } from 'lodash';
 
 import { getReferenceText } from '../lib/reference.js';
 
-const getRandomReference = function() {
+const getRandomReference = function( version ) {
 	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
 		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
 		numberOfVerses = bible.Data.verses[bookNumber][chapterNumber],
@@ -13,17 +13,15 @@ const getRandomReference = function() {
 	referenceObject.book = bible.Data.books[bookNumber][0];
 	referenceObject.chapter = chapterNumber + 1;
 	referenceObject.verse = verseNumber + 1;
+	referenceObject.version = version;
 	return referenceObject;
 };
 
-if ( window.location.hash.length < 3 ) {
-	const randomReference = getRandomReference();
-	window.location.hash = '#/' + randomReference.book + '/' + randomReference.chapter + '/' + randomReference.verse;
-}
-
 const getReferenceFromHash = function( hash, version ) {
 	const reference = hash.split( '/' );
-	if ( ! reference[ 1 ] ) {
+
+	if ( ! reference[ 1 ] || reference[ 1 ] === '' ) {
+		const randomReference = getRandomReference( version );
 		return false;
 	}
 
@@ -43,6 +41,11 @@ const getReferenceFromAction = ( reference, version ) => {
 }
 
 const getInitialState = () => {
+	const hashArray = window.location.hash.split( '/' );
+	if ( ! hashArray[ 1 ] || hashArray[ 1 ] === '' ) {
+		return [ getRandomReference( 'original' ), getRandomReference( 'kjv' ) ];
+	}
+
 	return [ getReferenceFromHash( window.location.hash, 'original' ), getReferenceFromHash( window.location.hash, 'kjv' ) ];
 }
 
@@ -50,9 +53,11 @@ const reference = ( state = getInitialState(), action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
 			const reference = getReferenceFromHash( action.payload.location.hash, state[ 0 ].version );
+
 			if ( ! reference ) {
 				return state;
 			}
+
 			const locationState = [ ...state ];
 			locationState[ 0 ] = reference;
 			document.title = getReferenceText( reference ) + ' | Javascripture ';
