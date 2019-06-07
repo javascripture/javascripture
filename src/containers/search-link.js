@@ -21,6 +21,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		expandedSearchResults: state.settings.expandedSearchResults,
 		highlightSearchResults: state.settings.highlightSearchResults,
 		data: state.data,
+		interfaceLanguage: state.settings.interfaceLanguage,
 	};
 };
 

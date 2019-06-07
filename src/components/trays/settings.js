@@ -111,7 +111,13 @@ class SettingsTray extends React.Component{
 											<input type="checkbox" name="highlightSearchResults" checked={ this.props.settings.highlightSearchResults } onChange={ this.changeCheckboxSetting } /> Highlight all words in a verse when hovering the search results
 										</label>
 									</li>
-
+									<li className={ styles.settingsLi }>
+										<label>Interface language:</label>
+										<select value={ this.props.settings.interfaceLanguage } name="interfaceLanguage" onChange={ this.changeSetting } >
+											<option value="en">English</option>
+											<option value="original">Original</option>
+										</select>
+									</li>
 								</ul>
 							</form>
 						</div>

@@ -7,6 +7,7 @@ const initialState = {
 	inSync: true,
 	expandedSearchResults: false,
 	highlightSearchResults: false,
+	interfaceLanguage: 'en',
 	type: "SETTINGS_CHANGE",
 }
 

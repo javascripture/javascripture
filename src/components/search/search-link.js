@@ -63,7 +63,7 @@ class SearchLink extends React.Component{
 					onMouseOver={ this.highlightWords }
 					onMouseOut={ this.unHighlighWords }
 				>
-					{ index + 1 }. { reference.book } { reference.chapter }:{ reference.verse }
+					{ index + 1 }. { bible.getTranslatedBookNameByLanguage( reference.book, this.props.interfaceLanguage ) } { reference.chapter }:{ reference.verse }
 				</Link>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>

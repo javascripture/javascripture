@@ -387,6 +387,12 @@ bible.getBookId = function( textReference ) {
 bible.getBook = function( bookId ) {
 	return bible.Data.books[ bookId - 1][0];
 };
+
+bible.getTranslatedBookNameByLanguage = function( bookName, language ) {
+	return bible.Data.bookNamesByLanguage[ language ][ bible.getBookId( bookName ) - 1 ];
+};
+
 bible.getTranslatedBookName = function( bookName, version ) {
-	return bible.Data.bookNamesByLanguage[ bible.Data.mapVersionsToLanguages[ version ] ][ bible.getBookId( bookName ) - 1 ];
+	var language = bible.Data.mapVersionsToLanguages[ version ];
+	return bible.getTranslatedBookNameByLanguage( bookName, language );
 };
