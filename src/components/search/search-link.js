@@ -20,7 +20,7 @@ class SearchLink extends React.Component{
 			console.log( 'found a non-existent verse', reference );
 			return null;
 		}
-		const verseData = getVerseData( reference, this.props.terms.version );
+		const verseData = getVerseData( reference, this.props.terms.version, this.props.data );
 
 		return (
 			<div className={ styles.verse }>
