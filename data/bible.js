@@ -31,7 +31,7 @@ bible.Data.books = [
 ['Hosea','Hos','Ho'],
 ['Joel','Joel'],
 ['Amos'],
-['Obadiah','Oba','Ob'],
+['Obadiah','Oba','Ob','Obad'],
 ['Jonah','Jon'],
 ['Micah','Mic','Mi'],
 ['Nahum','Nah','Na'],
