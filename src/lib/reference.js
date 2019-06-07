@@ -13,3 +13,7 @@ export const getLanguageFromVersion = ( book, version ) => {
 
 	return version;
 };
+
+export const getReferenceText = ( referenceObject ) => {
+	return referenceObject.book + ' ' + referenceObject.chapter + ':' + referenceObject.verse;
+};

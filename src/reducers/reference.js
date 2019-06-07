@@ -2,6 +2,8 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { isMatch } from 'lodash';
 
+import { getReferenceText } from '../lib/reference.js';
+
 const getRandomReference = function() {
 	var bookNumber = Math.floor(Math.random() * bible.Data.books.length),
 		chapterNumber = Math.floor(Math.random() * bible.Data.verses[bookNumber].length),
@@ -53,7 +55,7 @@ const reference = ( state = getInitialState(), action ) => {
 			}
 			const locationState = [ ...state ];
 			locationState[ 0 ] = reference;
-			document.title = reference.book + ' ' + reference.chapter + ':' + reference.verse + ' | Javascripture ';
+			document.title = getReferenceText( reference ) + ' | Javascripture ';
 			return locationState;
 
 		case 'CHANGE_VERSION':

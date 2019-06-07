@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // Internal dependencies
 import Verse from '../reference/verse';
 import styles from './styles.scss';
-import { createReferenceLink, getVerseData } from '../../lib/reference.js';
+import { createReferenceLink, getReferenceText, getVerseData } from '../../lib/reference.js';
 
 class SearchLink extends React.Component{
 	setCurrentVerse() {
@@ -63,7 +63,7 @@ class SearchLink extends React.Component{
 					onMouseOver={ this.highlightWords }
 					onMouseOut={ this.unHighlighWords }
 				>
-					{ index + 1 }. { bible.getTranslatedBookNameByLanguage( reference.book, this.props.interfaceLanguage ) } { reference.chapter }:{ reference.verse }
+					{ index + 1 }. { getReferenceText( reference ) }
 				</Link>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>

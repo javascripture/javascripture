@@ -5,7 +5,9 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
-import { createReferenceLink } from '../../lib/reference.js';
+import { createReferenceLink, getReferenceText } from '../../lib/reference.js';
+import ReferenceText from '../reference-text';
+console.log(ReferenceText);
 
 class CrossReferences extends React.Component{
 	getCrossReferences() {
@@ -20,7 +22,7 @@ class CrossReferences extends React.Component{
 				<div>
 					<p>Cross references for&nbsp;
 						<a href={ '#' + createReferenceLink( this.props.reference ) }>
-							{ this.referenceText( this.props.reference ) }
+							<ReferenceText reference={ this.props.reference } />
 						</a>:
 					</p>
 					{ this.showReferences() }
@@ -31,14 +33,10 @@ class CrossReferences extends React.Component{
 		return (
 			<p>No cross references for&nbsp;
 				<a href={ '#' + createReferenceLink( this.props.reference ) }>
-					{ this.referenceText( this.props.reference ) }
+					<ReferenceText reference={ this.props.reference } />
 				</a>
 			</p>
 		);
-	}
-
-	referenceText( referenceObject ) {
-		return referenceObject.book + ' ' + referenceObject.chapter + ':' + referenceObject.verse;
 	}
 
 	showReferences() {
@@ -60,8 +58,8 @@ class CrossReferences extends React.Component{
 					return (
 						<li key={ reference }>
 							<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
-								{ this.referenceText( referenceArrays[ 0 ] ) }
-								{ referenceArrays[ 1 ] && ' - ' + this.referenceText( referenceArrays[ 1 ] ) }
+								<ReferenceText reference={ referenceArrays[ 0 ] } />
+								{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
 							</a>
 						</li>
 					);
