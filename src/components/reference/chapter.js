@@ -48,7 +48,9 @@ class Chapter extends React.Component{
 	referenceHasChanged( prevProps ) {
 		let referenceHasChanged = false;
 		this.props.reference.forEach( ( reference, index ) => {
-			if ( ! ( reference.book === prevProps.reference[ index ].book && reference.chapter === prevProps.reference[ index ].chapter && reference.verse === prevProps.reference[ index ].verse ) ) {
+			if ( ! prevProps.reference[ index ] ) {
+				referenceHasChanged = true; // Because the colum widths will change
+			} else if ( ! ( reference.book === prevProps.reference[ index ].book && reference.chapter === prevProps.reference[ index ].chapter && reference.verse === prevProps.reference[ index ].verse ) ) {
 				referenceHasChanged = true;
 			}
 		} );
