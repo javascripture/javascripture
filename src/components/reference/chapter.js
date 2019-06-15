@@ -106,8 +106,6 @@ class Chapter extends React.Component{
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
 								const language = mapVersionToData( book, reference.version );
-								console.log( language );
-								console.log( this.props.data[ language ] );
 								if ( ! this.props.data[ language ] ) {
 									return this.placeholder( index + verseNumber);
 								}

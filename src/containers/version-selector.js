@@ -21,7 +21,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		inSync: state.settings.inSync,
 		references: state.reference,
 		value: getReferenceValue( state, index, version ),
-		versions: state.versions,
+		versions: bible.Data.supportedVersions,
 	}
 };
 

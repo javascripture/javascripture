@@ -6,6 +6,7 @@ const initialVersions = [
 	[ 'lc', 'Literal' ],
 	[ 'faropv', 'ترجمه-ی قدام' ],
 	[ 'fartpv', 'مژده برای اسرع جدید' ],
+	[ 'ylt', 'Young\'s Literal Translation' ],
 ];
 
 const versions = ( state = initialVersions , action ) => {

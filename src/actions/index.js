@@ -1,3 +1,5 @@
+var cache = 'javascripture.22.0.1560597788';
+
 import { createReferenceLink } from '../lib/reference.js';
 import xhr from 'xhr';
 
@@ -290,6 +292,12 @@ export const fetchData = ( key ) => {
 				"Content-Type": "application/json"
 			}
 		}, function ( error, response, body ) {
+			caches.open( cache ).then( function( cache ) {
+				return cache.addAll([
+					'/bibles/' + key +'.json'
+				]);
+			});
+
 			dispatch( receiveData( key, JSON.parse( body ).books ) );
 		} );
 	}
