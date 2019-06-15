@@ -285,7 +285,7 @@ export const fetchData = ( key ) => {
 
 		return xhr( {
 			method: "get",
-			uri: "/data/" + key + ".json",
+			uri: "/bibles/" + key + ".json",
 			headers: {
 				"Content-Type": "application/json"
 			}

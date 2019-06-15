@@ -3,8 +3,6 @@ const initialState = {
 	hebrew: javascripture.data.hebrew,
 	kjv: javascripture.data.kjv,
 	web: javascripture.data.web,
-	faropv: javascripture.data.faropv,
-	fartpv: javascripture.data.fartpv,
 };
 
 const data = ( state = initialState, action ) => {
