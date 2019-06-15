@@ -53,7 +53,9 @@ class ReferenceSelectorMobile extends React.Component{
 		const chapters = bible.Data.verses[ this.props.bookIndex ];
 		return (
 			<div className={ styles.chapterList }>
-				<div className={ styles.chapterName }>{ this.props.bookName }</div>
+				<div className={ styles.chapterName }>
+					{ bible.getTranslatedBookName( this.props.bookName, this.props.version ) }
+				</div>
 				<div className={ styles.chapterBlocks }>
 					{ chapters.map( ( numberOfVerses, chapterNumber ) => {
 						return this.renderReferenceLink( this.props.bookName, chapterNumber + 1, chapterNumber + 1 );
