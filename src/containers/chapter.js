@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { fetchData } from '../actions';
 
 import Chapter from '../components/reference/chapter';
 
@@ -10,8 +11,17 @@ const mapStateToProps = ( state, ownProps ) => {
 	}
 };
 
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		fetchData: ( key ) => {
+			dispatch( fetchData( key ) );
+		}
+	}
+};
+
 const ChapterContainer = connect(
- 	mapStateToProps
+	mapStateToProps,
+	mapDispatchToProps,
 )( Chapter )
 
 export default ChapterContainer;

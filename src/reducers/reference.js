@@ -1,6 +1,9 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { REHYDRATE } from 'redux-persist/lib/constants'
 import { isMatch } from 'lodash';
+import xhr from 'xhr';
+
+import { mapVersionToData } from '../lib/reference';
 
 import { getReferenceText } from '../lib/reference.js';
 

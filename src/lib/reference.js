@@ -6,7 +6,7 @@ export const getVerseData = ( reference, version, data ) => {
 	return data[ version ][ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
 };
 
-export const getLanguageFromVersion = ( book, version ) => {
+export const mapVersionToData = ( book, version ) => {
 	if ( version === 'original' || version === 'lc' ) {
 		return bible.Data.otBooks.indexOf( book ) > -1 ? 'hebrew' : 'greek';
 	}

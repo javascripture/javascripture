@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 
 // Internal
 import VersionSelector from '../components/version-selector';
-import { changeVersion, setReference, setScrollChapter } from '../actions'
+import { changeVersion, fetchData, setReference, setScrollChapter } from '../actions'
 
 const getReferenceValue = ( state, index, version ) => {
 	const chapter = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].chapter ) ? state.scrollChapter[ index ].chapter : state.reference[ index ].chapter;
@@ -29,6 +29,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		changeVersion: ( index, version ) => {
 			dispatch( changeVersion( index, version ) );
+			dispatch( fetchData( version ) );
 		},
 		setReference: ( reference, index ) => {
 			dispatch( setReference( reference, index ) );

@@ -59,6 +59,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.0.3",
-    "strongs": "^1.0.2"
+    "strongs": "^1.0.2",
+    "xhr": "^2.5.0"
   }
 }

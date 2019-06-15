@@ -9,7 +9,8 @@ import Bookmarker from '../../containers/bookmarker';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
-import { getLanguageFromVersion } from '../../lib/reference';
+import { mapVersionToData } from '../../lib/reference';
+import xhr from 'xhr';
 
 const getVerseWrapperStyle = function( language, version ) {
 	if ( ( language === 'hebrew' && version === 'original' ) || version === 'faropv' || version === 'fartpv' ) {
@@ -21,22 +22,12 @@ const getVerseWrapperStyle = function( language, version ) {
 	return {};
 };
 
-const getVerseStyle = function( language, version ) {
-	/*if ( language === 'hebrew' && version === 'original' ) {
-		return {
-			fontFamily: 'Times New Roman, Times, serif',
-			fontSize: '140%',
-			lineHeight: '1em',
-			verticalAlign: 'middle'
-		};
-	}
-
-	return {};*/
-};
-
 class Chapter extends React.Component{
 	componentDidMount() {
 		this.scrollToCurrentChapter();
+		this.props.reference.forEach( reference => {
+			this.props.fetchData( mapVersionToData( reference.book, reference.version ) );
+		} );
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
@@ -73,12 +64,21 @@ class Chapter extends React.Component{
 		return styles.verse
 	}
 
+	placeholder( key ) {
+		return (
+			<div className={ styles.verseWrapper } key={ key }>
+				<span className={ styles.placeholder }></span>
+				<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }></span>
+			</div>
+		);
+	}
+
 	getSyncVerses() {
+		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ],
 			kjvData = this.props.data[ 'kjv' ][ book ][ chapter - 1 ];
 
-		this.currentRef = React.createRef();
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
@@ -105,7 +105,12 @@ class Chapter extends React.Component{
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
-								const language = getLanguageFromVersion( book, reference.version );
+								const language = mapVersionToData( book, reference.version );
+
+								if ( ! this.props.data[ language ] ) {
+									return this.placeholder( index + verseNumber);
+								}
+
 								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
 									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( language, reference.version ) }>
@@ -124,12 +129,20 @@ class Chapter extends React.Component{
 	}
 
 	getDifferentVerses() {
+		this.currentRef = React.createRef();
+
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ],
-			language = getLanguageFromVersion( book, this.props.reference[ index ].version ),
-			chapterData = this.props.data[ language ][ book ][ chapter - 1 ];
+			language = mapVersionToData( book, this.props.reference[ index ].version );
 
-		this.currentRef = React.createRef();
+		if ( ! this.props.data[ language ] ) {
+			return (
+				<div>Loading { this.props.reference[ index ].version }...</div>
+			);
+		}
+
+		const chapterData = this.props.data[ language ][ book ][ chapter - 1 ];
+
 		return (
 			<div>
 				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>

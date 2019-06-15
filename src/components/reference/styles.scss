@@ -84,3 +84,10 @@
 .select-single:hover {
 	cursor: crosshair;
 }
+
+.placeholder {
+	background: #eee;
+	display: block;
+	height: 1em;
+	margin: .4em 0 .5em 0;
+}

@@ -1,4 +1,5 @@
 import { createReferenceLink } from '../lib/reference.js';
+import xhr from 'xhr';
 
 export const goToReference = ( reference ) => {
 	window.location.hash = createReferenceLink( reference );
@@ -255,5 +256,41 @@ export const appendToSearchForm = ( name, value ) => {
 export const clearSearchForm = () => {
 	return {
 		type: 'CLEAR_SEARCH_FORM',
+	}
+}
+
+function requestData( key ) {
+	return {
+		type: 'REQUEST_DATA',
+		key,
+	}
+}
+
+function receiveData( key, data ) {
+	return {
+		type: 'RECEIVE_DATA',
+		key,
+		data,
+	}
+}
+
+export const fetchData = ( key ) => {
+	return function( dispatch, getState ) {
+		const { data } = getState();
+		if ( data[ key ] ) {
+			return;
+		}
+
+		dispatch( requestData( key ) );
+
+		return xhr( {
+			method: "get",
+			uri: "/data/" + key + ".json",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}, function ( error, response, body ) {
+			dispatch( receiveData( key, JSON.parse( body ).books ) );
+		} );
 	}
 }

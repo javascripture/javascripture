@@ -1,6 +1,6 @@
 var cache = 'javascripture.22.0.1556104916';
 
-self.addEventListener('install', function(e) {
+self.addEventListener('install', function( e ) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
 		return cache.addAll([
 			'/',
@@ -43,7 +43,6 @@ self.addEventListener('install', function(e) {
 
 	}));
 });
-
 
 function send_message_to_client(client, msg){
 	return new Promise(function(resolve, reject){
