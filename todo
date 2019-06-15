@@ -30,7 +30,7 @@ _____
 - generate the strongs hebrew dictionary
 - generate kjv and put it in the repo
 - generate the greek and put it in the repo
-- look at getting ESV and NET
+- look at getting NET
 - put strongs roots and families in repo
 - put WEB in repo?
 - cross references in repo
@@ -81,7 +81,6 @@ show history
 use intersecting bubbles to show what words appear in all X passages and with words
 graphs for chapters and words
 word density
-change strict to exact
 find strange translations
 history - which passges you look up more and less
 back button

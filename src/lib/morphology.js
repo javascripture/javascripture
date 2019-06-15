@@ -138,7 +138,7 @@ export default function (morph, includeLinks, lemma ) {
 		} else {
 			if ( 'hebrew' === language ) {
 				const morphParseObject = new MorphParse();
-				if ( 'undefined' !== typeof morphParseObject.Parse( morph ) ) {
+				if ( 'undefined' !== typeof morphParseObject.Parse( 'H' + morph ) ) {
 					markup += morphParseObject.Parse( 'H' + morph ); // The morphology API expexts the morph to be prepended with an H
 				}
 			} else {
