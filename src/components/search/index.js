@@ -116,8 +116,8 @@ class Search extends React.Component{
 							</fieldset>
 							<fieldset>
 								<label htmlFor="version">Language:</label> <select name="version" onChange={ this.change } value={ this.props.searchForm.version }>
-									{ this.props.versions.map( ( version, index ) => (
-										<option value={ version[ 0 ] } key={ index }>{ version[ 1 ] }</option>
+									{ Object.keys( this.props.versions ).map( ( version, index ) => (
+										<option value={ version } key={ index }>{ version }</option>
 									) ) }
 								</select>
 							</fieldset>

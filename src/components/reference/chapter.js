@@ -30,6 +30,12 @@ class Chapter extends React.Component{
 		} );
 	}
 
+	componentWillReceiveProps( nextProps ) {
+		nextProps.reference.forEach( reference => {
+			this.props.fetchData( mapVersionToData( reference.book, reference.version ) );
+		} );
+	}
+
 	componentDidUpdate( prevProps, prevState ) {
 		if( this.referenceHasChanged( prevProps ) ) {
 			this.scrollToCurrentChapter();
@@ -77,7 +83,7 @@ class Chapter extends React.Component{
 		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ],
-			kjvData = this.props.data[ 'kjv' ][ book ][ chapter - 1 ];
+			kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		const title = (
 			<div className={ styles.chapterColumn }>
@@ -106,7 +112,7 @@ class Chapter extends React.Component{
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
 								const language = mapVersionToData( book, reference.version );
-								if ( ! this.props.data[ language ] ) {
+								if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
 									return this.placeholder( index + verseNumber);
 								}
 
@@ -134,7 +140,7 @@ class Chapter extends React.Component{
 		const currentReference = this.props.reference[ index ],
 			language = mapVersionToData( book, this.props.reference[ index ].version );
 
-		if ( ! this.props.data[ language ] ) {
+		if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
 			return (
 				<div>Loading { this.props.reference[ index ].version }...</div>
 			);

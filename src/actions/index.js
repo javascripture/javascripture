@@ -278,7 +278,7 @@ function receiveData( key, data ) {
 
 export const fetchData = ( key ) => {
 	return function( dispatch, getState ) {
-		const { data } = getState();
+		const { data } = getState(); // check that the data isn't already in state
 		if ( data[ key ] ) {
 			return;
 		}
@@ -292,13 +292,12 @@ export const fetchData = ( key ) => {
 				"Content-Type": "application/json"
 			}
 		}, function ( error, response, body ) {
+			dispatch( receiveData( key, JSON.parse( body ).books ) );
 			caches.open( cache ).then( function( cache ) {
 				return cache.addAll([
 					'/bibles/' + key +'.json'
 				]);
 			});
-
-			dispatch( receiveData( key, JSON.parse( body ).books ) );
 		} );
 	}
 }

@@ -29,7 +29,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		changeVersion: ( index, version ) => {
 			dispatch( changeVersion( index, version ) );
-			dispatch( fetchData( version ) );
+			//dispatch( fetchData( version ) );
 		},
 		setReference: ( reference, index ) => {
 			dispatch( setReference( reference, index ) );

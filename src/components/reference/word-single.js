@@ -52,7 +52,7 @@ class WordSingle extends React.Component {
 
 	getWord() {
 		const { lemma, morph, version, word } = this.props;
-		if ( version === 'lc' ) {
+		if ( version === 'LC' ) {
 			return getByLemmaAndMorph( lemma, morph ) + ' ';
 		}
 

@@ -1,4 +1,4 @@
-const version = ( state = { left: 'original', right: 'kjv' }, action ) => {
+const version = ( state = { left: 'original', right: 'KJV' }, action ) => {
 	let returnState;
 	switch ( action.type ) {
 		default:

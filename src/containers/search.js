@@ -22,7 +22,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		searchTerms: state.searchTerms,
 		settings: state.settings,
 		searchForm: state.searchForm,
-		versions: state.versions,
+		versions: bible.Data.supportedVersions,
 	};
 };
 

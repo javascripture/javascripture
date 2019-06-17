@@ -2,18 +2,20 @@ var language;
 
 javascripture.api.search = {
 	language: { //helper object to access different languages
-		kjv: javascripture.data.kjv,
-		web: javascripture.data.web,
-		esv: javascripture.data.esv,
+		KJV: javascripture.data.kjv,
+		WEB: javascripture.data.web,
+		ESV: javascripture.data.esv,
 		greek: javascripture.data.greek,
-		hebrew: javascripture.data.hebrew
+		hebrew: javascripture.data.hebrew,
+		original: Object.assign( {}, javascripture.data.hebrew, javascripture.data.greek ),
 	},
 	books: {
-		kjv: bible.Data.allBooks,
-		web: bible.Data.allBooks,
-		esv: bible.Data.allBooks,
+		KJV: bible.Data.allBooks,
+		WEB: bible.Data.allBooks,
+		ESV: bible.Data.allBooks,
 		hebrew: bible.Data.otBooks,
 		greek: bible.Data.ntBooks,
+		original: bible.Data.allBooks,
 	},
 	types: [
 		'word',
@@ -87,6 +89,7 @@ javascripture.api.search = {
 		self.results.references = [];
 		self.resetMatches();
 
+		console.log( self.parameters.version );
 		var booksToSearch = this.books[ self.parameters.version ];
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );

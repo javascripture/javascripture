@@ -46,10 +46,10 @@ const getReferenceFromAction = ( reference, version ) => {
 const getInitialState = () => {
 	const hashArray = window.location.hash.split( '/' );
 	if ( ! hashArray[ 1 ] || hashArray[ 1 ] === '' ) {
-		return [ getRandomReference( 'original' ), getRandomReference( 'kjv' ) ];
+		return [ getRandomReference( 'original' ), getRandomReference( 'KJV' ) ];
 	}
 
-	return [ getReferenceFromHash( window.location.hash, 'original' ), getReferenceFromHash( window.location.hash, 'kjv' ) ];
+	return [ getReferenceFromHash( window.location.hash, 'original' ), getReferenceFromHash( window.location.hash, 'KJV' ) ];
 }
 
 const reference = ( state = getInitialState(), action ) => {

@@ -90,8 +90,8 @@ class VersionSelector extends React.Component{
 		return (
 			<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
 				{
-					this.props.versions.map( ( version, index ) => (
-						<option value={ version[ 0 ] } key={ index }>{ version[ 1 ] }</option>
+					Object.keys( this.props.versions ).map( ( key ) => (
+						<option value={ key } key={ key } title={ this.props.versions[ key ].name }>{ key }</option>
 					) )
 				}
 			</select>

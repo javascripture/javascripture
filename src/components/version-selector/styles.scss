@@ -24,7 +24,7 @@
 
 .inputWrapper {
 	display: flex;
-	flex-grow: 4;
+	flex-basis: 60%;
 	height: 20px;
 	position: relative;
 }
@@ -33,6 +33,10 @@
 	border-radius: 0;
 	border-right: 0;
 	flex-grow: 1;
+}
+
+.left-version, .right-version {
+	flex-basis: 40%;
 }
 
 .left-version, .right-version, .input {
