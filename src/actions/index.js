@@ -68,28 +68,30 @@ export const showCrossReferences = ( reference ) => {
 }
 
 export const addWord = ( { strongsNumber, subdue, open, morphology, version, clickedWord } ) => {
-	const searchParameters = {
-		clusivity: 'exclusive',
-		version: version,
-		lemma: strongsNumber,
-		range: 'verse',
-		clickedWord: clickedWord,
-	};
+	return function( dispatch, getState ) {
+		const searchParameters = {
+			clusivity: 'exclusive',
+			version: version,
+			lemma: strongsNumber,
+			range: 'verse',
+			clickedWord: clickedWord,
+		};
 
-	// Send data to our worker.
-	worker.postMessage( {
-		task: 'search',
-		parameters: searchParameters,
-	} );
+		// Send data to our worker.
+		worker.postMessage( {
+			task: 'search',
+			parameters: searchParameters,
+		} );
 
-	return {
-		strongsNumber,
-		subdue,
-		open,
-		morphology,
-		version,
-		clickedWord,
-		type: 'ADD_WORD',
+		dispatch( {
+			strongsNumber,
+			subdue,
+			open,
+			morphology,
+			version,
+			clickedWord,
+			type: 'ADD_WORD',
+		} );
 	}
 }
 

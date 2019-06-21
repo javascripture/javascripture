@@ -89,7 +89,6 @@ javascripture.api.search = {
 		self.results.references = [];
 		self.resetMatches();
 
-		console.log( self.parameters.version );
 		var booksToSearch = this.books[ self.parameters.version ];
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
