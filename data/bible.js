@@ -78,25 +78,7 @@ bible.Data.bookNamesByLanguage = {
 	"original":["בראשית","שמות","ויקרא","במדבר","דברים","יהושע","שפטים","רות","שמואל א","שמואל ב","מלכים א","מלכים ב","דברי הימים א","דברי הימים ב","עזרא","נחמיה","אסתר","איוב","תהילים","משלי","קהלת","שיר השירים","ישעה","ירמיה","איכה","יחזקאל","דניאל","הושע","יואל","עמוס","עבדיה","יונה","מיכה","נחום","חבקוק","צפניה","חגי","זכריה","מלאכי","Ματθαίος","Μάρκος","Λουκάς","Ιωάννης","Πράξεις","Ρωμαίους","Α΄ Κορινθίους","Β΄ Κορινθίους","Γαλάτες","Εφεσίους","Φιλιππησίους","Κολοσσαείς","Α΄ Θεσσαλονικείς","Β΄ Θεσσαλονικείς","Α΄ Τιμόθεο","Β΄ Τιμόθεο","Τίτο","Φιλήμονα","Εβραίους","Ιακώβου","Α΄ Πέτρου","Β΄ Πέτρου","Α΄ Ιωάννη","Β΄ Ιωάννη","Γ΄ Ιωάννη","Ιούδα","Αποκάλυψη του Ιωάννη"],
 	'ar':['تكوين','خروج','لاويين','عدد','تثنية','يشوع','قضاة','راعوث','1 صموئيل','2 صموئيل','1 ملوك','2 ملوك','1 اخبار','2 اخبار','عزرا','نحميا','استير','ايوب','مزامير','امثال','جامعة','نشيد الانشاد','اشعياء','ارميا','مراثي','حزقيال','دانيال','هوشع','يوئيل','عاموس','عوبديا','يونان','ميخا','ناحوم','حبقوق','صفنيا','حجى','زكريا','ملاخي','متى','مرقس','لوقا','يوحنا','اعمال','رومية','1 كورنثوس','2 كورنثوس','غلاطية','افسس','فيلبي','كولوسي','1 تسالونيكي','2 تسالونيكي','1 تيموثاوس','2 تيموثاوس','تيطس','فليمون','عبرانيين','يعقوب','1بطرس','2بطرس','1 يوحنا','2 يوحنا','3 يوحنا','يهوذا','رؤيا'],
 };
-bible.Data.mapVersionsToLanguages = {
-	"kjv": "en",
-	"esv": "en",
-	"web": "en",
-	"lc": "en",
-	"original": "original",
-	"faropv": "fa",
-	"fartpv": "fa",
-	'ylt': 'en',
-	'asv': 'en',
-	'AraSVD': 'ar',
-	'DARBY': 'en',
-	'FarHezareNoh': 'en',
-	'GW': 'en',
-	'JUB': 'en',
-	'LEB': 'en',
-	'NET': 'en',
-	'WMB': 'en',
-};
+bible.Data.rtlLanguages = [ 'he', 'fa', 'ar' ];
 bible.Data.supportedVersions = {
 	'original': { name: 'Original', language: 'original' },
 	'KJV': { name: 'King James Version', language: 'en' },
@@ -427,4 +409,9 @@ bible.getTranslatedBookNameByLanguage = function( bookName, language ) {
 bible.getTranslatedBookName = function( bookName, version ) {
 	var language = bible.Data.supportedVersions[ version ].language;
 	return bible.getTranslatedBookNameByLanguage( bookName, language );
+};
+
+bible.isRtlVersion = function( version, language ) {
+	var versionLanguage = bible.Data.supportedVersions[ version ].language;
+	return language === 'hebrew' || bible.Data.rtlLanguages.indexOf( versionLanguage ) > -1;
 };

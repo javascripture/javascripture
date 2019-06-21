@@ -13,7 +13,8 @@ import { mapVersionToData } from '../../lib/reference';
 import xhr from 'xhr';
 
 const getVerseWrapperStyle = function( language, version ) {
-	if ( ( language === 'hebrew' && version === 'original' ) || version === 'FarOPV' || version === 'FarTPV' || version === 'FarHezareNoh' ) {
+	// TODO generalize
+	if ( bible.isRtlVersion( version, language ) ) {
 		return {
 			direction: 'rtl'
 		};
