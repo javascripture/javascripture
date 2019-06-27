@@ -67,6 +67,14 @@ export const showCrossReferences = ( reference ) => {
 	}
 }
 
+function postMessageToWorker( task, parameters, state ) {
+	worker.postMessage( {
+		task,
+		parameters,
+		data: state.data[ parameters.version ],
+	} );
+}
+
 export const addWord = ( { strongsNumber, subdue, open, morphology, version, clickedWord } ) => {
 	return function( dispatch, getState ) {
 		const searchParameters = {
@@ -78,10 +86,7 @@ export const addWord = ( { strongsNumber, subdue, open, morphology, version, cli
 		};
 
 		// Send data to our worker.
-		worker.postMessage( {
-			task: 'search',
-			parameters: searchParameters,
-		} );
+		postMessageToWorker( 'search', searchParameters, getState() );
 
 		dispatch( {
 			strongsNumber,
@@ -128,17 +133,16 @@ export const closeAdvancedSearch = () => {
 };
 
 export const addSearch = ( terms, target ) => {
-	// Send data to our worker.
-	worker.postMessage( {
-		task: target,
-		parameters: terms
-	} );
+	return function( dispatch, getState ) {
+		// Send data to our worker.
+		postMessageToWorker( target, terms, getState() );
 
-	return {
-		open: true,
-		target,
-		terms,
-		type: 'ADD_SEARCH'
+		dispatch( {
+			open: true,
+			target,
+			terms,
+			type: 'ADD_SEARCH'
+		} );
 	}
 }
 

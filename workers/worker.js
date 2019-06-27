@@ -26,7 +26,7 @@ self.postMessage( { task: 'loading', html: 'loading complete!' } );
 self.addEventListener('message', function( e ) {
 	var result;
 	if ( e.data.task === 'search' || e.data.task === 'word' ) {
-		result = javascripture.api.search.getReferences( e.data.parameters );
+		result = javascripture.api.search.getReferences( e.data.parameters, e.data.data );
 	}
 
 	if ( result ) {

@@ -129,6 +129,10 @@ h1, h2, h3, h4, h5, h6 {
 		background: #333;
 		cursor: pointer;
 		padding: .5rem 1rem; }
+    input[disabled] {
+      background: #eee;
+      color: #ccc;
+    }
 		.full-page .content .button button[disabled] {
 		  background: #ccc; }
 .full-page .loading {

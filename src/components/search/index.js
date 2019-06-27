@@ -14,6 +14,11 @@ class Search extends React.Component{
 		this.props.updateSearchForm( event.target.name, event.target.value );
 	};
 
+	selectChange = ( event ) => {
+		this.change( event );
+		this.props.fetchData( event.target.value );
+	};
+
 	toggle = ( event ) => {
 		this.props.updateSearchForm( event.target.name, event.target.checked );
 	};
@@ -54,6 +59,19 @@ class Search extends React.Component{
 
 	removeWord = ( terms ) => {
 		this.props.removeSearch( terms );
+	};
+
+	searchButtonText = () => {
+		if ( this.isSubmitButtonDisabled() ) {
+			return 'Loading ' + this.props.searchForm.version + '...';
+		}
+
+		return 'Search';
+	};
+
+	isSubmitButtonDisabled = () => {
+		const data = this.props.data[ this.props.searchForm.version ];
+		return ! data || Object.keys( data ).length === 0;
 	};
 
 	pickerButton( field ) {
@@ -115,7 +133,7 @@ class Search extends React.Component{
 								{ this.pickerButton( 'morph' ) }
 							</fieldset>
 							<fieldset>
-								<label htmlFor="version">Language:</label> <select name="version" onChange={ this.change } value={ this.props.searchForm.version }>
+								<label htmlFor="version">Language:</label> <select name="version" onChange={ this.selectChange } value={ this.props.searchForm.version }>
 									{ Object.keys( this.props.versions ).map( ( version, index ) => (
 										<option value={ version } key={ index }>{ version }</option>
 									) ) }
@@ -141,7 +159,7 @@ class Search extends React.Component{
 					) }
 					{ this.renderAdvanced() }
 					<fieldset>
-						<input type="submit" value="Search" />
+						<input type="submit" value={ this.searchButtonText() } disabled={ this.isSubmitButtonDisabled() } />
 						<input type="reset" value="Reset" onClick={ this.reset } />
 					</fieldset>
 				</form>

@@ -13,6 +13,7 @@ import {
 	activateSearchSelect,
 	updateSearchForm,
 	clearSearchForm,
+	fetchData,
 } from '../actions'
 import Search from '../components/search';
 
@@ -23,6 +24,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		settings: state.settings,
 		searchForm: state.searchForm,
 		versions: bible.Data.supportedVersions,
+		data: state.data,
 	};
 };
 
@@ -62,6 +64,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		},
 		clearSearchForm: () => {
 			dispatch( clearSearchForm() );
+		},
+		fetchData: ( key ) => {
+			dispatch( fetchData( key ) );
 		},
 	}
 };

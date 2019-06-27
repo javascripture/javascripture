@@ -26,9 +26,10 @@ javascripture.api.search = {
 		references: [], //used to create an array of references
 		matches: {} //used to keep track of which word has been matched when searching - for when you need to match more than one word
 	},
-	getReferences: function ( parameters ) {
+	getReferences: function ( parameters, data ) {
 		var self = this;
 		self.parameters = parameters;
+		self.data = data;
 		this.lookForTerm();
 		return self.results.references;
 	},
@@ -85,11 +86,14 @@ javascripture.api.search = {
 		//	language = self.inferLanguage( self.parameters );
 		//}
 
-		var dataSource = this.language[ self.parameters.version ];
+		var dataSource = self.data;
 		self.results.references = [];
 		self.resetMatches();
 
-		var booksToSearch = this.books[ self.parameters.version ];
+		var booksToSearch = bible.Data.allBooks;
+		if ( this.books[ self.parameters.version ] ) {
+			booksToSearch = this.books[ self.parameters.version ];
+		}
 		booksToSearch.forEach( function( bookName, bookNumber ) {
 			self.searchInABook( dataSource, bookName, bookNumber, booksToSearch );
 		} );
@@ -120,6 +124,10 @@ javascripture.api.search = {
 					self.resetMatches();
 				}
 
+				if ( typeof verse === 'string' ) {
+					verse = verse.split( ' ' );
+				}
+
 				if ( verse ) {
 					verse.forEach( function ( word ) {
 						if (parameters.range === 'word' && parameters.clusivity === 'exclusive' ) { //only need to do this for exclusive searches
@@ -135,8 +143,14 @@ javascripture.api.search = {
 
 							if ( self.areTheTermStringAndWordObjectAreGoodToSearch( termString, word, typeKey ) ) {
 								if ( word[typeKey] ) {
-									var terms = termString.split(' '),
-										wordTypes = word[typeKey].split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
+									var terms = termString.split(' ');
+									if ( typeof word === 'string' ) {
+										wordTypes = word;
+									} else {
+										wordTypes = word[typeKey];
+									}
+									wordTypes = wordTypes.split(/ |\//); //because sometimes words have spaces in them and lemma/morph sometimes have slashes now
+
 									wordTypes.forEach( function( wordType ) {
 										terms.forEach( function( term ) {
 											if ( self.doesDataMatchTerm( type, wordType, term ) ) {
