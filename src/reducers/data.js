@@ -5,6 +5,8 @@ const initialState = {
 	LC: javascripture.data.literalConsistent,
 };
 
+initialState.original = Object.assign( {}, javascripture.data.hebrew, javascripture.data.greek );
+
 const data = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'REQUEST_DATA':

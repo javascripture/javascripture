@@ -1,21 +1,8 @@
 var language;
 
 javascripture.api.search = {
-	language: { //helper object to access different languages
-		KJV: javascripture.data.kjv,
-		WEB: javascripture.data.web,
-		ESV: javascripture.data.esv,
-		greek: javascripture.data.greek,
-		hebrew: javascripture.data.hebrew,
-		original: Object.assign( {}, javascripture.data.hebrew, javascripture.data.greek ),
-	},
 	books: {
-		KJV: bible.Data.allBooks,
-		WEB: bible.Data.allBooks,
-		ESV: bible.Data.allBooks,
-		hebrew: bible.Data.otBooks,
-		greek: bible.Data.ntBooks,
-		original: bible.Data.allBooks,
+		FarHezareNoh: bible.Data.ntBooks,
 	},
 	types: [
 		'word',

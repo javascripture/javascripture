@@ -1,23 +1,6 @@
 var module = {};
 var javascripture = {};
-javascripture.data = {};
 javascripture.api = {};
-self.postMessage( { task: 'loading', html: 'loading KJV' } );
-importScripts('../data/KJV.js');
-self.postMessage( { task: 'loading', html: 'loading ESV' } );
-importScripts('../data/ESV.js');
-self.postMessage( { task: 'loading', html: 'loading WEB' } );
-importScripts('../data/WEB.js');
-self.postMessage( { task: 'loading', html: 'loading Hebrew' } );
-importScripts('../data/morphhb.js');
-self.postMessage( { task: 'loading', html: 'loading Greek' } );
-importScripts('../data/tischendorf.js');
-
-javascripture.data.kjv=KJV.books;
-javascripture.data.esv=ESV.books;
-javascripture.data.web=WEB.books;
-javascripture.data.hebrew=morphhb;
-javascripture.data.greek=tischendorf;
 
 importScripts('../data/bible.js');
 self.postMessage( { task: 'loading', html: 'loading API' } );

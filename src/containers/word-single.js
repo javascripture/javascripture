@@ -28,7 +28,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		},
 		selectSearchTerm: ( name, value ) => {
 			dispatch( appendToSearchForm( name, value ) );
-			dispatch( updateSearchForm( 'version', ownProps.language ) );
+			dispatch( updateSearchForm( 'version', ownProps.version ) );
 			dispatch( deactivateSearchSelect() );
 		},
 		addWord: ( subdue ) => {
@@ -44,7 +44,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 					subdue,
 					open: true,
 					morphology: ownProps.morph,
-					version: ownProps.language,
+					version: ownProps.version,
 					clickedWord: ownProps.word,
 				} ) );
 			} );
