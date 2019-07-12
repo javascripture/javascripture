@@ -15,7 +15,6 @@
 .form-field {
 	box-sizing: border-box;
 	flex-grow: 1;
-
 }
 
 .right-version {
@@ -44,4 +43,9 @@
 		border-top: 0;
 		border-radius: 0;
 	}
+
+	@media ( min-width: 768px ) {
+		font-size: 1.2em;
+	}
+
 }
