@@ -86,8 +86,7 @@ class WordSingle extends React.Component {
 		if ( ! lemma ) {
 			return null;
 		}
-		return lemma;
-		//return morph ? lemma + ' ' + morphology( morph, 'noLinks', lemma ) : lemma;
+		return morph ? lemma + ' ' + morphology( morph, 'noLinks', lemma ) : lemma;
 	};
 
 	getClassName = () => {

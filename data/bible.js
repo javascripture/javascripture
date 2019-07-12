@@ -407,7 +407,6 @@ bible.getTranslatedBookNameByLanguage = function( bookName, language ) {
 };
 
 bible.getTranslatedBookName = function( bookName, version ) {
-	console.log( version );
 	var language = bible.Data.supportedVersions[ version ].language;
 	return bible.getTranslatedBookNameByLanguage( bookName, language );
 };
