@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1562944547';
+var cache = 'javascripture.22.0.1562944718';
 
 import { createReferenceLink } from '../lib/reference.js';
 import xhr from 'xhr';
