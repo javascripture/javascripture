@@ -8,7 +8,6 @@ var webpack = require( 'webpack' ),
 
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 var config = {
 	mode: NODE_ENV,
@@ -86,23 +85,6 @@ if ( process.env.NODE_ENV !== 'production' ) {
 		include: path.join( __dirname, '/src' ),
 		exclude: /node_modules/,
 	} );*/
-}
-
-if ( NODE_ENV === 'production' ) {
-	config.optimization = {};
-	config.optimization.minimizer = [
-		new UglifyJsPlugin()
-	];
-	/*config.plugins.push(
-		new webpack.optimize.UglifyJsPlugin( {
-			output: {
-				comments: false
-			},
-			compress: {
-				warnings: false
-			}
-		} )
-	);*/
 }
 
 module.exports = config;
