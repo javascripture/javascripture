@@ -90,9 +90,9 @@ if ( process.env.NODE_ENV !== 'production' ) {
 
 if ( NODE_ENV === 'production' ) {
 	config.optimization = {};
-	config.optimization.minimizer = [
+	/*config.optimization.minimizer = [
 		new UglifyJsPlugin()
-	];
+	];*/
 	/*config.plugins.push(
 		new webpack.optimize.UglifyJsPlugin( {
 			output: {
