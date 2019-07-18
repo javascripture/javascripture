@@ -68,10 +68,14 @@ export const showCrossReferences = ( reference ) => {
 }
 
 function postMessageToWorker( task, parameters, state ) {
+	let data = state.data[ parameters.version ];
+	if ( parameters.version === 'LC' ) {
+		data = state.data[ 'original' ];
+	}
 	worker.postMessage( {
 		task,
 		parameters,
-		data: state.data[ parameters.version ],
+		data,
 	} );
 }
 
