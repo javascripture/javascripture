@@ -7,6 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import CancelSvg from '../svg/cancel.js';
+import CopySvg from '../svg/copy.js';
 import KJVDef from '../../containers/kjv-def';
 import morphology from '../../lib/morphology';
 import SearchBlock from '../../containers/search-block';
@@ -119,6 +120,17 @@ class WordBlock extends React.Component {
 		} );
 	};
 
+	copyToClipboard = ( event ) => {
+		event.stopPropagation();
+		const textarea = document.createElement( 'textarea' )
+		textarea.value = this.wordBlockRef.innerText;
+		document.body.appendChild( textarea );
+		textarea.select();
+		document.execCommand('copy');
+		textarea.remove();
+		event.target.focus();
+	};
+
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = strongs[ strongsNumber ],
@@ -126,7 +138,7 @@ class WordBlock extends React.Component {
 			className = classnames( styles.wordBlock, this.props.open ? styles.visible : styles.hidden );
 
 		return (
-			<div className={ className }>
+			<div className={ className } key={ className }>
 				{ strongsNumber } | { stripPointing( wordDetail.lemma ) }
 				{ wordDetail.xlit ? ' | ' + wordDetail.xlit : null }
 				{ wordDetail.translit ? ' | ' + wordDetail.translit : null }
@@ -183,12 +195,17 @@ class WordBlock extends React.Component {
 					>
 						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 						{ stripPointing( wordDetail.lemma ) }
+						<a className={ styles.copy } onClick={ this.copyToClipboard }>
+							<CopySvg fill={ fill } />
+						</a>
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
 							<CancelSvg fill={ fill } />
 						</a>
 					</h2>
-					{ this.renderDetails() }
-					<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
+					<div ref={ ( div ) => this.wordBlockRef = div }>
+						{ this.renderDetails() }
+						<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
+					</div>
 				</div>
 			);
 		}
