@@ -11,7 +11,6 @@ const SearchTray = () => (
 	<div className={ styles.tray }>
 		<div id="referenceTracking">
 			<Search />
-			<div className="searchResults"></div>
 		</div>
 	</div>
 );

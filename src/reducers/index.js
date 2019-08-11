@@ -16,6 +16,7 @@ import crossReferences from './cross-references';
 import currentReference from './current-reference';
 import version from './version';
 import versions from './versions';
+import similarReferences from './similar-references';
 
 const app = {
 	bookmarks,
@@ -36,6 +37,7 @@ const app = {
 	versions,
 	wordDetails,
 	wordHighlight,
+	similarReferences,
 };
 
 export default app;

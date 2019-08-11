@@ -2,31 +2,28 @@
 
 .cross-references {
 	border-top: 1px solid #ccc;
+	padding: 1em;
 
 	a {
 		color: black;
-		text-decoration: underline;
-	}
-
-	p {
-		padding: 0 20px;
 	}
 }
 
 .title {
 	font-family: 'Helvetica Neue';
+	font-size: 1.4em;
 	font-weight: 100;
 	letter-spacing: .02em;
-	padding: 20px 20px 0 20px;
 }
 
 .cross-references-list {
 	list-style: none;
+	margin-bottom: 1em;
 
 	a {
 		display: block;
 		line-height: 1.4;
-		padding: 0 20px;
+		padding: 0 .5em;
 		text-decoration: none;
 		&:hover {
 			background: $hover;

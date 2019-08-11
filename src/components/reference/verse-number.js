@@ -33,6 +33,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 export default connect(
-  null,
-  mapDispatchToProps,
+	null,
+	mapDispatchToProps,
 )( withStyles( styles )( VerseNumber ) );

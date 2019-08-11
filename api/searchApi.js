@@ -61,11 +61,7 @@ javascripture.api.search = {
 		this.results.matches = {};
 	},
 	addReference: function (bookName, chapterNumber, verseNumber ) {
-		this.results.references.push({
-			book: bookName,
-			chapter: chapterNumber + 1,
-			verse: verseNumber + 1
-		});
+		this.results.references.push( bookName + '.' +( chapterNumber + 1 ) + '.' + ( verseNumber + 1 ) );
 	},
 	lookForTerm: function () {
 		var self = this;
@@ -152,6 +148,7 @@ javascripture.api.search = {
 								}
 							}
 						} );
+
 						//terms are combined for exclusive searches here
 						if (parameters.clusivity === 'exclusive' ) {
 							matchesLength = 0;

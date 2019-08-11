@@ -1,26 +1,31 @@
 import { connect } from 'react-redux';
 import some from 'lodash/some';
 
-import { showCrossReferences } from '../actions';
+import { showCrossReferences, findSimilarReferences, removeSearch } from '../actions';
 import CrossReferences from '../components/cross-references';
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		reference: state.crossReferences
+		reference: state.crossReferences,
+		data: state.data,
+		showSimilarVerses: state.similarReferences === state.crossReferences,
 	};
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		showCrossReferences: ( reference ) => {
-			dispatch( showCrossReferences( reference ) );
-		}
+		findSimilarReferences: ( reference ) => {
+			dispatch( findSimilarReferences( reference ) );
+		},
+		removeSearch: ( terms ) => {
+			dispatch( removeSearch( terms ) );
+		},
 	}
 };
 
 const CrossReferencesContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( CrossReferences )
 
 export default CrossReferencesContainer;

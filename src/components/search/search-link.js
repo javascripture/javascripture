@@ -53,7 +53,7 @@ class SearchLink extends React.Component{
 	};
 
 	render() {
-		const { reference, index } = this.props,
+		const { reference, index, count } = this.props,
 			className = this.props.isActive ? styles.activeReference : null;
 
 		return (
@@ -65,6 +65,7 @@ class SearchLink extends React.Component{
 					onMouseOut={ this.unHighlighWords }
 				>
 					{ index + 1 }. <ReferenceText reference={ reference } />
+					{ count && ' (' + count + ')' }
 				</Link>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>

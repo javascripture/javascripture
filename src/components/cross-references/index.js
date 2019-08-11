@@ -5,11 +5,18 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
-import { createReferenceLink, getReferenceText } from '../../lib/reference.js';
+import { createReferenceLink, getReferenceText, getAllLemmasFromReference } from '../../lib/reference.js';
 import ReferenceText from '../reference-text';
 import ReferenceLink from '../reference-link';
+import SearchBlock from '../../containers/search-block';
 
 class CrossReferences extends React.Component{
+	componentDidUpdate( prevProps, prevState, snapshot ) {
+		if ( prevProps.reference && prevProps.reference !== this.props.reference ) {
+			this.props.removeSearch( this.getSearchParameters( prevProps.reference ) );
+		}
+	}
+
 	getCrossReferences() {
 		const bookId = bible.getBookId( this.props.reference.book ),
 			referenceString = bible.Data.books[ bookId - 1 ][ 1 ] + '.' + this.props.reference.chapter + '.' + this.props.reference.verse;
@@ -74,12 +81,40 @@ class CrossReferences extends React.Component{
 		);
 	}
 
+	getSearchParameters( reference ) {
+		return {
+			clusivity: 'inclusive',
+			version: 'original',
+			lemma: getAllLemmasFromReference( reference, this.props.data.original ),
+			range: 'verse',
+		};
+	}
+
+	findSimilarReferences = () => {
+		this.props.findSimilarReferences( this.props.reference );
+	};
+
+	renderFindSimilarReferences() {
+		return <a href="#" onClick={ this.findSimilarReferences }>Find similar verses</a>;
+	}
+
+	renderSimilarVerses() {
+		return (
+			<div>
+				<h2 className={ styles.title }>Similar verses (word matches)</h2>
+				<SearchBlock open={ true } sorted={ true } terms={ this.getSearchParameters( this.props.reference ) } />
+			</div>
+		);
+	}
+
 	render() {
 		return (
 			<div className={ styles.crossReferences }>
 				<h2 className={ styles.title }>Cross references</h2>
 				{ ! this.props.reference && this.helpText() }
 				{ this.props.reference && this.crossReferences() }
+				{ this.props.reference && ! this.props.showSimilarVerses && this.renderFindSimilarReferences() }
+				{ this.props.reference && this.props.showSimilarVerses && this.renderSimilarVerses() }
 			</div>
 		);
 	}

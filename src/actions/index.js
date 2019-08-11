@@ -1,6 +1,6 @@
 var cache = 'javascripture.22.0.1565129030';
 
-import { createReferenceLink } from '../lib/reference.js';
+import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
 import xhr from 'xhr';
 
 export const goToReference = ( reference ) => {
@@ -64,6 +64,25 @@ export const showCrossReferences = ( reference ) => {
 	return {
 		reference,
 		type: 'SHOW_CROSS_REFERENCES'
+	}
+}
+
+export const findSimilarReferences = ( reference ) => {
+	return function( dispatch, getState ) {
+		const searchParameters = {
+			clusivity: 'inclusive',
+			version: 'original',
+			lemma: getAllLemmasFromReference( reference, getState().data.original ),
+			range: 'verse',
+		};
+
+		// Send data to our worker.
+		postMessageToWorker( 'search', searchParameters, getState() );
+
+		dispatch( {
+			reference,
+			type: 'FIND_SIMILAR_REFERENCES'
+		} );
 	}
 }
 

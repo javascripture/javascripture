@@ -30,8 +30,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const SearchBlockContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( SearchBlock )
 
 export default SearchBlockContainer;

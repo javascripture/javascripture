@@ -17,3 +17,24 @@ export const mapVersionToData = ( book, version ) => {
 export const getReferenceText = ( referenceObject ) => {
 	return referenceObject.book + ' ' + referenceObject.chapter + ':' + referenceObject.verse;
 };
+
+export const getAllLemmasFromReference = ( reference, data ) => {
+	const verse = data[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
+	lemmas = verse.map( word => {
+		const lemma = word[ 1 ].split( '/' );
+		// filter out non-numeric lemmas
+		return lemma.filter( singleLemma => ! isNaN( singleLemma[1] ) );
+	} );
+
+	// convert to string
+	return lemmas.join( ' ' );
+};
+
+export const getReferenceFromSearchResult = ( result ) => {
+	const reference = result.split( '.' );
+	return {
+		book: reference[0],
+		chapter: reference[1],
+		verse: reference[2],
+	};
+};
