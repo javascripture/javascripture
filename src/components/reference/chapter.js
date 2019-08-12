@@ -47,6 +47,11 @@ class Chapter extends React.Component{
 
 	referenceHasChanged( prevProps ) {
 		let referenceHasChanged = false;
+
+		if ( ! this.props.inSync ) {
+			return false;
+		}
+
 		this.props.reference.forEach( ( reference, index ) => {
 			if ( ! prevProps.reference[ index ] ) {
 				referenceHasChanged = true; // Because the colum widths will change
