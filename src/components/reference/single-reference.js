@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { union } from 'lodash';
 
 // Internal
-import Chapter from '../../containers/chapter';
+import Chapter from './chapter';
 import styles from './styles.scss';
 
 class SingleReference extends React.Component{

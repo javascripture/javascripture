@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import BookMarks from '../../containers/bookmarks';
-import CrossReferences from '../../containers/cross-references';
+import BookMarks from '../bookmarks';
+import CrossReferences from '../cross-references';
 import styles from './styles.scss';
 
 const BookmarksTray = ( props ) => (

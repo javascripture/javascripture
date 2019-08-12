@@ -1,11 +1,13 @@
 // External
 import React from 'react';
+import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import Bookmarker from '../../containers/bookmarker';
+import { fetchData } from '../../actions';
+import Bookmarker from './bookmarker';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
@@ -184,4 +186,25 @@ class Chapter extends React.Component{
 	}
 }
 
-export default withStyles( styles )( Chapter );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		reference: state.reference,
+		inSync: state.settings.inSync,
+		data: state.data,
+	}
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		fetchData: ( key ) => {
+			dispatch( fetchData( key ) );
+		}
+	}
+};
+
+const ChapterContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)( Chapter )
+
+export default withStyles( styles )( ChapterContainer );

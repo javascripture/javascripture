@@ -1,9 +1,11 @@
 // External dependencies
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
+import { removeBookmark } from '../../actions';
 import styles from './styles.scss';
 import Cancel from '../svg/cancel';
 import { createReferenceLink } from '../../lib/reference';
@@ -26,4 +28,21 @@ class BookMark extends React.Component{
 	}
 }
 
-export default withStyles( styles )( BookMark );
+const BookMarkWithStyles = withStyles( styles )( BookMark );
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		removeBookmark: ( reference ) => {
+			dispatch( removeBookmark( reference ) )
+		},
+	}
+};
+
+const BookMarkContainer = connect(
+	null,
+	mapDispatchToProps
+)( BookMarkWithStyles )
+
+export default BookMarkContainer;
+
+

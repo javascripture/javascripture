@@ -1,11 +1,13 @@
 // External dependencies
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import styles from './styles.scss';
 import { createReferenceLink, getReferenceText, getAllLemmasFromReference } from '../../lib/reference.js';
+import { showCrossReferences, findSimilarReferences, removeSearch } from '../../actions';
 import ReferenceText from '../reference-text';
 import ReferenceLink from '../reference-link';
 import SearchBlock from '../../containers/search-block';
@@ -122,4 +124,31 @@ class CrossReferences extends React.Component{
 
 CrossReferences.propTypes = {};
 
-export default withStyles( styles )( CrossReferences );
+const CrossReferencesWithStyles = withStyles( styles )( CrossReferences );
+
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		reference: state.crossReferences,
+		data: state.data,
+		showSimilarVerses: state.similarReferences === state.crossReferences,
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		findSimilarReferences: ( reference ) => {
+			dispatch( findSimilarReferences( reference ) );
+		},
+		removeSearch: ( terms ) => {
+			dispatch( removeSearch( terms ) );
+		},
+	}
+};
+
+const CrossReferencesContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( CrossReferencesWithStyles )
+
+export default CrossReferencesContainer;
+
