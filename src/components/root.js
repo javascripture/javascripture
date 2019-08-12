@@ -7,7 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Dock from './dock';
 import Footer from './footer';
 import ReferenceWrapper from '../containers/reference-wrapper';
-import KeyboardShortcuts from '../containers/keyboard-shortcuts';
+import KeyboardShortcuts from './keyboard-shortcuts';
 import Trays from './trays';
 import VisibleTrays from '../containers/visible-trays';
 import WordHighlight from '../containers/word-highlight';

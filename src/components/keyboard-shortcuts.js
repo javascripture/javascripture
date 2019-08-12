@@ -2,9 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
+import { connect } from 'react-redux';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 
 // Internal
-import { createReferenceLink } from '../lib/reference.js';
+import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse } from '../actions'
+import { createReferenceLink, getReferenceFromSearchResult } from '../lib/reference.js';
 
 // Component variables
 let lastTimeStamp = 0,
@@ -68,4 +72,43 @@ class KeyboardShortcuts extends React.Component{
 
 KeyboardShortcuts.propTypes = {};
 
-export default KeyboardShortcuts;
+function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
+	const currentSearchResults = find( searchResults, searchResult => {
+		return isEqual( searchResult.terms, currentReference.terms );
+	} )	;
+
+	if ( currentSearchResults ) {
+		return currentSearchResults.results[ currentReference.activeReference + offset ];
+	}
+
+	return null;
+};
+
+const mapStateToProps = ( { searchResults, currentReference, reference } ) => {
+	return {
+		nextReference: getCurrentReferenceOffset( searchResults, currentReference, 1 ),
+		previousReference: getCurrentReferenceOffset( searchResults, currentReference, -1 ),
+		reference: reference,
+	}
+};
+
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		markNextCurrentReference: () => {
+			dispatch( goToNextCurrentVerse() );
+		},
+		markPreviousCurrentReference: () => {
+			dispatch( goToPreviousCurrentVerse() );
+		},
+		goToReference: ( reference ) => {
+			goToReference( getReferenceFromSearchResult( reference ) );
+		}
+	}
+};
+
+const KeyboardShortcutsContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)( KeyboardShortcuts )
+
+export default KeyboardShortcutsContainer;
