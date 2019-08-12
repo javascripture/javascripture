@@ -65,6 +65,7 @@
 				</div>
 			</div>
 		</div>
+		<div id="notification">A new version of this app is available. <a id="reload">Update now</a></div>
 	</div>
 </body>
 
@@ -121,11 +122,37 @@
 		javascripture.sw = event.data;
 	});
 
+	let newWorker;
+	// The click event on the notification
+	document.getElementById('reload').addEventListener('click', function(){
+		newWorker.postMessage({ action: 'skipWaiting' });
+	});
+
 	if( 'serviceWorker' in navigator) {
 		navigator.serviceWorker
 			.register('/sw.js', { updateViaCache: 'imports' } )
 			.then( function( reg ) {
-				console.log("Service Worker Registered", reg);
+				reg.addEventListener('updatefound', () => {
+
+					// An updated service worker has appeared in reg.installing!
+					newWorker = reg.installing;
+
+					newWorker.addEventListener('statechange', () => {
+
+						// Has service worker state changed?
+						switch (newWorker.state) {
+							case 'installed':
+
+							// There is a new service worker available, show the notification
+							if (navigator.serviceWorker.controller) {
+								let notification = document.getElementById('notification');
+								notification.style.display = 'block';
+							}
+
+							break;
+						}
+					});
+				});
 			});
 
 		// Handler for messages coming from the service worker
@@ -133,6 +160,15 @@
 			// Send to react
 			javascripture.sw = event.data;
 		} );
+
+		let refreshing;
+		// The event listener that is fired when the service worker updates
+		// Here we reload the page
+		navigator.serviceWorker.addEventListener('controllerchange', function () {
+			if (refreshing) return;
+			window.location.reload();
+			refreshing = true;
+		});
 	}
 
 	// Attach web workers

@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1565129030';
+var cache = 'javascripture.22.0.1565129046';
 
 self.addEventListener('install', function( e ) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
@@ -87,4 +87,10 @@ self.addEventListener('activate', function( event ) {
 			}));
 		})
 	);
+});
+
+self.addEventListener('message', function (event) {
+	if (event.data.action === 'skipWaiting') {
+		self.skipWaiting();
+	}
 });

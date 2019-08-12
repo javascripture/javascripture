@@ -160,3 +160,22 @@ h1, h2, h3, h4, h5, h6 {
 .dvnNm {
   text-transform: uppercase;
 }
+
+#notification {
+  background: #666;
+  color: #eee;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2em;
+  text-align: center;
+  z-index: 999;
+}
+
+#notification a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: underline;
+}
