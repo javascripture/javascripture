@@ -2,10 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
 
 // Internal dependencies
+import { addWord, clearAll, removeWord } from '../../actions'
 import styles from './styles.scss';
-import WordBlock from '../../containers/word-block';
+import WordBlock from './word-block';
 
 class WordDetails extends React.Component{
 	render() {
@@ -28,4 +30,31 @@ class WordDetails extends React.Component{
 
 WordDetails.propTypes = {};
 
-export default withStyles( styles )( WordDetails );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		words: state.wordDetails
+	}
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		addWord: ( lemma, open, morphology, version ) => {
+			dispatch( addWord( { lemma, open, morphology, version } ) );
+		},
+
+		clearAll: () => {
+			dispatch( clearAll() );
+		},
+
+		removeWord: ( lemma ) => {
+			dispatch( removeWord( lemma ) );
+		},
+	}
+};
+
+const WordDetailsContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( WordDetails )
+
+export default withStyles( styles )( WordDetailsContainer );

@@ -17,7 +17,7 @@ import { HashRouter, Route } from 'react-router-dom';
  */
 import reducers from './reducers';
 import Stylizer, { insertCss } from './lib/stylizer';
-import Root from './containers/root';
+import Root from './components/root';
 
 const config = {
 	key: 'primary',

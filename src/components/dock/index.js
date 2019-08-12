@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Internal
-import VersionSelector from '../../containers/version-selector';
+import VersionSelector from '../version-selector';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 

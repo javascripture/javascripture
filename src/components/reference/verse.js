@@ -1,5 +1,3 @@
-/*global javascripture*/
-
 // External
 import React from 'react';
 

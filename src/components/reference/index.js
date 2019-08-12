@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Waypoint from 'react-waypoint';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 
 // Internal
-import SingleReference from '../../containers/single-reference';
+import { setScrollChapter } from '../../actions';
+import SingleReference from './single-reference';
 import styles from './styles.scss';
 
 let oldHeight = 0, scroller = null, isScrolling = false;
@@ -201,4 +203,30 @@ class Reference extends React.Component{
 	}
 }
 
-export default withStyles( styles )( Reference );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		inSync: state.settings.inSync,
+	}
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		setScrollChapter: ( book, chapter, index ) => {
+			dispatch( setScrollChapter( book, chapter, index ) );
+		},
+		setScrollChapterPrevious: ( book, chapter, index ) => {
+			const currentChapter = bible.parseReference( book + ' ' + chapter );
+			const prevChapter = currentChapter.prevChapter();
+			if ( prevChapter ) {
+				dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1, index ) );
+			}
+		},
+	}
+};
+
+const ReferenceContainer = connect(
+ 	mapStateToProps,
+ 	mapDispatchToProps
+)( Reference )
+
+export default withStyles( styles )( ReferenceContainer );

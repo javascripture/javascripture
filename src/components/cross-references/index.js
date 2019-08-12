@@ -10,7 +10,7 @@ import { createReferenceLink, getReferenceText, getAllLemmasFromReference } from
 import { showCrossReferences, findSimilarReferences, removeSearch } from '../../actions';
 import ReferenceText from '../reference-text';
 import ReferenceLink from '../reference-link';
-import SearchBlock from '../../containers/search-block';
+import SearchBlock from '../search/search-block.js';
 
 class CrossReferences extends React.Component{
 	componentDidUpdate( prevProps, prevState, snapshot ) {

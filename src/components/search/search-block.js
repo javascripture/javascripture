@@ -3,9 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { countBy, toPairs, sortBy } from 'lodash';
+import { connect } from 'react-redux';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 
 // Internal dependencies
-import SearchLink from '../../containers/search-link';
+import { setCurrentVerse } from '../../actions';
+import SearchLink from './search-link';
 import { getReferenceFromSearchResult } from '../../lib/reference.js';
 import styles from './styles.scss';
 
@@ -53,4 +57,31 @@ class SearchBlock extends React.Component{
 
 SearchBlock.propTypes = {};
 
-export default withStyles( styles )( SearchBlock );
+function getSearchResults( searchResults, terms ) {
+	const searchResultsData = searchResults.find( searchResult => isEqual( searchResult.terms, terms ) );
+
+	if ( searchResultsData ) {
+		return searchResultsData.results;
+	}
+}
+
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		results: getSearchResults( state.searchResults, ownProps.terms )
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		setCurrentVerse: ( index ) => {
+			dispatch( setCurrentVerse( ownProps.terms, index ) );
+		},
+	}
+};
+
+const SearchBlockContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( SearchBlock )
+
+export default withStyles( styles )( SearchBlockContainer );

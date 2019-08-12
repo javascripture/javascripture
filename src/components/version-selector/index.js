@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 
 // Internal dependencies
+import { changeVersion, fetchData, setReference, setScrollChapter } from '../../actions'
 import AddColumnButton from '../add-column-button';
 import ReferenceSelectorMobile from '../reference-selector-mobile';
 import RemoveColumnButton from '../remove-column-button';
@@ -113,4 +117,39 @@ class VersionSelector extends React.Component{
 
 VersionSelector.propTypes = {};
 
-export default withStyles( styles )( VersionSelector );
+const getReferenceValue = ( state, index, version ) => {
+	const chapter = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].chapter ) ? state.scrollChapter[ index ].chapter : state.reference[ index ].chapter;
+	const book = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].book ) ? state.scrollChapter[ index ].book : state.reference[ index ].book;
+	const tranlatedBook = bible.getTranslatedBookName( book, version );
+	return tranlatedBook + ' ' + chapter;
+};
+
+const mapStateToProps = ( state, ownProps ) => {
+	const index = state.settings.inSync ? 0 : ownProps.index;
+	const version = state.reference[ ownProps.index ].version;
+	return {
+		inSync: state.settings.inSync,
+		references: state.reference,
+		value: getReferenceValue( state, index, version ),
+		versions: bible.Data.supportedVersions,
+	}
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		changeVersion: ( index, version ) => {
+			dispatch( changeVersion( index, version ) );
+		},
+		setReference: ( reference, index ) => {
+			dispatch( setReference( reference, index ) );
+			dispatch( setScrollChapter( reference.book, reference.chapter, index ) );
+		},
+	}
+};
+
+const VersionSelectorContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)( VersionSelector );
+
+export default withStyles( styles )( VersionSelectorContainer );

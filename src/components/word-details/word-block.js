@@ -4,13 +4,15 @@ import map from 'lodash/map';
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
 
 // Internal dependencies
+import { addWord, removeSearch, removeWord, settingsChange, toggleWord } from '../../actions'
 import CancelSvg from '../svg/cancel.js';
 import CopySvg from '../svg/copy.js';
-import KJVDef from '../../containers/kjv-def';
+import KJVDef from './kjv-def';
 import morphology from '../../lib/morphology';
-import SearchBlock from '../../containers/search-block';
+import SearchBlock from '../search/search-block.js';
 import { getHighlight } from '../strongs-color.js';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
@@ -216,4 +218,54 @@ class WordBlock extends React.Component {
 
 WordBlock.propTypes = {};
 
-export default withStyles( styles )( WordBlock );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		settings: state.settings,
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		addWord: ( strongsNumber, subdue ) => {
+			dispatch( addWord( {
+				strongsNumber: strongsNumber,
+				subdue,
+				open: true,
+				morphology: null,
+				version: ownProps.version,
+			} ) );
+		},
+
+		removeWord: ( lemma, version ) => {
+			const searchParameters = {
+				clusivity: 'exclusive',
+				version: version,
+				lemma: lemma,
+				range: 'verse',
+			};
+
+			dispatch( removeWord( lemma ) );
+			dispatch( removeSearch( searchParameters ) );
+		},
+
+		toggleWord: () => {
+			dispatch( toggleWord( ownProps.strongsNumber ) );
+		},
+
+		expandSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', true ) );
+		},
+
+		collapseSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', false ) );
+		},
+
+	}
+};
+
+const WordBlockContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)( WordBlock )
+
+export default withStyles( styles )( WordBlockContainer );

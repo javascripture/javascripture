@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 
 // Internal dependencies
+import { setCurrentVerse } from '../../actions';
 import Verse from '../reference/verse';
 import styles from './styles.scss';
 import { createReferenceLink, getReferenceText, getVerseData } from '../../lib/reference.js';
@@ -75,4 +79,35 @@ class SearchLink extends React.Component{
 
 SearchLink.propTypes = {};
 
-export default withStyles( styles )( SearchLink );
+function isActive( currentReference, ownProps ) {
+	if( ownProps.terms === currentReference.terms && currentReference.activeReference === ownProps.index ) {
+		return true;
+	}
+
+	return false;
+}
+
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		isActive: isActive( state.currentReference, ownProps ),
+		expandedSearchResults: state.settings.expandedSearchResults,
+		highlightSearchResults: state.settings.highlightSearchResults,
+		data: state.data,
+		interfaceLanguage: state.settings.interfaceLanguage,
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		setCurrentVerse: ( index ) => {
+			dispatch( setCurrentVerse( ownProps.terms, index ) );
+		},
+	}
+};
+
+const SearchLinkContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( SearchLink )
+
+export default withStyles( styles )( SearchLinkContainer );

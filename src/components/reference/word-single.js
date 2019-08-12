@@ -2,8 +2,18 @@
 import React from 'react';
 import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
 
 // Internal
+import {
+	addWord,
+	deactivateSearchSelect,
+	removeWordHighlight,
+	setWordHighlight,
+	setTrayVisibilityFilter,
+	updateSearchForm,
+	appendToSearchForm
+} from '../../actions';
 import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
 import styles from './styles.scss';
@@ -125,4 +135,51 @@ class WordSingle extends React.Component {
 	}
 }
 
-export default withStyles( styles )( WordSingle );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		highlighted: state.wordHighlight,
+		searchSelect: state.searchSelect,
+		settings: state.settings,
+	}
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		highlightOn: () => {
+			dispatch( setWordHighlight( ownProps.lemma.split(' ') ) )
+		},
+		highlightOff: () => {
+			dispatch( removeWordHighlight( ownProps.lemma.split( ' ' ) ) )
+		},
+		selectSearchTerm: ( name, value ) => {
+			dispatch( appendToSearchForm( name, value ) );
+			dispatch( updateSearchForm( 'version', ownProps.version ) );
+			dispatch( deactivateSearchSelect() );
+		},
+		addWord: ( subdue ) => {
+			dispatch( setTrayVisibilityFilter( 'word' ) );
+
+			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
+				if ( strongsNumber === "G3588" ) {
+					return;
+				}
+
+				dispatch( addWord( {
+					strongsNumber,
+					subdue,
+					open: true,
+					morphology: ownProps.morph,
+					version: ownProps.version,
+					clickedWord: ownProps.word,
+				} ) );
+			} );
+		},
+	}
+};
+
+const WordSingleContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( WordSingle )
+
+export default withStyles( styles )( WordSingleContainer );

@@ -1,7 +1,9 @@
 // External dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+// Internal
 import { getHighlight, getHighlightBorder } from '../strongs-color.js';
 
 class WordHighlight extends React.Component{
@@ -26,4 +28,16 @@ class WordHighlight extends React.Component{
 
 WordHighlight.propTypes = {};
 
-export default WordHighlight;
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		wordHighlight: state.wordHighlight,
+		settings: state.settings,
+		searchSelect: state.searchSelect,
+	}
+};
+
+const WordHighlightContainer = connect(
+	mapStateToProps
+)( WordHighlight )
+
+export default WordHighlightContainer;

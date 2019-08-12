@@ -2,11 +2,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
 
 // Internal dependencies
+import {
+	addSearch,
+	clearAll,
+	removeSearch,
+	toggleSearch,
+	closeAdvancedSearch,
+	openAdvancedSearch,
+	settingsChange,
+	activateSearchSelect,
+	updateSearchForm,
+	clearSearchForm,
+	fetchData,
+} from '../../actions'
 import CancelSvg from '../svg/cancel.js';
 import PickerSvg from '../svg/picker.js';
-import SearchBlock from '../../containers/search-block';
+import SearchBlock from './search-block';
 import styles from './styles.scss';
 
 class Search extends React.Component{
@@ -171,4 +185,63 @@ class Search extends React.Component{
 
 Search.propTypes = {};
 
-export default withStyles( styles )( Search );
+const mapStateToProps = ( state, ownProps ) => {
+	return {
+		searchAdvanced: state.searchAdvanced,
+		searchTerms: state.searchTerms,
+		settings: state.settings,
+		searchForm: state.searchForm,
+		versions: bible.Data.supportedVersions,
+		data: state.data,
+	};
+};
+
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	javascripture.reactHelpers.dispatch = dispatch;
+	return {
+		updateSearchForm: ( name, value ) => {
+			dispatch( updateSearchForm( name, value ) );
+		},
+		addSearch: ( terms ) => {
+			dispatch( addSearch( terms, 'search' ) );
+			dispatch( clearSearchForm() );
+		},
+		removeSearch: ( terms ) => {
+			dispatch( removeSearch( terms ) );
+		},
+		toggleSearch: ( terms ) => {
+			dispatch( toggleSearch( terms ) );
+		},
+		clearAllSearch: () => {
+			dispatch( clearAll() );
+		},
+		openAdvancedSearch: () => {
+			dispatch( openAdvancedSearch() );
+		},
+		closeAdvancedSearch: () => {
+			dispatch( closeAdvancedSearch() );
+		},
+		expandSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', true ) );
+		},
+		collapseSearchResults: () => {
+			dispatch( settingsChange( 'expandedSearchResults', false ) );
+		},
+		activateSearchSelect: ( mode ) => {
+			dispatch( activateSearchSelect( mode ) );
+		},
+		clearSearchForm: () => {
+			dispatch( clearSearchForm() );
+		},
+		fetchData: ( key ) => {
+			dispatch( fetchData( key ) );
+		},
+	}
+};
+
+const SearchContainer = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( Search )
+
+export default withStyles( styles )( SearchContainer );

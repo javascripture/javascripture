@@ -2,8 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
 
 // Internal dependencies
+import { addSearch, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.scss';
 
 class KJVDef extends React.Component{
@@ -28,4 +30,18 @@ class KJVDef extends React.Component{
 
 KJVDef.propTypes = {};
 
-export default withStyles( styles )( KJVDef );
+const mapDispatchToProps = ( dispatch, ownProps ) => {
+	return {
+		addSearch: ( terms ) => {
+			dispatch( addSearch( terms, 'search' ) );
+			dispatch( setTrayVisibilityFilter( 'search' ) )
+		}
+	}
+};
+
+const KJVDefContainer = connect(
+	null,
+	mapDispatchToProps
+)( KJVDef )
+
+export default withStyles( styles )( KJVDefContainer );

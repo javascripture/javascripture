@@ -2,8 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { connect } from 'react-redux';
+import findIndex from 'lodash/findIndex';
 
 // Internal
+import { toggleTray } from '../../actions'
 import styles from './styles.scss';
 import WordTray from './word';
 import SearchTray from './search';
@@ -53,4 +56,24 @@ TrayList.propTypes = {
 	}).isRequired).isRequired
 };
 
-export default withStyles( styles )( TrayList );
+const mapStateToProps = ( state ) => {
+	return {
+		trays: state.trays,
+		filter: state.trayVisibilityFilter,
+	}
+}
+
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		onTrayClick: ( id ) => {
+			dispatch( toggleTray( id ) )
+		},
+	}
+}
+
+const VisibleTrayList = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)( TrayList )
+
+export default withStyles( styles )( VisibleTrayList );

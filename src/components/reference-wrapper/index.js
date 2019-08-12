@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Internal
-import Reference from '../../containers/reference';
+import Reference from '../reference';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -27,4 +27,15 @@ class ReferenceWrapper extends React.Component{
 	}
 }
 
-export default withStyles( styles )( ReferenceWrapper );
+const mapStateToProps = ( { reference, settings }, ownProps ) => {
+	return {
+		inSync: settings.inSync,
+		references: reference,
+	}
+};
+
+const ReferenceWrapperContainer = connect(
+	mapStateToProps,
+)( ReferenceWrapper )
+
+export default withStyles( styles )( ReferenceWrapperContainer );

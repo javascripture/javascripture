@@ -3,7 +3,7 @@ import React from 'react';
 
 // Internal
 import strongsColor from '../strongs-color.js';
-import WordSingle from '../../containers/word-single.js';
+import WordSingle from './word-single.js';
 
 function startsWithPunctuation( word ) {
 	return word.indexOf( '(' ) === 0;

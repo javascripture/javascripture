@@ -6,11 +6,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal
 import Dock from './dock';
 import Footer from './footer';
-import ReferenceWrapper from '../containers/reference-wrapper';
+import ReferenceWrapper from '../components/reference-wrapper';
 import KeyboardShortcuts from './keyboard-shortcuts';
 import Trays from './trays';
-import VisibleTrays from '../containers/visible-trays';
-import WordHighlight from '../containers/word-highlight';
+import TrayList from './trays/tray-list';
+import WordHighlight from './word-highlight';
 import styles from './root.scss';
 
 class Root extends React.Component{
@@ -29,7 +29,7 @@ class Root extends React.Component{
 				<KeyboardShortcuts />
 				<WordHighlight word={ this.props.highlightedWord } />
 				<Trays>
-					<VisibleTrays />
+					<TrayList />
 				</Trays>
 				<Dock />
 				<ReferenceWrapper />
