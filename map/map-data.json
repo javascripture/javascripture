@@ -1,0 +1,46 @@
+{
+  "nodes": [
+    {"id": "Genesis.1.1", "group": 1},
+    {"id": "Genesis.1.2", "group": 1},
+    {"id": "H7225", "group": 2},
+    {"id": "H1254", "group": 2},
+    {"id": "H430", "group": 2},
+    {"id": "H8064", "group": 2},
+    {"id": "H853", "group": 2},
+    {"id": "H776", "group": 2},
+    {"id": "H1961", "group": 2},
+    {"id": "H8414", "group": 2},
+    {"id": "H922", "group": 2},
+    {"id": "H2822", "group": 2},
+    {"id": "H5921", "group": 2},
+    {"id": "H6440", "group": 2},
+    {"id": "H8415", "group": 2},
+    {"id": "H7307", "group": 2},
+    {"id": "H7363", "group": 2},
+    {"id": "H4325", "group": 2}
+  ],
+  "links": [
+    {"source": "Genesis.1.1", "target": "H7225", "value": 1},
+    {"source": "Genesis.1.1", "target": "H1254", "value": 1},
+    {"source": "Genesis.1.1", "target": "H430", "value": 1},
+    {"source": "Genesis.1.1", "target": "H8064", "value": 1},
+    {"source": "Genesis.1.1", "target": "H853", "value": 1},
+    {"source": "Genesis.1.1", "target": "H776", "value": 1},
+
+    {"source": "Genesis.1.2", "target": "H1961", "value": 1},
+    {"source": "Genesis.1.2", "target": "H8414", "value": 1},
+    {"source": "Genesis.1.2", "target": "H922", "value": 1},
+    {"source": "Genesis.1.2", "target": "H2822", "value": 1},
+    {"source": "Genesis.1.2", "target": "H5921", "value": 1},
+    {"source": "Genesis.1.2", "target": "H6440", "value": 1},
+    {"source": "Genesis.1.2", "target": "H8415", "value": 1},
+    {"source": "Genesis.1.2", "target": "H7307", "value": 1},
+    {"source": "Genesis.1.2", "target": "H7363", "value": 1},
+    {"source": "Genesis.1.2", "target": "H776", "value": 1},
+    {"source": "Genesis.1.2", "target": "H5921", "value": 1},
+    {"source": "Genesis.1.2", "target": "H430", "value": 1},
+    {"source": "Genesis.1.2", "target": "H6440", "value": 1},
+    {"source": "Genesis.1.2", "target": "H4325", "value": 1}
+
+  ]
+}

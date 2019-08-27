@@ -1,0 +1,50 @@
+<head>
+	<style>
+		body { margin: 0; }
+		.form {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 9;
+		}
+		.form select {
+			width: auto;
+		}
+	</style>
+
+	<script src="//unpkg.com/d3-dsv"></script>
+	<script src="//unpkg.com/dat.gui"></script>
+	<script src="//unpkg.com/d3-octree"></script>
+	<script src="//unpkg.com/d3-force-3d"></script>
+
+	<script src="three.js"></script>
+	<script src="three-spritetext.min.js"></script>
+	<script src="3d-force-graph.min.js"></script>
+	<script src="lodash.min.js"></script>
+	<script src="../data/bible.js"></script>
+	<script src="../data/morphhb.js"></script>
+	<script src="../data/kjv.js"></script>
+	<script src="./mapped.js"></script>
+	<script>
+		var javascripture = {
+			data: {}
+		};
+	</script>
+	<script src="../data/strongs-dictionary.js"></script>
+</head>
+
+<body>
+	<form class="form">
+		<select name="book" id="book">
+			<option>Select book</option>
+		</select>
+		<select name="chapter" id="chapter">
+			<option>-</option>
+		</select>
+		<select name="verse" id="verse">
+			<option>-</option>
+		</select>
+	</form>
+	<div id="3d-graph"></div>
+	<script src="map.js"></script>
+</body>
