@@ -1,6 +1,7 @@
 const elem = document.getElementById('3d-graph');
 const VERSE_GROUP = 1;
 const WORD_GROUP = 2;
+const NODE_LIMIT = 500;
 const Graph = ForceGraph3D()
 	//.cooldownTime( 1000 )
 	//.dagMode('lr')
@@ -11,12 +12,12 @@ const Graph = ForceGraph3D()
 			const obj = new THREE.Mesh(
 				new THREE.SphereGeometry(5,10,10),
 				//new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true, transparent: true, opacity: 1})
-				new THREE.MeshStandardMaterial({ depthWrite: false, transparent: false, opacity: 1 } )//, color: 0xff0000 })
+				new THREE.MeshStandardMaterial({ depthWrite: false, transparent: false, opacity: 1, color: node.color })
 			);
 			// add text sprite as child
 			const sprite = new SpriteText(node.id);
 			sprite.color = node.color;
-			sprite.textHeight = 5;
+			sprite.textHeight = 3;
 			obj.add(sprite);
 			return obj;
 		})
@@ -85,26 +86,30 @@ function addReference( reference ) {
 	}
 	const words = removeNullWords( referenceWithWords[0].words );
 
+/*
 	// remove words that already have nodes
 	const filteredWords = words.filter( word => ( ! nodeAlreadyExists( word ) ) );
 
 	// create nodes for every word
-	const newNodes = filteredWords.map( word => ( { id: word, group: WORD_GROUP, label: getWordLabel( word ) } ) );
-
+	const newNodes = filteredWords.map( word => ( { id: word, group: WORD_GROUP, label: getWordLabel( word ), color: getStrongsColor( word, '50%' ) } ) );
+*/
 	// add the reference to the list of new nodes
+	newNodes = [];
 	if ( ! nodeAlreadyExists( reference ) ) {
 		newNodes.push( { id: reference, group: VERSE_GROUP } );
 	};
-
+/*
 	// create a link between each word and verse
 	const newLinks = words.map( ( word ) => {
 		return { source: word, target: reference, value: 1 };
-	} );
+	} );*/
 
 	Graph.graphData({
 		nodes: [ ...nodes, ...newNodes ],
-		links: [ ...links, ...newLinks ],
+		links: [ ...links ],
 	});
+
+	addWordsForVerse( { id: reference, words } );
 }
 
 function getReferenceFromString( reference ) {
@@ -118,7 +123,7 @@ function getReferenceFromString( reference ) {
 function getTranslationFromVReferenceAndWord( reference, word ) {
 	const { book, chapter, verse } = getReferenceFromString( reference );
 	const translatedWord = KJV.books[ book ][ chapter ][ verse ].filter( wordArray => {
-		return wordArray[ 1 ] === word;
+		return wordArray[ 1 ] && wordArray[ 1 ].indexOf( word ) > -1;
 	} );
 	return translatedWord.map( wordArray => wordArray[ 0 ] );
 }
@@ -151,7 +156,7 @@ function addVersesForWord( node ) {
 	// get the list of verses where the word appears
 	verses = _.filter( mapped, { words: [ word ] } );
 
-	if ( verses.length > 500 ) {
+	if ( verses.length > NODE_LIMIT ) {
 		return alert( 'too many verses!' );
 	}
 
@@ -181,7 +186,7 @@ function addWordsForVerse( verse ) {
 	const filteredWords = verse.words.filter( word => ( ! nodeAlreadyExists( word ) ) );
 
 	// create nodes for every word
-	const wordNodes = filteredWords.map( word => ( { id: word, group: WORD_GROUP } ) );
+	const wordNodes = filteredWords.map( word => ( { id: word, group: WORD_GROUP, color: getStrongsColor( word, '50%' ) } ) );
 
 	// create a link between each word and verse
 	const wordLinks = verse.words.map( ( word ) => {
@@ -192,6 +197,17 @@ function addWordsForVerse( verse ) {
 		nodes: [...nodes, ...wordNodes ],
 		links: [...links, ...wordLinks ],
 	});
+}
+
+function getStrongsColor( lemma, lightness ) {
+	var strongsInt = parseInt( lemma.substring(1, lemma.length) );
+	if ( isNaN ( strongsInt ) ) {
+		strongsInt = 0;
+	}
+	var theSizeOfAColorSegment = 360 / 8000,
+		hue = Math.floor( strongsInt * theSizeOfAColorSegment ),
+		staturation = '50%';
+	return 'hsl( ' + hue + ',' + staturation + ', ' + lightness + ' )';
 }
 
 document.getElementById( 'book' ).innerHTML = (
