@@ -1,0 +1,79 @@
+<head>
+	<script src="../data/morphhb.js"></script>
+	<script src="../data/tischendorf.js"></script>
+	<script>
+		var javascripture = {
+			data: {}
+		};
+	</script>
+	<script src="../data/strongsObjectWithFamilies2.js"></script>
+</head>
+<body>
+	<div id="content"></div>
+	<script>
+		const count = {};
+		Object.keys( morphhb ).forEach( books => {
+			morphhb[ books ].forEach( chapters => {
+				chapters.forEach( verses => {
+					verses.forEach( words => {
+						const lemmas = words[ 1 ].split('/');
+						lemmas.forEach( lemma => {
+							if ( ! count[ lemma ] ) {
+								count[ lemma ] = 1;
+							} else {
+								count[ lemma ] = count[ lemma ] + 1;
+							}
+						} )
+					} );
+				} );
+			} );
+		} );
+
+		Object.keys( tischendorf ).forEach( books => {
+			tischendorf[ books ].forEach( chapters => {
+				chapters.forEach( verses => {
+					verses.forEach( words => {
+						const lemmas = words[ 1 ].split('/');
+						lemmas.forEach( lemma => {
+							if ( ! count[ lemma ] ) {
+								count[ lemma ] = 1;
+							} else {
+								count[ lemma ] = count[ lemma ] + 1;
+							}
+						} )
+					} );
+				} );
+			} );
+		} );
+
+		Object.keys( count ).forEach( lemma => {
+			const lemmaCount = count[ lemma ];
+			if ( ! javascripture.data.strongsObjectWithFamilies[ lemma ] ) {
+				javascripture.data.strongsObjectWithFamilies[ lemma ] = {
+					count: lemmaCount
+				};
+			} else {
+				javascripture.data.strongsObjectWithFamilies[ lemma ].count = lemmaCount;
+			}
+		} );
+
+		document.write( JSON.stringify( javascripture.data.strongsObjectWithFamilies ) );
+/*
+		const ref2Lemmas = morphhb.Psalms[30].map( verse => {
+			return verse.map( word => {
+				return word[ 1 ].split('/');
+			} ).flat();
+		} ).flat();
+		const overlap = ref1Lemmas.filter( lemma => {
+			if ( ! isNaN( lemma[ 1 ] ) ) { //filter out non strongs
+				if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+					return lemma;
+				}
+			}
+		} )
+		const content = document.getElementById('content')
+		overlap.forEach( lemma => {
+			content.innerHTML += lemma + ' ' + javascripture.data.strongsDictionary[ lemma ].kjv_def + '<br>';
+		} );*/
+	</script>
+</body>

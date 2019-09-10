@@ -1,0 +1,80 @@
+<head>
+	<script src="../data/bible.js"></script>
+	<script src="../data/morphhb.js"></script>
+	<script src="../data/kjv.js"></script>
+	<script>
+		var javascripture = {
+			data: {}
+		};
+	</script>
+	<script src="../data/strongs-dictionary.js"></script>
+	<script src="../data/strongsObjectWithFamilies2.js"></script>
+	<script src="map/lodash.min.js"></script>
+</head>
+<body>
+	<form class="form" id="form">
+		<p>
+			<select name="book1" id="book1">
+				<option>Select book</option>
+			</select>
+			<select name="chapter1" id="chapter1">
+				<option>-</option>
+			</select>
+			<select name="verse1" id="verse1">
+				<option>-</option>
+			</select>
+		</p>
+		<p>
+			<select name="book2" id="book2">
+				<option>Select book</option>
+			</select>
+			<select name="chapter2" id="chapter2">
+				<option>-</option>
+			</select>
+			<select name="verse2" id="verse2">
+				<option>-</option>
+			</select>
+		</p>
+		<input type="submit" value="Find connections" />
+	</form>
+	<div id="content"></div>
+	<script>
+		function submitForm( event ) {
+			event.preventDefault();
+			const ref1Book = document.getElementById( 'book1' ).value;
+			const ref2Book = document.getElementById( 'book2' ).value;
+			const ref1Chapter = document.getElementById( 'chapter1' ).value;
+			const ref2Chapter = document.getElementById( 'chapter2' ).value;
+			const ref1Verse = document.getElementById( 'verse1' ).value;
+			const ref2Verse = document.getElementById( 'verse2' ).value;
+
+			const ref1Lemmas = morphhb[ ref1Book ][ ref1Chapter - 1 ].map( verse => {
+				return verse.map( word => {
+					return word[ 1 ].split('/');
+				} ).flat();
+			} ).flat();
+			const ref2Lemmas = morphhb[ ref2Book ][ ref2Chapter - 1 ].map( verse => {
+				return verse.map( word => {
+					return word[ 1 ].split('/');
+				} ).flat();
+			} ).flat();
+			const overlap = ref1Lemmas.filter( lemma => {
+				if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < 500 ) {
+					if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+						return lemma;
+					}
+				}
+			} )
+			const content = document.getElementById('content')
+			content.innerHTML = '';
+			let contentHTML = 'connections: ' + overlap.length + '<br />';
+			overlap.forEach( lemma => {
+				contentHTML += lemma + ' ' + javascripture.data.strongsDictionary[ lemma ].kjv_def + '<br>';
+			} );
+			content.innerHTML = contentHTML;
+			console.log( contentHTML );
+		}
+		document.getElementById( 'form' ).onsubmit = submitForm;
+	</script>
+	<script src="overlap.js"></script>
+</body>

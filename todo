@@ -6,6 +6,7 @@
 	- literal consistent
 	- most common words in a passage
 	- most similar verse
+	- improve mobile ui
 
 - yahweh in 1 sam 24:10 - ESV
 - fix esth 1:13
@@ -20,11 +21,9 @@
 - fixing caching
 - make errors work better
 
-- improve mobile ui
 - make it possible to reload service worker - browser cache
 - simplify word/word-single
 - gaps between words like there in
-
 
 - creating a new literal consistent translation
 - remove + from lemma
@@ -69,7 +68,7 @@ search for "change" broken
 H5214
 luke 8:25 - afrai
 link definitions to usage
-G96 is  a root of G1381
+G96 is a root of G1381
 
 luke 6:41 - KJV/
 mark 9:43
