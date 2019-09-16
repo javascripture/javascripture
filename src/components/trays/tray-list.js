@@ -12,6 +12,7 @@ import WordTray from './word';
 import SearchTray from './search';
 import BookmarksTray from './bookmarks';
 import SettingsTray from './settings';
+import ChapterTray from './chapter-tray'
 
 function getComponent( componentString ) {
 	switch ( componentString ) {
@@ -26,6 +27,9 @@ function getComponent( componentString ) {
 
 		case 'SettingsTray':
 			return <SettingsTray />
+
+		case 'ChapterTray':
+			return <ChapterTray />
 	}
 }
 

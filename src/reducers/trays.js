@@ -24,6 +24,12 @@ const initalState = [
 		id: 'settings',
 		text: 'Settings',
 		component: 'SettingsTray'
+	},
+	{
+		visible: false,
+		id: 'chapter',
+		text: 'Chapter',
+		component: 'ChapterTray'
 	}
 ];
 

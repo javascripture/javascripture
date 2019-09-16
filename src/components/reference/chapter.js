@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import { fetchData } from '../../actions';
+import { fetchData, setTrayVisibilityFilter, setChapterInfo } from '../../actions';
 import Bookmarker from './bookmarker';
 import Verse from './verse';
 import VerseNumber from './verse-number';
@@ -87,6 +87,10 @@ class Chapter extends React.Component{
 		);
 	}
 
+	showChapterDetails = () => {
+		this.props.openBookmarkSidebar( { book: this.props.book, chapter: this.props.chapter } );
+	};
+
 	getSyncVerses() {
 		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
@@ -99,7 +103,7 @@ class Chapter extends React.Component{
 					const tranlatedBook = bible.getTranslatedBookName( this.props.book, reference.version );
 
 					return (
-						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index }>
+						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index } onClick={ this.showChapterDetails }>
 							{ tranlatedBook + ' ' + this.props.chapter }
 						</h1>
 					);
@@ -203,6 +207,11 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		fetchData: ( key ) => {
 			dispatch( fetchData( key ) );
+		},
+
+		openBookmarkSidebar: ( reference ) => {
+			dispatch( setTrayVisibilityFilter( 'chapter' ) );
+			dispatch( setChapterInfo( reference ) );
 		}
 	}
 };

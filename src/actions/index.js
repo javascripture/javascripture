@@ -113,7 +113,7 @@ export const addWord = ( { strongsNumber, subdue, open, morphology, version, cli
 
 		dispatch( {
 			strongsNumber,
-			subdue,
+			subdue: getState().settings.subdue,
 			open,
 			morphology,
 			version,
@@ -328,5 +328,12 @@ export const fetchData = ( key ) => {
 				]);
 			});
 		} );
+	}
+}
+
+export const setChapterInfo = ( reference ) => {
+	return {
+		type: 'SET_CHAPTER_INFO',
+		reference: reference
 	}
 }

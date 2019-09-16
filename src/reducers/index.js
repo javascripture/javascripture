@@ -17,9 +17,11 @@ import currentReference from './current-reference';
 import version from './version';
 import versions from './versions';
 import similarReferences from './similar-references';
+import chapterInfo from './chapter-info';
 
 const app = {
 	bookmarks,
+	chapterInfo,
 	crossReferences,
 	currentReference,
 	data,

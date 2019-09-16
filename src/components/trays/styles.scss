@@ -12,6 +12,36 @@
 	z-index: 10;
 }
 
+.tray-padding-2 {
+	display: flex;
+	padding: 0.5em;
+
+	* {
+		margin-right: 5px;
+	}
+
+	span {
+		width: 80px;
+	}
+
+	input, select {
+		height: auto;
+	}
+
+	button {
+		width: 100%;
+
+		&[disabled] {
+			border: none;
+			color: #999;
+
+			&:hover {
+				background: #eee;
+			}
+		}
+	}
+}
+
 .visible {
 	display: block;
 }
@@ -47,4 +77,9 @@
 	label {
 		display: block;
 	}
+}
+
+.limit {
+	display: inline;
+	width: 50px;
 }

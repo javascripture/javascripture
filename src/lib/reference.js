@@ -30,6 +30,14 @@ export const getAllLemmasFromReference = ( reference, data ) => {
 	return lemmas.join( ' ' );
 };
 
+export const getLemmasForReference = ( reference, data ) => {
+	return data[ reference.book ][ reference.chapter - 1 ].map( verse => {
+		return verse.map( word => {
+			return word[ 1 ].split('/');
+		} ).flat();
+	} ).flat();
+};
+
 export const getReferenceFromSearchResult = ( result ) => {
 	const reference = result.split( '.' );
 	return {
