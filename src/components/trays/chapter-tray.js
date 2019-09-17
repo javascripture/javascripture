@@ -18,6 +18,7 @@ class ChapterTray extends React.Component {
 		book: null,
 		limit: 100,
 		overlap: null,
+		rare: null,
 	}
 
 	bookChange = ( event ) => {
@@ -101,42 +102,72 @@ class ChapterTray extends React.Component {
 		)
 	}
 
+	findRareWords = () => {
+		const lemmas = getLemmasForReference( this.props.chapterInfo, this.getDataFromBook( this.props.chapterInfo ) );
+		const rare = uniq( lemmas.filter( lemma => {
+			return javascripture.data.strongsObjectWithFamilies[ lemma ].count < this.state.limit;
+		} ) );
+
+		this.setState({ rare });
+	};
+
+	getRareWords() {
+		if ( ! this.state.rare ) {
+			return null;
+		}
+
+		return this.state.rare.map( lemma => <div key={ lemma }>{ lemma }</div> );
+	}
+
 	render() {
 		return (
 			<div className={ styles.tray }>
-				<div className={ styles.trayPadding2 }>
-					<span>Compare </span>
-					<select name="compareWithBook" name="compareWithBook" onChange={ this.bookChange } value={ this.props.chapterInfo ? this.props.chapterInfo.book : '' }>
-						<option value="">Select a book</option>
-						{
-							bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
-						}
-					</select>
-					<select name="compareWithChapter" name="compareWithChapter" onChange={ this.chapterChange } value={ this.props.chapterInfo ? this.props.chapterInfo.chapter : '' }>
-					{ this.getCompareChapters() }
-					</select>
-				</div>
-				<div className={ styles.trayPadding2 }>
-					<span>with </span>
-					<select name="book" onChange={ this.bookChange }>
-						<option value="">Select a book</option>
-						{
-							bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
-						}
-					</select>
-					<select name="chapter" onChange={ this.chapterChange }>{ this.getChapters() }</select>
-				</div>
-				<div className={ styles.trayPadding2 }>
-					For words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
-				</div>
-				<div className={ styles.trayPadding2 }>
-					<button onClick={ this.compareChapters } disabled={ ! this.state.book }>Compare</button>
-				</div>
-				<div className={ styles.trayPadding2 }>
-					{ this.getOverlap() }
-				</div>
-				<div className={ styles.trayPadding2 }>
-					{ this.state.overlap && <button onClick={ this.addAllWords }>Select all words</button> }
+				<div className={ styles.chapterTrayPadding }>
+					<h2>Comparison</h2>
+					<div className={ styles.chapterTray }>
+						<span>Compare </span>
+						<select name="compareWithBook" name="compareWithBook" onChange={ this.bookChange } value={ this.props.chapterInfo ? this.props.chapterInfo.book : '' }>
+							<option value="">Select a book</option>
+							{
+								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
+							}
+						</select>
+						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.chapterChange } value={ this.props.chapterInfo ? this.props.chapterInfo.chapter : '' }>
+						{ this.getCompareChapters() }
+						</select>
+					</div>
+					<div className={ styles.chapterTray }>
+						<span>with </span>
+						<select name="book" onChange={ this.bookChange }>
+							<option value="">Select a book</option>
+							{
+								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
+							}
+						</select>
+						<select name="chapter" onChange={ this.chapterChange }>{ this.getChapters() }</select>
+					</div>
+					<div className={ styles.chapterTray }>
+						For words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
+					</div>
+					<div className={ styles.chapterTray }>
+						<button onClick={ this.compareChapters } disabled={ ! this.state.book }>Compare</button>
+					</div>
+					<div className={ styles.chapterTray }>
+						{ this.getOverlap() }
+					</div>
+					<div className={ styles.chapterTray }>
+						{ this.state.overlap && <button onClick={ this.addAllWords }>Select all words</button> }
+					</div>
+					<h2>Rare words</h2>
+					<div className={ styles.chapterTray }>
+						Find words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
+					</div>
+					<div className={ styles.chapterTray }>
+						<button onClick={ this.findRareWords }>Find rare words</button>
+					</div>
+					<div>
+						{ this.getRareWords() }
+					</div>
 				</div>
 			</div>
 		);

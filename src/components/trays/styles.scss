@@ -12,9 +12,12 @@
 	z-index: 10;
 }
 
-.tray-padding-2 {
-	display: flex;
+.chapter-tray-padding {
 	padding: 0.5em;
+}
+
+.chapter-tray {
+	display: flex;
 
 	* {
 		margin-right: 5px;
