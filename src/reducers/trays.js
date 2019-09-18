@@ -27,9 +27,9 @@ const initalState = [
 	},
 	{
 		visible: false,
-		id: 'chapter',
-		text: 'Chapter',
-		component: 'ChapterTray'
+		id: 'reference',
+		text: 'Reference Info',
+		component: 'ReferenceInfo'
 	}
 ];
 

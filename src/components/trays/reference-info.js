@@ -7,15 +7,17 @@ import { uniq } from 'lodash';
 
 // Internal dependencies
 import { getLemmasForReference } from '../../lib/reference';
-import { addWord, setTrayVisibilityFilter } from '../../actions';
+import { addWord, setReferenceInfo, setTrayVisibilityFilter } from '../../actions';
 
 import styles from './styles.scss';
 
-class ChapterTray extends React.Component {
+class ReferenceInfo extends React.Component {
 	state = {
 		compareWithBook: null,
 		compareWithChapter: null,
 		book: null,
+		chapter: '',
+		verse: '',
 		limit: 100,
 		overlap: null,
 		rare: null,
@@ -29,13 +31,19 @@ class ChapterTray extends React.Component {
 		}
 		newState[ event.target.name ] = event.target.value;
 		newState[ chapterFieldName ] = 1;
+		newState.verse = 'all';
 		this.setState( newState );
 	}
 
 	chapterChange = ( event ) => {
 		const newState = {};
 		newState[ event.target.name ] = event.target.value;
+		newState.verse = 'all';
 		this.setState( newState );
+	}
+
+	verseChange = ( event ) => {
+		this.setState( { verse: event.target.value } );
 	}
 
 	getChapters() {
@@ -47,9 +55,39 @@ class ChapterTray extends React.Component {
 		return <option>-</option>;
 	}
 
+	getVerses( reference ) {
+		if ( reference && reference.book && reference.chapter ) {
+			const bookNumber = bible.getBookId( reference.book );
+			const numberOfVerses = bible.Data.verses[ bookNumber - 1 ][ reference.chapter ];
+			const verses = [];
+			for ( var i = 0 ; i <= numberOfVerses ; i++) {
+				verses.push( i );
+			}
+			const versesJSX = verses.map( ( key ) => {
+				return <option key={ key }>{ key + 1 }</option>
+			} );
+			versesJSX.unshift( <option key="all" value="all">All</option> );
+			return versesJSX;
+		}
+
+		return <option>-</option>;
+	}
+
+	compareBookChange = ( event ) => {
+		this.props.setReferenceInfo( { book: event.target.value, chapter: 1, verse: 'all' } );
+	}
+
+	compareChapterChange = ( event ) => {
+		this.props.setReferenceInfo( { ...this.props.referenceInfo, chapter: event.target.value, verse: 'all' } );
+	}
+
+	compareVerseChange = ( event ) => {
+		this.props.setReferenceInfo( { ...this.props.referenceInfo, verse: event.target.value } );
+	}
+
 	getCompareChapters() {
-		if ( this.props.chapterInfo && this.props.chapterInfo.book ) {
-			const bookNumber = bible.getBookId( this.props.chapterInfo.book );
+		if ( this.props.referenceInfo && this.props.referenceInfo.book ) {
+			const bookNumber = bible.getBookId( this.props.referenceInfo.book );
 			return bible.Data.verses[ bookNumber - 1 ].map( ( verses, index ) => <option key={ index }>{ index + 1 }</option> );
 		}
 
@@ -61,7 +99,7 @@ class ChapterTray extends React.Component {
 	}
 
 	compareChapters = () => {
-		const ref1Lemmas = getLemmasForReference( this.props.chapterInfo, this.getDataFromBook( this.props.chapterInfo ) );
+		const ref1Lemmas = getLemmasForReference( this.props.referenceInfo, this.getDataFromBook( this.props.referenceInfo ) );
 		const ref2Lemmas = getLemmasForReference( this.state, this.getDataFromBook( this.state ) );
 		const overlap = ref1Lemmas.filter( lemma => {
 			if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < this.state.limit ) {
@@ -103,7 +141,7 @@ class ChapterTray extends React.Component {
 	}
 
 	findRareWords = () => {
-		const lemmas = getLemmasForReference( this.props.chapterInfo, this.getDataFromBook( this.props.chapterInfo ) );
+		const lemmas = getLemmasForReference( this.props.referenceInfo, this.getDataFromBook( this.props.referenceInfo ) );
 		const rare = uniq( lemmas.filter( lemma => {
 			return javascripture.data.strongsObjectWithFamilies[ lemma ].count < this.state.limit;
 		} ) );
@@ -126,15 +164,16 @@ class ChapterTray extends React.Component {
 					<h2>Comparison</h2>
 					<div className={ styles.chapterTray }>
 						<span>Compare </span>
-						<select name="compareWithBook" name="compareWithBook" onChange={ this.bookChange } value={ this.props.chapterInfo ? this.props.chapterInfo.book : '' }>
+						<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.referenceInfo ? this.props.referenceInfo.book : '' }>
 							<option value="">Select a book</option>
 							{
 								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
 							}
 						</select>
-						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.chapterChange } value={ this.props.chapterInfo ? this.props.chapterInfo.chapter : '' }>
-						{ this.getCompareChapters() }
+						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.compareChapterChange } value={ this.props.referenceInfo ? this.props.referenceInfo.chapter : '' }>
+							{ this.getCompareChapters() }
 						</select>
+						<select name="compareWithVerses" onChange={ this.compareVerseChange } value={ this.props.referenceInfo ? this.props.referenceInfo.verse : '' }>{ this.getVerses( this.props.referenceInfo ) }</select>
 					</div>
 					<div className={ styles.chapterTray }>
 						<span>with </span>
@@ -144,7 +183,8 @@ class ChapterTray extends React.Component {
 								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
 							}
 						</select>
-						<select name="chapter" onChange={ this.chapterChange }>{ this.getChapters() }</select>
+						<select name="chapter" onChange={ this.chapterChange } value={ this.state.chapter }>{ this.getChapters() }</select>
+						<select name="verses" onChange={ this.verseChange } value={ this.state.verse }>{ this.getVerses( this.state ) }</select>
 					</div>
 					<div className={ styles.chapterTray }>
 						For words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
@@ -156,7 +196,7 @@ class ChapterTray extends React.Component {
 						{ this.getOverlap() }
 					</div>
 					<div className={ styles.chapterTray }>
-						{ this.state.overlap && <button onClick={ this.addAllWords }>Select all words</button> }
+						{ this.state.overlap && this.state.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
 					</div>
 					<h2>Rare words</h2>
 					<div className={ styles.chapterTray }>
@@ -174,11 +214,11 @@ class ChapterTray extends React.Component {
 	}
 }
 
-ChapterTray.propTypes = {};
+ReferenceInfo.propTypes = {};
 
 const mapStateToProps = ( state ) => {
 	return {
-		chapterInfo: state.chapterInfo,
+		referenceInfo: state.referenceInfo,
 		data: state.data,
 	}
 }
@@ -194,12 +234,15 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 				version: 'original',
 			} ) );
 		},
+		setReferenceInfo: ( reference ) => {
+			dispatch( setReferenceInfo( reference ) );
+		}
 	}
 };
 
-const ConnectedChapterTray = connect(
+const ConnectedReferenceInfo = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)( ChapterTray )
+)( ReferenceInfo )
 
-export default withStyles( styles )( ConnectedChapterTray );
+export default withStyles( styles )( ConnectedReferenceInfo );

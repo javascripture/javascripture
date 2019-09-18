@@ -17,15 +17,15 @@ import currentReference from './current-reference';
 import version from './version';
 import versions from './versions';
 import similarReferences from './similar-references';
-import chapterInfo from './chapter-info';
+import referenceInfo from './reference-info';
 
 const app = {
 	bookmarks,
-	chapterInfo,
 	crossReferences,
 	currentReference,
 	data,
 	reference,
+	referenceInfo,
 	referenceSelectorMobile,
 	scrollChapter,
 	searchAdvanced,

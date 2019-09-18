@@ -331,9 +331,9 @@ export const fetchData = ( key ) => {
 	}
 }
 
-export const setChapterInfo = ( reference ) => {
+export const setReferenceInfo = ( reference ) => {
 	return {
-		type: 'SET_CHAPTER_INFO',
+		type: 'SET_REFERENCE_INFO',
 		reference: reference
 	}
 }

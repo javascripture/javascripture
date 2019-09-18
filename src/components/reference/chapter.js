@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import { fetchData, setTrayVisibilityFilter, setChapterInfo } from '../../actions';
+import { fetchData, setTrayVisibilityFilter, setReferenceInfo } from '../../actions';
 import Bookmarker from './bookmarker';
 import Verse from './verse';
 import VerseNumber from './verse-number';
@@ -88,7 +88,7 @@ class Chapter extends React.Component{
 	}
 
 	showChapterDetails = () => {
-		this.props.openBookmarkSidebar( { book: this.props.book, chapter: this.props.chapter } );
+		this.props.openReferenceInfoSidebar( { book: this.props.book, chapter: this.props.chapter } );
 	};
 
 	getSyncVerses() {
@@ -209,9 +209,9 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( fetchData( key ) );
 		},
 
-		openBookmarkSidebar: ( reference ) => {
-			dispatch( setTrayVisibilityFilter( 'chapter' ) );
-			dispatch( setChapterInfo( reference ) );
+		openReferenceInfoSidebar: ( reference ) => {
+			dispatch( setTrayVisibilityFilter( 'reference' ) );
+			dispatch( setReferenceInfo( reference ) );
 		}
 	}
 };

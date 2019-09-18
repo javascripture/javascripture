@@ -1,12 +1,12 @@
 import difference from 'lodash/difference';
 
-const chapterInfo = ( state = null, action ) => {
+const referenceInfo = ( state = null, action ) => {
 	switch ( action.type ) {
-		case 'SET_CHAPTER_INFO':
+		case 'SET_REFERENCE_INFO':
 			return action.reference;
 		default:
 			return state
 	}
 }
 
-export default chapterInfo;
+export default referenceInfo;
