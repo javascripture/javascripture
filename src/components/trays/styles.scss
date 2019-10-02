@@ -86,3 +86,8 @@
 	display: inline;
 	width: 50px;
 }
+
+.scrolling-block {
+	max-height: 100px;
+	overflow: auto;
+}

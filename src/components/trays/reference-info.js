@@ -7,48 +7,32 @@ import { uniq } from 'lodash';
 
 // Internal dependencies
 import { getLemmasForReference } from '../../lib/reference';
-import { addWord, setReferenceInfo, setTrayVisibilityFilter } from '../../actions';
+import {
+	addWord,
+	setReferenceInfo,
+	setReferenceInfoCompareWith,
+	setReferenceInfoLimit,
+	setTrayVisibilityFilter,
+} from '../../actions';
 
 import styles from './styles.scss';
 
 class ReferenceInfo extends React.Component {
-	state = {
-		compareWithBook: null,
-		compareWithChapter: null,
-		book: null,
-		chapter: '',
-		verse: '',
-		limit: 100,
-		overlap: null,
-		rare: null,
-	}
-
 	bookChange = ( event ) => {
-		const newState = {};
-		let chapterFieldName = 'chapter';
-		if ( event.target.name === 'compareWithBook' ) {
-			chapterFieldName = 'compareWithChapter';
-		}
-		newState[ event.target.name ] = event.target.value;
-		newState[ chapterFieldName ] = 1;
-		newState.verse = 'all';
-		this.setState( newState );
+		this.props.setReferenceInfoCompareWith( { book: event.target.value, chapter: 1, verse: 'all' } );
 	}
 
 	chapterChange = ( event ) => {
-		const newState = {};
-		newState[ event.target.name ] = event.target.value;
-		newState.verse = 'all';
-		this.setState( newState );
+		this.props.setReferenceInfoCompareWith( { ...this.props.referenceToCompareWith, chapter: event.target.value, verse: 'all' } );
 	}
 
 	verseChange = ( event ) => {
-		this.setState( { verse: event.target.value } );
+		this.props.setReferenceInfoCompareWith( { ...this.props.referenceToCompareWith, verse: event.target.value } );
 	}
 
 	getChapters() {
-		if ( this.state.book ) {
-			const bookNumber = bible.getBookId( this.state.book );
+		if ( this.props.referenceToCompareWith && this.props.referenceToCompareWith.book ) {
+			const bookNumber = bible.getBookId( this.props.referenceToCompareWith.book );
 			return bible.Data.verses[ bookNumber - 1 ].map( ( verses, index ) => <option key={ index }>{ index + 1 }</option> );
 		}
 
@@ -78,135 +62,123 @@ class ReferenceInfo extends React.Component {
 	}
 
 	compareChapterChange = ( event ) => {
-		this.props.setReferenceInfo( { ...this.props.referenceInfo, chapter: event.target.value, verse: 'all' } );
+		this.props.setReferenceInfo( { ...this.props.reference, chapter: event.target.value, verse: 'all' } );
 	}
 
 	compareVerseChange = ( event ) => {
-		this.props.setReferenceInfo( { ...this.props.referenceInfo, verse: event.target.value } );
+		this.props.setReferenceInfo( { ...this.props.reference, verse: event.target.value } );
 	}
 
 	getCompareChapters() {
-		if ( this.props.referenceInfo && this.props.referenceInfo.book ) {
-			const bookNumber = bible.getBookId( this.props.referenceInfo.book );
+		if ( this.props.reference && this.props.reference.book ) {
+			const bookNumber = bible.getBookId( this.props.reference.book );
 			return bible.Data.verses[ bookNumber - 1 ].map( ( verses, index ) => <option key={ index }>{ index + 1 }</option> );
 		}
 
 		return <option>-</option>;
 	}
 
-	getDataFromBook( reference ) {
-		return bible.Data.otBooks.indexOf( reference.book ) > -1 ? this.props.data.hebrew : this.props.data.greek;
-	}
-
-	compareChapters = () => {
-		const ref1Lemmas = getLemmasForReference( this.props.referenceInfo, this.getDataFromBook( this.props.referenceInfo ) );
-		const ref2Lemmas = getLemmasForReference( this.state, this.getDataFromBook( this.state ) );
-		const overlap = ref1Lemmas.filter( lemma => {
-			if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < this.state.limit ) {
-				if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
-					return lemma;
-				}
-			}
-		} )
-
-		this.setState( {
-			overlap: uniq( overlap )
-		} );
-	}
-
 	changeLimit = ( event ) => {
-		this.setState( {
-			limit: event.target.value
-		} );
+		this.props.setReferenceInfoLimit( event.target.value );
+	};
+
+	addAllRareWords = () => {
+		this.props.rare.forEach( lemma => this.props.addWord( lemma ) );
 	};
 
 	addAllWords = () => {
-		this.state.overlap.forEach( lemma => this.props.addWord( lemma ) );
+		this.props.overlap.forEach( lemma => this.props.addWord( lemma ) );
 	};
 
 	getOverlap() {
-		if ( ! this.state.overlap ) {
+		if ( ! this.props.overlap ) {
 			return;
 		}
 
-		if ( this.state.overlap.length === 0 ) {
+		if ( this.props.overlap.length === 0 ) {
 			return 'No connections found';
 		}
 
-		const overlap = this.state.overlap.map( lemma => <div key={ lemma }>{ lemma }</div> )
+		const overlap = this.props.overlap.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> )
 
 		return (
-			<span>Connections: { overlap }</span>
+			<div>
+				<span>Connections ({ this.props.overlap.length }):</span>
+				{ overlap }
+				<span>Connection quality: { this.props.connectionQuality }</span>
+			</div>
 		)
 	}
 
-	findRareWords = () => {
-		const lemmas = getLemmasForReference( this.props.referenceInfo, this.getDataFromBook( this.props.referenceInfo ) );
-		const rare = uniq( lemmas.filter( lemma => {
-			return javascripture.data.strongsObjectWithFamilies[ lemma ].count < this.state.limit;
-		} ) );
-
-		this.setState({ rare });
-	};
-
 	getRareWords() {
-		if ( ! this.state.rare ) {
+		if ( ! this.props.rare ) {
 			return null;
 		}
 
-		return this.state.rare.map( lemma => <div key={ lemma }>{ lemma }</div> );
+		if ( this.props.rare.length === 0 ) {
+			return 'No rare words found';
+		}
+
+		return this.props.rare.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> );
+	}
+
+	getWord( lemma ) {
+		return(
+			<div>
+				{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit }
+			</div>
+		);
 	}
 
 	render() {
 		return (
 			<div className={ styles.tray }>
 				<div className={ styles.chapterTrayPadding }>
-					<h2>Comparison</h2>
+					<h1>Reference Info</h1>
 					<div className={ styles.chapterTray }>
-						<span>Compare </span>
-						<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.referenceInfo ? this.props.referenceInfo.book : '' }>
+						<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.reference ? this.props.reference.book : '' }>
 							<option value="">Select a book</option>
 							{
 								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
 							}
 						</select>
-						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.compareChapterChange } value={ this.props.referenceInfo ? this.props.referenceInfo.chapter : '' }>
+						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.compareChapterChange } value={ this.props.reference ? this.props.reference.chapter : '' }>
 							{ this.getCompareChapters() }
 						</select>
-						<select name="compareWithVerses" onChange={ this.compareVerseChange } value={ this.props.referenceInfo ? this.props.referenceInfo.verse : '' }>{ this.getVerses( this.props.referenceInfo ) }</select>
+						<select name="compareWithVerses" onChange={ this.compareVerseChange } value={ this.props.reference ? this.props.reference.verse : '' }>{ this.getVerses( this.props.reference ) }</select>
+					</div>
+					<br />
+
+					<h2>Rare words</h2>
+					<div className={ styles.chapterTray }>
+						Words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times { this.props.rare ? '(' + this.props.rare.length + ')' : null }:
+					</div>
+					<div className={ styles.scrollingBlock }>
+						{ this.getRareWords() }
 					</div>
 					<div className={ styles.chapterTray }>
-						<span>with </span>
-						<select name="book" onChange={ this.bookChange }>
+						{ this.props.rare && this.props.rare.length > 0 && <button onClick={ this.addAllRareWords }>Select all rare words (slow!)</button> }
+					</div>
+					<br />
+					<h2>Compare with</h2>
+					<div className={ styles.chapterTray }>
+						<select name="book" onChange={ this.bookChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.book : '' }>
 							<option value="">Select a book</option>
 							{
 								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
 							}
 						</select>
-						<select name="chapter" onChange={ this.chapterChange } value={ this.state.chapter }>{ this.getChapters() }</select>
-						<select name="verses" onChange={ this.verseChange } value={ this.state.verse }>{ this.getVerses( this.state ) }</select>
+						<select name="chapter" onChange={ this.chapterChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.chapter : '' }>{ this.getChapters() }</select>
+						<select name="verses" onChange={ this.verseChange } value={ this.props.referenceToCompareWith? this.props.referenceToCompareWith.verse : '' }>{ this.getVerses( this.props.referenceToCompareWith ) }</select>
 					</div>
 					<div className={ styles.chapterTray }>
-						For words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
+						For words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
 					</div>
-					<div className={ styles.chapterTray }>
-						<button onClick={ this.compareChapters } disabled={ ! this.state.book }>Compare</button>
-					</div>
-					<div className={ styles.chapterTray }>
+					<div className={ styles.scrollingBlock }>
 						{ this.getOverlap() }
 					</div>
 					<div className={ styles.chapterTray }>
-						{ this.state.overlap && this.state.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
-					</div>
-					<h2>Rare words</h2>
-					<div className={ styles.chapterTray }>
-						Find words used less than <input type="number" name="limit" value={ this.state.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
-					</div>
-					<div className={ styles.chapterTray }>
-						<button onClick={ this.findRareWords }>Find rare words</button>
-					</div>
-					<div>
-						{ this.getRareWords() }
+						{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
 					</div>
 				</div>
 			</div>
@@ -216,10 +188,63 @@ class ReferenceInfo extends React.Component {
 
 ReferenceInfo.propTypes = {};
 
+const getDataFromBook = ( reference, data ) => {
+	return bible.Data.otBooks.indexOf( reference.book ) > -1 ? data.hebrew : data.greek;
+}
+
+const compareTwoReferences = ( { referenceInfo: { reference, referenceToCompareWith, limit } , data } ) => {
+	if ( ! reference || ! referenceToCompareWith ) {
+		return null;
+	}
+
+	const ref1Lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
+	const ref2Lemmas = getLemmasForReference( referenceToCompareWith, getDataFromBook( referenceToCompareWith, data ) );
+	const comparison = ref1Lemmas.filter( lemma => {
+		if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit ) {
+			if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+				return lemma;
+			}
+		}
+	} );
+
+	return uniq( comparison );
+};
+
+const calculateRareWords = ( { referenceInfo: { reference, limit } , data } ) => {
+	if ( ! reference ) {
+		return null;
+	}
+
+	const lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
+	return uniq( lemmas.filter( lemma => {
+		return javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit;
+	} ) );
+};
+
+
+const calculateConnectionQuality = ( state ) => {
+	const { referenceInfo: { reference, limit } , data } = state;
+	if ( ! reference ) {
+		return null;
+	}
+
+	const comparisonState = JSON.parse( JSON.stringify( state ) );
+	comparisonState.referenceInfo.limit = 99999999999;
+	const numberOfWordsInReference = uniq( getLemmasForReference( reference, getDataFromBook( reference, data ) ) ).length;
+	const comparison = compareTwoReferences( comparisonState );
+	const numberOfConnections = comparison ? comparison.length : 0;
+	return numberOfConnections / numberOfWordsInReference;
+};
+
 const mapStateToProps = ( state ) => {
 	return {
-		referenceInfo: state.referenceInfo,
+		reference: state.referenceInfo.reference,
+		referenceToCompareWith: state.referenceInfo.referenceToCompareWith,
+		limit: state.referenceInfo.limit,
+		overlap: compareTwoReferences( state ),
+		rare: calculateRareWords( state ),
 		data: state.data,
+		connectionQuality: calculateConnectionQuality( state ),
 	}
 }
 
@@ -236,7 +261,13 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		},
 		setReferenceInfo: ( reference ) => {
 			dispatch( setReferenceInfo( reference ) );
-		}
+		},
+		setReferenceInfoCompareWith: ( reference ) => {
+			dispatch( setReferenceInfoCompareWith( reference ) );
+		},
+		setReferenceInfoLimit: ( limit ) => {
+			dispatch( setReferenceInfoLimit( limit ) );
+		},
 	}
 };
 

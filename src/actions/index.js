@@ -1,7 +1,8 @@
 var cache = 'javascripture.22.0.1568652815';
 
-import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
+import { uniq } from 'lodash';
 import xhr from 'xhr';
+import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
 
 export const goToReference = ( reference ) => {
 	window.location.hash = createReferenceLink( reference );
@@ -334,6 +335,20 @@ export const fetchData = ( key ) => {
 export const setReferenceInfo = ( reference ) => {
 	return {
 		type: 'SET_REFERENCE_INFO',
-		reference: reference
+		reference: reference,
+	}
+}
+
+export const setReferenceInfoCompareWith = ( referenceToCompareWith ) => {
+	return {
+		type: 'SET_REFERENCE_INFO_COMPARE_WITH',
+		referenceToCompareWith: referenceToCompareWith,
+	}
+}
+
+export const setReferenceInfoLimit = ( limit ) => {
+	return {
+		type: 'SET_REFERENCE_INFO_LIMIT',
+		limit,
 	}
 }

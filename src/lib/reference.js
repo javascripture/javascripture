@@ -31,7 +31,6 @@ export const getAllLemmasFromReference = ( reference, data ) => {
 };
 
 export const getLemmasForReference = ( reference, data ) => {
-	console.log( reference );
 	if ( ! reference.verse || reference.verse === 'all' ) {
 		return data[ reference.book ][ reference.chapter - 1 ].map( verse => {
 			return verse.map( word => {
