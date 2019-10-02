@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import BookmarkSvg from '../svg/bookmark.js';
 import CogSvg from '../svg/cog.js';
 import EyeSvg from '../svg/eye.js';
+import InfoSvg from '../svg/info.js';
 import SearchSvg from '../svg/search.js';
 import TrayFilter from '../../components/trays/filter.js';
 import styles from './styles.scss';
@@ -22,6 +23,9 @@ const Footer = () => (
 		</TrayFilter>
 		<TrayFilter filter="bookmarks">
 			<BookmarkSvg fill={ fill } />
+		</TrayFilter>
+		<TrayFilter filter="reference">
+			<InfoSvg fill={ fill } />
 		</TrayFilter>
 		<TrayFilter filter="settings">
 			<CogSvg fill={ fill } />
