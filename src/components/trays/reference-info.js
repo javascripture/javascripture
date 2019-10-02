@@ -100,12 +100,12 @@ class ReferenceInfo extends React.Component {
 		}
 
 		const overlap = this.props.overlap.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> )
+//				<span>Connection quality: { this.props.connectionQuality }</span>
 
 		return (
 			<div>
 				<span>Connections ({ this.props.overlap.length }):</span>
 				{ overlap }
-				<span>Connection quality: { this.props.connectionQuality }</span>
 			</div>
 		)
 	}
@@ -244,7 +244,7 @@ const mapStateToProps = ( state ) => {
 		overlap: compareTwoReferences( state ),
 		rare: calculateRareWords( state ),
 		data: state.data,
-		connectionQuality: calculateConnectionQuality( state ),
+		connectionQuality: null, //calculateConnectionQuality( state ),
 	}
 }
 
