@@ -125,6 +125,7 @@
 	let newWorker;
 	// The click event on the notification
 	document.getElementById('reload').addEventListener('click', function(){
+		localStorage.clear();
 		newWorker.postMessage({ action: 'skipWaiting' });
 	});
 
