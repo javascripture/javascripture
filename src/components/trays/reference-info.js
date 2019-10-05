@@ -3,10 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { uniq } from 'lodash';
 
 // Internal dependencies
-import { getLemmasForReference } from '../../lib/reference';
+import { getLemmasForReference, compareTwoReferences, calculateRareWords, calculateConnectionQuality } from '../../lib/reference';
 import {
 	addWord,
 	setReferenceInfo,
@@ -187,54 +186,6 @@ class ReferenceInfo extends React.Component {
 }
 
 ReferenceInfo.propTypes = {};
-
-const getDataFromBook = ( reference, data ) => {
-	return bible.Data.otBooks.indexOf( reference.book ) > -1 ? data.hebrew : data.greek;
-}
-
-const compareTwoReferences = ( { referenceInfo: { reference, referenceToCompareWith, limit } , data } ) => {
-	if ( ! reference || ! referenceToCompareWith ) {
-		return null;
-	}
-
-	const ref1Lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
-	const ref2Lemmas = getLemmasForReference( referenceToCompareWith, getDataFromBook( referenceToCompareWith, data ) );
-	const comparison = ref1Lemmas.filter( lemma => {
-		if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit ) {
-			if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
-				return lemma;
-			}
-		}
-	} );
-
-	return uniq( comparison );
-};
-
-const calculateRareWords = ( { referenceInfo: { reference, limit } , data } ) => {
-	if ( ! reference ) {
-		return null;
-	}
-
-	const lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
-	return uniq( lemmas.filter( lemma => {
-		return javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit;
-	} ) );
-};
-
-
-const calculateConnectionQuality = ( state ) => {
-	const { referenceInfo: { reference, limit } , data } = state;
-	if ( ! reference ) {
-		return null;
-	}
-
-	const comparisonState = JSON.parse( JSON.stringify( state ) );
-	comparisonState.referenceInfo.limit = 99999999999;
-	const numberOfWordsInReference = uniq( getLemmasForReference( reference, getDataFromBook( reference, data ) ) ).length;
-	const comparison = compareTwoReferences( comparisonState );
-	const numberOfConnections = comparison ? comparison.length : 0;
-	return numberOfConnections / numberOfWordsInReference;
-};
 
 const mapStateToProps = ( state ) => {
 	return {

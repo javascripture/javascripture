@@ -1,3 +1,5 @@
+import { uniq } from 'lodash';
+
 export const createReferenceLink = ( reference ) => {
 	return '/' + reference.book + '/' + reference.chapter + '/' + reference.verse;
 };
@@ -52,4 +54,52 @@ export const getReferenceFromSearchResult = ( result ) => {
 		chapter: reference[1],
 		verse: reference[2],
 	};
+};
+
+const getDataFromBook = ( reference, data ) => {
+	return bible.Data.otBooks.indexOf( reference.book ) > -1 ? data.hebrew : data.greek;
+}
+
+export const compareTwoReferences = ( { referenceInfo: { reference, referenceToCompareWith, limit } , data } ) => {
+	if ( ! reference || ! referenceToCompareWith ) {
+		return null;
+	}
+
+	const ref1Lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
+	const ref2Lemmas = getLemmasForReference( referenceToCompareWith, getDataFromBook( referenceToCompareWith, data ) );
+	const comparison = ref1Lemmas.filter( lemma => {
+		if ( javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit ) {
+			if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+				return lemma;
+			}
+		}
+	} );
+
+	return uniq( comparison );
+};
+
+export const calculateRareWords = ( { referenceInfo: { reference, limit } , data } ) => {
+	if ( ! reference ) {
+		return null;
+	}
+
+	const lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
+	return uniq( lemmas.filter( lemma => {
+		return javascripture.data.strongsObjectWithFamilies[ lemma ].count < limit;
+	} ) );
+};
+
+
+export const calculateConnectionQuality = ( state ) => {
+	const { referenceInfo: { reference, limit } , data } = state;
+	if ( ! reference ) {
+		return null;
+	}
+
+	const comparisonState = JSON.parse( JSON.stringify( state ) );
+	comparisonState.referenceInfo.limit = 99999999999;
+	const numberOfWordsInReference = uniq( getLemmasForReference( reference, getDataFromBook( reference, data ) ) ).length;
+	const comparison = compareTwoReferences( comparisonState );
+	const numberOfConnections = comparison ? comparison.length : 0;
+	return numberOfConnections / numberOfWordsInReference;
 };
