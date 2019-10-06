@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="lodash-full.js"></script>
+		<script src="data/bible.js"></script>
+		<script src="data/morphhb.js"></script>
+		<script src="data/tischendorf.js"></script>
+		<script>
+			var data = Object.assign( {}, morphhb, tischendorf );
+		</script>
+		<script>
+
+const getLemmasForReference = ( reference ) => {
+	if ( ! reference.verse || reference.verse === 'all' ) {
+		return data[ reference.book ][ reference.chapter - 1 ].map( verse => {
+			return verse.map( word => {
+				return word[ 1 ].split('/');
+			} ).flat();
+		} ).flat();
+	}
+
+	return data[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ].map( word => {
+		return word[ 1 ].split('/');
+	} ).flat();
+};
+
+const compareTwoReferences = ( reference, referenceToCompareWith ) => {
+	if ( ! reference || ! referenceToCompareWith ) {
+		return null;
+	}
+
+	const ref1Lemmas = getLemmasForReference( reference );
+	const ref2Lemmas = getLemmasForReference( referenceToCompareWith );
+	const comparison = ref1Lemmas.filter( lemma => {
+		if ( ref2Lemmas.indexOf( lemma ) > -1 ) {
+			return lemma;
+		}
+	} );
+
+	return _.uniq( comparison );
+};
+
+//javascripture.data.strongsObjectWithFamilies[ lemma ].count
+const calculateConnectionQuality = ( reference, referenceToCompareWith ) => {
+	if ( ! reference || ! referenceToCompareWith ) {
+		return null;
+	}
+
+	const numberOfWordsInReference = _.uniq( getLemmasForReference( reference ) ).length;
+	const comparison = compareTwoReferences( reference, referenceToCompareWith );
+	const numberOfConnections = comparison ? comparison.length : 0;
+	return numberOfConnections / numberOfWordsInReference;
+};
+		</script>
+		<style>
+			table {
+				border-collapse: collapse;
+				border-spacing: 0;
+				margin: 0;
+				padding: 0;
+			}
+			td {
+				width: 1px;
+				height: 1px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="table"></div>
+	</body>
+	<script>
+		let chart = '<table>';
+		chart += bible.Data.books.map( ( book, index ) => {
+			return bible.Data.verses[ index ].map( ( chapterArray, chapterNumber ) => {
+				const chapter = chapterNumber + 1;
+				const reference = { book: book[0], chapter };
+				let chapters = '<tr>';
+				const color = Math.random()*360;
+				chapters += bible.Data.books.map( ( bookToCompareWith, indexToCompareWith ) => {
+					referenceToCompareWith = {
+						book: bookToCompareWith[0],
+						chapter: 1,
+					};
+					//const color = calculateConnectionQuality( reference, referenceToCompareWith ) * 360;
+					const color = '50';
+					return '<td style="background: hsl(' + color + ', 50%, 50%)" title="'+book[ 0 ]+ ' ' + ( chapterNumber + 1 ) + ' <-> ' + bookToCompareWith[ 0 ] + ' 1"></td>';
+					/*return bible.Data.verses[ index ].map( ( chapterToCompareWith, chapterNumberToCompareWith ) => {
+						return '<td title="'+book[ 0 ]+ ':' + ( chapterNumber + 1 ) + ' <-> ' + bookToCompareWith[ 0 ] + ':' + ( chapterNumberToCompareWith + 1 ) + '"></td>';
+					} ).join('');*/
+				} ).join('');
+				chapters += '</tr>';
+				return chapters;
+			} ).join('');
+		} ).join('');
+		chart += '</table>';
+		document.getElementById( 'table' ).innerHTML = chart;
+	</script>
+</html>

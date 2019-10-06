@@ -20,6 +20,7 @@ import { getFamily } from '../../lib/word';
 
 const fill = '#fff';
 const strongs = javascripture.data.strongsDictionary;
+const strongsWithFamilies = javascripture.data.strongsObjectWithFamilies;
 
 class WordBlock extends React.Component {
 	getSearchParameters() {
@@ -154,6 +155,9 @@ class WordBlock extends React.Component {
 				</div>
 				<div>
 					<strong>Family: </strong>{ wordFamily }
+				</div>
+				<div>
+					{ strongsWithFamilies[ strongsNumber ].count } uses
 				</div>
 				<br />
 				<div>
