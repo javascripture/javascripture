@@ -6,9 +6,21 @@
 		<script src="data/morphhb.js"></script>
 		<script src="data/tischendorf.js"></script>
 		<script>
+			var javascripture = { data: {} };
 			var data = Object.assign( {}, morphhb, tischendorf );
 		</script>
+		<script src="data/strongsObjectWithFamilies2.js"></script>
 		<script>
+
+const getNumberOfUsesOfLemma = ( lemmaToFind, reference ) => {
+	const numberOfUses = data[ reference.book ][ reference.chapter - 1 ].map( verse => {
+		return verse.map( word => {
+			return word[ 1 ].split('/').filter( lemma => lemma === lemmaToFind );
+		} ).flat();
+	} ).flat()
+
+	return numberOfUses.length;
+}
 
 const getLemmasForReference = ( reference ) => {
 	if ( ! reference.verse || reference.verse === 'all' ) {
@@ -37,7 +49,9 @@ const compareTwoReferences = ( reference, referenceToCompareWith ) => {
 		}
 	} );
 
-	return _.uniq( comparison );
+	return _.intersection( ref1Lemmas, ref2Lemmas );
+
+	//return _.uniq( comparison );
 };
 
 //javascripture.data.strongsObjectWithFamilies[ lemma ].count
@@ -46,10 +60,55 @@ const calculateConnectionQuality = ( reference, referenceToCompareWith ) => {
 		return null;
 	}
 
-	const numberOfWordsInReference = _.uniq( getLemmasForReference( reference ) ).length;
+	const numberOfWordsInReference1 = _.uniq( getLemmasForReference( reference ) ).length;
+	const numberOfWordsInReference2 = _.uniq( getLemmasForReference( reference ) ).length;
+	const averageLengthOfReference = ( numberOfWordsInReference1 + numberOfWordsInReference1 ) / 2
 	const comparison = compareTwoReferences( reference, referenceToCompareWith );
 	const numberOfConnections = comparison ? comparison.length : 0;
-	return numberOfConnections / numberOfWordsInReference;
+
+	// for each connection determine the significance, density and uniqueness
+	// significance (%age) = number of connections divided by the number of words in the passages (an average of the two passage?)
+	const significance = ( numberOfConnections / averageLengthOfReference ) * 100;
+	// density (%age) = the number of times the word is used in each chapter multiplied
+	totalConnectionsBetweenPassages = comparison.map( lemma => {
+		return getNumberOfUsesOfLemma( lemma, reference ) * getNumberOfUsesOfLemma( lemma, referenceToCompareWith );
+		//const result = {}
+		//result[ lemma ] = getNumberOfUsesOfLemma( lemma, reference ) * getNumberOfUsesOfLemma( lemma, referenceToCompareWith );
+		//return result;
+	} ).reduce( ( total, uses ) => {
+		return total + uses;
+	} );
+	const density = totalConnectionsBetweenPassages / averageLengthOfReference;
+	// uniqueness = the number of uses of the word elsewhere
+	// the most common word is used 50986 times
+	// divide by the number of uses of the word
+	const significanceOfConnections = comparison.map( lemma => {
+		return 1 / ( strongs[ lemma ].count * strongs[ lemma ].count );
+	} ).reduce( ( total, uses ) => {
+		return total + uses;
+	} );
+	const uniqueness = significanceOfConnections * 1000;
+
+	return {
+		reference,
+		referenceToCompareWith,
+		significance,
+		density,
+		uniqueness,
+	}
+};
+
+const getColorsFromConnectionQuality = ( { significance, density, uniqueness } ) => {
+	const lightness = significance;
+	const saturation = density * 10; // just a guess
+	const hue = 300 - uniqueness;
+	console.log( 'hsl(' + hue + ',' + saturation + '%,' + lightness + '%)' );
+	return 'hsl(' + hue + ',' + saturation + '%,' + lightness + '%)';
+};
+
+const getColor = ( ref1, ref2 ) => {
+	const quality = calculateConnectionQuality( ref1, ref2 );
+	return getColorsFromConnectionQuality( quality );
 };
 		</script>
 		<style>
@@ -69,6 +128,16 @@ const calculateConnectionQuality = ( reference, referenceToCompareWith ) => {
 		<div id="table"></div>
 	</body>
 	<script>
+		const count = [];
+		const strongs = javascripture.data.strongsObjectWithFamilies;
+		/*Object.keys( strongs ).map( key => {
+			count.push( {
+				number: key,
+				count: strongs[ key ].count,
+			} );
+		});
+		const sorted = _.orderBy( count, ['count'], ['desc']);
+		console.log( sorted );*/
 		let chart = '<table>';
 		chart += bible.Data.books.map( ( book, index ) => {
 			return bible.Data.verses[ index ].map( ( chapterArray, chapterNumber ) => {
@@ -83,7 +152,7 @@ const calculateConnectionQuality = ( reference, referenceToCompareWith ) => {
 					};
 					//const color = calculateConnectionQuality( reference, referenceToCompareWith ) * 360;
 					const color = '50';
-					return '<td style="background: hsl(' + color + ', 50%, 50%)" title="'+book[ 0 ]+ ' ' + ( chapterNumber + 1 ) + ' <-> ' + bookToCompareWith[ 0 ] + ' 1"></td>';
+					//return '<td style="background: hsl(' + color + ', 50%, 50%)" title="'+book[ 0 ]+ ' ' + ( chapterNumber + 1 ) + ' <-> ' + bookToCompareWith[ 0 ] + ' 1"></td>';
 					/*return bible.Data.verses[ index ].map( ( chapterToCompareWith, chapterNumberToCompareWith ) => {
 						return '<td title="'+book[ 0 ]+ ':' + ( chapterNumber + 1 ) + ' <-> ' + bookToCompareWith[ 0 ] + ':' + ( chapterNumberToCompareWith + 1 ) + '"></td>';
 					} ).join('');*/
@@ -94,5 +163,56 @@ const calculateConnectionQuality = ( reference, referenceToCompareWith ) => {
 		} ).join('');
 		chart += '</table>';
 		document.getElementById( 'table' ).innerHTML = chart;
+		var ref1 = { book: 'Genesis', chapter: 1 };
+		var ref2 = { book: 'Exodus', chapter: 1 };
+		var ref3 = { book: 'Leviticus', chapter: 1 };
+		var ref4 = { book: 'Deuteronomy', chapter: 1 };
+		var ref5 = { book: 'Psalms', chapter: 22 };
+		var ref6 = { book: 'Psalms', chapter: 31 };
+		var ref7 = { book: 'II Samuel', chapter: 22 };
+		var ref8 = { book: 'Psalms', chapter: 18 };
+
+
+		var testRefs = [
+			{ book: 'Genesis', chapter: 1 },
+			{ book: 'Genesis', chapter: 2 },
+			{ book: 'Exodus', chapter: 1 },
+			{ book: 'Leviticus', chapter: 1 },
+			{ book: 'Deuteronomy', chapter: 1 },
+			{ book: 'Psalms', chapter: 22 },
+			{ book: 'Psalms', chapter: 31 },
+			{ book: 'II Samuel', chapter: 22 },
+			{ book: 'Psalms', chapter: 18 },
+		];
+
+		console.log( calculateConnectionQuality( ref1, ref2 ) );
+		console.log( calculateConnectionQuality( ref2, ref3 ) );
+		console.log( calculateConnectionQuality( ref3, ref4 ) );
+		console.log( calculateConnectionQuality( ref1, ref3 ) );
+		console.log( calculateConnectionQuality( ref1, ref4 ) );
+		console.log( calculateConnectionQuality( ref2, ref4 ) );
+		console.log( calculateConnectionQuality( ref1, ref1 ) );
+		console.log( calculateConnectionQuality( ref5, ref6 ) );
+
+		/*https://stackoverflow.com/questions/35816179/calculation-algorithm-to-mix-3-hsl-colors
+		var x = Math.cos(hue / 180 * Math.PI) * saturation;
+		var y = Math.sin(hue / 180 * Math.PI) * saturation;
+		var z = lightness;
+
+		var h= Math.atan2(y, x) * 180 / Math.PI;
+		var s = Math.sqrt(x * x + y * y);
+		var l = z;
+
+		console.log( 'hsl('+h+','+s+'%,'+l+'%)' );*/
+	//	document.body.style.backgroundColor = getColor( ref2, ref6 );
+
+		var result = '';
+		result += '<div>';
+		result += testRefs.map( mappedRef1 => {
+			return testRefs.map( mappedRef2 => {
+				return '<div style="background:' + getColor( mappedRef1, mappedRef2 ) + '">' + mappedRef1.book + mappedRef1.chapter + '->' + mappedRef2.book + mappedRef2.chapter + '</div>';
+			} ).join('');
+		} ).join('');
+		document.getElementById( 'table' ).innerHTML = result;
 	</script>
 </html>
