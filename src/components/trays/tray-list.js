@@ -9,6 +9,7 @@ import findIndex from 'lodash/findIndex';
 import { toggleTray } from '../../actions'
 import styles from './styles.scss';
 import WordTray from './word';
+import GotoTray from './goto';
 import SearchTray from './search';
 import BookmarksTray from './bookmarks';
 import SettingsTray from './settings';
@@ -18,6 +19,9 @@ function getComponent( componentString ) {
 	switch ( componentString ) {
 		case 'WordTray':
 			return <WordTray />
+
+		case 'GotoTray':
+			return <GotoTray />
 
 		case 'SearchTray':
 			return <SearchTray />

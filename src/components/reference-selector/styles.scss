@@ -1,0 +1,17 @@
+@import '../_colors.scss';
+
+.bookControl {
+	line-height: 2em;
+	padding-left: .5em;
+	position: relative;
+
+	&:hover {
+		background: $hover;
+	}
+}
+
+.go {
+	line-height: 2em;
+	position: absolute;
+		right: 0;
+}

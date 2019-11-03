@@ -11,7 +11,7 @@ class WordHighlight extends React.Component{
 		return (
 			<style>
 				{ this.props.word && this.props.word.split(/[/, ]/).map( word => {
-					if ( word === 'added' || word === 'divineName' || word === 'G3588' ) {
+					if ( word === 'added' || word === 'divineName' ) {
 						return;
 					}
 
