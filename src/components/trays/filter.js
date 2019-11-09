@@ -10,20 +10,17 @@ import { setTrayVisibilityFilter } from '../../actions'
 import styles from './styles.scss';
 
 const TrayFilter = ( { active, children, activate, hideAll } ) => {
-	let classeName = styles.trayFilter;
+
+	let className = styles.trayFilter;
 	if ( active ) {
-		classeName = styles.active
+		className = styles.active
 	}
 
 	return (
-		<span className={ classeName }
+		<span className={ className }
 			onClick={ event => {
 				event.preventDefault()
-				if ( active ) {
-					hideAll();
-				} else {
-					activate();
-				}
+				activate();
 			} }
 		>
 			{ children }
@@ -35,7 +32,6 @@ TrayFilter.propTypes = {
 	active: PropTypes.bool.isRequired,
 	children: PropTypes.node.isRequired,
 	activate: PropTypes.func.isRequired,
-	hideAll: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ( state, ownProps ) => {
@@ -51,9 +47,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		activate: () => {
 			dispatch( setTrayVisibilityFilter( ownProps.filter ) )
 		},
-		hideAll: () => {
-			dispatch( setTrayVisibilityFilter( 'SHOW_NONE' ) )
-		}
 	}
 };
 

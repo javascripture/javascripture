@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Sidebar from 'react-sidebar';
 
 // Internal
 import Dock from './dock';
@@ -12,6 +13,7 @@ import Trays from './trays';
 import TrayList from './trays/tray-list';
 import WordHighlight from './word-highlight';
 import styles from './root.scss';
+import { toggleSidebar } from '../actions'
 
 class Root extends React.Component{
 	getBodyStyles() {
@@ -24,27 +26,49 @@ class Root extends React.Component{
 
 	render() {
 		return (
-			<div className={ styles.root }>
-				<style>{ this.getBodyStyles() }</style>
-				<KeyboardShortcuts />
-				<WordHighlight word={ this.props.highlightedWord } />
-				<Trays>
-					<TrayList />
-				</Trays>
-				<Dock />
-				<ReferenceWrapper />
-				<Footer />
-			</div>
+			<Sidebar
+				sidebar={
+					<Trays>
+						<TrayList />
+					</Trays>
+				}
+				open={ this.props.sidebar }
+				onSetOpen={this.props.toggleSidebar }
+				styles={{
+					sidebar: { overflowY: "none", width: "320px" },
+					overlay: { disply: "none", bottom: "auto", right: "auto" },
+				}}
+			>
+				<div className={ styles.root }>
+					<style>{ this.getBodyStyles() }</style>
+					<KeyboardShortcuts />
+					<WordHighlight word={ this.props.highlightedWord } />
+					<Dock />
+					<ReferenceWrapper />
+					<Footer />
+				</div>
+			</Sidebar>
+
 		);
 	}
 }
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		settings: state.settings
+		settings: state.settings,
+		sidebar: state.sidebar,
 	};
+};
+
+const mapDispatchToProps = ( dispatch ) => {
+	return {
+		toggleSidebar: () => {
+			dispatch( toggleSidebar() );
+		},
+	}
 };
 
 export default connect(
 	mapStateToProps,
+	mapDispatchToProps,
 )( withStyles( styles )( Root ) );

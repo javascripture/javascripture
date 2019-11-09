@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import findIndex from 'lodash/findIndex';
 
 // Internal
-import { toggleTray } from '../../actions'
+import { toggleTray, toggleSidebar } from '../../actions'
 import styles from './styles.scss';
 import WordTray from './word';
 import GotoTray from './goto';
@@ -42,7 +42,7 @@ class TrayList extends React.Component{
 		const { trays, filter, onTrayClick } = this.props;
 
 		return (
-			<div>
+			<div className={ styles.trayList }>
 				{ trays.map( tray =>
 					<div
 						key={ tray.id }
@@ -74,7 +74,9 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = ( dispatch ) => {
 	return {
 		onTrayClick: ( id ) => {
+			console.log('on clock');
 			dispatch( toggleTray( id ) )
+			dispatch( toggleSidebar() )
 		},
 	}
 }

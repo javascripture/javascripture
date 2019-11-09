@@ -19,7 +19,6 @@ class WordDetails extends React.Component{
 							<WordBlock { ...wordDetails } key={ index } />
 						);
 					} ) }
-					<a className={ styles.clearAll } onClick={ this.props.clearAll }>Clear all</a>
 				</div>
 			);
 		}
@@ -40,10 +39,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addWord: ( lemma, open, morphology, version ) => {
 			dispatch( addWord( { lemma, open, morphology, version } ) );
-		},
-
-		clearAll: () => {
-			dispatch( clearAll() );
 		},
 
 		removeWord: ( lemma ) => {

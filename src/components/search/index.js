@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import {
 	addSearch,
-	clearAll,
 	removeSearch,
 	toggleSearch,
 	closeAdvancedSearch,
@@ -111,8 +110,6 @@ class Search extends React.Component{
 					</h2>
 
 					<SearchBlock { ...searchTerm } />
-
-					<a className={ styles.clearAll } onClick={ this.props.clearAllSearch }>Clear all</a>
 				</div>
 			);
 		} );
@@ -211,9 +208,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 		},
 		toggleSearch: ( terms ) => {
 			dispatch( toggleSearch( terms ) );
-		},
-		clearAllSearch: () => {
-			dispatch( clearAll() );
 		},
 		openAdvancedSearch: () => {
 			dispatch( openAdvancedSearch() );

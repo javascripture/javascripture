@@ -1,13 +1,13 @@
 @import '../colors.scss';
 
+.trayList {
+	overflow: auto;
+	position: absolute;
+	top: 40px;
+	bottom: 56px;
+}
+
 .tray {
-	background: rgba( 255, 255, 255, .9 );
-	box-shadow: 0 0 5px 0 rgba( 0, 0, 0 , .5 );
-	overflow: scroll;
-	position: fixed;
-		bottom: 3.5em;
-		left: 0;
-		top: 0;
 	width: 320px;
 	z-index: 10;
 }
@@ -57,7 +57,7 @@
 	display: inline-block;
 	cursor: pointer;
 	margin: 0;
-	padding: 1em 0;
+	padding: 14px 0;
 	text-align: center;
 	width: 16.66%;
 
@@ -92,3 +92,22 @@
 	max-height: 100px;
 	overflow: auto;
 }
+
+.sidebar-controls {
+	background: #fff;
+	box-shadow: 1px 1px 1px 0 rgba( 0, 0, 0, .3 );
+	height: 39px;
+	line-height: 39px;
+	position: sticky;
+	top: 0;
+	text-align: right;
+	width: 100%;
+	z-index: 999;
+
+	a {
+		display: inline-block;
+		padding: 6px;
+		vertical-align: middle;
+	}
+}
+

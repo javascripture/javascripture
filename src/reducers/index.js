@@ -16,6 +16,7 @@ import crossReferences from './cross-references';
 import currentReference from './current-reference';
 import version from './version';
 import versions from './versions';
+import sidebar from './sidebar';
 import similarReferences from './similar-references';
 import referenceInfo from './reference-info';
 
@@ -34,6 +35,7 @@ const app = {
 	searchSelect,
 	searchTerms,
 	settings,
+	sidebar,
 	trays,
 	version,
 	versions,

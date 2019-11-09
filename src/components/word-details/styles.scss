@@ -36,23 +36,6 @@
 	display: none;
 }
 
-$trayWidth: 320px;
-$width: 70px;
-$padding: 10px;
-a.clear-all {
-	background: $hover;
-	color: #666;
-	display: block;
-	padding: $padding;
-	position: fixed;
-	bottom: 55px;
-	left: $trayWidth - $width - $padding * 2;
-	cursor: pointer;
-	text-align: right;
-	text-decoration: none;
-	width: $width;
-}
-
 .word-block {
 	padding: .5em;
 }
