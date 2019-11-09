@@ -23,7 +23,7 @@
 
 .inputWrapper {
 	display: flex;
-	flex-basis: 60%;
+	flex-grow: 1;
 	height: 20px;
 	position: relative;
 }
@@ -35,17 +35,13 @@
 }
 
 .left-version, .right-version {
-	flex-basis: 40%;
+	max-width: 100px;
 }
 
 .left-version, .right-version, .input {
+	font-size: 1.2em;
 	@media ( max-width: 399px ) {
 		border-top: 0;
 		border-radius: 0;
 	}
-
-	@media ( min-width: 768px ) {
-		font-size: 1.2em;
-	}
-
 }
