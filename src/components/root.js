@@ -35,7 +35,7 @@ class Root extends React.Component{
 				open={ this.props.sidebar }
 				onSetOpen={this.props.toggleSidebar }
 				styles={{
-					sidebar: { overflowY: "none", width: "320px" },
+					sidebar: { background: "white", overflowY: "none", width: "320px" },
 					overlay: { disply: "none", bottom: "auto", right: "auto" },
 				}}
 			>
