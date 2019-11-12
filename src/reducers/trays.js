@@ -5,37 +5,43 @@ const initalState = [
 		visible: true,
 		id: 'goto',
 		text: 'Go to',
-		component: 'GotoTray'
+		component: 'GotoTray',
+		icon: 'BookSvg',
 	},
 	{
 		visible: false,
 		id: 'word',
 		text: 'Word Details',
-		component: 'WordTray'
+		component: 'WordTray',
+		icon: 'EyeSvg',
 	},
 	{
 		visible: false,
 		id: 'search',
 		text: 'Search',
-		component: 'SearchTray'
+		component: 'SearchTray',
+		icon: 'SearchSvg',
 	},
 	{
 		visible: false,
 		id: 'bookmarks',
 		text: 'Bookmarks',
-		component: 'BookmarksTray'
+		component: 'BookmarksTray',
+		icon: 'BookmarkSvg',
 	},
 	{
 		visible: false,
 		id: 'settings',
 		text: 'Settings',
-		component: 'SettingsTray'
+		component: 'SettingsTray',
+		icon: 'HelpSvg',
 	},
 	{
 		visible: false,
 		id: 'reference',
 		text: 'Reference Info',
-		component: 'ReferenceInfo'
+		component: 'ReferenceInfo',
+		icon: 'InfoSvg',
 	}
 ];
 

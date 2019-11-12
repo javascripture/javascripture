@@ -11,7 +11,6 @@ import BookMark from './bookmark';
 
 const BookMarks = ( { bookmarks, removeBookmark } ) => (
 	<div className={ styles.bookmarks }>
-		<h2 className={ styles.title }>Bookmarks</h2>
 		<div className={ styles.bookmarksList }>
 			{ bookmarks.length === 0 && ( <p>Click the <Bookmark /> to bookmark a verse.</p> ) }
 			{ bookmarks.map( ( bookmark, key ) => {

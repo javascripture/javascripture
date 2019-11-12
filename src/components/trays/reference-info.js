@@ -133,7 +133,6 @@ class ReferenceInfo extends React.Component {
 		return (
 			<div className={ styles.tray }>
 				<div className={ styles.chapterTrayPadding }>
-					<h1>Reference Info</h1>
 					<div className={ styles.chapterTray }>
 						<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.reference ? this.props.reference.book : '' }>
 							<option value="">Select a book</option>
