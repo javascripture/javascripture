@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { setScrollChapter } from '../../actions';
 import SingleReference from './single-reference';
 import styles from './styles.scss';
+import deferComponentRender from '../deferComponentRender';
 
 let oldHeight = 0, scroller = null, isScrolling = false;
 
@@ -238,8 +239,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 };
 
 const ReferenceContainer = connect(
- 	mapStateToProps,
- 	mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )( Reference )
 
-export default withStyles( styles )( ReferenceContainer );
+export default deferComponentRender( withStyles( styles )( ReferenceContainer ) );
