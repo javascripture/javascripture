@@ -36,6 +36,19 @@ class Reference extends React.Component{
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
+		if ( ga ) {
+			ga('send', {
+				hitType: 'event',
+				eventCategory: 'Reference',
+				eventAction: 'change',
+				eventLabel: new Date() - timer
+			} );
+		}
+
+		if ( console ) {
+			console.log( new Date() - timer );
+		}
+
 		// Only scroll if chapter or book changes
 		const references = this.state.references;
 

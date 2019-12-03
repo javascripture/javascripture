@@ -55,6 +55,7 @@ const getInitialState = () => {
 const reference = ( state = getInitialState(), action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
+			timer = new Date();
 			const reference = getReferenceFromHash( action.payload.location.hash, state[ 0 ].version );
 
 			if ( ! reference ) {
