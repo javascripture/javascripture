@@ -36,7 +36,7 @@ class Reference extends React.Component{
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
-		if ( ga ) {
+		if ( typeof ga !== 'undefined' ) {
 			ga('send', {
 				hitType: 'event',
 				eventCategory: 'Reference',
