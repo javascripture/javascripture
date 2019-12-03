@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1575404074';
+var cache = 'javascripture.22.0.1575409085';
 
 import { uniq } from 'lodash';
 import xhr from 'xhr';
