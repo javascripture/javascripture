@@ -77,7 +77,9 @@ class WordSingle extends React.Component {
 			strongsNumber = getFamily( this.props.lemma );
 		}
 
-		window.updateAppComponent( 'highlightedWord', strongsNumber );
+		if ( strongsNumber !== "G3588" ) {
+			window.updateAppComponent( 'highlightedWord', strongsNumber );
+		}
 	};
 
 	selectWord = () => {
