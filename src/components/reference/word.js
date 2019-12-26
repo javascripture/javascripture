@@ -25,9 +25,11 @@ const Word = ( { word, version, language } ) => {
 	}
 
 	const [ wordValue, lemma, morph ] = word;
+	const lemmaArray = lemma ? lemma.split('/') : null;
+	const morphArray = morph ? morph.split('/'): null;
 
 	const wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => (
-		<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordSingleValue } morph={ morph ? morph.split('/')[ key ] : null } version={ version } language={ language } />
+		<WordSingle key={ key } lemma={ lemmaArray ? lemmaArray[ key ]: null } word={ wordSingleValue } morph={ morphArray ? morphArray[ key ] : null } version={ version } language={ language } />
 	) );
 
 	if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( props.lastWord && startsWithPunctuation( props.lastWord[0] ) ) ) {
