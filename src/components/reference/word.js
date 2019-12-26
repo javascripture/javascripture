@@ -19,31 +19,29 @@ function endsWithPunctuation( word ) {
 		word.indexOf( ',' ) === 0;
 }
 
-class Word extends React.Component{
-	render() {
-		if ( ! this.props.word ) {
-			return null;
-		}
-
-		const word = this.props.word[ 0 ],
-			lemma = this.props.word[ 1 ],
-			morph = this.props.word[ 2 ];
-
-		let wordString;
-
-
-		wordString = word && word.split('/').map( ( wordValue, key ) => (
-			<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordValue } morph={ morph ? morph.split('/')[ key ] : null } version={ this.props.version } language={ this.props.language } />
-		) );
-
-		if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
-			return wordString;
-		}
-
-		return (
-			<React.Fragment> { wordString }</React.Fragment>
-		);
+const Word = ( { word, version, language } ) => {
+	if ( ! word ) {
+		return null;
 	}
+
+	const wordValue = word[ 0 ],
+		lemma = word[ 1 ],
+		morph = word[ 2 ];
+
+	let wordString;
+
+
+	wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => (
+		<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordSingleValue } morph={ morph ? morph.split('/')[ key ] : null } version={ version } language={ language } />
+	) );
+
+	if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( props.lastWord && startsWithPunctuation( props.lastWord[0] ) ) ) {
+		return wordString;
+	}
+
+	return (
+		<React.Fragment> { wordString }</React.Fragment>
+	);
 }
 
 export default Word;
