@@ -36,16 +36,6 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 };
 
 class WordSingle extends React.Component {
-	getLemma() {
-		if ( this.props.lemma) {
-			return this.props.lemma.split( ' ' ).split( '/' ).filter( function( lemma ) {
-				return lemma != 'G3588';
-			} );
-		}
-
-		return [];
-	}
-
 	getWord() {
 		const { lemma, morph, version, word } = this.props;
 		if ( version === 'LC' ) {
