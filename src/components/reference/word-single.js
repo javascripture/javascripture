@@ -8,8 +8,6 @@ import { connect } from 'react-redux';
 import {
 	addWord,
 	deactivateSearchSelect,
-	removeWordHighlight,
-	setWordHighlight,
 	setTrayVisibilityFilter,
 	updateSearchForm,
 	appendToSearchForm
@@ -145,12 +143,6 @@ const mapStateToProps = ( state, ownProps ) => {
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		highlightOn: () => {
-			dispatch( setWordHighlight( ownProps.lemma.split(' ') ) )
-		},
-		highlightOff: () => {
-			dispatch( removeWordHighlight( ownProps.lemma.split( ' ' ) ) )
-		},
 		selectSearchTerm: ( name, value ) => {
 			dispatch( appendToSearchForm( name, value ) );
 			dispatch( updateSearchForm( 'version', ownProps.version ) );
