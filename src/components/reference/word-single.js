@@ -35,24 +35,25 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 	return 'todo';
 };
 
-class WordSingle extends React.Component {
-	getWord() {
-		const { lemma, morph, version, word } = this.props;
+const WordSingle = ( props ) => {
+	const { lemma, morph, version, word } = props;
+
+	const getWord = () => {
 		if ( version === 'LC' ) {
 			return getByLemmaAndMorph( lemma, morph ) + ' ';
 		}
 
 		return word;
-	}
+	};
 
-	clearHighlightWord = () => {
+	const clearHighlightWord = () => {
 		window.updateAppComponent( 'highlightedWord', '' );
 	};
 
-	highlightWord = () => {
-		let strongsNumber = this.props.lemma;
-		if ( this.props.settings.highlightWordsWith === 'family' ) {
-			strongsNumber = getFamily( this.props.lemma );
+	const highlightWord = () => {
+		let strongsNumber = lemma;
+		if ( props.settings.highlightWordsWith === 'family' ) {
+			strongsNumber = getFamily( lemma );
 		}
 
 		if ( strongsNumber !== "G3588" ) {
@@ -60,27 +61,25 @@ class WordSingle extends React.Component {
 		}
 	};
 
-	selectWord = () => {
-		if( this.props.searchSelect ) {
-			this.props.selectSearchTerm( this.props.searchSelect, this.props[ this.props.searchSelect ] );
+	const selectWord = () => {
+		if( props.searchSelect ) {
+			props.selectSearchTerm( props.searchSelect, props[ props.searchSelect ] );
 			return;
 		}
 
-		this.props.addWord( this.props.settings.subdue );
+		props.addWord( props.settings.subdue );
 	};
 
-	getTitle = () => {
-		const { lemma, morph } = this.props;
+	const getTitle = () => {
 		if ( ! lemma ) {
 			return null;
 		}
 		return morph ? lemma + ' ' + morphology( morph, 'noLinks', lemma ) : lemma;
 	};
 
-	getClassName = () => {
-		const { lemma } = this.props;
+	const getClassName = () => {
 		let family = null;
-		if ( this.props.settings.highlightWordsWith === 'family' ) {
+		if ( props.settings.highlightWordsWith === 'family' ) {
 			family = getFamily( lemma );
 		}
 
@@ -88,33 +87,29 @@ class WordSingle extends React.Component {
 			return classnames( lemma );
 		}
 
-		if( this.props.searchSelect ) {
+		if( props.searchSelect ) {
 			return classnames( lemma, family, styles.selectSingle );
 		}
 
 		return classnames( lemma, family, styles.single );
 	};
 
-	render() {
-		const { lemma } = this.props;
-		return (
-			<span
-				className={ this.getClassName() }
-				onMouseOver={ this.highlightWord }
-				onMouseOut={ this.clearHighlightWord }
-				onClick={ this.selectWord }
-				title={ this.getTitle() }
-				key={ lemma }
-				>
-				{ this.getWord() }
-			</span>
-		);
-	}
-}
+	return (
+		<span
+			className={ getClassName() }
+			onMouseOver={ highlightWord }
+			onMouseOut={ clearHighlightWord }
+			onClick={ selectWord }
+			title={ getTitle() }
+			key={ lemma }
+			>
+			{ getWord() }
+		</span>
+	);
+};
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		highlighted: state.wordHighlight,
 		searchSelect: state.searchSelect,
 		settings: state.settings,
 	}
