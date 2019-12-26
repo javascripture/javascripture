@@ -37,13 +37,11 @@ class Word extends React.Component{
 		) );
 
 		if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( this.props.lastWord && startsWithPunctuation( this.props.lastWord[0] ) ) ) {
-			return (
-				<span>{ wordString }</span>
-			);
+			return wordString;
 		}
 
 		return (
-			<span> { wordString }</span>
+			<React.Fragment> { wordString }</React.Fragment>
 		);
 	}
 }

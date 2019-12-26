@@ -17,9 +17,7 @@ const Verse = ( { verse, index, language, version } ) => {
 		words = verse;
 	}
 
-	return (
-		<span>{ words }</span>
-	);
+	return words;
 };
 
 export default Verse;

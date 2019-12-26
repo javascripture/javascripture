@@ -187,10 +187,10 @@ class Chapter extends React.Component{
 	}
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				{ this.props.inSync && this.getSyncVerses() }
 				{ ! this.props.inSync && this.getDifferentVerses() }
-			</div>
+			</React.Fragment>
 		);
 	}
 }
