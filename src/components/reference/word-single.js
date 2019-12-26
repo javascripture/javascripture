@@ -36,10 +36,6 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 };
 
 class WordSingle extends React.Component {
-	state = {
-		style: {},
-	}
-
 	getLemma() {
 		if ( this.props.lemma) {
 			return this.props.lemma.split( ' ' ).split( '/' ).filter( function( lemma ) {
@@ -48,14 +44,6 @@ class WordSingle extends React.Component {
 		}
 
 		return [];
-	}
-
-	wordStyle() {
-		let wordStyle = {};
-		if ( this.props.textTransform ) {
-			wordStyle.textTransform = this.props.textTransform;
-		}
-		return wordStyle;
 	}
 
 	getWord() {
@@ -126,7 +114,6 @@ class WordSingle extends React.Component {
 				onMouseOut={ this.clearHighlightWord }
 				onClick={ this.selectWord }
 				title={ this.getTitle() }
-				style={ this.wordStyle() }
 				key={ lemma }
 				>
 				{ this.getWord() }
