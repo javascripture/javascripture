@@ -24,14 +24,9 @@ const Word = ( { word, version, language } ) => {
 		return null;
 	}
 
-	const wordValue = word[ 0 ],
-		lemma = word[ 1 ],
-		morph = word[ 2 ];
+	const [ wordValue, lemma, morph ] = word;
 
-	let wordString;
-
-
-	wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => (
+	const wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => (
 		<WordSingle key={ key } lemma={ lemma ? lemma.split('/')[ key ]: null } word={ wordSingleValue } morph={ morph ? morph.split('/')[ key ] : null } version={ version } language={ language } />
 	) );
 
