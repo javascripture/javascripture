@@ -57,15 +57,6 @@ const trays = ( state = initalState, action ) => {
 				return tray;
 			} );
 
-		case LOCATION_CHANGE:
-			if ( window.innerWidth < 600 ) {
-				return state.map( tray => {
-					tray.visible = false;
-					return tray;
-				} );
-			}
-			return state;
-
 		default:
 			return state;
 	}
