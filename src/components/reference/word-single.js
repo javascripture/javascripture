@@ -67,7 +67,7 @@ const WordSingle = ( props ) => {
 			return;
 		}
 
-		props.addWord( props.settings.subdue );
+		props.addWord();
 	};
 
 	const getTitle = () => {
@@ -122,7 +122,7 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( updateSearchForm( 'version', ownProps.version ) );
 			dispatch( deactivateSearchSelect() );
 		},
-		addWord: ( subdue ) => {
+		addWord: () => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
 
 			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
@@ -132,7 +132,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 
 				dispatch( addWord( {
 					strongsNumber,
-					subdue,
 					open: true,
 					morphology: ownProps.morph,
 					version: ownProps.version,
