@@ -179,3 +179,19 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.single {
+  margin: 0 -1px;
+  padding: 0 1px;
+}
+
+.single:hover {
+  cursor: pointer;
+}
+
+.search-select {
+  cursor: crosshair;
+}
+.search-select .single:hover {
+  cursor: crosshair !important;
+}

@@ -1,7 +1,6 @@
 // External
 import React from 'react';
 import classnames from 'classnames';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { connect } from 'react-redux';
 
 // Internal
@@ -14,7 +13,6 @@ import {
 } from '../../actions';
 import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
-import styles from './styles.scss';
 
 const getByLemmaAndMorph = function( lemma, morph ) {
 	if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ] ) {
@@ -84,14 +82,10 @@ const WordSingle = ( props ) => {
 		}
 
 		if ( lemma === 'added' ) {
-			return classnames( lemma );
+			return classnames( 'single', lemma );
 		}
 
-		if( props.searchSelect ) {
-			return classnames( lemma, family, styles.selectSingle );
-		}
-
-		return classnames( lemma, family, styles.single );
+		return classnames( 'single', lemma, family );
 	};
 
 	return (
@@ -110,8 +104,8 @@ const WordSingle = ( props ) => {
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		searchSelect: state.searchSelect,
 		settings: state.settings,
+		searchSelect: state.searchSelect,
 	}
 };
 
@@ -147,4 +141,4 @@ const WordSingleContainer = connect(
 	mapDispatchToProps
 )( WordSingle )
 
-export default withStyles( styles )( WordSingleContainer );
+export default WordSingleContainer;

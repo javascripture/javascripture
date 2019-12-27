@@ -1,6 +1,7 @@
 // External
 import React from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 // Internal
 import Reference from '../reference';
@@ -17,8 +18,9 @@ class ReferenceWrapper extends React.Component{
 			references = <Reference reference={ this.props.references[ 0 ] } index={ 0 } />
 		}
 
+		const className = classnames( styles.referenceWrapper, this.props.searchSelect ? 'search-select' : null );
 		return (
-			<div className={ styles.referenceWrapper }>
+			<div className={ className }>
 				<div className={ styles.referenceWrapperInner }>
 					{ references }
 				</div>
@@ -27,10 +29,11 @@ class ReferenceWrapper extends React.Component{
 	}
 }
 
-const mapStateToProps = ( { reference, settings }, ownProps ) => {
+const mapStateToProps = ( { reference, settings, searchSelect }, ownProps ) => {
 	return {
 		inSync: settings.inSync,
 		references: reference,
+		searchSelect,
 	}
 };
 
