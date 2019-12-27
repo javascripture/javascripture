@@ -14,8 +14,9 @@ var getStrongsColor = function( lemma, lightness ) {
 var getStrongsColorWithSettings = function( strongsNumber, lightness, highlightWordsWith ) {
 	var hightlightFamilies = highlightWordsWith === 'family',
 		classInt;
+
 	if ( hightlightFamilies ) {
-		classInt = parseFloat( strongsNumber.substring( 1, strongsNumber.length ), 10 );
+		classInt = parseFloat( getFamily( strongsNumber ).substring( 1, strongsNumber.length ), 10 );
 	} else {
 		classInt = parseInt( strongsNumber.substring( 1, strongsNumber.length ), 10 );
 	}
@@ -25,7 +26,7 @@ var getStrongsColorWithSettings = function( strongsNumber, lightness, highlightW
 
 var getClassNameWithSettings = function( strongsNumber, lightness, highlightWordsWith ) {
 	if ( highlightWordsWith === 'family' ) {
-		return getFamily( strongsNumber );
+		return getFamily( strongsNumber ) + '-family';
 	} else {
 		return strongsNumber;
 	}

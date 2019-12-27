@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import {
-	addWord,
+	selectWord,
 	deactivateSearchSelect,
 	setTrayVisibilityFilter,
 	updateSearchForm,
@@ -49,13 +49,8 @@ const WordSingle = ( props ) => {
 	};
 
 	const highlightWord = () => {
-		let strongsNumber = lemma;
-		if ( props.settings.highlightWordsWith === 'family' ) {
-			strongsNumber = getFamily( lemma );
-		}
-
-		if ( strongsNumber !== "G3588" ) {
-			window.updateAppComponent( 'highlightedWord', strongsNumber );
+		if ( lemma !== "G3588" ) {
+			window.updateAppComponent( 'highlightedWord', lemma );
 		}
 	};
 
@@ -76,10 +71,7 @@ const WordSingle = ( props ) => {
 	};
 
 	const getClassName = () => {
-		let family = null;
-		if ( props.settings.highlightWordsWith === 'family' ) {
-			family = getFamily( lemma );
-		}
+		const family = lemma ? lemma.split( ' ' ).map( oneLemma => getFamily( oneLemma ) + '-family' ) : null;
 
 		if ( lemma === 'added' ) {
 			return classnames( 'single', lemma );
@@ -104,7 +96,6 @@ const WordSingle = ( props ) => {
 
 const mapStateToProps = ( state, ownProps ) => {
 	return {
-		settings: state.settings,
 		searchSelect: state.searchSelect,
 	}
 };
