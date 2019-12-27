@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 // Internal
 import {
 	selectWord,
-	deactivateSearchSelect,
-	setTrayVisibilityFilter,
-	updateSearchForm,
-	appendToSearchForm
 } from '../../actions';
 import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
@@ -54,15 +50,6 @@ const WordSingle = ( props ) => {
 		}
 	};
 
-	const selectWord = () => {
-		if( props.searchSelect ) {
-			props.selectSearchTerm( props.searchSelect, props[ props.searchSelect ] );
-			return;
-		}
-
-		props.addWord();
-	};
-
 	const getTitle = () => {
 		if ( ! lemma ) {
 			return null;
@@ -85,7 +72,7 @@ const WordSingle = ( props ) => {
 			className={ getClassName() }
 			onMouseOver={ highlightWord }
 			onMouseOut={ clearHighlightWord }
-			onClick={ selectWord }
+			onClick={ props.selectWord }
 			title={ getTitle() }
 			key={ lemma }
 			>
@@ -94,41 +81,16 @@ const WordSingle = ( props ) => {
 	);
 };
 
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		searchSelect: state.searchSelect,
-	}
-};
-
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
-		selectSearchTerm: ( name, value ) => {
-			dispatch( appendToSearchForm( name, value ) );
-			dispatch( updateSearchForm( 'version', ownProps.version ) );
-			dispatch( deactivateSearchSelect() );
-		},
-		addWord: () => {
-			dispatch( setTrayVisibilityFilter( 'word' ) );
-
-			ownProps.lemma && ownProps.lemma.split( ' ' ).map( strongsNumber => {
-				if ( strongsNumber === "G3588" ) {
-					return;
-				}
-
-				dispatch( addWord( {
-					strongsNumber,
-					open: true,
-					morphology: ownProps.morph,
-					version: ownProps.version,
-					clickedWord: ownProps.word,
-				} ) );
-			} );
+		selectWord: () => {
+			dispatch( selectWord( ownProps ) );
 		},
 	}
 };
 
 const WordSingleContainer = connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
 )( WordSingle )
 

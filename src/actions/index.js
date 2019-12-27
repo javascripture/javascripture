@@ -370,3 +370,32 @@ export const toggleSidebar = () => {
 		type: 'TOGGLE_SIDEBAR',
 	}
 }
+
+export const selectWord = ( props ) => {
+	const { word, lemma, morph, version } = props;
+	return function( dispatch, getState ) {
+		const searchSelect = getState().searchSelect;
+		if ( searchSelect ) {
+			dispatch( appendToSearchForm( searchSelect, props[ searchSelect ] ) );
+			dispatch( updateSearchForm( 'version', version ) );
+			dispatch( deactivateSearchSelect() );
+		} else {
+			dispatch( setTrayVisibilityFilter( 'word' ) );
+
+			lemma && lemma.split( ' ' ).map( strongsNumber => {
+				if ( strongsNumber === "G3588" ) {
+					return;
+				}
+
+				dispatch( addWord( {
+					strongsNumber,
+					open: true,
+					morphology: morph,
+					version: version,
+					clickedWord: word,
+				} ) );
+			} );
+		}
+	}
+
+};
