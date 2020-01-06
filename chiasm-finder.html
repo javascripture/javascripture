@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script src="data/bible.js"></script>
+		<script src="data/morphhb.js"></script>
+		<script src="data/tischendorf.js"></script>
+		<script>
+			var data = Object.assign( {}, morphhb, tischendorf );
+		</script>
+		<script>
+		
+		function getLemmaFromWord( word ) {
+			if ( word && word.length > 0 ) {
+				var lemma = word[1].split( '/' );
+				return lemma[ lemma.length - 1 ];
+			}
+			
+			return null;
+		}
+		
+		function isABCBA( wordArray ) {
+			return getLemmaFromWord(wordArray[ 0 ]) === getLemmaFromWord(wordArray[ 4 ]) && getLemmaFromWord(wordArray[ 1 ]) === getLemmaFromWord(wordArray[ 3 ]);
+		}
+		
+		function isABBA( wordArray ) {
+			return getLemmaFromWord(wordArray[ 0 ]) === getLemmaFromWord(wordArray[ 3 ]) && getLemmaFromWord(wordArray[ 1 ]) === getLemmaFromWord(wordArray[ 2 ]);
+		}
+
+		function getWordSummary( wordArray ) {
+			return wordArray.map( word => {
+				return word ? word[ 0 ].replace(/\//g,'') : word;
+			} ).join( ' ' );
+		}
+
+		function getLemmaSummary( wordArray ) {
+			return wordArray.map( word => {
+				return word ? word[ 1 ] : word;
+			} ).join( ' ' );
+		}
+		
+		function findChiasms() {
+			var type = document.getElementById('chiasmType').value;
+			var wordArray = [ null, null, null, null ];
+			if ( type === 'ABCBA' ) {
+				wordArray.push( null );
+			}
+
+			var references = [];
+			var summary = [];
+
+			bible.Data.allBooks.forEach( book => data[ book ].forEach( ( chapter, chapterNumber ) => chapter.forEach( ( verse, verseNumber ) => verse.forEach( word => {
+				wordArray.shift();
+				wordArray.push( word );
+				if ( ( type === 'ABCBA' && isABCBA( wordArray ) ) || ( type === 'ABBA' && isABBA( wordArray ) ) ) {
+					references.push( { book: book, chapter: chapterNumber + 1, verse: verseNumber + 1 } );
+					summary.push( wordArray.concat() );
+				}
+			} ) ) ) );
+			var results = references.length + ' results<br /><br />';
+			results += references.map( ( reference, key ) => {
+				return reference.book + ' ' + reference.chapter + ':' + reference.verse + '<br />' + getWordSummary( summary[ key ] ) + '<br />' + getLemmaSummary( summary[ key ] ) + '<br />';
+			} ).join('<br />');
+			document.getElementById('results').innerHTML = results;
+		}
+		</script>
+	</head>
+	<body>
+		<H1>Chiasm Finder</h1>
+		<p>This tool helps you find linguistic chiasms in the bible. The script loops through every word in the bible and looks for palindromic structures by comparing the strongs numbers assigned to each word. The script only looks for short palindromes, since these are long enough to be interesting, and anything longer will be included in the list. For the sake of simplicity this tool avoids Hebrew prefixes and suffixes.</p>
+		Select type:<br /><select id="chiasmType">
+			<option>ABCBA</option>
+			<option>ABBA</option>
+		</select><br />
+		<button onClick="findChiasms()">Find chiasms</button>
+		<br />
+		<br />
+		<div id="results"></div>
+		<p><a href="https://www.chiasmusxchange.com/">Find out more about chiasms here</a></p>
+	</body>
+</html>
