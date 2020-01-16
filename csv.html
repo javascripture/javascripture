@@ -53,7 +53,7 @@
         }
 		
 		function generateCSV() {
-            var books = ['Leviticus'];
+            var books = ['Daniel'];
             books.forEach( book => data[ book ].forEach( ( chapter, chapterNumber ) => chapter.forEach( ( verse, verseNumber ) => verse.forEach( word => {
                 const wordString = getWordFromWord( word );
                 const lemma = getLemmaFromWord( word );
