@@ -40,12 +40,15 @@
         function ConvertToCSV( words ) {
             var str = '';
 
-            Object.keys( words ).forEach( lemma => {
-                Object.keys( words[ lemma ] ).forEach( morph => {
-                    str += lemma + ','
-                    str += morph + ','
-                    str += words[ lemma ][ morph ]
-                    str += '<br />';
+            Object.keys( words ).forEach( word => {
+                Object.keys( words[ word ] ).forEach( lemma => {
+                    Object.keys( words[ word ][ lemma ] ).forEach( morph => {
+                        str += word + ','
+                        str += lemma + ','
+                        str += morph + ','
+                        str += words[ word ][ lemma ][ morph ]
+                        str += '<br />';
+                    } );
                 } );
             } );
 
@@ -54,7 +57,7 @@
 		
 		function generateCSV() {
             var books = ['Daniel'];
-            books.forEach( book => data[ book ].forEach( ( chapter, chapterNumber ) => chapter.forEach( ( verse, verseNumber ) => verse.forEach( word => {
+            bible.Data.allBooks.forEach( book => data[ book ].forEach( ( chapter, chapterNumber ) => chapter.forEach( ( verse, verseNumber ) => verse.forEach( word => {
                 const wordString = getWordFromWord( word );
                 const lemma = getLemmaFromWord( word );
                 const morph = getMorphFromWord( word )
@@ -62,32 +65,84 @@
                     wordArray = wordString.split('/');
                     lemmaArray = lemma.split('/');
                     morphArray = morph.split('/');
-                    lemmaArray.forEach( ( lemmaInArray, key ) =>  {
-                        if ( ! words[ lemmaInArray ] ) {
-                            words[ lemmaInArray ] = {};
+
+                    wordArray.forEach( ( wordInArray, key ) =>  {
+                        var wordForWord = wordInArray.replace(/[,·;\.:]+\s*$/, "").toLowerCase();
+                        if ( ! words[ wordForWord ] ) {
+                            words[ wordForWord ] = {};
                         }
-                        if ( morphArray[ key ] ) {
-                            words[ lemmaInArray ][ morphArray[ key ] ] = javascripture.data.literalConsistent[ lemmaInArray ][ morphArray[ key ] ];
-                        } else {
-                            words[ lemmaInArray ][ 'no-morph' ] = javascripture.data.literalConsistent[ lemmaInArray ][ 'no-morph' ];
+
+                        var lemmaForWord = lemmaArray[ key ];
+                        if ( ! lemmaForWord ) {
+                            lemmaForWord = 'no-lemma';
                         }
-                    } )
+
+                        if ( ! words[ wordForWord][ lemmaForWord ] ) {
+                            words[ wordForWord][ lemmaForWord ] = {};
+                        }
+
+                        var morphForWord = morphArray[ key ];
+                        if ( ! morphForWord ) {
+                            morphForWord = 'no-morph';
+                        }
+
+                        var literalTranslation = '';
+                        if ( javascripture.data.literalConsistent[ lemmaForWord ] ) {
+                            if ( javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord ] ) {
+                                literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord ];
+                            } else if ( javascripture.data.literalConsistent[ lemmaForWord ][ 'no-morph' ] ) {
+                                literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ 'no-morph' ];
+                            } else {
+                                var morphWeHave = Object.keys( javascripture.data.literalConsistent[ lemmaForWord ] )[0];
+                                literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ morphWeHave ];
+                            }
+                        }
+
+                        words[ wordForWord][ lemmaForWord ][ morphForWord ] = literalTranslation;
+                    } );
+
                 }
             } ) ) ) );
-            //console.log( ConvertToCSV( words ) );
-            //document.getElementById('results').innerHTML = JSON.stringify( words );
+
             document.getElementById('results').innerHTML = ConvertToCSV( words );
-			/*var results = words.map( ( word, key ) => {
-				return word
-			} ).join('<br />');*/
-			//document.getElementById('results').innerHTML = results;
-		}
+        }
+        
+        function generateObject() {
+            var file = document.getElementById( 'upload' ).files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.readAsText(file, "UTF-8");
+                reader.onload = function (evt) {
+                    var listOfWords = evt.target.result.split('\r\n');
+                    listOfWords.shift();
+                    console.log( listOfWords );
+                    listOfWords.forEach( word => {
+                        var wordArray = word.split( ',' );
+                        if ( ! words[ wordArray[0] ] ) {
+                            words[ wordArray[0] ] = {};
+                        }
+
+                        if ( ! words[ wordArray[0] ][ wordArray[1] ] ) {
+                            words[ wordArray[0] ][ wordArray[1] ] = {};
+                        }
+
+                        words[ wordArray[0] ][ wordArray[1] ][ wordArray[2] ] = [ wordArray[3] ]
+                    } );
+                    document.getElementById("results").innerHTML = JSON.stringify( words );
+                }
+                reader.onerror = function (evt) {
+                    document.getElementById("results").innerHTML = "error reading file";
+                }
+}
+            
+        }
 		</script>
 	</head>
 	<body>
 		<H1>CSV creator</h1>
 		<p>This tool creates a CSV of every lemma and morphology combination in the original text. Use it to generate a CSV that can be shared with others so the process of creating a literal translation can be shared.</p>
-		<button onClick="generateCSV()">Generate CSV</button>
+        <button onClick="generateCSV()">Generate CSV</button>
+        <input id="upload" type="file" /><button onClick="generateObject()">Generate Object</button>
 		<br />
 		<br />
 		<div id="results"></div>
