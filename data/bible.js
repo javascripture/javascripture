@@ -94,9 +94,9 @@ bible.Data.supportedVersions = {
 	'LEB': { name: 'Lexham English Bible', language: 'en' },
 	'NET': { name: 'New English Translation', language: 'en' },
 	'WMB': { name: 'World Messianic Bible', language: 'en' },
-	'FarOPV': { name: 'ترجمه-ی قدام', language: 'fa' },
-	'FarTPV': { name: 'مژده برای اسرع جدید', language: 'fa' },
-	'FarHezareNoh': { name: 'ترجمه هزارۀ نو', language: 'fa' },
+	'OPV': { name: 'ترجمه-ی قدام', language: 'fa' },
+	'TPV': { name: 'مژده برای اسرع جدید', language: 'fa' },
+	'NMV': { name: 'ترجمه هزارۀ نو', language: 'fa' },
 	'AraSVD': { name: 'Arabic Bible', language: 'ar' },
 	'RomCor': { name: 'Cornilescu Bible in Romanian language', language: 'ro' },
 };

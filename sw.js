@@ -24,8 +24,7 @@ self.addEventListener('install', function( e ) {
 			'data/morphhb.js',
 			'data/tischendorf.js',
 			'data/crossReferences.js',
-			'data/literalConsistent.js',
-			'data/literalConsistentExtra.js',
+			'data/LC.js',
 
 			//api - so that search works offline?
 			'api/searchApi.js',

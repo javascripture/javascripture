@@ -10,9 +10,42 @@ import {
 import { getFamily } from '../../lib/word';
 import morphology from '../../lib/morphology';
 
-const getByLemmaAndMorph = function( lemma, morph ) {
-	if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ] ) {
-		if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ lemma ][ morph ] ) {
+const getLiteralConsistent = function( word, lemma, morph ) {
+	if ( ! javascripture.data.LC ) {
+		return null;
+	}
+
+	if ( ! javascripture.data.LC[ word ] ) {
+		return null;
+	}
+
+	if ( ! javascripture.data.LC[ word ][ lemma ] ) {
+		if ( ! javascripture.data.LC[ word ][ 'no-lemma' ][ morph ] ) {
+			if ( ! javascripture.data.LC[ word ][ 'no-lemma' ][ 'no-morph' ] ) {
+				return null
+			}
+
+			return javascripture.data.LC[ word ][ 'no-lemma' ][ 'no-morph' ];
+		}
+
+		return javascripture.data.LC[ word ][ 'no-lemma' ][ morph ]
+	}
+
+	if ( ! javascripture.data.LC[ word ][ lemma ][ morph ] ) {
+		if ( ! javascripture.data.LC[ word ][ lemma ][ 'no-morph' ] ) {
+			return null;
+		}
+
+		return javascripture.data.LC[ word ][ lemma ][ 'no-morph' ];
+		
+	}
+
+	return javascripture.data.LC[ word ][ lemma ][ morph ];
+}
+
+/*
+	if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.LC[ lemma ] ) {
+		if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.LC[ lemma ][ morph ] ) {
 			return javascripture.data.literalConsistent[ lemma ][ morph ];
 		}
 
@@ -27,14 +60,14 @@ const getByLemmaAndMorph = function( lemma, morph ) {
 		return javascripture.data.literalConsistent[ morph ];
 	}
 	return 'todo';
-};
+};*/
 
 const WordSingle = ( props ) => {
 	const { lemma, morph, version, word } = props;
 
 	const getWord = () => {
 		if ( version === 'LC' ) {
-			return getByLemmaAndMorph( lemma, morph ) + ' ';
+			return getLiteralConsistent( word, lemma, morph ) + ' ';
 		}
 
 		return word;

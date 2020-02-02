@@ -2,7 +2,7 @@ var language;
 
 javascripture.api.search = {
 	books: {
-		FarHezareNoh: bible.Data.ntBooks,
+		NMV: bible.Data.ntBooks,
 	},
 	types: [
 		'word',
