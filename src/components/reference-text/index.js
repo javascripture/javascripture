@@ -2,7 +2,15 @@
 import { connect } from 'react-redux';
 
 const ReferenceText = ( { reference, interfaceLanguage } ) => {
-	return bible.getTranslatedBookNameByLanguage( reference.book, interfaceLanguage ) + ' ' + reference.chapter + ':' + reference.verse;
+	let text = bible.getTranslatedBookNameByLanguage( reference.book, interfaceLanguage );
+	if ( reference.chapter ) {
+		text +=  ' ' + reference.chapter;
+	}
+
+	if ( reference.verse ) {
+		text += ':' + reference.verse;
+	}
+	return text;
 };
 
 const mapStateToProps = ( state, ownProps ) => {

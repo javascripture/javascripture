@@ -6,6 +6,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
+import ReferenceText from '../reference-text';
 import styles from './styles.scss';
 
 class BookControl extends React.Component{
@@ -74,10 +75,10 @@ class BookControl extends React.Component{
 				onTouchMove={ this.handleTouchMove }
 				onTouchEnd={ this.handleTouchEnd }
 				ref={ ( ref ) => this.referenceSelector = ref }>
-				{ this.props.name } <span onTouchEnd={ this.goToReference } className="chapter-number">{ this.state.chapter }</span>
-				<span className={ styles.go }>
-					{ buttonText }
-				</span>
+					<ReferenceText reference={ { book: this.props.name } } /> <span onTouchEnd={ this.goToReference } className="chapter-number">{ this.state.chapter }</span>
+					<span className={ styles.go }>
+						{ buttonText }
+					</span>
 			</div>
 		);
 	}

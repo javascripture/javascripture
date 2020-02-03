@@ -116,6 +116,8 @@ class SettingsTray extends React.Component{
 											<option value="en">English</option>
 											<option value="fa">Farsi</option>
 											<option value="original">Original</option>
+											<option value="ro">Romanian</option>
+											<option value="ar">Arabic</option>
 										</select>
 									</li>
 								</ul>
