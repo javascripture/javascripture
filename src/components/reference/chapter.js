@@ -75,6 +75,10 @@ class Chapter extends React.Component{
 			return classnames( styles.verse, styles.hebrew );
 		}
 
+		if ( version === 'OPV' || version === 'TPV' || version === 'NMV' ) {
+			return classnames( styles.verse, styles.farsi );
+		}
+
 		return styles.verse
 	}
 

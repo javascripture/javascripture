@@ -27,7 +27,6 @@ class SettingsTray extends React.Component{
 						<div className="content-padding">
 							<h2>Help</h2>
 							<p><a href="/help">Get help here</a></p>
-							<br />
 							<ul>
 								<li>To find out about a word, click on it</li>
 							</ul>
@@ -133,6 +132,7 @@ class SettingsTray extends React.Component{
 						ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
 					</p>
 					<p><br />Version: { typeof( javascripture.sw ) !== 'undefined' ? javascripture.sw : null }</p>
+					<p><a href="javascript:clear();">Clear settings and start over</a></p>
 				</div>
 			</div>
 		);
