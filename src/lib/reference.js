@@ -22,7 +22,7 @@ export const getReferenceText = ( referenceObject ) => {
 
 export const getAllLemmasFromReference = ( reference, data ) => {
 	const verse = data[ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ];
-	lemmas = verse.map( word => {
+	const lemmas = verse.map( word => {
 		const lemma = word[ 1 ].split( '/' );
 		// filter out non-numeric lemmas
 		return lemma.filter( singleLemma => ! isNaN( singleLemma[1] ) );
