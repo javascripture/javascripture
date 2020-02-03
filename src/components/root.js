@@ -37,6 +37,7 @@ class Root extends React.Component{
 				styles={{
 					sidebar: { background: "white", overflowY: "none", width: "320px", zIndex: "10" },
 					overlay: { disply: "none", bottom: "auto", right: "auto" },
+					content: { background: "white" },
 				}}
 			>
 				<div className={ styles.root }>
@@ -48,7 +49,6 @@ class Root extends React.Component{
 					<Footer />
 				</div>
 			</Sidebar>
-
 		);
 	}
 }

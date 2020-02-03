@@ -43,25 +43,6 @@ const getLiteralConsistent = function( word, lemma, morph ) {
 	return javascripture.data.LC[ word ][ lemma ][ morph ];
 }
 
-/*
-	if ( 'undefined' !== typeof lemma && 'undefined' !== typeof javascripture.data.LC[ lemma ] ) {
-		if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.LC[ lemma ][ morph ] ) {
-			return javascripture.data.literalConsistent[ lemma ][ morph ];
-		}
-
-		if( javascripture.data.literalConsistent[ lemma ]['no-morph'] ) {
-			return javascripture.data.literalConsistent[ lemma ]['no-morph'];
-		}
-
-		var firstKey = Object.keys(javascripture.data.literalConsistent[ lemma ])[0];
-		return javascripture.data.literalConsistent[ lemma ][ firstKey ];
-	}
-	if ( 'undefined' !== typeof morph && 'undefined' !== typeof javascripture.data.literalConsistent[ morph ] ) {
-		return javascripture.data.literalConsistent[ morph ];
-	}
-	return 'todo';
-};*/
-
 const WordSingle = ( props ) => {
 	const { lemma, morph, version, word } = props;
 

@@ -2,7 +2,6 @@
 import React from 'react';
 
 // Internal
-import strongsColor from '../strongs-color.js';
 import WordSingle from './word-single.js';
 
 function startsWithPunctuation( word ) {
