@@ -87,10 +87,19 @@
                         if ( ! morphForWord ) {
                             morphForWord = 'no-morph';
                         }
+
+                        if ( morph.indexOf( 'H' ) === 0 && key > 0 ) {
+                            morphForWord = 'H' + morphForWord;
+                        }
+
+                        if ( morph.indexOf( 'A' ) === 0 && key > 0 ) {
+                            morphForWord = 'A' + morphForWord;
+                        }
+
                         const morphParseObject = new MorphParse();
-                        const morphCode = morphParseObject.Parse( 'H' + morph );
+                        const morphCode = morphParseObject.Parse( morphForWord );
                         if ( morphCode.indexOf( 'undefined' ) > -1 ) {
-                            morphString += morph + ' ' + morphParseObject.Parse( 'H' + morph ) + '<br>';
+                            morphString += morph + ' ' + morphForWord + ' ' + morphCode + '<br>';
                         }
 
                         var literalTranslation = '';
