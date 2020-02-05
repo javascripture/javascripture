@@ -5,6 +5,8 @@
 		<script src="data/bible.js"></script>
 		<script src="data/morphhb.js"></script>
         <script src="data/tischendorf.js"></script>
+        <script src="lib/MorphCodes.js"></script>
+        <script src="lib/MorphParse.js"></script>
 		<script>
             var javascripture = { data: {} };
 			var data = Object.assign( {}, morphhb, tischendorf );
@@ -18,14 +20,14 @@
 			if ( word && word.length > 0 ) {
 			    return word[0];
 			}
-			
+
 			return null;
 		}
 		function getLemmaFromWord( word ) {
 			if ( word && word.length > 0 ) {
 			    return word[1];
 			}
-			
+
 			return null;
 		}
 
@@ -33,10 +35,10 @@
 			if ( word && word.length > 0 ) {
 			    return word[2];
 			}
-			
+
 			return null;
         }
-        
+
         function ConvertToCSV( words ) {
             var str = '';
 
@@ -54,9 +56,9 @@
 
             return str;
         }
-		
+
 		function generateCSV() {
-            var books = ['Daniel'];
+            var morphString = '';
             bible.Data.allBooks.forEach( book => data[ book ].forEach( ( chapter, chapterNumber ) => chapter.forEach( ( verse, verseNumber ) => verse.forEach( word => {
                 const wordString = getWordFromWord( word );
                 const lemma = getLemmaFromWord( word );
@@ -85,6 +87,11 @@
                         if ( ! morphForWord ) {
                             morphForWord = 'no-morph';
                         }
+                        const morphParseObject = new MorphParse();
+                        const morphCode = morphParseObject.Parse( 'H' + morph );
+                        if ( morphCode.indexOf( 'undefined' ) > -1 ) {
+                            morphString += morph + ' ' + morphParseObject.Parse( 'H' + morph ) + '<br>';
+                        }
 
                         var literalTranslation = '';
                         if ( javascripture.data.literalConsistent[ lemmaForWord ] ) {
@@ -103,10 +110,10 @@
 
                 }
             } ) ) ) );
-
-            document.getElementById('results').innerHTML = ConvertToCSV( words );
+            document.getElementById('results').innerHTML = morphString;
+            //document.getElementById('results').innerHTML = ConvertToCSV( words );
         }
-        
+
         function generateObject() {
             var file = document.getElementById( 'upload' ).files[0];
             if (file) {
@@ -115,7 +122,7 @@
                 reader.onload = function (evt) {
                     var listOfWords = evt.target.result.split('\r\n');
                     listOfWords.shift();
-                    console.log( listOfWords );
+                    //console.log( listOfWords );
                     listOfWords.forEach( word => {
                         var wordArray = word.split( ',' );
                         if ( ! words[ wordArray[0] ] ) {
@@ -134,7 +141,7 @@
                     document.getElementById("results").innerHTML = "error reading file";
                 }
 }
-            
+
         }
 		</script>
 	</head>

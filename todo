@@ -1,7 +1,8 @@
 // todo
 - speed
 - can't see book names in portrait
-- 
+- fix broken morphologys
+- update LC with new unaccented data and morphology
 - use tab names in the footer
 - show tab names in the sidebar
 - make the reference selector better
@@ -147,4 +148,3 @@ Hebrw morphology
 
 Occourances for simon:
 word frequence analysis
-
