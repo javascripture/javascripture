@@ -14,9 +14,9 @@ import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 import xhr from 'xhr';
 
-const getVerseWrapperStyle = function( language, version ) {
+const getVerseWrapperStyle = function( book, version ) {
 	// TODO generalize
-	if ( bible.isRtlVersion( version, language ) ) {
+	if ( bible.isRtlVersion( version, book ) ) {
 		return {
 			direction: 'rtl'
 		};
@@ -70,8 +70,8 @@ class Chapter extends React.Component{
 		}
 	}
 
-	getClassName( language, version ) {
-		if ( language === 'hebrew' && version === 'original' ) {
+	getClassName( book, version ) {
+		if ( ( version === 'original' || version === 'accented' ) && bible.Data.otBooks.indexOf( book ) > -1 ) {
 			return classnames( styles.verse, styles.hebrew );
 		}
 
@@ -134,8 +134,8 @@ class Chapter extends React.Component{
 
 								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
-									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( language, reference.version ) }>
-										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, reference.version ) }>
+									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( book, reference.version ) }>
+										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( book, reference.version ) }>
 											<Verse verse={ verseData } index={ verseNumber } version={ reference.version } language={ language } />
 										</span>
 									</div>

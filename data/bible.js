@@ -82,6 +82,7 @@ bible.Data.bookNamesByLanguage = {
 bible.Data.rtlLanguages = [ 'he', 'fa', 'ar' ];
 bible.Data.supportedVersions = {
 	'original': { name: 'Original', language: 'original' },
+	'accented': { name: 'Accented original', language: 'original' },
 	'KJV': { name: 'King James Version', language: 'en' },
 	'WEB': { name: 'World English Bible', language: 'en' },
 	'ESV': { name: 'English Standard Version', language: 'en' },
@@ -99,7 +100,6 @@ bible.Data.supportedVersions = {
 	'NMV': { name: 'ترجمه هزارۀ نو', language: 'fa' },
 	'AraSVD': { name: 'Arabic Bible', language: 'ar' },
 	'RomCor': { name: 'Cornilescu Bible in Romanian language', language: 'ro' },
-	'ACCENTED': { name: 'Accented original', language: 'original' },
 };
 bible.Data.verses = [
 [31,25,24,26,32,22,24,22,29,32,32,20,18,24,21,16,27,33,38,18,34,24,20,67,34,35,46,22,35,43,55,32,20,31,29,43,36,30,23,23,57,38,34,34,28,34,31,22,33,26],
@@ -414,7 +414,13 @@ bible.getTranslatedBookName = function( bookName, version ) {
 	return bible.getTranslatedBookNameByLanguage( bookName, language );
 };
 
-bible.isRtlVersion = function( version, language ) {
+bible.isRtlVersion = function( version, book ) {
 	var versionLanguage = bible.Data.supportedVersions[ version ].language;
-	return language === 'hebrew' || bible.Data.rtlLanguages.indexOf( versionLanguage ) > -1;
+	if ( bible.Data.rtlLanguages.indexOf( versionLanguage ) > -1 ) {
+		return true;
+	}
+
+	if ( versionLanguage === 'original' && bible.Data.otBooks.indexOf( book ) > -1 ) {
+		return true;
+	}
 };
