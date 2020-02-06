@@ -7,6 +7,7 @@
         <script src="data/tischendorf.js"></script>
         <script src="lib/MorphCodes.js"></script>
         <script src="lib/MorphParse.js"></script>
+        <script src="lib/morphgnt-parse.js"></script>
 		<script>
             var javascripture = { data: {} };
 			var data = Object.assign( {}, morphhb, tischendorf );
@@ -45,9 +46,18 @@
             Object.keys( words ).forEach( word => {
                 Object.keys( words[ word ] ).forEach( lemma => {
                     Object.keys( words[ word ][ lemma ] ).forEach( morph => {
+                        let morphCode;
+                        if ( lemma.indexOf( 'G' ) === 0 ) {
+                            morphCode = parseGreekMorph( morph );
+                        } else {
+                            const morphParseObject = new MorphParse();
+                            morphCode = morphParseObject.Parse( morph );
+                        }
+
                         str += word + ','
                         str += lemma + ','
                         str += morph + ','
+                        str += morphCode + ','
                         str += words[ word ][ lemma ][ morph ]
                         str += '<br />';
                     } );
@@ -96,16 +106,10 @@
                             morphForWord = 'A' + morphForWord;
                         }
 
-                        const morphParseObject = new MorphParse();
-                        const morphCode = morphParseObject.Parse( morphForWord );
-                        if ( morphCode.indexOf( 'undefined' ) > -1 ) {
-                            morphString += morph + ' ' + morphForWord + ' ' + morphCode + '<br>';
-                        }
-
                         var literalTranslation = '';
                         if ( javascripture.data.literalConsistent[ lemmaForWord ] ) {
-                            if ( javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord ] ) {
-                                literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord ];
+                            if ( javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord.substr(1) ] ) {
+                                literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ morphForWord.substr(1) ];
                             } else if ( javascripture.data.literalConsistent[ lemmaForWord ][ 'no-morph' ] ) {
                                 literalTranslation = javascripture.data.literalConsistent[ lemmaForWord ][ 'no-morph' ];
                             } else {
@@ -119,8 +123,7 @@
 
                 }
             } ) ) ) );
-            document.getElementById('results').innerHTML = morphString;
-            //document.getElementById('results').innerHTML = ConvertToCSV( words );
+            document.getElementById('results').innerHTML = ConvertToCSV( words );
         }
 
         function generateObject() {
