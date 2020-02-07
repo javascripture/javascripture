@@ -1,13 +1,10 @@
 // todo
 - speed
 - can't see book names in portrait
-- fix broken morphologys
-- update LC with new unaccented data and morphology
 - use tab names in the footer
 - show tab names in the sidebar
 - make the reference selector better
 - fix kjv def search
-- make the clear option local and available alwayd
 - open help in a full screen
 - show javascripture.net
 - material-ui: cf933fffe1a083607d899ae591f245606c960746

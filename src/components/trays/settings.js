@@ -19,6 +19,11 @@ class SettingsTray extends React.Component{
 		event.target.blur();
 	};
 
+	clear() {
+		localStorage.clear();
+		window.location.href="/";
+	}
+
 	render() {
 		return (
 			<div className={ styles.tray }>
@@ -114,7 +119,7 @@ class SettingsTray extends React.Component{
 										<label>Interface language:</label>
 										<select value={ this.props.settings.interfaceLanguage } name="interfaceLanguage" onChange={ this.changeSetting } >
 											{ Object.keys( this.props.interfaceLanguages ).map( key => {
-												return <option value={ key }>{ this.props.interfaceLanguages[ key ] }</option>
+												return <option value={ key } key={ key }>{ this.props.interfaceLanguages[ key ] }</option>
 											} ) }
 										</select>
 									</li>
@@ -122,17 +127,21 @@ class SettingsTray extends React.Component{
 							</form>
 						</div>
 					</div>
+					<p>Legacy versions:<br />
+					<a href="https://javascripture.net">javascripture.net</a><br />
+					<a href="https://javascripture.xyz">javascripture.xyz</a><br />
+					</p>
 					<br />
 					<br />
 					<p>Built in Firefox. Tested in Chrome.</p>
 					<p>
-						Greek text: Tischendorf<br />
+						<a href="https://github.com/morphgnt/tischendorf">Greek text: Tischendorf</a><br />
 						<a href="https://github.com/openscriptures/morphhb">Hebrew text source</a><br />
 						<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">Literal: A work in progress</a><br />
 						ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
 					</p>
 					<p><br />Version: { typeof( javascripture.sw ) !== 'undefined' ? javascripture.sw : null }</p>
-					<p><a href="javascript:clear();">Clear settings and start over</a></p>
+					<p><a href="#" onClick={ this.clear }>Clear settings and start over</a></p>
 				</div>
 			</div>
 		);
