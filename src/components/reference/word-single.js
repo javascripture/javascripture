@@ -19,28 +19,15 @@ const getLiteralConsistent = function( word, lemma, morph ) {
 		return null;
 	}
 
-	if ( ! javascripture.data.LC[ word ][ lemma ] ) {
-		if ( ! javascripture.data.LC[ word ][ 'no-lemma' ][ morph ] ) {
-			if ( ! javascripture.data.LC[ word ][ 'no-lemma' ][ 'no-morph' ] ) {
-				return null
-			}
-
-			return javascripture.data.LC[ word ][ 'no-lemma' ][ 'no-morph' ];
-		}
-
-		return javascripture.data.LC[ word ][ 'no-lemma' ][ morph ]
+	if ( ! lemma ) {
+		lemma = '';
 	}
 
-	if ( ! javascripture.data.LC[ word ][ lemma ][ morph ] ) {
-		if ( ! javascripture.data.LC[ word ][ lemma ][ 'no-morph' ] ) {
-			return null;
-		}
-
-		return javascripture.data.LC[ word ][ lemma ][ 'no-morph' ];
-		
+	if ( typeof javascripture.data.LC[ word ][ lemma ][ morph ] === 'string' ) {
+		return javascripture.data.LC[ word ][ lemma ][ morph ];
 	}
 
-	return javascripture.data.LC[ word ][ lemma ][ morph ];
+	return null;
 }
 
 const WordSingle = ( props ) => {
