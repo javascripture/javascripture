@@ -85,9 +85,15 @@ class Chapter extends React.Component{
 	placeholder( key ) {
 		return (
 			<div className={ styles.verseWrapper } key={ key }>
-				<span className={ styles.placeholder }></span>
-				<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }></span>
+				<span className={ styles.placeholder }>&nbsp;Loading</span>
+				<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }>&nbsp;</span>
 			</div>
+		);
+	}
+
+	notAvailable( key ) {
+		return (
+			<div className={ styles.verseWrapper } key={ key }>Book not available</div>
 		);
 	}
 
@@ -128,8 +134,12 @@ class Chapter extends React.Component{
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
 								const language = mapVersionToData( book, reference.version );
-								if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
+								if ( ! this.props.data[ language ] || Object.keys( this.props.data[ language ] ).length === 0 ) {
 									return this.placeholder( index + verseNumber);
+								}
+
+								if ( ! this.props.data[ language ][ book ] ) {
+									return this.notAvailable( index + verseNumber );
 								}
 
 								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
