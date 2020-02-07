@@ -16,6 +16,7 @@ import {
 	updateSearchForm,
 	clearSearchForm,
 	fetchData,
+	selectWord,
 } from '../../actions'
 import CancelSvg from '../svg/cancel.js';
 import PickerSvg from '../svg/picker.js';
@@ -193,6 +194,10 @@ const mapStateToProps = ( state, ownProps ) => {
 	};
 };
 
+const isSimpleLemmaSearch = ( { lemma, word, morph, clusivity, range } ) => {
+	return lemma && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
+};
+
 const mapDispatchToProps = ( dispatch, ownProps ) => {
 	javascripture.reactHelpers.dispatch = dispatch;
 	return {
@@ -200,7 +205,11 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 			dispatch( updateSearchForm( name, value ) );
 		},
 		addSearch: ( terms ) => {
-			dispatch( addSearch( terms, 'search' ) );
+			if ( isSimpleLemmaSearch( terms ) ) {
+				dispatch( selectWord( terms ) );
+			} else {
+				dispatch( addSearch( terms, 'search' ) );
+			}
 			dispatch( clearSearchForm() );
 		},
 		removeSearch: ( terms ) => {
