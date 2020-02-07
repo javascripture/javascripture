@@ -99,7 +99,7 @@ function postMessageToWorker( task, parameters, state ) {
 	} );
 }
 
-export const addWord = ( { strongsNumber, subdue, open, morphology, version, clickedWord } ) => {
+export const addWord = ( { strongsNumber, open, morphology, version, clickedWord } ) => {
 	return function( dispatch, getState ) {
 		const searchParameters = {
 			clusivity: 'exclusive',
