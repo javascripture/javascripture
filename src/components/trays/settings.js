@@ -26,7 +26,7 @@ class SettingsTray extends React.Component{
 
 	render() {
 		return (
-			<div className={ styles.tray }>
+			<div>
 				<div id="helpPanel" className={ styles.helpPanel }>
 					<div className="content">
 						<div className="content-padding">

@@ -9,11 +9,9 @@ import CrossReferences from '../cross-references';
 import styles from './styles.scss';
 
 const BookmarksTray = ( props ) => (
-	<div className={ styles.tray }>
-		<div id="bookmarksPanel" className={ styles.trayPadding }>
-			<BookMarks />
-			<CrossReferences />
-		</div>
+	<div id="bookmarksPanel" className={ styles.trayPadding }>
+		<BookMarks />
+		<CrossReferences />
 	</div>
 );
 

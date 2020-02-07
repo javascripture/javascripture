@@ -8,9 +8,7 @@ import ReferenceSelector from '../reference-selector';
 import styles from './styles.scss';
 
 const GotoTray = () => (
-	<div className={ styles.tray }>
-		<ReferenceSelector />
-	</div>
+	<ReferenceSelector />
 );
 
 GotoTray.propTypes = {};

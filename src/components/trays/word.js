@@ -8,10 +8,8 @@ import WordDetails from '../word-details';
 import styles from './styles.scss';
 
 const WordTray = () => (
-	<div className={ styles.tray }>
-		<div className={ styles.trayContent }>
-			<WordDetails />
-		</div>
+	<div className={ styles.trayContent }>
+		<WordDetails />
 	</div>
 );
 

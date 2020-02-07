@@ -131,53 +131,51 @@ class ReferenceInfo extends React.Component {
 
 	render() {
 		return (
-			<div className={ styles.tray }>
-				<div className={ styles.chapterTrayPadding }>
-					<div className={ styles.chapterTray }>
-						<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.reference ? this.props.reference.book : '' }>
-							<option value="">Select a book</option>
-							{
-								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
-							}
-						</select>
-						<select name="compareWithChapter" name="compareWithChapter" onChange={ this.compareChapterChange } value={ this.props.reference ? this.props.reference.chapter : '' }>
-							{ this.getCompareChapters() }
-						</select>
-						<select name="compareWithVerses" onChange={ this.compareVerseChange } value={ this.props.reference ? this.props.reference.verse : '' }>{ this.getVerses( this.props.reference ) }</select>
-					</div>
-					<br />
+			<div className={ styles.chapterTrayPadding }>
+				<div className={ styles.chapterTray }>
+					<select name="compareWithBook" name="compareWithBook" onChange={ this.compareBookChange } value={ this.props.reference ? this.props.reference.book : '' }>
+						<option value="">Select a book</option>
+						{
+							bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
+						}
+					</select>
+					<select name="compareWithChapter" name="compareWithChapter" onChange={ this.compareChapterChange } value={ this.props.reference ? this.props.reference.chapter : '' }>
+						{ this.getCompareChapters() }
+					</select>
+					<select name="compareWithVerses" onChange={ this.compareVerseChange } value={ this.props.reference ? this.props.reference.verse : '' }>{ this.getVerses( this.props.reference ) }</select>
+				</div>
+				<br />
 
-					<h2>Rare words</h2>
-					<div className={ styles.chapterTray }>
-						Words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times { this.props.rare ? '(' + this.props.rare.length + ')' : null }:
-					</div>
-					<div className={ styles.scrollingBlock }>
-						{ this.getRareWords() }
-					</div>
-					<div className={ styles.chapterTray }>
-						{ this.props.rare && this.props.rare.length > 0 && <button onClick={ this.addAllRareWords }>Select all rare words (slow!)</button> }
-					</div>
-					<br />
-					<h2>Compare with</h2>
-					<div className={ styles.chapterTray }>
-						<select name="book" onChange={ this.bookChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.book : '' }>
-							<option value="">Select a book</option>
-							{
-								bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
-							}
-						</select>
-						<select name="chapter" onChange={ this.chapterChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.chapter : '' }>{ this.getChapters() }</select>
-						<select name="verses" onChange={ this.verseChange } value={ this.props.referenceToCompareWith? this.props.referenceToCompareWith.verse : '' }>{ this.getVerses( this.props.referenceToCompareWith ) }</select>
-					</div>
-					<div className={ styles.chapterTray }>
-						For words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
-					</div>
-					<div className={ styles.scrollingBlock }>
-						{ this.getOverlap() }
-					</div>
-					<div className={ styles.chapterTray }>
-						{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
-					</div>
+				<h2>Rare words</h2>
+				<div className={ styles.chapterTray }>
+					Words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times { this.props.rare ? '(' + this.props.rare.length + ')' : null }:
+				</div>
+				<div className={ styles.scrollingBlock }>
+					{ this.getRareWords() }
+				</div>
+				<div className={ styles.chapterTray }>
+					{ this.props.rare && this.props.rare.length > 0 && <button onClick={ this.addAllRareWords }>Select all rare words (slow!)</button> }
+				</div>
+				<br />
+				<h2>Compare with</h2>
+				<div className={ styles.chapterTray }>
+					<select name="book" onChange={ this.bookChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.book : '' }>
+						<option value="">Select a book</option>
+						{
+							bible.Data.books.map( book => <option key={ book[ 0 ] }>{ book[0] }</option> )
+						}
+					</select>
+					<select name="chapter" onChange={ this.chapterChange } value={ this.props.referenceToCompareWith ? this.props.referenceToCompareWith.chapter : '' }>{ this.getChapters() }</select>
+					<select name="verses" onChange={ this.verseChange } value={ this.props.referenceToCompareWith? this.props.referenceToCompareWith.verse : '' }>{ this.getVerses( this.props.referenceToCompareWith ) }</select>
+				</div>
+				<div className={ styles.chapterTray }>
+					For words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
+				</div>
+				<div className={ styles.scrollingBlock }>
+					{ this.getOverlap() }
+				</div>
+				<div className={ styles.chapterTray }>
+					{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
 				</div>
 			</div>
 		);

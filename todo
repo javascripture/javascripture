@@ -1,26 +1,26 @@
 // todo
 - speed
+
+stuff that will be fixed with muriel UI
 - can't see book names in portrait
 - use tab names in the footer
 - show tab names in the sidebar
 - make the reference selector better
-- fix kjv def search
-- open help in a full screen
-- show javascripture.net
-- material-ui: cf933fffe1a083607d899ae591f245606c960746
-- strongs number search
-- compare multiple pasages (not chapters)
-- focus column for keyboard shortcuts on reference
-- cross refs for jonah
 - touch reference - open selector
 - book selector doesn't scroll
 - book names are stupid!
-- if a lang doesn't load in OT show a good message
 - icons are too small for touch
+- material-ui: cf933fffe1a083607d899ae591f245606c960746
+
+- fix kjv def search
+- open help in a full screen
+- strongs number search
+
+- compare multiple pasages (not chapters)
+- if a lang doesn't load in OT show a good message
 - safari mobile - toolbar missing
 - copy/paste verses
 - search doesn't work in safari
-- book list should be in farsi
 - add sorani
 - esv psalm titles
 - go to ref in the URL when page opens
