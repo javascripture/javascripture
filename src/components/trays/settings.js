@@ -113,11 +113,9 @@ class SettingsTray extends React.Component{
 									<li className={ styles.settingsLi }>
 										<label>Interface language:</label>
 										<select value={ this.props.settings.interfaceLanguage } name="interfaceLanguage" onChange={ this.changeSetting } >
-											<option value="en">English</option>
-											<option value="fa">Farsi</option>
-											<option value="original">Original</option>
-											<option value="ro">Romanian</option>
-											<option value="ar">Arabic</option>
+											{ Object.keys( this.props.interfaceLanguages ).map( key => {
+												return <option value={ key }>{ this.props.interfaceLanguages[ key ] }</option>
+											} ) }
 										</select>
 									</li>
 								</ul>
@@ -141,9 +139,6 @@ class SettingsTray extends React.Component{
 	}
 }
 
-
-
-
 SettingsTray.propTypes = {};
 
 const SettingsTrayWithStyles = withStyles( styles )( SettingsTray );
@@ -157,7 +152,8 @@ const mapStateToProps = ( state, ownProps ) => {
 
 	return {
 		bookmarks: state.bookmarks,
-		settings: state.settings
+		settings: state.settings,
+		interfaceLanguages: bible.Data.interfaceLanguages,
 	};
 };
 
