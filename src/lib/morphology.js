@@ -32,11 +32,11 @@ export default function (morph, includeLinks, lemma ) {
 		includeLinks = 'noLinks';
 	}
 	var language = 'greek';
-	if ( lemma.substring( 0, 1 ) === "H" ) {
+	if ( lemma.substring( 0, 1 ) === "H" || lemma === '' ) {
 		language = 'hebrew';
 	}
 	var markup = '';
-	if (morph !== undefined) {
+	if ( morph ) {
 		//hebrew
 		if (morphologyDictionary.hebrew[morph] !== undefined) {
 			markup += morphologyDictionary.hebrew[morph];

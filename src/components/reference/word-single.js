@@ -52,10 +52,11 @@ const WordSingle = ( props ) => {
 	};
 
 	const getTitle = () => {
+		let lemmaForMorph = lemma;
 		if ( ! lemma ) {
-			return null;
+			lemmaForMorph = '';
 		}
-		return morph ? lemma + ' ' + morphology( morph, 'noLinks', lemma ) : lemma;
+		return lemmaForMorph + ' - ' + morph + ' - ' + morphology( morph, 'noLinks', lemmaForMorph );
 	};
 
 	const getClassName = () => {
