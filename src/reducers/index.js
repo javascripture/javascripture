@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
+
 import bookmarks from './bookmarks';
 import data from './data';
 import reference from './reference';
@@ -20,7 +23,8 @@ import sidebar from './sidebar';
 import similarReferences from './similar-references';
 import referenceInfo from './reference-info';
 
-const app = {
+export default (history) => { return {
+	router: connectRouter( history ),
 	bookmarks,
 	crossReferences,
 	currentReference,
@@ -42,6 +46,4 @@ const app = {
 	wordDetails,
 	wordHighlight,
 	similarReferences,
-};
-
-export default app;
+} };
