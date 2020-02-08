@@ -2,11 +2,10 @@
  * External dependencies
  */
 import React from 'react';
-import { render } from 'react-dom';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider, ReactReduxContext } from 'react-redux'
 import { createBrowserHistory } from 'history';
-import { connectRouter, ConnectedRouter, routerMiddleware } from 'connected-react-router'
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
 import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -50,7 +49,9 @@ class App extends React.Component{
 				<PersistGate loading={null} persistor={ persistor }>
 					<ConnectedRouter history={ history } context={ ReactReduxContext }>
 						<Stylizer onInsertCss={ insertCss }>
-							<HashRouter><Route path="/" render={ () => <Root highlightedWord={ this.state.highlightedWord } /> } /></HashRouter>
+							<HashRouter>
+								<Route path="/" render={ () => <Root highlightedWord={ this.state.highlightedWord } /> } />
+							</HashRouter>
 						</Stylizer>
 					</ConnectedRouter>
 				</PersistGate>
