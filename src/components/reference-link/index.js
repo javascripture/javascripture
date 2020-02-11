@@ -10,9 +10,9 @@ import ReferenceText from '../reference-text';
 
 const ReferenceLink = ( { reference, number } ) => {
 	return (
-		<Link to={ createReferenceLink( reference ) }>
+		<a href={ '/#' + createReferenceLink( reference ) }>
 			{ number + 1 }. <ReferenceText reference={ reference } />
-		</Link>
+		</a>
 	);
 };
 

@@ -62,7 +62,7 @@ class SearchLink extends React.Component{
 
 		return (
 			<li className={ className }>
-				<Link to={ createReferenceLink( reference ) }
+				<a href={ '/#' + createReferenceLink( reference ) }
 					className={ styles.searchLink }
 					onClick={ () => this.setCurrentVerse( false ) }
 					onMouseOver={ this.highlightWords }
@@ -70,7 +70,7 @@ class SearchLink extends React.Component{
 				>
 					{ index + 1 }. <ReferenceText reference={ reference } />
 					{ count && ' (' + count + ')' }
-				</Link>
+				</a>
 				{ this.props.expandedSearchResults && this.expandedSearchResults( reference ) }
 			</li>
 		);
