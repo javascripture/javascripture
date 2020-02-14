@@ -1,12 +1,11 @@
 .dock {
 	position: fixed;
 	width: 100%;
-	z-index: 9;
+	z-index: 12;
 
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
 		width: calc( 100% - 320px );
-		z-index: 10;
 	}
 
 	button {

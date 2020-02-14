@@ -69,18 +69,15 @@ class ReferenceSelectorMobile extends React.Component{
 		return (
 			<div className={ styles.bookList }>
 				<div className={ styles.bookColumn }>
-					{ bible.Data.books.slice( 0, 22 ).map( ( book, index ) => {
+					<strong>Old</strong>
+					{ bible.Data.books.slice( 0, 39 ).map( ( book, index ) => {
 						return this.renderBookLink( book[ 0 ], index );
 					} ) }
 				</div>
 				<div className={ styles.bookColumn }>
-					{ bible.Data.books.slice( 22, 44 ).map( ( book, index ) => {
-						return this.renderBookLink( book[ 0 ], index + 22 );
-					} ) }
-				</div>
-				<div className={ styles.bookColumn }>
-					{ bible.Data.books.slice( 44, 66 ).map( ( book, index ) => {
-						return this.renderBookLink( book[ 0 ], index + 44 );
+					<strong>New</strong>
+					{ bible.Data.books.slice( 39, 66 ).map( ( book, index ) => {
+						return this.renderBookLink( book[ 0 ], index + 39 );
 					} ) }
 				</div>
 			</div>

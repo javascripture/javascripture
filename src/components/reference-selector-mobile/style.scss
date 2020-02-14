@@ -2,6 +2,7 @@
 
 .reference-selector-mobile {
 	position: relative;
+	font-size: 20px;
 }
 
 .button {
@@ -25,8 +26,10 @@
 .chapterSelector {
 	background: white;
 	border-bottom: 1px solid rgba( 0, 0, 0, .3 );
+	bottom: 0;
 	box-shadow: 0 3px 6px 0 rgba( 0, 0, 0, .3 );
-	font-size: 14px;;
+	overflow: auto;
+	overflow-x: hidden;
 	text-align: left;
 	position: fixed;
 	top: 40px;
@@ -36,13 +39,12 @@
 
 	@media ( min-width: 768px ) {
 		position: absolute;
+		height: calc( 100vh - 40px );
 	}
 }
 
 .chapter-name {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 32px;
-	font-weight: 100;
 }
 
 .chapterList {
@@ -50,12 +52,14 @@
 }
 
 .chapterBlocks {
+	text-align: left;
 	a {
 		cursor: pointer;
 		display: inline-block;
-		height: 32px;
-		line-height: 32px;
-		width: 32px;
+		height: 64px;
+		line-height: 64px;
+		text-align: center;
+		width: 64px;
 
 		&:hover {
 			background: $hover;
@@ -69,12 +73,11 @@
 }
 
 .book-column {
-
+	padding: 0 5px;
 }
 
 .bookLink {
 	cursor: pointer;
-	padding: 0 5px;
 	white-space: nowrap;
 
 	&:hover {
