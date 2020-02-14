@@ -1,11 +1,8 @@
 // External dependencies
 import React from 'react';
-import PropTypes from 'prop-types';
 import mousetrap from 'mousetrap';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { connect } from 'react-redux';
-import find from 'lodash/find';
-import isEqual from 'lodash/isEqual';
 
 // Internal dependencies
 import { changeVersion, fetchData, setReference, setScrollChapter } from '../../actions'
@@ -98,13 +95,19 @@ class VersionSelector extends React.Component{
 	renderSelect() {
 		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
 		return (
-			<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
-				{
-					Object.keys( this.props.versions ).map( ( key ) => (
-						<option value={ key } key={ key } title={ this.props.versions[ key ].name }>{ key }</option>
-					) )
-				}
-			</select>
+			<span>
+				<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
+					{
+						Object.keys( this.props.interfaceLanguages ).map( ( key ) => {
+							const versionsForLanguage = Object.keys( this.props.versions ).filter( version => this.props.versions[ version ].language === key );
+							const versionOption = versionsForLanguage.map( version => {
+							return <option value={ version } key={ version } title={ this.props.versions[ version ].name }>{ version } - { this.props.versions[ version ].name }</option>
+							} );
+							return <optgroup label={ this.props.interfaceLanguages[ key ] }>{ versionOption }</optgroup>;
+						} )
+					}
+				</select>
+			</span>
 		);
 	}
 
@@ -123,12 +126,30 @@ class VersionSelector extends React.Component{
 
 VersionSelector.propTypes = {};
 
+
+const getBookFromState = ( state, index ) => {
+	if ( state.scrollChapter[ index ] && state.scrollChapter[ index ].book ) {
+		return state.scrollChapter[ index ].book;
+	} else {
+		if ( state.reference[ index ] ) {
+			return state.reference[ index ].book;
+		}
+	}
+}
 const getReferenceValue = ( state, index, version ) => {
 	const chapter = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].chapter ) ? state.scrollChapter[ index ].chapter : state.reference[ index ].chapter;
-	const book = ( state.scrollChapter[ index ] && state.scrollChapter[ index ].book ) ? state.scrollChapter[ index ].book : state.reference[ index ].book;
+	const book = getBookFromState( state, index );
 	const tranlatedBook = bible.getTranslatedBookName( book, version );
 	return tranlatedBook + ' ' + chapter;
 };
+
+const getLanguage = ( state, index ) => {
+	const book = getBookFromState( state, index );
+	if ( bible.Data.otBooks.indexOf( book ) > -1 ) {
+		return 'HEB';
+	}
+	return 'GRK';
+}
 
 const mapStateToProps = ( state, ownProps ) => {
 	const index = state.settings.inSync ? 0 : ownProps.index;
@@ -138,6 +159,8 @@ const mapStateToProps = ( state, ownProps ) => {
 		references: state.reference,
 		value: getReferenceValue( state, index, version ),
 		versions: bible.Data.supportedVersions,
+		interfaceLanguages: bible.Data.interfaceLanguages,
+		language: getLanguage( state, index ),
 	}
 };
 

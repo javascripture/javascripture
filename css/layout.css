@@ -61,6 +61,10 @@ select {
 
   padding-right: 17px;
 }
+optgroup {
+  font-style: normal;
+  font-weight: 500;
+}
 label.has-placeholder {
   display: none; }
 

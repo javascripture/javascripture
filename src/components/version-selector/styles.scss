@@ -35,11 +35,17 @@
 	font-size: 1.2em;
 }
 
+.versionButton {
+	font-size: 1.2em;
+	text-transform: uppercase;
+}
+
 .left-version, .right-version {
-	max-width: 100px;
+	max-width: 60px;
 	font-size: .8em;
+	position: relative;
 	@media ( min-width: 599px ) {
-		max-width: 100px;
+		max-width: 60px;
 		font-size: 1.2em;
 	}
 

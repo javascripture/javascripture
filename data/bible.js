@@ -90,7 +90,7 @@ bible.Data.supportedVersions = {
 	'YLT': { name: 'Young\'s Literal Translation', language: 'en' },
 	'ASV': { name: 'American Standard Version', language: 'en' },
 	'DARBY': { name: 'Darby Translation', language: 'en' },
-	'GW': { name: 'Gods Word Translation', language: 'en' },
+	'GW': { name: 'God\'s Word Translation', language: 'en' },
 	'JUB': { name: 'Jubilee Bible 200', language: 'en' },
 	'LEB': { name: 'Lexham English Bible', language: 'en' },
 	'NET': { name: 'New English Translation', language: 'en' },
@@ -104,7 +104,7 @@ bible.Data.supportedVersions = {
 bible.Data.interfaceLanguages = {
 	'original': 'Hebrew/Greek',
 	'en': 'English',
-	'far': 'Farsi',
+	'fa': 'Farsi',
 	'ro': 'Romanian',
 	'ar': 'Arabic',
 };
