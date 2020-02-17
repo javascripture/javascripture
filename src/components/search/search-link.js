@@ -29,7 +29,7 @@ class SearchLink extends React.Component{
 
 		return (
 			<div className={ styles.verse }>
-				<Verse verse={ verseData } index={ null } version="kjv" language="kjv" />
+				<Verse verse={ verseData } index={ null } version={ this.props.terms.version } language="kjv" />
 			</div>
 		);
 	};
