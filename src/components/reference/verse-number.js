@@ -1,38 +1,22 @@
 // External
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import { setTrayVisibilityFilter, showCrossReferences } from '../../actions';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class VerseNumber extends React.Component{
-	showCrossReferences = () => {
-		this.props.showCrossReferences( {
-			book: this.props.book,
-			chapter: this.props.chapter,
-			verse: this.props.verse
-		} );
+const VerseNumber =  React.memo( ( { book, chapter, verse } ) => {
+	const dispatch = useDispatch();
+	const handleShowCrossReferences = () => {
+		dispatch( showCrossReferences( { book,chapter, verse } ) );
+		dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
 	};
 
-	render() {
-		return (
-			<span onClick={ this.showCrossReferences } className={ styles.verseNumber }>{ this.props.verse }. </span>
-		);
-	}
-}
+	return (
+		<span onClick={ handleShowCrossReferences } className={ styles.verseNumber }>{ verse }. </span>
+	);
+} );
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		showCrossReferences: ( reference ) => {
-			dispatch( showCrossReferences( reference ) );
-			dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
-		}
-	};
-};
-
-export default connect(
-	null,
-	mapDispatchToProps,
-)( withStyles( styles )( VerseNumber ) );
+export default withStyles( styles )( VerseNumber );

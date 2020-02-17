@@ -1,4 +1,5 @@
 @import '../_dimensions.scss';
+@import '../_colors.scss';
 
 .reference {
 	height: calc( 100vh - 56px );
@@ -77,6 +78,9 @@
 
 .verseNumber {
 	cursor: pointer;
+	&:hover {
+		color: $text-hover;
+	}
 }
 
 .placeholder {
