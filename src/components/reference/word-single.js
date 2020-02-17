@@ -1,7 +1,7 @@
 // External
 import React from 'react';
 import classnames from 'classnames';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import {
@@ -30,8 +30,9 @@ const getLiteralConsistent = function( word, lemma, morph ) {
 	return null;
 }
 
-const WordSingle = ( props ) => {
+export default React.memo( ( props ) => {
 	const { lemma, morph, version, word } = props;
+	const dispatch = useDispatch();
 
 	const getWord = () => {
 		if ( version === 'LC' ) {
@@ -74,26 +75,11 @@ const WordSingle = ( props ) => {
 			className={ getClassName() }
 			onMouseOver={ highlightWord }
 			onMouseOut={ clearHighlightWord }
-			onClick={ props.selectWord }
+			onClick={ () => dispatch( selectWord( props ) ) }
 			title={ getTitle() }
 			key={ lemma }
 			>
 			{ getWord() }
 		</span>
 	);
-};
-
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		selectWord: () => {
-			dispatch( selectWord( ownProps ) );
-		},
-	}
-};
-
-const WordSingleContainer = connect(
-	null,
-	mapDispatchToProps
-)( WordSingle )
-
-export default WordSingleContainer;
+} );
