@@ -8,11 +8,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal
 import { fetchData, setTrayVisibilityFilter, setReferenceInfo } from '../../actions';
 import Bookmarker from './bookmarker';
+import Title from './title';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
-import xhr from 'xhr';
 
 const getVerseWrapperStyle = function( book, version ) {
 	// TODO generalize
@@ -110,13 +110,7 @@ class Chapter extends React.Component{
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
-					const tranlatedBook = bible.getTranslatedBookName( this.props.book, reference.version );
-
-					return (
-						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index } onClick={ this.showChapterDetails }>
-							{ tranlatedBook + ' ' + this.props.chapter }
-						</h1>
-					);
+					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ reference.version } />;
 				} ) }
 			</div>
 		);
