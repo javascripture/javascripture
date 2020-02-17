@@ -4,7 +4,7 @@ import React from 'react';
 // Internal
 import Word from './word';
 
-const Verse = ( { verse, index, language, version } ) => {
+const Verse = React.memo( ( { verse, index, language, version } ) => {
 	let lastWord = null;
 	let words = null;
 	if ( verse && verse.map ) {
@@ -18,6 +18,6 @@ const Verse = ( { verse, index, language, version } ) => {
 	}
 
 	return words;
-};
+} );
 
 export default Verse;

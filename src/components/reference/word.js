@@ -18,7 +18,7 @@ function endsWithPunctuation( word ) {
 		word.indexOf( ',' ) === 0;
 }
 
-const Word = ( { word, version } ) => {
+export default React.memo( ( { word, version } ) => {
 	if ( ! word ) {
 		return null;
 	}
@@ -54,6 +54,4 @@ const Word = ( { word, version } ) => {
 	return (
 		<React.Fragment> { wordString }</React.Fragment>
 	);
-}
-
-export default Word;
+} );
