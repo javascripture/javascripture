@@ -9,7 +9,7 @@ const Verse = ( { verse, index, language, version } ) => {
 	let words = null;
 	if ( verse && verse.map ) {
 		words = verse.map( ( word, index2 ) => {
-			const wordComponent = <Word word={ word } key={ index2 } language={ language } version={ version } lastWord={ lastWord }/>;
+			const wordComponent = <Word word={ word } key={ index2 } version={ version } lastWord={ lastWord }/>;
 			lastWord = word;
 			return wordComponent;
 		} );
