@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import { fetchData, setTrayVisibilityFilter, setReferenceInfo } from '../../actions';
+import { fetchData } from '../../actions';
 import Bookmarker from './bookmarker';
 import Title from './title';
 import Verse from './verse';
@@ -97,10 +97,6 @@ class Chapter extends React.Component{
 		);
 	}
 
-	showChapterDetails = () => {
-		this.props.openReferenceInfoSidebar( { book: this.props.book, chapter: this.props.chapter } );
-	};
-
 	getSyncVerses() {
 		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
@@ -139,7 +135,8 @@ class Chapter extends React.Component{
 								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
 									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( book, reference.version ) }>
-										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( book, reference.version ) }>
+										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
+										<span className={ this.getClassName( book, reference.version ) }>
 											<Verse verse={ verseData } index={ verseNumber } version={ reference.version } />
 										</span>
 									</div>
@@ -157,12 +154,13 @@ class Chapter extends React.Component{
 		this.currentRef = React.createRef();
 
 		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ],
-			language = mapVersionToData( book, this.props.reference[ index ].version );
+		const currentReference = this.props.reference[ index ];
+		const language = mapVersionToData( book, currentReference.version );
+		const version = currentReference.version;
 
 		if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
 			return (
-				<div>Loading { this.props.reference[ index ].version }...</div>
+				<div>Loading { version }...</div>
 			);
 		}
 
@@ -170,9 +168,7 @@ class Chapter extends React.Component{
 
 		return (
 			<div>
-				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>
-					{ this.props.book + ' ' + this.props.chapter }
-				</h1>
+				<Title book={ book } chapter={ chapter } version={ version } />
 				{ chapterData.map( ( verse, verseNumber ) => {
 					let ref = null;
 					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
@@ -181,9 +177,10 @@ class Chapter extends React.Component{
 
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
-							<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, this.props.reference[ index ].version ) }>
-								<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, this.props.reference[ index ].version ) }>
-									<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[ index ].version } />
+							<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, version ) }>
+								<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
+								<span className={ this.getClassName( book, version ) }>
+									<Verse verse={ verse } index={ verseNumber } version={ version } />
 								</span>
 							</div>
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
@@ -203,7 +200,7 @@ class Chapter extends React.Component{
 	}
 }
 
-const mapStateToProps = ( state, ownProps ) => {
+const mapStateToProps = ( state ) => {
 	return {
 		reference: state.reference,
 		inSync: state.settings.inSync,
@@ -211,16 +208,11 @@ const mapStateToProps = ( state, ownProps ) => {
 	}
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
+const mapDispatchToProps = ( dispatch ) => {
 	return {
 		fetchData: ( key ) => {
 			dispatch( fetchData( key ) );
 		},
-
-		openReferenceInfoSidebar: ( reference ) => {
-			dispatch( setTrayVisibilityFilter( 'reference' ) );
-			dispatch( setReferenceInfo( reference ) );
-		}
 	}
 };
 
