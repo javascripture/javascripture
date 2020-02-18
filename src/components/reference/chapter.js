@@ -13,17 +13,6 @@ import VerseWrapper from './verse-wrapper';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 
-const getVerseWrapperStyle = function( book, version ) {
-	// TODO generalize
-	if ( bible.isRtlVersion( version, book ) ) {
-		return {
-			direction: 'rtl'
-		};
-	}
-
-	return {};
-};
-
 class Chapter extends React.Component{
 	componentDidMount() {
 		this.scrollToCurrentChapter();
@@ -67,18 +56,6 @@ class Chapter extends React.Component{
 			currrentChapter.scrollIntoView();
 			document.getElementById( 'referenceWindow' + this.props.index ).scrollBy( 0, -40 );
 		}
-	}
-
-	getClassName( book, version ) {
-		if ( ( version === 'original' || version === 'accented' ) && bible.Data.otBooks.indexOf( book ) > -1 ) {
-			return classnames( styles.verse, styles.hebrew );
-		}
-
-		if ( version === 'OPV' || version === 'TPV' || version === 'NMV' ) {
-			return classnames( styles.verse, styles.farsi );
-		}
-
-		return styles.verse
 	}
 
 	placeholder( key ) {
