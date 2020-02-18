@@ -9,8 +9,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { fetchData } from '../../actions';
 import Bookmarker from './bookmarker';
 import Title from './title';
-import Verse from './verse';
-import VerseNumber from './verse-number';
+import VerseWrapper from './verse-wrapper';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 
@@ -134,12 +133,13 @@ class Chapter extends React.Component{
 
 								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
-									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( book, reference.version ) }>
-										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
-										<span className={ this.getClassName( book, reference.version ) }>
-											<Verse verse={ verseData } index={ verseNumber } version={ reference.version } />
-										</span>
-									</div>
+									<VerseWrapper
+										book={ book }
+										version={ reference.version }
+										chapter={ chapter }
+										verseNumber={ verseNumber + 1 }
+										verseData={ verseData }
+										index={ verseNumber } />
 								);
 							} ) }
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
@@ -177,12 +177,13 @@ class Chapter extends React.Component{
 
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
-							<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, version ) }>
-								<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
-								<span className={ this.getClassName( book, version ) }>
-									<Verse verse={ verse } index={ verseNumber } version={ version } />
-								</span>
-							</div>
+							<VerseWrapper
+								book={ book }
+								version={ version }
+								chapter={ chapter }
+								verseNumber={ verseNumber + 1 }
+								verseData={ verse }
+								index={ verseNumber } />
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 						</div>
 					);
