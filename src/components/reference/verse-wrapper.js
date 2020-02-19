@@ -30,13 +30,15 @@ const getClassName = ( book, version ) => {
 	return styles.verse
 };
 
-const VerseWrapper =  React.memo( ( { book, version, chapter, verseNumber, verseData, index } ) => (
-	<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) }>
-		<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
-		<span className={ getClassName( book, version ) }>
-			<Verse verse={ verseData } index={ index } version={ version } />
-		</span>
-	</div>
-) );
+const VerseWrapper =  React.memo( ( { book, version, chapter, verseNumber, verseData, index } ) => {
+	return (
+		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) }>
+			<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
+			<span className={ getClassName( book, version ) }>
+				<Verse verse={ verseData } index={ index } version={ version } />
+			</span>
+		</div>
+	);
+} );
 
 export default withStyles( styles )( VerseWrapper );

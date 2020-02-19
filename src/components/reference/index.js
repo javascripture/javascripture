@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 // Internal
 import { setScrollChapter } from '../../actions';
-import SingleReference from './single-reference';
+import Chapter from './chapter';
 import styles from './styles.scss';
 import deferComponentRender from '../deferComponentRender';
 
@@ -204,7 +204,7 @@ class Reference extends React.Component{
 								onLeave={ ( ( event ) => this.handleWaypointLeave( event, book, chapter ) ) }
 								topOffset={ 1 }
 							/>
-							<SingleReference
+							<Chapter
 								book={ book }
 								chapter={ chapter }
 								index={ this.props.index }

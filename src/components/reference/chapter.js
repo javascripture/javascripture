@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
-import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
@@ -170,10 +169,10 @@ class Chapter extends React.Component{
 	}
 	render() {
 		return (
-			<React.Fragment>
+			<div className={ styles.chapter }>
 				{ this.props.inSync && this.getSyncVerses() }
 				{ ! this.props.inSync && this.getDifferentVerses() }
-			</React.Fragment>
+			</div>
 		);
 	}
 }
