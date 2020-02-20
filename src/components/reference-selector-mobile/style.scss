@@ -63,7 +63,7 @@
 		width: 64px;
 
 		&:hover {
-			background: $hover;
+			color: $text-hover;
 		}
 	}
 }
@@ -82,6 +82,16 @@
 	white-space: nowrap;
 
 	&:hover {
-		background: $hover;
+		color: $text-hover;
+	}
+}
+
+.back {
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	&:hover {
+		color: $text-hover;
 	}
 }
