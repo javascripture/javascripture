@@ -81,7 +81,7 @@ class Chapter extends React.Component{
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
-					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ reference.version } />;
+					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ reference.version } key={ index } />;
 				} ) }
 			</div>
 		);
@@ -115,7 +115,8 @@ class Chapter extends React.Component{
 										chapter={ chapter }
 										verseNumber={ verseNumber + 1 }
 										verseData={ verseData }
-										index={ verseNumber } />
+										index={ verseNumber }
+										key={ 'versewrapper' + index + verseNumber } />
 								);
 							} ) }
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />

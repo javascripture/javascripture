@@ -101,9 +101,9 @@ class VersionSelector extends React.Component{
 						Object.keys( this.props.interfaceLanguages ).map( ( key ) => {
 							const versionsForLanguage = Object.keys( this.props.versions ).filter( version => this.props.versions[ version ].language === key );
 							const versionOption = versionsForLanguage.map( version => {
-							return <option value={ version } key={ version } title={ this.props.versions[ version ].name }>{ version } - { this.props.versions[ version ].name }</option>
+								return <option value={ version } key={ version } title={ this.props.versions[ version ].name }>{ version } - { this.props.versions[ version ].name }</option>
 							} );
-							return <optgroup label={ this.props.interfaceLanguages[ key ] }>{ versionOption }</optgroup>;
+							return <optgroup key={ 'optgroup' + key } label={ this.props.interfaceLanguages[ key ] }>{ versionOption }</optgroup>;
 						} )
 					}
 				</select>
