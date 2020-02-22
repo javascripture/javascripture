@@ -32,7 +32,7 @@ class Chapter extends React.Component{
 		}
 	}
 
-	referenceHasChanged( prevProps ) {
+	referenceHasChanged = ( prevProps ) => {
 		let referenceHasChanged = false;
 
 		if ( ! this.props.inSync ) {
@@ -49,7 +49,7 @@ class Chapter extends React.Component{
 		return referenceHasChanged;
 	}
 
-	scrollToCurrentChapter() {
+	scrollToCurrentChapter = () => {
 		const currrentChapter = ReactDOM.findDOMNode( this.currentRef.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
@@ -57,31 +57,17 @@ class Chapter extends React.Component{
 		}
 	}
 
-	placeholder( key ) {
-		return (
-			<div className={ styles.verseWrapper } key={ key }>
-				<span className={ styles.placeholder }>&nbsp;Loading</span>
-				<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }>&nbsp;</span>
-			</div>
-		);
-	}
-
-	notAvailable( key ) {
-		return (
-			<div className={ styles.verseWrapper } key={ key }>Book not available</div>
-		);
-	}
-
-	getSyncVerses() {
+	getSyncVerses = () => {
 		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ],
-			kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
+		const currentReference = this.props.reference[ index ];
+		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
-					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ reference.version } key={ index } />;
+					const version = reference.version;
+					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ version } key={ index } />;
 				} ) }
 			</div>
 		);
@@ -98,23 +84,13 @@ class Chapter extends React.Component{
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
-								const language = mapVersionToData( book, reference.version );
-								if ( ! this.props.data[ language ] || Object.keys( this.props.data[ language ] ).length === 0 ) {
-									return this.placeholder( index + verseNumber);
-								}
-
-								if ( ! this.props.data[ language ][ book ] ) {
-									return this.notAvailable( index + verseNumber );
-								}
-
-								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
 									<VerseWrapper
+										data={ this.props.data }
 										book={ book }
 										version={ reference.version }
 										chapter={ chapter }
 										verseNumber={ verseNumber + 1 }
-										verseData={ verseData }
 										index={ verseNumber }
 										key={ 'versewrapper' + index + verseNumber } />
 								);
@@ -127,26 +103,19 @@ class Chapter extends React.Component{
 		)
 	}
 
-	getDifferentVerses() {
+	getDifferentVerses = () => {
 		this.currentRef = React.createRef();
 
 		const { book, chapter, index } = this.props;
 		const currentReference = this.props.reference[ index ];
-		const language = mapVersionToData( book, currentReference.version );
 		const version = currentReference.version;
 
-		if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
-			return (
-				<div>Loading { version }...</div>
-			);
-		}
-
-		const chapterData = this.props.data[ language ][ book ][ chapter - 1 ];
+		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		return (
 			<div>
 				<Title book={ book } chapter={ chapter } version={ version } />
-				{ chapterData.map( ( verse, verseNumber ) => {
+				{ kjvData.map( ( verse, verseNumber ) => {
 					let ref = null;
 					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
 						ref = this.currentRef;
@@ -155,11 +124,11 @@ class Chapter extends React.Component{
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							<VerseWrapper
+								data={ this.props.data }
 								book={ book }
 								version={ version }
 								chapter={ chapter }
 								verseNumber={ verseNumber + 1 }
-								verseData={ verse }
 								index={ verseNumber } />
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 						</div>
@@ -168,6 +137,7 @@ class Chapter extends React.Component{
 			</div>
 		);
 	}
+
 	render() {
 		return (
 			<div className={ styles.chapter }>
