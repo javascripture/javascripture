@@ -64,8 +64,7 @@ class Reference extends React.Component{
 			if( this.state.references.loadingPrev ) {
 				const newHeight = this.reference.scrollHeight;
 				document.body.style.overflow = '';
-				var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-				if ( ! isChrome || ( isChrome && this.reference.scrollTop === 0 ) ) {
+				if ( this.reference.scrollTop === 0 ) {
 					this.reference.scrollBy( 0, newHeight - oldHeight );
 				}
 			}
