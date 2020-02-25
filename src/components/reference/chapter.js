@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import { fetchData } from '../../actions';
@@ -26,6 +27,7 @@ const Chapter = React.memo( ( props ) => {
 	const prevProps = usePrevious( props );
 	const currentReference = props.reference[ index ];
 	const kjvData = props.data[ 'KJV' ][ book ][ chapter - 1 ];
+	const dispatch = useDispatch();
 
 	// used to scroll to the current chapter
 	const currentRef = useRef();
@@ -33,7 +35,7 @@ const Chapter = React.memo( ( props ) => {
 	// probably move this to the parent
 	useEffect( () => {
 		props.reference.forEach( reference => {
-			props.fetchData( mapVersionToData( reference.book, reference.version ) );
+			dispatch( fetchData( mapVersionToData( reference.book, reference.version ) ) );
 		} );
 	}, [] );
 
@@ -142,17 +144,8 @@ const mapStateToProps = ( state ) => {
 	}
 };
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		fetchData: ( key ) => {
-			dispatch( fetchData( key ) );
-		},
-	}
-};
-
 const ChapterContainer = connect(
 	mapStateToProps,
-	mapDispatchToProps,
 )( Chapter )
 
 export default withStyles( styles )( ChapterContainer );
