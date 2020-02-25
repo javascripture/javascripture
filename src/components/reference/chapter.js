@@ -1,5 +1,5 @@
 // External
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -12,62 +12,66 @@ import VerseWrapper from './verse-wrapper';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 
-class Chapter extends React.Component{
-	componentDidMount() {
-		this.scrollToCurrentChapter();
-		this.props.reference.forEach( reference => {
-			this.props.fetchData( mapVersionToData( reference.book, reference.version ) );
-		} );
-	}
+function usePrevious(value) {
+	const ref = useRef();
+	useEffect(() => {
+	  ref.current = value;
+	});
+	return ref.current;
+  }
 
-	componentWillReceiveProps( nextProps ) {
-		nextProps.reference.forEach( reference => {
-			this.props.fetchData( mapVersionToData( reference.book, reference.version ) );
-		} );
-	}
+const Chapter = React.memo( ( props ) => {
+	const { reference } = props;
+	const { book, chapter, index } = props;
+	const prevProps = usePrevious( props );
+	const currentReference = props.reference[ index ];
+	const kjvData = props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
-	componentDidUpdate( prevProps, prevState ) {
-		if( this.referenceHasChanged( prevProps ) ) {
-			this.scrollToCurrentChapter();
+	// used to scroll to the current chapter
+	const currentRef = useRef();
+
+	// probably move this to the parent
+	useEffect( () => {
+		props.reference.forEach( reference => {
+			props.fetchData( mapVersionToData( reference.book, reference.version ) );
+		} );
+	}, [] );
+
+	useEffect( () => {
+		if( referenceHasChanged( prevProps ) ) {
+			scrollToCurrentChapter();
 		}
-	}
+	}, [ reference ] );
 
-	referenceHasChanged = ( prevProps ) => {
+	const referenceHasChanged = () => {
 		let referenceHasChanged = false;
 
-		if ( ! this.props.inSync ) {
-			return false;
-		}
-
-		this.props.reference.forEach( ( reference, index ) => {
-			if ( ! prevProps.reference[ index ] ) {
+		props.reference.forEach( ( reference, index ) => {
+			if ( ! prevProps || ! prevProps.reference[ index ] ) {
 				referenceHasChanged = true; // Because the colum widths will change
 			} else if ( ! ( reference.book === prevProps.reference[ index ].book && reference.chapter === prevProps.reference[ index ].chapter && reference.verse === prevProps.reference[ index ].verse ) ) {
 				referenceHasChanged = true;
 			}
 		} );
 		return referenceHasChanged;
-	}
+	};
 
-	scrollToCurrentChapter = () => {
-		const currrentChapter = ReactDOM.findDOMNode( this.currentRef.current );
+	const scrollToCurrentChapter = () => {
+		const currrentChapter = ReactDOM.findDOMNode( currentRef.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
-			document.getElementById( 'referenceWindow' + this.props.index ).scrollBy( 0, -40 );
+			document.getElementById( 'referenceWindow' + props.index ).scrollBy( 0, -40 );
 		}
-	}
+	};
 
-	getSyncVerses = () => {
-		this.currentRef = React.createRef();
-		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ];
-		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
+	const isCurrentRef = ( verseNumber ) => ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) ? currentRef : null;
 
+	const getSyncVerses = () => {
 		const title = (
 			<div className={ styles.chapterColumn }>
-				{ this.props.reference.map( ( reference, index ) => {
+				{ props.reference.map( ( reference, index ) => {
 					const version = reference.version;
-					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ version } key={ index } />;
+					return <Title book={ props.book } chapter={ props.chapter } version={ version } key={ index } />;
 				} ) }
 			</div>
 		);
@@ -76,17 +80,12 @@ class Chapter extends React.Component{
 			<div>
 				{ title }
 				{ kjvData.map( ( verse, verseNumber ) => {
-					let ref = null;
-					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
-						ref = this.currentRef;
-					}
-
 					return (
-						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
-							{ this.props.reference.map( ( reference, index ) => {
+						<div className={ styles.singleReference } key={ verseNumber } ref={ isCurrentRef( verseNumber ) }>
+							{ props.reference.map( ( reference, index ) => {
 								return (
 									<VerseWrapper
-										data={ this.props.data }
+										data={ props.data }
 										book={ book }
 										version={ reference.version }
 										chapter={ chapter }
@@ -103,28 +102,17 @@ class Chapter extends React.Component{
 		)
 	}
 
-	getDifferentVerses = () => {
-		this.currentRef = React.createRef();
-
-		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ];
+	const getDifferentVerses = () => {
 		const version = currentReference.version;
-
-		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		return (
 			<div>
 				<Title book={ book } chapter={ chapter } version={ version } />
 				{ kjvData.map( ( verse, verseNumber ) => {
-					let ref = null;
-					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
-						ref = this.currentRef;
-					}
-
 					return (
-						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
+						<div className={ styles.singleReference } key={ verseNumber } ref={ isCurrentRef( verseNumber ) }>
 							<VerseWrapper
-								data={ this.props.data }
+								data={ props.data }
 								book={ book }
 								version={ version }
 								chapter={ chapter }
@@ -138,15 +126,13 @@ class Chapter extends React.Component{
 		);
 	}
 
-	render() {
-		return (
-			<div className={ styles.chapter }>
-				{ this.props.inSync && this.getSyncVerses() }
-				{ ! this.props.inSync && this.getDifferentVerses() }
-			</div>
-		);
-	}
-}
+	return (
+		<div className={ styles.chapter }>
+			{ props.inSync && getSyncVerses() }
+			{ ! props.inSync && getDifferentVerses() }
+		</div>
+	);
+} );
 
 const mapStateToProps = ( state ) => {
 	return {

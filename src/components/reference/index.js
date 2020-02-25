@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Waypoint from 'react-waypoint';
 import classnames from 'classnames';
