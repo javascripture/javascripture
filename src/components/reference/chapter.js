@@ -37,7 +37,7 @@ const Chapter = React.memo( ( props ) => {
 		props.reference.forEach( reference => {
 			dispatch( fetchData( mapVersionToData( reference.book, reference.version ) ) );
 		} );
-	}, [] );
+	}, [ reference ] );
 
 	useEffect( () => {
 		if( referenceHasChanged( prevProps ) ) {
