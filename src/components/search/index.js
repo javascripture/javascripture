@@ -195,7 +195,7 @@ const mapStateToProps = ( state, ownProps ) => {
 };
 
 const isSimpleLemmaSearch = ( { lemma, word, morph, clusivity, range } ) => {
-	return lemma && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
+	return lemma && lemma.indexOf( ' ' ) < 1 && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
 };
 
 const mapDispatchToProps = ( dispatch, ownProps ) => {
