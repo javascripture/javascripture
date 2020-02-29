@@ -91,17 +91,17 @@ class Reference extends React.Component{
 		} );
 	};
 
-	handleWaypointEnter( event, book, chapter ) {
+	handleWaypointEnter = ( event, book, chapter ) => {
 		if ( event.previousPosition === 'above' ) {
 			this.props.setScrollChapterPrevious( book, chapter, this.props.index );
 		}
-	}
+	};
 
-	handleWaypointLeave( event, book, chapter ) {
+	handleWaypointLeave = ( event, book, chapter ) => {
 		if ( event.currentPosition === 'above' ) {
 			this.props.setScrollChapter( book, chapter, this.props.index );
 		}
-	}
+	};
 
 	addNextChapter = () => {
 		var references = this.state.references.references.slice(),
@@ -154,7 +154,7 @@ class Reference extends React.Component{
 		} );
 	};
 
-	getReferences( nextProps ) {
+	getReferences = ( nextProps ) => {
 		if ( ! nextProps.reference || ! nextProps.reference.book ) {
 			return null
 		}
