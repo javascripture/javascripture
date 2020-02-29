@@ -25,7 +25,6 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 	const data = useSelector( state => state.data );
 	const reference = useSelector( state => state.reference );
 	const currentReference = reference[ index ];
-	const prevReference = usePrevious( reference );
 	const kjvData = data[ 'KJV' ][ book ][ chapter - 1 ];
 	const dispatch = useDispatch();
 
@@ -40,23 +39,8 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 	}, [ reference ] );
 
 	useEffect( () => {
-		if( referenceHasChanged() ) {
-			scrollToCurrentChapter();
-		}
+		scrollToCurrentChapter();
 	}, [ reference ] );
-
-	const referenceHasChanged = () => {
-		let referenceHasChanged = false;
-
-		reference.forEach( ( singleReference, index ) => {
-			if ( ! prevReference || ! prevReference[ index ] ) {
-				referenceHasChanged = true; // Because the colum widths will change
-			} else if ( ! ( singleReference.book === prevReference[ index ].book && singleReference.chapter === prevReference[ index ].chapter && singleReference.verse === prevReference[ index ].verse ) ) {
-				referenceHasChanged = true;
-			}
-		} );
-		return referenceHasChanged;
-	};
 
 	const scrollToCurrentChapter = () => {
 		const currrentChapter = ReactDOM.findDOMNode( currentRef.current );
