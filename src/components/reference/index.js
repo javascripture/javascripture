@@ -215,13 +215,13 @@ class Reference extends React.Component{
 	}
 }
 
-const mapStateToProps = ( state, ownProps ) => {
+const mapStateToProps = ( state ) => {
 	return {
 		inSync: state.settings.inSync,
 	}
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
+const mapDispatchToProps = ( dispatch ) => {
 	return {
 		setScrollChapter: ( book, chapter, index ) => {
 			dispatch( setScrollChapter( book, chapter, index ) );
