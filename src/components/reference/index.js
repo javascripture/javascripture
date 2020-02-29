@@ -31,11 +31,11 @@ class Reference extends React.Component{
 		} );
 	}
 
-	shouldComponentUpdate( nextProps, nextState ) {
+	shouldComponentUpdate() {
 		return ! isScrolling;
 	}
 
-	componentDidUpdate( prevProps, prevState ) {
+	componentDidUpdate( prevProps ) {
 		if ( typeof ga !== 'undefined' ) {
 			ga('send', {
 				hitType: 'event',
