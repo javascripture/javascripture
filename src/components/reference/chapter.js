@@ -1,9 +1,8 @@
 // External
 import React, { useEffect, useRef, useState } from 'react';
-import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import { fetchData } from '../../actions';
@@ -21,12 +20,13 @@ function usePrevious(value) {
 	return ref.current;
   }
 
-const Chapter = React.memo( ( props ) => {
-	const { reference } = props;
-	const { book, chapter, index } = props;
-	const prevProps = usePrevious( props );
-	const currentReference = props.reference[ index ];
-	const kjvData = props.data[ 'KJV' ][ book ][ chapter - 1 ];
+const Chapter = React.memo( ( { book, chapter, index } ) => {
+	const inSync = useSelector( state => state.settings.inSync );
+	const data = useSelector( state => state.data );
+	const reference = useSelector( state => state.reference );
+	const currentReference = reference[ index ];
+	const prevReference = usePrevious( reference );
+	const kjvData = data[ 'KJV' ][ book ][ chapter - 1 ];
 	const dispatch = useDispatch();
 
 	// used to scroll to the current chapter
@@ -34,13 +34,13 @@ const Chapter = React.memo( ( props ) => {
 
 	// probably move this to the parent
 	useEffect( () => {
-		props.reference.forEach( reference => {
-			dispatch( fetchData( mapVersionToData( reference.book, reference.version ) ) );
+		reference.forEach( ( { book, version } ) => {
+			dispatch( fetchData( mapVersionToData( book, version ) ) );
 		} );
 	}, [ reference ] );
 
 	useEffect( () => {
-		if( referenceHasChanged( prevProps ) ) {
+		if( referenceHasChanged() ) {
 			scrollToCurrentChapter();
 		}
 	}, [ reference ] );
@@ -48,10 +48,10 @@ const Chapter = React.memo( ( props ) => {
 	const referenceHasChanged = () => {
 		let referenceHasChanged = false;
 
-		props.reference.forEach( ( reference, index ) => {
-			if ( ! prevProps || ! prevProps.reference[ index ] ) {
+		reference.forEach( ( singleReference, index ) => {
+			if ( ! prevReference || ! prevReference[ index ] ) {
 				referenceHasChanged = true; // Because the colum widths will change
-			} else if ( ! ( reference.book === prevProps.reference[ index ].book && reference.chapter === prevProps.reference[ index ].chapter && reference.verse === prevProps.reference[ index ].verse ) ) {
+			} else if ( ! ( singleReference.book === prevReference[ index ].book && singleReference.chapter === prevReference[ index ].chapter && singleReference.verse === prevReference[ index ].verse ) ) {
 				referenceHasChanged = true;
 			}
 		} );
@@ -62,7 +62,7 @@ const Chapter = React.memo( ( props ) => {
 		const currrentChapter = ReactDOM.findDOMNode( currentRef.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
-			document.getElementById( 'referenceWindow' + props.index ).scrollBy( 0, -40 );
+			document.getElementById( 'referenceWindow' + index ).scrollBy( 0, -40 );
 		}
 	};
 
@@ -71,9 +71,8 @@ const Chapter = React.memo( ( props ) => {
 	const getSyncVerses = () => {
 		const title = (
 			<div className={ styles.chapterColumn }>
-				{ props.reference.map( ( reference, index ) => {
-					const version = reference.version;
-					return <Title book={ props.book } chapter={ props.chapter } version={ version } key={ index } />;
+				{ reference.map( ( { version }, index ) => {
+					return <Title book={ book } chapter={ chapter } version={ version } key={ index } />;
 				} ) }
 			</div>
 		);
@@ -84,12 +83,12 @@ const Chapter = React.memo( ( props ) => {
 				{ kjvData.map( ( verse, verseNumber ) => {
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ isCurrentRef( verseNumber ) }>
-							{ props.reference.map( ( reference, index ) => {
+							{ reference.map( ( { version }, index ) => {
 								return (
 									<VerseWrapper
-										data={ props.data }
+										data={ data }
 										book={ book }
-										version={ reference.version }
+										version={ version }
 										chapter={ chapter }
 										verseNumber={ verseNumber + 1 }
 										index={ verseNumber }
@@ -114,7 +113,7 @@ const Chapter = React.memo( ( props ) => {
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ isCurrentRef( verseNumber ) }>
 							<VerseWrapper
-								data={ props.data }
+								data={ data }
 								book={ book }
 								version={ version }
 								chapter={ chapter }
@@ -130,22 +129,9 @@ const Chapter = React.memo( ( props ) => {
 
 	return (
 		<div className={ styles.chapter }>
-			{ props.inSync && getSyncVerses() }
-			{ ! props.inSync && getDifferentVerses() }
+			{ inSync ? getSyncVerses() : getDifferentVerses() }
 		</div>
 	);
 } );
 
-const mapStateToProps = ( state ) => {
-	return {
-		reference: state.reference,
-		inSync: state.settings.inSync,
-		data: state.data,
-	}
-};
-
-const ChapterContainer = connect(
-	mapStateToProps,
-)( Chapter )
-
-export default withStyles( styles )( ChapterContainer );
+export default withStyles( styles )( Chapter );
