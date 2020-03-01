@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Waypoint from 'react-waypoint';
 import classnames from 'classnames';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import { setScrollChapter } from '../../actions';
@@ -16,6 +16,8 @@ let oldHeight = 0, scroller = null, isScrolling = false;
 const Reference = React.memo( ( props ) => {
 	const [ references, setReferences ] = useState( {} );
 	const referenceWindow = useRef();
+	const inSync = useSelector( state => state.settings.inSync );
+	const dispatch = useDispatch();
 
 	useEffect( () => {
 		setReferences( getReferences( props ) );
@@ -69,13 +71,17 @@ const Reference = React.memo( ( props ) => {
 
 	const handleWaypointEnter = ( event, book, chapter ) => {
 		if ( event.previousPosition === 'above' ) {
-			props.setScrollChapterPrevious( book, chapter, props.index );
+			const currentChapter = bible.parseReference( book + ' ' + chapter );
+			const prevChapter = currentChapter.prevChapter();
+			if ( prevChapter ) {
+				dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1, props.index ) );
+			}
 		}
 	};
 
 	const handleWaypointLeave = ( event, book, chapter ) => {
 		if ( event.currentPosition === 'above' ) {
-			props.setScrollChapter( book, chapter, props.index );
+			dispatch( setScrollChapter( book, chapter, props.index ) );
 		}
 	};
 
@@ -156,7 +162,7 @@ const Reference = React.memo( ( props ) => {
 
 	const currentBook = references.book;
 	const currentChapter = references.chapter;
-	const classname = classnames( styles.reference, props.inSync ? null : styles.isNotSync );
+	const classname = classnames( styles.reference, inSync ? null : styles.isNotSync );
 
 	return (
 		<div id={ 'referenceWindow' + props.index } className={ classname } key={ currentBook + '-' + currentChapter } ref={ referenceWindow } onScroll={ handleScroll }>
@@ -183,30 +189,4 @@ const Reference = React.memo( ( props ) => {
 	);
 } );
 
-const mapStateToProps = ( state ) => {
-	return {
-		inSync: state.settings.inSync,
-	}
-};
-
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		setScrollChapter: ( book, chapter, index ) => {
-			dispatch( setScrollChapter( book, chapter, index ) );
-		},
-		setScrollChapterPrevious: ( book, chapter, index ) => {
-			const currentChapter = bible.parseReference( book + ' ' + chapter );
-			const prevChapter = currentChapter.prevChapter();
-			if ( prevChapter ) {
-				dispatch( setScrollChapter( prevChapter.bookName, prevChapter.chapter1, index ) );
-			}
-		},
-	}
-};
-
-const ReferenceContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)( Reference )
-
-export default deferComponentRender( withStyles( styles )( ReferenceContainer ) );
+export default deferComponentRender( withStyles( styles )( Reference ) );
