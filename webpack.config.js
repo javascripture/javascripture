@@ -71,7 +71,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
 	//config.debug = true;
 
 	// Enables source maps
-	config.devtool = 'eval';
+	config.devtool = 'source-map';
 
 	config.devServer = {
 		hot: true,

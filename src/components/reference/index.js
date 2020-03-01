@@ -1,5 +1,5 @@
 // External dependencies
-import React from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Waypoint from 'react-waypoint';
 import classnames from 'classnames';
@@ -13,29 +13,17 @@ import deferComponentRender from '../deferComponentRender';
 
 let oldHeight = 0, scroller = null, isScrolling = false;
 
-// If you make this a stateless component it breaks hot reloading
-class Reference extends React.Component{
-	componentWillMount() {
-		this.setState( {
-			references: this.getReferences( this.props ),
-		} );
-	}
+const Reference = React.memo( ( props ) => {
+	const [ references, setReferences ] = useState( {} );
+	const referenceWindow = useRef();
 
-	state = {
-		references: {},
-	};
+	useEffect( () => {
+		setReferences( getReferences( props ) );
+	}, [ props ] );
 
-	componentWillReceiveProps( nextProps ) {
-		this.setState( {
-			references: this.getReferences( nextProps ),
-		} );
-	}
+	useLayoutEffect( () => {
+		console && console.log( new Date() - timer );
 
-	shouldComponentUpdate() {
-		return ! isScrolling;
-	}
-
-	componentDidUpdate( prevProps ) {
 		if ( typeof ga !== 'undefined' ) {
 			ga('send', {
 				hitType: 'event',
@@ -44,33 +32,20 @@ class Reference extends React.Component{
 				eventLabel: new Date() - timer
 			} );
 		}
+	}, [ references.book, references.chapter ] );
 
-		if ( console ) {
-			console.log( new Date() - timer );
-		}
+	useEffect( () => {
+		if( references.loadingPrev ) {
+			const newHeight = referenceWindow.current.scrollHeight;
+			document.body.style.overflow = '';
 
-		// Only scroll if chapter or book changes
-		const references = this.state.references;
-
-		if ( ! references || ! prevProps ) {
-			return;
-		}
-
-		const prevReference = prevProps.reference;
-		if ( ! prevReference || prevReference.book !== references.book || prevReference.chapter !== references.chapter ) {
-			// do nothing
-		} else {
-			if( this.state.references.loadingPrev ) {
-				const newHeight = this.reference.scrollHeight;
-				document.body.style.overflow = '';
-				if ( this.reference.scrollTop === 0 ) {
-					this.reference.scrollBy( 0, newHeight - oldHeight );
-				}
+			if ( referenceWindow.current.scrollTop === 0 ) {
+				referenceWindow.current.scrollBy( 0, newHeight - oldHeight );
 			}
 		}
-	}
+	} );
 
-	handleScroll = ( event ) => {
+	const handleScroll = ( event ) => {
 		const debouncedScroll = ( callback ) => {
 			return setTimeout( callback, 250 );
 		};
@@ -81,80 +56,77 @@ class Reference extends React.Component{
 		clearTimeout( scroller );
 		scroller = debouncedScroll( () => {
 			isScrolling = false;
-			if ( this.reference.scrollTop < 500 ) {
-				this.addPreviousChapter();
+
+			if ( referenceWindow.current.scrollTop < 500 ) {
+				addPreviousChapter();
 			}
 
-			if ( this.reference.scrollHeight - this.reference.scrollTop - document.documentElement.clientHeight < 1000 ) {
-				this.addNextChapter();
+			if ( referenceWindow.current.scrollHeight - referenceWindow.current.scrollTop - document.documentElement.clientHeight < 1000 ) {
+				addNextChapter();
 			}
 		} );
 	};
 
-	handleWaypointEnter = ( event, book, chapter ) => {
+	const handleWaypointEnter = ( event, book, chapter ) => {
 		if ( event.previousPosition === 'above' ) {
-			this.props.setScrollChapterPrevious( book, chapter, this.props.index );
+			props.setScrollChapterPrevious( book, chapter, props.index );
 		}
 	};
 
-	handleWaypointLeave = ( event, book, chapter ) => {
+	const handleWaypointLeave = ( event, book, chapter ) => {
 		if ( event.currentPosition === 'above' ) {
-			this.props.setScrollChapter( book, chapter, this.props.index );
+			props.setScrollChapter( book, chapter, props.index );
 		}
 	};
 
-	addNextChapter = () => {
-		var references = this.state.references.references.slice(),
-			lastReference = references[ references.length - 1 ],
+	const addNextChapter = () => {
+		var localReferences = references.references.slice(),
+			lastReference = localReferences[ localReferences.length - 1 ],
 			currentReference = bible.parseReference( lastReference.bookName + ' ' + lastReference.chapter1 );
 
 		const nextChapter = currentReference.nextChapter(),
-			nextChapterAlreadyLoaded = nextChapter && find( this.state.references.references, function ( reference ) {
+			nextChapterAlreadyLoaded = nextChapter && find( localReferences, function ( reference ) {
 				return reference.bookID === nextChapter.bookID && reference.chapter1 === nextChapter.chapter1;
 			} );
 		if ( nextChapter && ! nextChapterAlreadyLoaded ) {
-			references.push( nextChapter );
+			localReferences.push( nextChapter );
 		}
 
-		this.setState( {
-			references: {
-				book: this.state.references.book,
-				chapter: this.state.references.chapter,
-				references,
-				loadingPrev: false,
-			},
+		setReferences( {
+			book: references.book,
+			chapter: references.chapter,
+			references: localReferences,
+			loadingPrev: false,
 		} );
 	};
 
-	addPreviousChapter = () => {
+	const addPreviousChapter = () => {
 		document.body.style.overflow = 'hidden';
 
-		var references = this.state.references.references.slice(),
-			firstReference = references[ 0 ],
+		var localReferences = references.references.slice(),
+			firstReference = localReferences[ 0 ],
 			currentReference = bible.parseReference( firstReference.bookName + ' ' + firstReference.chapter1 );
 
 		const prevChapter = currentReference.prevChapter(),
-			prevChapterAlreadyLoaded = prevChapter && find( this.state.references.references, function ( reference ) {
+			prevChapterAlreadyLoaded = prevChapter && find( localReferences, function ( reference ) {
 				return reference.bookID === prevChapter.bookID && reference.chapter1 === prevChapter.chapter1;
 			} );
 
 		if ( prevChapter && ! prevChapterAlreadyLoaded ) {
-			references.unshift( prevChapter );
+			localReferences.unshift( prevChapter );
 		}
 
-		oldHeight = this.reference.scrollHeight;
+		oldHeight = referenceWindow.current.scrollHeight;
 
-		this.setState( {
-			references: {
-				book: this.state.references.book,
-				chapter: this.state.references.chapter,
-				references,
-				loadingPrev: true,
-			}
+		setReferences( {
+			book: references.book,
+			chapter: references.chapter,
+			references: localReferences,
+			loadingPrev: true,
 		} );
 	};
 
-	getReferences = ( nextProps ) => {
+	const getReferences = ( nextProps ) => {
 		if ( ! nextProps.reference || ! nextProps.reference.book ) {
 			return null
 		}
@@ -176,44 +148,40 @@ class Reference extends React.Component{
 		}
 
 		return { book, chapter, references, loadingPrev };
+	};
+
+	if ( ! references || ! references.book ) {
+		return null;
 	}
 
-	render() {
-		const references = this.state.references;
+	const currentBook = references.book;
+	const currentChapter = references.chapter;
+	const classname = classnames( styles.reference, props.inSync ? null : styles.isNotSync );
 
-		if ( ! references || ! references.book ) {
-			return null;
-		}
+	return (
+		<div id={ 'referenceWindow' + props.index } className={ classname } key={ currentBook + '-' + currentChapter } ref={ referenceWindow } onScroll={ handleScroll }>
+			{ references.references && references.references.map( ( reference ) => {
+				const book = bible.getBook( reference.bookID );
+				const chapter = reference.chapter1;
 
-		const currentBook = references.book,
-			currentChapter = references.chapter,
-			classname = classnames( styles.reference, this.props.inSync ? null : styles.isNotSync );
-
-		return (
-			<div id={ 'referenceWindow' + this.props.index } className={ classname } key={ currentBook + '-' + currentChapter } ref={ (ref) => this.reference = ref } onScroll={ this.handleScroll }>
-				{ references.references && references.references.map( ( reference ) => {
-					const book = bible.getBook( reference.bookID ),
-						chapter = reference.chapter1;
-
-					return (
-						<div className={ styles.referenceInner } key={ book + chapter }>
-							<Waypoint
-								onEnter={ ( ( event ) => this.handleWaypointEnter( event, book, chapter ) ) }
-								onLeave={ ( ( event ) => this.handleWaypointLeave( event, book, chapter ) ) }
-								topOffset={ 1 }
-							/>
-							<Chapter
-								book={ book }
-								chapter={ chapter }
-								index={ this.props.index }
-							/>
-						</div>
-					);
-				} ) }
-			</div>
-		);
-	}
-}
+				return (
+					<div className={ styles.referenceInner } key={ book + chapter }>
+						<Waypoint
+							onEnter={ ( event ) => handleWaypointEnter( event, book, chapter ) }
+							onLeave={ ( event ) => handleWaypointLeave( event, book, chapter ) }
+							topOffset={ 1 }
+						/>
+						<Chapter
+							book={ book }
+							chapter={ chapter }
+							index={ props.index }
+						/>
+					</div>
+				);
+			} ) }
+		</div>
+	);
+} );
 
 const mapStateToProps = ( state ) => {
 	return {
