@@ -47,7 +47,7 @@ const Reference = React.memo( ( props ) => {
 		}
 	} );
 
-	const handleScroll = ( event ) => {
+	const handleScroll = () => {
 		const debouncedScroll = ( callback ) => {
 			return setTimeout( callback, 250 );
 		};
