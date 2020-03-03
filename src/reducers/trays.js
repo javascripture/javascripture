@@ -39,7 +39,7 @@ const initalState = [
 	{
 		visible: false,
 		id: 'reference',
-		text: 'Reference Info',
+		text: 'Compare',
 		component: 'ReferenceInfo',
 		icon: 'InfoSvg',
 	}

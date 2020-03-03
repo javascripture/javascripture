@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import BookSVG from '../svg/book.js';
 import { createReferenceLink } from '../../lib/reference.js';
 import { closeReferenceSelectorMobile, toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -33,6 +34,11 @@ class ReferenceSelectorMobile extends React.Component{
 		}
 	};
 
+	backToBooks = () => {
+		this.toggleList();
+		this.toggleList();
+	}
+
 	renderReferenceLink( book, chapter, linkText ) {
 		return (
 			<a
@@ -53,6 +59,9 @@ class ReferenceSelectorMobile extends React.Component{
 		const chapters = bible.Data.verses[ this.props.bookIndex ];
 		return (
 			<div className={ styles.chapterList }>
+				<a className={ styles.back } onClick={ this.backToBooks }>
+					<ArrowBackIcon />
+				</a>
 				<div className={ styles.chapterName }>
 					{ bible.getTranslatedBookName( this.props.bookName, this.props.version ) }
 				</div>

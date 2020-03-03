@@ -3,6 +3,7 @@
 .reference-selector-mobile {
 	position: relative;
 	font-size: 20px;
+	z-index: 99;
 }
 
 .button {
@@ -26,7 +27,7 @@
 .chapterSelector {
 	background: white;
 	border-bottom: 1px solid rgba( 0, 0, 0, .3 );
-	bottom: 0;
+	bottom: 56px;
 	box-shadow: 0 3px 6px 0 rgba( 0, 0, 0, .3 );
 	overflow: auto;
 	overflow-x: hidden;
@@ -35,7 +36,7 @@
 	top: 40px;
 	left: calc( 50% - 320px / 2 );
 	width: 320px;
-	z-index: 1;
+	z-index: 20;
 
 	@media ( min-width: 768px ) {
 		position: absolute;
@@ -62,7 +63,7 @@
 		width: 64px;
 
 		&:hover {
-			background: $hover;
+			color: $text-hover;
 		}
 	}
 }
@@ -81,6 +82,16 @@
 	white-space: nowrap;
 
 	&:hover {
-		background: $hover;
+		color: $text-hover;
+	}
+}
+
+.back {
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	&:hover {
+		color: $text-hover;
 	}
 }

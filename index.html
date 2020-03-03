@@ -141,6 +141,22 @@
 </script>
 <script src="build/bundle.js"></script>
 <script>
+	// Attach web workers
+	// has to come before service worker
+	worker.addEventListener( 'message', function( e ) {
+		if( e.data.task === 'search' ) {
+			javascripture.reactHelpers.dispatch( {
+				terms: e.data.parameters,
+				results: e.data.result,
+				type: 'ADD_SEARCH_RESULTS',
+			} );
+		}
+
+		if( e.data.task === 'loading' ) {
+			document.getElementById( 'loading' ).innerHTML = e.data.html;
+		}
+	}, false );
+
 	// Handler for messages coming from the service worker
 	const channel = new BroadcastChannel('sw-messages');
 	channel.addEventListener('message', event => {
@@ -196,20 +212,5 @@
 			refreshing = true;
 		});
 	}
-
-	// Attach web workers
-	worker.addEventListener( 'message', function( e ) {
-		if( e.data.task === 'search' ) {
-			javascripture.reactHelpers.dispatch( {
-				terms: e.data.parameters,
-				results: e.data.result,
-				type: 'ADD_SEARCH_RESULTS',
-			} );
-		}
-
-		if( e.data.task === 'loading' ) {
-			document.getElementById( 'loading' ).innerHTML = e.data.html;
-		}
-	}, false );
 </script>
 </html>

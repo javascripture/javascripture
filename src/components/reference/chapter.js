@@ -2,28 +2,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
-import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
-import { fetchData, setTrayVisibilityFilter, setReferenceInfo } from '../../actions';
+import { fetchData } from '../../actions';
 import Bookmarker from './bookmarker';
-import Verse from './verse';
-import VerseNumber from './verse-number';
+import Title from './title';
+import VerseWrapper from './verse-wrapper';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
-import xhr from 'xhr';
-
-const getVerseWrapperStyle = function( book, version ) {
-	// TODO generalize
-	if ( bible.isRtlVersion( version, book ) ) {
-		return {
-			direction: 'rtl'
-		};
-	}
-
-	return {};
-};
 
 class Chapter extends React.Component{
 	componentDidMount() {
@@ -45,7 +32,7 @@ class Chapter extends React.Component{
 		}
 	}
 
-	referenceHasChanged( prevProps ) {
+	referenceHasChanged = ( prevProps ) => {
 		let referenceHasChanged = false;
 
 		if ( ! this.props.inSync ) {
@@ -62,7 +49,7 @@ class Chapter extends React.Component{
 		return referenceHasChanged;
 	}
 
-	scrollToCurrentChapter() {
+	scrollToCurrentChapter = () => {
 		const currrentChapter = ReactDOM.findDOMNode( this.currentRef.current );
 		if ( currrentChapter ) {
 			currrentChapter.scrollIntoView();
@@ -70,53 +57,17 @@ class Chapter extends React.Component{
 		}
 	}
 
-	getClassName( book, version ) {
-		if ( ( version === 'original' || version === 'accented' ) && bible.Data.otBooks.indexOf( book ) > -1 ) {
-			return classnames( styles.verse, styles.hebrew );
-		}
-
-		if ( version === 'OPV' || version === 'TPV' || version === 'NMV' ) {
-			return classnames( styles.verse, styles.farsi );
-		}
-
-		return styles.verse
-	}
-
-	placeholder( key ) {
-		return (
-			<div className={ styles.verseWrapper } key={ key }>
-				<span className={ styles.placeholder }>&nbsp;Loading</span>
-				<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }>&nbsp;</span>
-			</div>
-		);
-	}
-
-	notAvailable( key ) {
-		return (
-			<div className={ styles.verseWrapper } key={ key }>Book not available</div>
-		);
-	}
-
-	showChapterDetails = () => {
-		this.props.openReferenceInfoSidebar( { book: this.props.book, chapter: this.props.chapter } );
-	};
-
-	getSyncVerses() {
+	getSyncVerses = () => {
 		this.currentRef = React.createRef();
 		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ],
-			kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
+		const currentReference = this.props.reference[ index ];
+		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		const title = (
 			<div className={ styles.chapterColumn }>
 				{ this.props.reference.map( ( reference, index ) => {
-					const tranlatedBook = bible.getTranslatedBookName( this.props.book, reference.version );
-
-					return (
-						<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading } key={ index } onClick={ this.showChapterDetails }>
-							{ tranlatedBook + ' ' + this.props.chapter }
-						</h1>
-					);
+					const version = reference.version;
+					return <Title book={ this.props.book } chapter={ this.props.chapter } version={ version } key={ index } />;
 				} ) }
 			</div>
 		);
@@ -133,22 +84,15 @@ class Chapter extends React.Component{
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
 							{ this.props.reference.map( ( reference, index ) => {
-								const language = mapVersionToData( book, reference.version );
-								if ( ! this.props.data[ language ] || Object.keys( this.props.data[ language ] ).length === 0 ) {
-									return this.placeholder( index + verseNumber);
-								}
-
-								if ( ! this.props.data[ language ][ book ] ) {
-									return this.notAvailable( index + verseNumber );
-								}
-
-								const verseData = this.props.data[ language ][ book ][ chapter - 1 ][ verseNumber ];
 								return (
-									<div className={ styles.verseWrapper } key={ index + verseNumber } style={ getVerseWrapperStyle( book, reference.version ) }>
-										<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( book, reference.version ) }>
-											<Verse verse={ verseData } index={ verseNumber } version={ reference.version } language={ language } />
-										</span>
-									</div>
+									<VerseWrapper
+										data={ this.props.data }
+										book={ book }
+										version={ reference.version }
+										chapter={ chapter }
+										verseNumber={ verseNumber + 1 }
+										index={ verseNumber }
+										key={ 'versewrapper' + index + verseNumber } />
 								);
 							} ) }
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
@@ -159,27 +103,19 @@ class Chapter extends React.Component{
 		)
 	}
 
-	getDifferentVerses() {
+	getDifferentVerses = () => {
 		this.currentRef = React.createRef();
 
 		const { book, chapter, index } = this.props;
-		const currentReference = this.props.reference[ index ],
-			language = mapVersionToData( book, this.props.reference[ index ].version );
+		const currentReference = this.props.reference[ index ];
+		const version = currentReference.version;
 
-		if ( ! this.props.data[ language ] || ! this.props.data[ language ][ book ] ) {
-			return (
-				<div>Loading { this.props.reference[ index ].version }...</div>
-			);
-		}
-
-		const chapterData = this.props.data[ language ][ book ][ chapter - 1 ];
+		const kjvData = this.props.data[ 'KJV' ][ book ][ chapter - 1 ];
 
 		return (
 			<div>
-				<h1 id={ this.props.book + '_' + this.props.chapter } className={ styles.heading }>
-					{ this.props.book + ' ' + this.props.chapter }
-				</h1>
-				{ chapterData.map( ( verse, verseNumber ) => {
+				<Title book={ book } chapter={ chapter } version={ version } />
+				{ kjvData.map( ( verse, verseNumber ) => {
 					let ref = null;
 					if ( currentReference && currentReference.book === book && currentReference.chapter === chapter && currentReference.verse === ( verseNumber + 1 ) ) {
 						ref = this.currentRef;
@@ -187,11 +123,13 @@ class Chapter extends React.Component{
 
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ ref }>
-							<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( language, this.props.reference[ index ].version ) }>
-								<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber + 1 } /><span className={ this.getClassName( language, this.props.reference[ index ].version ) }>
-									<Verse verse={ verse } index={ verseNumber } version={ this.props.reference[ index ].version } language={ language } />
-								</span>
-							</div>
+							<VerseWrapper
+								data={ this.props.data }
+								book={ book }
+								version={ version }
+								chapter={ chapter }
+								verseNumber={ verseNumber + 1 }
+								index={ verseNumber } />
 							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 						</div>
 					);
@@ -199,17 +137,18 @@ class Chapter extends React.Component{
 			</div>
 		);
 	}
+
 	render() {
 		return (
-			<React.Fragment>
+			<div className={ styles.chapter }>
 				{ this.props.inSync && this.getSyncVerses() }
 				{ ! this.props.inSync && this.getDifferentVerses() }
-			</React.Fragment>
+			</div>
 		);
 	}
 }
 
-const mapStateToProps = ( state, ownProps ) => {
+const mapStateToProps = ( state ) => {
 	return {
 		reference: state.reference,
 		inSync: state.settings.inSync,
@@ -217,16 +156,11 @@ const mapStateToProps = ( state, ownProps ) => {
 	}
 };
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
+const mapDispatchToProps = ( dispatch ) => {
 	return {
 		fetchData: ( key ) => {
 			dispatch( fetchData( key ) );
 		},
-
-		openReferenceInfoSidebar: ( reference ) => {
-			dispatch( setTrayVisibilityFilter( 'reference' ) );
-			dispatch( setReferenceInfo( reference ) );
-		}
 	}
 };
 
