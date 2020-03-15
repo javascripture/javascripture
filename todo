@@ -1,5 +1,11 @@
 // todo
 - speed
+- word map
+- native app
+- word comparison page
+- combined search
+- common words
+- literal consistent
 
 stuff that will be fixed with muriel UI
 - can't see book names in portrait
@@ -69,10 +75,6 @@ commit 1095bff18f2380d75ea0c5cb3a695a52b46917ce
 data
 _____
 
-- generate the strongs hebrew dictionary
-- generate kjv and put it in the repo
-- generate the greek and put it in the repo
-- look at getting NET
 - put strongs roots and families in repo
 - put WEB in repo?
 - cross references in repo
