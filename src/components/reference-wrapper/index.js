@@ -18,7 +18,7 @@ class ReferenceWrapper extends React.Component{
 			references = <Reference reference={ this.props.references[ 0 ] } index={ 0 } />
 		}
 
-		const className = classnames( styles.referenceWrapper, this.props.searchSelect ? 'search-select' : null );
+		const className = classnames( styles.referenceWrapper, this.props.sidebarOpen ? styles.referenceWrapperSidebarOpen : null, this.props.searchSelect ? 'search-select' : null );
 		return (
 			<div className={ className }>
 				<div className={ styles.referenceWrapperInner }>
@@ -29,11 +29,12 @@ class ReferenceWrapper extends React.Component{
 	}
 }
 
-const mapStateToProps = ( { reference, settings, searchSelect }, ownProps ) => {
+const mapStateToProps = ( { reference, settings, searchSelect, sidebar }, ownProps ) => {
 	return {
 		inSync: settings.inSync,
 		references: reference,
 		searchSelect,
+		sidebarOpen: sidebar,
 	}
 };
 

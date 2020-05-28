@@ -1,12 +1,9 @@
 .dock {
 	position: fixed;
 	width: 100%;
+	margin-left: 0;
+	transition: margin 200ms;
 	z-index: 8;
-
-	@media ( min-width: 768px ) {
-		margin-left: 320px;
-		width: calc( 100% - 320px );
-	}
 
 	button {
 		cursor: pointer;
@@ -27,4 +24,12 @@
 .dock-version-selectors {
 	display: flex;
 	justify-content: center;
+}
+
+.dock-with-sidebar-open {
+	@media ( min-width: 768px ) {
+		margin-left: 320px;
+		transition: margin 200ms;
+		width: calc( 100% - 320px );
+	}
 }

@@ -1,6 +1,7 @@
 // External
 import React from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 // Internal
 import VersionSelector from '../version-selector';
@@ -10,8 +11,9 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 class Dock extends React.Component{
 	render() {
 		const numberOfColumns = this.props.references.length;
+		const className = classnames( styles.dock, this.props.sidebarOpen ? styles.dockWithSidebarOpen : null );
 		return (
-			<div className={ styles.dock }>
+			<div className={ className }>
 				<div className={ styles.dockVersionSelectors }>
 					{ this.props.references.map( ( reference, index ) => {
 						return (
@@ -24,14 +26,14 @@ class Dock extends React.Component{
 	}
 }
 
-const mapStateToProps = ( { reference, settings }, ownProps ) => {
+const mapStateToProps = ( { reference, settings, sidebar }, ownProps ) => {
 	return {
 		inSync: settings.inSync,
 		references: reference,
+		sidebarOpen: sidebar,
 	};
 };
 
 export default connect(
 	mapStateToProps
 )( withStyles( styles )( Dock ) );
-

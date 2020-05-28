@@ -1,6 +1,12 @@
 .reference-wrapper {
+	margin-left: 0;
+	transition: margin 200ms;
+}
+
+.reference-wrapper-sidebar-open {
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
+		transition: margin 200ms;
 	}
 }
 
