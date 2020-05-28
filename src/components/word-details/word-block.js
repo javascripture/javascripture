@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 // Internal dependencies
 import { addWord, removeSearch, removeWord, settingsChange, toggleWord } from '../../actions'
-import CancelSvg from '../svg/cancel.js';
+import RemoveSvg from '../svg/remove.js';
 import CopySvg from '../svg/copy.js';
 import KJVDef from './kjv-def';
 import morphology from '../../lib/morphology';
@@ -205,7 +205,7 @@ class WordBlock extends React.Component {
 							<CopySvg fill={ fill } />
 						</a>
 						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
-							<CancelSvg fill={ fill } />
+							<RemoveSvg fill={ fill } />
 						</a>
 					</h2>
 					<div ref={ ( div ) => this.wordBlockRef = div }>
