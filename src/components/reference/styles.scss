@@ -27,9 +27,10 @@
 
 .headingSync, .heading {
 	cursor: pointer;
+	flex-basis: 0;
+	flex-grow: 1;
 	font-family: 'Helvetica Neue';
 	font-weight: 100;
-	margin: 0 auto;
 	max-width: $column-width;
 	padding: 10px 0;
 	text-align: center;
@@ -37,6 +38,7 @@
 
 .chapter-column {
 	display: flex;
+	justify-content: center;
 }
 
 .verseWrapper {
