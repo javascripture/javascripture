@@ -1,34 +1,20 @@
 // External
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Internal
 import { removeColumn } from '../../actions';
 import RemoveSvg from '../svg/remove';
-import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-const fill = '#333333';
+const RemoveColumnButton = React.memo( ( { index } ) => {
+	const dispatch = useDispatch();
+	const fill = '#333333';
+	return (
+		<button type="button" onClick={ () => dispatch( removeColumn( index ) ) }>
+			<RemoveSvg fill={ fill } />
+		</button>
+	);
+} );
 
-class RemoveColumnButton extends React.Component{
-	render() {
-		return (
-			<button type="button" onClick={ this.props.removeColumn }>
-				<RemoveSvg fill={ fill } />
-			</button>
-		);
-	}
-}
-
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		removeColumn: () => {
-			dispatch( removeColumn( ownProps.index ) )
-		}
-	};
-};
-
-export default connect(
-	null,
-	mapDispatchToProps,
-)( withStyles( styles )( RemoveColumnButton ) );
+export default RemoveColumnButton;
