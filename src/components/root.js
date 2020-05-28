@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sidebar from 'react-sidebar';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import Dock from './dock';
@@ -15,60 +16,45 @@ import WordHighlight from './word-highlight';
 import styles from './root.scss';
 import { toggleSidebar } from '../actions'
 
-class Root extends React.Component{
-	getBodyStyles() {
+const Root = ( { highlightedWord } ) => {
+	const dispatch = useDispatch();
+	const sidebarOpen = useSelector( state => state.sidebar );
+	const getBodyStyles = () => {
+		const fontFamily = useSelector( state => state.settings.fontFamily );
+		const fontSize = useSelector( state => state.settings.fontSize );
+
 		var bodyStyles = 'body { ';
-		bodyStyles += 'font-family: ' + this.props.settings.fontFamily + ';';
-		bodyStyles += 'font-size: ' + this.props.settings.fontSize + ';';
+		bodyStyles += 'font-family: ' + fontFamily + ';';
+		bodyStyles += 'font-size: ' + fontSize + ';';
 		bodyStyles += '}';
 		return bodyStyles;
-	}
-
-	render() {
-		return (
-			<Sidebar
-				sidebar={
-					<Trays>
-						<TrayList />
-					</Trays>
-				}
-				open={ this.props.sidebar }
-				onSetOpen={this.props.toggleSidebar }
-				styles={{
-					sidebar: { background: "white", overflowY: "none", width: "320px", zIndex: "10" },
-					overlay: { disply: "none", bottom: "auto", right: "auto" },
-					content: { background: "white" },
-				}}
-			>
-				<div className={ styles.root }>
-					<style>{ this.getBodyStyles() }</style>
-					<KeyboardShortcuts />
-					<WordHighlight word={ this.props.highlightedWord } />
-					<Dock />
-					<ReferenceWrapper />
-					<Footer />
-				</div>
-			</Sidebar>
-		);
-	}
-}
-
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		settings: state.settings,
-		sidebar: state.sidebar,
 	};
+
+	return (
+		<Sidebar
+			sidebar={
+				<Trays>
+					<TrayList />
+				</Trays>
+			}
+			open={ sidebarOpen }
+			onSetOpen={ () => dispatch( toggleSidebar() ) }
+			styles={{
+				sidebar: { background: "white", overflowY: "none", width: "320px", zIndex: "10" },
+				overlay: { disply: "none", bottom: "auto", right: "auto" },
+				content: { background: "white" },
+			}}
+		>
+			<div className={ styles.root }>
+				<style>{ getBodyStyles() }</style>
+				<KeyboardShortcuts />
+				<WordHighlight word={ highlightedWord } />
+				<Dock />
+				<ReferenceWrapper />
+				<Footer />
+			</div>
+		</Sidebar>
+	)
 };
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		toggleSidebar: () => {
-			dispatch( toggleSidebar() );
-		},
-	}
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)( withStyles( styles )( Root ) );
+export default withStyles( styles )( Root );
