@@ -2,14 +2,11 @@
 import classnames from 'classnames';
 import map from 'lodash/map';
 import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { connect } from 'react-redux';
 
 // Internal dependencies
-import { addWord, removeSearch, removeWord, settingsChange, toggleWord } from '../../actions'
-import RemoveSvg from '../svg/remove.js';
-import CopySvg from '../svg/copy.js';
+import { addWord, settingsChange } from '../../actions'
 import KJVDef from './kjv-def';
 import morphology from '../../lib/morphology';
 import SearchBlock from '../search/search-block.js';
@@ -17,12 +14,16 @@ import { getHighlight } from '../strongs-color.js';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
 import { getFamily } from '../../lib/word';
+import WordBlockHeader from './word-block-header';
 
-const fill = '#fff';
 const strongs = javascripture.data.strongsDictionary;
 const strongsWithFamilies = javascripture.data.strongsObjectWithFamilies;
 
 class WordBlock extends React.Component {
+	constructor( props ) {
+		super( props );
+		this.wordBlockRef = React.createRef();
+	}
 	getSearchParameters() {
 		return {
 			clusivity: 'exclusive',
@@ -123,17 +124,6 @@ class WordBlock extends React.Component {
 		} );
 	};
 
-	copyToClipboard = ( event ) => {
-		event.stopPropagation();
-		const textarea = document.createElement( 'textarea' )
-		textarea.value = this.wordBlockRef.innerText;
-		document.body.appendChild( textarea );
-		textarea.select();
-		document.execCommand('copy');
-		textarea.remove();
-		event.target.focus();
-	};
-
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = strongs[ strongsNumber ],
@@ -173,18 +163,15 @@ class WordBlock extends React.Component {
 		);
 	}
 
-	removeWord() {
-		this.props.removeWord( this.props.strongsNumber, this.props.version );
-	}
-
 	termTitle( { clusivity, version, lemma, range, clickedWord } ) {
 		return 'strongs number: ' + lemma + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nclicked word: ' + clickedWord;
 	}
 
 	render() {
 		const strongsNumber = this.props.strongsNumber,
-			wordDetail = strongs[ strongsNumber ],
-			wordFamily = getFamily( strongsNumber );
+			lemma = this.props.lemma,
+			version = this.props.version,
+			wordDetail = strongs[ strongsNumber ];
 
 		if ( strongsNumber === 'G3588' ) {
 			return null;
@@ -194,21 +181,8 @@ class WordBlock extends React.Component {
 			return (
 				<div>
 					<style>{ getHighlight( strongsNumber, this.props.subdue, null ) }</style>
-					<h2
-						className={ this.getClassName( strongsNumber ) + ' ' + styles.title }
-						onClick={ () => this.toggleDetails( false ) }
-						title={ this.termTitle( this.getSearchParameters() ) }
-					>
-						<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
-						{ stripPointing( wordDetail.lemma ) }
-						<a className={ styles.copy } onClick={ this.copyToClipboard }>
-							<CopySvg fill={ fill } />
-						</a>
-						<a className={ styles.remove } onClick={ () => this.removeWord( false ) }>
-							<RemoveSvg fill={ fill } />
-						</a>
-					</h2>
-					<div ref={ ( div ) => this.wordBlockRef = div }>
+					<WordBlockHeader title={ this.termTitle( this.getSearchParameters() ) } strongsNumber={ strongsNumber } version={ version } textToCopy={ this.wordBlockRef } />
+					<div ref={ this.wordBlockRef }>
 						{ this.renderDetails() }
 						<SearchBlock { ...this.props } terms={ this.getSearchParameters() } />
 					</div>
@@ -238,22 +212,6 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 				morphology: null,
 				version: ownProps.version,
 			} ) );
-		},
-
-		removeWord: ( lemma, version ) => {
-			const searchParameters = {
-				clusivity: 'exclusive',
-				version: version,
-				lemma: lemma,
-				range: 'verse',
-			};
-
-			dispatch( removeWord( lemma ) );
-			dispatch( removeSearch( searchParameters ) );
-		},
-
-		toggleWord: () => {
-			dispatch( toggleWord( ownProps.strongsNumber ) );
 		},
 
 		expandSearchResults: () => {
