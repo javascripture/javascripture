@@ -40,7 +40,7 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 
 	useEffect( () => {
 		scrollToCurrentChapter();
-	}, [ reference ] );
+	}, [ reference[ index ] ] );
 
 	const scrollToCurrentChapter = () => {
 		const currrentChapter = ReactDOM.findDOMNode( currentRef.current );

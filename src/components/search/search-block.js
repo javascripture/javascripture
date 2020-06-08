@@ -18,7 +18,7 @@ function getSearchResults( searchResults, terms ) {
 	}
 }
 
-const SearchBlock = React.memo(( { open, sorted, terms } ) => {
+const SearchBlock = React.memo( ( { open, sorted, terms } ) => {
 	const results = useSelector( state => getSearchResults( state.searchResults, terms ) );
 
 	if ( ! results ) {
