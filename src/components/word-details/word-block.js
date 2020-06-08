@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import { addWord, settingsChange } from '../../actions'
@@ -18,6 +19,98 @@ import WordBlockHeader from './word-block-header';
 
 const strongs = javascripture.data.strongsDictionary;
 const strongsWithFamilies = javascripture.data.strongsObjectWithFamilies;
+
+const WordBlockLink = React.memo( ( { strongsNumber, version } ) => {
+	const subdue = useSelector( state => state.settings.subdue );
+	const dispatch = useDispatch();
+
+	const getClassName = ( strongsNumber ) => {
+		return classnames( strongsNumber, styles.wordTree )
+	};
+
+	const highlight = ( strongsNumber ) => {
+		window.updateAppComponent( 'highlightedWord', strongsNumber );
+	};
+
+	const unHighlight = () => {
+		window.updateAppComponent( 'highlightedWord', null );
+	};
+
+	const searchForWord = ( strongsNumber ) => {
+		dispatch( addWord( {
+			strongsNumber,
+			subdue,
+			open: true,
+			morphology: null,
+			version,
+		} ) );
+	};
+
+	return (
+		<span><a className={ getClassName( strongsNumber ) }
+			onClick={ () => searchForWord( strongsNumber ) }
+			onMouseOver={ () => highlight( strongsNumber ) }
+			onMouseOut={ unHighlight }>
+			{ strongsNumber }
+		</a> </span>
+	)
+} );
+
+const WordBlockDetails = React.memo( ( { strongsNumber, version } ) => {
+	const getBranchesData = () => {
+		return map( javascripture.data.strongsObjectWithFamilies, ( strongsObjectData, strongsObjectNumber ) => {
+			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( strongsNumber ) > -1 ) {
+				return (
+					<WordBlockLink key={ strongsObjectNumber } strongsNumber={ strongsObjectNumber } version={ version } />
+				);
+			}
+		} );
+	};
+
+	const getBranches = () => {
+		const branchesData = getBranchesData();
+		if ( branchesData ) {
+			return branchesData;
+		}
+
+		return 'None';
+	}
+
+	const getRoots = () => {
+		if ( ! javascripture.data.strongsObjectWithFamilies[ strongsNumber ] ) {
+			return;
+		}
+
+		const rootsData = javascripture.data.strongsObjectWithFamilies[ strongsNumber ].roots;
+		if( rootsData ) {
+			return rootsData.map( ( rootNumber, index ) => {
+				return (
+					<WordBlockLink key={ index } strongsNumber={ rootNumber } version={ version } />
+				);
+			} );
+		}
+
+		return 'None';
+	};
+
+	return (
+		<div>
+			<div>
+				<strong>Roots: </strong>{ getRoots() }
+			</div>
+			<div>
+				<strong>Branches: </strong>{ getBranches() }
+			</div>
+			<div>
+				<strong>Family: </strong>{ getFamily( strongsNumber ) }
+			</div>
+			<div>
+				{ strongsWithFamilies[ strongsNumber ].count } uses
+			</div>
+			<br />
+		</div>
+	)
+} );
 
 class WordBlock extends React.Component {
 	constructor( props ) {
@@ -62,62 +155,6 @@ class WordBlock extends React.Component {
 		return classnames( rootNumber, styles.wordTree )
 	}
 
-	highlight( strongsNumber ) {
-		window.updateAppComponent( 'highlightedWord', strongsNumber );
-	}
-
-	unHighlight() {
-		window.updateAppComponent( 'highlightedWord', null );
-	}
-
-	getRoots() {
-		if ( ! javascripture.data.strongsObjectWithFamilies[ this.props.strongsNumber ] ) {
-			return;
-		}
-
-		const rootsData = javascripture.data.strongsObjectWithFamilies[ this.props.strongsNumber ].roots;
-		if( rootsData ) {
-			return rootsData.map( ( rootNumber, index ) => {
-				return (
-					<span key={ index }>
-						<a className={ this.getClassName( rootNumber ) }
-							onClick={ this.searchForWord.bind( this, rootNumber ) }
-							onMouseOver={ this.highlight.bind( this, rootNumber ) }
-							onMouseOut={ this.unHighlight }>
-							{ rootNumber }
-					</a> </span>
-				);
-			} );
-		}
-
-		return 'None';
-	}
-
-	getBranchesData() {
-		return map( javascripture.data.strongsObjectWithFamilies, ( strongsObjectData, strongsObjectNumber ) => {
-			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( this.props.strongsNumber ) > -1 ) {
-				return (
-					<span key={ strongsObjectNumber }>
-						<a className={ this.getClassName( strongsObjectNumber ) }
-							onClick={ this.searchForWord.bind( this, strongsObjectNumber ) }
-							onMouseOver={ this.highlight.bind( this, strongsObjectNumber ) }
-							onMouseOut={ this.unHighlight }>
-							{ strongsObjectNumber }
-					</a> </span>
-				);
-			}
-		} );
-	}
-
-	getBranches() {
-		const branchesData = this.getBranchesData();
-		if ( branchesData ) {
-			return branchesData;
-		}
-
-		return 'None';
-	}
-
 	getMorphology = ( strongsNumber ) => {
 		return this.props.morphology.split( ' ' ).map( ( morph, index ) => {
 			return ( index !== 0 ? ' - ' : '' ) + morphology( morph, 'noLinks', strongsNumber );
@@ -127,7 +164,6 @@ class WordBlock extends React.Component {
 	renderDetails() {
 		const strongsNumber = this.props.strongsNumber,
 			wordDetail = strongs[ strongsNumber ],
-			wordFamily = getFamily( strongsNumber ),
 			className = classnames( styles.wordBlock, this.props.open ? styles.visible : styles.hidden );
 
 		return (
@@ -137,19 +173,7 @@ class WordBlock extends React.Component {
 				{ wordDetail.translit ? ' | ' + wordDetail.translit : null }
 				{ wordDetail.pronounciation ? ' | ' + wordDetail.pronounciation : null }
 				<br />
-				<div>
-					<strong>Roots: </strong>{ this.getRoots() }
-				</div>
-				<div>
-					<strong>Branches: </strong>{ this.getBranches() }
-				</div>
-				<div>
-					<strong>Family: </strong>{ wordFamily }
-				</div>
-				<div>
-					{ strongsWithFamilies[ strongsNumber ].count } uses
-				</div>
-				<br />
+				<WordBlockDetails strongsNumber={ strongsNumber } version={ this.props.version } />
 				<div>
 					<strong>Morphology</strong><br />{ this.props.morphology } - { this.props.morphology && this.getMorphology( strongsNumber ) }<br />
 					<br />
