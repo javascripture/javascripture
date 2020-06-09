@@ -39,9 +39,9 @@
 	z-index: 20;
 
 	@media ( min-width: 768px ) {
-		position: absolute;
-		left: 0;
 		height: calc( 100vh - 40px );
+		left: 0;
+		position: absolute;
 	}
 }
 
