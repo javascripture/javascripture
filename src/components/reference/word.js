@@ -4,11 +4,11 @@ import React from 'react';
 // Internal
 import WordSingle from './word-single.js';
 
-function startsWithPunctuation( word ) {
+function startingPunctuation( word ) {
 	return word.indexOf( '(' ) === 0;
 }
 
-function endsWithPunctuation( word ) {
+function startsWithPunctuation( word ) {
 	return word.indexOf( '\.' ) === 0 ||
 		word.indexOf( ')' ) === 0 ||
 		word.indexOf( '?' ) === 0 ||
@@ -43,15 +43,12 @@ export default React.memo( ( { word, version } ) => {
 		return morphArray[ key ];
 	}
 
-	const wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => (
-		<WordSingle key={ key } lemma={ lemmaArray ? lemmaArray[ key ]: null } word={ wordSingleValue } morph={ getMorphSingle( key ) } version={ version } />
-	) );
+	return wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => {
+		const wordFragment = <WordSingle key={ key } lemma={ lemmaArray ? lemmaArray[ key ]: null } word={ wordSingleValue } morph={ getMorphSingle( key ) } version={ version } />;
+		if ( startsWithPunctuation( wordSingleValue ) ) { // this removes the space between the and king in esther 1:13 || ( props.lastWord && startsWithPunctuation( props.lastWord[0] ) ) ) {
+			return wordFragment;
+		}
 
-	if ( endsWithPunctuation( word ) ) { // this removes the space between the and king in esther 1:13 || ( props.lastWord && startsWithPunctuation( props.lastWord[0] ) ) ) {
-		return wordString;
-	}
-
-	return (
-		<React.Fragment> { wordString }</React.Fragment>
-	);
+		return <React.Fragment key={ key }> { wordFragment }</React.Fragment>;
+	 } );
 } );

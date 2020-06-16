@@ -17,12 +17,6 @@
 	line-height: 140%;
 	justify-content: center;
 	position: relative;
-
-	&:hover {
-		.bookmarker {
-			visibility: visible;
-		}
-	}
 }
 
 .headingSync, .heading {
@@ -44,9 +38,16 @@
 .verseWrapper {
 	color: #bbb;
 	padding: 0 $column-padding;
+	position: relative;
 	flex-basis: 0;
 	flex-grow: 1;
 	max-width: $column-width;
+
+	&:hover {
+		.helpers {
+			visibility: visible;
+		}
+	}
 }
 
 .verse {
@@ -66,12 +67,14 @@
 	vertical-align: middle;
 }
 
-.bookmarker {
+.helpers {
 	cursor: pointer;
 	position: absolute;
 	right: 0;
-	top: 20px;
+	top: 0;
 	visibility: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
 .chapter {

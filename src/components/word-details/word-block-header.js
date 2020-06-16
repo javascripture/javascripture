@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux';
 // Internal dependencies
 import { removeSearch, removeWord, toggleWord } from '../../actions'
 import RemoveSvg from '../svg/remove.js';
-import CopySvg from '../svg/copy.js';
 import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
+import CopyToClipboard from '../copy-to-clipboard';
 
 const fill = '#fff';
 const strongs = javascripture.data.strongsDictionary;
 
-const WordBlockHeader = ( { copyToClipboard, strongsNumber, textToCopy, title, version } ) => {
+const WordBlockHeader = ( { strongsNumber, textToCopy, title, version } ) => {
 	const dispatch = useDispatch();
 	const wordDetail = strongs[ strongsNumber ];
 
@@ -32,17 +32,6 @@ const WordBlockHeader = ( { copyToClipboard, strongsNumber, textToCopy, title, v
 		return classnames( rootNumber, styles.wordTree, styles.title )
 	};
 
-	copyToClipboard = ( event, textToCopy ) => {
-		event.stopPropagation();
-		const textarea = document.createElement( 'textarea' )
-		textarea.value = textToCopy.current.innerText;
-		document.body.appendChild( textarea );
-		textarea.select();
-		document.execCommand('copy');
-		textarea.remove();
-		event.target.focus();
-	};
-
 	return (
 		<h2
 			className={ getClassName( strongsNumber ) }
@@ -50,9 +39,9 @@ const WordBlockHeader = ( { copyToClipboard, strongsNumber, textToCopy, title, v
 			onClick={ () => dispatch( toggleWord( strongsNumber ) ) }>
 			<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 			{ stripPointing( wordDetail.lemma ) }
-			<a className={ styles.copy } onClick={ ( event ) => copyToClipboard( event, textToCopy ) }>
-				<CopySvg fill={ fill } />
-			</a>
+			<span className={ styles.copy }>
+				<CopyToClipboard fill={ fill } textToCopy={ textToCopy } />
+			</span>
 			<a className={ styles.remove } onClick={ () => removeWordAction() }>
 				<RemoveSvg fill={ fill } />
 			</a>

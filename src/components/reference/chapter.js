@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import { fetchData } from '../../actions';
-import Bookmarker from './bookmarker';
 import Title from './title';
 import VerseWrapper from './verse-wrapper';
 import styles from './styles.scss';
@@ -79,7 +78,6 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 										key={ 'versewrapper' + index + verseNumber } />
 								);
 							} ) }
-							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 						</div>
 					);
 				} ) }
@@ -103,7 +101,6 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 								chapter={ chapter }
 								verseNumber={ verseNumber + 1 }
 								index={ verseNumber } />
-							<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } />
 						</div>
 					);
 				} ) }

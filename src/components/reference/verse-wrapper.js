@@ -3,11 +3,14 @@ import React from 'react';
 import classnames from 'classnames';
 
 // Internal
+import Bookmarker from './bookmarker';
+import CopyToClipboard from '../copy-to-clipboard';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { mapVersionToData } from '../../lib/reference';
+import { ReactReduxContext } from 'react-redux';
 
 const getVerseWrapperStyle = ( book, version ) => {
 	if ( bible.isRtlVersion( version, book ) ) {
@@ -56,12 +59,31 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 		return notAvailable( index + verseNumber );
 	}
 
+	const startsWithPunctuation = ( word ) => {
+		return word.indexOf( '\.' ) === 0 ||
+			word.indexOf( ')' ) === 0 ||
+			word.indexOf( '?' ) === 0 ||
+			word.indexOf( '!' ) === 0 ||
+			word.indexOf( ':' ) === 0 ||
+			word.indexOf( ';' ) === 0 ||
+			word.indexOf( ',' ) === 0;
+	};
 	const verseData = data[ language ][ book ][ chapter - 1 ][ index ];
+	const textToCopy = verseData.map ? verseData.map( ( wordArray, index ) => {
+		return wordArray[ 0 ].split('/').map( ( wordSingleValue ) => {
+			return ( startsWithPunctuation( wordSingleValue ) || index === 0 ) ? wordSingleValue : ' ' + wordSingleValue;
+		} ).join( '' );
+	} ).join( '' ) : verseData;
+
 	return (
 		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) }>
 			<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
 			<span className={ getClassName( book, version ) }>
 				<Verse verse={ verseData } index={ index } version={ version } />
+			</span>
+			<span className={ styles.helpers }>
+				<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } fill={ '#666' } />
+				<CopyToClipboard fill={ '#666' } textToCopy={ textToCopy } />
 			</span>
 		</div>
 	);

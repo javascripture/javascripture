@@ -8,9 +8,9 @@ import { addBookmark, setTrayVisibilityFilter } from '../../actions';
 import Bookmark from '../svg/bookmark.js';
 import styles from './styles.scss';
 
-const Bookmarker = ( { book, chapter, verse, addBookmark } ) => {
+const Bookmarker = ( { book, chapter, verse, addBookmark, fill } ) => {
 	return (
-		<span className={ styles.bookmarker } onClick={ addBookmark }><Bookmark /></span>
+		<span className={ styles.bookmarker } onClick={ addBookmark }><Bookmark fill={ fill } /></span>
 	);
 };
 
