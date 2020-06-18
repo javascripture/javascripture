@@ -13,7 +13,7 @@ const Verse = React.memo( ( { verse, version } ) => {
 			return <Word word={ word } key={ index } version={ version } lastWord={ lastWord }/>;
 		} );
 	} else if ( verse ) {
-		words = verse;
+		words = verse.replace(/<[^>]+>/g, ''); // to strip tags like <FI>
 	}
 
 	return words;

@@ -6,6 +6,7 @@
 - combined search
 - common words
 - literal consistent
+- html tags in some versions
 
 stuff that will be fixed with muriel UI
 - can't see book names in portrait
@@ -51,10 +52,8 @@ commit 1095bff18f2380d75ea0c5cb3a695a52b46917ce
 - yahweh in 1 sam 24:10 - ESV
 - fix esth 1:13
 - dan 5:25
-- copy/paste spaces
 
 - fix john 6:20 - WEB
-- ex 4:23 - no morph on the word to serve?
 
 - fix undefined parsing errors
 - remove uninspired titles to psalms in ESV
