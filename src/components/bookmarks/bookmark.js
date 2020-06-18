@@ -7,8 +7,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import { removeBookmark } from '../../actions';
 import styles from './styles.scss';
-import Cancel from '../svg/cancel';
-import { createReferenceLink } from '../../lib/reference';
+import Remove from '../svg/remove';
 import ReferenceLink from '../reference-link';
 
 //The right way to do a link
@@ -22,7 +21,7 @@ class BookMark extends React.Component{
 		return (
 			<div className={ styles.bookmark }>
 				<ReferenceLink reference={ bookmark } number={ this.props.number } />
-				<a onClick={ this.removeBookmark } className={ styles.cancel }><Cancel fill="#000000" /></a>
+				<a onClick={ this.removeBookmark } className={ styles.cancel }><Remove fill="#666" /></a>
 			</div>
 		);
 	}
@@ -44,5 +43,3 @@ const BookMarkContainer = connect(
 )( BookMarkWithStyles )
 
 export default BookMarkContainer;
-
-

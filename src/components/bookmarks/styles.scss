@@ -20,12 +20,8 @@
 	a {
 		display: block;
 		line-height: 2em;
-		padding: 0 20px;
+		padding: 0 10px;
 		text-decoration: none;
-
-		&:hover {
-			background: $hover;
-		}
 	}
 }
 
@@ -38,10 +34,7 @@
 	right: 0;
 	top: 0;
 
-	svg {
-		cursor: pointer;
-		height: 15px;
-		vertical-align: middle;
-		width: 15px;
+	&:hover [fill] {
+		fill: $text-hover;
 	}
 }
