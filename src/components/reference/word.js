@@ -43,12 +43,13 @@ export default React.memo( ( { word, version } ) => {
 		return morphArray[ key ];
 	}
 
-	return wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => {
-		const wordFragment = <WordSingle key={ key } lemma={ lemmaArray ? lemmaArray[ key ]: null } word={ wordSingleValue } morph={ getMorphSingle( key ) } version={ version } />;
-		if ( startsWithPunctuation( wordSingleValue ) ) { // this removes the space between the and king in esther 1:13 || ( props.lastWord && startsWithPunctuation( props.lastWord[0] ) ) ) {
-			return wordFragment;
-		}
+	const wordString = wordValue && wordValue.split('/').map( ( wordSingleValue, key ) => {
+		return <WordSingle key={ key } lemma={ lemmaArray ? lemmaArray[ key ]: null } word={ wordSingleValue } morph={ getMorphSingle( key ) } version={ version } />;
+	} );
 
-		return <React.Fragment key={ key }> { wordFragment }</React.Fragment>;
-	 } );
+	if ( startsWithPunctuation( wordValue ) ) {
+		return wordString;
+	}
+
+	return <React.Fragment key={ word }> { wordString }</React.Fragment>;
 } );
