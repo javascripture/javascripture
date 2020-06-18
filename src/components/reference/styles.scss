@@ -36,15 +36,17 @@
 }
 
 .verseWrapper {
-	color: #bbb;
-	padding: 0 $column-padding;
+	color: #999;
+	padding: 0 0 0 $column-padding;
 	position: relative;
 	flex-basis: 0;
 	flex-grow: 1;
 	max-width: $column-width;
+	display: flex;
 
 	&:hover {
-		.helpers {
+		z-index: 1;
+		.hidden {
 			visibility: visible;
 		}
 	}
@@ -52,6 +54,8 @@
 
 .verse {
 	color: black;
+	flex-basis: 0;
+	flex-grow: 1;
 }
 
 .hebrew {
@@ -69,12 +73,23 @@
 
 .helpers {
 	cursor: pointer;
-	position: absolute;
-	right: 0;
-	top: 0;
-	visibility: hidden;
+	flex-basis: 0;
+	flex-grow: 1;
+	max-width: $column-padding;
+	width: $column-padding;
+
+	svg:hover [fill] {
+		fill: $text-hover;
+	}
+}
+
+.hidden {
+	background-color: white;
 	display: flex;
 	flex-direction: column;
+	position: absolute;
+	top: 20px;
+	visibility: hidden;
 }
 
 .chapter {
@@ -83,6 +98,10 @@
 
 .verseNumber {
 	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	width: $column-padding;
+
 	&:hover {
 		color: $text-hover;
 	}
