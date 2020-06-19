@@ -16,6 +16,8 @@ import InfoSvg from '../svg/info.js';
 import ClearSvg from '../svg/clear.js';
 import CloseSvg from '../svg/close.js';
 import styles from './styles.scss';
+import MenuOpenSvg from '../svg/menu-open.js';
+import MenuSvg from '../svg/menu.js';
 
 const icons = {
 	BookSvg: <BookSvg />,
@@ -26,7 +28,7 @@ const icons = {
 	InfoSvg: <InfoSvg />,
 };
 
-const SidebarControls = ( { clearAll, closeSidebar, words, icon, title } ) => (
+const SidebarControls = ( { clearAll, closeSidebar, words, icon, sidebarOpen, title } ) => (
 	<div className={ styles.sidebarControls }>
 		<span className={ styles.sidebarControlsInner }>
 			{ icons[ icon ] }
@@ -40,7 +42,7 @@ const SidebarControls = ( { clearAll, closeSidebar, words, icon, title } ) => (
 				</a>
 			) }
 			<a href="#" onClick={ closeSidebar } title="Close sidebar">
-				<CloseSvg />
+				{ sidebarOpen ? <MenuOpenSvg /> : <MenuSvg /> }
 			</a>
 		</span>
 	</div>
@@ -55,6 +57,7 @@ const mapStateToProps = ( state, ownProps ) => {
 		words: state.wordDetails,
 		icon: selectedTray && selectedTray.icon,
 		title: selectedTray&& selectedTray.text,
+		sidebarOpen: state.sidebar,
 	}
 };
 
