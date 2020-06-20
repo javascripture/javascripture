@@ -13,7 +13,7 @@ import CopyToClipboard from '../copy-to-clipboard';
 const fill = '#fff';
 const strongs = javascripture.data.strongsDictionary;
 
-const WordBlockHeader = ( { strongsNumber, textToCopy, title, version } ) => {
+const WordBlockHeader = React.memo( ( { strongsNumber, textToCopy, title, version } ) => {
 	const dispatch = useDispatch();
 	const wordDetail = strongs[ strongsNumber ];
 
@@ -47,6 +47,6 @@ const WordBlockHeader = ( { strongsNumber, textToCopy, title, version } ) => {
 			</a>
 		</h2>
 	);
-};
+} );
 
 export default WordBlockHeader;

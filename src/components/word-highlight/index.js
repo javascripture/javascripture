@@ -1,43 +1,28 @@
 // External dependencies
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Internal
 import { getHighlight, getHighlightBorder } from '../strongs-color.js';
 
-class WordHighlight extends React.Component{
-	render() {
-		return (
-			<style>
-				{ this.props.word && this.props.word.split(/[/, ]/).map( word => {
-					if ( word === 'added' || word === 'divineName' ) {
-						return;
-					}
+const WordHighlight = React.memo( ( { word } ) => {
+	const settings = useSelector( state => state.settings );
+	const searchSelect = useSelector( state => state.searchSelect );
+	return (
+		<style>
+			{ word && word.split(/[/, ]/).map( word => {
+				if ( word === 'added' || word === 'divineName' ) {
+					return;
+				}
 
-					if ( this.props.searchSelect ) {
-						return getHighlightBorder( word, this.props.settings.subdue, this.props.settings.highlightWordsWith );
-					}
+				if ( searchSelect ) {
+					return getHighlightBorder( word, settings.subdue, settings.highlightWordsWith );
+				}
 
-					return getHighlight( word, this.props.settings.subdue, this.props.settings.highlightWordsWith );
-				} ) }
-			</style>
-		);
-	}
-}
+				return getHighlight( word, settings.subdue, settings.highlightWordsWith );
+			} ) }
+		</style>
+	);
+} );
 
-WordHighlight.propTypes = {};
-
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		wordHighlight: state.wordHighlight,
-		settings: state.settings,
-		searchSelect: state.searchSelect,
-	}
-};
-
-const WordHighlightContainer = connect(
-	mapStateToProps
-)( WordHighlight )
-
-export default WordHighlightContainer;
+export default WordHighlight;
