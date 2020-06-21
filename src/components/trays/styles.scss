@@ -1,4 +1,5 @@
 @import '../colors.scss';
+@import '../dimensions.scss';
 
 .trays {
 	background: white;
@@ -126,4 +127,24 @@
 
 .sidebarControlsRight {
 	padding-right: 10px;
+}
+
+.close-with-sidebar-closed {
+	background: white;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-top: none;
+	box-sizing: border-box;
+	height: $dock-height;
+	line-height: $dock-height;
+	width: $dock-height + 1;
+	position: absolute;
+	right: - $dock-height - 1;
+	text-align: center;
+	top: 0;
+
+	svg {
+		position: absolute;
+		left: 7px;
+		top: 6px;
+	}
 }

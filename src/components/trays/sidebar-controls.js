@@ -3,6 +3,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { find } from 'lodash';
+import classnames from 'classnames';
 
 // Internal dependencies
 import { clearAll, toggleSidebar } from '../../actions'
@@ -49,7 +50,7 @@ const SidebarControls = React.memo( () => {
 						<ClearSvg />
 					</a>
 				) }
-				<a href="#" onClick={ () => dispatch( toggleSidebar() ) } title="Close sidebar" className={ styles.close }>
+				<a href="#" onClick={ () => dispatch( toggleSidebar() ) } title="Close sidebar" className={ classnames( sidebarOpen ? null : styles.closeWithSidebarClosed ) }>
 					{ sidebarOpen ? <MenuOpenSvg /> : <MenuCloseSvg /> }
 				</a>
 			</span>

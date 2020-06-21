@@ -1,6 +1,7 @@
 .dock {
 	position: fixed;
-	width: 100%;
+	left: 40px;
+	right: 0;
 	margin-left: 0;
 	transition: margin 200ms;
 	z-index: 8;
@@ -27,6 +28,7 @@
 }
 
 .dock-with-sidebar-open {
+	left: 0;
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
 		transition: margin 200ms;
