@@ -15,7 +15,7 @@ import InfoSvg from '../svg/info.js';
 import ClearSvg from '../svg/clear.js';
 import styles from './styles.scss';
 import MenuOpenSvg from '../svg/menu-open.js';
-import MenuSvg from '../svg/menu.js';
+import MenuCloseSvg from '../svg/menu-close.js';
 
 const icons = {
 	BookSvg: <BookSvg />,
@@ -50,7 +50,7 @@ const SidebarControls = React.memo( () => {
 					</a>
 				) }
 				<a href="#" onClick={ () => dispatch( toggleSidebar() ) } title="Close sidebar" className={ styles.close }>
-					{ sidebarOpen ? <MenuOpenSvg /> : <MenuSvg /> }
+					{ sidebarOpen ? <MenuOpenSvg /> : <MenuCloseSvg /> }
 				</a>
 			</span>
 		</div>
