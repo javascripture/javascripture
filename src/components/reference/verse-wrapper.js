@@ -69,7 +69,7 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 			word.indexOf( ',' ) === 0;
 	};
 	const verseData = data[ language ][ book ][ chapter - 1 ][ index ];
-	const textToCopy = verseData.map ? verseData.map( ( wordArray, index ) => {
+	const textToCopy = ( verseData && verseData.map ) ? verseData.map( ( wordArray, index ) => {
 		const wordString = wordArray[ 0 ].split('/').map( wordSingleValue => wordSingleValue ).join( '' );
 		return ( startsWithPunctuation( wordString ) || index === 0 ) ? wordString : ' ' + wordString;
 	} ).join( '' ) : verseData;
