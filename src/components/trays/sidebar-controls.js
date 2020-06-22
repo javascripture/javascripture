@@ -46,11 +46,17 @@ const SidebarControls = React.memo( () => {
 
 			<span className={ styles.sidebarControlsRight }>
 				{ words.length > 0 && (
-					<a href="#" onClick={ () => dispatch( clearAll() ) } title="Clear all">
+					<a href="#" onClick={ ( event ) => {
+						event.preventDefault();
+						dispatch( clearAll() );
+					} } title="Clear all">
 						<ClearSvg />
 					</a>
 				) }
-				<a href="#" onClick={ () => dispatch( toggleSidebar() ) } title="Close sidebar" className={ classnames( sidebarOpen ? null : styles.closeWithSidebarClosed ) }>
+				<a href="#" onClick={ ( event ) => {
+					event.preventDefault();
+					dispatch( toggleSidebar() );
+				} } title="Close sidebar" className={ classnames( sidebarOpen ? null : styles.closeWithSidebarClosed ) }>
 					{ sidebarOpen ? <MenuOpenSvg /> : <MenuCloseSvg /> }
 				</a>
 			</span>

@@ -21,7 +21,6 @@ const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 	const bookName = useSelector( state => state.referenceSelectorMobile[ index ].bookName );
 
 	const toggleList = () => {
-		console.log('here');
 		dispatch( toggleReferenceSelectorMobile( index ) );
 	};
 

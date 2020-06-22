@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import Dock from './dock';
-import Footer from './footer';
 import ReferenceWrapper from '../components/reference-wrapper';
 import KeyboardShortcuts from './keyboard-shortcuts';
 import Trays from './trays';
@@ -51,7 +50,6 @@ const Root = ( { highlightedWord } ) => {
 				<WordHighlight word={ highlightedWord } />
 				<Dock />
 				<ReferenceWrapper />
-				<Footer />
 			</div>
 		</Sidebar>
 	)
