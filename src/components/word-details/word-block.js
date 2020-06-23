@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import SearchBlock from '../search/search-block.js';
 import { getHighlight } from '../strongs-color.js';
 import styles from './styles.scss';
-import WordBlockHeader from './word-block-header';
+import WordBlockHeader from '../word-block-header';
 import WordBlockDetails from './word-block-details';
 
 const strongs = javascripture.data.strongsDictionary;

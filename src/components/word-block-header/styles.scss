@@ -1,0 +1,31 @@
+.title {
+	cursor: pointer;
+	font-weight: 100;
+	margin: 0 !important;
+	padding: 5px !important;
+	position: relative;
+}
+
+.strongs-number-title {
+	display: inline-block;
+	width: 85px;
+}
+.copy {
+	padding: 8px;
+	position: absolute;
+	top: 0;
+	right: 24px;
+}
+
+.remove {
+	color: #fff;
+	padding: 8px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.word-tree {
+	margin: 0 -1px;
+	padding: 0 1px;
+}

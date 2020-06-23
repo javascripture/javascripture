@@ -2,6 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useDispatch } from 'react-redux';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { removeSearch, removeWord, toggleWord } from '../../actions'
@@ -49,4 +50,4 @@ const WordBlockHeader = React.memo( ( { strongsNumber, textToCopy, title, versio
 	);
 } );
 
-export default WordBlockHeader;
+export default withStyles( styles )( WordBlockHeader );
