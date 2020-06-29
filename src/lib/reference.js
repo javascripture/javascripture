@@ -1,4 +1,5 @@
-import { uniq } from 'lodash';
+import _ from 'lodash';
+import { uniq, sortBy, forEach, toPairs, fromPairs, orderBy } from 'lodash';
 
 export const createReferenceLink = ( reference ) => {
 	return '/' + reference.book + '/' + reference.chapter + '/' + reference.verse;
@@ -78,7 +79,7 @@ export const compareTwoReferences = ( { referenceInfo: { reference, referenceToC
 	return uniq( comparison );
 };
 
-export const calculateRareWords = ( { referenceInfo: { reference, limit } , data } ) => {
+export const calculateRareWords = ( { referenceInfo: { reference, limit }, data } ) => {
 	if ( ! reference ) {
 		return null;
 	}
@@ -89,6 +90,23 @@ export const calculateRareWords = ( { referenceInfo: { reference, limit } , data
 	} ) );
 };
 
+export const calculateCommonWords = ( { referenceInfo: { reference }, data } ) => {
+	if ( ! reference ) {
+		return null;
+	}
+
+	const lemmas = getLemmasForReference( reference, getDataFromBook( reference, data ) );
+	const counted = {};
+	forEach( lemmas, lemma => {
+		if ( typeof counted[ lemma ] === 'undefined' ) {
+			counted[ lemma ] = 1;
+		} else {
+			counted[ lemma ] = counted[ lemma ] + 1;
+		}
+	} );
+
+	return _( counted ).toPairs( counted ).orderBy( [1], ['desc'] ).fromPairs().value();
+};
 
 export const calculateConnectionQuality = ( state ) => {
 	const { referenceInfo: { reference, limit } , data } = state;

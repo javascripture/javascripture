@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getLemmasForReference, compareTwoReferences, calculateRareWords, calculateConnectionQuality } from '../../lib/reference';
+import { getLemmasForReference, compareTwoReferences, calculateRareWords, calculateCommonWords, calculateConnectionQuality } from '../../lib/reference';
 import {
 	addWord,
 	setReferenceInfo,
@@ -121,6 +121,18 @@ class ReferenceInfo extends React.Component {
 		return this.props.rare.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> );
 	}
 
+	getCommonWords() {
+		if ( ! this.props.common ) {
+			return null;
+		}
+
+		if ( this.props.common.length === 0 ) {
+			return 'No common words found';
+		}
+
+		return Object.keys( this.props.common ).map( lemma => <div key={ lemma }>{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit } - { this.props.common[ lemma ] } times</div> );
+	}
+
 	getWord( lemma ) {
 		return(
 			<div>
@@ -177,6 +189,11 @@ class ReferenceInfo extends React.Component {
 				<div className={ styles.chapterTray }>
 					{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
 				</div>
+				<br />
+				<h2>Common words</h2>
+				<div className={ styles.scrollingBlock }>
+					{ this.getCommonWords() }
+				</div>
 			</div>
 		);
 	}
@@ -191,6 +208,7 @@ const mapStateToProps = ( state ) => {
 		limit: state.referenceInfo.limit,
 		overlap: compareTwoReferences( state ),
 		rare: calculateRareWords( state ),
+		common: calculateCommonWords( state ),
 		data: state.data,
 		connectionQuality: null, //calculateConnectionQuality( state ),
 	}
