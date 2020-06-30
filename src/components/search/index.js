@@ -18,10 +18,9 @@ import {
 	fetchData,
 	selectWord,
 } from '../../actions'
-import CancelSvg from '../svg/cancel.js';
 import PickerSvg from '../svg/picker.js';
-import SearchBlock from './search-block';
 import styles from './styles.scss';
+import SearchResults from './search-results';
 
 class Search extends React.Component{
 	change = ( event ) => {
@@ -63,10 +62,6 @@ class Search extends React.Component{
 		}
 	};
 
-	termTitle( { clusivity, version, lemma, morph, range, strict, word } ) {
-		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
-	}
-
 	toggleDetails = ( terms ) => {
 		this.props.toggleSearch( terms );
 	};
@@ -97,23 +92,6 @@ class Search extends React.Component{
 				<PickerSvg />
 			</button>
 		);
-	}
-
-	results() {
-		return this.props.searchTerms.map( ( searchTerm, index ) => {
-			return (
-				<div key={ index }>
-					<h2 className={ styles.header } onClick={ () => this.toggleDetails( searchTerm.terms ) } title={ this.termTitle( searchTerm.terms ) }>
-						{ searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph }
-						<a className={ styles.remove } onClick={ () => this.removeWord( searchTerm.terms ) }>
-							<CancelSvg fill="#fff" />
-						</a>
-					</h2>
-
-					<SearchBlock { ...searchTerm } />
-				</div>
-			);
-		} );
 	}
 
 	renderAdvanced() {
@@ -175,7 +153,7 @@ class Search extends React.Component{
 						<input type="reset" value="Reset" onClick={ this.reset } />
 					</fieldset>
 				</form>
-				{ this.results() }
+				<SearchResults />
 			</div>
 		);
 	}
