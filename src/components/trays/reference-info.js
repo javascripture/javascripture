@@ -130,7 +130,14 @@ class ReferenceInfo extends React.Component {
 			return 'No common words found';
 		}
 
-		return Object.keys( this.props.common ).map( lemma => <div key={ lemma }>{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit } - { this.props.common[ lemma ] } times</div> );
+		return Object.keys( this.props.common ).map( lemma => {
+			const significance = ( this.props.common[ lemma ] / javascripture.data.strongsObjectWithFamilies[ lemma ].count ).toFixed( 2 );
+			return (
+				<div key={ lemma }>
+					{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit } - <span title={ 'significance: ' + significance }>({ this.props.common[ lemma ] } times)</span>
+				</div>
+			);
+		} );
 	}
 
 	getWord( lemma ) {
@@ -190,7 +197,7 @@ class ReferenceInfo extends React.Component {
 					{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
 				</div>
 				<br />
-				<h2>Common words</h2>
+				<h2>All words</h2>
 				<div className={ styles.scrollingBlock }>
 					{ this.getCommonWords() }
 				</div>
