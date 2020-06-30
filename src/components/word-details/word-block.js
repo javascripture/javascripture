@@ -1,7 +1,7 @@
 // External dependencies
 import React, { useRef } from "react";
 import classnames from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import stripPointing from '../../lib/strip-pointing.js';
 
@@ -11,6 +11,7 @@ import { getHighlight } from '../strongs-color.js';
 import styles from './styles.scss';
 import WordBlockHeader from '../word-block-header';
 import WordBlockDetails from './word-block-details';
+import { removeSearch, removeWord, toggleWord } from '../../actions'
 
 const strongs = javascripture.data.strongsDictionary;
 
@@ -42,11 +43,29 @@ const WordBlock = React.memo( ( props ) => {
 		return null;
 	}
 
+	const dispatch = useDispatch();
+	const onClick = () => dispatch( toggleWord( strongsNumber ) );
+	const onRemove = () => {
+		const searchParameters = {
+			clusivity: 'exclusive',
+			version: version,
+			lemma: strongsNumber,
+			range: 'verse',
+		};
+		dispatch( removeWord( strongsNumber ) );
+		dispatch( removeSearch( searchParameters ) );
+	};
+
 	if ( wordDetail ) {
 		return (
 			<div>
 				<style>{ getHighlight( strongsNumber, subdue, null ) }</style>
-				<WordBlockHeader className={ getClassName( strongsNumber ) } title={ termTitle( getSearchParameters() ) } strongsNumber={ strongsNumber } version={ version } textToCopy={ wordBlock }>
+				<WordBlockHeader
+					className={ getClassName( strongsNumber ) }
+					title={ termTitle( getSearchParameters() ) }
+					textToCopy={ wordBlock }
+					onClick={ onClick }
+					onRemove={ onRemove }>
 					<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 					{ stripPointing( wordDetail.lemma ) }
 				</WordBlockHeader>
