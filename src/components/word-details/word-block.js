@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import classnames from 'classnames';
 import { useSelector } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import stripPointing from '../../lib/strip-pointing.js';
 
 // Internal dependencies
 import SearchBlock from '../search/search-block.js';
@@ -27,6 +28,10 @@ const WordBlock = React.memo( ( props ) => {
 		};
 	};
 
+	const getClassName = ( rootNumber ) => {
+		return classnames( rootNumber, styles.wordTree );
+	};
+
 	const termTitle = ( { clusivity, version, lemma, range, clickedWord } ) => {
 		return 'strongs number: ' + lemma + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nclicked word: ' + clickedWord;
 	};
@@ -41,7 +46,10 @@ const WordBlock = React.memo( ( props ) => {
 		return (
 			<div>
 				<style>{ getHighlight( strongsNumber, subdue, null ) }</style>
-				<WordBlockHeader title={ termTitle( getSearchParameters() ) } strongsNumber={ strongsNumber } version={ version } textToCopy={ wordBlock } />
+				<WordBlockHeader className={ getClassName( strongsNumber ) } title={ termTitle( getSearchParameters() ) } strongsNumber={ strongsNumber } version={ version } textToCopy={ wordBlock }>
+					<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
+					{ stripPointing( wordDetail.lemma ) }
+				</WordBlockHeader>
 				<div ref={ wordBlock }>
 					<div className={ classnames( styles.wordBlock, open ? styles.visible : styles.hidden ) }>
 						<WordBlockDetails morphologyProp={ morphology } strongsNumber={ strongsNumber } version={ version } />
