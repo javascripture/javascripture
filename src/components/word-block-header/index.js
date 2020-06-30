@@ -37,7 +37,7 @@ const WordBlockHeader = React.memo( ( { children, className, strongsNumber, text
 					<CopyToClipboard fill={ fill } textToCopy={ textToCopy } />
 				</span>
 				<a className={ styles.remove } onClick={ () => removeWordAction() }>
-				<RemoveSvg fill={ fill } />
+					<RemoveSvg fill={ fill } />
 				</a>
 		</h2>
 	);
