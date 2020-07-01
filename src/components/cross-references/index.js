@@ -151,4 +151,3 @@ const CrossReferencesContainer = connect(
 )( CrossReferencesWithStyles )
 
 export default CrossReferencesContainer;
-

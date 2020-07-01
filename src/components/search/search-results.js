@@ -26,12 +26,14 @@ const SearchResults = () => {
 				<WordBlockHeader
 					className={ styles.header }
 					title={ termTitle( searchTerm.terms ) }
-					textToCopy={ 'todo' }
+					textToCopy={ textToCopy }
 					onClick={ () => dispatch( toggleSearch( searchTerm.terms ) ) }
 					onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }>
 					{ searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph }
 				</WordBlockHeader>
-				<SearchBlock { ...searchTerm } ref={ textToCopy } />
+				<div ref={ textToCopy }>
+					<SearchBlock { ...searchTerm } />
+				</div>
 			</div>
 		);
 	} );
