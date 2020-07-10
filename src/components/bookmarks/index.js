@@ -1,19 +1,18 @@
 // External dependencies
-import { connect } from 'react-redux';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { useSelector } from 'react-redux';
 
 // Internal dependencies
-import { removeBookmark } from '../../actions';
 import Bookmark from '../svg/bookmark.js';
 import styles from './styles.scss';
 import BookMark from './bookmark';
-import ReferenceLink from '../reference-link';
-import ReferenceText from '../reference-link';
+import ReferenceText from '../reference-text';
 import { createReferenceLink } from '../../lib/reference.js';
+import Collapsible from '../collapsible';
 
-
-const BookMarks = React.memo( ( { bookmarks, removeBookmark } ) => {
+const BookMarks = React.memo( () => {
+	const bookmarks = useSelector( state => state.bookmarks );
 	const getCrossReferences = ( reference ) => {
 		const bookId = bible.getBookId( reference.book );
 		const referenceString = bible.Data.books[ bookId - 1 ][ 1 ] + '.' + reference.chapter + '.' + reference.verse;
@@ -37,22 +36,22 @@ const BookMarks = React.memo( ( { bookmarks, removeBookmark } ) => {
 				{ bookmarks.length === 0 && ( <p>Click the <Bookmark /> to bookmark a verse.</p> ) }
 				{ bookmarks.map( ( bookmark, key ) => {
 					return (
-						<div key={ key }>
-							<BookMark bookmark={ bookmark } key={ key } number={ key } />
+						<Collapsible key={ key } header={ <BookMark bookmark={ bookmark } key={ key } number={ key } /> }>
+							Cross references:
 							{ getCrossReferences( bookmark ).map( ( reference, index ) => {
 								const referenceSections = reference.split('-');
 								const referenceArrays = referenceSections.map( ( referenceSection ) => getReferenceFromCrossReference( referenceSection ) );
 
 								return (
-									<li key={ index }>
+									<div key={ index }>
 										<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
 											{ index + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
 											{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
 										</a>
-									</li>
+									</div>
 								);
 							} ) }
-						</div>
+						</Collapsible>
 					);
 				} ) }
 			</div>
@@ -60,14 +59,4 @@ const BookMarks = React.memo( ( { bookmarks, removeBookmark } ) => {
 	)
 } );
 
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		bookmarks: state.bookmarks
-	};
-};
-
-const BookMarksContainer = connect(
-	mapStateToProps,
-)( BookMarks )
-
-export default withStyles( styles )( BookMarksContainer );
+export default withStyles( styles )( BookMarks );

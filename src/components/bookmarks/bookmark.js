@@ -20,7 +20,7 @@ class BookMark extends React.Component{
 		const bookmark = this.props.bookmark;
 		return (
 			<div className={ styles.bookmark }>
-				<ReferenceLink reference={ bookmark } number={ this.props.number } />
+				<ReferenceLink reference={ bookmark } />
 				<a onClick={ this.removeBookmark } className={ styles.cancel }><Remove fill="#666" /></a>
 			</div>
 		);

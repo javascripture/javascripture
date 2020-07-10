@@ -17,10 +17,17 @@
 		vertical-align: middle;
 	}
 
-	a {
-		display: block;
+	.bookmark > a {
 		line-height: 2em;
 		padding: 0 10px;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	a {
 		text-decoration: none;
 	}
 }
