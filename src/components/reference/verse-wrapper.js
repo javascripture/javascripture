@@ -79,7 +79,7 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 			<div className={ styles.helpers }>
 				<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
 				<span className={ styles.hidden }>
-					<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber + 1 } fill={ '#999' } />
+					<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber } fill={ '#999' } />
 					<CopyToClipboard fill={ '#999' } textToCopy={ textToCopy } />
 				</span>
 			</div>

@@ -1,6 +1,6 @@
 // External
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
@@ -8,25 +8,18 @@ import { addBookmark, setTrayVisibilityFilter } from '../../actions';
 import Bookmark from '../svg/bookmark.js';
 import styles from './styles.scss';
 
-const Bookmarker = ( { book, chapter, verse, addBookmark, fill } ) => {
+const Bookmarker = React.memo( ( { book, chapter, verse, fill } ) => {
+	const dispatch = useDispatch();
+	const addBookmarkAction = () => {
+		dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
+		dispatch( addBookmark( { book, chapter, verse } ) );
+	};
+
 	return (
-		<span className={ styles.bookmarker } onClick={ addBookmark }><Bookmark fill={ fill } /></span>
+		<span className={ styles.bookmarker } onClick={ addBookmarkAction }>
+			<Bookmark fill={ fill } />
+		</span>
 	);
-};
+} )	;
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		addBookmark: () => {
-			dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
-			dispatch( addBookmark( ownProps ) );
-		},
-
-	}
-};
-
-const BookMarkerContainer = connect(
-	null,
-	mapDispatchToProps
-)( Bookmarker );
-
-export default withStyles( styles )( BookMarkerContainer );
+export default withStyles( styles )( Bookmarker );
