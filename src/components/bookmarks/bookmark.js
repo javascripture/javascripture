@@ -12,7 +12,8 @@ import ReferenceLink from '../reference-link';
 
 //The right way to do a link
 class BookMark extends React.Component{
-	removeBookmark = () => {
+	removeBookmark = ( event ) => {
+		event.stopPropagation();
 		this.props.removeBookmark( this.props.bookmark );
 	};
 
@@ -21,7 +22,7 @@ class BookMark extends React.Component{
 		return (
 			<div className={ styles.bookmark }>
 				<ReferenceLink reference={ bookmark } />
-				<a onClick={ this.removeBookmark } className={ styles.cancel }><Remove fill="#666" /></a>
+				<a onClick={ ( event ) => this.removeBookmark( event ) } className={ styles.cancel }><Remove fill="#666" /></a>
 			</div>
 		);
 	}
