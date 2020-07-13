@@ -1,6 +1,5 @@
 // External dependencies
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -11,36 +10,22 @@ import Remove from '../svg/remove';
 import ReferenceLink from '../reference-link';
 
 //The right way to do a link
-class BookMark extends React.Component{
-	removeBookmark = ( event ) => {
+const BookMark = React.memo( ( { bookmark } ) => {
+	const dispatch = useDispatch();
+	const removeBookmarkAction = ( event ) => {
 		event.stopPropagation();
-		this.props.removeBookmark( this.props.bookmark );
+		dispatch( removeBookmark( bookmark ) );
 	};
 
-	render() {
-		const bookmark = this.props.bookmark;
-		return (
-			<div className={ styles.bookmark }>
-				<ReferenceLink reference={ bookmark } />
-				<a onClick={ ( event ) => this.removeBookmark( event ) } className={ styles.cancel }><Remove fill="#666" /></a>
-			</div>
-		);
-	}
-}
 
-const BookMarkWithStyles = withStyles( styles )( BookMark );
+	return (
+		<div className={ styles.bookmark }>
+			<ReferenceLink reference={ bookmark } />
+			<a onClick={ ( event ) => removeBookmarkAction( event ) } className={ styles.cancel }>
+				<Remove fill="#666" />
+			</a>
+		</div>
+	);
+} )
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		removeBookmark: ( reference ) => {
-			dispatch( removeBookmark( reference ) )
-		},
-	}
-};
-
-const BookMarkContainer = connect(
-	null,
-	mapDispatchToProps
-)( BookMarkWithStyles )
-
-export default BookMarkContainer;
+export default withStyles( styles )( BookMark );
