@@ -10,7 +10,7 @@ import { clearAll, toggleSidebar } from '../../actions'
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
-import BookmarkSvg from '../svg/bookmark.js';
+import BookmarksSvg from '../svg/bookmarks.js';
 import HelpSvg from '../svg/help.js';
 import InfoSvg from '../svg/info.js';
 import ClearSvg from '../svg/clear.js';
@@ -22,7 +22,7 @@ const icons = {
 	BookSvg: <BookSvg />,
 	EyeSvg: <EyeSvg />,
 	SearchSvg: <SearchSvg />,
-	BookmarkSvg: <BookmarkSvg />,
+	BookmarksSvg: <BookmarksSvg />,
 	HelpSvg: <HelpSvg />,
 	InfoSvg: <InfoSvg />,
 };

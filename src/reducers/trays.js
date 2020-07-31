@@ -27,7 +27,7 @@ const initalState = [
 		id: 'bookmarks',
 		text: 'Bookmarks',
 		component: 'BookmarksTray',
-		icon: 'BookmarkSvg',
+		icon: 'BookmarksSvg',
 	},
 	{
 		visible: false,
