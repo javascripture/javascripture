@@ -49,6 +49,10 @@
 		.hidden {
 			visibility: visible;
 		}
+
+		.verseNumber {
+			color: #fff;
+		}
 	}
 }
 
@@ -75,11 +79,8 @@
 	flex-basis: 0;
 	flex-grow: 1;
 	max-width: $column-padding;
+	position: relative;
 	width: $column-padding;
-
-	svg:hover [fill] {
-		fill: $text-hover;
-	}
 }
 
 .hidden {
@@ -87,7 +88,8 @@
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	top: 20px;
+	left: 3px;
+	top: 36px;
 	visibility: hidden;
 }
 
@@ -98,11 +100,23 @@
 .verseNumber {
 	cursor: pointer;
 	display: inline-block;
+	position: relative;
 	text-align: center;
 	width: $column-padding;
 
-	&:hover {
-		color: $text-hover;
+	span:hover {
+		color: $hover;
+	}
+}
+
+.verseNumberIcon {
+	position: absolute;
+	top: -3px;
+	left: -3px;
+	z-index: -1;
+	svg {
+		width: 36px;
+		height: 36px;
 	}
 }
 

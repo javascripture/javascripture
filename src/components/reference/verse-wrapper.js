@@ -3,14 +3,12 @@ import React from 'react';
 import classnames from 'classnames';
 
 // Internal
-import Bookmarker from './bookmarker';
 import CopyToClipboard from '../copy-to-clipboard';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { mapVersionToData } from '../../lib/reference';
-import { ReactReduxContext } from 'react-redux';
 
 const getVerseWrapperStyle = ( book, version ) => {
 	if ( bible.isRtlVersion( version, book ) ) {
@@ -79,7 +77,6 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 			<div className={ styles.helpers }>
 				<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
 				<span className={ styles.hidden }>
-					<Bookmarker book={ book } chapter={ chapter } verse={ verseNumber } fill={ '#999' } />
 					<CopyToClipboard fill={ '#999' } textToCopy={ textToCopy } />
 				</span>
 			</div>

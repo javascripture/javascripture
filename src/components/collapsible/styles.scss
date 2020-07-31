@@ -1,7 +1,14 @@
 .header {
 	background: #eee;
 	border-bottom: 1px solid #ccc;
-	cursor: pointer;
+}
+
+.open {
+	cursor: zoom-out;
+}
+
+.closed {
+	cursor: zoom-in;
 }
 
 .content {

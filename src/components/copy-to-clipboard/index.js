@@ -3,6 +3,8 @@ import React from 'react';
 
 // Internal dependencies
 import CopySvg from '../svg/copy.js';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import styles from './styles.scss';
 
 const copyToClipboardHelper = ( event, textToCopy ) => {
 	if ( textToCopy.current ) {
@@ -21,10 +23,10 @@ const copyToClipboardHelper = ( event, textToCopy ) => {
 
 const CopyToClipboard = ( { fill, textToCopy } ) => {
 	return (
-		<a onClick={ ( event ) => copyToClipboardHelper( event, textToCopy ) }>
+		<a className={ styles.copyToClipboard } onClick={ ( event ) => copyToClipboardHelper( event, textToCopy ) }>
 			<CopySvg fill={ fill } />
 		</a>
 	);
 }
 
-export default CopyToClipboard;
+export default withStyles( styles )( CopyToClipboard );

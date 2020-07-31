@@ -5,13 +5,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import BookMarks from '../bookmarks';
-import CrossReferences from '../cross-references';
 import styles from './styles.scss';
 
 const BookmarksTray = ( props ) => (
 	<div id="bookmarksPanel" className={ styles.trayPadding }>
 		<BookMarks />
-		<CrossReferences />
 	</div>
 );
 

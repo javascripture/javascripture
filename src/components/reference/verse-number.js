@@ -1,21 +1,25 @@
 // External
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Internal
-import { setTrayVisibilityFilter, showCrossReferences } from '../../actions';
+import { setTrayVisibilityFilter, addBookmark } from '../../actions';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Bookmark from '../svg/bookmark';
 
 const VerseNumber =  React.memo( ( { book, chapter, verse } ) => {
 	const dispatch = useDispatch();
-	const handleShowCrossReferences = () => {
-		dispatch( showCrossReferences( { book,chapter, verse } ) );
+	const addBookmarkAction = () => {
+		dispatch( addBookmark( { book, chapter, verse } ) );
 		dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
 	};
 
 	return (
-		<span onClick={ handleShowCrossReferences } className={ styles.verseNumber }>{ verse }. </span>
+		<span className={ styles.verseNumber } onClick={ addBookmarkAction }>
+			<span>{ verse }</span>
+			<span className={ styles.verseNumberIcon }><Bookmark fill="#999" /></span>
+		</span>
 	);
 } );
 

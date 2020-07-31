@@ -1,4 +1,5 @@
 // External dependencies
+import classnames from 'classnames';
 import React, { useState } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -9,7 +10,7 @@ const Collapsible = React.memo( ( { children, header } ) => {
 	const [ open, setOpen ] = useState( false );
 	return (
 		<div>
-			<div className={ styles.header } onClick={ () => setOpen( ! open ) }>{ header }</div>
+			<div className={ classnames( styles.header, open ? styles.open : styles.closed ) } onClick={ () => setOpen( ! open ) }>{ header }</div>
 			{ open && ( <div className={ styles.content }>{ children }</div> ) }
 		</div>
 	)
