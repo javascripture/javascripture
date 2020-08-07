@@ -1,9 +1,10 @@
 // External dependencies
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
+import { toggleBookmark } from '../../actions';
 import Bookmark from '../svg/bookmark.js';
 import styles from './styles.scss';
 import BookMark from './bookmark';
@@ -12,6 +13,7 @@ import { createReferenceLink } from '../../lib/reference.js';
 import Collapsible from '../collapsible';
 
 const BookMarks = React.memo( () => {
+	const dispatch = useDispatch();
 	const bookmarks = useSelector( state => state.bookmarks );
 	const getCrossReferences = ( reference ) => {
 		const bookId = bible.getBookId( reference.book );
@@ -35,10 +37,14 @@ const BookMarks = React.memo( () => {
 			<div className={ styles.bookmarksList }>
 				{ bookmarks.length === 0 && ( <p>Click the <Bookmark /> to bookmark a verse.</p> ) }
 				{ bookmarks.map( ( bookmark, key ) => {
+					const handleToggle = () => {
+						dispatch( toggleBookmark( bookmark ) );
+					};
+					const crossReferences = getCrossReferences( bookmark );
 					return (
-						<Collapsible key={ key } header={ <BookMark bookmark={ bookmark } key={ key } number={ key } /> }>
-							Cross references:
-							{ getCrossReferences( bookmark ).map( ( reference, index ) => {
+						<Collapsible key={ key } header={ <BookMark bookmark={ bookmark } key={ key } number={ key } /> } open={ bookmark.open } onToggle={ () => handleToggle() }>
+							{ crossReferences.length > 0 ? 'Cross references:' : 'No cross references' }
+							{ crossReferences.map( ( reference, index ) => {
 								const referenceSections = reference.split('-');
 								const referenceArrays = referenceSections.map( ( referenceSection ) => getReferenceFromCrossReference( referenceSection ) );
 

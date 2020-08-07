@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import BookSvg from '../svg/book.js';
-import BookmarkSvg from '../svg/bookmark.js';
+import BookmarksSvg from '../svg/bookmarks.js';
 import HelpSvg from '../svg/help.js';
 import EyeSvg from '../svg/eye.js';
 import InfoSvg from '../svg/info.js';
@@ -26,7 +26,7 @@ const Footer = () => (
 			<SearchSvg fill={ fill } />
 		</TrayFilter>
 		<TrayFilter filter="bookmarks">
-			<BookmarkSvg fill={ fill } />
+			<BookmarksSvg fill={ fill } />
 		</TrayFilter>
 		<TrayFilter filter="reference">
 			<InfoSvg fill={ fill } />

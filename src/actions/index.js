@@ -1,6 +1,5 @@
 var cache = 'javascripture.22.0.1594464884';
 
-import { uniq } from 'lodash';
 import xhr from 'xhr';
 import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
 
@@ -49,6 +48,13 @@ export const removeBookmark = ( reference ) => {
 	return {
 		reference,
 		type: 'REMOVE_BOOKMARK'
+	}
+}
+
+export const toggleBookmark = ( reference ) => {
+	return {
+		reference,
+		type: 'TOGGLE_BOOKMARK'
 	}
 }
 
