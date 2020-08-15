@@ -57,7 +57,7 @@ export default React.memo( ( props ) => {
 		if ( ! lemma ) {
 			lemmaForMorph = '';
 		}
-		return lemmaForMorph + ' - ' + morph + ' - ' + morphology( morph, 'noLinks', lemmaForMorph );
+		return lemmaForMorph + ' - ' + ( morph ? morph : '' ) + ' - ' + morphology( morph, 'noLinks', lemmaForMorph );
 	};
 
 	const getClassName = () => {

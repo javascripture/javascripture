@@ -18,7 +18,7 @@ const strongs = javascripture.data.strongsDictionary;
 const WordBlock = React.memo( ( props ) => {
 	const { clickedWord, open, morphology, strongsNumber, version } = props;
 	const subdue = useSelector( state => state.settings.subdue );
-	const wordBlock = useRef( null );
+	const wordBlockRef = useRef( null );
 	const getSearchParameters = () => {
 		return {
 			clusivity: 'exclusive',
@@ -63,13 +63,13 @@ const WordBlock = React.memo( ( props ) => {
 				<WordBlockHeader
 					className={ getClassName( strongsNumber ) }
 					title={ termTitle( getSearchParameters() ) }
-					textToCopy={ wordBlock }
+					textToCopy={ wordBlockRef }
 					onClick={ onClick }
 					onRemove={ onRemove }>
 					<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 					{ stripPointing( wordDetail.lemma ) }
 				</WordBlockHeader>
-				<div ref={ wordBlock }>
+				<div ref={ wordBlockRef }>
 					<div className={ classnames( styles.wordBlock, open ? styles.visible : styles.hidden ) }>
 						<WordBlockDetails morphologyProp={ morphology } strongsNumber={ strongsNumber } version={ version } />
 					</div>
