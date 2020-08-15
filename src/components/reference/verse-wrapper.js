@@ -1,5 +1,5 @@
 // External
-import React from 'react';
+import React, { useRef } from 'react';
 import classnames from 'classnames';
 
 // Internal
@@ -48,6 +48,7 @@ const notAvailable = ( key ) => {
 }
 
 const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber, index } ) => {
+	const verseWrapperRef = useRef( null );
 	const language = mapVersionToData( book, version );
 	if ( ! data[ language ] || Object.keys( data[ language ] ).length === 0 ) {
 		return placeholder( index + verseNumber);
@@ -67,17 +68,12 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 			word.indexOf( ',' ) === 0;
 	};
 	const verseData = data[ language ][ book ][ chapter - 1 ][ index ];
-	const textToCopy = ( verseData && verseData.map ) ? verseData.map( ( wordArray, index ) => {
-		const wordString = wordArray[ 0 ].split('/').map( wordSingleValue => wordSingleValue ).join( '' );
-		return ( startsWithPunctuation( wordString ) || index === 0 ) ? wordString : ' ' + wordString;
-	} ).join( '' ) : verseData;
-
 	return (
-		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) }>
+		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) } ref={ verseWrapperRef }>
 			<div className={ styles.helpers }>
 				<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
 				<span className={ styles.hidden }>
-					<CopyToClipboard fill={ '#999' } textToCopy={ textToCopy } />
+					<CopyToClipboard fill={ '#999' } textToCopy={ verseWrapperRef } />
 				</span>
 			</div>
 			<div className={ getClassName( book, version ) }>
