@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux'
 import some from 'lodash/some';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -9,8 +8,11 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { setTrayVisibilityFilter } from '../../actions'
 import styles from './styles.scss';
 
-const TrayFilter = ( { active, children, activate, hideAll } ) => {
-
+const TrayFilter = ( { activate, children, filter } ) => {
+	const dispatch = useDispatch();
+	const active = useSelector( state => state.trays.some( tray => {
+		return ( tray.id === filter && tray.visible );
+	} ) );
 	let className = styles.trayFilter;
 	if ( active ) {
 		className = styles.active
@@ -20,7 +22,7 @@ const TrayFilter = ( { active, children, activate, hideAll } ) => {
 		<span className={ className }
 			onClick={ event => {
 				event.preventDefault()
-				activate();
+				dispatch( setTrayVisibilityFilter( filter ) )
 			} }
 		>
 			{ children }
@@ -28,31 +30,4 @@ const TrayFilter = ( { active, children, activate, hideAll } ) => {
 	);
 };
 
-TrayFilter.propTypes = {
-	active: PropTypes.bool.isRequired,
-	children: PropTypes.node.isRequired,
-	activate: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		active: state.trays.some( tray => {
-			return ( tray.id === ownProps.filter && tray.visible );
-		} )
-	}
-};
-
-const mapDispatchToProps = ( dispatch, ownProps ) => {
-	return {
-		activate: () => {
-			dispatch( setTrayVisibilityFilter( ownProps.filter ) )
-		},
-	}
-};
-
-const ConnectedTrayFilter = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)( TrayFilter )
-
-export default withStyles( styles )( ConnectedTrayFilter );
+export default withStyles( styles )( TrayFilter );
