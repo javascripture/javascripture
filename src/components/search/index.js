@@ -123,7 +123,7 @@ class Search extends React.Component{
 								{ this.pickerButton( 'morph' ) }
 							</fieldset>
 							<fieldset>
-								<label htmlFor="version">Language:</label> <select name="version" onChange={ this.selectChange } value={ this.props.searchForm.version }>
+								<label htmlFor="version">Version:</label> <select name="version" onChange={ this.selectChange } value={ this.props.searchForm.version }>
 									{ Object.keys( this.props.versions ).map( ( version, index ) => (
 										<option value={ version } key={ index }>{ version }</option>
 									) ) }
