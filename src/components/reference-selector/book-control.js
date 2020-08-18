@@ -1,90 +1,79 @@
 // External
+import React, { useState, useRef } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
 import ReferenceText from '../reference-text';
 import styles from './styles.scss';
 
-class BookControl extends React.Component{
-	state = {
-		chapter: 1
+const BookControl = React.memo( ( { chapters, goToReference, name } ) => {
+	const [ chapter, setChapter ] = useState( 1 );
+	const [ touched, setTouched ] = useState( false );
+	const [ touchChapter, setTouchChapter ] = useState( false );
+	const referenceSelector = useRef( null );
+	const handleGoToReference = () => {
+		goToReference( '/#/' + name + '/' + chapter + '/1/' );
 	};
 
-	goToReference = () => {
-		this.props.goToReference( '/#/' + this.props.name + '/' + this.state.chapter + '/1/' );
+	const handleMouseMove = ( event ) => {
+		handleSetChapter( event.clientX );
 	};
 
-	handleMouseMove = ( event ) => {
-		this.setChapter( event.clientX );
-	};
-
-	handleTouchMove = ( event ) => {
+	const handleTouchMove = ( event ) => {
 		if ( event.touches ) {
-			this.setState( {
-				touchChapter: true
-			} );
-			this.setChapter( event.touches[ 0 ].clientX );
+			setTouchChapter( true );
+			handleSetChapter( event.touches[ 0 ].clientX );
 		}
 	};
 
-	handleTouchStart = () => {
-		this.setState( {
-			touched: true
-		} );
+	const handleTouchStart = () => {
+		setTouched( true );
 	};
 
-	handleTouchEnd = ( event ) => {
-		this.setState( {
-			touchChapter: false
-		} );
-
-		this.goToReference()
+	const handleTouchEnd = ( event ) => {
+		setTouchChapter( false );
+		handleGoToReference();
 	};
 
-	setChapter( clientX ) {
-		var width = this.referenceSelector.offsetWidth - 40,
-			spacing = width / this.props.chapters,
-			chapter = Math.ceil( clientX / spacing );
+	const handleSetChapter = ( clientX ) => {
+		const width = referenceSelector.current.offsetWidth - 40;
+		const spacing = width / chapters;
+		let newChapter = Math.ceil( clientX / spacing );
 
-		if ( chapter < 1 ) {
-			chapter = 1;
+		if ( newChapter < 1 ) {
+			newChapter = 1;
 		}
 
-		if ( chapter > this.props.chapters ) {
-			chapter = this.props.chapters;
+		if ( newChapter > chapters ) {
+			newChapter = chapters;
 		}
 
-		this.setState( {
-			chapter: chapter
-		} );
-	}
+		setChapter( newChapter );
+	};
 
-	render() {
-		var buttonText = this.state.touchChapter ? this.state.chapter : '';
+	var buttonText = touchChapter ? chapter : '';
 
-		return (
-			<div
-				className={ styles.bookControl }
-				onClick={ this.goToReference }
-				onTouchStart={ this.handleTouchStart }
-				onMouseMove={ this.handleMouseMove }
-				onTouchMove={ this.handleTouchMove }
-				onTouchEnd={ this.handleTouchEnd }
-				ref={ ( ref ) => this.referenceSelector = ref }>
-					<ReferenceText reference={ { book: this.props.name } } /> <span onTouchEnd={ this.goToReference } className="chapter-number">{ this.state.chapter }</span>
-					<span className={ styles.go }>
-						{ buttonText }
-					</span>
-			</div>
-		);
-	}
-}
+	return (
+		<div
+			className={ styles.bookControl }
+			onClick={ handleGoToReference }
+			onTouchStart={ handleTouchStart }
+			onMouseMove={ handleMouseMove }
+			onTouchMove={ handleTouchMove }
+			onTouchEnd={ handleTouchEnd }
+			ref={ referenceSelector }>
+				<ReferenceText reference={ { book: name } } /> <span onTouchEnd={ handleGoToReference } className="chapter-number">{ chapter }</span>
+				<span className={ styles.go }>
+					{ buttonText }
+				</span>
+		</div>
+	);
+} );
 
-const mapDispatchToProps = ( dispatch, ownProps ) => {
+const mapDispatchToProps = ( dispatch ) => {
 	return {
 		goToReference: ( path ) => {
 			dispatch( push( path ) );
