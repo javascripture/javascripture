@@ -34,9 +34,6 @@ const searchResults = ( state = [], action ) => {
 				return ! isEqual( searchTerm.terms, action.terms );
 			} );
 
-		case 'CLEAR_ALL':
-			return [];
-
 		default:
 			return state;
 	}

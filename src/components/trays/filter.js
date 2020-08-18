@@ -8,7 +8,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { setTrayVisibilityFilter } from '../../actions'
 import styles from './styles.scss';
 
-const TrayFilter = ( { activate, children, filter } ) => {
+const TrayFilter = ( { children, filter } ) => {
 	const dispatch = useDispatch();
 	const active = useSelector( state => state.trays.some( tray => {
 		return ( tray.id === filter && tray.visible );

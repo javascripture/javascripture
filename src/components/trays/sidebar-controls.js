@@ -2,11 +2,10 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { find } from 'lodash';
 import classnames from 'classnames';
 
 // Internal dependencies
-import { clearAll, toggleSidebar } from '../../actions'
+import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch } from '../../actions'
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
@@ -32,10 +31,47 @@ const SidebarControls = React.memo( () => {
 	const selectedTray = useSelector( state => state.trays.find( tray => {
 		return tray.visible;
 	} ) );
-	const words = useSelector( state => state.wordDetails );
+	const wordDetails = useSelector( state => state.wordDetails );
+	const bookmarks = useSelector( state => state.bookmarks );
+	const searchTerms = useSelector( state => state.searchTerms );
 	const sidebarOpen = useSelector( state => state.sidebar );
 	const icon = selectedTray && selectedTray.icon;
-	const title = selectedTray&& selectedTray.text;
+	const title = selectedTray && selectedTray.text;
+
+	let clearControls;
+	if ( selectedTray.id === 'bookmarks' ) {
+		clearControls = ( bookmarks.length > 0 && (
+			<a href="#" onClick={ ( event ) => {
+				event.preventDefault();
+				dispatch( removeAllBookmarks() );
+			} } title="Clear bookmarks">
+				<ClearSvg />
+			</a>
+		) );
+	}
+
+	if ( selectedTray.id === 'word' ) {
+		clearControls = ( wordDetails.length > 0 && (
+			<a href="#" onClick={ ( event ) => {
+				event.preventDefault();
+				dispatch( clearAll() );
+			} } title="Clear words">
+				<ClearSvg />
+			</a>
+		) );
+	}
+
+	if ( selectedTray.id === 'search' ) {
+		clearControls = ( searchTerms.length > 0 && (
+			<a href="#" onClick={ ( event ) => {
+				event.preventDefault();
+				dispatch( clearSearch() );
+			} } title="Clear words">
+				<ClearSvg />
+			</a>
+		) );
+	}
+
 
 	return (
 		<div className={ styles.sidebarControls }>
@@ -45,14 +81,7 @@ const SidebarControls = React.memo( () => {
 			</span>
 
 			<span className={ styles.sidebarControlsRight }>
-				{ words.length > 0 && (
-					<a href="#" onClick={ ( event ) => {
-						event.preventDefault();
-						dispatch( clearAll() );
-					} } title="Clear all">
-						<ClearSvg />
-					</a>
-				) }
+				{ clearControls }
 				<a href="#" onClick={ ( event ) => {
 					event.preventDefault();
 					dispatch( toggleSidebar() );

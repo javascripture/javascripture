@@ -51,6 +51,13 @@ export const removeBookmark = ( reference ) => {
 	}
 }
 
+export const removeAllBookmarks = ( reference ) => {
+	return {
+		type: 'REMOVE_ALL_BOOKMARKS'
+	}
+}
+
+
 export const toggleBookmark = ( reference ) => {
 	return {
 		reference,
@@ -187,6 +194,13 @@ export const toggleSearch = ( terms ) => {
 	return {
 		terms,
 		type: 'TOGGLE_SEARCH'
+	}
+}
+
+export const clearSearch = ( terms ) => {
+	return {
+		terms,
+		type: 'CLEAR_SEARCH'
 	}
 }
 

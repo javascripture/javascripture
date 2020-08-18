@@ -54,7 +54,7 @@ const searchTerms = ( state = [], action ) => {
 				return word.terms !== action.terms;
 			} );
 
-		case 'CLEAR_ALL':
+		case 'CLEAR_SEARCH':
 			return [];
 
 		default:

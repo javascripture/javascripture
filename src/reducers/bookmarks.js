@@ -1,4 +1,5 @@
-const bookmarks = ( state = [], action ) => {
+const initialState = [];
+const bookmarks = ( state = initialState, action ) => {
 	function referencesAreEqual( reference1, reference2 ) {
 		return reference1.book === reference2.book &&
 		reference1.chapter === reference2.chapter &&
@@ -34,7 +35,8 @@ const bookmarks = ( state = [], action ) => {
 					return reference;
 				}
 			} );
-
+		case 'REMOVE_ALL_BOOKMARKS':
+			return initialState;
 
 		default:
 			return state;
