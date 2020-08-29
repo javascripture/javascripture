@@ -1,6 +1,11 @@
 .header {
 	background: #eee;
 	border-bottom: 1px solid #ccc;
+
+	a {
+		display: inline-block;
+		line-height: 30px;
+	}
 }
 
 .open {

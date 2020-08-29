@@ -34,14 +34,14 @@
 
 .bookmark {
 	position: relative;
-}
+	display: flex;
+	justify-content: space-between;
 
-.cancel {
-	position: absolute;
-	right: 0;
-	top: 0;
-
-	&:hover [fill] {
+	*:hover [fill] {
 		fill: $text-hover;
 	}
+}
+
+.icons {
+	align-self: center;
 }
