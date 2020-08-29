@@ -18,5 +18,14 @@
 
 .content {
 	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+}
+
+.visible {
+	height: auto;
 	padding: .7em;
+}
+
+.hidden {
+	height: 0;
 }

@@ -47,7 +47,7 @@ const SearchBlock = React.memo( ( { open, sorted, terms } ) => {
 	}
 
 	return (
-		<div className={ open ? null : styles.hidden }>
+		<div className={ open ? styles.open : styles.hidden }>
 			<ol className={ styles.results }>
 				{ renderedResults }
 			</ol>

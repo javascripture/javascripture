@@ -6,15 +6,13 @@
 }
 
 .visible {
-	display: block;
+	height: auto;
+	padding: .5em;
 }
 
 .hidden {
-	display: none;
-}
-
-.word-block {
-	padding: .5em;
+	height: 0;
+	overflow: hidden;
 }
 
 .found-in-extra {

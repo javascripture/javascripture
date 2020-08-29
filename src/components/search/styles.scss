@@ -56,7 +56,12 @@
 }
 
 .hidden {
-	display: none;
+	height: 0;
+	overflow: hidden;
+}
+
+.open {
+	height: auto;
 }
 
 .no-results {

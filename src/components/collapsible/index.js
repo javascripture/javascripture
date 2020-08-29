@@ -10,7 +10,7 @@ const Collapsible = React.memo( ( { children, header, open, onToggle } ) => {
 	return (
 		<div>
 			<div className={ classnames( styles.header, open ? styles.open : styles.closed ) } onClick={ () => onToggle() }>{ header }</div>
-			{ open && ( <div className={ styles.content }>{ children }</div> ) }
+			<div className={ classnames( styles.content, open ? styles.visible : styles.hidden ) }>{ children }</div>
 		</div>
 	)
 } );
