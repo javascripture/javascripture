@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 // Internal dependencies
 import { removeBookmark, toggleBookmark } from '../../actions';
-import WordBlockHeader from '../word-block-header';
 import ReferenceText from '../reference-text';
 import { createReferenceLink } from '../../lib/reference.js';
 import Collapsible from '../collapsible';
@@ -41,15 +40,18 @@ const Single = ( { bookmark, index } ) => {
 	const crossReferences = getCrossReferences( bookmark );
 
 	const header = (
-		<WordBlockHeader
-			textToCopy={ bookmarkRef }
-			onRemove={ () => dispatch( removeBookmark( bookmark ) ) }>
-			<ReferenceLink reference={ bookmark } />
-		</WordBlockHeader>
+		<ReferenceLink reference={ bookmark } />
 	);
 
 	return (
-		<Collapsible key={ index } header={ header } open={ bookmark.open } onToggle={ () => handleToggle() }>
+		<Collapsible
+			key={ index }
+			header={ header }
+			open={ bookmark.open }
+			onToggle={ () => handleToggle() }
+			textToCopy={ bookmarkRef }
+			onRemove={ () => dispatch( removeBookmark( bookmark ) ) }
+		>
 			<div ref={ bookmarkRef }>
 				{ crossReferences.length > 0 ? 'Cross references:' : 'No cross references' }
 				{ crossReferences.map( ( reference, index2 ) => {

@@ -2,11 +2,12 @@
 import classnames from 'classnames';
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import WordBlockHeader from '../word-block-header';
 
 // Internal dependencies
 import styles from './styles.scss';
 
-const Collapsible = React.memo( ( { children, header, open, onToggle, title } ) => {
+const Collapsible = React.memo( ( { children, className, header, open, onToggle, textToCopy, title, onRemove } ) => {
 	return (
 		<div className={ styles.collapsible }>
 			<div
@@ -14,9 +15,17 @@ const Collapsible = React.memo( ( { children, header, open, onToggle, title } ) 
 				onClick={ () => onToggle() }
 				title={ title }
 			>
-				{ header }
+				<WordBlockHeader
+					className={ className }
+					textToCopy={ textToCopy }
+					onRemove={ onRemove }
+				>
+					{ header }
+				</WordBlockHeader>
 			</div>
-			<div className={ classnames( styles.content, open ? styles.visible : styles.hidden ) }>{ children }</div>
+			<div className={ classnames( styles.content, open ? styles.visible : styles.hidden ) }>
+				{ children }
+			</div>
 		</div>
 	)
 } );

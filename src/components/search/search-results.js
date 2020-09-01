@@ -11,7 +11,6 @@ import {
 	toggleSearch,
 	removeSearch,
 } from '../../actions'
-import WordBlockHeader from '../word-block-header';
 
 const SearchResults = () => {
 	const dispatch = useDispatch();
@@ -22,16 +21,18 @@ const SearchResults = () => {
 	const textToCopy = useRef( null );
 
 	return searchTerms.map( ( searchTerm, index ) => {
-		const header = (
-			<WordBlockHeader
-				textToCopy={ textToCopy }
-				onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }>
-				{ searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph }
-			</WordBlockHeader>
-		);
+		const header = searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph;
 
 		return (
-			<Collapsible title={ termTitle( searchTerm.terms ) } key={ index } header={ header } open={ searchTerm.open } onToggle={ () => dispatch( toggleSearch( searchTerm.terms ) ) }>
+			<Collapsible
+				title={ termTitle( searchTerm.terms ) }
+				key={ index }
+				header={ header }
+				open={ searchTerm.open }
+				onToggle={ () => dispatch( toggleSearch( searchTerm.terms ) ) }
+				textToCopy={ textToCopy }
+				onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }
+			>
 				<div ref={ textToCopy }>
 					<SearchBlock { ...searchTerm } />
 				</div>
