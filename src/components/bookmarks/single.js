@@ -3,11 +3,12 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Internal dependencies
-import { toggleBookmark } from '../../actions';
-import BookMarkHeader from './header';
+import { removeBookmark, toggleBookmark } from '../../actions';
+import WordBlockHeader from '../word-block-header';
 import ReferenceText from '../reference-text';
 import { createReferenceLink } from '../../lib/reference.js';
 import Collapsible from '../collapsible';
+import ReferenceLink from '../reference-link';
 
 const getCrossReferences = ( reference ) => {
 	if ( ! reference ) {
@@ -38,8 +39,13 @@ const Single = ( { bookmark, index } ) => {
 	};
 
 	const crossReferences = getCrossReferences( bookmark );
+
 	const header = (
-		<BookMarkHeader bookmark={ bookmark } key={ index } number={ index } textToCopy={ bookmarkRef } />
+		<WordBlockHeader
+			textToCopy={ bookmarkRef }
+			onRemove={ () => dispatch( removeBookmark( bookmark ) ) }>
+			<ReferenceLink reference={ bookmark } />
+		</WordBlockHeader>
 	);
 
 	return (
