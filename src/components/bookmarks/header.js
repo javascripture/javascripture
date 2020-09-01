@@ -1,19 +1,17 @@
 // External dependencies
 import { useDispatch } from 'react-redux';
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { removeBookmark } from '../../actions';
-import styles from './styles.scss';
 import Remove from '../svg/remove';
 import ReferenceLink from '../reference-link';
 import CopyToClipboard from '../copy-to-clipboard';
 
-const fill = "#666";
+const fill = "#fff";
 
 //The right way to do a link
-const BookMark = React.memo( ( { bookmark, textToCopy } ) => {
+const BookMarkHeader = React.memo( ( { bookmark, textToCopy } ) => {
 	const dispatch = useDispatch();
 	const removeBookmarkAction = ( event ) => {
 		event.stopPropagation();
@@ -21,9 +19,9 @@ const BookMark = React.memo( ( { bookmark, textToCopy } ) => {
 	};
 
 	return (
-		<div className={ styles.bookmark }>
+		<div>
 			<ReferenceLink reference={ bookmark } />
-			<span className={ styles.icon }>
+			<span>
 				<CopyToClipboard fill={ fill } textToCopy={ textToCopy } />
 				<a onClick={ ( event ) => removeBookmarkAction( event ) }>
 					<Remove fill={ fill } />
@@ -33,4 +31,4 @@ const BookMark = React.memo( ( { bookmark, textToCopy } ) => {
 	);
 } )
 
-export default withStyles( styles )( BookMark );
+export default BookMarkHeader;

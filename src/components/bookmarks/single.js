@@ -53,7 +53,7 @@ const Single = ( { bookmark, index } ) => {
 					return (
 						<div key={ index2 }>
 							<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
-								{ index + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
+								{ index2 + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
 								{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
 							</a>
 						</div>

@@ -6,6 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import stripPointing from '../../lib/strip-pointing.js';
 
 // Internal dependencies
+import Collapsible from '../collapsible';
 import SearchBlock from '../search/search-block.js';
 import { getHighlight } from '../strongs-color.js';
 import styles from './styles.scss';
@@ -44,7 +45,6 @@ const WordBlock = React.memo( ( props ) => {
 	}
 
 	const dispatch = useDispatch();
-	const onClick = () => dispatch( toggleWord( strongsNumber ) );
 	const onRemove = () => {
 		const searchParameters = {
 			clusivity: 'exclusive',
@@ -57,25 +57,28 @@ const WordBlock = React.memo( ( props ) => {
 	};
 
 	if ( wordDetail ) {
-		return (
-			<div>
-				<style>{ getHighlight( strongsNumber, subdue, null ) }</style>
-				<WordBlockHeader
-					className={ getClassName( strongsNumber ) }
-					title={ termTitle( getSearchParameters() ) }
-					textToCopy={ wordBlockRef }
-					onClick={ onClick }
-					onRemove={ onRemove }>
+		const header = (
+			<WordBlockHeader
+				className={ getClassName( strongsNumber ) }
+				textToCopy={ wordBlockRef }
+				onRemove={ onRemove }>
+				<span>
 					<span className={ styles.strongsNumberTitle }>{ strongsNumber }</span>
 					{ stripPointing( wordDetail.lemma ) }
-				</WordBlockHeader>
+				</span>
+			</WordBlockHeader>
+		);
+
+		return (
+			<Collapsible title={ termTitle( getSearchParameters() ) } header={ header } open={ open } onToggle={ () => dispatch( toggleWord( strongsNumber ) ) }>
+				<style>{ getHighlight( strongsNumber, subdue, null ) }</style>
 				<div ref={ wordBlockRef }>
 					<div className={ classnames( styles.wordBlock, open ? styles.visible : styles.hidden ) }>
 						<WordBlockDetails morphologyProp={ morphology } strongsNumber={ strongsNumber } version={ version } />
 					</div>
 					<SearchBlock { ...props } terms={ getSearchParameters() } />
 				</div>
-			</div>
+			</Collapsible>
 		);
 	}
 

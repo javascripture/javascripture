@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
+import Collapsible from '../collapsible';
 import SearchBlock from './search-block';
 import styles from './styles.scss';
 import {
@@ -21,20 +22,20 @@ const SearchResults = () => {
 	const textToCopy = useRef( null );
 
 	return searchTerms.map( ( searchTerm, index ) => {
+		const header = (
+			<WordBlockHeader
+				textToCopy={ textToCopy }
+				onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }>
+				{ searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph }
+			</WordBlockHeader>
+		);
+
 		return (
-			<div key={ index }>
-				<WordBlockHeader
-					className={ styles.header }
-					title={ termTitle( searchTerm.terms ) }
-					textToCopy={ textToCopy }
-					onClick={ () => dispatch( toggleSearch( searchTerm.terms ) ) }
-					onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }>
-					{ searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph }
-				</WordBlockHeader>
+			<Collapsible title={ termTitle( searchTerm.terms ) } key={ index } header={ header } open={ searchTerm.open } onToggle={ () => dispatch( toggleSearch( searchTerm.terms ) ) }>
 				<div ref={ textToCopy }>
 					<SearchBlock { ...searchTerm } />
 				</div>
-			</div>
+			</Collapsible>
 		);
 	} );
 }

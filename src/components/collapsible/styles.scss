@@ -1,11 +1,46 @@
+@import '../colors.scss';
+
+.collapsible {
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 .header {
-	background: #eee;
-	border-bottom: 1px solid #ccc;
+	background: $grey-dark;
+	color: #fff;
+	font-size: 1.4em;
+	font-weight: normal;
+	margin: 0 !important;
+	position: relative;
+
+	div {
+		display: flex;
+		justify-content: space-between;
+		padding: 5px;
+	}
 
 	a {
+		color: #fff;
 		display: inline-block;
-		line-height: 30px;
 	}
+
+	svg {
+		vertical-align: middle;
+
+		&:hover [fill] {
+			fill: $hover;
+		}
+	}
+
+	.icons {
+		align-self: center;
+	}
+
 }
 
 .open {
