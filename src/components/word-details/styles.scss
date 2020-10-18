@@ -26,3 +26,23 @@
 	display: inline-block;
 	width: 85px;
 }
+
+
+// Duplicated from search block
+.results {
+	line-height: 1.4;
+	list-style: none;
+
+	li {
+		padding-left: .5em;
+	}
+	a {
+		color: black;
+		display: block;
+		text-decoration: none;
+
+		&:hover {
+			background: $hover;
+		}
+	}
+}

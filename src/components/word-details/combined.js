@@ -2,12 +2,14 @@
 import { countBy, sortBy } from 'lodash';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
 import SearchLink from '../search/search-link';
 import { getReferenceFromSearchResult } from '../../lib/reference.js'
 import { getSearchResults } from '../search/utils.js';
+import styles from './styles.scss';
 
 const CombinedResults = React.memo( () => {
 	const [ open, setOpen ] = useState( false );
@@ -35,9 +37,7 @@ const CombinedResults = React.memo( () => {
 
 		const combinedResults = sortedResults.map( ( result, index ) => {
 			return (
-				<li>
-					<SearchLink key={ index } index={ index } reference={ getReferenceFromSearchResult( result.key ) } count={ result.value } />
-				</li>
+				<SearchLink key={ index } index={ index } reference={ getReferenceFromSearchResult( result.key ) } count={ result.value } />
 			);
 		} );
 
@@ -49,7 +49,9 @@ const CombinedResults = React.memo( () => {
 					onToggle={ () => setOpen( ! open ) }
 					className="collapse"
 				>
-					{ combinedResults }
+					<ol className={ styles.results }>
+						{ combinedResults }
+					</ol>
 				</Collapsible>
 			);
 		}
@@ -60,4 +62,4 @@ const CombinedResults = React.memo( () => {
 	return null;
 } );
 
-export default CombinedResults;
+export default withStyles( styles )( CombinedResults );
