@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 // Internal dependencies
 import styles from './styles.scss';
+import CombinedResults from './combined';
 import WordBlock from './word-block';
 
 const WordDetails = React.memo( () => {
@@ -17,6 +18,7 @@ const WordDetails = React.memo( () => {
 						<WordBlock { ...wordDetails } key={ index } />
 					);
 				} ) }
+				<CombinedResults />
 			</div>
 		);
 	}

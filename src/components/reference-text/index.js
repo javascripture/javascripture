@@ -2,7 +2,8 @@
 import { connect } from 'react-redux';
 
 const ReferenceText = ( { reference, interfaceLanguage } ) => {
-	let text = bible.getTranslatedBookNameByLanguage( reference.book, interfaceLanguage );
+	console.log( interfaceLanguage );
+	let text = bible.getTranslatedBookName( reference.book, interfaceLanguage );
 	if ( reference.chapter ) {
 		text +=  ' ' + reference.chapter;
 	}

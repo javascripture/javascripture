@@ -8,7 +8,6 @@ import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { mapVersionToData } from '../../lib/reference';
 
 const getVerseWrapperStyle = ( book, version ) => {
 	if ( bible.isRtlVersion( version, book ) ) {
@@ -32,42 +31,9 @@ const getClassName = ( book, version ) => {
 	return styles.verse
 };
 
-const placeholder = ( key ) => {
-	return (
-		<div className={ styles.verseWrapper } key={ key }>
-			<span className={ styles.placeholder }>&nbsp;Loading</span>
-			<span className={ styles.placeholder } style={ { width: ( Math.random() * 100 ) + '%' } }>&nbsp;</span>
-		</div>
-	);
-}
-
-const notAvailable = ( key ) => {
-	return (
-		<div className={ styles.verseWrapper } key={ key }>Book not available</div>
-	);
-}
-
 const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber, index } ) => {
 	const verseWrapperRef = useRef( null );
-	const language = mapVersionToData( book, version );
-	if ( ! data[ language ] || Object.keys( data[ language ] ).length === 0 ) {
-		return placeholder( index + verseNumber);
-	}
-
-	if ( ! data[ language ][ book ] ) {
-		return notAvailable( index + verseNumber );
-	}
-
-	const startsWithPunctuation = ( word ) => {
-		return word.indexOf( '\.' ) === 0 ||
-			word.indexOf( ')' ) === 0 ||
-			word.indexOf( '?' ) === 0 ||
-			word.indexOf( '!' ) === 0 ||
-			word.indexOf( ':' ) === 0 ||
-			word.indexOf( ';' ) === 0 ||
-			word.indexOf( ',' ) === 0;
-	};
-	const verseData = data[ language ][ book ][ chapter - 1 ][ index ];
+	const reference = { book, chapter: chapter - 1, verse: index };
 	return (
 		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) } ref={ verseWrapperRef }>
 			<div className={ styles.helpers }>
@@ -77,7 +43,7 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 				</span>
 			</div>
 			<div className={ getClassName( book, version ) }>
-				<Verse verse={ verseData } index={ index } version={ version } />
+				<Verse reference={ reference } index={ index } version={ version } />
 			</div>
 		</div>
 	);

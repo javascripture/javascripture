@@ -2,21 +2,13 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { countBy, sortBy } from 'lodash';
-import isEqual from 'lodash/isEqual';
 import { useSelector } from 'react-redux';
 
 // Internal dependencies
 import SearchLink from './search-link';
 import { getReferenceFromSearchResult } from '../../lib/reference.js';
 import styles from './styles.scss';
-
-function getSearchResults( searchResults, terms ) {
-	const searchResultsData = searchResults.find( searchResult => isEqual( searchResult.terms, terms ) );
-
-	if ( searchResultsData ) {
-		return searchResultsData.results;
-	}
-}
+import { getSearchResults } from './utils.js';
 
 const SearchBlock = React.memo( ( { open, sorted, terms } ) => {
 	const results = useSelector( state => getSearchResults( state.searchResults, terms ) );

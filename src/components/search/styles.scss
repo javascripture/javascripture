@@ -74,8 +74,13 @@
 
 .verse {
 	font-size: 12px;
+	display: none;
 }
 
 .search-link {
 	cursor: pointer;
+}
+
+.verse-expanded {
+	display: block;
 }

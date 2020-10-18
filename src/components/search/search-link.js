@@ -1,5 +1,6 @@
 // External dependencies
 import React from 'react';
+import classnames from 'classnames';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,8 +24,8 @@ const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
 	const isActive = useSelector( state => isLinkActive( state.currentReference, index, terms ) );
 	const expandedSearchResults = useSelector( state => state.settings.expandedSearchResults );
 	const highlightSearchResults = useSelector( state => state.settings.highlightSearchResults );
+	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const data = useSelector( state => state.data );
-
 	const dispatch = useDispatch();
 
 	// Component constants
@@ -34,7 +35,7 @@ const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
 			return;
 		}
 
-		const verseData = getVerseData( reference, terms.version );
+		const verseData = getVerseData( reference, interfaceLanguage );
 		const strongsNumbers = verseData.map( ( word ) => {
 				return word[ 1 ]
 			} );
@@ -49,15 +50,10 @@ const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
 		window.updateAppComponent( 'highlightedWord', null );
 	};
 	const expandedSearchResultsRendered = ( reference ) => {
-		if ( ! data[ terms.version ][ reference.book ][ reference.chapter - 1 ] || ! data[ terms.version ][ reference.book ][ reference.chapter - 1 ][ reference.verse - 1 ] ) {
-			console.log( 'found a non-existent verse', reference );
-			return null;
-		}
-		const verseData = getVerseData( reference, terms.version, data );
-
+		const adjustedReference = { book: reference.book, chapter: reference.chapter - 1, verse: reference.verse - 1 };
 		return (
-			<div className={ styles.verse }>
-				<Verse verse={ verseData } index={ null } version={ terms.version } />
+			<div className={ classnames( styles.verse, expandedSearchResults ? styles.verseExpanded : null ) }>
+				<Verse reference={ adjustedReference } index={ adjustedReference.verse } version={ interfaceLanguage } />
 			</div>
 		);
 	};
@@ -73,7 +69,7 @@ const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
 				{ index + 1 }. <ReferenceText reference={ reference } />
 				{ count && ' (' + count + ')' }
 			</a>
-			{ expandedSearchResults && expandedSearchResultsRendered( reference ) }
+			{ expandedSearchResultsRendered( reference ) }
 		</li>
 	);
 } );
