@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal dependencies
-import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch, settingsChange, fetchData } from '../../actions'
+import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch, fetchData } from '../../actions';
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
@@ -17,6 +17,7 @@ import styles from './styles.scss';
 import MenuOpenSvg from '../svg/menu-open.js';
 import MenuCloseSvg from '../svg/menu-close.js';
 import { mapVersionToData } from '../../lib/reference';
+import VersionSelect from '../version-select';
 
 const icons = {
 	BookSvg: <BookSvg />,
@@ -42,8 +43,12 @@ const SidebarControls = React.memo( () => {
 
 	useEffect( () => {
 		// Load data for OT and NT
-		dispatch( fetchData( mapVersionToData( 'Genesis', interfaceLanguage ) ) );
-		dispatch( fetchData( mapVersionToData( 'Matthew', interfaceLanguage ) ) );
+		const otData = mapVersionToData( 'Genesis', interfaceLanguage );
+		const ntData = mapVersionToData( 'Matthew', interfaceLanguage )
+		dispatch( fetchData( otData ) );
+		if ( ntData !== otData ) {
+			dispatch( fetchData( ntData ) );
+		}
 	}, [ interfaceLanguage ] );
 
 	let clearControls;
@@ -87,14 +92,7 @@ const SidebarControls = React.memo( () => {
 				<span className={ styles.sidebarControlsTitle }>{ title }</span>
 			</span>
 
-			<select className={ styles.sidebarSelect } name="version" value={ interfaceLanguage } onChange={ ( event ) => {
-				dispatch( settingsChange( 'interfaceLanguage', event.target.value ) );
-				event.target.blur();
-			} }>
-				{ Object.keys( bible.Data.supportedVersions ).map( ( version, index ) => (
-					<option value={ version } key={ index }>{ version }</option>
-				) ) }
-			</select>
+			<VersionSelect />
 
 			<span className={ styles.sidebarControlsRight }>
 				{ clearControls }
