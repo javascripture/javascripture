@@ -12,13 +12,15 @@ const WordBlockHeader = React.memo( ( { children, className, textToCopy, onRemov
 		<div className={ className }>
 				{ children }
 				<span>
-					<CopyToClipboard fill={ fill } textToCopy={ textToCopy } />
-					<a onClick={ ( event ) => {
-						event.stopPropagation();
-						onRemove();
-					} }>
-						<RemoveSvg fill={ fill } />
-					</a>
+					{ textToCopy && <CopyToClipboard fill={ fill } textToCopy={ textToCopy } /> }
+					{ onRemove && (
+						<a onClick={ ( event ) => {
+							event.stopPropagation();
+							onRemove();
+						} }>
+							<RemoveSvg fill={ fill } />
+						</a>
+					) }
 				</span>
 		</div>
 	);

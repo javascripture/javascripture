@@ -69,6 +69,10 @@ const reference = ( state = getInitialState(), action ) => {
 
 		case 'CHANGE_VERSION':
 			const newState = [ ...state ];
+			if ( typeof newState[ action.index ] === 'undefined' ) {
+				return newState;
+			}
+
 			const newReference = newState[ action.index ];
 			newReference.version = action.version;
 			newState[ action.index ] = newReference;

@@ -7,7 +7,7 @@ const initialState = {
 	inSync: true,
 	expandedSearchResults: false,
 	highlightSearchResults: false,
-	interfaceLanguage: 'en',
+	interfaceLanguage: 'KJV',
 	type: "SETTINGS_CHANGE",
 }
 
