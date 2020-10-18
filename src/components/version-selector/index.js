@@ -11,6 +11,7 @@ import ReferenceSelectorMobile from '../reference-selector-mobile';
 import RemoveColumnButton from '../remove-column-button';
 import SyncButton from '../sync-button';
 import { createReferenceLink } from '../../lib/reference.js';
+import VersionSelect from '../version-select';
 
 // Component variables
 let lastTimeStamp = 0;
@@ -96,17 +97,7 @@ class VersionSelector extends React.Component{
 		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
 		return (
 			<span>
-				<select name={ this.props.index } className={ styles.rightVersion } value={ value } onChange={ this.changeVersion }>
-					{
-						Object.keys( this.props.interfaceLanguages ).map( ( key ) => {
-							const versionsForLanguage = Object.keys( this.props.versions ).filter( version => this.props.versions[ version ].language === key );
-							const versionOption = versionsForLanguage.map( version => {
-								return <option value={ version } key={ version } title={ this.props.versions[ version ].name }>{ version } - { this.props.versions[ version ].name }</option>
-							} );
-							return <optgroup key={ 'optgroup' + key } label={ this.props.interfaceLanguages[ key ] }>{ versionOption }</optgroup>;
-						} )
-					}
-				</select>
+				<VersionSelect name={ this.props.index } value={ value } onChange={ this.changeVersion } />
 			</span>
 		);
 	}

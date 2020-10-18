@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal dependencies
-import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch, fetchData } from '../../actions';
+import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch, fetchData, settingsChange } from '../../actions';
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
@@ -92,7 +92,12 @@ const SidebarControls = React.memo( () => {
 				<span className={ styles.sidebarControlsTitle }>{ title }</span>
 			</span>
 
-			<VersionSelect />
+			<VersionSelect name="version" value={ interfaceLanguage } onChange={
+				( event ) => {
+					dispatch( settingsChange( 'interfaceLanguage', event.target.value ) );
+					event.target.blur();
+				}
+			} />
 
 			<span className={ styles.sidebarControlsRight }>
 				{ clearControls }
