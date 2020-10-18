@@ -13,6 +13,7 @@ self.addEventListener('install', function( e ) {
 			//libs
 			'lib/MorphCodes.js',
 			'lib/MorphParse.js',
+			'lib/morphgnt-parse.js',
 
 			//data
 			'data/bible.js',
