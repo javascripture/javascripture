@@ -39,9 +39,9 @@ const Root = ( { highlightedWord } ) => {
 			open={ sidebarOpen }
 			onSetOpen={ () => dispatch( toggleSidebar() ) }
 			styles={{
-				sidebar: { background: "white", overflowY: "none", width: "320px", zIndex: "10" },
+				sidebar: { background: "transparent", overflowY: "none", width: "320px", zIndex: "10" },
 				overlay: { disply: "none", bottom: "auto", right: "auto" },
-				content: { background: "white" },
+				content: { background: "transparent" },
 			}}
 		>
 			<div className={ styles.root }>

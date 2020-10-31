@@ -36,13 +36,16 @@
 }
 
 .verseWrapper {
-	color: #999;
 	padding: 0 $column-padding / 2;
 	position: relative;
 	flex-basis: 0;
 	flex-grow: 1;
 	max-width: $column-width;
 	display: flex;
+
+	.verseNumber {
+		color: #999;
+	}
 
 	&:hover {
 		z-index: 1;
@@ -57,7 +60,6 @@
 }
 
 .verse {
-	color: black;
 	flex-basis: 0;
 	flex-grow: 1;
 }

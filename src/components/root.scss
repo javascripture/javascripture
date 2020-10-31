@@ -1,8 +1,13 @@
 @import './colors.scss';
 
 .root {
-	background: white;
+	background: #fff;
 	position: relative;
+
+	/*@media ( prefers-color-scheme: dark ) {
+		background: #000;
+		color: #fff;
+	}*/
 
 	input[type=submit],
 	button {
