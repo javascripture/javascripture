@@ -56,7 +56,7 @@ class SettingsTray extends React.Component{
 									<li className={ styles.settingsLi }>
 										<label>Fonts:</label>
 										<select value={ this.props.settings.fontFamily } name="fontFamily" onChange={ this.changeSetting }>
-											<option value="'Helvetica Neue', Helvetica, Arial, sans-serif">Helvetica</option>
+											<option value='-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", Arial, Helvetica, sans-serif !important;'>Helvetica</option>
 											<option value="'Bookman Old Style' !important">Bookman</option>
 											<option value="'Courier New', Courier !important">Courier</option>
 											<option value="Georgia !important">Georgia</option>

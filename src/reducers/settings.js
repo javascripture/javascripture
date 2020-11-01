@@ -1,6 +1,6 @@
 const initialState = {
 	fontSize: "100%",
-	fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+	fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", Arial, Helvetica, sans-serif;',
 	highlightWordsWith: "same",
 	referencePicker: "select",
 	subdue: "50%",
