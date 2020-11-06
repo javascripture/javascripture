@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
-import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse } from '../actions'
+import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse, setTrayVisibilityFilter } from '../actions'
 import { createReferenceLink, getReferenceFromSearchResult } from '../lib/reference.js';
 
 // Component variables
@@ -71,10 +71,16 @@ const KeyboardShortcuts = React.memo( () => {
 		lastTimeStamp = currentTimeStamp;
 	};
 
+	const openTray = ( event, combo ) => {
+		const tray = combo.split( '+' )[1];
+		dispatch( setTrayVisibilityFilter( tray ) );
+	};
+
 	useEffect( () => {
 		mousetrap.bind( [ '=' ], () => goToNextCurrentVerseHandler() );
 		mousetrap.bind( [ '-' ], () => goToPreviousCurrentVerseHandler() );
 		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => goToChapter( event, combo ) );
+		mousetrap.bind( ['alt+1','alt+2','alt+3','alt+4','alt+5','alt+6'], ( event, combo ) => openTray( event, combo ) );
 	} );
 
 	return null;

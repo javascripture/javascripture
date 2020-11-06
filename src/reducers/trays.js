@@ -46,10 +46,13 @@ const initalState = [
 ];
 
 const trays = ( state = initalState, action ) => {
+	console.log( action );
 	switch ( action.type ) {
 		case 'SET_TRAY_VISIBILITY_FILTER':
-			return state.map( tray => {
+			return state.map( ( tray, index ) => {
 				if ( action.filter === tray.id ) {
+					tray.visible = true;
+				} else if ( parseInt( action.filter ) - 1 === index ) {
 					tray.visible = true;
 				} else {
 					tray.visible = false;
