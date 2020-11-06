@@ -1,10 +1,9 @@
 // External dependencies
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import mousetrap from 'mousetrap';
-import { connect } from 'react-redux';
 import find from 'lodash/find';
 import isEqual from 'lodash/isEqual';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
 import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse } from '../actions'
@@ -13,64 +12,6 @@ import { createReferenceLink, getReferenceFromSearchResult } from '../lib/refere
 // Component variables
 let lastTimeStamp = 0,
 	waiter;
-
-class KeyboardShortcuts extends React.Component{
-	goToNextCurrentVerse() {
-		if ( this.props.nextReference ) {
-			this.props.goToReference( this.props.nextReference );
-			this.props.markNextCurrentReference();
-		}
-	}
-
-	goToPreviousCurrentVerse() {
-		if ( this.props.previousReference ) {
-			this.props.goToReference( this.props.previousReference );
-			this.props.markPreviousCurrentReference();
-		}
-	}
-
-	goToChapter( event, combo ) {
-		const currentTimeStamp = Math.floor( event.timeStamp ),
-			bookId = bible.getBookId( this.props.reference[ 0 ].book );
-
-		let chapterToGoTo = combo;
-		if ( currentTimeStamp - lastTimeStamp < 500) {
-			chapterToGoTo = this.props.reference[ 0 ].chapter + combo;
-		}
-
-		if ( bible.Data.verses[bookId - 1][ chapterToGoTo - 1] ) {
-			var newReference = this.props.reference[ 0 ];
-			newReference.chapter = chapterToGoTo;
-			newReference.verse = 1;
-
-			clearTimeout( waiter );
-			waiter = setTimeout( () => {
-				window.location.hash = createReferenceLink( newReference );
-			}, 500 );
-
-		}
-
-		lastTimeStamp = currentTimeStamp;
-	}
-
-	componentDidMount() {
-		mousetrap.bind( [ '=' ], () => this.goToNextCurrentVerse( false ) );
-		mousetrap.bind( [ '-' ], () => this.goToPreviousCurrentVerse( false ) );
-		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => this.goToChapter( event, combo ) );
-	}
-
-	componentWillUnmount() {
-		mousetrap.unbind( [ '=' ], () => this.goToNextCurrentVerse( false ) );
-		mousetrap.unbind( [ '-' ], () => this.goToPreviousCurrentVerse( false ) );
-		mousetrap.unbind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => this.goToChapter( event, combo ) );
-	}
-
-	render() {
-		return null;
-	}
-}
-
-KeyboardShortcuts.propTypes = {};
 
 function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
 	const currentSearchResults = find( searchResults, searchResult => {
@@ -84,31 +25,59 @@ function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
 	return null;
 };
 
-const mapStateToProps = ( { searchResults, currentReference, reference } ) => {
-	return {
-		nextReference: getCurrentReferenceOffset( searchResults, currentReference, 1 ),
-		previousReference: getCurrentReferenceOffset( searchResults, currentReference, -1 ),
-		reference: reference,
-	}
-};
+const KeyboardShortcuts = React.memo( () => {
+	const searchResults = useSelector( ( state ) => state.searchResults );
+	const currentReference = useSelector( ( state ) => state.currentReference );
+	const reference = useSelector( ( state ) => state.reference );
+	const nextReference = getCurrentReferenceOffset( searchResults, currentReference, 1 );
+	const previousReference = getCurrentReferenceOffset( searchResults, currentReference, -1 );
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		markNextCurrentReference: () => {
+	const dispatch = useDispatch();
+
+	const goToNextCurrentVerseHandler = () => {
+		if ( nextReference ) {
+			goToReference( getReferenceFromSearchResult( nextReference ) );
 			dispatch( goToNextCurrentVerse() );
-		},
-		markPreviousCurrentReference: () => {
-			dispatch( goToPreviousCurrentVerse() );
-		},
-		goToReference: ( reference ) => {
-			goToReference( getReferenceFromSearchResult( reference ) );
 		}
-	}
-};
+	};
 
-const KeyboardShortcutsContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)( KeyboardShortcuts )
+	const goToPreviousCurrentVerseHandler = () => {
+		if ( previousReference ) {
+			goToReference( getReferenceFromSearchResult( previousReference ) );
+			dispatch( goToPreviousCurrentVerse() );
+		}
+	};
 
-export default KeyboardShortcutsContainer;
+	const goToChapter = ( event, combo ) => {
+		const currentTimeStamp = Math.floor( event.timeStamp ),
+			bookId = bible.getBookId( reference[ 0 ].book );
+
+		let chapterToGoTo = combo;
+		if ( currentTimeStamp - lastTimeStamp < 500) {
+			chapterToGoTo = reference[ 0 ].chapter + combo;
+		}
+
+		if ( bible.Data.verses[bookId - 1][ chapterToGoTo - 1] ) {
+			var newReference = reference[ 0 ];
+			newReference.chapter = chapterToGoTo;
+			newReference.verse = 1;
+
+			clearTimeout( waiter );
+			waiter = setTimeout( () => {
+				window.location.hash = createReferenceLink( newReference );
+			}, 500 );
+		}
+
+		lastTimeStamp = currentTimeStamp;
+	};
+
+	useEffect( () => {
+		mousetrap.bind( [ '=' ], () => goToNextCurrentVerseHandler() );
+		mousetrap.bind( [ '-' ], () => goToPreviousCurrentVerseHandler() );
+		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => goToChapter( event, combo ) );
+	} );
+
+	return null;
+} );
+
+export default KeyboardShortcuts;
