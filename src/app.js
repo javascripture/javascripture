@@ -27,14 +27,30 @@ const config = {
 
 const history = createBrowserHistory()
 
-let persistedReducer = persistCombineReducers(config, rootReducer( history ) );
+const persistedReducer = persistCombineReducers(config, rootReducer( history ) );
 
-let store = createStore( persistedReducer, compose(
-	window.devToolsExtension ? window.devToolsExtension() : f => f,
+const composeEnhancers =
+	typeof window === 'object' &&
+	window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+			stateSanitizer: ( state ) => {
+				if (!state.data) return state;
+				const data = {};
+				Object.keys(state.data).forEach(key => {
+					data[key] = { __TRUNCATED: true };
+				});
+				return { 
+					...state,
+					data
+				};
+			}
+    }) : compose;
+
+const store = createStore( persistedReducer, composeEnhancers(
 	applyMiddleware( routerMiddleware( history ), thunk )
 ) );
 
-let persistor = persistStore( store );
+const persistor = persistStore( store );
 
 class App extends React.Component{
 	constructor(props) {
