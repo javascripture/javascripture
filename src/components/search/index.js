@@ -43,7 +43,7 @@ const Search = React.memo( () => {
 		} else {
 			dispatch( addSearch( terms, 'search' ) );
 		}
-		dispatch( clearSearchForm() );
+		//dispatch( clearSearchForm() );
 	};
 	const reset = ( event ) => {
 		event.preventDefault();
