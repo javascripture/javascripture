@@ -14,25 +14,25 @@ import ReferenceInfo from './reference-info';
 import ReferenceSelector from '../reference-selector';
 import WordDetails from '../word-details';
 
-function getComponent( componentString ) {
+function getComponent( componentString, visible ) {
 	switch ( componentString ) {
 		case 'WordTray':
-			return <WordDetails />
+			return <WordDetails visible={ visible } />
 
 		case 'GotoTray':
-			return <ReferenceSelector />
+			return <ReferenceSelector visible={ visible } />
 
 		case 'SearchTray':
-			return <Search />
+			return <Search visible={ visible } />
 
 		case 'BookmarksTray':
-			return <BookmarksTray />
+			return <BookmarksTray visible={ visible } />
 
 		case 'SettingsTray':
-			return <SettingsTray />
+			return <SettingsTray visible={ visible } />
 
 		case 'ReferenceInfo':
-			return <ReferenceInfo />
+			return <ReferenceInfo visible={ visible } />
 	}
 }
 
@@ -48,7 +48,7 @@ class TrayList extends React.Component{
 						className={ tray.visible ? styles.visible : styles.hidden }
 					>
 						<div className={ styles.tray }>
-							{ getComponent( tray.component ) }
+							{ getComponent( tray.component, tray.visible ) }
 						</div>
 					</div>
 				) }

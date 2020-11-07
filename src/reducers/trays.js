@@ -46,7 +46,6 @@ const initalState = [
 ];
 
 const trays = ( state = initalState, action ) => {
-	console.log( action );
 	switch ( action.type ) {
 		case 'SET_TRAY_VISIBILITY_FILTER':
 			return state.map( ( tray, index ) => {

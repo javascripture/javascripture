@@ -1,14 +1,11 @@
 // External dependencies
-import React from 'react';
+import React, { useEffect } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { connect } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import {
 	addSearch,
-	removeSearch,
-	toggleSearch,
 	closeAdvancedSearch,
 	openAdvancedSearch,
 	settingsChange,
@@ -95,12 +92,18 @@ const Search = React.memo( () => {
 		);
 	}
 
+	let textInput = null;
+	useEffect( () => {
+		console.log('use effect');
+		textInput.focus();
+	} );
+
 	return (
 		<div>
 			<form className={ styles.search } onSubmit={ submit }>
 				<fieldset>
 					<label htmlFor="word" className="has-placeholder">Word</label>
-					<input type="text" name="word" placeholder="Word" onChange={ change } value={ searchForm.word } />
+					<input type="text" name="word" placeholder="Word" onChange={ change } value={ searchForm.word } ref={ (button) => { textInput = button; }} />
 					{ pickerButton( 'word' ) }
 				</fieldset>
 				{ searchAdvanced && (

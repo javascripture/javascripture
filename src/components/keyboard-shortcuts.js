@@ -72,6 +72,7 @@ const KeyboardShortcuts = React.memo( () => {
 	};
 
 	const openTray = ( event, combo ) => {
+		event.preventDefault();
 		const tray = combo.split( '+' )[1];
 		dispatch( setTrayVisibilityFilter( tray ) );
 	};
