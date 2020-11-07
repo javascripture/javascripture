@@ -14,20 +14,6 @@ export const setTrayVisibilityFilter = ( filter ) => {
 	}
 }
 
-export const setWordHighlight = ( word ) => {
-	return {
-		type: 'SET_WORD_HIGHLIGHT',
-		word
-	}
-}
-
-export const removeWordHighlight = ( word ) => {
-	return {
-		type: 'REMOVE_WORD_HIGHLIGHT',
-		word
-	}
-}
-
 export const setScrollChapter = ( book, chapter, index ) => {
 	return {
 		book,

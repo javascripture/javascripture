@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 
 import bookmarks from './bookmarks';
@@ -14,7 +13,6 @@ import searchTerms from './search-terms';
 import settings from './settings';
 import trays from './trays';
 import wordDetails from './word-details';
-import wordHighlight from './word-highlight';
 import crossReferences from './cross-references';
 import currentReference from './current-reference';
 import version from './version';
@@ -44,6 +42,5 @@ export default (history) => { return {
 	version,
 	versions,
 	wordDetails,
-	wordHighlight,
 	similarReferences,
 } };
