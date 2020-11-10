@@ -23,34 +23,6 @@ export const setScrollChapter = ( book, chapter, index ) => {
 	}
 }
 
-export const addBookmark = ( reference ) => {
-	return {
-		reference,
-		type: 'ADD_BOOKMARK'
-	}
-}
-
-export const removeBookmark = ( reference ) => {
-	return {
-		reference,
-		type: 'REMOVE_BOOKMARK'
-	}
-}
-
-export const removeAllBookmarks = ( reference ) => {
-	return {
-		type: 'REMOVE_ALL_BOOKMARKS'
-	}
-}
-
-
-export const toggleBookmark = ( reference ) => {
-	return {
-		reference,
-		type: 'TOGGLE_BOOKMARK'
-	}
-}
-
 export const settingsChange = ( settingName, settingValue ) => {
 	var returnValue = {
 		type: 'SETTINGS_CHANGE'
@@ -404,4 +376,32 @@ export const selectWord = ( props ) => {
 		}
 	}
 
+};
+
+export const addToList = ( item ) => {
+	return {
+		type: 'ADD_TO_LIST',
+		item: item,
+	}
+};
+
+export const removeFromList = ( item ) => {
+	return {
+		type: 'REMOVE_FROM_LIST',
+		item: item,
+	}
+};
+
+export const removeTypeFromList = ( listType ) => {
+	return {
+		type: 'REMOVE_TYPE_FROM_LIST',
+		listType: listType,
+	}
+};
+
+export const toggleListItemVisible = ( item ) => {
+	return {
+		type: 'TOGGLE_LIST_ITEM_VISIBLE',
+		item: item,
+	}
 };

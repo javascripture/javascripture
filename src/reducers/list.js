@@ -1,0 +1,51 @@
+import { isEqual } from 'lodash';
+
+const initialState = [];
+
+const list = ( state = initialState, action ) => {
+	switch ( action.type ) {
+		case 'ADD_TO_LIST':
+			const findInState = state.filter( item => isEqual( item.data, action.item.data ) );
+			if ( findInState.length > 0 ) {
+				return [
+					...state.map( item => {
+						item.visible = findInState[ 0 ].id === item.id;
+						return item;
+					} )
+				];
+			}
+
+			return [
+				...state.map( item => {
+					if ( item.listType === action.item.listType ) {
+						item.visible = false;
+					}
+					return item;
+				} ),
+				{ ...action.item, id: state.length }
+			]
+		case 'REMOVE_FROM_LIST':
+			return [
+				...state.filter( item => item.id !== action.item.id )
+			]
+		case 'REMOVE_TYPE_FROM_LIST':
+			return [
+				...state.filter( item => item.listType !== action.listType )
+			]
+		case 'TOGGLE_LIST_ITEM_VISIBLE':
+			return [
+				...state.map( ( item ) => {
+					if ( item.id === action.item.id ) {
+						item.visible = ! item.visible;
+					} else if ( action.item.listType === item.listType ) {
+						item.visible = false;
+					}
+					return item;
+				} )
+			]
+		default:
+			return state
+	}
+}
+
+export default list;

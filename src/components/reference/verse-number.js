@@ -1,9 +1,9 @@
 // External
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 // Internal
-import { setTrayVisibilityFilter, addBookmark } from '../../actions';
+import { addToList, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Bookmark from '../svg/bookmark';
@@ -11,8 +11,14 @@ import Bookmark from '../svg/bookmark';
 const VerseNumber =  React.memo( ( { book, chapter, verse } ) => {
 	const dispatch = useDispatch();
 	const addBookmarkAction = () => {
-		dispatch( addBookmark( { book, chapter, verse } ) );
 		dispatch( setTrayVisibilityFilter( 'bookmarks' ) );
+		dispatch( addToList( {
+			listType: 'bookmark',
+			data: {
+				reference: { book, chapter, verse }
+			},
+			visible: true,
+		} ) );
 	};
 
 	return (

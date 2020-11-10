@@ -94,7 +94,6 @@ const Search = React.memo( () => {
 
 	let textInput = null;
 	useEffect( () => {
-		console.log('use effect');
 		textInput.focus();
 	} );
 

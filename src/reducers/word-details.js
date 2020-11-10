@@ -1,10 +1,7 @@
-import clone from 'lodash/clone';
 import findIndex from 'lodash/findIndex';
 
 const wordDetails = ( state = [], action ) => {
-	let newState,
-		getCurrentVersePosition,
-		reference;
+	let newState;
 
 	switch ( action.type ) {
 		case 'ADD_WORD':

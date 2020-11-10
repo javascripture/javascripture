@@ -1,7 +1,9 @@
 import { connectRouter } from 'connected-react-router'
 
-import bookmarks from './bookmarks';
+import crossReferences from './cross-references';
+import currentReference from './current-reference';
 import data from './data';
+import list from './list';
 import reference from './reference';
 import referenceSelectorMobile from './reference-selector-mobile';
 import scrollChapter from './scroll-chapter';
@@ -13,8 +15,6 @@ import searchTerms from './search-terms';
 import settings from './settings';
 import trays from './trays';
 import wordDetails from './word-details';
-import crossReferences from './cross-references';
-import currentReference from './current-reference';
 import version from './version';
 import versions from './versions';
 import sidebar from './sidebar';
@@ -23,10 +23,10 @@ import referenceInfo from './reference-info';
 
 export default (history) => { return {
 	router: connectRouter( history ),
-	bookmarks,
 	crossReferences,
 	currentReference,
 	data,
+	list,
 	reference,
 	referenceInfo,
 	referenceSelectorMobile,

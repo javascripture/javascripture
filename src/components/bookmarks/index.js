@@ -7,7 +7,7 @@ import Bookmark from '../svg/bookmark.js';
 import Single from './single';
 
 const BookMarks = React.memo( () => {
-	const bookmarks = useSelector( state => state.bookmarks );
+	const bookmarks = useSelector( state => state.list.filter( ( { listType } ) => listType === 'bookmark' ) );
 
 	return (
 		<div>

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal dependencies
-import { clearAll, removeAllBookmarks, toggleSidebar, clearSearch, fetchData, settingsChange } from '../../actions';
+import { clearAll, removeTypeFromList, toggleSidebar, clearSearch, fetchData, settingsChange } from '../../actions';
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
@@ -34,7 +34,7 @@ const SidebarControls = React.memo( () => {
 		return tray.visible;
 	} ) );
 	const wordDetails = useSelector( state => state.wordDetails );
-	const bookmarks = useSelector( state => state.bookmarks );
+	const bookmarks = useSelector( state => state.list.filter( ( { listType } ) => listType === 'bookmark' ) );
 	const searchTerms = useSelector( state => state.searchTerms );
 	const sidebarOpen = useSelector( state => state.sidebar );
 	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
@@ -56,7 +56,7 @@ const SidebarControls = React.memo( () => {
 		clearControls = ( bookmarks.length > 0 && (
 			<a href="#" onClick={ ( event ) => {
 				event.preventDefault();
-				dispatch( removeAllBookmarks() );
+				dispatch( removeTypeFromList( 'bookmark' ) );
 			} } title="Clear bookmarks">
 				<ClearSvg />
 			</a>
