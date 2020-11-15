@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sidebar from 'react-sidebar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,9 +38,9 @@ const Root = ( { highlightedWord } ) => {
 			open={ sidebarOpen }
 			onSetOpen={ () => dispatch( toggleSidebar() ) }
 			styles={{
-				sidebar: { background: "transparent", overflowY: "none", width: "320px", zIndex: "10" },
+				sidebar: { background: "var(--background)", overflowY: "none", width: "320px", zIndex: "10" },
 				overlay: { disply: "none", bottom: "auto", right: "auto" },
-				content: { background: "transparent" },
+				content: { background: "var(--background)" },
 			}}
 		>
 			<div className={ styles.root }>
