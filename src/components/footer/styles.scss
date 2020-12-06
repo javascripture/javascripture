@@ -1,9 +1,25 @@
+@import '../dimensions.scss';
+
 .footer {
-	background: #fcfcfc;
-	border-top: 1px solid #ccc;
+	background: var(--background-ui);
 	position: fixed;
 		bottom: 0;
 		left: 0;
 		right: 0;
 	z-index: 19;
+}
+
+.sidebar-button {
+	background: var(--background-ui);
+	border: 1px solid var(--mid);
+	cursor: pointer;
+	box-sizing: border-box;
+	display: block;
+	height: $dock-height;
+	line-height: $dock-height;
+	position: absolute;
+		bottom: -1px;
+		right: - $dock-height - 1;
+	text-align: center;
+	width: $dock-height;
 }

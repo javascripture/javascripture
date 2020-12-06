@@ -1,4 +1,5 @@
 @import '../_colors.scss';
+@import '../dimensions.scss';
 
 .reference-selector-mobile {
 	position: relative;
@@ -10,7 +11,7 @@
 	border-radius: 0;
 	border-right: 0;
 	cursor: pointer;
-	line-height: 38px;
+	line-height: $dock-height;
 	padding: 4px;
 
 	@media ( max-width: 399px ) {
@@ -25,7 +26,7 @@
 }
 
 .chapterSelector {
-	background: white;
+	background: var(--background-ui);
 	border-bottom: 1px solid rgba( 0, 0, 0, .3 );
 	bottom: 56px;
 	box-shadow: 0 3px 6px 0 rgba( 0, 0, 0, .3 );
@@ -33,13 +34,13 @@
 	overflow-x: hidden;
 	text-align: left;
 	position: fixed;
-	top: 40px;
+	top: $dock-height;
 	left: calc( 50% - 320px / 2 );
 	width: 320px;
 	z-index: 20;
 
 	@media ( min-width: 768px ) {
-		height: calc( 100vh - 40px );
+		height: calc( 100vh - 120px );
 		left: 0;
 		position: absolute;
 	}

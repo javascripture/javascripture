@@ -44,7 +44,7 @@
 	display: flex;
 
 	.verseNumber {
-		color: #999;
+		color: var(--mid);
 	}
 
 	&:hover {
@@ -54,7 +54,7 @@
 		}
 
 		.verseNumber {
-			color: #fff;
+			color: var(--background);
 		}
 	}
 }
@@ -86,13 +86,13 @@
 }
 
 .hidden {
-	background-color: white;
+	background-color: var(--background);
 	display: flex;
 	flex-direction: column;
 	padding-top: 5px;
 	position: absolute;
 	left: 3px;
-	top: 28px;
+	top: 36px;
 	visibility: hidden;
 }
 
@@ -103,6 +103,7 @@
 .verseNumber {
 	cursor: pointer;
 	display: inline-block;
+	font-size: 75%;
 	position: relative;
 	text-align: center;
 	width: $column-padding;
@@ -114,7 +115,7 @@
 
 .verseNumberIcon {
 	position: absolute;
-	top: -3px;
+	top: 0;
 	left: -3px;
 	z-index: -1;
 	svg {

@@ -1,6 +1,8 @@
 // External dependencies
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import classnames from 'classnames';
 
 // Internal dependencies
 import BookSvg from '../svg/book.js';
@@ -10,31 +12,44 @@ import EyeSvg from '../svg/eye.js';
 import InfoSvg from '../svg/info.js';
 import SearchSvg from '../svg/search.js';
 import TrayFilter from '../../components/trays/filter.js';
+import MenuOpenSvg from '../svg/menu-open.js';
+import MenuCloseSvg from '../svg/menu-close.js';
+import { toggleSidebar } from '../../actions';
+
 import styles from './styles.scss';
 
-const fill = '#333333';
+const Footer = React.memo( () => {
+	const sidebarOpen = useSelector( state => state.sidebar );
+	const dispatch = useDispatch();
 
-const Footer = () => (
+	return (
 	<div className={ styles.footer }>
 		<TrayFilter filter="goto">
-			<BookSvg fill={ fill } />
+			<BookSvg />
 		</TrayFilter>
 		<TrayFilter filter="word">
-			<EyeSvg fill={ fill } />
+			<EyeSvg />
 		</TrayFilter>
 		<TrayFilter filter="search">
-			<SearchSvg fill={ fill } />
+			<SearchSvg />
 		</TrayFilter>
 		<TrayFilter filter="bookmarks">
-			<BookmarksSvg fill={ fill } />
+			<BookmarksSvg />
 		</TrayFilter>
 		<TrayFilter filter="reference">
-			<InfoSvg fill={ fill } />
+			<InfoSvg />
 		</TrayFilter>
 		<TrayFilter filter="settings">
-			<HelpSvg fill={ fill } />
+			<HelpSvg />
 		</TrayFilter>
+
+		<button onClick={ ( event ) => {
+			event.preventDefault();
+			dispatch( toggleSidebar() );
+		} } title="Close sidebar" className={ classnames( styles.sidebarButton, sidebarOpen ? null : styles.closeWithSidebarClosed ) }>
+			{ sidebarOpen ? <MenuOpenSvg /> : <MenuCloseSvg /> }
+		</button>
 	</div>
-)
+) } );
 
 export default withStyles( styles )( Footer );

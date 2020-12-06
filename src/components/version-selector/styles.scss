@@ -21,31 +21,14 @@
 	border-radius: 0;
 }
 
-.inputWrapper {
-	display: flex;
-	flex-grow: 1;
-	height: 20px;
-	position: relative;
-}
-
-.input {
-	border-radius: 0;
-	border-right: 0;
-	flex-grow: 1;
-	font-size: 1.2em;
-}
-
 .versionButton {
-	font-size: 1.2em;
 	text-transform: uppercase;
 }
 
 .left-version, .right-version {
-	max-width: 60px;
 	font-size: .8em;
 	position: relative;
 	@media ( min-width: 599px ) {
-		max-width: 60px;
 		font-size: 1.2em;
 	}
 
@@ -56,4 +39,13 @@
 		border-top: 0;
 		border-radius: 0;
 	}
+}
+
+.version-selector-input {
+	flex-grow: 1;
+}
+
+.input {
+	border-right: none;
+	text-overflow: clip;
 }

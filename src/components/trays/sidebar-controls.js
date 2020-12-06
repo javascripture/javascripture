@@ -2,10 +2,9 @@
 import React, { useEffect } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import classnames from 'classnames';
 
 // Internal dependencies
-import { clearAll, removeTypeFromList, toggleSidebar, clearSearch, fetchData, settingsChange } from '../../actions';
+import { clearAll, removeTypeFromList, clearSearch, fetchData, settingsChange } from '../../actions';
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
@@ -14,8 +13,6 @@ import HelpSvg from '../svg/help.js';
 import InfoSvg from '../svg/info.js';
 import ClearSvg from '../svg/clear.js';
 import styles from './styles.scss';
-import MenuOpenSvg from '../svg/menu-open.js';
-import MenuCloseSvg from '../svg/menu-close.js';
 import { mapVersionToData } from '../../lib/reference';
 import VersionSelect from '../version-select';
 
@@ -36,7 +33,6 @@ const SidebarControls = React.memo( () => {
 	const wordDetails = useSelector( state => state.wordDetails );
 	const bookmarks = useSelector( state => state.list.filter( ( { listType } ) => listType === 'bookmark' ) );
 	const searchTerms = useSelector( state => state.searchTerms );
-	const sidebarOpen = useSelector( state => state.sidebar );
 	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const icon = selectedTray && selectedTray.icon;
 	const title = selectedTray && selectedTray.text;
@@ -101,12 +97,6 @@ const SidebarControls = React.memo( () => {
 
 			<span className={ styles.sidebarControlsRight }>
 				{ clearControls }
-				<a href="#" onClick={ ( event ) => {
-					event.preventDefault();
-					dispatch( toggleSidebar() );
-				} } title="Close sidebar" className={ classnames( sidebarOpen ? null : styles.closeWithSidebarClosed ) }>
-					{ sidebarOpen ? <MenuOpenSvg /> : <MenuCloseSvg /> }
-				</a>
 			</span>
 		</div>
 	);

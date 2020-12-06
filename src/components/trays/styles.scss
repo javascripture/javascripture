@@ -1,14 +1,10 @@
 @import '../colors.scss';
 @import '../dimensions.scss';
 
-.trays {
-	background: white;
-}
-
 .trayList {
 	overflow: auto;
 	position: absolute;
-	top: 40px;
+	top: $dock-height;
 	bottom: 56px;
 }
 
@@ -59,6 +55,9 @@
 }
 
 .trayFilter {
+	border: 1px solid var(--mid);
+	border-right: 0;
+	box-sizing: border-box;
 	display: inline-block;
 	cursor: pointer;
 	margin: 0;
@@ -67,13 +66,17 @@
 	width: 16.66%;
 
 	&:hover {
-		background: $hover;
+		background: var(--background);
+	}
+
+	svg {
+		fill: var(--color);
 	}
 }
 
 .active {
 	composes: trayFilter;
-	background: $active;
+	background: var(--background);
 }
 
 .help-panel {
@@ -99,16 +102,20 @@
 }
 
 .sidebar-controls {
-	background: #fff;
-	box-shadow: 1px 1px 1px 0 rgba( 0, 0, 0, .3 );
+	background: var(--background-ui);
+	border-bottom: 1px solid var(--mid);
 	display: flex;
 		align-items: center;
 		justify-content: space-between;
-	height: 39px;
+	height: $dock-height - 1;
 	position: sticky;
 	top: 0;
 	width: 100%;
 	z-index: 999;
+
+	svg {
+		fill: var(--color);
+	}
 }
 
 .sidebar-icon {
@@ -123,28 +130,4 @@
 	display: flex;
 	align-items: center;
 	padding-left: 10px;
-}
-
-.sidebarControlsRight {
-	padding-right: 10px;
-}
-
-.close-with-sidebar-closed {
-	background: white;
-	border: 1px solid rgba(0, 0, 0, 0.3);
-	border-top: none;
-	box-sizing: border-box;
-	height: $dock-height;
-	line-height: $dock-height;
-	width: $dock-height + 1;
-	position: absolute;
-	right: - $dock-height - 1;
-	text-align: center;
-	top: 0;
-
-	svg {
-		position: absolute;
-		left: 7px;
-		top: 6px;
-	}
 }

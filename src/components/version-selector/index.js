@@ -84,15 +84,6 @@ class VersionSelector extends React.Component{
 		}
 	}
 
-	renderInput() {
-		return (
-			<span className={ styles.inputWrapper }>
-				<ReferenceSelectorMobile index={ this.props.index } version={ this.props.reference.version } inSync={ this.props.inSync } />
-				<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } value={ this.state.reference } onChange={ this.change } />
-			</span>
-		);
-	}
-
 	renderSelect() {
 		const value = this.props.references[ this.props.index ].version ? this.props.references[ this.props.index ].version : '';
 		return (
@@ -105,7 +96,10 @@ class VersionSelector extends React.Component{
 	render() {
 		return (
 			<form onSubmit={ this.goToReference } className={ styles.versionSelectorFlexible }>
-				{ this.renderInput() }
+				<ReferenceSelectorMobile index={ this.props.index } version={ this.props.reference.version } inSync={ this.props.inSync } />
+				<span className={ styles.versionSelectorInput}>
+					<input type="text" id="goToReference" name="reference" ref="referenceInput" placeholder="Go to reference" className={ styles.input } value={ this.state.reference } onChange={ this.change } />
+				</span>
 				{ this.renderSelect() }
 				{ this.props.index === 0 ? <SyncButton /> : <RemoveColumnButton index={ this.props.index } /> }
 				{ this.props.last && <AddColumnButton /> }
@@ -143,8 +137,12 @@ const getLanguage = ( state, index ) => {
 }
 
 const mapStateToProps = ( state, ownProps ) => {
-	const index = state.settings.inSync ? 0 : ownProps.index;
-	const version = state.reference[ ownProps.index ].version;
+	let index = state.settings.inSync ? 0 : ownProps.index;
+	// in case the references get deleted before the other columns
+	if ( 'undefined' !== typeof state.reference[ index ] ) {
+		index = 0;
+	}
+	const version = state.reference[ index ].version;
 	return {
 		inSync: state.settings.inSync,
 		references: state.reference,

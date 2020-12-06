@@ -7,7 +7,6 @@
 
 .visible {
 	height: auto;
-	padding: .5em;
 }
 
 .hidden {
@@ -24,7 +23,7 @@
 
 .strongs-number-title {
 	display: inline-block;
-	width: 85px;
+	margin-right: 15px;
 }
 
 
@@ -33,16 +32,14 @@
 	line-height: 1.4;
 	list-style: none;
 
-	li {
-		padding-left: .5em;
-	}
 	a {
-		color: black;
 		display: block;
+		padding-left: .5em;
 		text-decoration: none;
 
 		&:hover {
 			background: $hover;
+			color: black;
 		}
 	}
 }

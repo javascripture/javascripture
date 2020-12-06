@@ -1,8 +1,9 @@
+@import '../dimensions.scss';
+
 .dock {
 	position: fixed;
-	left: 40px;
 	right: 0;
-	margin-left: 0;
+	left: 0;
 	transition: margin 200ms;
 	z-index: 8;
 
@@ -13,13 +14,10 @@
 	}
 
 	button:first-child {
-		border-left: 1px solid rgba(0, 0, 0, 0.3);
+		border-left-color: var(--mid);
+		border-left-width: 1px;
+		border-left-style: solid;
 	}
-
-	input {
-		flex-grow: 1;
-	}
-
 }
 
 .dock-version-selectors {
@@ -28,7 +26,10 @@
 }
 
 .dock-with-sidebar-open {
-	left: 0;
+	@media ( max-width: 767px ) {
+		left: 0;
+	}
+
 	@media ( min-width: 768px ) {
 		margin-left: 320px;
 		transition: margin 200ms;

@@ -1,5 +1,6 @@
-$column-width: 480px;
+$column-width: 680px;
 $column-padding: 30px;
-$dock-height: 40px;
+// Also needs updating in chapter.js
+$dock-height: 60px;
 
 $total-column-width: $column-width + $column-padding;

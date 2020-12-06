@@ -2,10 +2,8 @@
 @import '../colors.scss';
 
 .sidebar-select {
-	border: 1px solid $grey;
-	border-radius: 0;
 	height: $dock-height;
-	max-width: 60px;
+	max-width: 90px;
 
 	@media ( min-width: 599px ) {
 		font-size: 1.2em;

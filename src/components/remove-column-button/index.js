@@ -9,10 +9,10 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const RemoveColumnButton = React.memo( ( { index } ) => {
 	const dispatch = useDispatch();
-	const fill = '#333333';
+
 	return (
 		<button type="button" onClick={ () => dispatch( removeColumn( index ) ) }>
-			<RemoveSvg fill={ fill } />
+			<RemoveSvg />
 		</button>
 	);
 } );

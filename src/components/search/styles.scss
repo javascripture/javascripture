@@ -35,14 +35,17 @@
 
 	li {
 		padding-left: .5em;
+
+		&:hover {
+			background: var(--hover);
+		}
 	}
 	a {
-		color: black;
 		display: block;
 		text-decoration: none;
 
 		&:hover {
-			background: $hover;
+			color: #000;
 		}
 	}
 }
@@ -61,7 +64,10 @@
 }
 
 .active-reference {
-	background: $active;
+	background: var(--active);
+	a {
+		color: var(--color);
+	}
 }
 
 .advanced {
