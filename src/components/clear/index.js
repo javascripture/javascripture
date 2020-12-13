@@ -16,19 +16,19 @@ const Clear = React.memo( ( { selectedTrayId } ) => {
 	const searchTerms = useSelector( state => state.searchTerms );
 
 	if (  selectedTrayId !== 'bookmarks' && selectedTrayId !== 'word' && selectedTrayId !== 'search' ) {
-		return <button>&nbsp;</button>;
+		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
 	if ( selectedTrayId === 'bookmarks' && bookmarks.length === 0 ) {
-		return <button>&nbsp;</button>;
+		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
 	if ( selectedTrayId === 'word' && wordDetails.length === 0 ) {
-		return <button>&nbsp;</button>;
+		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
 	if ( selectedTrayId === 'search' && searchTerms.length === 0 ) {
-		return <button>&nbsp;</button>;
+		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
 	const clearTray = ( event ) => {

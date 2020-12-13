@@ -19,6 +19,8 @@
 
 .chapter-tray {
 	display: flex;
+	font-size: 13px;
+	line-height: 30px;
 
 	* {
 		margin-right: 5px;
@@ -93,6 +95,7 @@
 
 .limit {
 	display: inline;
+	height: 30px;
 	width: 50px;
 }
 
