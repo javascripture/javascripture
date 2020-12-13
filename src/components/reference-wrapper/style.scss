@@ -4,7 +4,7 @@
 }
 
 .reference-wrapper-sidebar-open {
-	@media ( min-width: 768px ) {
+	@media ( min-width: 960px ) {
 		margin-left: 320px;
 		transition: margin 200ms;
 	}

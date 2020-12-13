@@ -11,7 +11,7 @@ const initalState = [
 	{
 		visible: false,
 		id: 'word',
-		text: 'Word Details',
+		text: 'Words',
 		component: 'WordTray',
 		icon: 'EyeSvg',
 	},

@@ -4,17 +4,17 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
-import { clearAll, removeTypeFromList, clearSearch, fetchData, settingsChange } from '../../actions';
+import { fetchData, settingsChange } from '../../actions';
 import BookSvg from '../svg/book.js';
 import EyeSvg from '../svg/eye.js';
 import SearchSvg from '../svg/search.js';
 import BookmarksSvg from '../svg/bookmarks.js';
 import HelpSvg from '../svg/help.js';
 import InfoSvg from '../svg/info.js';
-import ClearSvg from '../svg/clear.js';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 import VersionSelect from '../version-select';
+import Clear from '../clear';
 
 const icons = {
 	BookSvg: <BookSvg />,
@@ -30,9 +30,6 @@ const SidebarControls = React.memo( () => {
 	const selectedTray = useSelector( state => state.trays.find( tray => {
 		return tray.visible;
 	} ) );
-	const wordDetails = useSelector( state => state.wordDetails );
-	const bookmarks = useSelector( state => state.list.filter( ( { listType } ) => listType === 'bookmark' ) );
-	const searchTerms = useSelector( state => state.searchTerms );
 	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const icon = selectedTray && selectedTray.icon;
 	const title = selectedTray && selectedTray.text;
@@ -47,40 +44,6 @@ const SidebarControls = React.memo( () => {
 		}
 	}, [ interfaceLanguage ] );
 
-	let clearControls;
-	if ( selectedTray.id === 'bookmarks' ) {
-		clearControls = ( bookmarks.length > 0 && (
-			<a href="#" onClick={ ( event ) => {
-				event.preventDefault();
-				dispatch( removeTypeFromList( 'bookmark' ) );
-			} } title="Clear bookmarks">
-				<ClearSvg />
-			</a>
-		) );
-	}
-
-	if ( selectedTray.id === 'word' ) {
-		clearControls = ( wordDetails.length > 0 && (
-			<a href="#" onClick={ ( event ) => {
-				event.preventDefault();
-				dispatch( clearAll() );
-			} } title="Clear words">
-				<ClearSvg />
-			</a>
-		) );
-	}
-
-	if ( selectedTray.id === 'search' ) {
-		clearControls = ( searchTerms.length > 0 && (
-			<a href="#" onClick={ ( event ) => {
-				event.preventDefault();
-				dispatch( clearSearch() );
-			} } title="Clear words">
-				<ClearSvg />
-			</a>
-		) );
-	}
-
 	return (
 		<div className={ styles.sidebarControls }>
 			<span className={ styles.sidebarControlsInner }>
@@ -88,15 +51,17 @@ const SidebarControls = React.memo( () => {
 				<span className={ styles.sidebarControlsTitle }>{ title }</span>
 			</span>
 
-			<VersionSelect name="version" value={ interfaceLanguage } onChange={
-				( event ) => {
-					dispatch( settingsChange( 'interfaceLanguage', event.target.value ) );
-					event.target.blur();
-				}
-			} />
+			<span className={ styles.sidebarControlsRightOuter}>
+				<VersionSelect name="version" value={ interfaceLanguage } onChange={
+					( event ) => {
+						dispatch( settingsChange( 'interfaceLanguage', event.target.value ) );
+						event.target.blur();
+					}
+				} />
 
-			<span className={ styles.sidebarControlsRight }>
-				{ clearControls }
+				<span className={ styles.sidebarControlsRight }>
+					<Clear selectedTrayId={ selectedTray.id } />
+				</span>
 			</span>
 		</div>
 	);

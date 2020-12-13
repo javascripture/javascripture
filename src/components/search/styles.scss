@@ -35,9 +35,11 @@
 
 	li {
 		padding-left: .5em;
+		margin: 0 -0.7em;
 
 		&:hover {
-			background: var(--hover);
+			background: var(--color);
+			color: var(--hover);
 		}
 	}
 	a {
@@ -45,7 +47,8 @@
 		text-decoration: none;
 
 		&:hover {
-			color: #000;
+			background: var(--color);
+			color: var(--hover);
 		}
 	}
 }

@@ -3,7 +3,6 @@
 
 .reference-selector-mobile {
 	position: relative;
-	font-size: 20px;
 	z-index: 99;
 }
 
@@ -12,7 +11,6 @@
 	border-right: 0;
 	cursor: pointer;
 	line-height: $dock-height;
-	padding: 4px;
 
 	@media ( max-width: 399px ) {
 		border-top: 0;
@@ -65,7 +63,8 @@
 		width: 64px;
 
 		&:hover {
-			color: $text-hover;
+			background: var(--color);
+			color: var(--hover)
 		}
 	}
 }
@@ -84,7 +83,8 @@
 	white-space: nowrap;
 
 	&:hover {
-		color: $text-hover;
+		background: var(--color);
+		color: var(--hover)
 	}
 }
 
@@ -94,6 +94,7 @@
 	top: 5px;
 	left: 5px;
 	&:hover {
-		color: $text-hover;
+		background: var(--color);
+		color: var(--hover)
 	}
 }

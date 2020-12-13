@@ -26,11 +26,11 @@
 }
 
 .dock-with-sidebar-open {
-	@media ( max-width: 767px ) {
+	@media ( max-width: 959px ) {
 		left: 0;
 	}
 
-	@media ( min-width: 768px ) {
+	@media ( min-width: 960px ) {
 		margin-left: 320px;
 		transition: margin 200ms;
 		width: calc( 100% - 320px );
