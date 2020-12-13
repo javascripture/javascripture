@@ -1,0 +1,12 @@
+.clear {
+	border-left: none;
+	border-right: none;
+	cursor: pointer;
+}
+
+.clear:hover {
+	background: var(--color);
+	svg {
+		fill: var(--hover);
+	}
+}
