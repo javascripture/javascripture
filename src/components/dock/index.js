@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
-import VersionSelector from '../version-selector';
+import Navigation from '../navigation';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
@@ -19,7 +19,7 @@ const Dock = React.memo( ( { } ) => {
 			<div className={ styles.dockVersionSelectors }>
 				{ reference.map( ( reference, index ) => {
 					return (
-						<VersionSelector key={ index } reference={ reference } index={ index } last={ ( index + 1 ) === numberOfColumns } />
+						<Navigation key={ index } reference={ reference } index={ index } last={ ( index + 1 ) === numberOfColumns } />
 					);
 				} ) }
 			</div>
