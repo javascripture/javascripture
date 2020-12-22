@@ -1,14 +1,15 @@
 // External
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classnames from 'classnames';
 
 // Internal
 import Navigation from '../navigation';
+import Controls from '../controls';
 import styles from './style.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-const Dock = React.memo( ( { } ) => {
+const Dock = React.memo( () => {
 	const reference = useSelector( state => state.reference );
 	const numberOfColumns = reference.length
 	const sidebarOpen = useSelector( state => state.sidebar );
@@ -22,6 +23,7 @@ const Dock = React.memo( ( { } ) => {
 						<Navigation key={ index } reference={ reference } index={ index } last={ ( index + 1 ) === numberOfColumns } />
 					);
 				} ) }
+				<Controls />
 			</div>
 		</div>
 	);

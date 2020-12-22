@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import { changeVersion } from '../../actions'
-import AddColumnButton from '../add-column-button';
 import ReferenceSelectorMobile from '../reference-selector-mobile';
-import RemoveColumnButton from '../remove-column-button';
-import SyncButton from '../sync-button';
 import ReferenceInput from '../reference-input';
 import VersionSelect from '../version-select';
 
@@ -27,11 +24,9 @@ const Navigation = React.memo( ( { index, version, last } ) => {
 
 	return (
 		<Fragment>
-			<ReferenceSelectorMobile index={ index } version={ version } inSync={ inSync } />
+			<ReferenceSelectorMobile index={ index } version={ value } inSync={ inSync } />
 			<ReferenceInput version={ version } index={ index } />
 			<VersionSelect name={ index } value={ value } onChange={ handleChangeVersion } />
-			{ index === 0 ? <SyncButton /> : <RemoveColumnButton index={ index } /> }
-			{ last && <AddColumnButton /> }
 		</Fragment>
 	);
 } );

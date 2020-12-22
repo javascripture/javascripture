@@ -418,6 +418,9 @@ bible.getTranslatedBookNameByLanguage = function( bookName, language ) {
 };
 
 bible.getTranslatedBookName = function( bookName, version ) {
+	if ( ! bookName || ! version ) {
+		return 'problemo';
+	}
 	var language = bible.Data.supportedVersions[ version ].language;
 	return bible.getTranslatedBookNameByLanguage( bookName, language );
 };
