@@ -87,13 +87,11 @@ const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 		return (
 			<div className={ styles.bookList }>
 				<div className={ styles.bookColumn }>
-					<strong>Old</strong>
 					{ bible.Data.books.slice( 0, 39 ).map( ( book, index ) => {
 						return renderBookLink( book[ 0 ], index );
 					} ) }
 				</div>
 				<div className={ styles.bookColumn }>
-					<strong>New</strong>
 					{ bible.Data.books.slice( 39, 66 ).map( ( book, index ) => {
 						return renderBookLink( book[ 0 ], index + 39 );
 					} ) }
@@ -119,9 +117,10 @@ const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 		);
 	};
 
+	// <button type="button" className={ open ? styles.openButton : styles.button } onClick={ ( event ) => toggleList( event ) }><BookSVG /></button>
+
 	return (
 		<span className={ styles.referenceSelectorMobile }>
-			<button type="button" className={ open ? styles.openButton : styles.button } onClick={ ( event ) => toggleList( event ) }><BookSVG /></button>
 			{ open && <div className={ styles.chapterSelector }>
 				{ ! bookName && renderBookList() }
 				{ bookName && renderChapterList() }

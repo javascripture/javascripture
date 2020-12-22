@@ -221,6 +221,13 @@ export const toggleReferenceSelectorMobile = ( index ) => {
 	}
 }
 
+export const openReferenceSelectorMobile = ( index ) => {
+	return {
+		index,
+		type: 'OPEN_REFERENCE_SELECTOR_MOBILE',
+	}
+}
+
 export const addColumn = () => {
 	return {
 		type: 'ADD_COLUMN'

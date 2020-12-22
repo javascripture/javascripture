@@ -1,5 +1,14 @@
 @import '../_dimensions.scss';
 
+.navigation {
+	display: flex;
+	width: $total-column-width;
+
+	&:last-of-type {
+		width: $total-column-width - ( $dock-height * 2 );
+	}
+}
+
 .version-selector {
 	display: flex;
 }

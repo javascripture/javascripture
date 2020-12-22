@@ -23,11 +23,11 @@ const Navigation = React.memo( ( { index, version, last } ) => {
 	const value = references[ index ].version ? references[ index ].version : '';
 
 	return (
-		<Fragment>
+		<div className={ styles.navigation }>
 			<ReferenceSelectorMobile index={ index } version={ value } inSync={ inSync } />
 			<ReferenceInput version={ version } index={ index } />
 			<VersionSelect name={ index } value={ value } onChange={ handleChangeVersion } />
-		</Fragment>
+		</div>
 	);
 } );
 

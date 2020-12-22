@@ -74,12 +74,10 @@
 	justify-content: space-between;
 }
 
-.book-column {
-	padding: 0 5px;
-}
-
 .bookLink {
 	cursor: pointer;
+	line-height: 2;
+	padding: 0 .2em;
 	white-space: nowrap;
 
 	&:hover {

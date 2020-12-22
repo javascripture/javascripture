@@ -5,7 +5,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
-import { closeReferenceSelectorMobile, toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions';
+import { closeReferenceSelectorMobile, openReferenceSelectorMobile	, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions';
 import { createReferenceLink } from '../../lib/reference.js';
 
 // Internal dependencies
@@ -63,7 +63,6 @@ const ReferenceInput = React.memo( ( { index, last } ) => {
 	};
 
 	useEffect( () => {
-		console.log( referenceValue );
 		setLocalReference( referenceValue );
 	}, [ reference, scrollChapter, inSync ] );
 
@@ -76,14 +75,14 @@ const ReferenceInput = React.memo( ( { index, last } ) => {
 		}
 	} );
 
-	const focusAndBlur = () => {
-		//dispatch( toggleReferenceSelectorMobile( index ) );
+	const focus = () => {
+		dispatch( openReferenceSelectorMobile( index ) );
 	};
 
 	return (
 		<div className={ styles.versionSelectorFlexible }>
 			<form onSubmit={ goToReference } className={ styles.versionSelectorInput} >
-				<input type="text" id="goToReference" name="reference" placeholder="Go to reference" className={ styles.input } value={ localReference } onChange={ change } ref={ referenceInputField } onFocus={ focusAndBlur } onBlur={ focusAndBlur } />
+				<input type="text" id="goToReference" name="reference" placeholder="Go to reference" className={ styles.input } value={ localReference } onChange={ change } ref={ referenceInputField } onFocus={ focus } />
 			</form>
 		</div>
 	);

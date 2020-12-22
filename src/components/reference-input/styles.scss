@@ -9,7 +9,6 @@
 	flex-basis: 0;
 	flex-grow: 1;
 	margin-right: -1px;
-	max-width: $total-column-width;
 }
 
 .form-field {
@@ -47,5 +46,6 @@
 
 .input {
 	border-right: none;
+	font-size: 1.2em;
 	text-overflow: clip;
 }

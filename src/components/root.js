@@ -12,9 +12,9 @@ import Trays from './trays';
 import TrayList from './trays/tray-list';
 import WordHighlight from './word-highlight';
 import styles from './root.scss';
-import { toggleSidebar } from '../actions'
+import { closeReferenceSelectorMobile, toggleSidebar } from '../actions'
 
-const Root = ( { highlightedWord } ) => {
+const Root = React.memo( ( { highlightedWord } ) => {
 	const dispatch = useDispatch();
 	const sidebarOpen = useSelector( state => state.sidebar );
 	const getBodyStyles = () => {
@@ -26,6 +26,9 @@ const Root = ( { highlightedWord } ) => {
 		bodyStyles += 'font-size: ' + fontSize + ';';
 		bodyStyles += '}';
 		return bodyStyles;
+	};
+	const clearReferenceSelector = () => {
+		dispatch( closeReferenceSelectorMobile() )
 	};
 
 	return (
@@ -49,10 +52,12 @@ const Root = ( { highlightedWord } ) => {
 				<KeyboardShortcuts />
 				<WordHighlight word={ highlightedWord } />
 				<Dock />
-				<ReferenceWrapper />
+				<div onClick={ clearReferenceSelector }>
+					<ReferenceWrapper />
+				</div>
 			</div>
 		</Sidebar>
 	)
-};
+} );
 
 export default withStyles( styles )( Root );
