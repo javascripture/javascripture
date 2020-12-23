@@ -10,13 +10,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 const Controls = React.memo( ( { } ) => {
 	const dispatch = useDispatch();
 	const inSync = useSelector( state => state.settings.inSync );
+	const reference = useSelector( state => state.reference );
 	const change = ( event ) => {
 		if ( event.target.value === 'add' ) {
 			dispatch( addColumn() );
 		}
 
 		if( event.target.value === 'delete' ) {
-			dispatch( removeColumn() );
+			dispatch( removeColumn( reference.length - 1 ) );
 		}
 
 		if ( event.target.value === "sync" ) {
