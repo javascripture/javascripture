@@ -37,8 +37,8 @@ const Controls = React.memo( ( { } ) => {
 		<select onChange={ change } className={ styles.extraOptions } value={ value }>
 			<option>…</option>
 			<option value="add">Add a column</option>
-			<option value="delete">Delete column</option>
-			{ inSync ? <option value="unsync">Un-sync references</option> : <option value="sync">Sync references</option> }
+			{ reference.length > 1 && <option value="delete">Delete column</option> }
+			{ reference.length > 1 && ( inSync ? <option value="unsync">Un-sync references</option> : <option value="sync">Sync references</option> ) }
 		</select>
 	);
 } );
