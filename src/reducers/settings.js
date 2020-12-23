@@ -9,6 +9,7 @@ const initialState = {
 	highlightSearchResults: false,
 	interfaceLanguage: 'KJV',
 	type: "SETTINGS_CHANGE",
+	darkMode: null,
 }
 
 export default ( state = initialState, action ) => {

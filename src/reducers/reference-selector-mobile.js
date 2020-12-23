@@ -21,7 +21,6 @@ const referenceSelectorMobile = ( state = initialState, action ) => {
 		case 'SET_REFERENCE':
 		case LOCATION_CHANGE:
 		case 'CLOSE_REFERENCE_SELECTOR_MOBILE':
-			console.log('location change');
 			return state.map( () => {
 				return {
 					open: false,

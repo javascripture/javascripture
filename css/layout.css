@@ -2,30 +2,54 @@
 
 :root {
   --background: #ffffff;
-  --background-ui: rgb(230,230,230);
-	--color: #000000;
-	--mid: #7f7f7f;
+  --background-ui: rgb(240,240,240);
+  --color: #000000;
+  --color-dimmed: #333333;
+	--mid: rgb(210,210,210);;
   --shadow: rgb( 0, 0, 0, 0.15);
   --hover: rgba( 215, 245, 245, 1 );
   --active: rgba( 215, 245, 245, .5 );
 
 }
-
 @media ( prefers-color-scheme: dark ) {
 	:root {
     --background: #333333;
     --background-ui: rgb(0,0,0);
-		--color: #ffffff;
+    --color: #ffffff;
+    --color-dimmed: #aaaaaa;
+    --mid: #444;
     --shadow: rgb( 255, 255, 255, 0.15);
     --hover: rgba( 15, 45, 45, 1 );
     --active: rgba( 215, 245, 245, .3 );
 	}
+}
+.dark-mode-off {
+  --background: #ffffff;
+  --background-ui: rgb(240,240,240);
+  --color: #000000;
+  --color-dimmed: #333333;
+	--mid: rgb(210,210,210);;
+  --shadow: rgb( 0, 0, 0, 0.15);
+  --hover: rgba( 215, 245, 245, 1 );
+  --active: rgba( 215, 245, 245, .5 );
+
+}
+.dark-mode-on {
+  --background: #333333;
+  --background-ui: rgb(0,0,0);
+  --color: #ffffff;
+  --color-dimmed: #aaaaaa;
+  --mid: #444;
+  --shadow: rgb( 255, 255, 255, 0.15);
+  --hover: rgba( 15, 45, 45, 1 );
+  --active: rgba( 215, 245, 245, .3 );
 }
 
 html {
   font-size: 140%;
 }
 
+.root,
 body {
 	background: var(--background);
 	color: var(--color);
@@ -33,13 +57,15 @@ body {
   font-weight: 300;
 }
 
+.root a,
 a {
   color: var(--color);
   cursor: pointer;
 }
 
+.root .added,
 .added {
-  color: var(--mid);
+  color: var(--color-dimmed);
   font-style: italic;
 }
 

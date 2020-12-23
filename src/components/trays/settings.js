@@ -112,6 +112,11 @@ class SettingsTray extends React.Component{
 									</li>
 									<li className={ styles.settingsLi }>
 										<label>
+											<input type="checkbox" name="darkMode" checked={ this.props.settings.darkMode } onChange={ this.changeCheckboxSetting } /> Dark Mode
+										</label>
+									</li>
+									<li className={ styles.settingsLi }>
+										<label>
 											<input type="checkbox" name="highlightSearchResults" checked={ this.props.settings.highlightSearchResults } onChange={ this.changeCheckboxSetting } /> Highlight all words in a verse when hovering the search results
 										</label>
 									</li>

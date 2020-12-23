@@ -7,54 +7,8 @@
 	&:last-of-type {
 		width: $total-column-width - ( $dock-height * 2 );
 	}
-}
 
-.version-selector {
-	display: flex;
-}
-
-.version-selector-flexible {
-	display: flex;
-	flex-basis: 0;
-	flex-grow: 1;
-	margin-right: -1px;
-	max-width: $total-column-width;
-}
-
-.form-field {
-	box-sizing: border-box;
-	flex-grow: 1;
-}
-
-.right-version {
-	border-radius: 0;
-}
-
-.versionButton {
-	text-transform: uppercase;
-}
-
-.left-version, .right-version {
-	font-size: .8em;
-	position: relative;
-	@media ( min-width: 599px ) {
-		font-size: 1.2em;
+	select {
+		border-right: none;
 	}
-
-}
-
-.left-version, .right-version, .input {
-	@media ( max-width: 399px ) {
-		border-top: 0;
-		border-radius: 0;
-	}
-}
-
-.version-selector-input {
-	flex-grow: 1;
-}
-
-.input {
-	border-right: none;
-	text-overflow: clip;
 }

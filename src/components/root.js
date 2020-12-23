@@ -3,6 +3,7 @@ import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sidebar from 'react-sidebar';
 import { useDispatch, useSelector } from 'react-redux';
+import classnames from 'classnames';
 
 // Internal
 import Dock from './dock';
@@ -17,6 +18,7 @@ import { closeReferenceSelectorMobile, toggleSidebar } from '../actions'
 const Root = React.memo( ( { highlightedWord } ) => {
 	const dispatch = useDispatch();
 	const sidebarOpen = useSelector( state => state.sidebar );
+	const darkMode = useSelector( state => state.settings.darkMode );
 	const getBodyStyles = () => {
 		const fontFamily = useSelector( state => state.settings.fontFamily );
 		const fontSize = useSelector( state => state.settings.fontSize );
@@ -32,32 +34,34 @@ const Root = React.memo( ( { highlightedWord } ) => {
 	};
 
 	return (
-		<Sidebar
-			sidebar={
-				<Trays>
-					<TrayList />
-				</Trays>
-			}
-			open={ sidebarOpen }
-			onSetOpen={ () => dispatch( toggleSidebar() ) }
-			shadow={ false }
-			styles={{
-				sidebar: { background: "var(--background)", border: "1px solid var(--mid)", boxShadow: "var(--shadow) 2px 2px 4px", overflowY: "none", width: "320px", zIndex: "10" },
-				overlay: { disply: "none", bottom: "auto", right: "auto" },
-				content: { background: "var(--background)" },
-			}}
-		>
-			<div className={ styles.root }>
-				<style>{ getBodyStyles() }</style>
-				<KeyboardShortcuts />
-				<WordHighlight word={ highlightedWord } />
-				<Dock />
-				<div onClick={ clearReferenceSelector }>
-					<ReferenceWrapper />
+		<div className={ classnames( 'root', { 'dark-mode-on': darkMode === true, 'dark-mode-off': darkMode === false } ) }>
+			<Sidebar
+				sidebar={
+					<Trays>
+						<TrayList />
+					</Trays>
+				}
+				open={ sidebarOpen }
+				onSetOpen={ () => dispatch( toggleSidebar() ) }
+				shadow={ false }
+				styles={{
+					sidebar: { background: "var(--background)", borderTop: "1px solid var(--mid)", boxShadow: "var(--shadow) 2px 2px 4px", overflowY: "none", width: "320px", zIndex: "10" },
+					overlay: { disply: "none", bottom: "auto", right: "auto" },
+					content: { background: "var(--background)" },
+				}}
+			>
+				<div className={ styles.root }>
+					<style>{ getBodyStyles() }</style>
+					<KeyboardShortcuts />
+					<WordHighlight word={ highlightedWord } />
+					<Dock />
+					<div onClick={ clearReferenceSelector }>
+						<ReferenceWrapper />
+					</div>
 				</div>
-			</div>
-		</Sidebar>
-	)
+			</Sidebar>
+		</div>
+	);
 } );
 
 export default withStyles( styles )( Root );

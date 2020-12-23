@@ -18,8 +18,8 @@
 	height: $dock-height;
 	line-height: $dock-height;
 	position: absolute;
-		bottom: -1px;
-		right: - $dock-height - 1;
+		bottom: 0;
+		right: - $dock-height;
 	text-align: center;
 	width: $dock-height;
 }
