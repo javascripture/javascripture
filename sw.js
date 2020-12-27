@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1608765227';
+var cache = 'javascripture.22.0.1609079226';
 
 self.addEventListener('install', function( e ) {
 	e.waitUntil( caches.open( cache ).then(function(cache) {
