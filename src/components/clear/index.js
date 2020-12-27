@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearAll, removeTypeFromList, clearSearch } from '../../actions';
 
 import ClearSvg from '../svg/clear.js';
+import DeleteForever from '../svg/delete-forever.js';
 import styles from './style.scss';
 
 const Clear = React.memo( ( { selectedTrayId } ) => {
@@ -50,7 +51,7 @@ const Clear = React.memo( ( { selectedTrayId } ) => {
 		<button onClick={ ( event ) => {
 			clearTray( event )
 		} } title="Clear" className={ styles.clear }>
-			<ClearSvg />
+			<DeleteForever />
 		</button>
 	);
 } );
