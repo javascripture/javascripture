@@ -102,19 +102,19 @@ const Search = React.memo( () => {
 			<form className={ styles.search } onSubmit={ submit }>
 				<fieldset>
 					<label htmlFor="word" className="has-placeholder">Word</label>
-					<input type="text" name="word" placeholder="Word" onChange={ change } value={ searchForm.word } ref={ (button) => { textInput = button; }} />
+					<input className={ styles.hasPicker } type="text" name="word" placeholder="Word" onChange={ change } value={ searchForm.word } ref={ (button) => { textInput = button; }} />
 					{ pickerButton( 'word' ) }
 				</fieldset>
 				{ searchAdvanced && (
 					<div>
 						<fieldset>
 							<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
-							<input type="text" name="lemma" placeholder="Strongs number" onChange={ change } value={ searchForm.lemma } />
+							<input className={ styles.hasPicker } type="text" name="lemma" placeholder="Strongs number" onChange={ change } value={ searchForm.lemma } />
 							{ pickerButton( 'lemma' ) }
 						</fieldset>
 						<fieldset>
 							<label htmlFor="morph" className="has-placeholder">Morphology</label>
-							<input type="text" name="morph" placeholder="Morphology" onChange={ change } value={ searchForm.morph } />
+							<input className={ styles.hasPicker } type="text" name="morph" placeholder="Morphology" onChange={ change } value={ searchForm.morph } />
 							{ pickerButton( 'morph' ) }
 						</fieldset>
 						<fieldset>
