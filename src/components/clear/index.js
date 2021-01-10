@@ -12,9 +12,9 @@ import styles from './style.scss';
 
 const Clear = React.memo( ( { selectedTrayId } ) => {
 	const dispatch = useDispatch();
-	const wordDetails = useSelector( state => state.wordDetails );
+	const words = useSelector( state => state.list.filter( ( { listType } ) => listType === 'word' ) );
 	const bookmarks = useSelector( state => state.list.filter( ( { listType } ) => listType === 'bookmark' ) );
-	const searchTerms = useSelector( state => state.searchTerms );
+	const searchTerms = useSelector( state => state.list.filter( ( { listType } ) => listType === 'search' ) );
 
 	if (  selectedTrayId !== 'bookmarks' && selectedTrayId !== 'word' && selectedTrayId !== 'search' ) {
 		return <button className={ styles.button }>&nbsp;</button>;
@@ -24,7 +24,7 @@ const Clear = React.memo( ( { selectedTrayId } ) => {
 		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
-	if ( selectedTrayId === 'word' && wordDetails.length === 0 ) {
+	if ( selectedTrayId === 'word' && words.length === 0 ) {
 		return <button className={ styles.button }>&nbsp;</button>;
 	}
 
@@ -39,11 +39,11 @@ const Clear = React.memo( ( { selectedTrayId } ) => {
 		}
 
 		if ( selectedTrayId === 'word' ) {
-			dispatch( clearAll() );
+			dispatch( removeTypeFromList( 'word' ) );
 		}
 
 		if ( selectedTrayId === 'search' ) {
-			dispatch( clearSearch() );
+			dispatch( removeTypeFromList( 'search' ) );
 		}
 	};
 

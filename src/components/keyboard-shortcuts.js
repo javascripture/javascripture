@@ -1,52 +1,21 @@
 // External dependencies
 import React, { useEffect } from 'react';
 import mousetrap from 'mousetrap';
-import find from 'lodash/find';
-import isEqual from 'lodash/isEqual';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
-import { goToReference, goToNextCurrentVerse, goToPreviousCurrentVerse, setTrayVisibilityFilter } from '../actions'
+import { goToReference, setTrayVisibilityFilter, setCurrentListResult } from '../actions'
 import { createReferenceLink, getReferenceFromSearchResult } from '../lib/reference.js';
 
 // Component variables
 let lastTimeStamp = 0,
 	waiter;
 
-function getCurrentReferenceOffset( searchResults, currentReference, offset ) {
-	const currentSearchResults = find( searchResults, searchResult => {
-		return isEqual( searchResult.terms, currentReference.terms );
-	} )	;
-
-	if ( currentSearchResults ) {
-		return currentSearchResults.results[ currentReference.activeReference + offset ];
-	}
-
-	return null;
-};
-
 const KeyboardShortcuts = React.memo( () => {
-	const searchResults = useSelector( ( state ) => state.searchResults );
-	const currentReference = useSelector( ( state ) => state.currentReference );
+	const currentListItem = useSelector( state => state.list.filter( ( { current } ) => typeof current !== 'undefined' ) ).shift();
 	const reference = useSelector( ( state ) => state.reference );
-	const nextReference = getCurrentReferenceOffset( searchResults, currentReference, 1 );
-	const previousReference = getCurrentReferenceOffset( searchResults, currentReference, -1 );
 
 	const dispatch = useDispatch();
-
-	const goToNextCurrentVerseHandler = () => {
-		if ( nextReference ) {
-			goToReference( getReferenceFromSearchResult( nextReference ) );
-			dispatch( goToNextCurrentVerse() );
-		}
-	};
-
-	const goToPreviousCurrentVerseHandler = () => {
-		if ( previousReference ) {
-			goToReference( getReferenceFromSearchResult( previousReference ) );
-			dispatch( goToPreviousCurrentVerse() );
-		}
-	};
 
 	const goToChapter = ( event, combo ) => {
 		const currentTimeStamp = Math.floor( event.timeStamp ),
@@ -78,8 +47,18 @@ const KeyboardShortcuts = React.memo( () => {
 	};
 
 	useEffect( () => {
-		mousetrap.bind( [ '=' ], () => goToNextCurrentVerseHandler() );
-		mousetrap.bind( [ '-' ], () => goToPreviousCurrentVerseHandler() );
+		mousetrap.bind( [ '=' ], () => {
+			if ( currentListItem && currentListItem.current < currentListItem.results.length - 1 ) {
+				goToReference( getReferenceFromSearchResult( currentListItem.results[ currentListItem.current + 1 ] ) );
+				dispatch( setCurrentListResult( currentListItem.id, currentListItem.current + 1 ) );
+			}
+		} );
+		mousetrap.bind( [ '-' ], () => {
+			if ( currentListItem  && currentListItem.current > 0) {
+				goToReference( getReferenceFromSearchResult( currentListItem.results[ currentListItem.current - 1 ] ) );
+				dispatch( setCurrentListResult( currentListItem.id, currentListItem.current - 1 ) );
+			}
+		} );
 		mousetrap.bind( [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ], ( event, combo ) => goToChapter( event, combo ) );
 		mousetrap.bind( ['alt+1','alt+2','alt+3','alt+4','alt+5','alt+6'], ( event, combo ) => openTray( event, combo ) );
 	} );

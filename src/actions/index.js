@@ -1,5 +1,4 @@
 var cache = 'javascripture.22.0.1609079226';
-
 import xhr from 'xhr';
 import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
 
@@ -39,7 +38,7 @@ export const showCrossReferences = ( reference ) => {
 	}
 }
 
-export const findSimilarReferences = ( reference ) => {
+export const findSimilarReferences = ( reference, listItem ) => {
 	return function( dispatch, getState ) {
 		const searchParameters = {
 			clusivity: 'inclusive',
@@ -70,28 +69,15 @@ function postMessageToWorker( task, parameters, state ) {
 	} );
 }
 
-export const addWord = ( { strongsNumber, open, morphology, version, clickedWord } ) => {
+export const addWord = ( word ) => {
 	return function( dispatch, getState ) {
-		const searchParameters = {
-			clusivity: 'exclusive',
-			version: version,
-			lemma: strongsNumber,
-			range: 'verse',
-			clickedWord: clickedWord,
-		};
+		word.data.clusivity = 'exclusive';
+		word.data.range = 'verse';
+		delete( word.data.morphology );
 
 		// Send data to our worker.
-		postMessageToWorker( 'search', searchParameters, getState() );
-
-		dispatch( {
-			strongsNumber,
-			subdue: getState().settings.subdue,
-			open,
-			morphology,
-			version,
-			clickedWord,
-			type: 'ADD_WORD',
-		} );
+		postMessageToWorker( 'search', word.data, getState() );
+		dispatch( addToList( word ) );
 	}
 }
 
@@ -132,12 +118,12 @@ export const addSearch = ( terms, target ) => {
 		// Send data to our worker.
 		postMessageToWorker( target, terms, getState() );
 
-		dispatch( {
-			open: true,
-			target,
-			terms,
-			type: 'ADD_SEARCH'
-		} );
+		const searchItem = {
+			listType: 'search',
+			data: terms,
+			visible: true,
+		}
+		dispatch( addToList( searchItem ) );
 	}
 }
 
@@ -373,11 +359,14 @@ export const selectWord = ( props ) => {
 				}
 
 				dispatch( addWord( {
-					strongsNumber,
-					open: true,
-					morphology: morph,
-					version: version,
-					clickedWord: word,
+					listType: 'word',
+					data: {
+						lemma: strongsNumber,
+						morphology: morph,
+						version: version,
+						clickedWord: word,
+					},
+					visible: true,
 				} ) );
 			} );
 		}
@@ -412,3 +401,11 @@ export const toggleListItemVisible = ( item ) => {
 		item: item,
 	}
 };
+
+export const setCurrentListResult = ( id, index ) => {
+	return {
+		id,
+		index,
+		type: 'SET_CURRENT_LIST_RESULT'
+	}
+}

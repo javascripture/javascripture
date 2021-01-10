@@ -11,11 +11,13 @@ import stripPointing from '../../lib/strip-pointing.js';
 import styles from './styles.scss';
 import { getFamily } from '../../lib/word';
 import WordBlockLink from './word-block-link';
+import SearchLink from '../search/search-link';
+import { getReferenceFromSearchResult } from '../../lib/reference.js'
 
 const strongs = javascripture.data.strongsDictionary;
 const strongsWithFamilies = javascripture.data.strongsObjectWithFamilies;
 
-const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version } ) => {
+const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version, word } ) => {
 	const dispatch = useDispatch();
 	const expandedSearchResults = useSelector( state => state.settings.expandedSearchResults );
 	const getBranchesData = () => {
@@ -84,6 +86,16 @@ const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version 
 	};
 
 	const wordDetail = strongs[ strongsNumber ];
+	const results = word.results && word.results.map( ( result, index ) => {
+		const resultArray = result.split( '.' );
+		const reference = {
+			book: resultArray[ 0 ],
+			chapter: resultArray[ 1 ],
+			verse: resultArray[ 2 ],
+		};
+
+		return <SearchLink key={ index } index={ index } reference={ getReferenceFromSearchResult( result ) } word={ word } />;
+	} );
 
 	return (
 		<div>
@@ -114,6 +126,9 @@ const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version 
 			</div>
 			<br />
 			<strong>Found in</strong> { expandedSearchResults ? ( <a className={ styles.foundInExtra } onClick={ collapseSearchResults }>collapse</a> ) : ( <a className={ styles.foundInExtra } onClick={ expandSearchResults }>expand</a> ) }
+			{ results && (
+				<ol className={ styles.results }>{ results }</ol>
+			) }
 		</div>
 	)
 } );

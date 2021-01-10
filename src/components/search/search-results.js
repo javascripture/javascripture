@@ -7,31 +7,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import Collapsible from '../collapsible';
 import SearchBlock from './search-block';
 import styles from './styles.scss';
-import {
-	toggleSearch,
-	removeSearch,
-} from '../../actions'
+import { removeFromList, toggleListItemVisible } from '../../actions';
 
 const SearchResults = () => {
 	const dispatch = useDispatch();
-	const searchTerms = useSelector( state => state.searchTerms );
+	const searchTerms = useSelector( state => state.list.filter( ( { listType } ) => listType === 'search' ) );
 	const termTitle = ( { clusivity, version, lemma, morph, range, strict, word } ) => {
 		return 'word: ' + word + '\nstrongs number: ' + lemma + '\nmorphology: ' + morph + '\nversion: ' + version + '\nclusivity: ' + clusivity + '\nrange: ' + range + '\nstrict: ' + strict;
 	};
 	const textToCopy = useRef( null );
 
 	return searchTerms.map( ( searchTerm, index ) => {
-		const header = searchTerm.terms.word + ' ' + searchTerm.terms.lemma + ' ' + searchTerm.terms.morph;
+		const header = searchTerm.data.word + ' ' + searchTerm.data.lemma + ' ' + searchTerm.data.morph;
 
 		return (
 			<Collapsible
-				title={ termTitle( searchTerm.terms ) }
+				title={ termTitle( searchTerm.data ) }
 				key={ index }
 				header={ header }
-				open={ searchTerm.open }
-				onToggle={ () => dispatch( toggleSearch( searchTerm.terms ) ) }
+				open={ searchTerm.visible }
 				textToCopy={ textToCopy }
-				onRemove={ () => dispatch( removeSearch( searchTerm.terms ) ) }
+				onToggle={ () => dispatch( toggleListItemVisible( searchTerm ) ) }
+				onRemove={ () => dispatch( removeFromList( searchTerm ) ) }
 			>
 				<div ref={ textToCopy }>
 					<SearchBlock { ...searchTerm } />

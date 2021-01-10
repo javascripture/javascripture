@@ -11,7 +11,7 @@ import ReferenceText from '../reference-text';
 const ReferenceLink = ( { reference, number } ) => {
 	return (
 		<a href={ '/#' + createReferenceLink( reference ) } onClick={ ( event ) => event.stopPropagation() }>
-			{ ( number && number + 1 + '.' ) } <ReferenceText reference={ reference } />
+			{ typeof number !== 'undefined' && ( parseInt( number ) + 1 + '.' ) } <ReferenceText reference={ reference } />
 		</a>
 	);
 };

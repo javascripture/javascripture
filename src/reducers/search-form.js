@@ -21,7 +21,7 @@ const searchForm = ( state = initialState, action ) => {
 			appendedSearchForm[ action.name ] = ( appendedSearchForm[ action.name ] + ' ' + action.value ).trimStart();
 			return appendedSearchForm;
 
-		case 'CLEAR_SEARCH_FORM': 
+		case 'CLEAR_SEARCH_FORM':
 			return { ...initialState };
 
 		default:

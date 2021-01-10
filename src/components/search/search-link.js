@@ -5,27 +5,18 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
-import { setCurrentVerse } from '../../actions';
+import { setCurrentListResult } from '../../actions';
 import Verse from '../reference/verse';
 import styles from './styles.scss';
 import { createReferenceLink, getVerseData } from '../../lib/reference.js';
 import ReferenceText from '../reference-text';
 
-function isLinkActive( currentReference, index, terms ) {
-	if( terms === currentReference.terms && currentReference.activeReference === index ) {
-		return true;
-	}
-
-	return false;
-}
-
-const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
+const SearchLink = React.memo( ( { reference, index, count, word } ) => {
 	// State constants
-	const isActive = useSelector( state => isLinkActive( state.currentReference, index, terms ) );
 	const expandedSearchResults = useSelector( state => state.settings.expandedSearchResults );
 	const highlightSearchResults = useSelector( state => state.settings.highlightSearchResults );
 	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
-	const data = useSelector( state => state.data );
+	const isActive = word && typeof word.current !== 'undefined' && word.current === index;
 	const dispatch = useDispatch();
 
 	// Component constants
@@ -62,7 +53,7 @@ const SearchLink = React.memo( ( { reference, index, count, terms } ) => {
 		<li className={ className }>
 			<a href={ '/#' + createReferenceLink( reference ) }
 				className={ styles.searchLink }
-				onClick={ () => dispatch( setCurrentVerse( terms, index ) ) }
+				onClick={ () => dispatch( setCurrentListResult( word.id, index ) ) }
 				onMouseOver={ highlightWords }
 				onMouseOut={ unHighlighWords }
 			>

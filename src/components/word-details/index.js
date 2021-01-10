@@ -9,21 +9,17 @@ import CombinedResults from './combined';
 import WordBlock from './word-block';
 
 const WordDetails = React.memo( () => {
-	const words = useSelector( ( state ) => state.wordDetails );
-	if ( words.length ) {
-		return (
-			<div>
-				{ words.map( ( wordDetails, index ) => {
-					return (
-						<WordBlock { ...wordDetails } key={ index } />
-					);
-				} ) }
-				<CombinedResults />
-			</div>
-		);
-	}
-
-	return ( <div className={ styles.wordBlock }>Select a word to show more details about it here.</div> );
+	const words = useSelector( state => state.list.filter( ( { listType } ) => listType === 'word' ) );
+	return words.length ? (
+		<div>
+			{ words.map( ( word, index ) => {
+				return (
+					<WordBlock { ...word } key={ index } />
+				);
+			} ) }
+			<CombinedResults />
+		</div>
+	) : <div className={ styles.wordBlock }>Select a word to show more details about it here.</div>;
 
 } );
 

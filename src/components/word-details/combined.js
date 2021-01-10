@@ -8,25 +8,15 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Collapsible from '../collapsible';
 import SearchLink from '../search/search-link';
 import { getReferenceFromSearchResult } from '../../lib/reference.js'
-import { getSearchResults } from '../search/utils.js';
 import styles from './styles.scss';
 
 const CombinedResults = React.memo( () => {
 	const [ open, setOpen ] = useState( false );
-	const words = useSelector( ( state ) => state.wordDetails );
-	const searchResults = useSelector( ( state ) => state.searchResults );
+	const words = useSelector( state => state.list.filter( ( { listType } ) => listType === 'word' ) );
 	if ( words.length ) {
 		let combined = [];
-		words.forEach( ( wordDetails, index ) => {
-			const { version, strongsNumber, clickedWord } = wordDetails
-			const params = {
-				clusivity: 'exclusive',
-				version: version,
-				lemma: strongsNumber,
-				range: 'verse',
-				clickedWord,
-			};
-			const results = getSearchResults( searchResults, params );
+		words.forEach( ( word ) => {
+			const results = word.results;
 			const uniqueResults = [ ...new Set( results ) ];
 			combined = combined.concat( uniqueResults );
 		} );

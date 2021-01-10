@@ -19,8 +19,8 @@ import PickerSvg from '../svg/picker.js';
 import styles from './styles.scss';
 import SearchResults from './search-results';
 
-const isSimpleLemmaSearch = ( { lemma, word, morph, clusivity, range } ) => {
-	return lemma && lemma.indexOf( ' ' ) < 1 && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
+const isSimpleLemmaSearch = ( { strongsNumber, word, morph, clusivity, range } ) => {
+	return strongsNumber && strongsNumber.indexOf( ' ' ) < 1 && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
 };
 
 const Search = React.memo( () => {
@@ -108,9 +108,9 @@ const Search = React.memo( () => {
 				{ searchAdvanced && (
 					<div>
 						<fieldset>
-							<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
-							<input className={ styles.hasPicker } type="text" name="lemma" placeholder="Strongs number" onChange={ change } value={ searchForm.lemma } />
-							{ pickerButton( 'lemma' ) }
+							<label htmlFor="strongsNumber" className="has-placeholder">Strongs number</label>
+							<input className={ styles.hasPicker } type="text" name="strongsNumber" placeholder="Strongs number" onChange={ change } value={ searchForm.strongsNumber } />
+							{ pickerButton( 'strongsNumber' ) }
 						</fieldset>
 						<fieldset>
 							<label htmlFor="morph" className="has-placeholder">Morphology</label>

@@ -4,7 +4,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './styles.scss';
-import { addWord } from '../../actions';
+import { selectWord } from '../../actions';
 
 const WordBlockLink = React.memo( ( { strongsNumber, version } ) => {
 	const subdue = useSelector( state => state.settings.subdue );
@@ -23,11 +23,8 @@ const WordBlockLink = React.memo( ( { strongsNumber, version } ) => {
 	};
 
 	const searchForWord = ( strongsNumber ) => {
-		dispatch( addWord( {
-			strongsNumber,
-			subdue,
-			open: true,
-			morphology: null,
+		dispatch( selectWord( {
+			lemma: strongsNumber,
 			version,
 		} ) );
 	};
