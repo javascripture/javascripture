@@ -19,8 +19,8 @@ import PickerSvg from '../svg/picker.js';
 import styles from './styles.scss';
 import SearchResults from './search-results';
 
-const isSimpleLemmaSearch = ( { strongsNumber, word, morph, clusivity, range } ) => {
-	return strongsNumber && strongsNumber.indexOf( ' ' ) < 1 && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
+const isSimpleLemmaSearch = ( { lemma, word, morph, clusivity, range } ) => {
+	return lemma && lemma.indexOf( ' ' ) < 1 && ! word && ! morph && clusivity === 'exclusive' && range === 'verse';
 };
 
 const Search = React.memo( () => {
@@ -29,6 +29,7 @@ const Search = React.memo( () => {
 	const searchForm = useSelector( state => state.searchForm );
 	const versions = bible.Data.supportedVersions;
 	const data = useSelector( state => state.data );
+	const trays = useSelector( state => state.trays );
 	const dispatch = useDispatch();
 	javascripture.reactHelpers.dispatch = dispatch;
 
@@ -95,7 +96,7 @@ const Search = React.memo( () => {
 	let textInput = null;
 	useEffect( () => {
 		textInput.focus();
-	} );
+	}, [ trays ] );
 
 	return (
 		<div>
@@ -108,9 +109,9 @@ const Search = React.memo( () => {
 				{ searchAdvanced && (
 					<div>
 						<fieldset>
-							<label htmlFor="strongsNumber" className="has-placeholder">Strongs number</label>
-							<input className={ styles.hasPicker } type="text" name="strongsNumber" placeholder="Strongs number" onChange={ change } value={ searchForm.strongsNumber } />
-							{ pickerButton( 'strongsNumber' ) }
+							<label htmlFor="lemma" className="has-placeholder">Strongs number</label>
+							<input className={ styles.hasPicker } type="text" name="lemma" placeholder="Strongs number" onChange={ change } value={ searchForm.lemma } />
+							{ pickerButton( 'lemma' ) }
 						</fieldset>
 						<fieldset>
 							<label htmlFor="morph" className="has-placeholder">Morphology</label>

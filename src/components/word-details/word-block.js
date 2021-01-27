@@ -7,7 +7,6 @@ import stripPointing from '../../lib/strip-pointing.js';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
-import SearchBlock from '../search/search-block.js';
 import { getHighlight } from '../strongs-color.js';
 import styles from './styles.scss';
 import WordBlockDetails from './word-block-details';
@@ -69,7 +68,6 @@ const WordBlock = React.memo( ( props ) => {
 					<div className={ classnames( styles.wordBlock, visible ? styles.visible : styles.hidden ) }>
 						<WordBlockDetails morphologyProp={ morphology } strongsNumber={ lemma } version={ version } word={ props } />
 					</div>
-					<SearchBlock { ...props } terms={ getSearchParameters() } />
 				</div>
 			</Collapsible>
 		);

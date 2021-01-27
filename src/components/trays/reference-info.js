@@ -1,13 +1,12 @@
 // External dependencies
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
-import { getLemmasForReference, compareTwoReferences, calculateRareWords, calculateCommonWords, calculateConnectionQuality } from '../../lib/reference';
+import { compareTwoReferences, calculateRareWords, calculateCommonWords, calculateConnectionQuality } from '../../lib/reference';
 import {
-	addWord,
+	selectWord,
 	setReferenceInfo,
 	setReferenceInfoCompareWith,
 	setReferenceInfoLimit,
@@ -225,10 +224,8 @@ const mapDispatchToProps = ( dispatch, ownProps ) => {
 	return {
 		addWord: ( lemma ) => {
 			dispatch( setTrayVisibilityFilter( 'word' ) );
-			dispatch( addWord( {
-				strongsNumber: lemma,
-				subdue: null,
-				open: true,
+			dispatch( selectWord( {
+				lemma,
 				version: 'original',
 			} ) );
 		},

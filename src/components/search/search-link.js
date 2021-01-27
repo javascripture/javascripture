@@ -53,7 +53,11 @@ const SearchLink = React.memo( ( { reference, index, count, word } ) => {
 		<li className={ className }>
 			<a href={ '/#' + createReferenceLink( reference ) }
 				className={ styles.searchLink }
-				onClick={ () => dispatch( setCurrentListResult( word.id, index ) ) }
+				onClick={ () => {
+					if ( word ) {
+						dispatch( setCurrentListResult( word.id, index ) );
+					}
+				} }
 				onMouseOver={ highlightWords }
 				onMouseOut={ unHighlighWords }
 			>
