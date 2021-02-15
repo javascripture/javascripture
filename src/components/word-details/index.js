@@ -19,7 +19,7 @@ const WordDetails = React.memo( () => {
 			} ) }
 			<CombinedResults />
 		</div>
-	) : <div className={ styles.wordBlock }>Select a word to show more details about it here.</div>;
+	) : <div className={ styles.wordBlockHelp }>Select a word to show more details about it here.</div>;
 
 } );
 
