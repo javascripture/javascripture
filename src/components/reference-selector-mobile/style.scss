@@ -30,7 +30,6 @@
 	box-shadow: 0 3px 6px 0 rgba( 0, 0, 0, .3 );
 	overflow: auto;
 	overflow-x: hidden;
-	text-align: left;
 	position: fixed;
 	top: $dock-height;
 	left: calc( 50% - 320px / 2 );
@@ -44,6 +43,13 @@
 	}
 }
 
+.isRTL {
+	@media ( min-width: 768px ) {
+		left: auto;
+		right: 0;
+	}
+}
+
 .chapter-name {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -53,7 +59,6 @@
 }
 
 .chapterBlocks {
-	text-align: left;
 	a {
 		cursor: pointer;
 		display: inline-block;

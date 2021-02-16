@@ -1,6 +1,6 @@
 // External dependencies
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import { removeFromList, toggleListItemVisible } from '../../actions';
@@ -30,6 +30,7 @@ const getReferenceFromCrossReference = ( referenceString ) => {
 };
 
 const Single = ( { bookmark, index } ) => {
+	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const bookmarkRef = useRef();
 	const dispatch = useDispatch();
 	const { data: { reference } } = bookmark;
@@ -55,19 +56,21 @@ const Single = ( { bookmark, index } ) => {
 		>
 			<div ref={ bookmarkRef }>
 				{ crossReferences.length > 0 ? 'Cross references:' : 'No cross references' }
-				{ crossReferences.map( ( crossReference, index2 ) => {
-					const referenceSections = crossReference.split('-');
-					const referenceArrays = referenceSections.map( ( referenceSection ) => getReferenceFromCrossReference( referenceSection ) );
+				<div dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
+					{ crossReferences.map( ( crossReference, index2 ) => {
+						const referenceSections = crossReference.split('-');
+						const referenceArrays = referenceSections.map( ( referenceSection ) => getReferenceFromCrossReference( referenceSection ) );
 
-					return (
-						<div key={ index2 }>
-							<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
-								{ index2 + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
-								{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
-							</a>
-						</div>
-					);
-				} ) }
+						return (
+							<div key={ index2 }>
+								<a href={ '#' + createReferenceLink( referenceArrays[ 0 ] ) }>
+									{ index2 + 1 }. <ReferenceText reference={ referenceArrays[ 0 ] } />
+									{ referenceArrays[ 1 ] && ( <span> - <ReferenceText reference={ referenceArrays[ 1 ] } /></span> ) }
+								</a>
+							</div>
+						);
+					} ) }
+				</div>
 			</div>
 		</Collapsible>
 	);

@@ -9,16 +9,6 @@ import VerseNumber from './verse-number';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-const getVerseWrapperStyle = ( book, version ) => {
-	if ( bible.isRtlVersion( version, book ) ) {
-		return {
-			direction: 'rtl'
-		};
-	}
-
-	return {};
-};
-
 const getClassName = ( book, version ) => {
 	if ( ( version === 'original' || version === 'accented' ) && bible.Data.otBooks.indexOf( book ) > -1 ) {
 		return classnames( styles.verse, styles.hebrew );
@@ -35,7 +25,7 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 	const verseWrapperRef = useRef( null );
 	const reference = { book, chapter: chapter - 1, verse: index };
 	return (
-		<div className={ styles.verseWrapper } style={ getVerseWrapperStyle( book, version ) } ref={ verseWrapperRef }>
+		<div className={ styles.verseWrapper } dir={ bible.isRtlVersion( version, book ) ? 'rtl' : 'ltr' } ref={ verseWrapperRef }>
 			<div className={ styles.helpers }>
 				<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
 				<span className={ styles.hidden }>

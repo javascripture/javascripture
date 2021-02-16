@@ -20,6 +20,7 @@ const strongsWithFamilies = javascripture.data.strongsObjectWithFamilies;
 const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version, word } ) => {
 	const dispatch = useDispatch();
 	const expandedSearchResults = useSelector( state => state.settings.expandedSearchResults );
+	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const getBranchesData = () => {
 		return map( javascripture.data.strongsObjectWithFamilies, ( strongsObjectData, strongsObjectNumber ) => {
 			if ( strongsObjectData.roots && strongsObjectData.roots.indexOf( strongsNumber ) > -1 ) {
@@ -127,7 +128,9 @@ const WordBlockDetails = React.memo( ( { morphologyProp, strongsNumber, version,
 			<br />
 			<strong>Found in</strong> { expandedSearchResults ? ( <a className={ styles.foundInExtra } onClick={ collapseSearchResults }>collapse</a> ) : ( <a className={ styles.foundInExtra } onClick={ expandSearchResults }>expand</a> ) }
 			{ results && (
-				<ol className={ styles.results }>{ results }</ol>
+				<ol className={ styles.results } dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
+					{ results }
+				</ol>
 			) }
 		</div>
 	)

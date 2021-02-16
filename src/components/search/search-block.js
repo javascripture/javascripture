@@ -2,6 +2,7 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { countBy, sortBy } from 'lodash';
+import { useSelector } from 'react-redux';
 
 // Internal dependencies
 import SearchLink from './search-link';
@@ -9,6 +10,7 @@ import { getReferenceFromSearchResult } from '../../lib/reference.js';
 import styles from './styles.scss';
 
 const SearchBlock = React.memo( ( props ) => {
+	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	const { visible, sorted, terms, results } = props;
 	if ( ! results ) {
 		return ( <div className={ styles.noResults }>Loading…</div> );
@@ -36,7 +38,7 @@ const SearchBlock = React.memo( ( props ) => {
 	}
 
 	return (
-		<div className={ visible ? styles.open : styles.hidden }>
+		<div className={ visible ? styles.open : styles.hidden } dir={ bible.isRtlVersion( interfaceLanguage ) ? 'rtl' : 'ltr' }>
 			<ol className={ styles.results }>
 				{ renderedResults }
 			</ol>

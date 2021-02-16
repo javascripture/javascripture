@@ -1,11 +1,9 @@
 // External
+import classnames from 'classnames';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
-import BookSVG from '../svg/book.js';
 import { createReferenceLink } from '../../lib/reference.js';
 import { closeReferenceSelectorMobile, toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -15,7 +13,6 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 	const dispatch = useDispatch();
 	const inSync = useSelector( state => state.settings.inSync );
-	const references = useSelector( state => state.references );
 	const open = useSelector( state => state.referenceSelectorMobile[ index ].open );
 	const bookIndex = useSelector( state => state.referenceSelectorMobile[ index ].bookIndex );
 	const bookName = useSelector( state => state.referenceSelectorMobile[ index ].bookName );
@@ -118,10 +115,15 @@ const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 	};
 
 	// <button type="button" className={ open ? styles.openButton : styles.button } onClick={ ( event ) => toggleList( event ) }><BookSVG /></button>
+	const isRTL = bible.isRtlVersion( version );
+	const classes = classnames(
+		styles.chapterSelector,
+		isRTL ? styles.isRTL : ''
+	);
 
 	return (
 		<span className={ styles.referenceSelectorMobile }>
-			{ open && <div className={ styles.chapterSelector }>
+			{ open && <div className={ classes }>
 				{ ! bookName && renderBookList() }
 				{ bookName && renderChapterList() }
 			</div> }

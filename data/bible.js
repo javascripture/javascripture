@@ -431,7 +431,7 @@ bible.isRtlVersion = function( version, book ) {
 		return true;
 	}
 
-	if ( versionLanguage === 'original' && bible.Data.otBooks.indexOf( book ) > -1 ) {
+	if ( versionLanguage === 'original' && book && bible.Data.otBooks.indexOf( book ) > -1 ) {
 		return true;
 	}
 };
