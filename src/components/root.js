@@ -23,7 +23,7 @@ const Root = React.memo( ( { highlightedWord } ) => {
 		const fontFamily = useSelector( state => state.settings.fontFamily );
 		const fontSize = useSelector( state => state.settings.fontSize );
 
-		var bodyStyles = 'body { ';
+		var bodyStyles = 'body, .root { ';
 		bodyStyles += 'font-family: ' + fontFamily + ';';
 		bodyStyles += 'font-size: ' + fontSize + ';';
 		bodyStyles += '}';
