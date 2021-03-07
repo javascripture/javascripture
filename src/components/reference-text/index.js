@@ -1,7 +1,8 @@
 // External
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const ReferenceText = ( { reference, interfaceLanguage } ) => {
+const ReferenceText = ( { reference } ) => {
+	const interfaceLanguage = useSelector( state => state.settings.interfaceLanguage );
 	let text = bible.getTranslatedBookName( reference.book, interfaceLanguage );
 	if ( reference.chapter ) {
 		text +=  ' ' + reference.chapter;
@@ -13,12 +14,5 @@ const ReferenceText = ( { reference, interfaceLanguage } ) => {
 	return text;
 };
 
-const mapStateToProps = ( state, ownProps ) => {
-	return {
-		interfaceLanguage: state.settings.interfaceLanguage,
-	};
-};
 
-export default connect(
-	mapStateToProps,
-)( ReferenceText )
+export default ReferenceText;
