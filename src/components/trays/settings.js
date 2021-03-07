@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
 import { settingsChange } from '../../actions';
+import VersionSelect from '../version-select';
 import styles from './styles.scss';
 
 
@@ -129,11 +130,7 @@ const SettingsTray = React.memo( () => {
 								</li>
 								<li className={ styles.settingsLi }>
 									<label>Interface language:</label>
-									<select value={ settings.interfaceLanguage } name="interfaceLanguage" onChange={ changeSetting } >
-										{ Object.keys( bible.Data.interfaceLanguages ).map( key => {
-											return <option value={ key } key={ key }>{ bible.Data.interfaceLanguages[ key ] }</option>
-										} ) }
-									</select>
+									<VersionSelect value={ settings.interfaceLanguage } name="interfaceLanguage" onChange={ changeSetting } />
 								</li>
 							</ul>
 						</form>
@@ -146,14 +143,12 @@ const SettingsTray = React.memo( () => {
 				<br />
 				<br />
 				<p>Built in Firefox. Tested in Chrome.</p>
-				<p>
-					<a href="https://github.com/morphgnt/tischendorf">Greek text: Tischendorf</a><br />
-					<a href="https://github.com/openscriptures/morphhb">Hebrew text source</a><br />
-					<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">Literal: A work in progress</a><br />
-					ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
-					<p><br />Version: { typeof( javascripture.sw ) !== 'undefined' ? javascripture.sw : null }</p>
-					<p><a href="#" onClick={ clear }>Clear settings and start over</a></p>
-				</p>
+				<a href="https://github.com/morphgnt/tischendorf">Greek text: Tischendorf</a><br />
+				<a href="https://github.com/openscriptures/morphhb">Hebrew text source</a><br />
+				<a href="https://github.com/javascripture/javascripture/blob/gh-pages/data/literalConsistent.js">Literal: A work in progress</a><br />
+				ESV: The Holy Bible, English Standard Version ©2011 Crossway Bibles, a division of Good News Publishers. All rights reserved.<br />
+				<p><br />Version: { typeof( javascripture.sw ) !== 'undefined' ? javascripture.sw : null }</p>
+				<p><a href="#" onClick={ clear }>Clear settings and start over</a></p>
 			</div>
 		</div>
 	);

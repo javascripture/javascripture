@@ -7,12 +7,12 @@ import styles from './styles.scss';
 import SidebarControls from './sidebar-controls';
 import Footer from '../footer';
 
-const Trays = ( { children } ) => (
+const Trays = React.memo( ( { children } ) => (
 	<div className={ styles.trays }>
 		<SidebarControls />
 		{ children }
 		<Footer />
 	</div>
-)
+) );
 
 export default withStyles( styles )( Trays );

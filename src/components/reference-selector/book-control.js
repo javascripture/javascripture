@@ -1,6 +1,6 @@
 // External
 import React, { useState, useRef } from 'react';
-import { browserHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -9,13 +9,14 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import ReferenceText from '../reference-text';
 import styles from './styles.scss';
 
-const BookControl = React.memo( ( { chapters, goToReference, name } ) => {
+const BookControl = React.memo( ( { chapters, name } ) => {
+	const dispatch = useDispatch();
 	const [ chapter, setChapter ] = useState( 1 );
 	const [ touched, setTouched ] = useState( false );
 	const [ touchChapter, setTouchChapter ] = useState( false );
 	const referenceSelector = useRef( null );
 	const handleGoToReference = () => {
-		goToReference( '/#/' + name + '/' + chapter + '/1/' );
+		dispatch( push( '/#/' + name + '/' + chapter + '/1/' ) );
 	};
 
 	const handleMouseMove = ( event ) => {
@@ -73,15 +74,4 @@ const BookControl = React.memo( ( { chapters, goToReference, name } ) => {
 	);
 } );
 
-const mapDispatchToProps = ( dispatch ) => {
-	return {
-		goToReference: ( path ) => {
-			dispatch( push( path ) );
-		}
-	}
-};
-
-export default connect(
-	null,
-	mapDispatchToProps
-)( withStyles( styles )( BookControl ) );
+export default withStyles( styles )( BookControl );

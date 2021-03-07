@@ -5,6 +5,7 @@ const initialState = [];
 const list = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'ADD_TO_LIST':
+
 			const findInState = state.filter( item => isEqual( item.data, action.item.data ) );
 			if ( findInState.length > 0 ) {
 				return [
@@ -15,6 +16,8 @@ const list = ( state = initialState, action ) => {
 				];
 			}
 
+			const id = state.length;
+			console.log( id );
 			return [
 				...state.map( item => {
 					if ( item.listType === action.item.listType ) {
@@ -22,7 +25,7 @@ const list = ( state = initialState, action ) => {
 					}
 					return item;
 				} ),
-				{ ...action.item, id: state.length }
+				{ ...action.item, id }
 			]
 		case 'REMOVE_FROM_LIST':
 			return [
