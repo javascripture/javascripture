@@ -1,6 +1,6 @@
 // External dependencies
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
@@ -14,6 +14,83 @@ import {
 } from '../../actions';
 
 import styles from './styles.scss';
+
+const ReferenceInfoInner = React.memo( ( props ) => {
+	const dispatch = useDispatch();
+	const overlap = useSelector( state => compareTwoReferences( state ) );
+	const rare = useSelector( state => calculateRareWords( state ) );
+	const common = useSelector( state => calculateCommonWords( state ) );
+	const addAllWords = () => {
+		overlap.forEach( lemma => {
+			dispatch( setTrayVisibilityFilter( 'word' ) );
+			dispatch( selectWord( {
+				lemma,
+				version: 'original',
+			} ) );
+		} );
+	};
+
+	const getWord = ( lemma ) => {
+		return (
+			<div>
+				{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit }
+			</div>
+		);
+	}
+
+	const getOverlap = () => {
+		if ( ! overlap ) {
+			return;
+		}
+
+		if ( overlap.length === 0 ) {
+			return 'No connections found';
+		}
+
+		const overlapMarkup = overlap.map( lemma => <div key={ lemma }>{ getWord( lemma ) }</div> )
+
+		return (
+			<div>
+				<span>Connections ({ overlap.length }):</span>
+				{ overlapMarkup }
+			</div>
+		)
+	}
+
+	const getCommonWords = () => {
+		if ( ! common ) {
+			return null;
+		}
+
+		if ( common.length === 0 ) {
+			return 'No common words found';
+		}
+
+		return Object.keys( common ).map( lemma => {
+			const significance = ( common[ lemma ] / javascripture.data.strongsObjectWithFamilies[ lemma ].count ).toFixed( 2 );
+			return (
+				<div key={ lemma }>
+					{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit } - <span title={ 'significance: ' + significance }>({ common[ lemma ] } times)</span>
+				</div>
+			);
+		} );
+	};
+	return (
+		<Fragment>
+			<div className={ styles.scrollingBlock }>
+				{ getOverlap() }
+			</div>
+			<div className={ styles.chapterTray }>
+				{ overlap && overlap.length > 0 && <button onClick={ addAllWords }>Select all words</button> }
+			</div>
+			<br />
+			<h2>All words</h2>
+			<div className={ styles.scrollingBlock }>
+				{ getCommonWords() }
+			</div>
+		</Fragment>
+	)
+} );
 
 class ReferenceInfo extends React.Component {
 	bookChange = ( event ) => {
@@ -84,30 +161,6 @@ class ReferenceInfo extends React.Component {
 		this.props.rare.forEach( lemma => this.props.addWord( lemma ) );
 	};
 
-	addAllWords = () => {
-		this.props.overlap.forEach( lemma => this.props.addWord( lemma ) );
-	};
-
-	getOverlap() {
-		if ( ! this.props.overlap ) {
-			return;
-		}
-
-		if ( this.props.overlap.length === 0 ) {
-			return 'No connections found';
-		}
-
-		const overlap = this.props.overlap.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> )
-//				<span>Connection quality: { this.props.connectionQuality }</span>
-
-		return (
-			<div>
-				<span>Connections ({ this.props.overlap.length }):</span>
-				{ overlap }
-			</div>
-		)
-	}
-
 	getRareWords() {
 		if ( ! this.props.rare ) {
 			return null;
@@ -120,27 +173,8 @@ class ReferenceInfo extends React.Component {
 		return this.props.rare.map( lemma => <div key={ lemma }>{ this.getWord( lemma ) }</div> );
 	}
 
-	getCommonWords() {
-		if ( ! this.props.common ) {
-			return null;
-		}
-
-		if ( this.props.common.length === 0 ) {
-			return 'No common words found';
-		}
-
-		return Object.keys( this.props.common ).map( lemma => {
-			const significance = ( this.props.common[ lemma ] / javascripture.data.strongsObjectWithFamilies[ lemma ].count ).toFixed( 2 );
-			return (
-				<div key={ lemma }>
-					{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit } - <span title={ 'significance: ' + significance }>({ this.props.common[ lemma ] } times)</span>
-				</div>
-			);
-		} );
-	}
-
 	getWord( lemma ) {
-		return(
+		return (
 			<div>
 				{ lemma } - { javascripture.data.strongsDictionary[ lemma ].lemma } - { javascripture.data.strongsDictionary[ lemma ].xlit }
 			</div>
@@ -189,17 +223,7 @@ class ReferenceInfo extends React.Component {
 				<div className={ styles.chapterTray }>
 					For words used less than <input type="number" name="limit" value={ this.props.limit } onChange={ this.changeLimit } className={ styles.limit } /> times.
 				</div>
-				<div className={ styles.scrollingBlock }>
-					{ this.getOverlap() }
-				</div>
-				<div className={ styles.chapterTray }>
-					{ this.props.overlap && this.props.overlap.length > 0 && <button onClick={ this.addAllWords }>Select all words</button> }
-				</div>
-				<br />
-				<h2>All words</h2>
-				<div className={ styles.scrollingBlock }>
-					{ this.getCommonWords() }
-				</div>
+				<ReferenceInfoInner />
 			</div>
 		);
 	}
