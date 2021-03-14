@@ -1,7 +1,6 @@
 // External
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
