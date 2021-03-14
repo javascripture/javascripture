@@ -7,6 +7,7 @@ import { mapVersionToData } from '../../lib/reference';
 import Word from './word';
 import styles from './styles.scss';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import deferComponentRender from '../deferComponentRender';
 
 const Verse = React.memo( ( { reference, version } ) => {
 	const dispatch = useDispatch();
@@ -56,4 +57,4 @@ const Verse = React.memo( ( { reference, version } ) => {
 	return words;
 } );
 
-export default withStyles( styles )( Verse );
+export default deferComponentRender( withStyles( styles )( Verse ) );
