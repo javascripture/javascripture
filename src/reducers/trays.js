@@ -42,6 +42,13 @@ const initalState = [
 		text: 'Compare',
 		component: 'ReferenceInfo',
 		icon: 'InfoSvg',
+	},
+	{
+		visible: false,
+		id: 'dailyreadings',
+		text: 'Daily Readings',
+		component: 'DailyReadings',
+		icon: 'CalendarSvg',
 	}
 ];
 

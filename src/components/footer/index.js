@@ -11,6 +11,7 @@ import HelpSvg from '../svg/help.js';
 import EyeSvg from '../svg/eye.js';
 import InfoSvg from '../svg/info.js';
 import SearchSvg from '../svg/search.js';
+import CalendarSvg from '../svg/calendar.js';
 import TrayFilter from '../../components/trays/filter.js';
 import MenuOpenSvg from '../svg/menu-open.js';
 import MenuCloseSvg from '../svg/menu-close.js';
@@ -38,6 +39,9 @@ const Footer = React.memo( () => {
 		</TrayFilter>
 		<TrayFilter filter="reference">
 			<InfoSvg />
+		</TrayFilter>
+		<TrayFilter filter="dailyreadings">
+			<CalendarSvg />
 		</TrayFilter>
 		<TrayFilter filter="settings">
 			<HelpSvg />

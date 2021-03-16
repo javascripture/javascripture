@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 // Internal
 import styles from './styles.scss';
 import Search from '../search';
+import DailyReadings from '../daily-readings';
 import BookmarksTray from './bookmarks';
 import SettingsTray from './settings';
 import ReferenceInfo from './reference-info';
@@ -23,6 +24,9 @@ function getComponent( componentString, visible ) {
 		case 'SearchTray':
 			return <Search visible={ visible } />
 
+		case 'DailyReadings':
+			return <DailyReadings visible={ visible } />
+
 		case 'BookmarksTray':
 			return <BookmarksTray visible={ visible } />
 
@@ -39,16 +43,18 @@ const TrayList = React.memo( () => {
 
 	return (
 		<div className={ styles.trayList }>
-			{ trays.map( tray =>
-				<div
-					key={ tray.id }
-					className={ tray.visible ? styles.visible : styles.hidden }
-				>
-					<div className={ styles.tray }>
-						{ getComponent( tray.component, tray.visible ) }
+			{ trays.map( tray => {
+				return (
+					<div
+						key={ tray.id }
+						className={ tray.visible ? styles.visible : styles.hidden }
+					>
+						<div className={ styles.tray }>
+							{ getComponent( tray.component, tray.visible ) }
+						</div>
 					</div>
-				</div>
-			) }
+				);
+			} ) }
 		</div>
 	);
 } );

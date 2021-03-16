@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import some from 'lodash/some';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies

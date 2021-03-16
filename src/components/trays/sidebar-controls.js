@@ -11,6 +11,7 @@ import SearchSvg from '../svg/search.js';
 import BookmarksSvg from '../svg/bookmarks.js';
 import HelpSvg from '../svg/help.js';
 import InfoSvg from '../svg/info.js';
+import CalendarSvg from '../svg/calendar.js';
 import styles from './styles.scss';
 import { mapVersionToData } from '../../lib/reference';
 import VersionSelect from '../version-select';
@@ -23,6 +24,7 @@ const icons = {
 	BookmarksSvg: <BookmarksSvg />,
 	HelpSvg: <HelpSvg />,
 	InfoSvg: <InfoSvg />,
+	CalendarSvg: <CalendarSvg />,
 };
 
 const SidebarControls = React.memo( () => {

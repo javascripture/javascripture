@@ -65,7 +65,7 @@
 	margin: 0;
 	padding: 14px 0;
 	text-align: center;
-	width: 16.66%;
+	width: calc(100% / 7);
 	height: $dock-height;
 
 	&:hover {
