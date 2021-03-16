@@ -1,4 +1,4 @@
-var cache = 'javascripture.22.0.1615198803';
+var cache = 'javascripture.22.0.1615932488';
 import xhr from 'xhr';
 import { createReferenceLink, getAllLemmasFromReference } from '../lib/reference.js';
 
