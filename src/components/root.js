@@ -10,7 +10,6 @@ import Dock from './dock';
 import ReferenceWrapper from '../components/reference-wrapper';
 import KeyboardShortcuts from './keyboard-shortcuts';
 import Trays from './trays';
-import TrayList from './trays/tray-list';
 import WordHighlight from './word-highlight';
 import styles from './root.scss';
 import { closeReferenceSelectorMobile, toggleSidebar } from '../actions'
@@ -37,9 +36,7 @@ const Root = React.memo( ( { highlightedWord } ) => {
 		<div className={ classnames( 'root', { 'dark-mode-on': darkMode === true, 'dark-mode-off': darkMode === false } ) }>
 			<Sidebar
 				sidebar={
-					<Trays>
-						<TrayList />
-					</Trays>
+					<Trays />
 				}
 				open={ sidebarOpen }
 				onSetOpen={ () => dispatch( toggleSidebar() ) }

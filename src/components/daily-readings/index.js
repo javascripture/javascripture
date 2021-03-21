@@ -16,7 +16,7 @@ const getMonths = () => {
 	let monthNumber = 0;
 	const months = [];
 	while( monthNumber < 12 ) {
-		months[ monthNumber ] = ( <option value={ monthNumber }>{ getMonthName( monthNumber ) }</option> );
+		months[ monthNumber ] = ( <option key={ monthNumber } value={ monthNumber }>{ getMonthName( monthNumber ) }</option> );
 		monthNumber++;
 	}
 	return months;
@@ -69,11 +69,11 @@ const DailyReadings = React.memo( () => {
 		);
 	}
 
-	const dailyReadingsList = javascripture.data.dailyReadings[ daysIntoYear - 1 ].Readings.map( reading => {
+	const dailyReadingsList = javascripture.data.dailyReadings[ daysIntoYear - 1 ].Readings.map( ( reading, key ) => {
 		return (
-			<li>
-				{ reading.Refs.map( oneRef => {
-					return ( <Fragment>{ getReferenceLink( oneRef ) }<br /></Fragment> );
+			<li key={ key }>
+				{ reading.Refs.map( ( oneRef, index ) => {
+					return ( <Fragment key={ index }>{ getReferenceLink( oneRef ) }<br /></Fragment> );
 				} ) }
 			</li>
 		);

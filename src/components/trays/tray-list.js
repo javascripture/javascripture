@@ -13,8 +13,8 @@ import ReferenceInfo from './reference-info';
 import ReferenceSelector from '../reference-selector';
 import WordDetails from '../word-details';
 
-function getComponent( componentString, visible ) {
-	switch ( componentString ) {
+function getComponent( ComponentString, visible ) {
+	switch ( ComponentString ) {
 		case 'WordTray':
 			return <WordDetails visible={ visible } />
 

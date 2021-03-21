@@ -5,12 +5,13 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 // Internal dependencies
 import styles from './styles.scss';
 import SidebarControls from './sidebar-controls';
+import TrayList from './tray-list';
 import Footer from '../footer';
 
-const Trays = React.memo( ( { children } ) => (
+const Trays = React.memo( () => (
 	<div className={ styles.trays }>
 		<SidebarControls />
-		{ children }
+		<TrayList />
 		<Footer />
 	</div>
 ) );
