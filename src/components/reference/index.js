@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setScrollChapter } from '../../actions';
 import Chapter from './chapter';
 import styles from './styles.scss';
-import deferComponentRender from '../deferComponentRender';
 
 let oldHeight = 0, scroller = null, isScrolling = false;
 
@@ -189,4 +188,4 @@ const Reference = React.memo( ( props ) => {
 	);
 } );
 
-export default deferComponentRender( withStyles( styles )( Reference ) );
+export default withStyles( styles )( Reference );
