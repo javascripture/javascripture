@@ -60,6 +60,8 @@ const DailyReadings = React.memo( () => {
 		if ( oneRef.Verses ) {
 			reference.verse = oneRef.Verses.split('-')[0];
 			referenceString += ':' + oneRef.Verses;
+		} else {
+			reference.verse = 1;
 		}
 
 		return (
