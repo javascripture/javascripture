@@ -29,21 +29,3 @@
 	display: inline-block;
 	margin-right: 15px;
 }
-
-
-// Duplicated from search block
-.results {
-	line-height: 1.4;
-	list-style: none;
-
-	a {
-		display: block;
-		padding-left: .5em;
-		text-decoration: none;
-
-		&:hover {
-			background: $hover;
-			color: black;
-		}
-	}
-}

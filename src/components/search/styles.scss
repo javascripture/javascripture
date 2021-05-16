@@ -29,30 +29,6 @@
 	top: 0;
 }
 
-.results {
-	line-height: 1.4;
-	list-style: none;
-
-	li {
-		padding: 0 0.5em;
-		margin: 0 -0.7em;
-
-		&:hover {
-			background: var(--color);
-			color: var(--hover);
-		}
-	}
-	a {
-		display: block;
-		text-decoration: none;
-
-		&:hover {
-			background: var(--color);
-			color: var(--hover);
-		}
-	}
-}
-
 .hidden {
 	height: 0;
 	overflow: hidden;

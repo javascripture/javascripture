@@ -51,6 +51,20 @@
 .content {
 	border-bottom: 1px solid #ccc;
 	overflow: hidden;
+
+	ol {
+		line-height: 1.4;
+		list-style: none;
+
+		a {
+			display: block;
+			text-decoration: none;
+
+			&:hover {
+				background: var(--hover);
+			}
+		}
+	}
 }
 
 .visible {
