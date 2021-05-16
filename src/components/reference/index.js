@@ -174,7 +174,7 @@ const Reference = React.memo( ( props ) => {
 						<Waypoint
 							onEnter={ ( event ) => handleWaypointEnter( event, book, chapter ) }
 							onLeave={ ( event ) => handleWaypointLeave( event, book, chapter ) }
-							topOffset={ 1 }
+							topOffset={ 65 } // This is the height of the dock
 						/>
 						<Chapter
 							book={ book }
