@@ -25,7 +25,6 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 	const verseWrapperRef = useRef( null );
 	const reference = { book, chapter: chapter - 1, verse: index };
 
-	console.log(isCurrentRef);
 	return (
 		<div className={ classnames( styles.verseWrapper, isCurrentRef ? styles.isCurrent : null ) } dir={ bible.isRtlVersion( version, book ) ? 'rtl' : 'ltr' } ref={ verseWrapperRef }>
 			<div className={ styles.helpers }>
