@@ -190,7 +190,12 @@
 							// There is a new service worker available, show the notification
 							if (navigator.serviceWorker.controller) {
 								let notification = document.getElementById('notification');
-								notification.style.display = 'block';
+
+								// notification.style.display = 'block';
+								if ( confirm('A new version of this app is available.') ) {
+									localStorage.clear();
+									newWorker.postMessage({ action: 'skipWaiting' });
+								}
 							}
 
 							break;

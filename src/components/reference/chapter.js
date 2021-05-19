@@ -78,7 +78,8 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 										chapter={ chapter }
 										verseNumber={ verseNumber + 1 }
 										index={ verseNumber }
-										key={ 'versewrapper' + index + verseNumber } />
+										key={ 'versewrapper' + index + verseNumber }
+										isCurrentRef={ !! isCurrentRef( verseNumber ) } />
 								);
 							} ) }
 						</div>
@@ -103,7 +104,8 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 								version={ version }
 								chapter={ chapter }
 								verseNumber={ verseNumber + 1 }
-								index={ verseNumber } />
+								index={ verseNumber }
+								isCurrentRef={ isCurrentRef( verseNumber ) } />
 						</div>
 					);
 				} ) }

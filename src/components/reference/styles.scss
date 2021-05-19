@@ -131,3 +131,7 @@
 	display: block;
 	margin: .4em 0 .5em 0;
 }
+
+.isCurrent {
+	background: var(--active);
+}
