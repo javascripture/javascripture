@@ -192,7 +192,7 @@
 								let notification = document.getElementById('notification');
 
 								// notification.style.display = 'block';
-								if ( confirm('A new version of this app is available.') ) {
+								if ( confirm('A new version of this app is available. Update now?') ) {
 									localStorage.clear();
 									newWorker.postMessage({ action: 'skipWaiting' });
 								}
