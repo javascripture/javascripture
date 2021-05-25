@@ -57,17 +57,12 @@ select {
 
 	/* Positions background arrow image */
 	background-color: var(--background-ui);
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23000000'><polygon points='0,0 100,0 50,50'/></svg>");
+	background-image: var(--select-svg);
 	background-size: 12px;
 	background-position: calc(100% - 5px) center;
 	background-repeat: no-repeat;
 
 	padding-right: 20px;
-}
-@media ( prefers-color-scheme: dark ) {
-	select {
-		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23ffffff'><polygon points='0,0 100,0 50,50'/></svg>");
-	}
 }
 
 optgroup {
