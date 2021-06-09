@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 // Internal
 import { addColumn, removeColumn, settingsChange } from '../../actions';
 import styles from './style.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const Controls = React.memo( ( { } ) => {
 	const dispatch = useDispatch();
@@ -43,4 +42,4 @@ const Controls = React.memo( ( { } ) => {
 	);
 } );
 
-export default withStyles( styles )( Controls );
+export default Controls;

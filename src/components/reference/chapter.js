@@ -1,7 +1,6 @@
 // External
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal
@@ -120,4 +119,4 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 	);
 } );
 
-export default withStyles( styles )( Chapter );
+export default Chapter;

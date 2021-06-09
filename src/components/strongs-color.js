@@ -49,8 +49,4 @@ var getHighlightBorder = function ( strongsNumber, lightness, highlightWordsWith
 	return '.' + className + ' {outline: 3px solid ' + newColor + ' !important;}';
 };
 
-module.exports = {
-	get: getStrongsColor,
-	getHighlight: getHighlight,
-	getHighlightBorder: getHighlightBorder,
-};
+export { getStrongsColor as get, getHighlight, getHighlightBorder };

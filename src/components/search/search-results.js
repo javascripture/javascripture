@@ -1,6 +1,5 @@
 // External dependencies
 import React, { useRef } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -38,4 +37,4 @@ const SearchResults = () => {
 	} );
 }
 
-export default withStyles( styles )( SearchResults );
+export default SearchResults;

@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 // Internal
 import { setTrayVisibilityFilter, setReferenceInfo } from '../../actions';
 import styles from './styles.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const Title =  React.memo( ( { book, chapter, version } ) => {
 	const dispatch = useDispatch();
@@ -23,4 +22,4 @@ const Title =  React.memo( ( { book, chapter, version } ) => {
 	);
 } );
 
-export default withStyles( styles )( Title );
+export default Title;

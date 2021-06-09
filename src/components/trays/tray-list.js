@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useSelector } from 'react-redux';
 
 // Internal
@@ -59,4 +58,4 @@ const TrayList = React.memo( () => {
 	);
 } );
 
-export default withStyles( styles )( TrayList );
+export default TrayList;

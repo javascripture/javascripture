@@ -34,11 +34,27 @@ var config = {
 			},
 			{
 				test: /\.scss$/,
-				loaders: [
-					'isomorphic-style-loader',
-					'css-loader?modules&importLoaders=1&localIdentName=[path][local]&camelCase=dashes&sourceMap',
+				use: [
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true,
+							modules: {
+								exportLocalsConvention: "camelCase",
+								localIdentName: '[path][local]',
+							},
+							importLoaders: 1,
+							sourceMap: true
+						}
+					},
 					'postcss-loader',
-					'sass-loader?sourceMap'
+					{
+						loader: 'sass-loader?sourceMap',
+						options: {
+							sourceMap: true,
+						}
+					}
 				]
 			}
 		],
@@ -47,13 +63,9 @@ var config = {
 		extensions: [ '.json', '.js', '.jsx' ]
 	},
 	node: {
-		console: false,
-		process: true,
 		global: true,
-		Buffer: true,
 		__filename: 'mock',
 		__dirname: 'mock',
-		fs: 'empty'
 	},
 	plugins: [
 		new webpack.DefinePlugin( {

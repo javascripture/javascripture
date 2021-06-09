@@ -1,7 +1,6 @@
 // External dependencies
 import React, { useRef, useState, useEffect } from 'react';
 import mousetrap from 'mousetrap';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -88,4 +87,4 @@ const ReferenceInput = React.memo( ( { index, last } ) => {
 	);
 } );
 
-export default withStyles( styles )( ReferenceInput );
+export default ReferenceInput;

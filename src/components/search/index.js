@@ -1,6 +1,5 @@
 // External dependencies
 import React, { useEffect } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -155,4 +154,4 @@ const Search = React.memo( () => {
 } );
 
 
-export default withStyles( styles )( Search );
+export default Search;

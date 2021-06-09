@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -56,4 +55,4 @@ const Clear = React.memo( ( { selectedTrayId } ) => {
 	);
 } );
 
-export default withStyles( styles )( Clear );
+export default Clear;

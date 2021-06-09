@@ -7,14 +7,12 @@ import classnames from 'classnames';
 import Navigation from '../navigation';
 import Controls from '../controls';
 import styles from './style.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const Dock = React.memo( () => {
 	const reference = useSelector( state => state.reference );
 	const numberOfColumns = reference.length
 	const sidebarOpen = useSelector( state => state.sidebar );
 	const className = classnames( styles.dock, sidebarOpen ? styles.dockWithSidebarOpen : null );
-
 	return (
 		<div className={ className }>
 			<div className={ styles.dockVersionSelectors }>
@@ -29,4 +27,4 @@ const Dock = React.memo( () => {
 	);
 } );
 
-export default withStyles( styles )( Dock );
+export default Dock;

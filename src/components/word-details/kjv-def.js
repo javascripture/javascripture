@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch } from 'react-redux';
 
 // Internal dependencies
@@ -29,4 +28,4 @@ const KJVDef = React.memo( ( { word, strongsNumber } ) => {
 	);
 } );
 
-export default withStyles( styles )( KJVDef );
+export default KJVDef;

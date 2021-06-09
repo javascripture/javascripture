@@ -1,6 +1,5 @@
 // External dependencies
 import React, { useEffect } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -69,4 +68,4 @@ const SidebarControls = React.memo( () => {
 	);
 } );
 
-export default withStyles( styles )( SidebarControls );
+export default SidebarControls;

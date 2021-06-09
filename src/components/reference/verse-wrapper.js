@@ -7,7 +7,6 @@ import CopyToClipboard from '../copy-to-clipboard';
 import Verse from './verse';
 import VerseNumber from './verse-number';
 import styles from './styles.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const getClassName = ( book, version ) => {
 	if ( ( version === 'original' || version === 'accented' ) && bible.Data.otBooks.indexOf( book ) > -1 ) {
@@ -40,4 +39,4 @@ const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber,
 	);
 } );
 
-export default withStyles( styles )( VerseWrapper );
+export default VerseWrapper;

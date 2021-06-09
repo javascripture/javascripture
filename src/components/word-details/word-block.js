@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import stripPointing from '../../lib/strip-pointing.js';
 
 // Internal dependencies
@@ -76,4 +75,4 @@ const WordBlock = React.memo( ( props ) => {
 	return null;
 } );
 
-export default withStyles( styles )( WordBlock );
+export default WordBlock;

@@ -16,8 +16,12 @@ import { PersistGate } from 'redux-persist/integration/react'
  * Internal dependencies
  */
 import rootReducer from './reducers';
-import Stylizer, { insertCss } from './lib/stylizer';
 import Root from './components/root';
+
+const insertCss = (...styles) => {
+	const removeCss = styles.map(style => style._insertCss())
+	return () => removeCss.forEach(dispose => dispose())
+}
 
 const config = {
 	key: 'primary',
@@ -31,7 +35,7 @@ const persistedReducer = persistCombineReducers(config, rootReducer( history ) )
 
 const composeEnhancers =
 	typeof window === 'object' &&
-	window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+	window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
 		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
 			stateSanitizer: ( state ) => {
 				if (!state.data) return state;
@@ -39,7 +43,7 @@ const composeEnhancers =
 				Object.keys(state.data).forEach(key => {
 					data[key] = { __TRUNCATED: true };
 				});
-				return { 
+				return {
 					...state,
 					data
 				};
@@ -64,11 +68,9 @@ class App extends React.Component{
 			<Provider store={ store } context={ ReactReduxContext }>
 				<PersistGate loading={null} persistor={ persistor }>
 					<ConnectedRouter history={ history } context={ ReactReduxContext }>
-						<Stylizer onInsertCss={ insertCss }>
-							<HashRouter>
-								<Route path="/" render={ () => <Root highlightedWord={ this.state.highlightedWord } /> } />
-							</HashRouter>
-						</Stylizer>
+						<HashRouter>
+							<Route path="/" render={ () => <Root highlightedWord={ this.state.highlightedWord } /> } />
+						</HashRouter>
 					</ConnectedRouter>
 				</PersistGate>
 			</Provider>

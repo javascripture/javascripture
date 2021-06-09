@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
 import styles from './styles.scss';
@@ -19,4 +18,4 @@ const VersionSelect = React.memo( ( { name, value, onChange } ) => {
 	);
 } );
 
-export default withStyles( styles )( VersionSelect );
+export default VersionSelect;

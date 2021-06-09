@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import classnames from 'classnames';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -69,4 +68,4 @@ const SearchLink = React.memo( ( { reference, index, count, word } ) => {
 	);
 } );
 
-export default withStyles( styles )( SearchLink );
+export default SearchLink;

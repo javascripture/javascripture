@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -23,4 +22,4 @@ const WordDetails = React.memo( () => {
 
 } );
 
-export default withStyles( styles )( WordDetails );
+export default WordDetails;

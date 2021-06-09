@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import RemoveSvg from '../svg/remove.js';
@@ -26,4 +25,4 @@ const WordBlockHeader = React.memo( ( { children, className, textToCopy, onRemov
 	);
 } );
 
-export default withStyles( styles )( WordBlockHeader );
+export default WordBlockHeader;

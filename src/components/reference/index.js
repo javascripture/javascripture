@@ -1,7 +1,6 @@
 // External dependencies
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import Waypoint from 'react-waypoint';
+import { Waypoint } from 'react-waypoint';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -188,4 +187,4 @@ const Reference = React.memo( ( props ) => {
 	);
 } );
 
-export default withStyles( styles )( Reference );
+export default Reference;

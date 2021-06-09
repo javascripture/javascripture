@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 // Internal
 import { addToList, setTrayVisibilityFilter } from '../../actions';
 import styles from './styles.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Bookmark from '../svg/bookmark';
 
 const VerseNumber =  React.memo( ( { book, chapter, verse } ) => {
@@ -29,4 +28,4 @@ const VerseNumber =  React.memo( ( { book, chapter, verse } ) => {
 	);
 } );
 
-export default withStyles( styles )( VerseNumber );
+export default VerseNumber;

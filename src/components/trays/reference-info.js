@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { compareTwoReferences, calculateRareWords, calculateCommonWords, calculateConnectionQuality } from '../../lib/reference';
@@ -217,4 +216,4 @@ const ReferenceInfo = React.memo( ( props ) => {
 } );
 
 
-export default withStyles( styles )( ReferenceInfo );
+export default ReferenceInfo;

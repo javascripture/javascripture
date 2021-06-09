@@ -1,6 +1,5 @@
 // External dependencies
 import React, { Fragment } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Internal dependencies
@@ -32,4 +31,4 @@ const Navigation = React.memo( ( { index, last } ) => {
 	);
 } );
 
-export default withStyles( styles )( Navigation );
+export default Navigation ;

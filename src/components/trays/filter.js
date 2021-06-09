@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { setTrayVisibilityFilter } from '../../actions'
@@ -29,4 +28,4 @@ const TrayFilter = ( { children, filter } ) => {
 	);
 };
 
-export default withStyles( styles )( TrayFilter );
+export default TrayFilter;

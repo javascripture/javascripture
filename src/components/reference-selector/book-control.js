@@ -2,7 +2,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal
 import ReferenceText from '../reference-text';
@@ -73,4 +72,4 @@ const BookControl = React.memo( ( { chapters, name } ) => {
 	);
 } );
 
-export default withStyles( styles )( BookControl );
+export default BookControl;

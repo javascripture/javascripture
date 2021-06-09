@@ -2,7 +2,6 @@
 import { countBy, sortBy } from 'lodash';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import Collapsible from '../collapsible';
@@ -52,4 +51,4 @@ const CombinedResults = React.memo( () => {
 	return null;
 } );
 
-export default withStyles( styles )( CombinedResults );
+export default CombinedResults;

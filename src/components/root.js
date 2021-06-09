@@ -1,6 +1,5 @@
 // External
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Sidebar from 'react-sidebar';
 import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
@@ -61,4 +60,4 @@ const Root = React.memo( ( { highlightedWord } ) => {
 	);
 } );
 
-export default withStyles( styles )( Root );
+export default Root;

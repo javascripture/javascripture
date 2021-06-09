@@ -1,7 +1,6 @@
 // External dependencies
 import classnames from 'classnames';
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import WordBlockHeader from '../word-block-header';
 
 // Internal dependencies
@@ -30,4 +29,4 @@ const Collapsible = React.memo( ( { children, className, header, open, onToggle,
 	)
 } );
 
-export default withStyles( styles )( Collapsible );
+export default Collapsible;

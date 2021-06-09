@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { mapVersionToData } from '../../lib/reference';
 import Word from './word';
 import styles from './styles.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const Verse = React.memo( ( { reference, version } ) => {
 	const { book, chapter, verse } = reference;
@@ -55,4 +54,4 @@ const Verse = React.memo( ( { reference, version } ) => {
 	return words;
 } );
 
-export default withStyles( styles )( Verse );
+export default Verse;

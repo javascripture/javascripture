@@ -1,6 +1,5 @@
 // External dependencies
 import React, { useState, Fragment } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 // Internal dependencies
 import { createReferenceLink } from '../../lib/reference';
@@ -96,4 +95,4 @@ const DailyReadings = React.memo( () => {
 	)
 } );
 
-export default withStyles( styles )( DailyReadings );
+export default DailyReadings;

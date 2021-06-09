@@ -1,9 +1,9 @@
 Stylizer
 ========
 
-`Stylizer` is a very simple library that is used in conjunction with the [isomorphic style loader](https://github.com/kriasoft/isomorphic-style-loader/) for Webpack and [React](https://facebook.github.io/react/). This loader picks up the output of previous loaders (usually a CSS loader) and injects the CSS into the page. `Stylizer` simplifies the use of this loader with React applications. 
+`Stylizer` is a very simple library that is used in conjunction with the [isomorphic style loader](https://github.com/kriasoft/isomorphic-style-loader/) for Webpack and [React](https://facebook.github.io/react/). This loader picks up the output of previous loaders (usually a CSS loader) and injects the CSS into the page. `Stylizer` simplifies the use of this loader with React applications.
 
-To be more specific, `Stylizer` provides the function specified via the `onInsertCss` prop to all child components. It makes use of the [React context](https://facebook.github.io/react/docs/context.html) so you don't have to pass this function down manually at every level in the component tree. Each component should be decorated with the `withStyles` higher-order component provided by the loader. 
+To be more specific, `Stylizer` provides the function specified via the `onInsertCss` prop to all child components. It makes use of the [React context](https://facebook.github.io/react/docs/context.html) so you don't have to pass this function down manually at every level in the component tree. Each component should be decorated with the `withStyles` higher-order component provided by the loader.
 
 
 ### Client-side
@@ -42,7 +42,7 @@ function render() {
 	...
 
 	const css = [];
-	
+
 	const content = renderToString(
 		<Provider store={ store }>
 			<Stylizer onInsertCss={ curry( addCss )( css ) }>
@@ -63,7 +63,7 @@ Any component with styles should be wrapped with the `withStyles` function. The 
 ```
 import React from 'react';
 import styles from './styles.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import withStyles from 'isomorphic-style-loader/withStyles'
 
 const MyComponent = React.createClass( {
 	render() {

@@ -1,6 +1,5 @@
 // External dependencies
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { countBy, sortBy } from 'lodash';
 import { useSelector } from 'react-redux';
 
@@ -46,4 +45,4 @@ const SearchBlock = React.memo( ( props ) => {
 	);
 } );
 
-export default withStyles( styles )( SearchBlock );
+export default SearchBlock;

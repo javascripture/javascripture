@@ -1,7 +1,6 @@
 // External dependencies
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import classnames from 'classnames';
 
 // Internal dependencies
@@ -56,4 +55,4 @@ const Footer = React.memo( () => {
 	</div>
 ) } );
 
-export default withStyles( styles )( Footer );
+export default Footer;

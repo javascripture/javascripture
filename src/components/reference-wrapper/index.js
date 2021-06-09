@@ -6,7 +6,6 @@ import classnames from 'classnames';
 // Internal
 import Reference from '../reference';
 import styles from './style.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const ReferenceWrapper = React.memo( () => {
 	const reference = useSelector( state => state.reference );
@@ -32,4 +31,4 @@ const ReferenceWrapper = React.memo( () => {
 	);
 } );
 
-export default withStyles( styles )( ReferenceWrapper );
+export default ReferenceWrapper;

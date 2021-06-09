@@ -8,7 +8,6 @@ import { createReferenceLink } from '../../lib/reference.js';
 import { closeReferenceSelectorMobile, toggleReferenceSelectorMobile, referenceSelectorMobileSetBook, setReference, setScrollChapter } from '../../actions'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './style.scss';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 	const dispatch = useDispatch();
@@ -131,4 +130,4 @@ const ReferenceSelectorMobile = React.memo( ( { index, version } ) => {
 	);
 } );
 
-export default withStyles( styles )( ReferenceSelectorMobile );
+export default ReferenceSelectorMobile;
