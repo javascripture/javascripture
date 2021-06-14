@@ -125,7 +125,7 @@ const Search = React.memo( () => {
 							</select>
 						</fieldset>
 						<fieldset>
-							<label htmlFor="clusivity">Look for</label> <select name="clusivity" onChange={ change } value={ searchForm.clusivity }>
+							<label htmlFor="clusivity">Find</label> <select name="clusivity" onChange={ change } value={ searchForm.clusivity }>
 								<option value="exclusive">all</option>
 								<option value="inclusive">any</option>
 							</select> <label htmlFor="range">terms in a</label> <select name="range" onChange={ change } value={ searchForm.range }>

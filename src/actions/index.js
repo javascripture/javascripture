@@ -76,8 +76,8 @@ export const addWord = ( word ) => {
 		delete( word.data.morphology );
 
 		// Send data to our worker.
-		postMessageToWorker( 'search', word.data, getState() );
 		dispatch( addToList( word ) );
+		postMessageToWorker( 'search', word.data, getState() );
 	}
 }
 

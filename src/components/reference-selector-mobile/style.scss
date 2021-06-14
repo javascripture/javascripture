@@ -68,8 +68,8 @@
 		width: 64px;
 
 		&:hover {
-			background: var(--color);
-			color: var(--hover)
+			background: var(--hover);
+			color: var(--color)
 		}
 	}
 }
@@ -86,8 +86,8 @@
 	white-space: nowrap;
 
 	&:hover {
-		background: var(--color);
-		color: var(--hover)
+		background: var(--hover);
+		color: var(--color)
 	}
 }
 
@@ -97,7 +97,7 @@
 	top: 5px;
 	left: 5px;
 	&:hover {
-		background: var(--color);
-		color: var(--hover)
+		background: var(--hover);
+		color: var(--color)
 	}
 }

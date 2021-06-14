@@ -69,17 +69,27 @@
 	height: $dock-height;
 
 	&:hover {
-		background: var(--background);
+		background: var(--hover);
+
+		svg {
+			fill: var(--color);
+		}
 	}
 
 	svg {
-		fill: var(--color);
+		fill: var(--color-dimmed);
 	}
 }
 
 .active {
 	composes: trayFilter;
 	background: var(--background);
+	border-top-color: var(--background);
+	box-shadow: 1px 1px 1px 0 #000;
+
+	svg {
+		fill: var(--color);
+	}
 }
 
 .help-panel {
