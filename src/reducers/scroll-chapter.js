@@ -18,13 +18,10 @@ const getReferenceFromHash = function( hash ) {
 const scrollChapter = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
-			let hash;
-			if ( action.payload.location.hash ) {
-				hash = action.payload.location.hash;
-			} else {
-				hash = action.payload.location.location.hash;
+			if ( "undefined" === typeof action.payload.location ) {
+				return state;
 			}
-
+			const hash = action.payload.location.hash;
 			const locationState = [ ...state ],
 				reference = getReferenceFromHash( hash );
 			locationState[ 0 ] = reference;

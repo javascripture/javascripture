@@ -64,10 +64,10 @@ const reference = ( state = getInitialState(), action ) => {
 	switch ( action.type ) {
 		case LOCATION_CHANGE:
 			let hash;
-			if ( action.payload.location.hash ) {
+			if ( "undefined" !== typeof action.payload.location && action.payload.location.hash ) {
 				hash = action.payload.location.hash;
 			} else {
-				hash = action.payload.location.location.hash;
+				return state;
 			}
 
 			timer = new Date();
