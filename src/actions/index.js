@@ -73,7 +73,6 @@ export const addWord = ( word ) => {
 	return function( dispatch, getState ) {
 		word.data.clusivity = 'exclusive';
 		word.data.range = 'verse';
-		delete( word.data.morphology );
 
 		// Send data to our worker.
 		dispatch( addToList( word ) );
@@ -344,6 +343,7 @@ export const toggleSidebar = () => {
 
 export const selectWord = ( props ) => {
 	const { word, lemma, morph, version } = props;
+
 	return function( dispatch, getState ) {
 		const searchSelect = getState().searchSelect;
 		if ( searchSelect ) {

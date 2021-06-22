@@ -5,8 +5,12 @@ const initialState = [];
 const list = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'ADD_TO_LIST':
-			const id = JSON.stringify( action.item.data );
-			const findInState = state.filter( item => isEqual( item.data, action.item.data ) );
+			const dataForId = Object.assign( {}, action.item.data );
+			delete dataForId.clickedWord;
+			delete dataForId.morphology;
+			const id = JSON.stringify( dataForId );
+
+			const findInState = state.filter( item => item.id === id );
 			if ( findInState.length > 0 ) {
 				return [
 					...state.map( item => {
