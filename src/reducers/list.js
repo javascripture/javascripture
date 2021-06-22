@@ -17,7 +17,7 @@ const list = ( state = initialState, action ) => {
 			}
 
 			const id = state.length;
-			console.log( id );
+
 			return [
 				...state.map( item => {
 					if ( item.listType === action.item.listType ) {
