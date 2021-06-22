@@ -5,8 +5,7 @@ const initialState = [];
 const list = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'ADD_TO_LIST':
-			const id = JSON.stringify( action.item.data ).replace("{|}","");
-			console.log( id );
+			const id = JSON.stringify( action.item.data );
 			const findInState = state.filter( item => isEqual( item.data, action.item.data ) );
 			if ( findInState.length > 0 ) {
 				return [
