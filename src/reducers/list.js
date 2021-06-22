@@ -5,9 +5,8 @@ const initialState = [];
 const list = ( state = initialState, action ) => {
 	switch ( action.type ) {
 		case 'ADD_TO_LIST':
-			const { word, lemma, morph, version, clusivity, range, strict } = action.item.data;
-			const id = word + lemma + morph + version + clusivity + range + strict;
-
+			const id = JSON.stringify( action.item.data ).replace("{|}","");
+			console.log( id );
 			const findInState = state.filter( item => isEqual( item.data, action.item.data ) );
 			if ( findInState.length > 0 ) {
 				return [
