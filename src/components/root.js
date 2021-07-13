@@ -17,6 +17,7 @@ const Root = React.memo( ( { highlightedWord } ) => {
 	const dispatch = useDispatch();
 	const sidebarOpen = useSelector( state => state.sidebar );
 	const darkMode = useSelector( state => state.settings.darkMode );
+	const compareMode = useSelector( state => state.settings.compareMode );
 	const getBodyStyles = () => {
 		const fontFamily = useSelector( state => state.settings.fontFamily );
 		const fontSize = useSelector( state => state.settings.fontSize );
@@ -50,10 +51,11 @@ const Root = React.memo( ( { highlightedWord } ) => {
 					<style>{ getBodyStyles() }</style>
 					<KeyboardShortcuts />
 					<WordHighlight word={ highlightedWord } />
-					<Dock />
+					{ compareMode ? null : <Dock /> }
 					<div onClick={ clearReferenceSelector }>
 						<ReferenceWrapper />
 					</div>
+
 				</div>
 			</Sidebar>
 		</div>

@@ -20,20 +20,20 @@ const getClassName = ( book, version ) => {
 	return styles.verse
 };
 
-const VerseWrapper =  React.memo( ( { data, book, version, chapter, verseNumber, index, isCurrentRef } ) => {
+const VerseWrapper = React.memo( ( { book, version, chapter, verse, isCurrentRef } ) => {
 	const verseWrapperRef = useRef( null );
-	const reference = { book, chapter: chapter - 1, verse: index };
+	const reference = { book, chapter: chapter - 1, verse: verse - 1 };
 
 	return (
 		<div className={ classnames( styles.verseWrapper, isCurrentRef ? styles.isCurrent : null ) } dir={ bible.isRtlVersion( version, book ) ? 'rtl' : 'ltr' } ref={ verseWrapperRef }>
 			<div className={ styles.helpers }>
-				<VerseNumber book={ book } chapter={ chapter } verse={ verseNumber } />
+				<VerseNumber book={ book } chapter={ chapter } verse={ verse } />
 				<span className={ styles.hidden }>
 					<CopyToClipboard fill={ '#999' } textToCopy={ verseWrapperRef } />
 				</span>
 			</div>
 			<div className={ getClassName( book, version ) }>
-				<Verse reference={ reference } index={ index } version={ version } />
+				<Verse reference={ reference } version={ version } />
 			</div>
 		</div>
 	);

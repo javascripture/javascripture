@@ -10,6 +10,7 @@ const initialState = {
 	interfaceLanguage: 'KJV',
 	type: "SETTINGS_CHANGE",
 	darkMode: null,
+	compareMode: false,
 }
 
 export default ( state = initialState, action ) => {

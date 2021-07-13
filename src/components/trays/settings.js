@@ -124,6 +124,11 @@ const SettingsTray = React.memo( () => {
 								</li>
 								<li className={ styles.settingsLi }>
 									<label>
+										<input type="checkbox" name="compareMode" checked={ settings.compareMode } onChange={ changeCheckboxSetting } /> Compare Mode
+									</label>
+								</li>
+								<li className={ styles.settingsLi }>
+									<label>
 										<input type="checkbox" name="highlightSearchResults" checked={ settings.highlightSearchResults } onChange={ changeCheckboxSetting } /> Highlight all words in a verse when hovering the search results
 									</label>
 								</li>

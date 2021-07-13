@@ -71,12 +71,10 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 							{ reference.map( ( { version }, index ) => {
 								return (
 									<VerseWrapper
-										data={ data }
 										book={ book }
 										version={ version }
 										chapter={ chapter }
-										verseNumber={ verseNumber + 1 }
-										index={ verseNumber }
+										verse={ verseNumber + 1 }
 										key={ 'versewrapper' + index + verseNumber }
 										isCurrentRef={ !! isCurrentRef( verseNumber ) } />
 								);
@@ -98,12 +96,10 @@ const Chapter = React.memo( ( { book, chapter, index } ) => {
 					return (
 						<div className={ styles.singleReference } key={ verseNumber } ref={ isCurrentRef( verseNumber ) }>
 							<VerseWrapper
-								data={ data }
 								book={ book }
 								version={ version }
 								chapter={ chapter }
-								verseNumber={ verseNumber + 1 }
-								index={ verseNumber }
+								verse={ verseNumber + 1 }
 								isCurrentRef={ isCurrentRef( verseNumber ) } />
 						</div>
 					);
