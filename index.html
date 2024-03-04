@@ -51,13 +51,11 @@
 					<div class="logo">
 						<img src="/javascripture.svg" width="179" height="186">
 						<div class="intro">
-							<h1>Javascripture</h1>
-							<p>JavaScripture is a tool to help you understand the bible better.</p>
-							<script>
-								if ( localStorage ) {
-									document.write( '<p class="installation-info"><br />Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
-								}
-							</script>
+							<h1><s>Javascripture</s> sync.bible</h1>
+							<p style="text-align: center">Javascripture is now <a href="https://sync.bible">sync.bible</a>.</p>
+							<p style="text-align: center"><br><br>
+							<a href="https://sync.bible">Try sync.bible</a> or
+							<a href="javascript: window.renderApp();">Launch Javascripture</a></p>
 						</div>
 					</div>
 					<div class="loading">
@@ -65,13 +63,13 @@
 							Loading…
 						</div>
 					</div>
+					<script>
+						if ( localStorage ) {
+							document.write( '<p class="installation-info"><br />Once the scripts have loaded, they will be cached, so the app will work offline.</p>' );
+						}
+					</script>
 					<div class="features">
 						<p>Having problems? <a href="http://scruffian.wordpress.com/contact/">Email me</a>, <a href="javascript:clear()">Clear settings and start over</a></p>
-						<p>There are also old versions available in case this one is broken:<br />
-							<br />
-							<a href="https://javascripture.net">javascripture.net</a><br />
-							<a href="https://javascripture.xyz">javascripture.xyz</a><br />
-						</p>
 					</div>
 				</div>
 			</div>
@@ -220,4 +218,5 @@
 		});
 	}
 </script>
+<script>loadingStatus( '100%', 100 );</script>
 </html>
