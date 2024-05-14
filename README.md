@@ -1,4 +1,5 @@
 # Javascripture
+https://javascripture.github.io/javascripture/
 A tool for studying scripture, written in Javascript (React and Redux)
 
 ## Principles
